@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Familjen Grotesk", "sans-serif"],
-        mono: ["Space Mono", "monospace"],
+        mono: ["Familjen Grotesk", "sans-serif"],
       },
     },
   },
@@ -16,12 +16,12 @@ module.exports = {
         main: {
           ...require("daisyui/src/theming/themes")["light"],
           // primary: "#0084CA",
-          primary: "#FF5D63",
-          neutral: "#393939",
-          accent: "#ffa0a3", // Used for highlighting search results
+          primary: "#6c5a82",
+          neutral: "#a999bd",
+          accent: "#9ad199", // Used for highlighting search results
           "primary-content": "white",
           // background: "white",
-          background: "#FBEBE4",
+          background: "#E5E4E2",
           "--rounded-box": "0rem",
           "--rounded-btn": "0rem",
           "--rounded-badge": "0rem",
