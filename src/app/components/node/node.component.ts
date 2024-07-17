@@ -25,6 +25,15 @@ import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
 import { TypeModel } from '../../models/type.model';
 import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
 import { NodeTableRowComponent } from './node-table-row/node-table-row.component';
+import {
+  featherArrowLeft,
+  featherArrowRight,
+  featherChevronRight,
+} from '@ng-icons/feather-icons';
+import { NgIcon } from '@ng-icons/core';
+import { DetailsService } from '../../services/details.service';
+import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
+import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
 
 @Component({
   selector: 'app-node',
@@ -43,6 +52,9 @@ import { NodeTableRowComponent } from './node-table-row/node-table-row.component
     NodeEndpointComponent,
     NodeTableRowComponent,
     NgClass,
+    NgIcon,
+    NodeDetailsButtonComponent,
+    NodePermalinkButtonComponent,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -59,8 +71,8 @@ export class NodeComponent implements OnInit {
   showTitle = this.settings.hasViewModeSetting(ViewModeSetting.ShowTitle);
   showParents = this.settings.hasViewModeSetting(ViewModeSetting.ShowParents);
   showTypes = this.settings.hasViewModeSetting(ViewModeSetting.ShowTypes);
-  showLargeImages = this.settings.hasViewModeSetting(
-    ViewModeSetting.ShowLargeImage,
+  showImageNextToTable = this.settings.hasViewModeSetting(
+    ViewModeSetting.ShowImageNextToTable,
   );
 
   constructor(
@@ -69,6 +81,7 @@ export class NodeComponent implements OnInit {
     public data: DataService,
     public cache: CacheService,
     public settings: SettingsService,
+    public details: DetailsService,
   ) {}
 
   ngOnInit() {
@@ -134,9 +147,31 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  shouldShowLargeImages(): boolean {
-    return this.showLargeImages && this.images && this.images.length > 0;
+  get imageWidth(): string {
+    if (window.innerWidth < 640) {
+      return '100%';
+    }
+
+    return this.details.isShowing
+      ? Settings.largeImageWidth.details
+      : Settings.largeImageWidth.search;
+  }
+
+  shouldShowImageNextToTable(): boolean {
+    return this.showImageNextToTable && this.images && this.images.length > 0;
+  }
+
+  onTitleClicked($event: MouseEvent) {
+    $event.preventDefault();
+
+    if (!this.node) {
+      return;
+    }
+    this.details.show(this.node);
   }
 
   protected readonly Settings = Settings;
+  protected readonly featherChevronRight = featherChevronRight;
+  protected readonly featherArrowRight = featherArrowRight;
+  protected readonly featherArrowLeft = featherArrowLeft;
 }

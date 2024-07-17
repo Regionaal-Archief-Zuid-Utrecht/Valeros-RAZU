@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import {
@@ -18,6 +20,7 @@ import { FilterService } from '../../../services/search/filter.service';
 import {
   featherExternalLink,
   featherFilter,
+  featherMaximize2,
   featherSearch,
   featherX,
   featherEye,
@@ -33,7 +36,8 @@ import {
 import { NodeLabelComponent } from '../node-label/node-label.component';
 import { FilterType } from '../../../models/filter.model';
 import { SearchService } from '../../../services/search/search.service';
-import { CdnService } from '../../../services/cdn.service';
+import { DrawerService } from '../../../services/drawer.service';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'app-node-link',
@@ -64,13 +68,16 @@ export class NodeLinkComponent implements OnInit, OnChanges {
   @Input() suffixStr = '';
   @Input() shouldHighlight = true;
 
+  @Output() clicked: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
   isClickableUrl = false;
 
   constructor(
     public cache: CacheService,
     public filters: FilterService,
     public search: SearchService,
-    public cdn: CdnService,
+    public urlService: UrlService,
+    private drawer: DrawerService,
   ) {}
 
   ngOnInit() {
@@ -91,12 +98,17 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     }
   }
 
+  openDrawer(processedUrl: any): void {
+    const dynamicContent = [processedUrl]; // Dynamic content here
+    this.drawer.setDrawerItems(dynamicContent);
+  }
+
   processUrl() {
     if (!this.url) {
       return;
     }
 
-    this.processedUrl = this.cdn.processUrl(this.url);
+    this.processedUrl = this.urlService.processUrl(this.url);
   }
 
   get cachedLabel(): string | undefined {
@@ -112,20 +124,17 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     return this.processedUrl ? replacePrefixes(this.processedUrl) : undefined;
   }
 
-  preventDefault(event: MouseEvent) {
-    event.preventDefault();
-  }
+  onUrlClicked(event: MouseEvent) {
+    this.clicked.emit(event);
 
-  onToggleFilterClicked(event: MouseEvent, type: FilterType) {
-    this.preventDefault(event);
-    if (!this.url || this.disabled) {
+    if (!this.processedUrl || !this.isClickableUrl || this.disabled) {
+      this._preventDefault(event);
       return;
     }
+  }
 
-    this.filters.toggle({
-      valueId: this.url,
-      type: type,
-    });
+  private _preventDefault(event: MouseEvent) {
+    event.preventDefault();
   }
 
   protected readonly featherFilter = featherFilter;
@@ -133,7 +142,7 @@ export class NodeLinkComponent implements OnInit, OnChanges {
   protected readonly NgxFloatUiTriggers = NgxFloatUiTriggers;
   protected readonly featherExternalLink = featherExternalLink;
   protected readonly featherX = featherX;
-  protected readonly featherEye = featherEye;
+  protected readonly featherMaximize2 = featherMaximize2;
   protected readonly FilterType = FilterType;
   protected readonly featherSearch = featherSearch;
   protected readonly wrapWithDoubleQuotes = wrapWithDoubleQuotes;
