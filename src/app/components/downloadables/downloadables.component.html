@@ -1,0 +1,21 @@
+<div>
+  <button (click)="selectAll()">Select All Records</button>
+  <button (click)="selectAllWithAssociated()">
+    Select All Records and Associated Files
+  </button>
+  <button (click)="deselectAllWithAssociated()">Deselect all</button>
+  <br />
+  <button (click)="download()">Download</button>
+  <hr />
+  <br />
+  <h2>Select Records to Download</h2>
+
+  <div *ngFor="let entry of data | keyvalue">
+    <!-- Access the key and value from the entry -->
+    <app-checklist
+      [item]="entry.value"
+      [depth]="0"
+      [maxDepth]="maxDepth"
+    ></app-checklist>
+  </div>
+</div>

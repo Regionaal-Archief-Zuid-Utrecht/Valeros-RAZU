@@ -19,6 +19,7 @@ module.exports = {
           primary: "#6c5a82",
           neutral: "#a999bd",
           accent: "#9ad199", // Used for highlighting search results
+          secondary: "#c2b280",
           "primary-content": "white",
           // background: "white",
           background: "#E5E4E2",

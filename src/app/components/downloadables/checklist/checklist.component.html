@@ -1,0 +1,32 @@
+<div>
+  <div *ngIf="depth <= maxDepth">
+    <input
+      type="checkbox"
+      [id]="item.id"
+      [(ngModel)]="item.selected"
+      class="checkbox checkbox-primary"
+    />
+    <label [for]="item.id"
+      >{{ item.label }} (..{{ getAbbreviatedId(item.id) }})</label
+    >
+    <div
+      *ngIf="item.representations && item.representations.length > 0"
+      style="margin-left: 50px"
+    >
+      <input
+        type="checkbox"
+        [id]="item.id + '-associated'"
+        [(ngModel)]="item.selectAssociated"
+        class="checkbox checkbox-secondary"
+      />
+      <label [for]="item.id + '-associated'">Download associated files</label>
+    </div>
+    <div *ngFor="let child of item.children">
+      <app-checklist
+        [item]="child"
+        [depth]="depth + 1"
+        [maxDepth]="maxDepth"
+      ></app-checklist>
+    </div>
+  </div>
+</div>

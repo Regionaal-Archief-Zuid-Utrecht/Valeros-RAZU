@@ -29,11 +29,14 @@ import {
   featherArrowLeft,
   featherArrowRight,
   featherChevronRight,
+  featherDownload,
 } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
 import { DetailsService } from '../../services/details.service';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
+import { OriginalRecordComponent } from '../original-record/original-record.component';
+import { OriginalRecordService } from '../../services/originalrecord.service';
 
 @Component({
   selector: 'app-node',
@@ -55,6 +58,7 @@ import { NodePermalinkButtonComponent } from './node-permalink-button/node-perma
     NgIcon,
     NodeDetailsButtonComponent,
     NodePermalinkButtonComponent,
+    OriginalRecordComponent,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -82,6 +86,7 @@ export class NodeComponent implements OnInit {
     public cache: CacheService,
     public settings: SettingsService,
     public details: DetailsService,
+    public originalrecord: OriginalRecordService,
   ) {}
 
   ngOnInit() {
@@ -95,6 +100,7 @@ export class NodeComponent implements OnInit {
     }
 
     this.id = this.nodes.getId(this.node);
+    this.originalrecord.checkAvailability(this.id);
   }
 
   initTitle() {
@@ -169,9 +175,31 @@ export class NodeComponent implements OnInit {
     }
     this.details.show(this.node);
   }
+  onReturnClick() {
+    this.details.stopShowing();
+    this.originalrecord.stopShowing();
+  }
+
+  onOriginalRecordClicked() {
+    if (!this.node) {
+      return;
+    }
+    if (this.originalrecord.available && this.originalrecord.shown) {
+      this.originalrecord.stopShowing();
+    } else if (this.originalrecord.available && !this.originalrecord.shown) {
+      this.originalrecord.show(this.node);
+    }
+  }
+  onDownloadClicked() {
+    if (!this.id) {
+      return;
+    }
+    this.originalrecord.getOriginal(this.id);
+  }
 
   protected readonly Settings = Settings;
   protected readonly featherChevronRight = featherChevronRight;
   protected readonly featherArrowRight = featherArrowRight;
   protected readonly featherArrowLeft = featherArrowLeft;
+  protected readonly featherDownload = featherDownload;
 }

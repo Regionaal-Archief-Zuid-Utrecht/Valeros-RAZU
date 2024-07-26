@@ -1,0 +1,32 @@
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-spacer {
+    flex-grow: 1;
+}
+
+.flex-container-right {
+    display: flex;
+    align-items: right;
+}
+.label-json {
+    display: flex;
+    align-items: center;
+}
+
+.label-text {
+    margin-right: 8px;
+    /* Adjust the value as needed */
+}
+
+.custom-label {
+    justify-content: flex-end;
+    /* Override the space-between property */
+}
+
+.custom-label .label-text {
+    margin-right: 8px;
+    /* Adjust the value as needed to reduce space */
+}

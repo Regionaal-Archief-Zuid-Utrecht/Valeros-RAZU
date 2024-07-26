@@ -1,12 +1,52 @@
-<button
-  (click)="details.stopShowing()"
-  *ngIf="details.isShowing"
-  class="mb-4 text-lg font-bold"
->
-  <ng-icon [svg]="featherArrowLeft" class="relative top-[0.15rem] mr-2" />
+<div class="flex-container">
+  <button
+    (click)="onReturnClick()"
+    *ngIf="details.isShowing"
+    class="mb-4 text-lg font-bold"
+  >
+    <ng-icon [svg]="featherArrowLeft" class="relative top-[0.15rem] mr-2" />
+    <span>Terug naar zoekresultaten</span>
+  </button>
 
-  <span>Terug naar zoekresultaten</span>
-</button>
+  <div class="flex-spacer"></div>
+
+  <div
+    class="mb-1 text-lg font-bold flex-container-right"
+    [ngClass]="[
+      shouldShowImageNextToTable() ? 'right-0 top-0' : 'right-0 top-0'
+    ]"
+    *ngIf="details.isShowing"
+  >
+    <div class="flex-container-center relative top-[0.15rem]">
+      <div class="form-control w-52" *ngIf="originalrecord.available">
+        <button (click)="onDownloadClicked()">
+          <label class="label-json label cursor-pointer custom-label"
+            ><ng-icon [svg]="featherDownload" class="relative mr-2" />
+            <span class="label-text">Download origineel</span>
+          </label>
+        </button>
+      </div>
+    </div>
+    <div class="form-control w-52" *ngIf="originalrecord.available">
+      <label class="label-json label cursor-pointer custom-label">
+        <span class="label-text">Toon origineel</span>
+        <input
+          *ngIf="originalrecord.available && !originalrecord.shown"
+          type="checkbox"
+          class="toggle toggle-primary"
+          (click)="onOriginalRecordClicked()"
+        />
+        <input
+          *ngIf="originalrecord.available && originalrecord.shown"
+          type="checkbox"
+          class="toggle toggle-primary"
+          checked="checked"
+          (click)="onOriginalRecordClicked()"
+        />
+      </label>
+    </div>
+  </div>
+</div>
 
 <div
   class="w-full bg-base-100 border mb-4"
@@ -38,7 +78,7 @@
       />
     </div>
 
-    <div class="w-full sm:px-4">
+    <div class="w-full sm:px-4" *ngIf="!originalrecord.shown">
       <app-node-table-row
         [label]="'Onderdeel van'"
         *ngIf="showParents && parents.length > 0"
@@ -46,7 +86,6 @@
         <app-node-hierarchy [nodes]="parents" />
       </app-node-table-row>
 
-      <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
       <app-node-table-row
         [label]="'Soort'"
         *ngIf="showTypes && types.length > 0"
@@ -58,12 +97,12 @@
       </app-node-table-row>
     </div>
 
-    <app-node-renderer [node]="node" />
-
+    <app-node-renderer [node]="node" *ngIf="!originalrecord.shown" />
+    <app-original-record *ngIf="originalrecord.shown" />
     <div
       class="absolute"
       [ngClass]="[
-        shouldShowImageNextToTable() ? 'right-6 top-6' : 'right-0 top-0'
+        shouldShowImageNextToTable() ? 'right-6 top-8' : 'right-0 top-2'
       ]"
       *ngIf="details.isShowing"
     >

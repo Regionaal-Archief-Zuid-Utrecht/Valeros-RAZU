@@ -32,6 +32,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 import { HomeIntroComponent } from '../../home-intro/home-intro.component';
 import { Router } from '@angular/router';
 import { DrawerComponent } from '../../drawer/drawer.component';
+import { MessageComponent } from '../../message/message.component';
 import { NodeService } from '../../../services/node.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
@@ -61,6 +62,7 @@ import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below
     CommonModule,
     DrawerComponent,
     HomeIntroBelowSearchComponent,
+    MessageComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
