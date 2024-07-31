@@ -13,20 +13,20 @@
       for="my-drawer-4"
       aria-label="close sidebar"
       class="drawer-overlay"
+      (click)="closeDrawer()"
     ></label>
-    <ul class="menu bg-base-200 text-base-content min-h-full w-100 p-4">
-      <ng-container
-        ><div style="min-width: 300px; max-width: 1200px">
+    <ul class="menu min-h-full w-100 p-4 bg-primary-content">
+      <!--text-base-content-->
+      <ng-container>
+        <div style="min-width: 300px; max-width: 1200px">
           <div *ngIf="!data">
             <h3><ng-icon [svg]="featherMeh" class="relative mr-2" /></h3>
-            <br />Oh jeetje, dit hoort u niet te zien! Onze excuses voor het
-            ongemak.
+            <br />
+            Oh jeetje, dit hoort u niet te zien! Onze excuses voor het ongemak.
           </div>
-          <app-downloadables
-            *ngIf="data"
-            [data]="data"
-          ></app-downloadables></div
-      ></ng-container>
+          <app-downloadables *ngIf="data" [data]="data"></app-downloadables>
+        </div>
+      </ng-container>
     </ul>
   </div>
 </div>

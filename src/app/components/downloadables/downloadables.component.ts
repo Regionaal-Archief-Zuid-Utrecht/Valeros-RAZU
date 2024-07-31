@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ChecklistComponent } from './checklist/checklist.component';
 import { CommonModule, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface Representation {
   id: string;
@@ -22,6 +22,8 @@ interface Data {
     label: string;
     children: Child[];
     representations: Representation[];
+    selected?: boolean;
+    selectAssociated?: boolean;
   };
 }
 
@@ -30,7 +32,7 @@ interface Data {
   standalone: true,
   templateUrl: './downloadables.component.html',
   styleUrls: ['./downloadables.component.scss'],
-  imports: [ChecklistComponent, CommonModule, NgFor],
+  imports: [CommonModule, NgFor, FormsModule],
 })
 export class DownloadablesComponent {
   @Input() data: Data = {
@@ -38,10 +40,13 @@ export class DownloadablesComponent {
   };
 
   maxDepth: number = 3; // Set your max depth here
+  maxLengthTitle: number = 40;
 
   selectAll() {
     Object.values(this.data).forEach((item) => {
       // Cast to Child to match the method signature
+      item.selectAssociated = false;
+      item.selected = true;
       this.selectChildren(
         {
           id: '',
@@ -54,10 +59,21 @@ export class DownloadablesComponent {
       );
     });
   }
+  getAbbreviatedTitle(title: string | undefined): string {
+    if (!title) {
+      return 'Unknown'; // Handle cases where id is undefined
+    }
+    if (title.length <= this.maxLengthTitle) {
+      return title;
+    }
+    return title.slice(0, this.maxLengthTitle) + '...';
+  }
 
   selectAllWithAssociated() {
     Object.values(this.data).forEach((item) => {
       // Cast to Child to match the method signature
+      item.selected = true;
+      item.selectAssociated = false;
       this.selectChildren(
         {
           id: '',
@@ -74,6 +90,8 @@ export class DownloadablesComponent {
   deselectAllWithAssociated() {
     Object.values(this.data).forEach((item) => {
       // Cast to Child to match the method signature
+      item.selected = false;
+      item.selectAssociated = false;
       this.selectChildren(
         {
           id: '',
@@ -101,6 +119,9 @@ export class DownloadablesComponent {
     const selectedIds: string[] = [];
     Object.values(this.data).forEach((item) => {
       // Cast to Child to match the method signature
+      /*if (item.selected) {
+        selectedIds.push(Object.keys(this.data));
+      }*/
       this.collectSelectedIds(
         {
           id: '',

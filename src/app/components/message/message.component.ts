@@ -18,11 +18,9 @@ export class MessageComponent implements OnInit, OnDestroy {
   constructor(private originalRecordService: OriginalRecordService) {}
 
   ngOnInit(): void {
-    this.originalRecordService.dataGenerating.subscribe((message) => {
-      console.log('msg rcvd');
+    this.originalRecordService.setMessage.subscribe((message) => {
       if (message != null) {
         this.message = message;
-        console.log('received message', message);
         this.openMessage();
       } else {
         this.closeMessage();

@@ -30,7 +30,7 @@ export class OriginalRecordService {
   private _showingForNodeId: BehaviorSubject<string | undefined> =
     new BehaviorSubject<string | undefined>(undefined);
   dataGenerated = new EventEmitter<any>();
-  dataGenerating = new EventEmitter<any>();
+  setMessage = new EventEmitter<any>();
   lastShownNodeId: string | undefined = undefined;
   showingForNodeId = this._showingForNodeId.asObservable();
   shown = false;
@@ -73,14 +73,10 @@ export class OriginalRecordService {
 
   getOriginal(nodeId: string) {
     //this.fetchjson.downloadFile(nodeId, 'mdto');
-    console.log('Fetching downloadables, this can take a minute...');
-    this.dataGenerating.emit(
-      'Fetching downloadables, this can take a minute...',
-    );
+    this.setMessage.emit('Fetching downloadables, this can take a minute...');
     this.getDownloadables(nodeId).then((result) => {
-      console.log('Downloadables: ', JSON.stringify(result, null, 2));
       this.dataGenerated.emit(result);
-      this.dataGenerating.emit(null);
+      this.setMessage.emit(null);
     });
   }
 

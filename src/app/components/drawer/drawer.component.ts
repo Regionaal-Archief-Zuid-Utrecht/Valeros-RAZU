@@ -3,9 +3,7 @@ import {
   OnInit,
   OnDestroy,
   CUSTOM_ELEMENTS_SCHEMA,
-  Input,
 } from '@angular/core';
-import { DrawerService } from '../../services/drawer.service';
 import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -36,6 +34,7 @@ interface Data {
     representations: Representation[];
   };
 }
+
 @Component({
   selector: 'app-drawer',
   standalone: true,
@@ -49,27 +48,29 @@ export class DrawerComponent implements OnInit, OnDestroy {
   drawerSubscription: Subscription = new Subscription();
   opened = false;
 
-  constructor(
-    private drawerService: DrawerService,
-    private originalRecordService: OriginalRecordService,
-  ) {}
+  constructor(private originalRecordService: OriginalRecordService) {}
 
   ngOnInit(): void {
-    this.originalRecordService.dataGenerated.subscribe((data) => {
-      this.data = data;
-      console.log('Data at the drawer:', data);
-      this.openDrawer();
-    });
+    this.drawerSubscription =
+      this.originalRecordService.dataGenerated.subscribe((data) => {
+        this.data = data;
+        this.openDrawer();
+      });
   }
 
   ngOnDestroy(): void {
-    if (this.originalRecordService.dataGenerated) {
-      this.originalRecordService.dataGenerated.unsubscribe();
+    if (this.drawerSubscription) {
+      this.drawerSubscription.unsubscribe();
     }
   }
 
   openDrawer(): void {
     this.opened = true;
   }
+
+  closeDrawer(): void {
+    this.opened = false;
+  }
+
   protected readonly featherMeh = featherMeh;
 }

@@ -26,6 +26,7 @@ module.exports = {
           "--rounded-box": "0rem",
           "--rounded-btn": "0rem",
           "--rounded-badge": "0rem",
+          black: "#000000",
         },
       },
     ],

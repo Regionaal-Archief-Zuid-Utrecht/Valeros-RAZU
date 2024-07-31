@@ -1,21 +1,121 @@
 <div>
-  <button (click)="selectAll()">Select All Records</button>
-  <button (click)="selectAllWithAssociated()">
-    Select All Records and Associated Files
-  </button>
-  <button (click)="deselectAllWithAssociated()">Deselect all</button>
-  <br />
-  <button (click)="download()">Download</button>
-  <hr />
-  <br />
-  <h2>Select Records to Download</h2>
+  <div>
+    <span class="mb-5 text-lg font-bold flex-container-right"
+      >Selecteer wat u wilt downloaden</span
+    >
+  </div>
+  <div class="join mt-2 mb-5">
+    <button
+      (click)="selectAll()"
+      class="btn btn-secondary btn-xs join-item rounded-l-full"
+    >
+      Alles selecteren
+    </button>
+    <button
+      (click)="selectAllWithAssociated()"
+      class="btn btn-primary join-item btn-xs"
+    >
+      Alles selecteren, inclusief bestanden
+    </button>
+    <button
+      (click)="deselectAllWithAssociated()"
+      class="btn btn-error join-item btn-xs"
+    >
+      Alles deselecteren
+    </button>
+    <button (click)="download()" class="btn btn-success btn-xs rounded-r-full">
+      Downloaden
+    </button>
+  </div>
 
-  <div *ngFor="let entry of data | keyvalue">
-    <!-- Access the key and value from the entry -->
-    <app-checklist
-      [item]="entry.value"
-      [depth]="0"
-      [maxDepth]="maxDepth"
-    ></app-checklist>
+  <div class="overflow-x-auto">
+    <table class="table table-zebra">
+      <thead>
+        <tr>
+          <th>
+            <input
+              type="checkbox"
+              class="checkbox checkbox-xs"
+              disabled
+              checked="checked"
+            />
+          </th>
+          <th>Record</th>
+          <th>Bestanden</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let entry of data | keyvalue">
+          <tr>
+            <th>
+              <input
+                type="checkbox"
+                [id]="entry.value.label"
+                [(ngModel)]="entry.value.selected"
+                class="checkbox checkbox-xs mr-4 ml-1 checkbox-black"
+              />
+            </th>
+            <td>{{ getAbbreviatedTitle(entry.value.label) }}</td>
+            <td>
+              <ng-container
+                *ngIf="
+                  entry.value.representations &&
+                  entry.value.representations.length > 0
+                "
+              >
+                <input
+                  type="checkbox"
+                  [id]="entry.value.label + '-associated'"
+                  [(ngModel)]="entry.value.selectAssociated"
+                  class="checkbox checkbox-xs checkbox-secondary"
+                />
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  !entry.value.representations ||
+                  entry.value.representations.length === 0
+                "
+              >
+                <span class="text-xs">Geen bestanden</span>
+              </ng-container>
+            </td>
+          </tr>
+          <ng-container *ngFor="let child of entry.value.children">
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  [id]="child.label"
+                  [(ngModel)]="child.selected"
+                  class="checkbox checkbox-xs ml-1"
+                />
+              </th>
+              <td>{{ getAbbreviatedTitle(child.label) }}</td>
+              <td>
+                <ng-container
+                  *ngIf="
+                    child.representations && child.representations.length > 0
+                  "
+                >
+                  <input
+                    type="checkbox"
+                    [id]="child.label + '-associated'"
+                    [(ngModel)]="child.selectAssociated"
+                    class="checkbox checkbox-xs checkbox-secondary flex-container-center"
+                  />
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    !child.representations || child.representations.length === 0
+                  "
+                >
+                  Geen bestanden
+                </ng-container>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>

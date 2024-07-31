@@ -4,7 +4,6 @@ import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
 import { DetailsService } from '../../../services/details.service';
 import { NodeModel } from '../../../models/node.model';
-
 @Component({
   selector: 'app-node-details-button',
   standalone: true,
@@ -16,5 +15,6 @@ export class NodeDetailsButtonComponent {
   @Input() node: NodeModel | undefined;
 
   constructor(public details: DetailsService) {}
+
   protected readonly featherArrowRight = featherArrowRight;
 }
