@@ -37,6 +37,9 @@ import { NodeService } from '../../../services/node.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
 import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below-search/home-intro-below-search.component';
+import { LangSelectComponent } from '../../lang-select/lang-select.component';
+import { TranslocoModule } from '@jsverse/transloco';
+import { translate } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-search',
@@ -63,6 +66,8 @@ import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below
     DrawerComponent,
     HomeIntroBelowSearchComponent,
     MessageComponent,
+    LangSelectComponent,
+    TranslocoModule,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -93,12 +98,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   get numberOfHitsStr(): string {
     if (!this.search.numberOfHits) {
-      return 'Geen resultaten gevonden';
+      return translate('RESULTS_NONE');
     }
     if (this.search.numberOfHits === 1) {
-      return '1 resultaat';
+      return translate('RESULTS_1');
     }
-    return `${formatNumber(this.search.numberOfHits)}${this.search.moreHitsAreAvailable ? '+' : ''} resultaten`;
+    return `${formatNumber(this.search.numberOfHits)}${this.search.moreHitsAreAvailable ? '+' : ''} ${translate('RESULTS_LC')}`;
   }
 
   get shouldShowHomeIntro(): boolean {

@@ -21,6 +21,7 @@
     "@angular/router": "^17.0.0",
     "@elastic/elasticsearch": "^8.13.0",
     "@floating-ui/dom": "^1.6.4",
+    "@jsverse/transloco": "^7.4.3",
     "@ng-icons/core": "^27.2.0",
     "@ng-icons/feather-icons": "^27.2.0",
     "@ng-icons/font-awesome": "^27.2.0",

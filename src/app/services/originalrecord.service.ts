@@ -5,6 +5,7 @@ import { BehaviorSubject, Cons } from 'rxjs';
 import { NodeService } from './node.service';
 import { FetchJsonService } from './fetchjson.service';
 import { SparqlService } from './sparql.service';
+import { translate } from '@jsverse/transloco';
 
 type ChildrenDict = { [key: string]: ChildrenDict[] };
 type RepresentationDict = { id: string; label: string; url: string[] };
@@ -73,7 +74,8 @@ export class OriginalRecordService {
 
   getOriginal(nodeId: string) {
     //this.fetchjson.downloadFile(nodeId, 'mdto');
-    this.setMessage.emit('Fetching downloadables, this can take a minute...');
+    const message = translate('DOWNLOADABLES_GATHERING_OVERVIEW');
+    this.setMessage.emit(message);
     this.getDownloadables(nodeId).then((result) => {
       this.dataGenerated.emit(result);
       this.setMessage.emit(null);

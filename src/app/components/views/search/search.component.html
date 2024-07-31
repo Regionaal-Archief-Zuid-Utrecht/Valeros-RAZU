@@ -1,5 +1,6 @@
 <app-view-container>
   <app-drawer />
+  <app-lang-select />
 
   <app-header />
 
@@ -70,7 +71,9 @@
           class="loading loading-spinner loading-xs"
           *ngIf="search.isLoading.value"
         ></span>
-        Laad meer resultaten
+        <ng-container *transloco="let translateInPlace">{{
+          translateInPlace("RESULTS_LOAD_MORE")
+        }}</ng-container>
       </button>
     </div>
   </div>

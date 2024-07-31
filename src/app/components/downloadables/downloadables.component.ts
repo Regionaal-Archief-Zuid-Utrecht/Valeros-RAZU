@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 
 interface Representation {
   id: string;
@@ -32,7 +33,7 @@ interface Data {
   standalone: true,
   templateUrl: './downloadables.component.html',
   styleUrls: ['./downloadables.component.scss'],
-  imports: [CommonModule, NgFor, FormsModule],
+  imports: [CommonModule, NgFor, FormsModule, TranslocoModule],
 })
 export class DownloadablesComponent {
   @Input() data: Data = {

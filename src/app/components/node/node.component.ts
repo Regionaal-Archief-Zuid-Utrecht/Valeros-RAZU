@@ -37,6 +37,7 @@ import { NodeDetailsButtonComponent } from './node-details-button/node-details-b
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
 import { OriginalRecordComponent } from '../original-record/original-record.component';
 import { OriginalRecordService } from '../../services/originalrecord.service';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-node',
@@ -59,6 +60,7 @@ import { OriginalRecordService } from '../../services/originalrecord.service';
     NodeDetailsButtonComponent,
     NodePermalinkButtonComponent,
     OriginalRecordComponent,
+    TranslocoModule,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,8 @@ import { NgIconComponent } from '@ng-icons/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  constructor(private translocoService: TranslocoService) {
+    translocoService.setDefaultLang('nl');
+  }
   title = 'view-a-LOD';
 }
