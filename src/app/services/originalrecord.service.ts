@@ -6,6 +6,7 @@ import { NodeService } from './node.service';
 import { FetchJsonService } from './fetchjson.service';
 import { SparqlService } from './sparql.service';
 import { translate } from '@jsverse/transloco';
+import { MessageService } from './message.service';
 
 type ChildrenDict = { [key: string]: ChildrenDict[] };
 type RepresentationDict = { id: string; label: string; url: string[] };
@@ -31,7 +32,6 @@ export class OriginalRecordService {
   private _showingForNodeId: BehaviorSubject<string | undefined> =
     new BehaviorSubject<string | undefined>(undefined);
   dataGenerated = new EventEmitter<any>();
-  setMessage = new EventEmitter<any>();
   lastShownNodeId: string | undefined = undefined;
   showingForNodeId = this._showingForNodeId.asObservable();
   shown = false;
@@ -43,6 +43,7 @@ export class OriginalRecordService {
     private nodes: NodeService,
     private fetchjson: FetchJsonService,
     private sparql: SparqlService,
+    private messageService: MessageService,
   ) {}
 
   show(node: NodeModel) {
@@ -75,10 +76,10 @@ export class OriginalRecordService {
   getOriginal(nodeId: string) {
     //this.fetchjson.downloadFile(nodeId, 'mdto');
     const message = translate('DOWNLOADABLES_GATHERING_OVERVIEW');
-    this.setMessage.emit(message);
+    this.messageService.sendMessage(message, false);
     this.getDownloadables(nodeId).then((result) => {
       this.dataGenerated.emit(result);
-      this.setMessage.emit(null);
+      this.messageService.destroyMessage();
     });
   }
 

@@ -1,7 +1,7 @@
 {
     "LANGUAGES": {
         "en": "English",
-        "nl": "Dutch"
+        "nl": "Nederlands"
     },
     "DOWNLOAD": "Download",
     "SEARCH_COMMAND": "Search",
@@ -20,7 +20,7 @@
     "HERO_SUBTITLE_PART_ONE": "Search through the collections of ",
     "HERO_SUBTITLE_PART_TWO": "Het Utrechts Archief, Kasteel Amerongen & Regionaal Archief Zuid-Utrecht.",
     "READ_MORE": "Read more",
-    "ORGANIZATIONS": "Organizations",
+    "ORGANIZATIONS": "Organisations",
     "BACK_TO_RESULTS": "Go back to the search results",
     "DOWNLOAD_ORIGINAL": "Download original",
     "SHOW_ORIGINAL": "Show original",
@@ -32,5 +32,7 @@
     "FILES": "Files",
     "NO_FILES": "No files",
     "DOWNLOADABLES_GATHERING_OVERVIEW": "Gathering an overview of the record and its subrecords. This can take a minute.",
-    "DOWNLOADABLES_GATHERING_DOWNLOADS": "Gathering downloads, your download should start soon"
+    "DOWNLOADABLES_GATHERING_DOWNLOADS": "Gathering downloads, your download should start soon",
+    "METADATA": "Metadata",
+    "PDF_ERROR": "Something went wrong when loading a PDF-document."
 }

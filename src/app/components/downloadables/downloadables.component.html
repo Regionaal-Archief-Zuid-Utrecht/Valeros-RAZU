@@ -32,30 +32,25 @@
     <table class="table table-zebra">
       <thead>
         <tr>
-          <th>
-            <input
-              type="checkbox"
-              class="checkbox checkbox-xs"
-              disabled
-              checked="checked"
-            />
-          </th>
           <th>{{ translateInPlace("RECORD") }}</th>
+          <th>
+            {{ translateInPlace("METADATA") }}
+          </th>
           <th>{{ translateInPlace("FILES") }}</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let entry of data | keyvalue">
           <tr>
-            <th>
+            <th>{{ getAbbreviatedTitle(entry.value.label) }}</th>
+            <td>
               <input
                 type="checkbox"
                 [id]="entry.value.label"
                 [(ngModel)]="entry.value.selected"
                 class="checkbox checkbox-xs mr-4 ml-1 checkbox-black"
               />
-            </th>
-            <td>{{ getAbbreviatedTitle(entry.value.label) }}</td>
+            </td>
             <td>
               <ng-container
                 *ngIf="
@@ -82,15 +77,15 @@
           </tr>
           <ng-container *ngFor="let child of entry.value.children">
             <tr>
-              <th>
+              <th>{{ getAbbreviatedTitle(child.label) }}</th>
+              <td>
                 <input
                   type="checkbox"
                   [id]="child.label"
                   [(ngModel)]="child.selected"
                   class="checkbox checkbox-xs ml-1"
                 />
-              </th>
-              <td>{{ getAbbreviatedTitle(child.label) }}</td>
+              </td>
               <td>
                 <ng-container
                   *ngIf="

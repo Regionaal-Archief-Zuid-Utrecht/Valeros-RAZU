@@ -1,6 +1,6 @@
 {
     "LANGUAGES": {
-        "en": "Engels",
+        "en": "English",
         "nl": "Nederlands"
     },
     "DOWNLOAD": "Download",
@@ -32,5 +32,7 @@
     "FILES": "Bestanden",
     "NO_FILES": "Geen bestanden",
     "DOWNLOADABLES_GATHERING_OVERVIEW": "Overzicht van het record en zijn onderdelen aan het maken. Dit kan even duren.",
-    "DOWNLOADABLES_GATHERING_DOWNLOADS": "Uw opgevraagde bestanden aan het verzamelen. Uw download zal zo starten."
+    "DOWNLOADABLES_GATHERING_DOWNLOADS": "Uw opgevraagde bestanden aan het verzamelen. Uw download zal zo starten.",
+    "METADATA": "Metadata",
+    "PDF_ERROR": "Het is niet gelukt om een PDF-document te laden."
 }
