@@ -124,17 +124,19 @@ const filtersForEmptySearch: FilterModel[] = [
 //     type: FilterType.FieldAndValue,
 //   },
 // ];
+/* Old endpointUrls
 
+    
+*/
 export const Settings = {
   endpoints: {
-    hua: {
-      label: 'Het Utrechts Archief',
+    houten: {
+      label: 'Gemeente Houten',
       endpointUrls: [
         {
           elastic:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/services/Zoeken/_search',
-          sparql:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/sparql',
+            'https://api.data.razu.nl/datasets/htn/openbaar/services/openbaar/_search',
+          sparql: 'https://api.data.razu.nl/datasets/htn/openbaar/sparql',
         },
       ],
     },
@@ -142,10 +144,10 @@ export const Settings = {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
         {
-          elastic:
-            'https://data.razu.nl/_api/datasets/razu/PoCAmerongen2024/services/PoCAmerongen2024/_search',
           sparql:
             'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/sparql',
+          elastic:
+            'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/services/PoCAmerongen2024/_search',
         },
         {
           sparql: 'https://api.data.razu.nl/datasets/gedeeld/actoren/sparql',
@@ -156,6 +158,17 @@ export const Settings = {
           sparql: 'https://api.data.razu.nl/datasets/gedeeld/locaties/sparql',
           elastic:
             'https://api.data.razu.nl/datasets/gedeeld/locaties/services/locaties/_search',
+        },
+      ],
+    },
+    hua: {
+      label: 'Het Utrechts Archief',
+      endpointUrls: [
+        {
+          elastic:
+            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/services/Zoeken/_search',
+          sparql:
+            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/sparql',
         },
       ],
     },

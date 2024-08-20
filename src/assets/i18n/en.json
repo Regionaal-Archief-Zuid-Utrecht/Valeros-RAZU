@@ -34,5 +34,7 @@
     "DOWNLOADABLES_GATHERING_OVERVIEW": "Gathering an overview of the record and its subrecords. This can take a minute.",
     "DOWNLOADABLES_GATHERING_DOWNLOADS": "Gathering downloads, your download should start soon",
     "METADATA": "Metadata",
-    "PDF_ERROR": "Something went wrong when loading a PDF-document."
+    "PDF_ERROR": "Something went wrong when loading a PDF-document.",
+    "SHOW_DOCUMENT": "Show document",
+    "HIDE_DOCUMENT": "Hide document"
 }

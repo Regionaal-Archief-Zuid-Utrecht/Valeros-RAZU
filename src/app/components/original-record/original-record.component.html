@@ -1,4 +1,5 @@
 <div class="w-full sm:px-4">
+  <ng-container *ngIf="!loading">
   <shacl-form
     #shaclForm
     id="shacl-form"
@@ -6,4 +7,8 @@
     data-view
     data-loading="Origineel aan het ophalen..."
   ></shacl-form>
+</ng-container>
+<ng-container *ngIf="loading">
+  <span class="loading loading-spinner loading-xs mr-2"></span>
+</ng-container>
 </div>

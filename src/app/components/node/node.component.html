@@ -106,7 +106,7 @@
       </div>
 
       <app-node-renderer [node]="node" *ngIf="!originalrecord.shown" />
-      <app-original-record *ngIf="originalrecord.shown" />
+      <app-original-record [node]="node" *ngIf="originalrecord.shown" />
       <div
         class="absolute"
         [ngClass]="[

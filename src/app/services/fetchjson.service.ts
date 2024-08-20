@@ -14,15 +14,18 @@ export class FetchJsonService {
     private http: HttpClient,
   ) {}
 
-  fetchJson(iri: string, type: string): Observable<string | boolean> {
+  async fetchJson(
+    iri: string,
+    type: string,
+  ): Promise<Observable<string | boolean>> {
     // Extract the ID part from the original IRI
     const id = iri.split('/').pop();
 
     // Construct the new IRI
-    const newIri = `https://razu.opslag.razu.nl/${id}.${type}.json`;
+    const newIri = `https://htn.opslag.razu.nl/${id}.${type}.json`;
 
     // Use the CDN service to add the JWT token
-    const processedUrl = this.urlService.processUrl(newIri);
+    const processedUrl = await this.urlService.processUrl(newIri);
     if (this.isUrlValid(processedUrl)) {
       return of(processedUrl);
     } else {
@@ -36,12 +39,14 @@ export class FetchJsonService {
     );
   }
 
-  downloadFile(iri: string, type: string) {
-    this.fetchJson(iri, type).subscribe((result) => {
+  async downloadFile(iri: string, type: string) {
+    this.fetchJson(iri, type).then((result) => {
       if (typeof result === 'boolean') {
         return;
       } else {
-        this.url = result;
+        result.subscribe((value) => {
+          this.url = value as string;
+        });
       }
     });
     if (!this.url) {

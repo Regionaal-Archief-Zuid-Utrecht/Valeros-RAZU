@@ -34,5 +34,7 @@
     "DOWNLOADABLES_GATHERING_OVERVIEW": "Overzicht van het record en zijn onderdelen aan het maken. Dit kan even duren.",
     "DOWNLOADABLES_GATHERING_DOWNLOADS": "Uw opgevraagde bestanden aan het verzamelen. Uw download zal zo starten.",
     "METADATA": "Metadata",
-    "PDF_ERROR": "Het is niet gelukt om een PDF-document te laden."
+    "PDF_ERROR": "Het is niet gelukt om een PDF-document te laden.",
+    "SHOW_DOCUMENT": "Toon document",
+    "HIDE_DOCUMENT": "Verberg document"
 }

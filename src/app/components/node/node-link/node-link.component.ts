@@ -103,12 +103,12 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     this.drawer.setDrawerItems(dynamicContent);
   }
 
-  processUrl() {
+  async processUrl() {
     if (!this.url) {
       return;
     }
 
-    this.processedUrl = this.urlService.processUrl(this.url);
+    this.processedUrl = await this.urlService.processUrl(this.url);
   }
 
   get cachedLabel(): string | undefined {

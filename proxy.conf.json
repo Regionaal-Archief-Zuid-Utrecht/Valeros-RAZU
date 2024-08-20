@@ -1,0 +1,18 @@
+{
+  "/proxy/htn": {
+    "target": "https://htn.opslag.razu.nl",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/proxy/htn": ""
+    }
+  },
+  "/proxy/wbd": {
+    "target": "https://wbd.opslag.razu.nl",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/proxy/wbd": ""
+    }
+  }
+}

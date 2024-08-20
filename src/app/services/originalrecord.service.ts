@@ -61,8 +61,8 @@ export class OriginalRecordService {
   }
 
   // MAIN functions
-  checkAvailability(nodeId: string) {
-    this.fetchjson.fetchJson(nodeId, 'mdto').subscribe((result) => {
+  async checkAvailability(nodeId: string) {
+    (await this.fetchjson.fetchJson(nodeId, 'mdto')).subscribe((result) => {
       if (!result) {
         this.available = false;
       }

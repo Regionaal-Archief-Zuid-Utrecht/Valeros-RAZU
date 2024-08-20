@@ -40,6 +40,7 @@ import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below
 import { LangSelectComponent } from '../../lang-select/lang-select.component';
 import { TranslocoModule } from '@jsverse/transloco';
 import { translate } from '@jsverse/transloco';
+import { NodeDocumentComponent } from '../../node/node-document/node-document.component';
 
 @Component({
   selector: 'app-search',
@@ -68,6 +69,7 @@ import { translate } from '@jsverse/transloco';
     MessageComponent,
     LangSelectComponent,
     TranslocoModule,
+    NodeDocumentComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

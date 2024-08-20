@@ -12,6 +12,7 @@ import '@ulb-darmstadt/shacl-form';
 import { OriginalRecordService } from '../../services/originalrecord.service';
 import { DownloadablesComponent } from '../downloadables/downloadables.component';
 import { featherMeh } from '@ng-icons/feather-icons';
+import { NodeDocumentComponent } from '../node/node-document/node-document.component';
 
 interface Representation {
   id: string;
@@ -38,7 +39,13 @@ interface Data {
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [NgIcon, NgIf, CommonModule, DownloadablesComponent],
+  imports: [
+    NgIcon,
+    NgIf,
+    CommonModule,
+    DownloadablesComponent,
+    NodeDocumentComponent,
+  ],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
