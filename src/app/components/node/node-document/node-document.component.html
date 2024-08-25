@@ -16,7 +16,18 @@
       </a>
     </div>
     <ng-container *ngIf="document.visible">
-      <pdf-viewer
+      <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle" [open]="document.visible" (close)="toggleDocumentVisibility(document)">
+        <div class="modal-box" [style.width]="'90vw'" [style.height]="'90vh'" [style.maxWidth]="'none'" [style.maxHeight]="'none'">
+        <!--<div class="modal-box w-screen h-5/6 max-w-none !w-full !h-full"> -->
+          <form method="dialog">
+            <button
+              class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </form>
+          <h3 class="text-lg font-bold">{{document.title}}</h3>
+            <pdf-viewer
         [src]="document.blobUrl"
         [rotation]="0"
         [original-size]="false"
@@ -33,6 +44,9 @@
         (on-progress)="onProgress($event)"
         (on-error)="onError($event)"
       ></pdf-viewer>
+        </div>
+      </dialog>
+      
     </ng-container>
     
   </ng-container>
