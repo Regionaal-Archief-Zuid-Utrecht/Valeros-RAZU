@@ -1,0 +1,23 @@
+<div class="inline">
+  <app-hop-link
+    [id]="id"
+    [settings]="{
+      preds: ['http://www.nationaalarchief.nl/mdto#betrokkeneActor'],
+      showHops: false
+    }"
+    (hopObjIdsRetrieved)="this.hasActor = $event.length > 0"
+  />
+</div>
+
+<div class="inline">
+  <span *ngIf="hasType || hasActor"> (</span>
+  <app-hop-link
+    [id]="id"
+    [settings]="{
+      preds: ['http://www.nationaalarchief.nl/mdto#dekkingInTijdType'],
+      showHops: false
+    }"
+    (hopObjIdsRetrieved)="this.hasType = $event.length > 0"
+  />
+  <span *ngIf="hasType || hasActor">)</span>
+</div>

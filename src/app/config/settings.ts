@@ -130,56 +130,43 @@ const filtersForEmptySearch: FilterModel[] = [
 */
 export const Settings = {
   endpoints: {
-    houten: {
-      label: 'Gemeente Houten',
+    objects: {
+      label: 'Archieven',
       endpointUrls: [
         {
           elastic:
-            'https://api.data.razu.nl/datasets/htn/openbaar/services/openbaar/_search',
-          sparql: 'https://api.data.razu.nl/datasets/htn/openbaar/sparql',
+            'https://api.data.razu.nl/datasets/id/object-copy/services/object-copy/_search',
+          sparql: 'https://api.data.razu.nl/datasets/id/object-copy/sparql',
         },
       ],
     },
-    razu: {
-      label: 'Regionaal Archief Zuid-Utrecht',
+    locations: {
+      label: 'Locaties',
       endpointUrls: [
         {
-          sparql:
-            'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/sparql',
+          sparql: 'https://api.data.razu.nl/datasets/id/locatie/sparql',
           elastic:
-            'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/services/PoCAmerongen2024/_search',
-        },
-        {
-          sparql: 'https://api.data.razu.nl/datasets/gedeeld/actoren/sparql',
-          elastic:
-            'https://data.razu.nl/_api/datasets/gedeeld/actoren/services/actoren/_search',
-        },
-        {
-          sparql: 'https://api.data.razu.nl/datasets/gedeeld/locaties/sparql',
-          elastic:
-            'https://api.data.razu.nl/datasets/gedeeld/locaties/services/locaties/_search',
+            'https://api.data.razu.nl/datasets/id/locatie/services/locatie/_search',
         },
       ],
     },
-    hua: {
-      label: 'Het Utrechts Archief',
+    actors: {
+      label: 'Actoren',
       endpointUrls: [
         {
+          sparql: 'https://api.data.razu.nl/datasets/id/actor/sparql',
           elastic:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/services/Zoeken/_search',
-          sparql:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/sparql',
+            'https://api.data.razu.nl/datasets/id/actor/services/actor/_search',
         },
       ],
     },
-    kasteelAmerongen: {
-      label: 'Kasteel Amerongen',
+    vocabs: {
+      label: 'Begrippen en trefwoorden',
       endpointUrls: [
         {
+          sparql: 'https://api.data.razu.nl/datasets/id/vocabs/sparql',
           elastic:
-            'https://data.razu.nl/_api/datasets/Kasteel-Amerongen/PoC2024/services/PoC2024-SKA/_search',
-          sparql:
-            'https://api.data.razu.nl/datasets/Kasteel-Amerongen/PoC2024/sparql',
+            'https://api.data.razu.nl/datasets/id/vocabs/services/vocabs/_search',
         },
       ],
     },
@@ -198,14 +185,14 @@ export const Settings = {
         label: 'Is onderdeel van',
         fieldIds: [
           ...parentPredicates,
-          'https://hetutrechtsarchief.nl/def/isDescendentOf',
+          'http://www.nationaalarchief.nl/mdto#isOnderdeelVan',
         ],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
       license: {
-        label: 'Licentie',
-        fieldIds: ['https://schema.org/license'],
+        label: 'Archiefvormer',
+        fieldIds: ['http://www.nationaalarchief.nl/mdto#archiefvormer'],
         values: [],
       },
     },
@@ -359,9 +346,65 @@ export const Settings = {
         componentId: 'mdto-omvang',
       },
       'http://www.nationaalarchief.nl/mdto#betrokkene': {
-        componentId: 'hop-link',
+        componentId: 'mdto-betrokkene',
         hopLinkSettings: {
           preds: ['http://www.nationaalarchief.nl/mdto#Actor'],
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#aggregatieniveau': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#archiefvormer': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#classificatie': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#betrokkeneActor': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#betrokkeneTypeRelatie': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#beperkingGebruikType': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
+        },
+      },
+      'http://www.nationaalarchief.nl/mdto#dekkingInTijdType': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
+          showOriginalLink: false,
+          showHops: false,
         },
       },
       'http://www.nationaalarchief.nl/mdto#gerelateerdInformatieobject': {
@@ -376,11 +419,7 @@ export const Settings = {
       'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
         componentId: 'hop-image',
         hopLinkSettings: {
-          preds: [
-            'http://www.nationaalarchief.nl/mdto#identificatie',
-            'http://www.nationaalarchief.nl/mdto#identificatieKenmerk',
-            'http://www.nationaalarchief.nl/mdto#URLBestand',
-          ],
+          preds: ['http://www.nationaalarchief.nl/mdto#URLBestand'],
         },
       },
       'http://www.w3.org/ns/prov#hadPrimarySource': {

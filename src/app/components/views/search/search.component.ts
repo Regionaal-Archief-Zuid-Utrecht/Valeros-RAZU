@@ -41,6 +41,7 @@ import { LangSelectComponent } from '../../lang-select/lang-select.component';
 import { TranslocoModule } from '@jsverse/transloco';
 import { translate } from '@jsverse/transloco';
 import { NodeDocumentComponent } from '../../node/node-document/node-document.component';
+import { NodesTableComponent } from '../../node/nodes-table/nodes-table.component';
 
 @Component({
   selector: 'app-search',
@@ -70,6 +71,7 @@ import { NodeDocumentComponent } from '../../node/node-document/node-document.co
     LangSelectComponent,
     TranslocoModule,
     NodeDocumentComponent,
+    NodesTableComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

@@ -14,7 +14,12 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-mdto-url-bestand',
   standalone: true,
-  imports: [NodeLinkComponent, NodeImagesComponent, NodeDocumentComponent, NgIf],
+  imports: [
+    NodeLinkComponent,
+    NodeImagesComponent,
+    NodeDocumentComponent,
+    NgIf,
+  ],
   templateUrl: './mdto-url-bestand.component.html',
   styleUrl: './mdto-url-bestand.component.scss',
 })
@@ -31,7 +36,7 @@ export class MdtoUrlBestandComponent implements OnInit {
   ];
   docFileFormats: string[] = [
     'pdf',
-    'https://data.razu.nl/gedeeld/begrippenlijsten/bestandsformaten/fmt/20'
+    'https://data.razu.nl/gedeeld/begrippenlijsten/bestandsformaten/fmt/20',
   ];
 
   constructor(
@@ -57,10 +62,10 @@ ${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#besta
 
     const query = `
 SELECT ?bestandsformaat WHERE {
-  ${this.sparql.getFederatedQuery(queryTemplate, [...Settings.endpoints.razu.endpointUrls, ...Settings.endpoints.houten.endpointUrls, ...Settings.endpoints.kasteelAmerongen.endpointUrls])}
+  ${this.sparql.getFederatedQuery(queryTemplate, [...Settings.endpoints.objects.endpointUrls, ...Settings.endpoints.vocabs.endpointUrls, ...Settings.endpoints.actors.endpointUrls])}
 } LIMIT 100`;
     const response = await this.api.postData<{ bestandsformaat: string }[]>(
-      Settings.endpoints.houten.endpointUrls[0].sparql,
+      Settings.endpoints.objects.endpointUrls[0].sparql,
       {
         query: query,
       },

@@ -49,6 +49,7 @@
         *ngIf="viewModes.current.value === ViewMode.Grid"
         class="w-full"
       />
+      <app-nodes-table [nodes]="search.results.value.nodes" class="w-full" />
 
       <ng-container *ngIf="viewModes.current.value === ViewMode.List">
         <ng-container *ngFor="let node of search.results.value?.nodes">
