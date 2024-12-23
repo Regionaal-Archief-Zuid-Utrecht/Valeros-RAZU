@@ -515,7 +515,13 @@ export const Settings = {
     'https://hetutrechtsarchief.nl/def/isDescendentOf',
     'https://hetutrechtsarchief.nl/def/isDescendantOf',
   ],
-  onlyShowNodes: {},
+  onlyShowNodes: {
+    onlyShowInformatieObject: {
+      fieldIds: [...typePredicates],
+      valueIds: ['http://www.nationaalarchief.nl/mdto#Informatieobject'],
+      type: FilterType.FieldAndValue,
+    },
+  },
   alwaysHideNodes: {
     hideSkosConcept: {
       fieldIds: [...typePredicates],
