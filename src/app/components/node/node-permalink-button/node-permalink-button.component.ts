@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NodeModel } from '../../../models/node.model';
 import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
@@ -13,7 +13,7 @@ import { EndpointService } from '../../../services/endpoint.service';
   templateUrl: './node-permalink-button.component.html',
   styleUrl: './node-permalink-button.component.scss',
 })
-export class NodePermalinkButtonComponent {
+export class NodePermalinkButtonComponent implements OnChanges {
   @Input() node: NodeModel | undefined;
   processedUrl: string = '';
 
@@ -22,6 +22,12 @@ export class NodePermalinkButtonComponent {
     public nodes: NodeService,
     public endpoints: EndpointService,
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['node']) {
+      this.processUrl();
+    }
+  }
 
   async processUrl() {
     if (!this.node) {
