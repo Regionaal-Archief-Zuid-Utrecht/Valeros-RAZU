@@ -32,16 +32,10 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 import { HomeIntroComponent } from '../../home-intro/home-intro.component';
 import { Router } from '@angular/router';
 import { DrawerComponent } from '../../drawer/drawer.component';
-import { MessageComponent } from '../../message/message.component';
 import { NodeService } from '../../../services/node.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
 import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below-search/home-intro-below-search.component';
-import { LangSelectComponent } from '../../lang-select/lang-select.component';
-import { TranslocoModule } from '@jsverse/transloco';
-import { translate } from '@jsverse/transloco';
-import { NodeDocumentComponent } from '../../node/node-document/node-document.component';
-import { NodesTableComponent } from '../../node/nodes-table/nodes-table.component';
 
 @Component({
   selector: 'app-search',
@@ -67,11 +61,6 @@ import { NodesTableComponent } from '../../node/nodes-table/nodes-table.componen
     CommonModule,
     DrawerComponent,
     HomeIntroBelowSearchComponent,
-    MessageComponent,
-    LangSelectComponent,
-    TranslocoModule,
-    NodeDocumentComponent,
-    NodesTableComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -102,12 +91,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   get numberOfHitsStr(): string {
     if (!this.search.numberOfHits) {
-      return translate('RESULTS_NONE');
+      return 'Geen resultaten gevonden';
     }
     if (this.search.numberOfHits === 1) {
-      return translate('RESULTS_1');
+      return '1 resultaat';
     }
-    return `${formatNumber(this.search.numberOfHits)}${this.search.moreHitsAreAvailable ? '+' : ''} ${translate('RESULTS_LC')}`;
+    return `${formatNumber(this.search.numberOfHits)}${this.search.moreHitsAreAvailable ? '+' : ''} resultaten`;
   }
 
   get shouldShowHomeIntro(): boolean {

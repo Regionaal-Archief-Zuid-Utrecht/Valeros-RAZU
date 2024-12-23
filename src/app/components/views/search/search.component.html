@@ -1,8 +1,6 @@
 <app-view-container>
-  <app-drawer />
-  <app-lang-select />
-  <!--<app-node-document />-->
-
+  
+  <app-drawer/>
   <app-header />
 
   <app-home-intro *ngIf="shouldShowHomeIntro" />
@@ -49,7 +47,6 @@
         *ngIf="viewModes.current.value === ViewMode.Grid"
         class="w-full"
       />
-      <app-nodes-table [nodes]="search.results.value.nodes" class="w-full" />
 
       <ng-container *ngIf="viewModes.current.value === ViewMode.List">
         <ng-container *ngFor="let node of search.results.value?.nodes">
@@ -73,11 +70,8 @@
           class="loading loading-spinner loading-xs"
           *ngIf="search.isLoading.value"
         ></span>
-        <ng-container *transloco="let translateInPlace">{{
-          translateInPlace("RESULTS_LOAD_MORE")
-        }}</ng-container>
+        Laad meer resultaten
       </button>
     </div>
   </div>
-  <app-message />
 </app-view-container>

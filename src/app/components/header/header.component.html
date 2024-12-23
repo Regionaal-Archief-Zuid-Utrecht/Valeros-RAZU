@@ -3,12 +3,7 @@
 >
   <button class="text-left" (click)="router.navigateByUrl('')">
     <!--    <div class="text-sm sm:text-base">Prototype Zoekomgeving</div>-->
-    <div
-      class="font-semibold text-lg sm:text-2xl mb-2"
-      *transloco="let translateInPlace"
-    >
-      {{ translateInPlace("TITLE") }}
-    </div>
+    <div class="font-semibold text-lg sm:text-2xl mb-2">Kasteel Amerongen</div>
   </button>
 
   <div class="flex-grow">
@@ -17,8 +12,8 @@
       (click)="router.navigateByUrl(buttonUrl)"
       [attr.aria-label]="
         view === HeaderView.ShowingColofon
-          ? translateThis('GO_TO_SEARCH')
-          : translateThis('GO_TO_COLOFON')
+          ? 'Ga naar zoeken'
+          : 'Ga naar colofon'
       "
     >
       <span class="text-lg sm:text-2xl font-light">

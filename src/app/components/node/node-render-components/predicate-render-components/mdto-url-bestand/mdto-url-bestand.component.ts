@@ -8,18 +8,12 @@ import { ApiService } from '../../../../../services/api.service';
 import { Settings } from '../../../../../config/settings';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
-import { NodeDocumentComponent } from '../../../node-document/node-document.component';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-mdto-url-bestand',
   standalone: true,
-  imports: [
-    NodeLinkComponent,
-    NodeImagesComponent,
-    NodeDocumentComponent,
-    NgIf,
-  ],
+  imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
   templateUrl: './mdto-url-bestand.component.html',
   styleUrl: './mdto-url-bestand.component.scss',
 })
@@ -29,15 +23,7 @@ export class MdtoUrlBestandComponent implements OnInit {
   fileFormats?: string[];
 
   // TODO: Add complete list here
-  imgFileFormats: string[] = [
-    'fmt/44',
-    'jpeg',
-    'https://data.razu.nl/gedeeld/begrippenlijsten/bestandsformaten/fmt/43',
-  ];
-  docFileFormats: string[] = [
-    'pdf',
-    'https://data.razu.nl/gedeeld/begrippenlijsten/bestandsformaten/fmt/20',
-  ];
+  imgFileFormats: string[] = ['fmt/44', 'jpeg'];
 
   constructor(
     public api: ApiService,
@@ -53,19 +39,17 @@ export class MdtoUrlBestandComponent implements OnInit {
       return;
     }
 
-    /*const queryTemplate = `
-${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?b .
-?b <http://www.nationaalarchief.nl/mdto#begripLabel> ?bestandsformaat .`;*/
-
     const queryTemplate = `
-${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?bestandsformaat .`;
+${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?b .
+?b <http://www.nationaalarchief.nl/mdto#begripLabel> ?bestandsformaat .`;
 
     const query = `
 SELECT ?bestandsformaat WHERE {
-  ${this.sparql.getFederatedQuery(queryTemplate, [...Settings.endpoints.objects.endpointUrls, ...Settings.endpoints.vocabs.endpointUrls, ...Settings.endpoints.actors.endpointUrls])}
+  ${this.sparql.getFederatedQuery(queryTemplate, [...Settings.endpoints.razu.endpointUrls, ...Settings.endpoints.kasteelAmerongen.endpointUrls])}
 } LIMIT 100`;
+
     const response = await this.api.postData<{ bestandsformaat: string }[]>(
-      Settings.endpoints.objects.endpointUrls[0].sparql,
+      Settings.endpoints.razu.endpointUrls[0].sparql,
       {
         query: query,
       },
@@ -81,11 +65,5 @@ SELECT ?bestandsformaat WHERE {
       return false;
     }
     return intersects(this.imgFileFormats, this.fileFormats);
-  }
-  get isDocument(): boolean {
-    if (!this.fileFormats) {
-      return false;
-    }
-    return intersects(this.docFileFormats, this.fileFormats);
   }
 }

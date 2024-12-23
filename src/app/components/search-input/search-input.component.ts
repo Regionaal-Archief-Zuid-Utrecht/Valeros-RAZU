@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon } from '@ng-icons/core';
-import { NgClass, NgIf, CommonModule } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { SearchService } from '../../services/search/search.service';
 import { Settings } from '../../config/settings';
 import { featherSearch } from '@ng-icons/feather-icons';
 import { NavigationExtras, Router } from '@angular/router';
-import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-search-input',
   standalone: true,
-  imports: [FormsModule, NgIcon, NgIf, NgClass, CommonModule, TranslocoModule],
+  imports: [FormsModule, NgIcon, NgIf, NgClass],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })

@@ -46,7 +46,7 @@ WHERE {
 
     const response = await this.api.postData<
       { subject: string; subjectLabel: string }[]
-    >(Settings.endpoints.objects.endpointUrls[0].sparql, {
+    >(Settings.endpoints.hua.endpointUrls[0].sparql, {
       query: query,
     });
 

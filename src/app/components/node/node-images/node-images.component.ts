@@ -35,12 +35,12 @@ export class NodeImagesComponent implements OnInit, OnChanges {
     }
   }
 
-  private async processImageUrls() {
+  private processImageUrls() {
     if (!this.imageUrls) {
       return;
     }
 
-    this.processedImageUrls = await this.urlService.processUrls(this.imageUrls);
+    this.processedImageUrls = this.urlService.processUrls(this.imageUrls);
   }
 
   protected readonly Config = Config;

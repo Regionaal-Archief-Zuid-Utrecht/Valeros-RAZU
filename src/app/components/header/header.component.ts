@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { featherSearch, featherX } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
-import { TranslocoModule } from '@jsverse/transloco';
-import { translate } from '@jsverse/transloco';
 
 export enum HeaderView {
   ShowingColofon,
@@ -14,7 +12,7 @@ export enum HeaderView {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIcon, NgIf, TranslocoModule],
+  imports: [NgIcon, NgIf],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -29,9 +27,7 @@ export class HeaderComponent {
     }
     return '';
   }
-  translateThis(key: string): string {
-    return translate(key);
-  }
+
   protected readonly featherSearch = featherSearch;
   protected readonly featherX = featherX;
   protected readonly HeaderView = HeaderView;

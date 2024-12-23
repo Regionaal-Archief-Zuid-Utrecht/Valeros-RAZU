@@ -7,7 +7,6 @@ import { EndpointService } from '../../../services/endpoint.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 import { FilterService } from '../../../services/search/filter.service';
 import { SearchService } from '../../../services/search/search.service';
-import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-endpoints',
@@ -19,7 +18,6 @@ import { TranslocoModule } from '@jsverse/transloco';
     NodeLinkComponent,
     FilterCountComponent,
     NgClass,
-    TranslocoModule,
   ],
   templateUrl: './endpoints.component.html',
   styleUrl: './endpoints.component.scss',

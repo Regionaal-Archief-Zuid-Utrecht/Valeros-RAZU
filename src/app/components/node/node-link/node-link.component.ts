@@ -23,7 +23,6 @@ import {
   featherMaximize2,
   featherSearch,
   featherX,
-  featherEye,
 } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
 import {
@@ -103,12 +102,12 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     this.drawer.setDrawerItems(dynamicContent);
   }
 
-  async processUrl() {
+  processUrl() {
     if (!this.url) {
       return;
     }
 
-    this.processedUrl = await this.urlService.processUrl(this.url);
+    this.processedUrl = this.urlService.processUrl(this.url);
   }
 
   get cachedLabel(): string | undefined {

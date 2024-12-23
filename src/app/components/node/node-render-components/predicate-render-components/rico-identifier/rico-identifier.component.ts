@@ -45,12 +45,12 @@ export class RicoIdentifierComponent implements OnInit {
 
     const query = `
 SELECT distinct ?typeLabel ?value WHERE {
-${this.sparql.getFederatedQuery(queryTemplate, Settings.endpoints.objects.endpointUrls)}
+${this.sparql.getFederatedQuery(queryTemplate, Settings.endpoints.hua.endpointUrls)}
 } LIMIT 1`;
 
     const response = await this.api.postData<
       { typeLabel: string; value: string }[]
-    >(Settings.endpoints.objects.endpointUrls[0].sparql, {
+    >(Settings.endpoints.hua.endpointUrls[0].sparql, {
       query: query,
     });
     if (!response || response.length === 0) {
