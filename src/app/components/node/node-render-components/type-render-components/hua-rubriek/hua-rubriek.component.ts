@@ -31,7 +31,8 @@ export class HuaRubriekComponent extends NodeRenderComponent {
   }
 
   async initRubriek() {
-    if (!this.node) {
+    const hasHuaEndpoint = 'hua' in Settings.endpoints;
+    if (!this.node || !hasHuaEndpoint) {
       return;
     }
 
@@ -46,7 +47,7 @@ WHERE {
 
     const response = await this.api.postData<
       { subject: string; subjectLabel: string }[]
-    >(Settings.endpoints.hua.endpointUrls[0].sparql, {
+    >((Settings.endpoints as any).hua.endpointUrls[0].sparql, {
       query: query,
     });
 

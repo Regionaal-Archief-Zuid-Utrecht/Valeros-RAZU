@@ -9,6 +9,11 @@ import { Settings } from '../../../../../config/settings';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { NgIf } from '@angular/common';
+import {
+  EndpointModel,
+  EndpointUrlsModel,
+} from '../../../../../models/endpoint.model';
+import { EndpointService } from '../../../../../services/endpoint.service';
 
 @Component({
   selector: 'app-mdto-url-bestand',
@@ -28,6 +33,7 @@ export class MdtoUrlBestandComponent implements OnInit {
   constructor(
     public api: ApiService,
     public sparql: SparqlService,
+    public endpoints: EndpointService,
   ) {}
 
   ngOnInit() {
@@ -43,10 +49,13 @@ export class MdtoUrlBestandComponent implements OnInit {
 ${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?b .
 ?b <http://www.nationaalarchief.nl/mdto#begripLabel> ?bestandsformaat .`;
 
+    const endpointUrls: EndpointUrlsModel[] =
+      this.endpoints.getAllEnabledUrls();
+
     const query = `
-SELECT ?bestandsformaat WHERE {
-  ${this.sparql.getFederatedQuery(queryTemplate, [...Settings.endpoints.razu.endpointUrls, ...Settings.endpoints.kasteelAmerongen.endpointUrls])}
-} LIMIT 100`;
+  SELECT ?bestandsformaat WHERE {
+    ${this.sparql.getFederatedQuery(queryTemplate, endpointUrls)}
+  } LIMIT 100`;
 
     const response = await this.api.postData<{ bestandsformaat: string }[]>(
       Settings.endpoints.razu.endpointUrls[0].sparql,

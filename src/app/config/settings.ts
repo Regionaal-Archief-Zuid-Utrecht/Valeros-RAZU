@@ -172,17 +172,6 @@ const visualMaterialValueIds = [
 
 export const Settings = {
   endpoints: {
-    hua: {
-      label: 'Het Utrechts Archief',
-      endpointUrls: [
-        {
-          elastic:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/services/Zoeken/_search',
-          sparql:
-            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/sparql',
-        },
-      ],
-    },
     razu: {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
@@ -201,17 +190,6 @@ export const Settings = {
           sparql: 'https://api.data.razu.nl/datasets/gedeeld/locaties/sparql',
           elastic:
             'https://api.data.razu.nl/datasets/gedeeld/locaties/services/locaties/_search',
-        },
-      ],
-    },
-    kasteelAmerongen: {
-      label: 'Kasteel Amerongen',
-      endpointUrls: [
-        {
-          elastic:
-            'https://data.razu.nl/_api/datasets/Kasteel-Amerongen/PoC2024/services/PoC2024-SKA/_search',
-          sparql:
-            'https://api.data.razu.nl/datasets/Kasteel-Amerongen/PoC2024/sparql',
         },
       ],
     },

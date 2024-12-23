@@ -175,7 +175,7 @@ export class ElasticService {
       promise: Promise<SearchResponse<T>>;
       endpointId: string;
     }[] = [];
-    for (const endpoint of this.endpoints.getAllUrls()) {
+    for (const endpoint of this.endpoints.getAllEnabledUrls()) {
       if (!endpoint.elastic) {
         continue;
       }

@@ -73,10 +73,16 @@ export class EndpointService {
   }
 
   getFirstUrls(): EndpointUrlsModel {
-    return this.getAllUrls()[0];
+    return this.getAllEnabledUrls()[0];
   }
 
-  getAll(): EndpointsModel {
+  getAllUrls(): EndpointUrlsModel[] {
+    return Object.values(Settings.endpoints).flatMap(
+      (endpoint) => endpoint.endpointUrls,
+    );
+  }
+
+  getAllEnabled(): EndpointsModel {
     const all: [string, EndpointModel][] = Object.entries(
       Settings.endpoints as EndpointsModel,
     ).filter(([endpointId, _]) => {
@@ -91,8 +97,8 @@ export class EndpointService {
     return Object.fromEntries(all);
   }
 
-  getAllUrls(): EndpointUrlsModel[] {
-    const allUrls = Object.entries(this.getAll()).flatMap(
+  getAllEnabledUrls(): EndpointUrlsModel[] {
+    const allUrls = Object.entries(this.getAllEnabled()).flatMap(
       ([endpointId, endpoint]) => {
         endpoint.endpointUrls.forEach((u) => (u.id = endpointId));
         return endpoint.endpointUrls;

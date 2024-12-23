@@ -39,7 +39,7 @@ export class SparqlService {
 
     const unionEndpoints = queryEndpoints
       ? queryEndpoints.slice(1)
-      : this.endpoints.getAllUrls().slice(1);
+      : this.endpoints.getAllEnabledUrls().slice(1);
     const unionServiceQueries = unionEndpoints.map(
       (endpoint) => `
 UNION {

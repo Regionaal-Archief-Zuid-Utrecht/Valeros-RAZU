@@ -32,7 +32,8 @@ export class RicoIdentifierComponent implements OnInit {
   }
 
   async initLabel() {
-    if (!this.id) {
+    const hasHuaEndpoint = 'hua' in Settings.endpoints;
+    if (!this.id || !hasHuaEndpoint) {
       return;
     }
 
@@ -43,14 +44,16 @@ export class RicoIdentifierComponent implements OnInit {
     const queryTemplate = `
     ${wrapWithAngleBrackets(this.id)} <${prefixes.rico}hasIdentifierType>/<${prefixes.rdfs}label> ?typeLabel ; <${prefixes.rico}textualValue> ?value .`;
 
+    // TODO: Add type
     const query = `
 SELECT distinct ?typeLabel ?value WHERE {
-${this.sparql.getFederatedQuery(queryTemplate, Settings.endpoints.hua.endpointUrls)}
+${this.sparql.getFederatedQuery(queryTemplate, (Settings.endpoints as any).hua.endpointUrls)}
 } LIMIT 1`;
 
+    // TODO: Add type
     const response = await this.api.postData<
       { typeLabel: string; value: string }[]
-    >(Settings.endpoints.hua.endpointUrls[0].sparql, {
+    >((Settings.endpoints as any).hua.endpointUrls[0].sparql, {
       query: query,
     });
     if (!response || response.length === 0) {
