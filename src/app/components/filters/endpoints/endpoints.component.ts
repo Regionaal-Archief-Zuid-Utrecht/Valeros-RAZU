@@ -7,6 +7,8 @@ import { EndpointService } from '../../../services/endpoint.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 import { FilterService } from '../../../services/search/filter.service';
 import { SearchService } from '../../../services/search/search.service';
+import { FormsModule } from '@angular/forms';
+import { UiService } from '../../../services/ui.service';
 
 @Component({
   selector: 'app-endpoints',
@@ -18,6 +20,7 @@ import { SearchService } from '../../../services/search/search.service';
     NodeLinkComponent,
     FilterCountComponent,
     NgClass,
+    FormsModule,
   ],
   templateUrl: './endpoints.component.html',
   styleUrl: './endpoints.component.scss',
@@ -27,6 +30,7 @@ export class EndpointsComponent {
     public endpoints: EndpointService,
     public filters: FilterService,
     public search: SearchService,
+    public ui: UiService,
   ) {}
 
   protected readonly Settings = Settings;

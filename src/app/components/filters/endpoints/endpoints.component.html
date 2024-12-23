@@ -1,5 +1,9 @@
 <div class="collapse collapse-arrow join-item bg-primary text-white border">
-  <input type="checkbox" name="filter-accordion" />
+  <input
+    type="checkbox"
+    name="filter-accordion"
+    [(ngModel)]="ui.accordionExpandedStates['endpoints']"
+  />
   <div class="collapse-title">
     <span>Organisaties</span>
     <app-filter-count
@@ -21,7 +25,7 @@
           [checked]="endpoints.isEnabled(endpointId)"
           (click)="endpoints.toggle(endpointId)"
         />
-        {{ endpoints.getById(endpointId).label }}
+        {{ endpoints.getById(endpointId)?.label }}
       </label>
     </div>
   </div>

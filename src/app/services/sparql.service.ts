@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NodeModel } from '../models/node.model';
+import { Direction, NodeModel, NodeObj } from '../models/node.model';
 import { Settings } from '../config/settings';
 import { ApiService } from './api.service';
 import { wrapWithAngleBrackets } from '../helpers/util.helper';
@@ -9,6 +9,7 @@ import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { SettingsService } from './settings.service';
 import { EndpointService } from './endpoint.service';
 import { EndpointUrlsModel } from '../models/endpoint.model';
+import { SparqlPredObjModel } from '../models/sparql/sparql-pred-obj.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class SparqlService {
 {
   SERVICE <${firstEndpoint}> {
       ${queryTemplate}
+      BIND("${firstEndpoint}" AS ?endpointUrl)
   }
 }`;
 
@@ -43,6 +45,7 @@ export class SparqlService {
 UNION {
     SERVICE <${endpoint.sparql}> {
         ${queryTemplate}
+        BIND("${endpoint.sparql}" AS ?endpointUrl)
     }
 }`,
     );
@@ -222,5 +225,50 @@ LIMIT 10000`;
     const objIds = response.map((item) => item.o);
 
     return objIds;
+  }
+
+  async getNode(id: string): Promise<NodeModel> {
+    console.log('Retrieving node details using SPARQL...', id);
+    this._ensureEndpointsExist();
+
+    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj .`;
+
+    const query = `SELECT DISTINCT ?pred ?obj ?endpointUrl WHERE {
+        ${this.getFederatedQuery(queryTemplate)}
+    }`;
+
+    const results = await this.api.postData<SparqlPredObjModel[]>(
+      this.endpoints.getFirstUrls().sparql,
+      {
+        query: query,
+      },
+    );
+    const nodeData: { [pred: string]: NodeObj[] } = {};
+    const endpointIds: Set<string> = new Set();
+
+    for (const result of results) {
+      if (result.endpointUrl) {
+        const endpointId = this.endpoints.getIdBySparqlUrl(result.endpointUrl);
+        endpointIds.add(endpointId);
+      }
+
+      const pred = result.pred;
+      nodeData[pred] = nodeData[pred] || [];
+      const nodeObj = {
+        value: result.obj,
+        direction: Direction.Outgoing,
+      };
+      nodeData[pred].push(nodeObj);
+    }
+
+    const endpointIdsObjs: NodeObj[] = Array.from(endpointIds).map((id) => {
+      return { value: id, direction: Direction.Outgoing } as NodeObj;
+    });
+
+    return {
+      '@id': [{ value: id, direction: Direction.Outgoing }],
+      endpointId: endpointIdsObjs,
+      ...nodeData,
+    };
   }
 }

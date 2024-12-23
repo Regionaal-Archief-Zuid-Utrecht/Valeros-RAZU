@@ -73,6 +73,7 @@ export class NodeService {
   }
 
   async enrichWithIncomingRelations(nodes: NodeModel[]): Promise<NodeModel[]> {
+    console.log('Enriching with incoming relations...', nodes);
     const promises: Promise<void>[] = [];
 
     for (const node of nodes) {

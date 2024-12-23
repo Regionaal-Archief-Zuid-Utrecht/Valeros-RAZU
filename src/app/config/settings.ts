@@ -2,13 +2,25 @@ import { ViewMode } from '../models/view-mode.enum';
 import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
 import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
 import { RenderMode } from '../models/settings/render-component-settings.type';
-import { FilterModel } from '../models/filter.model';
+import { SortOrder } from '../models/settings/sort-order.enum';
+import { FilterPanelLocation } from '../models/settings/filter-panel-location.enum';
+import { FilterModel, FilterType } from '../models/filter.model';
 
 export const imagePredicates: string[] = [
   'http://xmlns.com/foaf/0.1/depiction',
   // 'https://schema.org/thumbnail',
   'https://schema.org/image',
 ];
+
+export const hasImageFilters: FilterModel[] = imagePredicates.map(
+  (imagePred) => {
+    return {
+      filterId: 'image',
+      fieldId: imagePred,
+      type: FilterType.Field,
+    };
+  },
+);
 
 const typePredicates: string[] = [
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
@@ -26,6 +38,7 @@ const parentPredicates: string[] = [
 
 export const labelPredicates: string[] = [
   'http://www.w3.org/2000/01/rdf-schema#label',
+  'http://www.w3.org/2004/02/skos/core#prefLabel',
   'https://schema.org/name',
   'https://www.ica.org/standards/RiC/ontology#title',
   'https://www.ica.org/standards/RiC/ontology#textualValue',
@@ -95,84 +108,165 @@ const hideFilterOptionValueIds = [
   'https://web.maisflexis.nl/rdf/INL',
   'https://web.maisflexis.nl/rdf/EB',
   'http://dbpedia.org/ontology/Place',
+  'http://www.nationaalarchief.nl/mdto#BetrokkeneGegevens',
 ];
 
-const peopleFilterOptionValueIds = [
+const peopleValueIds = [
   'https://schema.org/Person',
   'https://data.cbg.nl/pico#PersonObservation',
   'http://xmlns.com/foaf/0.1/Agent',
   'http://www.nationaalarchief.nl/mdto#archiefvormer',
 ];
 
-const filtersForEmptySearch: FilterModel[] = [
-  // ...imagePredicates.map((imagePredicate) => {
-  //   return {
-  //     fieldId: imagePredicate,
-  //     type: FilterType.Field,
-  //   };
-  // }),
-  // {
-  //   fieldId: 'http://www.nationaalarchief.nl/mdto#heeftRepresentatie',
-  //   type: FilterType.Field,
-  // },
+const publicationValueIds = [
+  'https://hetutrechtsarchief.nl/def/Band',
+  'https://hetutrechtsarchief.nl/id/aet/hasc',
+  'https://hetutrechtsarchief.nl/id/aet/jrg',
+  'https://hetutrechtsarchief.nl/id/aet/krtp',
+  'https://schema.org/Article',
+  'https://schema.org/Book',
+  'https://schema.org/BookSeries',
+  'https://schema.org/CollectionPage',
+  'https://schema.org/Manuscript',
+  'https://schema.org/Newspaper',
+  'https://schema.org/PublicationEvent',
 ];
-//
-// const filtersForEmptySearch = [
-//   {
-//     fieldId: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-//     valueId: 'https://schema.org/ArchiveComponent',
-//     type: FilterType.FieldAndValue,
-//   },
-// ];
-/* Old endpointUrls
 
-    
-*/
+const archivesValueIds = [
+  'https://data.cbg.nl/pico-terms#doopinschrijving',
+  'https://data.cbg.nl/pico-terms#dtb_begraven',
+  'https://data.cbg.nl/pico-terms#geboorteakte',
+  'https://data.cbg.nl/pico-terms#huwelijksakte',
+  'https://data.cbg.nl/pico-terms#naamsverbetering',
+  'https://data.cbg.nl/pico-terms#notariele-akte',
+  'https://data.cbg.nl/pico-terms#overlijdensakte',
+  'https://data.cbg.nl/pico-terms#trouwinschrijving',
+  'https://hetutrechtsarchief.nl/def/Transcriptie',
+  'https://hetutrechtsarchief.nl/def/Vertaling',
+  'https://hetutrechtsarchief.nl/id/aet/db',
+  'https://hetutrechtsarchief.nl/id/aet/eb',
+  'https://hetutrechtsarchief.nl/id/aet/geb',
+  'https://hetutrechtsarchief.nl/id/aet/kvk',
+  'https://hetutrechtsarchief.nl/id/aet/notakt',
+  'https://hetutrechtsarchief.nl/id/aet/ove',
+  'https://hetutrechtsarchief.nl/id/aet/tsc',
+  'https://hetutrechtsarchief.nl/id/lst/35-codicil',
+  'https://hetutrechtsarchief.nl/id/lst/35-ontzegeling',
+  'https://hetutrechtsarchief.nl/id/lst/35-procuratie',
+  'https://hetutrechtsarchief.nl/id/lst/35-verzegeling',
+  'https://schema.org/ArchiveComponent',
+  'https://schema.org/SheetMusic',
+  'https://www.ica.org/standards/RiC/ontology#Record',
+  'http://www.nationaalarchief.nl/mdto#Bestand',
+  'http://www.nationaalarchief.nl/mdto#Informatieobject',
+];
+
+const visualMaterialValueIds = [
+  'https://schema.org/CreativeWork',
+  'https://schema.org/Drawing',
+  'https://schema.org/ImageObject',
+  'https://schema.org/Map',
+  'https://schema.org/Photograph',
+  'https://schema.org/VideoObject',
+];
+
 export const Settings = {
   endpoints: {
-    objects: {
-      label: 'Archieven',
+    hua: {
+      label: 'Het Utrechts Archief',
       endpointUrls: [
         {
           elastic:
-            'https://api.data.razu.nl/datasets/id/object-copy/services/object-copy/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object-copy/sparql',
+            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/services/Zoeken/_search',
+          sparql:
+            'https://api.data.netwerkdigitaalerfgoed.nl/datasets/hetutrechtsarchief/Test-Amerongen/sparql',
         },
       ],
     },
-    locations: {
-      label: 'Locaties',
+    razu: {
+      label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
         {
-          sparql: 'https://api.data.razu.nl/datasets/id/locatie/sparql',
           elastic:
-            'https://api.data.razu.nl/datasets/id/locatie/services/locatie/_search',
+            'https://data.razu.nl/_api/datasets/razu/PoCAmerongen2024/services/PoCAmerongen2024/_search',
+          sparql:
+            'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/sparql',
+        },
+        {
+          sparql: 'https://api.data.razu.nl/datasets/gedeeld/actoren/sparql',
+          elastic:
+            'https://data.razu.nl/_api/datasets/gedeeld/actoren/services/actoren/_search',
+        },
+        {
+          sparql: 'https://api.data.razu.nl/datasets/gedeeld/locaties/sparql',
+          elastic:
+            'https://api.data.razu.nl/datasets/gedeeld/locaties/services/locaties/_search',
         },
       ],
     },
-    actors: {
-      label: 'Actoren',
+    kasteelAmerongen: {
+      label: 'Kasteel Amerongen',
       endpointUrls: [
         {
-          sparql: 'https://api.data.razu.nl/datasets/id/actor/sparql',
           elastic:
-            'https://api.data.razu.nl/datasets/id/actor/services/actor/_search',
-        },
-      ],
-    },
-    vocabs: {
-      label: 'Begrippen en trefwoorden',
-      endpointUrls: [
-        {
-          sparql: 'https://api.data.razu.nl/datasets/id/vocabs/sparql',
-          elastic:
-            'https://api.data.razu.nl/datasets/id/vocabs/services/vocabs/_search',
+            'https://data.razu.nl/_api/datasets/Kasteel-Amerongen/PoC2024/services/PoC2024-SKA/_search',
+          sparql:
+            'https://api.data.razu.nl/datasets/Kasteel-Amerongen/PoC2024/sparql',
         },
       ],
     },
   },
+  maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
+  sorting: {
+    default: 'relevance',
+    options: {
+      relevance: {
+        fields: [],
+        label: 'Relevantie',
+        order: SortOrder.Ascending,
+        boost: {
+          images: {
+            boost: 100,
+            filter: {
+              fieldIds: imagePredicates,
+              valueIds: [],
+              type: FilterType.Field,
+            },
+          },
+          publications: {
+            boost: 5,
+            filter: {
+              fieldIds: typePredicates,
+              valueIds: publicationValueIds,
+              type: FilterType.FieldAndValue,
+            },
+          },
+          archives: {
+            boost: 2,
+            filter: {
+              fieldIds: typePredicates,
+              valueIds: archivesValueIds,
+              type: FilterType.FieldAndValue,
+            },
+          },
+        },
+      },
+      'title-a-z': {
+        fields: labelPredicates,
+        label: 'Titel (A-Z)',
+        order: SortOrder.Ascending,
+      },
+      'title-z-a': {
+        fields: labelPredicates,
+        label: 'Titel (Z-A)',
+        order: SortOrder.Descending,
+      },
+    },
+  },
   filtering: {
     showFilterPanel: true,
+    showImageFilter: true,
+    filterPanelLocation: FilterPanelLocation.Left,
     minNumOfValuesForFilterOptionToAppear: 1,
     filterOptions: {
       type: {
@@ -185,15 +279,22 @@ export const Settings = {
         label: 'Is onderdeel van',
         fieldIds: [
           ...parentPredicates,
-          'http://www.nationaalarchief.nl/mdto#isOnderdeelVan',
+          'https://hetutrechtsarchief.nl/def/isDescendentOf',
         ],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
       license: {
-        label: 'Archiefvormer',
-        fieldIds: ['http://www.nationaalarchief.nl/mdto#archiefvormer'],
+        label: 'Licentie',
+        fieldIds: ['https://schema.org/license'],
         values: [],
+        showOnlyForSelectedFilters: {
+          visualMaterial: {
+            fieldIds: typePredicates,
+            valueIds: visualMaterialValueIds,
+            type: FilterType.FieldAndValue,
+          },
+        },
       },
     },
   },
@@ -201,45 +302,11 @@ export const Settings = {
     filterOptionValues: {
       images: {
         label: 'Beeldmateriaal',
-        valueIds: [
-          'https://schema.org/CreativeWork',
-          'https://schema.org/Drawing',
-          'https://schema.org/ImageObject',
-          'https://schema.org/Map',
-          'https://schema.org/Photograph',
-          'https://schema.org/VideoObject',
-        ],
+        valueIds: visualMaterialValueIds,
       },
       archive: {
         label: 'Archieven',
-        valueIds: [
-          'https://data.cbg.nl/pico-terms#doopinschrijving',
-          'https://data.cbg.nl/pico-terms#dtb_begraven',
-          'https://data.cbg.nl/pico-terms#geboorteakte',
-          'https://data.cbg.nl/pico-terms#huwelijksakte',
-          'https://data.cbg.nl/pico-terms#naamsverbetering',
-          'https://data.cbg.nl/pico-terms#notariele-akte',
-          'https://data.cbg.nl/pico-terms#overlijdensakte',
-          'https://data.cbg.nl/pico-terms#trouwinschrijving',
-          'https://hetutrechtsarchief.nl/def/Transcriptie',
-          'https://hetutrechtsarchief.nl/def/Vertaling',
-          'https://hetutrechtsarchief.nl/id/aet/db',
-          'https://hetutrechtsarchief.nl/id/aet/eb',
-          'https://hetutrechtsarchief.nl/id/aet/geb',
-          'https://hetutrechtsarchief.nl/id/aet/kvk',
-          'https://hetutrechtsarchief.nl/id/aet/notakt',
-          'https://hetutrechtsarchief.nl/id/aet/ove',
-          'https://hetutrechtsarchief.nl/id/aet/tsc',
-          'https://hetutrechtsarchief.nl/id/lst/35-codicil',
-          'https://hetutrechtsarchief.nl/id/lst/35-ontzegeling',
-          'https://hetutrechtsarchief.nl/id/lst/35-procuratie',
-          'https://hetutrechtsarchief.nl/id/lst/35-verzegeling',
-          'https://schema.org/ArchiveComponent',
-          'https://schema.org/SheetMusic',
-          'https://www.ica.org/standards/RiC/ontology#Record',
-          'http://www.nationaalarchief.nl/mdto#Bestand',
-          'http://www.nationaalarchief.nl/mdto#Informatieobject',
-        ],
+        valueIds: archivesValueIds,
       },
       locations: {
         label: 'Locaties',
@@ -270,23 +337,11 @@ export const Settings = {
       },
       people: {
         label: 'Personen',
-        valueIds: peopleFilterOptionValueIds,
+        valueIds: peopleValueIds,
       },
       publication: {
         label: 'Publicaties',
-        valueIds: [
-          'https://hetutrechtsarchief.nl/def/Band',
-          'https://hetutrechtsarchief.nl/id/aet/hasc',
-          'https://hetutrechtsarchief.nl/id/aet/jrg',
-          'https://hetutrechtsarchief.nl/id/aet/krtp',
-          'https://schema.org/Article',
-          'https://schema.org/Book',
-          'https://schema.org/BookSeries',
-          'https://schema.org/CollectionPage',
-          'https://schema.org/Manuscript',
-          'https://schema.org/Newspaper',
-          'https://schema.org/PublicationEvent',
-        ],
+        valueIds: publicationValueIds,
       },
     },
     types: {
@@ -302,13 +357,52 @@ export const Settings = {
   },
   search: {
     resultsPerPagePerEndpoint: 10,
+    autocomplete: {
+      enabled: true,
+      maxAutocompleteOptionsPerEndpoint: 50,
+      maxAutocompleteOptionsToShow: 20,
+      filtersForSearchTermOptions: {
+        type: {
+          type: FilterType.FieldAndValue,
+          fieldIds: typePredicates,
+          valueIds: [
+            'http://www.w3.org/2004/02/skos/core#Concept',
+            'https://hetutrechtsarchief.nl/def/trefwoord_tst_107',
+            'https://hetutrechtsarchief.nl/id/aet/incat',
+          ],
+        },
+        parents: {
+          type: FilterType.FieldAndValue,
+          fieldIds: [
+            ...parentPredicates,
+            'https://hetutrechtsarchief.nl/def/isDescendentOf',
+          ],
+          valueIds: [
+            'https://hetutrechtsarchief.nl/id/trefwoord',
+            'https://termennetwerk.netwerkdigitaalerfgoed.nl',
+          ],
+        },
+      },
+    },
   },
+  viewer: {
+    showReferenceStrip: true,
+  },
+  showLanguageToggle: false,
   labelMaxChars: 100,
   predicates: {
     parents: parentPredicates,
     label: labelPredicates,
     type: typePredicates,
     images: imagePredicates,
+    hopImages: [
+      [
+        'http://www.nationaalarchief.nl/mdto#heeftRepresentatie',
+        'http://www.nationaalarchief.nl/mdto#identificatie',
+        'http://www.nationaalarchief.nl/mdto#identificatieKenmerk',
+        'http://www.nationaalarchief.nl/mdto#URLBestand',
+      ],
+    ],
   },
   renderComponents: {
     [RenderMode.ByType]: {
@@ -346,65 +440,9 @@ export const Settings = {
         componentId: 'mdto-omvang',
       },
       'http://www.nationaalarchief.nl/mdto#betrokkene': {
-        componentId: 'mdto-betrokkene',
+        componentId: 'hop-link',
         hopLinkSettings: {
           preds: ['http://www.nationaalarchief.nl/mdto#Actor'],
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#aggregatieniveau': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#archiefvormer': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#classificatie': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#betrokkeneActor': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#betrokkeneTypeRelatie': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#beperkingGebruikType': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#dekkingInTijdType': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-          showOriginalLink: false,
-          showHops: false,
         },
       },
       'http://www.nationaalarchief.nl/mdto#gerelateerdInformatieobject': {
@@ -419,7 +457,11 @@ export const Settings = {
       'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
         componentId: 'hop-image',
         hopLinkSettings: {
-          preds: ['http://www.nationaalarchief.nl/mdto#URLBestand'],
+          preds: [
+            'http://www.nationaalarchief.nl/mdto#identificatie',
+            'http://www.nationaalarchief.nl/mdto#identificatieKenmerk',
+            'http://www.nationaalarchief.nl/mdto#URLBestand',
+          ],
         },
       },
       'http://www.w3.org/ns/prov#hadPrimarySource': {
@@ -494,6 +536,21 @@ export const Settings = {
     'https://hetutrechtsarchief.nl/def/isDescendentOf',
     'https://hetutrechtsarchief.nl/def/isDescendantOf',
   ],
+  alwaysHideNodes: {
+    hideSkosConcept: {
+      fieldIds: [...typePredicates],
+      valueIds: ['http://www.w3.org/2004/02/skos/core#concept'],
+      type: FilterType.FieldAndValue,
+    },
+    hideTerms: {
+      fieldIds: [...parentPredicates],
+      valueIds: [
+        'https://hetutrechtsarchief.nl/id/trefwoorden',
+        'https://termennetwerk.netwerkdigitaalerfgoed.nl',
+      ],
+      type: FilterType.FieldAndValue,
+    },
+  },
   namespacePrefixes: {
     'https://www.ica.org/standards/RiC/ontology#': 'rico:',
     'https://hetutrechtsarchief.nl/def/': 'def:',
@@ -517,5 +574,8 @@ export const Settings = {
     'http://www.nationaalarchief.nl/mdto-shacl#': 'mdto-sh:',
     'http://www.w3.org/ns/shacl#': 'sh:',
   },
-  filtersForEmptySearch: filtersForEmptySearch,
+  matomo: {
+    siteId: '2',
+    trackerUrl: '//analytics.boasmedia.nl/',
+  },
 };

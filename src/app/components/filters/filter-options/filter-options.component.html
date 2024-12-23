@@ -1,15 +1,19 @@
 <div
-  class="flex flex-col lg:flex-row gap-1 lg:gap-2 mb-8"
+  class="flex flex-col gap-1 mb-4"
+  [ngClass]="[
+    settings.showingFilterPanelOnSide() ? 'lg:gap-1' : 'lg:flex-row lg:gap-2'
+  ]"
   *ngIf="filters.options.value"
 >
   <!--  <p>Filter op:</p>-->
   <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
-    <div
-      class="w-full sm:flex-1"
-      *ngIf="filters.getOptionValueIds(filterId).length > 0"
-    >
+    <div class="w-full sm:flex-1" *ngIf="filters.shouldShow(filterId)">
       <div class="collapse collapse-arrow bg-primary text-white border">
-        <input type="checkbox" name="filter-accordion" />
+        <input
+          type="checkbox"
+          name="filter-accordion"
+          [(ngModel)]="ui.accordionExpandedStates[filterId]"
+        />
         <div class="collapse-title">
           <span>
             {{ filters.getOptionById(filterId).label }}
@@ -36,6 +40,10 @@
       </div>
     </div>
   </ng-container>
+
+  <div class="w-full lg:w-auto" *ngIf="Settings.filtering.showImageFilter">
+    <app-image-filter />
+  </div>
 
   <div class="w-full lg:w-auto">
     <app-endpoints />

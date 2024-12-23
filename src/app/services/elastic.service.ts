@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Settings } from '../config/settings';
+import { hasImageFilters, Settings } from '../config/settings';
 import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
 import { FilterModel, FilterType } from '../models/filter.model';
-import { ElasticSimpleQuery } from '../models/elastic/elastic-simple-query.type';
+import { ElasticQuery } from '../models/elastic/elastic-query.type';
 import { ElasticFieldExistsQuery } from '../models/elastic/elastic-field-exists-query.type';
 import { DataService } from './data.service';
 import { ElasticMatchQueries } from '../models/elastic/elastic-match-queries.type';
@@ -13,6 +13,10 @@ import { SettingsService } from './settings.service';
 import { EndpointService } from './endpoint.service';
 import { ElasticEndpointSearchResponse } from '../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticShouldQueries } from '../models/elastic/elastic-should-queries.type';
+import { SortOrder } from '../models/settings/sort-order.enum';
+import { ElasticSortEntryModel } from '../models/elastic/elastic-sort.model';
+import { SortService } from './sort.service';
+import { FilterOptionsIdsModel } from '../models/filter-option.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,31 +27,32 @@ export class ElasticService {
     private data: DataService,
     private settings: SettingsService,
     private endpoints: EndpointService,
+    private sort: SortService,
   ) {}
 
-  private _getSearchQuery(query: string): ElasticSimpleQuery {
-    return this._getSimpleQuery(query);
+  private _getSearchQuery(query: string): ElasticQuery {
+    return this.getQuery(query);
   }
 
-  private _getSimpleQuery(
+  private getQuery(
     query?: string,
     field?: string,
     boost?: number,
-  ): ElasticSimpleQuery {
+  ): ElasticQuery {
     if (!query) {
       query = '';
     }
 
-    const simpleQuery: ElasticSimpleQuery = {
-      simple_query_string: {
+    const elasticQuery: ElasticQuery = {
+      query_string: {
         query: query,
         boost: boost,
       },
     };
     if (field) {
-      simpleQuery.simple_query_string.fields = [field];
+      elasticQuery.query_string.fields = [field];
     }
-    return simpleQuery;
+    return elasticQuery;
   }
 
   private _getFieldExistsQuery(
@@ -67,7 +72,8 @@ export class ElasticService {
 
   private _getFieldOrValueFilterQueries(
     filters: FilterModel[],
-  ): (ElasticSimpleQuery | ElasticFieldExistsQuery)[] {
+    boost?: number,
+  ): (ElasticQuery | ElasticFieldExistsQuery)[] {
     const fieldOrValueFilters = filters.filter(
       (filter) =>
         filter.type === FilterType.Value || filter.type === FilterType.Field,
@@ -75,50 +81,17 @@ export class ElasticService {
 
     return fieldOrValueFilters.map((filter) => {
       if (filter.type === FilterType.Field) {
-        return this._getFieldExistsQuery(filter?.fieldId);
+        return this._getFieldExistsQuery(filter?.fieldId, boost);
       }
-      return this._getSimpleQuery(filter?.valueId);
+      return this.getQuery(filter?.valueId, undefined, boost);
     });
-  }
-
-  private getFieldAndValueFilterQueries(
-    filters: FilterModel[],
-  ): ElasticShouldQueries[] {
-    const fieldAndValueFilters = filters.filter(
-      (filter) =>
-        filter.type === FilterType.FieldAndValue &&
-        filter.fieldId !== undefined,
-    );
-
-    let matchQueries: { [filterId: string]: ElasticMatchQueries[] } = {};
-    fieldAndValueFilters.forEach((filter) => {
-      if (!filter.fieldId || !filter.valueId) {
-        return;
-      }
-      const fieldIdWithSpaces = this.data.replacePeriodsWithSpaces(
-        filter.fieldId,
-      );
-      const matchQuery: ElasticMatchQueries = {
-        match_phrase: { [fieldIdWithSpaces]: filter.valueId },
-      };
-      const filterId = filter?.filterId ?? 'Filter';
-      if (!(filterId in matchQueries)) {
-        matchQueries[filterId] = [];
-      }
-      matchQueries[filterId].push(matchQuery);
-    });
-
-    const shouldMatchQueries: ElasticShouldQueries[] = Object.values(
-      matchQueries,
-    ).map((queries) => {
-      return { bool: { should: queries } };
-    });
-    return shouldMatchQueries;
   }
 
   async getFilterOptions(
-    filterFieldIds: string[],
     query: string,
+    filterFieldIds: string[],
+    activeFilters: FilterModel[],
+    onlyWithImages: boolean,
   ): Promise<SearchResponse<any>[]> {
     const aggs = filterFieldIds.reduce((result: any, fieldId) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
@@ -145,17 +118,54 @@ export class ElasticService {
       return result;
     }, {});
 
-    const queryData: any = {
-      size: 0,
-      aggs: { ...aggs },
-    };
-
-    if (query) {
-      const searchQuery = this._getSearchQuery(query);
-      queryData.query = { bool: { must: [searchQuery] } };
-    }
+    const queryData = this._getNodeSearchQuery(
+      query,
+      activeFilters,
+      onlyWithImages,
+      0,
+      0,
+    );
+    queryData.aggs = { ...aggs };
 
     return await this.searchEndpoints(queryData);
+  }
+
+  getFieldAndValueFilterQueries(
+    filters: FilterModel[],
+    boost?: number,
+  ): ElasticShouldQueries[] {
+    const fieldAndValueFilters = filters.filter(
+      (filter) =>
+        filter.type === FilterType.FieldAndValue &&
+        filter.fieldId !== undefined,
+    );
+
+    let matchQueries: { [filterId: string]: ElasticMatchQueries[] } = {};
+    fieldAndValueFilters.forEach((filter) => {
+      if (!filter.fieldId || !filter.valueId) {
+        return;
+      }
+      const fieldIdWithSpaces = this.data.replacePeriodsWithSpaces(
+        filter.fieldId,
+      );
+      const matchQuery: ElasticMatchQueries = {
+        match_phrase: {
+          [fieldIdWithSpaces]: { query: filter.valueId, boost: boost },
+        },
+      };
+      const filterId = filter?.filterId ?? 'Filter';
+      if (!(filterId in matchQueries)) {
+        matchQueries[filterId] = [];
+      }
+      matchQueries[filterId].push(matchQuery);
+    });
+
+    const shouldMatchQueries: ElasticShouldQueries[] = Object.values(
+      matchQueries,
+    ).map((queries) => {
+      return { bool: { should: queries } };
+    });
+    return shouldMatchQueries;
   }
 
   async searchEndpoints<T>(
@@ -193,12 +203,35 @@ export class ElasticService {
     return searchResultsWithEndpointIds;
   }
 
-  async searchEntities(
+  private _getElasticSortEntriesFromSortOption(): ElasticSortEntryModel[] {
+    const sort = this.sort.current.value;
+    if (!sort) {
+      return [];
+    }
+
+    const elasticSortEntries: ElasticSortEntryModel[] = sort.fields.map(
+      (field) => {
+        const elasticField =
+          this.data.replacePeriodsWithSpaces(field) + '.keyword';
+        return {
+          [elasticField]: {
+            order: sort.order === SortOrder.Ascending ? 'asc' : 'desc',
+            unmapped_type: 'string',
+          },
+        };
+      },
+    );
+
+    return elasticSortEntries;
+  }
+
+  private _getNodeSearchQuery(
     query: string,
-    from: number,
-    size: number,
     filters: FilterModel[],
-  ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
+    onlyWithImages: boolean,
+    from?: number,
+    size?: number,
+  ): any {
     const queryData: any = {
       from: from,
       size: size,
@@ -207,17 +240,18 @@ export class ElasticService {
       },
     };
 
-    let searchFilters: FilterModel[] = filters;
-    const isHomePageQuery = !query;
-    const hasNoFiltersYet =
-      !filters ||
-      (filters.length === 0 && this.endpoints.enabledIds.value.length === 0);
-    if (isHomePageQuery && hasNoFiltersYet) {
-      searchFilters = Settings.filtersForEmptySearch as FilterModel[];
+    // Sorting
+    const elasticSortEntries = this._getElasticSortEntriesFromSortOption();
+    const shouldSort = elasticSortEntries && elasticSortEntries.length > 0;
+    if (shouldSort) {
+      queryData.sort = elasticSortEntries;
     }
 
+    // Search filters
+    let searchFilters: FilterModel[] = filters;
+
     const fieldOrValueFilterQueries: (
-      | ElasticSimpleQuery
+      | ElasticQuery
       | ElasticFieldExistsQuery
     )[] = this._getFieldOrValueFilterQueries(searchFilters);
 
@@ -234,9 +268,81 @@ export class ElasticService {
       mustQueries.push({ bool: { should: fieldOrValueFilterQueries } });
     }
 
+    // Has image filter
+    const hasImageFilterQueries =
+      this._getFieldOrValueFilterQueries(hasImageFilters);
+    const useHasImageFilter =
+      onlyWithImages &&
+      hasImageFilterQueries &&
+      hasImageFilterQueries.length > 0;
+    if (useHasImageFilter) {
+      mustQueries.push({ bool: { should: hasImageFilterQueries } });
+    }
+
     if (mustQueries && mustQueries.length > 0) {
       queryData.query.bool.must = mustQueries;
     }
+
+    // Hiding filters (e.g., hiding terms)
+    const hideFilters = this.data.convertFiltersFromIdsFormat(
+      Settings.alwaysHideNodes as FilterOptionsIdsModel,
+    );
+    const hideQueries: ElasticShouldQueries[] =
+      this.getFieldAndValueFilterQueries(hideFilters);
+    if (hideQueries && hideQueries.length > 0) {
+      queryData.query.bool.must_not = hideQueries;
+    }
+
+    // Boosting filters
+    const boostSettings = this.sort.current.value?.boost;
+    if (!boostSettings) {
+      return queryData;
+    }
+    let boostQueries: (
+      | ElasticQuery
+      | ElasticFieldExistsQuery
+      | ElasticMatchQueries
+    )[] = [];
+    for (const [id, boostSetting] of Object.entries(boostSettings)) {
+      const boostFilters = this.data.convertFiltersFromIdsFormat({
+        [id]: boostSetting.filter,
+      });
+      const boostFieldOrValueQueries = this._getFieldOrValueFilterQueries(
+        boostFilters,
+        boostSetting.boost,
+      );
+      const boostFieldAndValueQueries = this.getFieldAndValueFilterQueries(
+        boostFilters,
+        boostSetting.boost,
+      ).flatMap((f) => f.bool.should);
+      boostQueries = [
+        ...boostQueries,
+        ...boostFieldOrValueQueries,
+        ...boostFieldAndValueQueries,
+      ];
+    }
+    if (boostQueries && boostQueries.length > 0) {
+      // TODO: Fix issue with less results showing when including boost queries (e.g. empty search)
+      queryData.query.bool.should = boostQueries;
+    }
+
+    return queryData;
+  }
+
+  async searchNodes(
+    query: string,
+    from: number,
+    size: number,
+    filters: FilterModel[],
+    onlyWithImages: boolean,
+  ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
+    const queryData = this._getNodeSearchQuery(
+      query,
+      filters,
+      onlyWithImages,
+      from,
+      size,
+    );
 
     return await this.searchEndpoints<ElasticNodeModel>(queryData);
   }

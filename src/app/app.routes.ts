@@ -16,6 +16,10 @@ export const routes: Routes = [
     component: ColofonComponent,
   },
   {
+    path: 'details/:id',
+    component: SearchComponent,
+  },
+  {
     path: '**',
     redirectTo: '/',
   },

@@ -3,6 +3,7 @@ import {
   AsyncPipe,
   JsonPipe,
   KeyValuePipe,
+  Location,
   NgClass,
   NgForOf,
   NgIf,
@@ -16,7 +17,7 @@ import { ThingWithLabelModel } from '../../models/thing-with-label.model';
 import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
 import { NodeTypesComponent } from './node-types/node-types.component';
 import { NodeImagesComponent } from './node-images/node-images.component';
-import { CacheService } from '../../services/cache.service';
+import { LabelsCacheService } from '../../services/cache/labels-cache.service';
 import { NodeLinkComponent } from './node-link/node-link.component';
 import { NodeRendererComponent } from './node-renderer/node-renderer.component';
 import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
@@ -34,6 +35,8 @@ import { NgIcon } from '@ng-icons/core';
 import { DetailsService } from '../../services/details.service';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
+import { Router, RouterLink } from '@angular/router';
+import { RoutingService } from '../../services/routing.service';
 
 @Component({
   selector: 'app-node',
@@ -55,6 +58,7 @@ import { NodePermalinkButtonComponent } from './node-permalink-button/node-perma
     NgIcon,
     NodeDetailsButtonComponent,
     NodePermalinkButtonComponent,
+    RouterLink,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -79,9 +83,12 @@ export class NodeComponent implements OnInit {
     public nodes: NodeService,
     public sparql: SparqlService,
     public data: DataService,
-    public cache: CacheService,
+    public cache: LabelsCacheService,
     public settings: SettingsService,
     public details: DetailsService,
+    public router: Router,
+    public routing: RoutingService,
+    public location: Location,
   ) {}
 
   ngOnInit() {
@@ -101,6 +108,7 @@ export class NodeComponent implements OnInit {
     const titles = this.nodes
       .getObjValues(this.node, Settings.predicates.label)
       .map((title) => title.trim());
+
     if (!titles || titles.length === 0) {
       return;
     }
@@ -108,13 +116,30 @@ export class NodeComponent implements OnInit {
     this.title = titles[0];
   }
 
-  initImages() {
+  async getHopImageUrls(nodeId: string): Promise<string[]> {
+    const hopImagePromises = Settings.predicates.hopImages.map(
+      (hopImagePreds) => this.sparql.getObjIds(nodeId, hopImagePreds),
+    );
+
+    const hopImageUrls = await Promise.all(hopImagePromises);
+    return hopImageUrls.flat();
+  }
+
+  async initImages() {
+    if (!this.node) {
+      return;
+    }
+
     this.images = this.nodes.getObjValues(
       this.node,
       Settings.predicates.images,
       undefined,
       true,
     );
+
+    const nodeId: string = this.nodes.getId(this.node);
+    const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
+    this.images.push(...hopImageUrls);
   }
 
   initTypes() {
@@ -152,7 +177,7 @@ export class NodeComponent implements OnInit {
       return '100%';
     }
 
-    return this.details.isShowing
+    return this.details.showing.value
       ? Settings.largeImageWidth.details
       : Settings.largeImageWidth.search;
   }
@@ -161,17 +186,9 @@ export class NodeComponent implements OnInit {
     return this.showImageNextToTable && this.images && this.images.length > 0;
   }
 
-  onTitleClicked($event: MouseEvent) {
-    $event.preventDefault();
-
-    if (!this.node) {
-      return;
-    }
-    this.details.show(this.node);
-  }
-
   protected readonly Settings = Settings;
   protected readonly featherChevronRight = featherChevronRight;
   protected readonly featherArrowRight = featherArrowRight;
   protected readonly featherArrowLeft = featherArrowLeft;
+  protected readonly encodeURIComponent = encodeURIComponent;
 }

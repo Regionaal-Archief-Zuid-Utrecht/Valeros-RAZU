@@ -1,78 +1,53 @@
 import { Injectable } from '@angular/core';
-import { SearchService } from './search/search.service';
 import { NodeModel } from '../models/node.model';
-import { BehaviorSubject } from 'rxjs';
 import { NodeService } from './node.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { Config } from '../config/config';
+import { isValidHttpUrl } from '../helpers/util.helper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DetailsService {
-  private _showingForNodeId: BehaviorSubject<string | undefined> =
-    new BehaviorSubject<string | undefined>(undefined);
-  lastShownNodeId: string | undefined = undefined;
-  showingForNodeId = this._showingForNodeId.asObservable();
+  showing: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private search: SearchService,
     private nodes: NodeService,
+    private router: Router,
   ) {
-    this._initStopShowingDetailsOnSearchResultChanges();
-    this._initStoreLastShownNodeIdOnChange();
+    this._updateShowingOnRouteChange();
   }
 
-  private _initStoreLastShownNodeIdOnChange() {
-    this._showingForNodeId.subscribe((nodeId) => {
-      if (!nodeId) {
-        return;
+  private _updateShowingOnRouteChange() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const isShowingDetails = event.url.startsWith(`/${Config.detailsUrl}`);
+        const stateChanged = this.showing.value !== isShowingDetails;
+        if (stateChanged) {
+          this.showing.next(isShowingDetails);
+        }
       }
-      this.lastShownNodeId = nodeId;
     });
   }
 
-  private _initStopShowingDetailsOnSearchResultChanges() {
-    this.search.results.subscribe(() => {
-      this.stopShowing();
-    });
+  isShowing(): boolean {
+    return this.router.url.startsWith(`/${Config.detailsUrl}`);
   }
 
-  get isShowing(): boolean {
-    return !!this._showingForNodeId.value;
-  }
-
-  show(node: NodeModel) {
+  getLink(node: NodeModel): string {
     const nodeId = this.nodes.getId(node);
-    this._showingForNodeId.next(nodeId);
+    return this.getLinkFromUrl(nodeId);
   }
 
-  stopShowing() {
-    this._showingForNodeId.next(undefined);
-    this.lastShownNodeId = undefined;
-  }
-
-  shouldShowNode(node: NodeModel | undefined): boolean {
-    if (!node) {
-      return false;
-    }
-    const showingDetailsForId = this._showingForNodeId.value;
-    const shouldShowAllNodes = !showingDetailsForId;
-    if (shouldShowAllNodes) {
-      return true;
+  getLinkFromUrl(url: string): string {
+    const isAlreadyDetailsUrl = decodeURIComponent(url).startsWith(
+      `/${Config.detailsUrl}`,
+    );
+    if (isAlreadyDetailsUrl || !isValidHttpUrl(url)) {
+      return url;
     }
 
-    return this.showing(node);
-  }
-
-  showing(node: NodeModel | undefined): boolean {
-    if (!node) {
-      return false;
-    }
-
-    const nodeId = this.nodes.getId(node);
-    const showingDetailsForId = this._showingForNodeId.value;
-    if (!showingDetailsForId) {
-      return false;
-    }
-    return nodeId === this._showingForNodeId.value;
+    return `/${Config.detailsUrl}/` + encodeURIComponent(url);
   }
 }

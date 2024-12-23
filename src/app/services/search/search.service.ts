@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, skip, take } from 'rxjs';
 import { SearchResultsModel } from '../../models/elastic/search-results.model';
 import { ElasticService } from '../elastic.service';
 import { NodeModel } from '../../models/node.model';
@@ -16,7 +16,13 @@ import {
 import { DataService } from '../data.service';
 import { EndpointService } from '../endpoint.service';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DetailsService } from '../details.service';
+import { SortService } from '../sort.service';
+import { SortOptionModel } from '../../models/settings/sort-option.model';
+import { Config } from '../../config/config';
+import { UrlService } from '../url.service';
+import { UiService } from '../ui.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,13 +35,15 @@ export class SearchService {
   page: number = 0;
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   numberOfHits: number = 0;
-  moreHitsAreAvailable: boolean = false;
+  numberOfHitsIsCappedByElastic: boolean = false;
 
   hasDoneInitialSearch: boolean = false;
+  hasMoreResultsToLoad = true;
 
   private _searchQueryId = 0;
 
   constructor(
+    private url: UrlService,
     private elastic: ElasticService,
     private hits: SearchHitsService,
     private nodes: NodeService,
@@ -43,10 +51,15 @@ export class SearchService {
     private data: DataService,
     private endpoints: EndpointService,
     private route: ActivatedRoute,
+    private details: DetailsService,
+    private sort: SortService,
+    private router: Router,
+    private ui: UiService,
   ) {
-    this.initSearchOnQueryChange();
+    this.initSearchOnUrlChange();
     this.initSearchOnFilterChange();
-    void this.execute(true);
+    this.initSearchOnEndpointChange();
+    this.initSearchOnSortChange();
   }
 
   private _updateNumberOfHitsFromSearchResponses(
@@ -58,7 +71,7 @@ export class SearchService {
       0,
     );
 
-    this.moreHitsAreAvailable =
+    this.numberOfHitsIsCappedByElastic =
       [...responses].filter(
         (response) => (response as any).hits.total.relation === 'gte',
       ).length > 0;
@@ -66,7 +79,7 @@ export class SearchService {
     // TODO: Move 10000 max to config/settings file
     if (this.numberOfHits > 10000) {
       this.numberOfHits = 10000;
-      this.moreHitsAreAvailable = true;
+      this.numberOfHitsIsCappedByElastic = true;
     }
   }
 
@@ -115,26 +128,77 @@ export class SearchService {
     });
   }
 
-  get hasResults() {
-    if (!this.results.value.nodes) {
-      return false;
-    }
-    return this.results.value.nodes.length > 0;
+  initSearchOnFilterChange() {
+    this.filters.searchTrigger.subscribe((s) => {
+      if (s.clearFilters) {
+        console.log('-- Searching without filters to retrieve options');
+      } else {
+        console.log('-- Searching with re-applied filters');
+      }
+      void this.execute(true, s.clearFilters);
+    });
+
+    this.filters.onlyShowResultsWithImages.subscribe(() => {
+      void this.execute(true, false);
+    });
   }
 
-  initSearchOnFilterChange() {
-    this.filters.enabled.subscribe((_) => {
+  initSearchOnEndpointChange() {
+    this.endpoints.enabledIds.pipe(skip(1)).subscribe((_) => {
+      console.log('Searching because of updated endpoints...');
       void this.execute(true);
     });
-    this.endpoints.enabledIds.subscribe((_) => {
-      void this.execute(true, true);
-    });
   }
 
-  initSearchOnQueryChange() {
-    this.route.queryParams.subscribe((queryParams) => {
-      this.queryStr = queryParams['q'];
-      void this.execute(true, true);
+  initSearchOnSortChange() {
+    this.sort.current
+      .pipe(skip(1))
+      .subscribe((sortOption: SortOptionModel | undefined) => {
+        console.log('Searching because of sort update...', sortOption);
+        void this.execute(true);
+      });
+  }
+
+  private _searchOnUrlChange(queryParams: Params) {
+    if (this.url.ignoreQueryParamChange) {
+      console.log('Ignoring query param change');
+      return;
+    }
+
+    const navigatedToDetails = this.details.isShowing();
+    if (navigatedToDetails) {
+      return;
+    }
+
+    const queryStr = queryParams[Config.searchParam];
+    const queryStrChanged = queryStr !== this.queryStr;
+    if (queryStrChanged) {
+      this.queryStr = queryStr;
+      console.log('Searching because of query string update');
+      void this.execute(true);
+      return;
+    }
+  }
+
+  initSearchOnUrlChange() {
+    this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
+      console.log('INITIAL LOAD');
+      const filtersParam: string | undefined = queryParams[Config.filtersParam];
+      if (filtersParam) {
+        this.filters.onUpdateFromURLParam(filtersParam);
+      }
+
+      const onlyWithImages: string | undefined =
+        queryParams[Config.onlyWithImages];
+      if (onlyWithImages) {
+        this.filters.onlyShowResultsWithImages.next(JSON.parse(onlyWithImages));
+      }
+
+      setTimeout(() => this._searchOnUrlChange(queryParams));
+    });
+
+    this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
+      this._searchOnUrlChange(queryParams);
     });
   }
 
@@ -142,13 +206,29 @@ export class SearchService {
     this.results.next({});
     this.page = 0;
     this.numberOfHits = 0;
-    this.moreHitsAreAvailable = false;
+    this.numberOfHitsIsCappedByElastic = false;
   }
 
-  async execute(clearResults = false, clearFilters = false) {
+  async checkHasMoreResultsToLoad() {
+    const responses: ElasticEndpointSearchResponse<ElasticNodeModel>[] =
+      await this.elastic.searchNodes(
+        this.queryStr,
+        this.page * Settings.search.resultsPerPagePerEndpoint,
+        Settings.search.resultsPerPagePerEndpoint,
+        this.filters.enabled.value,
+        this.filters.onlyShowResultsWithImages.value,
+      );
+    const hits: SearchHit<ElasticNodeModel>[] =
+      this.hits.getFromSearchResponses(responses);
+    this.hasMoreResultsToLoad = hits && hits.length > 0;
+  }
+
+  async execute(clearResults = false, clearFilters = true) {
     // if (this.queryStr === '') {
     //   return;
     // }
+
+    this.ui.collapseAllAccordions();
 
     this._searchQueryId++;
 
@@ -156,22 +236,27 @@ export class SearchService {
       this.hasDoneInitialSearch = true;
     }
 
-    console.log('SEARCH', this.queryStr);
+    console.log(
+      `Searching for: ${this.queryStr}. Clearing results: ${clearResults}, clearing filters: ${clearFilters}`,
+    );
     if (clearResults) {
       this.clearResults();
     }
     if (clearFilters) {
-      this.filters.enabled.next([]);
+      // Filters are cleared for "initial" search to see what filter options exist for this search term
+      //  Afterward, previously existing filters are re-applied if they are still applicable for this search term
+      this.filters.clearEnabled();
     }
 
     this.isLoading.next(true);
     try {
       const searchQueryIdOfRequest = this._searchQueryId;
-      const searchPromise = this.elastic.searchEntities(
+      const searchPromise = this.elastic.searchNodes(
         this.queryStr,
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
+        this.filters.onlyShowResultsWithImages.value,
       );
       const filterOptionsPromise = this.filters.updateFilterOptionValues(
         this.queryStr,
@@ -194,6 +279,8 @@ export class SearchService {
       console.error('Error searching:', error);
     } finally {
       this.isLoading.next(false);
+
+      void this.checkHasMoreResultsToLoad();
     }
   }
 }

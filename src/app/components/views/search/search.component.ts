@@ -26,7 +26,6 @@ import { NodesGridComponent } from '../../nodes-grid/nodes-grid.component';
 import { FilterOptionsComponent } from '../../filters/filter-options/filter-options.component';
 import { Settings } from '../../../config/settings';
 import { EndpointsComponent } from '../../filters/endpoints/endpoints.component';
-import { formatNumber } from '../../../helpers/util.helper';
 import { HeaderComponent } from '../../header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { HomeIntroComponent } from '../../home-intro/home-intro.component';
@@ -36,6 +35,15 @@ import { NodeService } from '../../../services/node.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
 import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below-search/home-intro-below-search.component';
+import { DetailsComponent } from '../details/details.component';
+import { SortSelectComponent } from '../../sort-select/sort-select.component';
+import { LoadMoreSearchResultsButtonComponent } from '../../search/load-more-search-results-button/load-more-search-results-button.component';
+import { SearchHitsCounterComponent } from '../../search/search-hits-counter/search-hits-counter.component';
+import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
+import { SettingsService } from '../../../services/settings.service';
+import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
+import { filter } from 'rxjs';
+import { LangSwitchComponent } from '../../lang-switch/lang-switch.component';
 
 @Component({
   selector: 'app-search',
@@ -61,6 +69,12 @@ import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below
     CommonModule,
     DrawerComponent,
     HomeIntroBelowSearchComponent,
+    DetailsComponent,
+    SortSelectComponent,
+    LoadMoreSearchResultsButtonComponent,
+    SearchHitsCounterComponent,
+    DetailsBackButtonComponent,
+    LangSwitchComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -75,6 +89,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public nodes: NodeService,
     public scroll: ScrollService,
     public details: DetailsService,
+    public settings: SettingsService,
   ) {}
 
   ngOnInit() {}
@@ -83,30 +98,21 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.scroll.initScrollContainer(this.scrollContainer);
   }
 
-  loadMore() {
-    if (!this.search.isLoading.value) {
-      void this.search.execute();
-    }
-  }
-
-  get numberOfHitsStr(): string {
-    if (!this.search.numberOfHits) {
-      return 'Geen resultaten gevonden';
-    }
-    if (this.search.numberOfHits === 1) {
-      return '1 resultaat';
-    }
-    return `${formatNumber(this.search.numberOfHits)}${this.search.moreHitsAreAvailable ? '+' : ''} resultaten`;
-  }
-
   get shouldShowHomeIntro(): boolean {
+    // TODO: Better way to determine whether or not to show home
     if (this.router.url === '' || this.router.url === '/') {
       return true;
     }
 
-    return !this.search.hasDoneInitialSearch && this.search.queryStr === '';
+    return (
+      !this.details.showing.value &&
+      !this.search.hasDoneInitialSearch &&
+      this.search.queryStr === ''
+    );
   }
 
   protected readonly ViewMode = ViewMode;
   protected readonly Settings = Settings;
+  protected readonly FilterPanelLocation = FilterPanelLocation;
+  protected readonly filter = filter;
 }

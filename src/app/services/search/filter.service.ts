@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FilterModel, FilterType } from '../../models/filter.model';
 import {
   FilterOptionModel,
+  FilterOptionsIdsModel,
   FilterOptionsModel,
   FilterOptionValueModel,
 } from '../../models/filter-option.model';
@@ -16,22 +17,37 @@ import { ElasticService } from '../elastic.service';
 import { DataService } from '../data.service';
 import { Settings } from '../../config/settings';
 import { ClusterService } from '../cluster.service';
+import { Router } from '@angular/router';
+
+interface SearchTriggerModel {
+  clearFilters: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class FilterService {
+  searchTrigger: EventEmitter<SearchTriggerModel> =
+    new EventEmitter<SearchTriggerModel>();
+
+  prevEnabled: FilterModel[] = [];
   enabled: BehaviorSubject<FilterModel[]> = new BehaviorSubject<FilterModel[]>(
     [],
   );
   options: BehaviorSubject<FilterOptionsModel> =
     new BehaviorSubject<FilterOptionsModel>(Settings.filtering.filterOptions);
 
+  onlyShowResultsWithImages: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
   constructor(
     public elastic: ElasticService,
     public data: DataService,
     public clusters: ClusterService,
-  ) {}
+    public router: Router,
+  ) {
+    this._initRestorePreviousFiltersOnOptionsChange();
+  }
 
   private _getFieldDocCountsFromResponses(
     responses: SearchResponse<any>[],
@@ -63,13 +79,100 @@ export class FilterService {
     return docCountsByFieldId;
   }
 
+  private _initRestorePreviousFiltersOnOptionsChange() {
+    this.options.subscribe((newOptions) => {
+      this._restorePreviousFilters();
+    });
+  }
+
+  private _filterExistsInOptions(filter: FilterModel): boolean {
+    const options = this.options.value;
+    const filterId = filter?.filterId;
+    if (!filterId) {
+      console.warn('No filter ID defined', filter);
+      return false;
+    }
+    const isUnknownFilterType =
+      filter.type !== FilterType.Field &&
+      filter.type !== FilterType.Value &&
+      filter.type !== FilterType.FieldAndValue;
+    if (isUnknownFilterType) {
+      console.warn(
+        'Unknown filter type, enabled filter not checked against current options',
+      );
+      return false;
+    }
+
+    let filterExistsInOptions = false;
+    const fieldExistsInOptions = !!(
+      filter.fieldId && options[filterId].fieldIds.includes(filter.fieldId)
+    );
+    const valueExistsInOptions = options[filterId].values.some(
+      (a) => filter.valueId && a.ids.includes(filter.valueId),
+    );
+
+    const fieldFilterExistsInOptions =
+      filter.type === FilterType.Field && fieldExistsInOptions;
+    const valueFilterExistsInOptions =
+      filter.type === FilterType.Value && valueExistsInOptions;
+    const fieldAndValueFilterExistsInOptions =
+      filter.type === FilterType.FieldAndValue &&
+      fieldExistsInOptions &&
+      valueExistsInOptions;
+    if (
+      fieldFilterExistsInOptions ||
+      valueFilterExistsInOptions ||
+      fieldAndValueFilterExistsInOptions
+    ) {
+      filterExistsInOptions = true;
+    }
+
+    return filterExistsInOptions;
+  }
+
+  private _restorePreviousFilters() {
+    const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) =>
+      this._filterExistsInOptions(prevEnabledFilter),
+    );
+
+    const shouldUpdateEnabledFilters =
+      JSON.stringify(restoredFilters) !== JSON.stringify(this.enabled.value);
+    if (shouldUpdateEnabledFilters) {
+      console.log(
+        'Restoring previously applied filters and triggering new search with these filters:',
+        restoredFilters,
+        this.enabled.value,
+      );
+      this.enabled.next(restoredFilters);
+      this.searchTrigger.emit({ clearFilters: false });
+    }
+  }
+
+  onUpdateFromURLParam(filtersParam: string) {
+    console.log(
+      'Update filters based on URL param:',
+      filtersParam.slice(0, 100),
+      '...',
+    );
+    const urlFilters: FilterOptionsIdsModel = JSON.parse(filtersParam);
+    const filters: FilterModel[] =
+      this.data.convertFiltersFromIdsFormat(urlFilters);
+
+    this.enabled.next(filters);
+  }
+
   async updateFilterOptionValues(query: string) {
     const allFilterFieldIds: string[] = Object.values(
       this.options.value,
     ).flatMap((filterOption) => filterOption.fieldIds);
 
     const responses: SearchResponse<any>[] =
-      await this.elastic.getFilterOptions(allFilterFieldIds, query);
+      await this.elastic.getFilterOptions(
+        query,
+        allFilterFieldIds,
+        this.enabled.value,
+        this.onlyShowResultsWithImages.value,
+      );
     const docCounts: FieldDocCountsModel =
       this._getFieldDocCountsFromResponses(responses);
 
@@ -118,9 +221,9 @@ export class FilterService {
   }
 
   toggleMultiple(filters: FilterModel[]) {
-    const enabledFilters = this.enabled.value;
+    const updatedEnabledFilters = this.enabled.value;
     for (const filter of filters) {
-      const existingFilterIdx = enabledFilters.findIndex(
+      const existingFilterIdx = updatedEnabledFilters.findIndex(
         (f) =>
           f.valueId === filter.valueId &&
           f.fieldId === filter.fieldId &&
@@ -128,24 +231,29 @@ export class FilterService {
       );
       const filterAlreadyExists = existingFilterIdx > -1;
       if (filterAlreadyExists) {
-        enabledFilters.splice(existingFilterIdx, 1);
+        updatedEnabledFilters.splice(existingFilterIdx, 1);
       } else {
-        enabledFilters.push(filter);
+        updatedEnabledFilters.push(filter);
       }
     }
 
-    this.enabled.next(enabledFilters);
+    console.log(
+      'Toggled filter, triggering new search (where filters will be temporarily cleared)',
+    );
+    this.enabled.next(updatedEnabledFilters);
+    this.searchTrigger.emit({ clearFilters: true });
   }
 
   toggle(filter: FilterModel) {
     this.toggleMultiple([filter]);
   }
 
-  has(ids: string[], type: FilterType): boolean {
+  has(valueIds: string[], type: FilterType): boolean {
     // TODO: Reduce calls to this function if needed for performance reasons
+    // TODO: Make sure this works with other filter types (e.g. filtering on only Field or only Value)
     return (
       this.enabled.value.find(
-        (f) => f.valueId && ids.includes(f.valueId) && f.type === type,
+        (f) => f.valueId && valueIds.includes(f.valueId) && f.type === type,
       ) !== undefined
     );
   }
@@ -154,9 +262,62 @@ export class FilterService {
     return this.options.value?.[filterId];
   }
 
-  getOptionValueIds(filterId: string): string[] {
+  private _getOptionValueIds(filterId: string): string[] {
     // TODO: Reduce number of calls if necessary for performance reasons
     return this.getOptionById(filterId).values.flatMap((v) => v.ids);
+  }
+
+  shouldShow(filterId: string): boolean {
+    const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
+    const option: FilterOptionModel = this.getOptionById(filterId);
+
+    if (!option.showOnlyForSelectedFilters) {
+      return hasOptionsToShow;
+    }
+
+    const showOnlyForSelectedFilters: FilterOptionsIdsModel =
+      option.showOnlyForSelectedFilters;
+
+    return (
+      hasOptionsToShow &&
+      this._shouldShowBasedOnFilters(showOnlyForSelectedFilters)
+    );
+  }
+
+  private _shouldShowBasedOnFilters(
+    showOnlyForSelectedFilters: FilterOptionsIdsModel,
+  ): boolean {
+    const enabledFilters: FilterOptionsIdsModel =
+      this.data.convertFiltersToIdsFormat(this.enabled.value);
+    for (const enabledFilter of Object.values(enabledFilters)) {
+      for (const showOnlyForSelectedFilter of Object.values(
+        showOnlyForSelectedFilters,
+      )) {
+        const hasFieldIdOverlap = this.data.hasOverlap(
+          enabledFilter.fieldIds,
+          showOnlyForSelectedFilter.fieldIds,
+        );
+        const hasValueIdOverlap = this.data.hasOverlap(
+          enabledFilter.valueIds,
+          showOnlyForSelectedFilter.valueIds,
+        );
+
+        switch (showOnlyForSelectedFilter.type) {
+          case FilterType.Field:
+            if (hasFieldIdOverlap) return true;
+            break;
+          case FilterType.Value:
+            if (hasValueIdOverlap) return true;
+            break;
+          case FilterType.FieldAndValue:
+            if (hasFieldIdOverlap && hasValueIdOverlap) return true;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return false;
   }
 
   getEnabledFiltersCountStr(count: number): string | undefined {
@@ -185,5 +346,14 @@ export class FilterService {
     );
 
     return this.getEnabledFiltersCountStr(count);
+  }
+
+  clearEnabled() {
+    this.prevEnabled = this.enabled.value;
+    console.log(
+      'Clearing enabled filters, saved current filters',
+      this.prevEnabled,
+    );
+    this.enabled.next([]);
   }
 }

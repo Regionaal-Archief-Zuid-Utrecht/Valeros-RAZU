@@ -1,14 +1,18 @@
-<div [style.width]="width" class="w-full h-full overflow-y-scroll">
-  <ng-container
-    *ngFor="let image of processedImageUrls?.slice(0, Config.maxImagesToShow)"
-  >
-    <!-- TODO: Use image label as alt here-->
-    <img
-      [src]="image"
-      alt="Object image"
-      class="w-full h-full object-cover"
-      (error)="onImageLoadError($event)"
-      *ngIf="image"
-    />
-  </ng-container>
+<div
+  class="w-full h-full overflow-y-scroll min-h-24"
+  #viewerElem
+  [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
+  *ngIf="this.useViewer"
+></div>
+
+<div
+  class="w-full h-full overflow-y-scroll"
+  *ngIf="!this.useViewer && this.processedImageUrls.length > 0"
+>
+  <img
+    [src]="this.processedImageUrls[0]"
+    alt="Object image"
+    class="w-full h-full object-cover"
+    (error)="onImageLoadError($event)"
+  />
 </div>

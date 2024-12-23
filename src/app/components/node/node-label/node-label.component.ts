@@ -56,7 +56,15 @@ export class NodeLabelComponent implements OnInit, OnChanges {
       return input;
     }
 
-    const regex = new RegExp(searchString, 'gi');
+    // TODO: Use elastic to generate highlights to support search operators (fuzziness, wildcards, etc)
+    //  (Also to prevent highlighting keywords such as "OR" or "AND")
+    const escapedSearchString = searchString.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      '\\$&',
+    );
+    const searchStringWords = escapedSearchString.split(/\s+/);
+    const regex = new RegExp(searchStringWords.join('|'), 'gi');
+
     return input.replace(
       regex,
       (match) => `<span class="bg-accent">${match}</span>`,
