@@ -15,11 +15,24 @@ import { EndpointService } from '../../../services/endpoint.service';
 })
 export class NodePermalinkButtonComponent {
   @Input() node: NodeModel | undefined;
+  processedUrl: string = '';
+
   constructor(
     public urlService: UrlService,
     public nodes: NodeService,
     public endpoints: EndpointService,
   ) {}
+
+  async processUrl() {
+    if (!this.node) {
+      return;
+    }
+
+    this.processedUrl = await this.urlService.processUrl(
+      this.nodes.getId(this.node),
+      false,
+    );
+  }
 
   get endpointName(): string {
     if (!this.node) {

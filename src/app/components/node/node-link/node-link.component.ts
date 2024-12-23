@@ -94,13 +94,13 @@ export class NodeLinkComponent implements OnInit, OnChanges {
       this.labelUrl = this.url;
     }
 
-    this.processUrl();
-
-    this.initIsInternalUrl();
-    const isValidAbsoluteUrl =
-      this.processedUrl !== undefined && isValidUrl(this.processedUrl);
-    this.isClickableUrl =
-      (this.isInternalUrl || isValidAbsoluteUrl) && !this.disabled;
+    this.processUrl().then(() => {
+      this.initIsInternalUrl();
+      const isValidAbsoluteUrl =
+        this.processedUrl !== undefined && isValidUrl(this.processedUrl);
+      this.isClickableUrl =
+        (this.isInternalUrl || isValidAbsoluteUrl) && !this.disabled;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -121,12 +121,13 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     this.drawer.setDrawerItems(dynamicContent);
   }
 
-  processUrl() {
+  async processUrl() {
     if (!this.url) {
       return;
     }
 
-    this.processedUrl = this.urlService.processUrl(this.url);
+    this.processedUrl = await this.urlService.processUrl(this.url);
+    console.log('PROCESSED', this.processedUrl);
   }
 
   get cachedLabel(): string | undefined {

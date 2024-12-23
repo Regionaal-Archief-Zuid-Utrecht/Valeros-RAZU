@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { skip } from 'rxjs';
 import { DataService } from './data.service';
 import { EndpointService } from './endpoint.service';
+import { ApiService } from './api.service';
+import { SuraResponse } from '../models/sura-response.model';
+import { Settings } from '../config/settings';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +23,7 @@ export class UrlService {
     private router: Router,
     private data: DataService,
     private endpoints: EndpointService,
+    private api: ApiService,
   ) {
     this._initUpdateUrlOnFilterChange();
     this._initUpdateUrlOnEndpointChange();
@@ -96,22 +100,33 @@ export class UrlService {
     }
   }
 
-  processUrls(urls: string[], linkToDetails = true): string[] {
-    return urls.map((url) => this.processUrl(url, linkToDetails));
+  async processUrls(urls: string[], linkToDetails = true): Promise<string[]> {
+    const promises = urls.map(
+      async (url) => await this.processUrl(url, linkToDetails),
+    );
+    const processedUrls: string[] = await Promise.all(promises);
+    return processedUrls;
   }
 
-  processUrl(url: string, linkToDetails = true): string {
+  async processUrl(url: string, linkToDetails = true): Promise<string> {
+    if (url.includes('opslag.razu.nl')) {
+      const suraUrl = await this.api.postData<SuraResponse>(Settings.sura.url, {
+        url: url,
+      });
+      return suraUrl.url;
+      // url = this.addParamToUrl(
+      //   url,
+      //   'token',
+      //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTE3MDY0NjQsIm5iZiI6MTcxMTcwNjQ2NCwiZXhwIjoxNzQzMjQyNDY0fQ.ViNS0wWml0EwkF0z75G4cNZxKupYQMLiVB_PQ5kNQm8',
+      // );
+      // return url;
+    }
+
     if (linkToDetails) {
       return this.details.getLinkFromUrl(url);
     }
 
-    if (url.includes('opslag.razu.nl')) {
-      url = this.addParamToUrl(
-        url,
-        'token',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTE3MDY0NjQsIm5iZiI6MTcxMTcwNjQ2NCwiZXhwIjoxNzQzMjQyNDY0fQ.ViNS0wWml0EwkF0z75G4cNZxKupYQMLiVB_PQ5kNQm8',
-      );
-    }
+    console.log(url);
 
     url = url.replaceAll(
       'hetutrechtsarchief.nl/id',

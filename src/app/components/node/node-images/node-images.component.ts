@@ -124,12 +124,12 @@ export class NodeImagesComponent
     this.destroyImageViewer();
   }
 
-  private _processImageUrls() {
+  private async _processImageUrls() {
     if (!this.imageUrls) {
       return;
     }
 
-    this.processedImageUrls = this.urlService.processUrls(
+    this.processedImageUrls = await this.urlService.processUrls(
       this.imageUrls,
       false,
     );

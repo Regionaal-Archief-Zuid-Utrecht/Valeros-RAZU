@@ -565,4 +565,7 @@ export const Settings = {
     siteId: '2',
     trackerUrl: '//analytics.boasmedia.nl/',
   },
+  sura: {
+    url: 'http://viewer.razu.nl:8000',
+  },
 };
