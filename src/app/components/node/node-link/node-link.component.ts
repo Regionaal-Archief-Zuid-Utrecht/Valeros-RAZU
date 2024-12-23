@@ -127,7 +127,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     }
 
     this.processedUrl = await this.urlService.processUrl(this.url);
-    console.log('PROCESSED', this.processedUrl);
   }
 
   get cachedLabel(): string | undefined {
