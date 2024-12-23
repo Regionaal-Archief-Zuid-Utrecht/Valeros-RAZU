@@ -28,7 +28,7 @@ export class MdtoUrlBestandComponent implements OnInit {
   fileFormats?: string[];
 
   // TODO: Add complete list here
-  imgFileFormats: string[] = ['fmt/44', 'jpeg'];
+  imgFileFormats: string[] = ['fmt/44'];
 
   constructor(
     public api: ApiService,
@@ -47,7 +47,7 @@ export class MdtoUrlBestandComponent implements OnInit {
 
     const queryTemplate = `
 ${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?b .
-?b <http://www.nationaalarchief.nl/mdto#begripLabel> ?bestandsformaat .`;
+?b <http://schema.org/identifier> ?bestandsformaat .`;
 
     const endpointUrls: EndpointUrlsModel[] =
       this.endpoints.getAllEnabledUrls();
