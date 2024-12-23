@@ -515,6 +515,7 @@ export const Settings = {
     'https://schema.org/breadcrumb',
     'https://hetutrechtsarchief.nl/def/isDescendentOf',
     'https://hetutrechtsarchief.nl/def/isDescendantOf',
+    'http://purl.org/dc/terms/hasFormat',
   ],
   onlyShowNodes: {
     onlyShowInformatieObject: {
