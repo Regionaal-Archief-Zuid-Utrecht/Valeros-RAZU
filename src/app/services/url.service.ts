@@ -110,9 +110,10 @@ export class UrlService {
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
     if (url.includes('opslag.razu.nl')) {
-      const suraUrl = await this.api.postData<SuraResponse>(Settings.sura.url, {
-        url: url,
-      });
+      const suraUrl = await this.api.postData<SuraResponse>(
+        Settings.sura.url + `?url=${url}`,
+        null,
+      );
       return suraUrl.url;
       // url = this.addParamToUrl(
       //   url,
