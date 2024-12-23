@@ -127,7 +127,7 @@ export class UrlService {
       return this.details.getLinkFromUrl(url);
     }
 
-    console.log(url);
+    // console.log(url);
 
     url = url.replaceAll(
       'hetutrechtsarchief.nl/id',
