@@ -27,6 +27,7 @@ const typePredicates: string[] = [
   'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
   'https://schema.org/additionalType',
   'http://www.wikidata.org/entity/P31',
+  'http://www.nationaalarchief.nl/mdto#classificatie',
 ];
 
 const parentPredicates: string[] = [
