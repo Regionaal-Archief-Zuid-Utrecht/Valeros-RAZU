@@ -567,6 +567,6 @@ export const Settings = {
     trackerUrl: '//analytics.boasmedia.nl/',
   },
   sura: {
-    url: 'http://viewer.razu.nl:8000',
+    url: 'https://viewer.razu.nl/sura/process-url',
   },
 };
