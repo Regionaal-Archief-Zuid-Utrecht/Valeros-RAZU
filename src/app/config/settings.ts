@@ -177,19 +177,8 @@ export const Settings = {
       endpointUrls: [
         {
           elastic:
-            'https://data.razu.nl/_api/datasets/razu/PoCAmerongen2024/services/PoCAmerongen2024/_search',
-          sparql:
-            'https://api.data.razu.nl/datasets/razu/PoCAmerongen2024/sparql',
-        },
-        {
-          sparql: 'https://api.data.razu.nl/datasets/gedeeld/actoren/sparql',
-          elastic:
-            'https://data.razu.nl/_api/datasets/gedeeld/actoren/services/actoren/_search',
-        },
-        {
-          sparql: 'https://api.data.razu.nl/datasets/gedeeld/locaties/sparql',
-          elastic:
-            'https://api.data.razu.nl/datasets/gedeeld/locaties/services/locaties/_search',
+            'https://api.data.razu.nl/datasets/id/object/services/object/_search',
+          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
       ],
     },
@@ -243,11 +232,23 @@ export const Settings = {
   },
   filtering: {
     showFilterPanel: true,
-    showImageFilter: true,
+    showImageFilter: false,
     showOrganizationsFilter: false,
     filterPanelLocation: FilterPanelLocation.Left,
     minNumOfValuesForFilterOptionToAppear: 1,
     filterOptions: {
+      archiefVormer: {
+        label: 'Archiefvormer',
+        fieldIds: ['http://www.nationaalarchief.nl/mdto#archiefvormer'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
+      aggregatieniveau: {
+        label: 'Aggregatieniveau',
+        fieldIds: ['http://www.nationaalarchief.nl/mdto#aggregatieniveau'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
       type: {
         label: 'Soort',
         fieldIds: typePredicates,
@@ -283,10 +284,10 @@ export const Settings = {
         label: 'Beeldmateriaal',
         valueIds: visualMaterialValueIds,
       },
-      archive: {
-        label: 'Archieven',
-        valueIds: archivesValueIds,
-      },
+      // archive: {
+      //   label: 'Archieven',
+      //   valueIds: archivesValueIds,
+      // },
       locations: {
         label: 'Locaties',
         valueIds: [
