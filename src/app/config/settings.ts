@@ -244,7 +244,7 @@ export const Settings = {
   filtering: {
     showFilterPanel: true,
     showImageFilter: true,
-    showOrganizationsFilter: true,
+    showOrganizationsFilter: false,
     filterPanelLocation: FilterPanelLocation.Left,
     minNumOfValuesForFilterOptionToAppear: 1,
     filterOptions: {
