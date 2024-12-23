@@ -256,26 +256,11 @@ export const Settings = {
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
-      parents: {
-        label: 'Is onderdeel van',
-        fieldIds: [
-          ...parentPredicates,
-          'https://hetutrechtsarchief.nl/def/isDescendentOf',
-        ],
+      beperkingGebruik: {
+        label: 'Beperking',
+        fieldIds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruik'],
         values: [],
-        hideValueIds: [...hideFilterOptionValueIds],
-      },
-      license: {
-        label: 'Licentie',
-        fieldIds: ['https://schema.org/license'],
-        values: [],
-        showOnlyForSelectedFilters: {
-          visualMaterial: {
-            fieldIds: typePredicates,
-            valueIds: visualMaterialValueIds,
-            type: FilterType.FieldAndValue,
-          },
-        },
+        hideValueIds: [],
       },
     },
   },
