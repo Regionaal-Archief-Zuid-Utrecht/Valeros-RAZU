@@ -28,7 +28,7 @@ export class MdtoUrlBestandComponent implements OnInit {
   fileFormats?: string[];
 
   // TODO: Add complete list here
-  imgFileFormats: string[] = ['fmt/44'];
+  imgFileFormats: string[] = ['fmt/44', 'fmt/645'];
 
   constructor(
     public api: ApiService,
