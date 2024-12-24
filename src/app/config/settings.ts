@@ -547,8 +547,11 @@ export const Settings = {
     siteId: '2',
     trackerUrl: '//analytics.boasmedia.nl/',
   },
-  sura: {
-    url: 'https://viewer-test.razu.nl/sura/process-url',
+  razu: {
+    sura: {
+      url: 'https://viewer.razu.nl/sura/process-url',
+      matchUrlsSubstring: 'opslag.razu.nl',
+    },
   },
   header: {
     showLogo: true,

@@ -108,9 +108,9 @@ export class UrlService {
   }
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
-    if (url.includes('opslag.razu.nl')) {
+    if (url.includes(Settings.razu.sura.matchUrlsSubstring)) {
       const suraUrl = await this.api.postData<SuraResponse>(
-        Settings.sura.url + `?url=${url}`,
+        Settings.razu.sura.url + `?url=${url}`,
         null,
       );
       return suraUrl.url;
