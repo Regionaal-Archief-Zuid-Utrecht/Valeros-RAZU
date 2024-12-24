@@ -522,6 +522,7 @@ export const Settings = {
       type: FilterType.FieldAndValue,
     },
   },
+  hideTypePredicates: [],
   alwaysHideNodes: {
     hideSkosConcept: {
       fieldIds: [...typePredicates],

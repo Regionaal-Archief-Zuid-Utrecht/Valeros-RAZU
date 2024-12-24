@@ -7,6 +7,8 @@ import { Settings } from '../../../config/settings';
 import { TypeModel } from '../../../models/type.model';
 import { intersects } from '../../../helpers/util.helper';
 import { ClusterValuesSettingsModel } from '../../../models/settings/cluster-values-settings.model';
+import { SettingsService } from '../../../services/settings.service';
+import { PredicateVisibility } from '../../../models/settings/predicate-visibility-settings.model';
 
 @Component({
   selector: 'app-node-types',
@@ -20,11 +22,27 @@ export class NodeTypesComponent {
   typesClusteredInFilters: TypeModel[] = [];
   clusteredTypes: TypeModel[] = [];
 
-  constructor(public clusters: ClusterService) {}
+  constructor(
+    public clusters: ClusterService,
+    public settings: SettingsService,
+  ) {}
 
   ngOnInit() {
     this.initTypesClusteredInFilters();
     this.initClusteredTypes();
+  }
+
+  getVisibleTypes(): TypeModel[] {
+    if (!this.types) {
+      return [];
+    }
+
+    return this.types?.filter(
+      (t) =>
+        this.settings.getPredicateVisibility(t.id) !==
+          PredicateVisibility.Hide &&
+        !(Settings.hideTypePredicates as string[]).includes(t.id),
+    );
   }
 
   initTypesClusteredInFilters() {
@@ -33,7 +51,7 @@ export class NodeTypesComponent {
     }
 
     this.typesClusteredInFilters = [];
-    const typeIds = this.types.map((t) => t.id);
+    const typeIds = this.getVisibleTypes().map((t) => t.id);
 
     for (const [clusterId, filterCluster] of Object.entries(
       Settings.clustering.filterOptionValues as ClusterValuesSettingsModel,
@@ -54,7 +72,7 @@ export class NodeTypesComponent {
     }
 
     this.clusteredTypes = this.clusters.clusterTypes(
-      this.types,
+      this.getVisibleTypes(),
       Settings.clustering.types,
     );
   }
