@@ -64,6 +64,20 @@
           [id]="objValue"
         />
 
+        <app-mdto-heeft-representatie
+          *ngIf="shouldRenderComponentIds.includes('mdto-heeft-representatie')"
+          [id]="objValue"
+          [settings]="
+            renderComponent.getSettingByKey(
+              'hopLinkSettings',
+              node,
+              RenderMode.ByPredicate,
+              [pred],
+              direction
+            )
+          "
+        />
+
         <app-mdto-omvang
           *ngIf="shouldRenderComponentIds.includes('mdto-omvang')"
           [bytesStr]="objValue"

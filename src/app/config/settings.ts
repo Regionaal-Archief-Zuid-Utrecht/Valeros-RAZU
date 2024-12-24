@@ -405,6 +405,13 @@ export const Settings = {
       'http://www.nationaalarchief.nl/mdto#omvang': {
         componentId: 'mdto-omvang',
       },
+      'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
+        componentId: 'mdto-heeft-representatie',
+        hopLinkSettings: {
+          preds: ['http://www.nationaalarchief.nl/mdto#URLBestand'],
+          showOriginalLink: true,
+        },
+      },
       'http://www.nationaalarchief.nl/mdto#event': {
         componentId: 'mdto-event',
       },
@@ -428,16 +435,6 @@ export const Settings = {
         hopLinkSettings: {
           preds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruikType'],
           showHops: false,
-        },
-      },
-      'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
-        componentId: 'hop-image',
-        hopLinkSettings: {
-          preds: [
-            'http://www.nationaalarchief.nl/mdto#identificatie',
-            'http://www.nationaalarchief.nl/mdto#identificatieKenmerk',
-            'http://www.nationaalarchief.nl/mdto#URLBestand',
-          ],
         },
       },
       'http://www.w3.org/ns/prov#hadPrimarySource': {
