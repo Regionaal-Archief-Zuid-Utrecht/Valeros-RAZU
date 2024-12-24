@@ -522,7 +522,13 @@ export const Settings = {
       type: FilterType.FieldAndValue,
     },
   },
-  hideTypePredicates: [],
+  hideTypePredicates: [
+    'http://www.nationaalarchief.nl/mdto#BeperkingGebruikGegevens',
+    'http://www.nationaalarchief.nl/mdto#DekkingInTijdGegevens',
+    'http://www.nationaalarchief.nl/mdto#IdentificatieGegevens',
+    'http://www.nationaalarchief.nl/mdto#Informatieobject',
+    'http://www.nationaalarchief.nl/mdto#EventGegevens',
+  ],
   alwaysHideNodes: {
     hideSkosConcept: {
       fieldIds: [...typePredicates],
