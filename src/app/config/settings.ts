@@ -252,7 +252,7 @@ export const Settings = {
       },
       type: {
         label: 'Soort',
-        fieldIds: typePredicates,
+        fieldIds: ['http://www.nationaalarchief.nl/mdto#classificatie'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
