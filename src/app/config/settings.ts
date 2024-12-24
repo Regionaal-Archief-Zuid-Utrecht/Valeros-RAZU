@@ -405,6 +405,9 @@ export const Settings = {
       'http://www.nationaalarchief.nl/mdto#omvang': {
         componentId: 'mdto-omvang',
       },
+      'http://www.nationaalarchief.nl/mdto#event': {
+        componentId: 'mdto-event',
+      },
       'http://www.nationaalarchief.nl/mdto#betrokkene': {
         componentId: 'hop-link',
         hopLinkSettings: {

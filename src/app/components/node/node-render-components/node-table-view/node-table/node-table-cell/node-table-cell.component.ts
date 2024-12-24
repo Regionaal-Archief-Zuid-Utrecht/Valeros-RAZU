@@ -19,6 +19,7 @@ import { MdtoUrlBestandComponent } from '../../../predicate-render-components/md
 import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
 import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
 import { MdtoOmvangComponent } from '../../../predicate-render-components/mdto-omvang/mdto-omvang.component';
+import { MdtoEventComponent } from "../../../predicate-render-components/mdto-event/mdto-event.component";
 
 export enum TableCellShowOptions {
   Pred,
@@ -44,7 +45,8 @@ export enum TableCellShowOptions {
     HopImageComponent,
     RicoIdentifierComponent,
     MdtoOmvangComponent,
-  ],
+    MdtoEventComponent
+],
   templateUrl: './node-table-cell.component.html',
   styleUrl: './node-table-cell.component.scss',
 })

@@ -59,6 +59,11 @@
           [fileUrl]="objValue"
         />
 
+        <app-mdto-event
+          *ngIf="shouldRenderComponentIds.includes('mdto-event')"
+          [id]="objValue"
+        />
+
         <app-mdto-omvang
           *ngIf="shouldRenderComponentIds.includes('mdto-omvang')"
           [bytesStr]="objValue"
