@@ -423,6 +423,13 @@ export const Settings = {
           showHops: false,
         },
       },
+      'http://www.nationaalarchief.nl/mdto#beperkingGebruik': {
+        componentId: 'hop-link',
+        hopLinkSettings: {
+          preds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruikType'],
+          showHops: false,
+        },
+      },
       'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
         componentId: 'hop-image',
         hopLinkSettings: {
