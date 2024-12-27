@@ -5,7 +5,7 @@
     <!--    <div class="text-sm sm:text-base">Prototype Zoekomgeving</div>-->
     <div
       class="font-semibold text-lg sm:text-2xl mb-2"
-      [innerHTML]="'title-short' | translate"
+      [innerHTML]="'general.title-short' | translate"
     ></div>
   </button>
 
@@ -15,9 +15,9 @@
       (click)="onButtonClicked(buttonUrl)"
       [attr.aria-label]="
         view === HeaderView.ShowingColofon
-          ? 'Ga naar zoeken'
-          : 'Ga naar colofon'
-      "
+          ? 'homescreen.go-to-search'
+          : 'homescreen.go-to-colofon'
+      | translate "
     >
       <span class="text-lg sm:text-2xl font-light">
         <ng-icon

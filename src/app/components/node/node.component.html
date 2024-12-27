@@ -31,7 +31,7 @@
 
     <div class="w-full sm:px-4 sm:pr-32">
       <app-node-table-row
-        [label]="'Onderdeel van'"
+        [label]="'records-interface.part-of' | translate"
         *ngIf="showParents && parents.length > 0"
       >
         <app-node-hierarchy [nodes]="parents" />
@@ -39,13 +39,13 @@
 
       <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
       <app-node-table-row
-        [label]="'Soort'"
+        [label]="'records-interface.type' | translate"
         *ngIf="showTypes && types.length > 0"
       >
         <app-node-types [types]="types" />
       </app-node-table-row>
       <app-node-table-row
-        [label]="'Organisatie'"
+        [label]="'records-interface.organisation' | translate"
         *ngIf="details.showing.value && showOrganization"
       >
         <app-node-endpoint [endpointId]="nodes.getEndpointId(node)" />

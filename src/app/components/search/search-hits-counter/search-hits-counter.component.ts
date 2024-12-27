@@ -21,11 +21,11 @@ export class SearchHitsCounterComponent {
 
   get numberOfHitsStr(): string {
     if (!this.search.numberOfHits) {
-      return this.translate.instant('no-results-found');
+      return this.translate.instant('search-interface.no-results-found');
     }
     if (this.search.numberOfHits === 1) {
-      return this.translate.instant('1-result');
+      return this.translate.instant('search-interface.1-result');
     }
-    return `${formatNumber(this.search.numberOfHits)}${this.search.numberOfHitsIsCappedByElastic ? '+' : ''} ${this.translate.instant('results')}`;
+    return `${formatNumber(this.search.numberOfHits)}${this.search.numberOfHitsIsCappedByElastic ? '+' : ''} ${this.translate.instant('search-interface.results')}`;
   }
 }

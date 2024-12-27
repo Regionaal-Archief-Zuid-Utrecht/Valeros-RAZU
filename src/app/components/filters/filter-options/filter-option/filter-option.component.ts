@@ -7,11 +7,12 @@ import { FilterOptionValueModel } from '../../../../models/filter-option.model';
 import { formatNumber } from '../../../../helpers/util.helper';
 import { SearchService } from '../../../../services/search/search.service';
 import { Config } from '../../../../config/config';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter-option',
   standalone: true,
-  imports: [NgForOf, NodeLinkComponent, JsonPipe, NgIf, NgClass],
+  imports: [NgForOf, NodeLinkComponent, JsonPipe, NgIf, NgClass, TranslatePipe],
   templateUrl: './filter-option.component.html',
   styleUrl: './filter-option.component.scss',
 })

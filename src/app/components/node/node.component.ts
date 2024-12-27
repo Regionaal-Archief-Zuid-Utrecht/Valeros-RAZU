@@ -37,6 +37,7 @@ import { NodeDetailsButtonComponent } from './node-details-button/node-details-b
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
 import { Router, RouterLink } from '@angular/router';
 import { RoutingService } from '../../services/routing.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-node',
@@ -59,6 +60,7 @@ import { RoutingService } from '../../services/routing.service';
     NodeDetailsButtonComponent,
     NodePermalinkButtonComponent,
     RouterLink,
+    TranslatePipe,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',

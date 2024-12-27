@@ -4,11 +4,12 @@ import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { Settings } from '../../../../../config/settings';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeTableViewComponent } from '../../node-table-view/node-table-view.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sdo-photograph',
   standalone: true,
-  imports: [JsonPipe, NgForOf, NodeLinkComponent, NodeTableViewComponent, NgIf],
+  imports: [JsonPipe, NgForOf, NodeLinkComponent, NodeTableViewComponent, NgIf, TranslatePipe],
   templateUrl: './sdo-photograph.component.html',
   styleUrl: './sdo-photograph.component.scss',
 })

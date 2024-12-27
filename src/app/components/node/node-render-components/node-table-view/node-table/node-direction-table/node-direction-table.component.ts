@@ -5,6 +5,7 @@ import { PredicateVisibility } from '../../../../../../models/settings/predicate
 import { NodeService } from '../../../../../../services/node.service';
 import { SettingsService } from '../../../../../../services/settings.service';
 import { sortByArrayOrder } from '../../../../../../helpers/util.helper';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   NodeTableCellComponent,
   TableCellShowOptions,
@@ -14,7 +15,7 @@ import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 @Component({
   selector: 'app-node-direction-table',
   standalone: true,
-  imports: [NgForOf, NgClass, NodeTableCellComponent, NgIf, NodeLinkComponent],
+  imports: [NgForOf, NgClass, NodeTableCellComponent, NgIf, NodeLinkComponent, TranslatePipe],
   templateUrl: './node-direction-table.component.html',
   styleUrl: './node-direction-table.component.scss',
 })

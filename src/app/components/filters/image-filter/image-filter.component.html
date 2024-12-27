@@ -6,7 +6,7 @@
   />
   <div class="collapse-title">
     <span>
-      Alleen met afbeelding
+      {{ "search-interface.only-results-with-images" | translate }}
       {{ filters.onlyShowResultsWithImages.value ? "(1)" : "" }}
     </span>
   </div>
@@ -21,7 +21,7 @@
           [checked]="filters.onlyShowResultsWithImages.value"
           (click)="onToggle($event)"
         />
-        Toon alleen resultaten met afbeelding
+        {{ "search-interface.only-show-results-with-images" | translate }}
       </label>
     </div>
   </div>

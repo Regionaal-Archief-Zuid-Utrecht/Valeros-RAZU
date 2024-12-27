@@ -37,10 +37,10 @@
       "
     >
       <span class="opacity-70" *ngIf="filter.type === FilterType.Value"
-        >Verwijzing naar
+        >{{'records-interface.pointer-to' | translate}} 
       </span>
       <span class="opacity-70" *ngIf="filter.type === FilterType.FieldAndValue"
-        >verwijst naar
+        >{{'records-interface.points-to' | translate}} 
       </span>
     </app-node-link>
   </div>

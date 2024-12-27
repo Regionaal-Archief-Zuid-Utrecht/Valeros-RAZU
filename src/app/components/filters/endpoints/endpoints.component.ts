@@ -9,6 +9,7 @@ import { FilterService } from '../../../services/search/filter.service';
 import { SearchService } from '../../../services/search/search.service';
 import { FormsModule } from '@angular/forms';
 import { UiService } from '../../../services/ui.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-endpoints',
@@ -21,6 +22,7 @@ import { UiService } from '../../../services/ui.service';
     FilterCountComponent,
     NgClass,
     FormsModule,
+    TranslatePipe,
   ],
   templateUrl: './endpoints.component.html',
   styleUrl: './endpoints.component.scss',

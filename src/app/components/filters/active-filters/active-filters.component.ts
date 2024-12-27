@@ -6,11 +6,12 @@ import { NgIcon } from '@ng-icons/core';
 import { featherFilter, featherX } from '@ng-icons/feather-icons';
 import { FilterType } from '../../../models/filter.model';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-active-filters',
   standalone: true,
-  imports: [JsonPipe, NgForOf, NodeLinkComponent, NgIcon, NgIf, FormsModule],
+  imports: [JsonPipe, NgForOf, NodeLinkComponent, NgIcon, NgIf, FormsModule, TranslatePipe],
   templateUrl: './active-filters.component.html',
   styleUrl: './active-filters.component.scss',
 })

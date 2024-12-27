@@ -7,7 +7,7 @@
     "
   >
     <span [ngClass]="[smallFontSize ? 'text-sm' : '']"
-      >Objecten die verwijzen naar <app-node-link [url]="nodes.getId(node)"
+      >{{ "records-interface.objects-that-point-to" | translate }} <app-node-link [url]="nodes.getId(node)"
     /></span>
   </div>
 

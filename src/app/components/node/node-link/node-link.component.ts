@@ -41,6 +41,7 @@ import { DrawerService } from '../../../services/drawer.service';
 import { UrlService } from '../../../services/url.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-node-link',
@@ -56,6 +57,7 @@ import { DetailsService } from '../../../services/details.service';
     NgxFloatUiModule,
     NodeLabelComponent,
     NgForOf,
+    TranslatePipe,
   ],
   templateUrl: './node-link.component.html',
   styleUrl: './node-link.component.scss',

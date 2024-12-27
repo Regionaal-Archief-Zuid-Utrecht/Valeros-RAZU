@@ -6,6 +6,7 @@ import { NgForOf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiService } from '../../../services/ui.service';
 import { FilterService } from '../../../services/search/filter.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-image-filter',
@@ -16,6 +17,7 @@ import { FilterService } from '../../../services/search/filter.service';
     NgForOf,
     ReactiveFormsModule,
     FormsModule,
+    TranslatePipe,
   ],
   templateUrl: './image-filter.component.html',
   styleUrl: './image-filter.component.scss',

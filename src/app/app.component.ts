@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'view-a-LOD';
 
-  constructor(private translate: TranslateService) {
+  constructor(private titleService: Title,
+    private translate: TranslateService) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
     this.translate.use('nl');
+    this.translate.get('general.page-title').subscribe((res: string) => {
+      this.titleService.setTitle(res);
+    });
+
   }
 }
