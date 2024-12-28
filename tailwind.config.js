@@ -7,6 +7,9 @@ module.exports = {
         sans: ["Familjen Grotesk", "sans-serif"],
         mono: ["Familjen Grotesk", "sans-serif"],
       },
+      screens: {
+        'wide': '1600px',
+      },
     },
   },
   plugins: [require("daisyui")],

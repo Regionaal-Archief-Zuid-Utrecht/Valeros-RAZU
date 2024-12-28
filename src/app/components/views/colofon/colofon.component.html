@@ -57,5 +57,20 @@
       <a href="https://github.com/Regionaal-Archief-Zuid-Utrecht/view-a-LOD-RAZU" target="_blank" alt="Hyperlink naar de Github pagina van de RAZU-variant van deze website."> RAZU-variant vindt u hier.</a>
       (GPL-3.0).
     </p>
+    <div class="flex justify-center w-full">
+      <button
+    class="btn btn-primary btn-xs rounded-full text-center inline-block mx-auto"
+        [ngClass]="'w-9 sm:w-10 h-9 sm:h-10'"
+        (click)="onButtonClicked('')"
+        [attr.aria-label]="'homescreen.go-to-search' | translate "
+      >
+        <span class="text-lg sm:text-2xl font-light" >
+      <ng-icon
+        [svg]="featherX"
+        class="relative top-[0.125rem] sm:right-[0.05rem] sm:top-[0.15rem]"
+      />
+        </span>
+      </button>
+    </div>
   </div>
 </app-view-container>
