@@ -182,6 +182,10 @@ export const Settings = {
             'https://api.data.razu.nl/datasets/id/object/services/object/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
+        // {
+        //   elastic: 'http://localhost:8000/_search',
+        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        // }
       ],
     },
   },

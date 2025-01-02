@@ -17,6 +17,7 @@ import { SortOrder } from '../models/settings/sort-order.enum';
 import { ElasticSortEntryModel } from '../models/elastic/elastic-sort.model';
 import { SortService } from './sort.service';
 import { FilterOptionsIdsModel } from '../models/filter-option.model';
+import { ElasticFullTextMatchQuery } from '../models/elastic/elastic-full-text-match-query.type';
 
 @Injectable({
   providedIn: 'root',
@@ -73,7 +74,7 @@ export class ElasticService {
   private _getFieldOrValueFilterQueries(
     filters: FilterModel[],
     boost?: number,
-  ): (ElasticQuery | ElasticFieldExistsQuery)[] {
+  ): (ElasticFieldExistsQuery | ElasticQuery | ElasticFullTextMatchQuery | ElasticShouldQueries)[] {
     const fieldOrValueFilters = filters.filter(
       (filter) =>
         filter.type === FilterType.Value || filter.type === FilterType.Field,
@@ -85,6 +86,27 @@ export class ElasticService {
       }
       return this.getQuery(filter?.valueId, undefined, boost);
     });
+  }
+
+  private _getFullTextMatchQuery(query: string): ElasticFullTextMatchQuery {
+    return {
+      match: {
+        _full_text: {
+          query: query,
+        },
+      },
+    };
+  }
+
+  private _getCombinedSearchQuery(query: string): ElasticShouldQueries {
+    return {
+      bool: {
+        should: [
+          this._getSearchQuery(query),
+          this._getFullTextMatchQuery(query),
+        ],
+      },
+    };
   }
 
   async getFilterOptions(
@@ -251,13 +273,15 @@ export class ElasticService {
     let searchFilters: FilterModel[] = filters;
 
     const fieldOrValueFilterQueries: (
-      | ElasticQuery
       | ElasticFieldExistsQuery
+      | ElasticQuery
+      | ElasticFullTextMatchQuery
+      | ElasticShouldQueries
     )[] = this._getFieldOrValueFilterQueries(searchFilters);
 
     if (query) {
-      const searchQuery = this._getSearchQuery(query);
-      fieldOrValueFilterQueries.push(searchQuery);
+      const combinedQuery = this._getCombinedSearchQuery(query);
+      fieldOrValueFilterQueries.push(combinedQuery);
     }
 
     const fieldAndValueFilterQueries =
@@ -311,6 +335,8 @@ export class ElasticService {
     let boostQueries: (
       | ElasticQuery
       | ElasticFieldExistsQuery
+      | ElasticFullTextMatchQuery
+      | ElasticShouldQueries
       | ElasticMatchQueries
     )[] = [];
     for (const [id, boostSetting] of Object.entries(boostSettings)) {
