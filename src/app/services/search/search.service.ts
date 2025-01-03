@@ -65,16 +65,21 @@ export class SearchService {
   private _updateNumberOfHitsFromSearchResponses(
     responses: SearchResponse<ElasticNodeModel>[],
   ) {
-    // TODO: Save number of hits, page, morehitsavailable, etc in results variable?
-    this.numberOfHits = [...responses].reduce(
-      (acc, curr) => acc + (curr as any).hits.total.value,
-      0,
-    );
+    this.numberOfHits = [...responses].reduce((acc, curr) => {
+      const total = curr?.hits?.total;
+      if (typeof total === 'number') {
+        return acc + total;
+      } else if (typeof total?.value === 'number') {
+        return acc + total.value;
+      }
+      return acc;
+    }, 0);
 
     this.numberOfHitsIsCappedByElastic =
-      [...responses].filter(
-        (response) => (response as any).hits.total.relation === 'gte',
-      ).length > 0;
+      [...responses].filter((response) => {
+        const total = response?.hits?.total;
+        return typeof total === 'object' && total?.relation === 'gte';
+      }).length > 0;
 
     // TODO: Move 10000 max to config/settings file
     if (this.numberOfHits > 10000) {

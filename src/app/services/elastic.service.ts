@@ -162,7 +162,7 @@ export class ElasticService {
         filter.fieldId !== undefined,
     );
 
-    let matchQueries: { [filterId: string]: ElasticMatchQueries[] } = {};
+    let matchQueries: { [filterId: string]: ElasticShouldQueries[] } = {};
     fieldAndValueFilters.forEach((filter) => {
       if (!filter.fieldId || !filter.valueId) {
         return;
@@ -170,16 +170,31 @@ export class ElasticService {
       const fieldIdWithSpaces = this.data.replacePeriodsWithSpaces(
         filter.fieldId,
       );
-      const matchQuery: ElasticMatchQueries = {
+      const fieldIdWithDots = filter.fieldId;
+
+      const matchQueryWithSpaces: ElasticMatchQueries = {
         match_phrase: {
           [fieldIdWithSpaces]: { query: filter.valueId, boost: boost },
         },
       };
+
+      const matchQueryWithDots: ElasticMatchQueries = {
+        match_phrase: {
+          [fieldIdWithDots]: { query: filter.valueId, boost: boost },
+        },
+      };
+
+      const shouldQuery: ElasticShouldQueries = {
+        bool: {
+          should: [matchQueryWithSpaces, matchQueryWithDots],
+        },
+      };
+
       const filterId = filter?.filterId ?? 'Filter';
       if (!(filterId in matchQueries)) {
         matchQueries[filterId] = [];
       }
-      matchQueries[filterId].push(matchQuery);
+      matchQueries[filterId].push(shouldQuery);
     });
 
     const shouldMatchQueries: ElasticShouldQueries[] = Object.values(
