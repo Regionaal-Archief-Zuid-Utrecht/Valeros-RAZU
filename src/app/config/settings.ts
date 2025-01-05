@@ -135,13 +135,22 @@ export const Settings = {
             'https://api.data.razu.nl/datasets/id/object/services/object/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
-        // {
-        //   elastic: 'http://localhost:8000/_search',
-        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-        // }
+        {
+          elastic: 'http://localhost:8000/_search',
+          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        }
       ],
     },
   },
+  // razu_enriched: {
+  //   label: 'Regionaal Archief Zuid-Utrecht (enriched)',
+  //   endpointUrls: [
+  //     {
+  //       elastic: 'http://localhost:8000/_search',
+  //       sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+  //     },
+  //   ],
+  // },
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   sorting: {
     default: 'relevance',
@@ -214,9 +223,21 @@ export const Settings = {
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
-      beperkingGebruik: {
-        label: 'Beperking',
-        fieldIds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruik'],
+      // beperkingGebruik: {
+      //   label: 'Beperking',
+      //   fieldIds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruik'],
+      //   values: [],
+      //   hideValueIds: [],
+      // },
+      licentie: {
+        label: 'Licentie',
+        fieldIds: ['_licentie'],
+        values: [],
+        hideValueIds: [],
+      },
+      openbaarheid: {
+        label: 'Openbaarheidsstatus',
+        fieldIds: ['_openbaarheid'],
         values: [],
         hideValueIds: [],
       },
@@ -525,7 +546,8 @@ export const Settings = {
     trackerUrl: '//analytics.boasmedia.nl/',
   },
   sura: {
-    url: 'https://viewer.razu.nl/sura/process-url',
+    url: 'http://localhost:8000/process-url',
+    //url: 'https://viewer.razu.nl/sura/process-url',
   },
   header: {
     showLogo: true,

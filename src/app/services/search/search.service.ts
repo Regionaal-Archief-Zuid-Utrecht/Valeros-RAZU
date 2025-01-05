@@ -105,7 +105,7 @@ export class SearchService {
         nodes.push(otherNode);
       }
     });
-
+    console.log('MERGED NODES', nodes);
     return nodes;
   }
 
@@ -116,10 +116,11 @@ export class SearchService {
       this.hits.getFromSearchResponses(responses);
 
     const hitNodes: NodeModel[] = this.hits.parseToNodes(hits);
+    console.log('HIT NODES', hitNodes);
     // TODO: Run async, show initial hits in the meanwhile
     const enrichedNodes =
       await this.nodes.enrichWithIncomingRelations(hitNodes);
-
+    console.log('ENRICHED NODES', enrichedNodes);
     const hasHits = enrichedNodes && enrichedNodes.length > 0;
     if (hasHits) {
       this.page++;
@@ -256,21 +257,13 @@ export class SearchService {
     this.isLoading.next(true);
     try {
       const searchQueryIdOfRequest = this._searchQueryId;
-      const searchPromise = this.elastic.searchNodes(
+      const responses = await this.elastic.searchNodes(
         this.queryStr,
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
         this.filters.onlyShowResultsWithImages.value,
       );
-      const filterOptionsPromise = this.filters.updateFilterOptionValues(
-        this.queryStr,
-      );
-
-      const [responses, _] = await Promise.all([
-        searchPromise,
-        filterOptionsPromise,
-      ]);
 
       // TODO: Cancel requests if we know there's a new request already (note: cancelling promises not easily supported at the moment)
       const responsesAreOutdated =
@@ -278,8 +271,17 @@ export class SearchService {
       if (responsesAreOutdated) {
         return;
       }
+
       this._updateNumberOfHitsFromSearchResponses(responses);
       await this._updateResultsFromSearchResponses(responses);
+
+      // Now update filter options with the new nodes
+      if (clearFilters) {
+        await this.filters.updateFilterOptionValues(
+          this.queryStr,
+          this.results.value?.nodes || [],
+        );
+      }
     } catch (error) {
       console.error('Error searching:', error);
     } finally {
