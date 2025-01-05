@@ -22,7 +22,6 @@ export class ApiService {
     const requestIsCached = requestKey in this.postCache.cache;
 
     if (requestIsCached) {
-      // console.log('Cache:', url, dataStr.slice(0, 200));
       return this.postCache.cache[requestKey];
     }
 

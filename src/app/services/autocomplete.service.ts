@@ -107,7 +107,6 @@ export class AutocompleteService {
   private async _getOptions(
     searchInput: string,
   ): Promise<AutocompleteOptionModel[]> {
-    console.log('Retrieving autocomplete options...', searchInput);
 
     if (!searchInput) {
       return [];

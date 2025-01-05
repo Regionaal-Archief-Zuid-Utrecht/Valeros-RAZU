@@ -45,9 +45,7 @@ export class LabelsCacheService {
       }
     });
 
-    // console.log('RETRIEVING LABELS BATCH', idsWithoutLabel);
     const idsAndLabels = await this.sparql.getLabels(idsWithoutLabel);
-    // console.log('RETRIEVED LABELS BATCH', idsAndLabels);
 
     for (const idAndLabel of idsAndLabels) {
       const id = idAndLabel['@id'];

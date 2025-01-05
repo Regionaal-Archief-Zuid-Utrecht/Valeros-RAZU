@@ -135,22 +135,13 @@ export const Settings = {
             'https://api.data.razu.nl/datasets/id/object/services/object/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
-        {
-          elastic: 'http://localhost:8000/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-        }
+        // {
+        //   elastic: 'http://localhost:8000/_search',
+        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        // }
       ],
     },
   },
-  // razu_enriched: {
-  //   label: 'Regionaal Archief Zuid-Utrecht (enriched)',
-  //   endpointUrls: [
-  //     {
-  //       elastic: 'http://localhost:8000/_search',
-  //       sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-  //     },
-  //   ],
-  // },
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   sorting: {
     default: 'relevance',
@@ -223,12 +214,6 @@ export const Settings = {
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
-      // beperkingGebruik: {
-      //   label: 'Beperking',
-      //   fieldIds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruik'],
-      //   values: [],
-      //   hideValueIds: [],
-      // },
       licentie: {
         label: 'Licentie',
         fieldIds: ['_licentie'],
@@ -256,7 +241,7 @@ export const Settings = {
       locations: {
         label: 'Locaties',
         valueIds: [
-          'https://hetutrechtsarchief.nl/id/aet/bd',
+          // 'https://hetutrechtsarchief.nl/id/aet/bd',
           'https://schema.org/Place',
           'https://schema.org/PostalAddress',
           'https://www.ica.org/standards/RiC/ontology#Place',
@@ -267,17 +252,17 @@ export const Settings = {
       publicDomain: {
         label: 'Publiek Domein',
         valueIds: [
-          'https://hetutrechtsarchief.nl/id/630EAF2CCA826B2DE0534701000AE1E2',
-          'https://hetutrechtsarchief.nl/id/609C5BCA906D4642E0534701000A17FD',
-          'https://hetutrechtsarchief.nl/id/630EAF2CCA806B2DE0534701000AE1E2',
+          // 'https://hetutrechtsarchief.nl/id/630EAF2CCA826B2DE0534701000AE1E2',
+          // 'https://hetutrechtsarchief.nl/id/609C5BCA906D4642E0534701000A17FD',
+          // 'https://hetutrechtsarchief.nl/id/630EAF2CCA806B2DE0534701000AE1E2',
         ],
       },
       subject: {
         label: 'Onderwerpen',
         valueIds: [
           'http://www.w3.org/2004/02/skos/core#Concept',
-          'https://hetutrechtsarchief.nl/def/trefwoord_tst_107',
-          'https://hetutrechtsarchief.nl/id/aet/incat',
+          // 'https://hetutrechtsarchief.nl/def/trefwoord_tst_107',
+          // 'https://hetutrechtsarchief.nl/id/aet/incat',
         ],
       },
       people: {
@@ -313,18 +298,18 @@ export const Settings = {
           fieldIds: typePredicates,
           valueIds: [
             'http://www.w3.org/2004/02/skos/core#Concept',
-            'https://hetutrechtsarchief.nl/def/trefwoord_tst_107',
-            'https://hetutrechtsarchief.nl/id/aet/incat',
+            // 'https://hetutrechtsarchief.nl/def/trefwoord_tst_107',
+            // 'https://hetutrechtsarchief.nl/id/aet/incat',
           ],
         },
         parents: {
           type: FilterType.FieldAndValue,
           fieldIds: [
             ...parentPredicates,
-            'https://hetutrechtsarchief.nl/def/isDescendentOf',
+            // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
           ],
           valueIds: [
-            'https://hetutrechtsarchief.nl/id/trefwoord',
+            // 'https://hetutrechtsarchief.nl/id/trefwoord',
             'https://termennetwerk.netwerkdigitaalerfgoed.nl',
           ],
         },
@@ -351,12 +336,12 @@ export const Settings = {
   renderComponents: {
     [RenderMode.ByType]: {
       // 'https://schema.org/Photograph': { componentId: 'sdo-photograph' },
-      'https://hetutrechtsarchief.nl/id/aet/scnni': {
-        componentId: 'gescand-inventarisnummer',
-      },
-      'https://hetutrechtsarchief.nl/id/aet/rub': {
-        componentId: 'hua-rubriek',
-      },
+      // 'https://hetutrechtsarchief.nl/id/aet/scnni': {
+      //   componentId: 'gescand-inventarisnummer',
+      // },
+      // 'https://hetutrechtsarchief.nl/id/aet/rub': {
+      //   componentId: 'hua-rubriek',
+      // },
     },
     [RenderMode.ByPredicate]: {
       'http://xmlns.com/foaf/0.1/depiction': {
@@ -486,8 +471,8 @@ export const Settings = {
     'http://www.nationaalarchief.nl/mdto#checksum',
     'http://www.nationaalarchief.nl/mdto#waardering',
     'https://schema.org/breadcrumb',
-    'https://hetutrechtsarchief.nl/def/isDescendentOf',
-    'https://hetutrechtsarchief.nl/def/isDescendantOf',
+    // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
+    // 'https://hetutrechtsarchief.nl/def/isDescendantOf',
     'http://purl.org/dc/terms/hasFormat',
   ],
   onlyShowNodes: {
@@ -513,7 +498,7 @@ export const Settings = {
     hideTerms: {
       fieldIds: [...parentPredicates],
       valueIds: [
-        'https://hetutrechtsarchief.nl/id/trefwoorden',
+        // 'https://hetutrechtsarchief.nl/id/trefwoorden',
         'https://termennetwerk.netwerkdigitaalerfgoed.nl',
       ],
       type: FilterType.FieldAndValue,
@@ -521,10 +506,10 @@ export const Settings = {
   },
   namespacePrefixes: {
     'https://www.ica.org/standards/RiC/ontology#': 'rico:',
-    'https://hetutrechtsarchief.nl/def/': 'def:',
+    // 'https://hetutrechtsarchief.nl/def/': 'def:',
     'https://schema.org/': 'sdo:',
     'http://www.w3.org/2004/02/skos/core#': 'skos:',
-    'https://hetutrechtsarchief.nl/id/': 'id:',
+    // 'https://hetutrechtsarchief.nl/id/': 'id:',
     'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf:',
     'http://www.w3.org/2000/01/rdf-schema#': 'rdfs:',
     'http://www.wikidata.org/entity/': 'wd:',

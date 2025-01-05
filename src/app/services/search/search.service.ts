@@ -79,7 +79,6 @@ export class SearchService {
         nodes.push(otherNode);
       }
     });
-    console.log('MERGED NODES', nodes);
     return nodes;
   }
 
@@ -90,11 +89,9 @@ export class SearchService {
       this.hits.getFromSearchResponses(responses);
 
     const hitNodes: NodeModel[] = this.hits.parseToNodes(hits);
-    console.log('HIT NODES', hitNodes);
     // TODO: Run async, show initial hits in the meanwhile
     const enrichedNodes =
       await this.nodes.enrichWithIncomingRelations(hitNodes);
-    console.log('ENRICHED NODES', enrichedNodes);
 
     if (!enrichedNodes || enrichedNodes.length === 0) {
       this.results.next({
