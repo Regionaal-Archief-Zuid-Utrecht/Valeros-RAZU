@@ -136,10 +136,10 @@ export const Settings = {
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
         // This is how an enriched endpoint would look like
-        // {
-        //   elastic: 'http://localhost:8000/_search',
-        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-        // }
+        {
+          elastic: 'http://localhost:8000/_search',
+          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        }
       ],
     },
   },

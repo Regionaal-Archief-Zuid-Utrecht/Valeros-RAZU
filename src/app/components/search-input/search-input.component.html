@@ -1,6 +1,6 @@
-<div class="dropdown dropdown-bottom z-20 flex">
+<div class="dropdown dropdown-bottom z-20 flex ">
   <label
-    class="flex input input-bordered items-center gap-2 rounded-full w-full"
+    class="flex input input-bordered items-center gap-2 rounded-full w-full shadow hover:shadow-lg transition-shadow"
   >
     <input
       type="text"
@@ -14,7 +14,7 @@
     />
 
     <button
-      class="btn btn-primary btn-sm rounded-full text-white"
+      class="btn btn-primary btn-sm rounded-full text-white shadow-sm hover:shadow transition-shadow"
       [disabled]="search.isLoading.value"
       (click)="onSearch()"
     >

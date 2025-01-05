@@ -14,7 +14,7 @@
   <div class="break-all" [ngClass]="[smallFontSize ? 'text-xs' : '']">
     <ng-container *ngFor="let pred of nodePreds">
       <div
-        class="sm:flex sm:gap-4 sm:px-4 my-4 sm:my-2"
+        class="sm:flex sm:gap-4 sm:px-4 my-4 sm:my-2 hover:bg-gray-200 hover:shadow-sm transition-shadow duration-100 rounded-md"
         *ngIf="
           predicateVisibilities[pred] === visibility &&
           getNumPredValues(pred, direction) > 0
@@ -45,6 +45,10 @@
           />
         </td>
       </div>
+      <!-- <div class="divider w-2 align-self: center;" *ngIf="
+      predicateVisibilities[pred] === visibility &&
+      getNumPredValues(pred, direction) > 0
+    "></div> -->
     </ng-container>
   </div>
 </ng-container>
