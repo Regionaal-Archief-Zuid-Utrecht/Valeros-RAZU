@@ -81,6 +81,13 @@ const hideFilterOptionValueIds = [
   // 'https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series',
   // 'http://dbpedia.org/ontology/Place',
   'http://www.nationaalarchief.nl/mdto#BetrokkeneGegevens',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa10',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a',
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f'
 ];
 
 const peopleValueIds = [
@@ -458,7 +465,15 @@ export const Settings = {
         'https://www.ica.org/standards/RiC/ontology#hasCreator',
         '*',
       ],
-      [PredicateVisibility.Hide]: [...typePredicates],
+      [PredicateVisibility.Hide]: [...typePredicates,
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa10',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a',
+        'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f',
+      ],
     },
     [ViewMode.Grid]: {
       [PredicateVisibility.Show]: [],

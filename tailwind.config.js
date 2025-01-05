@@ -10,7 +10,9 @@ module.exports = {
       screens: {
         'wide': '1600px',
       },
-    },
+      colors: {
+        'background': '#E5E4E2',
+    },},
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -25,6 +27,7 @@ module.exports = {
           // secondary: "#c2b280",
           // "primary-content": "white",
           // background: "#E5E4E2",
+          // search_background: "#E5E4E2",
           // "--rounded-box": "1rem",
           // "--rounded-btn": "1rem",
           // "--rounded-badge": "1rem",
@@ -36,7 +39,8 @@ module.exports = {
           accent: "#b3b3b3", // Light gray for highlighting search results
           secondary: "#6d6d6d", // A slightly darker gray for secondary elements
           "primary-content": "white", // White text to maintain contrast
-          background: "#f2f2f2", // Very light gray for the background
+          background: "#f2f2f2",
+          search_background: "#f2f2f2", // Very light gray for the background
           "--rounded-box": "1rem",
           "--rounded-btn": "1rem",
           "--rounded-badge": "1rem",
