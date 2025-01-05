@@ -47,7 +47,7 @@
     </div>
 
     <div
-      class="p-4 pt-2 overflow-y-scroll flex-grow scroll-smooth"
+      class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
       [ngClass]="[
         shouldShowHomeIntro ? 'hidden' : '',
         settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : ''
@@ -56,15 +56,17 @@
     >
       <app-details *ngIf="details.showing.value" />
 
-      <div *ngIf="!details.showing.value">
-        <div class="flex flex-row">
-          <app-search-hits-counter class="w-1/2 lg:w-3/4" />
-          <app-sort-select class="w-1/2 lg:w-1/4 mb-2" />
-        </div>
+      <div class="flex flex-row sticky -top-2 bg-background z-10 p-2 " *ngIf="!details.showing.value">
+        <app-search-hits-counter class="w-1/2 lg:w-3/4" />
+        <app-sort-select class="w-1/2 lg:w-1/4 mb-2" />
+      </div>
+
+      <div *ngIf="!details.showing.value" class="overflow-hidden">
+        
 
         <!--    TODO: Bring back masonry grid-->
         <!--    <app-nodes-masonry-grid-->
-        <!--      [nodes]="search.results.value.nodes"-->
+        <!--      [nodes]="search.results.value.nodes-->
         <!--      *ngIf="viewModes.current.value === ViewMode.Grid"-->
         <!--      class="w-full"-->
         <!--    />-->
