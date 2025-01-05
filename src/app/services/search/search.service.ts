@@ -62,32 +62,6 @@ export class SearchService {
     this.initSearchOnSortChange();
   }
 
-  private _updateNumberOfHitsFromSearchResponses(
-    responses: SearchResponse<ElasticNodeModel>[],
-  ) {
-    this.numberOfHits = [...responses].reduce((acc, curr) => {
-      const total = curr?.hits?.total;
-      if (typeof total === 'number') {
-        return acc + total;
-      } else if (typeof total?.value === 'number') {
-        return acc + total.value;
-      }
-      return acc;
-    }, 0);
-
-    this.numberOfHitsIsCappedByElastic =
-      [...responses].filter((response) => {
-        const total = response?.hits?.total;
-        return typeof total === 'object' && total?.relation === 'gte';
-      }).length > 0;
-
-    // TODO: Move 10000 max to config/settings file
-    if (this.numberOfHits > 10000) {
-      this.numberOfHits = 10000;
-      this.numberOfHitsIsCappedByElastic = true;
-    }
-  }
-
   private _mergeNodesById(
     nodes: NodeModel[],
     otherNodes: NodeModel[],
@@ -121,16 +95,21 @@ export class SearchService {
     const enrichedNodes =
       await this.nodes.enrichWithIncomingRelations(hitNodes);
     console.log('ENRICHED NODES', enrichedNodes);
-    const hasHits = enrichedNodes && enrichedNodes.length > 0;
-    if (hasHits) {
-      this.page++;
+
+    if (!enrichedNodes || enrichedNodes.length === 0) {
+      this.results.next({
+        nodes: [],
+      });
+      return;
     }
 
+    const mergedNodes = this._mergeNodesById(
+      this.results.value.nodes ?? [],
+      enrichedNodes,
+    );
+
     this.results.next({
-      nodes: this._mergeNodesById(
-        this.results.value.nodes ?? [],
-        enrichedNodes,
-      ),
+      nodes: mergedNodes,
     });
   }
 
@@ -257,7 +236,16 @@ export class SearchService {
     this.isLoading.next(true);
     try {
       const searchQueryIdOfRequest = this._searchQueryId;
-      const responses = await this.elastic.searchNodes(
+
+      // First get all results for counting and filter options
+      const countingResponses = await this.elastic.searchNodesForCounting(
+        this.queryStr,
+        this.filters.enabled.value,
+        this.filters.onlyShowResultsWithImages.value,
+      );
+
+      // Then get paginated results for display
+      const displayResponses = await this.elastic.searchNodes(
         this.queryStr,
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
@@ -272,14 +260,29 @@ export class SearchService {
         return;
       }
 
-      this._updateNumberOfHitsFromSearchResponses(responses);
-      await this._updateResultsFromSearchResponses(responses);
+      // Update total hits from the counting response
+      const countingHits = this.hits.getFromSearchResponses(countingResponses);
+      const countingNodes = this.hits.parseToNodes(countingHits);
+      this.numberOfHits = countingNodes.length;
+      if (this.numberOfHits > 10000) {
+        this.numberOfHits = 10000;
+        this.numberOfHitsIsCappedByElastic = true;
+      }
 
-      // Now update filter options with the new nodes
+      // Update displayed results from the paginated response
+      await this._updateResultsFromSearchResponses(displayResponses);
+
+      // Increment page if we got results
+      const displayHits = this.hits.getFromSearchResponses(displayResponses);
+      if (displayHits && displayHits.length > 0) {
+        this.page++;
+      }
+
+      // Now update filter options with all nodes from counting response
       if (clearFilters) {
         await this.filters.updateFilterOptionValues(
           this.queryStr,
-          this.results.value?.nodes || [],
+          countingNodes,
         );
       }
     } catch (error) {

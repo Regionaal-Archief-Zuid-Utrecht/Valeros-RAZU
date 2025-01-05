@@ -118,20 +118,17 @@ export class ElasticService {
     const aggs = filterFieldIds.reduce((result: any, fieldId) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
 
-      // TODO: Find way to retrieve ALL hit IDs here if we want to show the full count for the filter options
-      //  Now using top_hits to prevent many separate requests
-      //  Relatively easy fix: update [index.max_inner_result_window] on elastic to 10.000"
       result[elasticFieldId] = {
         terms: {
           field: elasticFieldId + '.keyword',
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
-          size: Config.maxNumOfFilterOptionsPerField,
+          size: Settings.search.maxResultsForCounting,
         },
         aggs: {
           field_hits: {
             top_hits: {
-              size: Config.elasticTopHitsMax,
+              size: Settings.search.maxResultsForCounting,
               _source: '',
             },
           },
@@ -145,7 +142,7 @@ export class ElasticService {
       activeFilters,
       onlyWithImages,
       0,
-      0,
+      Settings.search.maxResultsForCounting,
     );
     queryData.aggs = { ...aggs };
 
@@ -380,6 +377,20 @@ export class ElasticService {
     return queryData;
   }
 
+  async searchNodesForCounting(
+    query: string,
+    filters: FilterModel[],
+    onlyWithImages: boolean,
+  ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
+    return this.searchNodes(
+      query,
+      0,
+      Settings.search.maxResultsForCounting,
+      filters,
+      onlyWithImages,
+    );
+  }
+
   async searchNodes(
     query: string,
     from: number,
@@ -395,6 +406,6 @@ export class ElasticService {
       size,
     );
 
-    return await this.searchEndpoints<ElasticNodeModel>(queryData);
+    return await this.searchEndpoints(queryData);
   }
 }
