@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UiService } from '../../../services/ui.service';
 import { NgIcon } from '@ng-icons/core';
 import { ImageFilterComponent } from '../image-filter/image-filter.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter-options',
@@ -30,6 +31,7 @@ import { ImageFilterComponent } from '../image-filter/image-filter.component';
     FormsModule,
     NgIcon,
     ImageFilterComponent,
+    TranslatePipe,
   ],
   templateUrl: './filter-options.component.html',
   styleUrl: './filter-options.component.scss',
@@ -46,4 +48,11 @@ export class FilterOptionsComponent {
   protected readonly Object = Object;
   protected readonly FilterType = FilterType;
   protected readonly Settings = Settings;
+
+  clearFilters(): void {
+    // First toggle off all enabled filters
+    this.filters.toggleMultiple([...this.filters.enabled.value]);
+    // Then trigger a search
+    this.filters.searchTrigger.emit({ clearFilters: true });
+  }
 }

@@ -29,7 +29,13 @@
     "1-result": "1 result",
     "organizations": "Organizations",
     "only-show-results-with-images": "Only show results with images",
-    "only-results-with-images": "Only images"
+    "only-results-with-images": "Only images",
+    "search-terms": "Search terms",
+    "search-results": "Search results",
+    "filters_title": "Filters",
+    "filters_active_singular": "active",
+    "filters_active_plural": "active",
+    "clear_filters": "Clear filters"
 	},
   "records-interface" :{
     "pointer-to": "pointer to",

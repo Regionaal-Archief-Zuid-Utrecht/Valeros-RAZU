@@ -5,19 +5,53 @@
   ]"
   *ngIf="filters.options.value"
 >
-  <!--  <p>Filter op:</p>-->
+  <div class="flex justify-between items-center mb-4">
+    <p class="text-xl font-bold">
+      {{ "search-interface.filters_title" | translate }}
+    </p>
+    <button 
+    *ngIf="filters.enabled.value.length > 0"
+    class="btn btn-xs btn-secondary flex items-center space-x-2 shadow hover:shadow-lg transition-shadow duration-200"
+    (click)="clearFilters()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+    <span>{{ "search-interface.clear_filters" | translate }}</span>
+  </button>
+  
+  </div>
   <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
+    
     <div class="w-full sm:flex-1" *ngIf="filters.shouldShow(filterId)">
-      <div class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200">
-        <input
+      
+        
+        <div class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200">
+          
+          <input
           type="checkbox"
           name="filter-accordion"
           [(ngModel)]="ui.accordionExpandedStates[filterId]"
         />
-        <div class="collapse-title">
+      
+      
+
+      <div class="collapse-title">
           <span>
             {{ filters.getOptionById(filterId).label }}
           </span>
+         
           <app-filter-count
             [count]="
               filters.getOptionEnabledFiltersCount(
@@ -38,7 +72,9 @@
           />
         </div>
       </div>
+    
     </div>
+  
   </ng-container>
 
   <div class="w-full lg:w-auto" *ngIf="Settings.filtering.showImageFilter">

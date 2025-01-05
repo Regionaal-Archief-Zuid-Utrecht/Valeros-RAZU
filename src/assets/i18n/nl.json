@@ -29,9 +29,13 @@
     "1-result": "1 resultaat",
     "organizations": "Organisaties",
     "only-show-results-with-images": "Toon alleen resultaten met afbeeldingen",
-    "only-results-with-images": "Only images",
+    "only-results-with-images": "Alleen afbeeldingen",
     "search-terms": "Zoektermen",
-    "search-results": "Zoekresultaten"
+    "search-results": "Zoekresultaten",
+    "filters_title": "Filters",
+    "filters_active_singular": "actieve filter",
+    "filters_active_plural": "actieve filters",
+    "clear_filters": "Filters wissen"
 	},
   "records-interface" :{
     "pointer-to": "Verwijzing naar",
@@ -52,4 +56,3 @@
     "title": "Titel"
   }
 }
-
