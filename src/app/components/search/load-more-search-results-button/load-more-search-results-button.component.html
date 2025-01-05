@@ -1,5 +1,5 @@
-<button
-  class="btn btn-primary"
+<div class="flex justify-center"><button
+  class="btn btn-primary shadow hover:shadow-lg transition-shadow duration-200"
   (click)="loadMore()"
   [disabled]="search.isLoading.value"
   *ngIf="search.hasMoreResultsToLoad"
@@ -9,4 +9,4 @@
     *ngIf="search.isLoading.value"
   ></span>
   {{ "search-interface.load-more-results" | translate }}
-</button>
+</button></div>

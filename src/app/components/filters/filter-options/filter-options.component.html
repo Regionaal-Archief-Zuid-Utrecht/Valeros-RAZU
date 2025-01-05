@@ -11,7 +11,7 @@
     </p>
     <button 
     *ngIf="filters.enabled.value.length > 0"
-    class="btn btn-xs btn-secondary flex items-center space-x-2 shadow hover:shadow-lg transition-shadow duration-200"
+    class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
     (click)="clearFilters()"
   >
     <svg
@@ -28,7 +28,7 @@
         d="M6 18L18 6M6 6l12 12"
       />
     </svg>
-    <span>{{ "search-interface.clear_filters" | translate }}</span>
+    <span style="padding-bottom: 0.1rem;">{{ "search-interface.clear_filters" | translate }}</span>
   </button>
   
   </div>
