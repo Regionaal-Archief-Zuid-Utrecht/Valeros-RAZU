@@ -144,7 +144,7 @@ export const Settings = {
         },
         // This is how an enriched endpoint would look like
         {
-          elastic: 'https://viewer.razu.nl/sura/_search',
+          elastic: 'https://viewer-test.razu.nl/sura/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         }
       ],
@@ -548,7 +548,7 @@ export const Settings = {
     trackerUrl: '//analytics.boasmedia.nl/',
   },
   sura: {
-    url: 'https://viewer.razu.nl/sura/process-url',
+    url: 'https://viewer-test.razu.nl/sura/process-url',
   },
   header: {
     showLogo: true,
