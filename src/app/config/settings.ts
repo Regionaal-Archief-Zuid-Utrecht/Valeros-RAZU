@@ -26,7 +26,7 @@ export const hasImageFilters: FilterModel[] = imagePredicates.map(
 const typePredicates: string[] = [
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
   // 'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
- 'https://schema.org/additionalType',
+  'https://schema.org/additionalType',
   // 'http://www.wikidata.org/entity/P31',
   'http://www.nationaalarchief.nl/mdto#classificatie',
 ];
@@ -87,7 +87,7 @@ const hideFilterOptionValueIds = [
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa10',
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30',
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a',
-  'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f'
+  'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f',
 ];
 
 const peopleValueIds = [
@@ -146,7 +146,7 @@ export const Settings = {
         {
           elastic: 'https://viewer-test.razu.nl/sura/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-        }
+        },
       ],
     },
   },
@@ -465,7 +465,8 @@ export const Settings = {
         'https://www.ica.org/standards/RiC/ontology#hasCreator',
         '*',
       ],
-      [PredicateVisibility.Hide]: [...typePredicates,
+      [PredicateVisibility.Hide]: [
+        ...typePredicates,
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
@@ -549,7 +550,7 @@ export const Settings = {
   },
   razu: {
     sura: {
-      url: 'https://viewer.razu.nl/sura/process-url',
+      url: 'https://viewer-test.razu.nl/sura/process-url',
       matchUrlsSubstring: 'opslag.razu.nl',
     },
   },
@@ -562,6 +563,6 @@ export const Settings = {
     scale: 'small' as const, // Options: 'small', 'medium', 'large'
     gapBeforeContent: 'small' as const, // Options: 'small', 'medium', 'large'
     horizontalPosition: 'left' as const, // Options: stick-to-left, left, center, right, stick-to-right
-    verticalPosition: 'top' as const,// Options: top, middle, bottom, middle only works if horizontalPosition is stick-to-left or stick-to-right
+    verticalPosition: 'top' as const, // Options: top, middle, bottom, middle only works if horizontalPosition is stick-to-left or stick-to-right
   } satisfies HeaderSettings,
 };
