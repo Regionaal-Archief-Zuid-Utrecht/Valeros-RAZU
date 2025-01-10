@@ -5,86 +5,106 @@
   ]"
   *ngIf="filters.options.value"
 >
-  <div class="flex justify-between items-center mb-4">
-    <p class="text-xl font-bold">
-      {{ "search-interface.filters_title" | translate }}
-    </p>
-    <button 
-    *ngIf="filters.enabled.value.length > 0"
-    class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
-    (click)="clearFilters()"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-    <span style="padding-bottom: 0.1rem;">{{ "search-interface.clear_filters" | translate }}</span>
-  </button>
-  
-  </div>
-  <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
-    
-    <div class="w-full sm:flex-1" *ngIf="filters.shouldShow(filterId)">
-      
-        
-        <div class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200">
-          
-          <input
-          type="checkbox"
-          name="filter-accordion"
-          [(ngModel)]="ui.accordionExpandedStates[filterId]"
-        />
-      
-      
-
-      <div class="collapse-title">
-          <span>
-            {{ filters.getOptionById(filterId).label }}
-          </span>
-         
-          <app-filter-count
-            [count]="
-              filters.getOptionEnabledFiltersCount(
-                filterId,
-                FilterType.FieldAndValue
-              )
-            "
-          />
-        </div>
-
-        <div
-          class="collapse-content max-h-64 overflow-y-scroll overflow-x-hidden"
+  <!-- Collapsible Parent Section -->
+  <div class="bg-background">
+    <div class="flex justify-between items-center px-4 py-2">
+      <p class="text-xl font-bold">
+        {{ "search-interface.filters_title" | translate }}
+      </p>
+      <div class="flex items-center gap-2">
+        <button
+          *ngIf="filters.enabled.value.length > 0"
+          class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
+          (click)="clearFilters()"
         >
-          <app-filter-option
-            [filterId]="filterId"
-            [values]="filters.getOptionById(filterId).values"
-            [fieldIds]="filters.getOptionById(filterId).fieldIds"
-          />
-        </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+          <span style="padding-bottom: 0.1rem;">
+            {{ "search-interface.clear_filters" | translate }}
+          </span>
+        </button>
+        <!-- Collapse Arrow -->
+        <button
+          class="focus:outline-none"
+          (click)="uix.filterGroupExpanded = !uix.filterGroupExpanded"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 transform transition-transform"
+            [ngClass]="{'rotate-180': uix.filterGroupExpanded}"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
       </div>
-    
     </div>
-  
-  </ng-container>
-
-  <div class="w-full lg:w-auto" *ngIf="Settings.filtering.showImageFilter">
-    <app-image-filter />
-  </div>
-
-  <div
-    class="w-full lg:w-auto"
-    *ngIf="Settings.filtering.showOrganizationsFilter"
-  >
-    <app-endpoints />
+    <div
+      class="transition-all overflow-hidden"
+      [style.maxHeight]="uix.filterGroupExpanded ? '1000px' : '0px'"
+    >
+      <!-- Existing Filters Logic -->
+      <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
+        <div class="w-full sm:flex-1" *ngIf="filters.shouldShow(filterId)">
+          <div
+            class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
+          >
+            <input
+              type="checkbox"
+              name="filter-accordion"
+              [(ngModel)]="ui.accordionExpandedStates[filterId]"
+            />
+            <div class="collapse-title">
+              <span>{{ filters.getOptionById(filterId).label }}</span>
+              <app-filter-count
+                [count]="
+                  filters.getOptionEnabledFiltersCount(
+                    filterId,
+                    FilterType.FieldAndValue
+                  )
+                "
+              />
+            </div>
+            <div
+              class="collapse-content max-h-64 overflow-y-scroll overflow-x-hidden"
+            >
+              <app-filter-option
+                [filterId]="filterId"
+                [values]="filters.getOptionById(filterId).values"
+                [fieldIds]="filters.getOptionById(filterId).fieldIds"
+              />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="w-full lg:w-auto" *ngIf="Settings.filtering.showImageFilter">
+        <app-image-filter />
+      </div>
+      <div
+        class="w-full lg:w-auto"
+        *ngIf="Settings.filtering.showOrganizationsFilter"
+      >
+        <app-endpoints />
+      </div>
+    </div>
   </div>
 </div>

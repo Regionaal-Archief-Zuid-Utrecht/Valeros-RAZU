@@ -55,4 +55,8 @@ export class FilterOptionsComponent {
     // Then trigger a search
     this.filters.searchTrigger.emit({ clearFilters: true });
   }
+  uix = {
+    filterGroupExpanded: true, // Default to expanded
+    accordionExpandedStates: {}, // Maintain individual filter states
+  };
 }
