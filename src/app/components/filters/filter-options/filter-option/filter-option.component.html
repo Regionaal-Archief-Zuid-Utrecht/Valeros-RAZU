@@ -2,12 +2,13 @@
   class="form-control flex-row"
   *ngFor="let value of values?.slice(0, numShowing)"
 >
-  <label class="label text">
+  <label class="label text" for="filter-{{ value.ids[0] }}">
     <input
       type="checkbox"
       class="checkbox checkbox-sm mr-4"
       [checked]="filterService.has(value.ids, FilterType.FieldAndValue)"
       (click)="onFilterToggle(value.ids)"
+      [id]="'filter-' + value.ids[0]"
     />
     <app-node-link
       [disabled]="true"
@@ -25,6 +26,7 @@
   class="btn btn-sm btn-neutral mt-2"
   (click)="onShowMoreClicked()"
   *ngIf="hasMoreToShow"
+  role="region" aria-label="Load more results" aria-labelledby="load-more-results-filter-option"
 >
   {{ "search-interface.load-more-results" | translate }}
 </button>

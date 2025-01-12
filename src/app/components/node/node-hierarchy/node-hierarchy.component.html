@@ -36,6 +36,7 @@
             [svg]="featherChevronRight"
             *ngIf="!collapsed && !isFirst"
             class="opacity-40"
+            accessible role="region" accessibilityLabelledBy="node-hierarchy" [accessibilityLabel]="'Navigate to ' + nodeInfo['@id']"
           />
         </app-node-link>
       </li>

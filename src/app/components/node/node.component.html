@@ -5,6 +5,8 @@
     shouldShowImageNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
+  role="main" aria-labelledby="search-results"
+  [attr.aria-label]="title"
 >
   <a
     *ngIf="shouldShowImageNextToTable()"
@@ -18,6 +20,7 @@
       [imageUrls]="images"
       [shownInTableCell]="false"
       [useViewer]="this.details.showing.value"
+      [imageLabel]="title"
     />
   </a>
 

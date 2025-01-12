@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DrawerService } from '../../../services/drawer.service';
 
 @Component({
   selector: 'app-view-container',
@@ -10,5 +9,4 @@ import { DrawerService } from '../../../services/drawer.service';
   styleUrl: './view-container.component.scss'
 })
 export class ViewContainerComponent {
-  constructor(public drawer: DrawerService) {}
 }

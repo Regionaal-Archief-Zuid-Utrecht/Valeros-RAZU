@@ -1,7 +1,7 @@
 <p class="text-xl mb-4 font-bold">
   <span *ngIf="search.isLoading.value" class="loading loading-spinner"> </span>
 
-  <span *ngIf="!search.isLoading.value && !details.showing.value">{{
+  <span *ngIf="!search.isLoading.value && !details.showing.value" role="search" aria-label="Search results count" aria-labelledby="search-results-count">{{
     numberOfHitsStr
   }}</span>
 </p>

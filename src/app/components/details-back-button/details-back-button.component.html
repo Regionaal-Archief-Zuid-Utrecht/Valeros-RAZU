@@ -3,7 +3,7 @@
   *ngIf="details.showing.value"
   class="mt-2 mb-2 text-lg font-bold hover:underline"
 >
-  <ng-icon [svg]="featherArrowLeft" class="relative top-[0.15rem] mr-2" />
+<span role="navigation" aria-labelledby="details-back-button" aria-label="Go back"><ng-icon [svg]="featherArrowLeft" class="relative top-[0.15rem] mr-2"  />
 
-  <span>{{ 'general.back' | translate }}</span>
+  {{ 'general.back' | translate }}</span>
 </button>

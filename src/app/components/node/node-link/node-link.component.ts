@@ -37,7 +37,6 @@ import {
 import { NodeLabelComponent } from '../node-label/node-label.component';
 import { FilterType } from '../../../models/filter.model';
 import { SearchService } from '../../../services/search/search.service';
-import { DrawerService } from '../../../services/drawer.service';
 import { UrlService } from '../../../services/url.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { DetailsService } from '../../../services/details.service';
@@ -86,7 +85,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     public filters: FilterService,
     public search: SearchService,
     public urlService: UrlService,
-    private drawer: DrawerService,
     public scroll: ScrollService,
     public details: DetailsService,
   ) {}
@@ -116,11 +114,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
       return;
     }
     this.isInternalUrl = this.processedUrl.startsWith('/');
-  }
-
-  openDrawer(processedUrl: any): void {
-    const dynamicContent = [processedUrl]; // Dynamic content here
-    this.drawer.setDrawerItems(dynamicContent);
   }
 
   async processUrl() {

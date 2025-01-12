@@ -34,6 +34,7 @@ export class NodeImagesComponent
   @Input() imageUrls?: string[];
   @Input() shownInTableCell = true;
   @Input() useViewer = true;
+  @Input() imageLabel?: string;
 
   processedImageUrls: string[] = [];
 
@@ -133,16 +134,7 @@ export class NodeImagesComponent
       this.imageUrls,
       false,
     );
-    // this.processedImageUrls = [
-    //   'https://placehold.co/600x400/EEE/31343C',
-    //   'https://placehold.co/600x400/EEE/red',
-    //   'https://placehold.co/600x400/EEE/blue',
-    //   'https://placehold.co/600x400/EEE/green',
-    //   'https://placehold.co/600x400/EEE/31343C',
-    //   'https://placehold.co/600x400/EEE/red',
-    //   'https://placehold.co/600x400/EEE/blue',
-    //   'https://placehold.co/600x400/EEE/green',
-    // ];
+
     this.initImageViewer(this.processedImageUrls);
   }
 

@@ -4,6 +4,9 @@
     settings.showingFilterPanelOnSide() ? 'lg:gap-1' : 'lg:flex-row lg:gap-2'
   ]"
   *ngIf="filters.options.value"
+  role="search"
+  aria-labelledby="filter-group"
+  aria-label="Filters"
 >
   <!-- Collapsible Parent Section -->
   <div class="bg-background">
@@ -16,6 +19,7 @@
           *ngIf="filters.enabled.value.length > 0"
           class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
           (click)="clearFilters()"
+          aria-label="Clear filters"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +43,9 @@
         <button
           class="focus:outline-none"
           (click)="uix.filterGroupExpanded = !uix.filterGroupExpanded"
+          aria-label="Toggle filter group"
+          role="region"
+          aria-labelledby="filter-group"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +54,8 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            role="region"
+            aria-labelledby="filter-group"
           >
             <path
               stroke-linecap="round"
@@ -68,13 +77,15 @@
           <div
             class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
           >
+         
             <input
               type="checkbox"
               name="filter-accordion"
               [(ngModel)]="ui.accordionExpandedStates[filterId]"
+              [id]="'Filter by ' + filters.getOptionById(filterId).label"
             />
             <div class="collapse-title">
-              <span>{{ filters.getOptionById(filterId).label }}</span>
+              <label [for]="'Filter by ' + filters.getOptionById(filterId).label" >{{ filters.getOptionById(filterId).label }} </label>
               <app-filter-count
                 [count]="
                   filters.getOptionEnabledFiltersCount(

@@ -1,14 +1,16 @@
 <div
   class="bg-neutral py-3 px-6 text-white inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600"
   [ngClass]="[getScaleClasses(), getPositionClasses(), getRoundedClasses()]"
+  role="banner"
+  aria-labelledby="main-header"
 >
-  <button class="text-left inline-flex items-center" [class.mr-3]="settings.showTitle || settings.showButton" (click)="onButtonClicked('')">
+  <button class="text-left inline-flex items-center" [class.mr-3]="settings.showTitle || settings.showButton" (click)="onButtonClicked('')" role="navigation" aria-labelledby="header-home-button">
     <img *ngIf="settings.showLogo" [src]="settings.logoPath" alt="Logo" [class.mr-3]="settings.showTitle" class="h-8">
     <div *ngIf="settings.showTitle">
-      <div
+      <h1><div
         class="font-semibold"
         [innerHTML]="(settings.titleType === 'short' ? 'general.title-short' : 'general.title-full') | translate"
-      ></div>
+      ></div></h1>
     </div>
   </button>
 
@@ -22,6 +24,8 @@
           ? 'homescreen.go-to-search'
           : 'homescreen.go-to-colofon'
       | translate "
+      role="navigation"
+      aria-labelledby="header-colofon-button"
     >
       <span class="text-lg sm:text-2xl font-light" >
         <ng-icon

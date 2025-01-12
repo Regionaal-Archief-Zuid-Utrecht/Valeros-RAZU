@@ -11,7 +11,7 @@
 >
   <img
     [src]="this.processedImageUrls[0]"
-    alt="Object image"
+    [alt]="this.imageLabel ?? 'Unknown image'"
     class="w-full h-full object-cover"
     (error)="onImageLoadError($event)"
   />
