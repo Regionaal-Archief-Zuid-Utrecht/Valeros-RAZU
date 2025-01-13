@@ -11,3 +11,7 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.badge {
+  border-radius: var(--rounded-badge, 0.375rem) !important;
+}

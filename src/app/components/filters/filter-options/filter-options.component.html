@@ -73,7 +73,7 @@
     >
       <!-- Existing Filters Logic -->
       <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
-        <div class="w-full sm:flex-1" *ngIf="filters.shouldShow(filterId)">
+        <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
           <div
             class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
           >

@@ -12,7 +12,8 @@ module.exports = {
       },
       colors: {
         'background': '#E5E4E2',
-    },},
+    },
+  },
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -41,10 +42,9 @@ module.exports = {
           "primary-content": "white", // White text to maintain contrast
           background: "#f2f2f2",
           search_background: "#f2f2f2", // Very light gray for the background
-          "--rounded-box": "1rem",
-          "--rounded-btn": "1rem",
-          "--rounded-badge": "1rem",
-          // black: "#000000",
+          "--rounded-box": "0.375rem",
+          "--rounded-btn": "0.375rem",
+          "--rounded-badge": "0.375rem",
         },
       },
     ],
