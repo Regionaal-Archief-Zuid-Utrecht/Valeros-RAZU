@@ -45,6 +45,31 @@ module.exports = {
           "--rounded-btn": "1rem",
           "--rounded-badge": "1rem",
           // black: "#000000",
+          
+          // // ACCEPT:
+          // primary: "#2e7d32", // Dark green for primary elements
+          // neutral: "#66bb6a", // Medium green for neutral elements
+          // accent: "#a5d6a7", // Light green for highlighting search results
+          // secondary: "#388e3c", // A slightly darker green for secondary elements
+          // "primary-content": "white", // White text to maintain contrast
+          // background: "#e8f5e9", // Very light green for the background
+          // search_background: "#e8f5e9", // Match background color
+          // "--rounded-box": "1rem",
+          // "--rounded-btn": "1rem",
+          // "--rounded-badge": "1rem",
+
+          // // TEST:
+          // primary: "#1565c0", // Dark blue for primary elements
+          // neutral: "#42a5f5", // Medium blue for neutral elements
+          // accent: "#90caf9", // Light blue for highlighting search results
+          // secondary: "#1976d2", // A slightly darker blue for secondary elements
+          // "primary-content": "white", // White text to maintain contrast
+          // background: "#e3f2fd", // Very light blue for the background
+          // search_background: "#e3f2fd", // Match background color
+          // "--rounded-box": "1rem",
+          // "--rounded-btn": "1rem",
+          // "--rounded-badge": "1rem",
+
         },
       },
     ],
