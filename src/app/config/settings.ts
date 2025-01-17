@@ -144,7 +144,7 @@ export const Settings = {
         },
         // This is how an enriched endpoint would look like
         {
-          elastic: 'https://viewer-test.razu.nl/sura/_search',
+          elastic: 'https://ontwikkel.viewer.razu.nl/sura/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
       ],
@@ -550,7 +550,7 @@ export const Settings = {
   },
   razu: {
     sura: {
-      url: 'https://viewer-test.razu.nl/sura/process-url',
+      url: 'https://ontwikkel.viewer.razu.nl/sura/process-url',
       matchUrlsSubstring: 'opslag.razu.nl',
     },
   },
