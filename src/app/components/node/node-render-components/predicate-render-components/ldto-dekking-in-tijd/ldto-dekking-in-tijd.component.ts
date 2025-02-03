@@ -3,13 +3,13 @@ import { HopLinkComponent } from '../hop-components/hop-link/hop-link.component'
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-mdto-dekking-in-tijd',
+  selector: 'app-ldto-dekking-in-tijd',
   standalone: true,
   imports: [HopLinkComponent, NgIf],
-  templateUrl: './mdto-dekking-in-tijd.component.html',
-  styleUrl: './mdto-dekking-in-tijd.component.scss',
+  templateUrl: './ldto-dekking-in-tijd.component.html',
+  styleUrl: './ldto-dekking-in-tijd.component.scss',
 })
-export class MdtoDekkingInTijdComponent {
+export class LdtoDekkingInTijdComponent {
   hasBeginDate = false;
   hasEndDate = false;
   hasType = false;

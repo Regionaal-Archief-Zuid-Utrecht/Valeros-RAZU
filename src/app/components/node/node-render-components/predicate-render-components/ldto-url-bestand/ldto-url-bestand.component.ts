@@ -16,13 +16,13 @@ import {
 import { EndpointService } from '../../../../../services/endpoint.service';
 
 @Component({
-  selector: 'app-mdto-url-bestand',
+  selector: 'app-ldto-url-bestand',
   standalone: true,
   imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
-  templateUrl: './mdto-url-bestand.component.html',
-  styleUrl: './mdto-url-bestand.component.scss',
+  templateUrl: './ldto-url-bestand.component.html',
+  styleUrl: './ldto-url-bestand.component.scss',
 })
-export class MdtoUrlBestandComponent implements OnInit {
+export class LdtoUrlBestandComponent implements OnInit {
   @Input() nodeId?: string;
   @Input() fileUrl?: string;
   fileFormats?: string[];
@@ -46,7 +46,7 @@ export class MdtoUrlBestandComponent implements OnInit {
     }
 
     const queryTemplate = `
-${wrapWithAngleBrackets(this.nodeId)} <http://www.nationaalarchief.nl/mdto#bestandsformaat> ?b .
+${wrapWithAngleBrackets(this.nodeId)} <https://data.razu.nl/def/ldto/bestandsformaat> ?b .
 ?b <http://schema.org/identifier> ?bestandsformaat .`;
 
     const endpointUrls: EndpointUrlsModel[] =

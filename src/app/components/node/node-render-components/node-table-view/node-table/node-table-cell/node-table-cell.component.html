@@ -48,24 +48,24 @@
           "
         />
 
-        <app-mdto-dekking-in-tijd
-          *ngIf="shouldRenderComponentIds.includes('mdto-dekking-in-tijd')"
+        <app-ldto-dekking-in-tijd
+          *ngIf="shouldRenderComponentIds.includes('ldto-dekking-in-tijd')"
           [id]="objValue"
         />
 
-        <app-mdto-url-bestand
-          *ngIf="shouldRenderComponentIds.includes('mdto-url-bestand')"
+        <app-ldto-url-bestand
+          *ngIf="shouldRenderComponentIds.includes('ldto-url-bestand')"
           [nodeId]="nodes.getId(node)"
           [fileUrl]="objValue"
         />
 
-        <app-mdto-event
-          *ngIf="shouldRenderComponentIds.includes('mdto-event')"
+        <app-ldto-event
+          *ngIf="shouldRenderComponentIds.includes('ldto-event')"
           [id]="objValue"
         />
 
-        <app-mdto-heeft-representatie
-          *ngIf="shouldRenderComponentIds.includes('mdto-heeft-representatie')"
+        <app-ldto-heeft-representatie
+          *ngIf="shouldRenderComponentIds.includes('ldto-heeft-representatie')"
           [id]="objValue"
           [settings]="
             renderComponent.getSettingByKey(
@@ -78,8 +78,8 @@
           "
         />
 
-        <app-mdto-omvang
-          *ngIf="shouldRenderComponentIds.includes('mdto-omvang')"
+        <app-ldto-omvang
+          *ngIf="shouldRenderComponentIds.includes('ldto-omvang')"
           [bytesStr]="objValue"
         />
 

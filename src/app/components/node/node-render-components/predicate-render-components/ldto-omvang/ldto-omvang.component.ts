@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { humanFileSize } from '../../../../../helpers/util.helper';
 
 @Component({
-  selector: 'app-mdto-omvang',
+  selector: 'app-ldto-omvang',
   standalone: true,
   imports: [],
-  templateUrl: './mdto-omvang.component.html',
-  styleUrl: './mdto-omvang.component.scss',
+  templateUrl: './ldto-omvang.component.html',
+  styleUrl: './ldto-omvang.component.scss',
 })
-export class MdtoOmvangComponent implements OnInit {
+export class LdtoOmvangComponent implements OnInit {
   @Input() bytesStr?: string;
   humanReadableBytesStr: string = '';
 

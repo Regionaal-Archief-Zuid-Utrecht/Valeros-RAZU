@@ -2,7 +2,7 @@
 <app-hop-link
   [id]="id"
   [settings]="{
-    preds: ['http://www.nationaalarchief.nl/mdto#eventType'],
+    preds: ['https://data.razu.nl/def/ldto/eventType'],
     showHops: false
   }"
 />
@@ -11,7 +11,7 @@
   (<app-hop-link
     [id]="id"
     [settings]="{
-      preds: ['http://www.nationaalarchief.nl/mdto#eventTijd'],
+      preds: ['https://data.razu.nl/def/ldto/eventTijd'],
       showHops: false
     }"
     (hopObjIdsRetrieved)="this.hasTime = $event.length > 0"
