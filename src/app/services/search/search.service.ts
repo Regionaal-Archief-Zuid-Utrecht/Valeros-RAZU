@@ -277,10 +277,7 @@ export class SearchService {
 
       // Now update filter options with all nodes from counting response
       if (clearFilters) {
-        await this.filters.updateFilterOptionValues(
-          this.queryStr,
-          countingNodes,
-        );
+        await this.filters.updateFilterOptionValues(this.queryStr);
       }
     } catch (error) {
       console.error('Error searching:', error);

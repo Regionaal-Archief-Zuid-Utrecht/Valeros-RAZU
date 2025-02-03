@@ -164,123 +164,58 @@ export class FilterService {
   // new helper function
   private _getFieldDocCountsFromNodes(
     nodes: any[],
-    filterOptions: FilterOptionsModel
+    filterOptions: FilterOptionsModel,
   ): FieldDocCountsModel {
     const docCountsByFieldId: FieldDocCountsModel = {};
-  
+
     for (const node of nodes) {
       for (const [field, values] of Object.entries(node)) {
         const filterOption = Object.values(filterOptions).find((option) =>
-          option.fieldIds.includes(field)
+          option.fieldIds.includes(field),
         );
-  
+
         if (filterOption) {
           if (!docCountsByFieldId[field]) {
             docCountsByFieldId[field] = [];
           }
-  
-          for (const valueObj of values as {value: string}[]) {
+
+          for (const valueObj of values as { value: string }[]) {
             docCountsByFieldId[field].push({
               key: valueObj.value,
-              hitIds: [node["@id"]?.[0]?.value || ""], // Extract hit IDs from `@id` field
+              hitIds: [node['@id']?.[0]?.value || ''], // Extract hit IDs from `@id` field
             });
           }
         }
       }
     }
-  
+
     return docCountsByFieldId;
   }
-  
 
-
-  //new
-  async updateFilterOptionValues(query: string, nodes: any[]) {
-    const filterOptions = this.options.value;
-    console.log('NODES', nodes);
-    // Extract filter options directly from the provided `nodes` array
-    const fieldDocCounts: FieldDocCountsModel = this._getFieldDocCountsFromNodes(
-      nodes,
-      filterOptions
-    );
-  
-    for (const [_, filter] of Object.entries(filterOptions)) {
-      const filterValuesMap = new Map<string, string[]>();
-  
-      filter.fieldIds.forEach((fieldId) => {
-        const docCountsForField = fieldDocCounts[fieldId] ?? [];
-        const docCountsToShow = docCountsForField.filter((d) => {
-          const valueId = d.key;
-          const shouldHideValueId = filter.hideValueIds?.includes(valueId);
-          if (!filter.showOnlyValueIds) {
-            return !shouldHideValueId;
-          }
-          return filter.showOnlyValueIds.includes(valueId);
-        });
-  
-        docCountsToShow.forEach((d) => {
-          const id = d.key;
-          const hitIds = d.hitIds;
-  
-          if (filterValuesMap.has(id)) {
-            filterValuesMap.set(id, filterValuesMap.get(id)!.concat(hitIds));
-          } else {
-            filterValuesMap.set(id, hitIds);
-          }
-        });
-      });
-  
-      const filterValues: FilterOptionValueModel[] = Array.from(
-        filterValuesMap
-      ).map(([id, filterHitIds]) => ({
-        ids: [id],
-        filterHitIds: filterHitIds,
-      }));
-  
-      const clusteredFilterValues =
-        this.clusters.clusterFilterOptionValues(filterValues);
-      filter.values = clusteredFilterValues;
-    }
-  
-    this.options.next(filterOptions);
-  }
-  
-
-// old
-  // async updateFilterOptionValues(query: string,) {
-  //   const allFilterFieldIds: string[] = Object.values(
-  //     this.options.value,
-  //   ).flatMap((filterOption) => filterOption.fieldIds);
-
-  //   const responses: SearchResponse<any>[] =
-  //     await this.elastic.getFilterOptions(
-  //       query,
-  //       allFilterFieldIds,
-  //       this.enabled.value,
-  //       this.onlyShowResultsWithImages.value,
-  //     );
-  //   const docCounts: FieldDocCountsModel =
-  //     this._getFieldDocCountsFromResponses(responses);
-
+  // Alternative without elastic requests (get directly from node results)
+  // async updateFilterOptionValues(query: string, nodes: any[]) {
   //   const filterOptions = this.options.value;
+  //   console.log('NODES', nodes);
+  //   // Extract filter options directly from the provided `nodes` array
+  //   const fieldDocCounts: FieldDocCountsModel = this._getFieldDocCountsFromNodes(
+  //     nodes,
+  //     filterOptions
+  //   );
+
   //   for (const [_, filter] of Object.entries(filterOptions)) {
   //     const filterValuesMap = new Map<string, string[]>();
 
   //     filter.fieldIds.forEach((fieldId) => {
-  //       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
-  //       const docCountsForField: DocCountModel[] =
-  //         docCounts?.[elasticFieldId] ?? [];
-  //       const docCountsToShow: DocCountModel[] = docCountsForField.filter(
-  //         (d) => {
-  //           const valueId = d.key;
-  //           const shouldHideValueId = filter.hideValueIds?.includes(valueId);
-  //           if (!filter.showOnlyValueIds) {
-  //             return !shouldHideValueId;
-  //           }
+  //       const docCountsForField = fieldDocCounts[fieldId] ?? [];
+  //       const docCountsToShow = docCountsForField.filter((d) => {
+  //         const valueId = d.key;
+  //         const shouldHideValueId = filter.hideValueIds?.includes(valueId);
+  //         if (!filter.showOnlyValueIds) {
+  //           return !shouldHideValueId;
+  //         }
+  //         return filter.showOnlyValueIds.includes(valueId);
+  //       });
 
-  //           return filter.showOnlyValueIds.includes(valueId);
-  //         },
-  //       );
   //       docCountsToShow.forEach((d) => {
   //         const id = d.key;
   //         const hitIds = d.hitIds;
@@ -292,8 +227,9 @@ export class FilterService {
   //         }
   //       });
   //     });
+
   //     const filterValues: FilterOptionValueModel[] = Array.from(
-  //       filterValuesMap,
+  //       filterValuesMap
   //     ).map(([id, filterHitIds]) => ({
   //       ids: [id],
   //       filterHitIds: filterHitIds,
@@ -303,8 +239,68 @@ export class FilterService {
   //       this.clusters.clusterFilterOptionValues(filterValues);
   //     filter.values = clusteredFilterValues;
   //   }
+
   //   this.options.next(filterOptions);
   // }
+
+  async updateFilterOptionValues(query: string) {
+    const allFilterFieldIds: string[] = Object.values(
+      this.options.value,
+    ).flatMap((filterOption) => filterOption.fieldIds);
+
+    const responses: SearchResponse<any>[] =
+      await this.elastic.getFilterOptions(
+        query,
+        allFilterFieldIds,
+        this.enabled.value,
+        this.onlyShowResultsWithImages.value,
+      );
+    const docCounts: FieldDocCountsModel =
+      this._getFieldDocCountsFromResponses(responses);
+
+    const filterOptions = this.options.value;
+    for (const [_, filter] of Object.entries(filterOptions)) {
+      const filterValuesMap = new Map<string, string[]>();
+
+      filter.fieldIds.forEach((fieldId) => {
+        const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+        const docCountsForField: DocCountModel[] =
+          docCounts?.[elasticFieldId] ?? [];
+        const docCountsToShow: DocCountModel[] = docCountsForField.filter(
+          (d) => {
+            const valueId = d.key;
+            const shouldHideValueId = filter.hideValueIds?.includes(valueId);
+            if (!filter.showOnlyValueIds) {
+              return !shouldHideValueId;
+            }
+
+            return filter.showOnlyValueIds.includes(valueId);
+          },
+        );
+        docCountsToShow.forEach((d) => {
+          const id = d.key;
+          const hitIds = d.hitIds;
+
+          if (filterValuesMap.has(id)) {
+            filterValuesMap.set(id, filterValuesMap.get(id)!.concat(hitIds));
+          } else {
+            filterValuesMap.set(id, hitIds);
+          }
+        });
+      });
+      const filterValues: FilterOptionValueModel[] = Array.from(
+        filterValuesMap,
+      ).map(([id, filterHitIds]) => ({
+        ids: [id],
+        filterHitIds: filterHitIds,
+      }));
+
+      const clusteredFilterValues =
+        this.clusters.clusterFilterOptionValues(filterValues);
+      filter.values = clusteredFilterValues;
+    }
+    this.options.next(filterOptions);
+  }
 
   toggleMultiple(filters: FilterModel[]) {
     const updatedEnabledFilters = this.enabled.value;
