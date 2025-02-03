@@ -18,6 +18,7 @@ import { ElasticSortEntryModel } from '../models/elastic/elastic-sort.model';
 import { SortService } from './sort.service';
 import { FilterOptionsIdsModel } from '../models/filter-option.model';
 import { ElasticFullTextMatchQuery } from '../models/elastic/elastic-full-text-match-query.type';
+import { ElasticMatchAllQuery } from '../models/elastic/elastic-match-all-query.type';
 
 @Injectable({
   providedIn: 'root',
@@ -271,6 +272,8 @@ export class ElasticService {
     from?: number,
     size?: number,
   ): any {
+    query = query.trim();
+
     const queryData: any = {
       from: from,
       size: size,
@@ -294,11 +297,14 @@ export class ElasticService {
       | ElasticQuery
       | ElasticFullTextMatchQuery
       | ElasticShouldQueries
+      | ElasticMatchAllQuery
     )[] = this._getFieldOrValueFilterQueries(searchFilters);
 
     if (query) {
       const combinedQuery = this._getCombinedSearchQuery(query);
       fieldOrValueFilterQueries.push(combinedQuery);
+    } else {
+      fieldOrValueFilterQueries.push({ match_all: {} });
     }
 
     const fieldAndValueFilterQueries =
@@ -355,6 +361,7 @@ export class ElasticService {
       | ElasticFullTextMatchQuery
       | ElasticShouldQueries
       | ElasticMatchQueries
+      | ElasticMatchAllQuery
     )[] = [];
     for (const [id, boostSetting] of Object.entries(boostSettings)) {
       const boostFilters = this.data.convertFiltersFromIdsFormat({
