@@ -216,6 +216,25 @@ export const Settings = {
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
+      classificatie: {
+        label: 'Classificatie',
+        fieldIds: ['classificatie'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
+      licenties: {
+        label: 'Licenties',
+        fieldIds: ['licenties'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
+      wettelijke_beperkingen_openbaarheid: {
+        label: 'Wettelijke beperkingen openbaarheid',
+        fieldIds: ['wettelijke_beperkingen_openbaarheid'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
+
       // type: {
       //   label: 'Soort',
       //   fieldIds: ['classificatie'],
