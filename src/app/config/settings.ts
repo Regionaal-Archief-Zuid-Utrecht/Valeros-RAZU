@@ -11,6 +11,7 @@ export const imagePredicates: string[] = [
   'http://xmlns.com/foaf/0.1/depiction',
   // 'https://schema.org/thumbnail',
   'https://schema.org/image',
+  'bestand_url',
 ];
 
 export const hasImageFilters: FilterModel[] = imagePredicates.map(
