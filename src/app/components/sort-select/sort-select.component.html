@@ -1,17 +1,21 @@
-
 <ng-container>
-<span role="search" aria-label="Sort results" aria-labelledby="sort-results">
-
-  <select class="select w-full max-w-xs select-ghost bg-white text-neutral shadow hover:shadow-lg transition-shadow duration-200" role="listbox" aria-labelledby="sort-select" aria-label="Sort dropdown">
-  <option
-    *ngFor="let sortOptionId of Object.keys(Settings.sorting.options)"
-    [value]="sortOptionId"
-    [selected]="sortOptionId === sorting.current.value?.id"
-    (change)="onChange(sortOptionId)"
+  <span role="search" aria-label="Sort results" aria-labelledby="sort-results">
+    <select
+      class="select w-full max-w-xs select-ghost bg-white text-neutral shadow hover:shadow-lg transition-shadow duration-200"
+      role="listbox"
+      aria-labelledby="sort-select"
+      aria-label="Sort dropdown"
+    >
+      <option
+        *ngFor="let sortOptionId of Object.keys(Settings.sorting.options)"
+        [value]="sortOptionId"
+        [selected]="sortOptionId === sorting.current.value?.id"
+        (change)="onChange(sortOptionId)"
+      >
+        {{ sorting.getById(sortOptionId)?.label }}
+      </option>
+    </select></span
   >
-    {{ sorting.getById(sortOptionId)?.label }}
-  </option>
-</select></span>
   <!-- <div class="collapse collapse-arrow join-item bg-white text-neutral shadow hover:shadow-lg transition-shadow duration-200">
   <input
     type="checkbox"
@@ -39,8 +43,4 @@
     </div>
   </div>
 </div> -->
-
-
-
-
 </ng-container>

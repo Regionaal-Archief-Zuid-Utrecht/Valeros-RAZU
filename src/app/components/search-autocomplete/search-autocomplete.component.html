@@ -5,7 +5,7 @@
 <ng-container *ngIf="!autocomplete.isLoading">
   <div *ngIf="autocomplete.hasOptionsOfType(AutocompleteOptionType.SearchTerm)">
     <div class="divider">
-      <span> {{ 'search-interface.search-terms' | translate }}</span>
+      <span> {{ "search-interface.search-terms" | translate }}</span>
     </div>
     <li
       *ngFor="
@@ -23,7 +23,7 @@
 
   <div *ngIf="autocomplete.hasOptionsOfType(AutocompleteOptionType.Node)">
     <div class="divider">
-      <span> {{ 'search-interface.search-results' | translate }}</span>
+      <span> {{ "search-interface.search-results" | translate }}</span>
     </div>
     <li
       *ngFor="

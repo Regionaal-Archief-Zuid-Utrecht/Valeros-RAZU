@@ -7,7 +7,7 @@ import { NodeModel } from '../../../models/node.model';
 import { RouterLink } from '@angular/router';
 import { NodeService } from '../../../services/node.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';  
+import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';
 
 @Component({
   selector: 'app-node-details-button',

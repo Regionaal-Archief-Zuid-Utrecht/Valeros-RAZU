@@ -1,13 +1,17 @@
-<div class="flex justify-center"><button
-  class="btn btn-primary shadow hover:shadow-lg transition-shadow duration-200"
-  (click)="loadMore()"
-  [disabled]="search.isLoading.value"
-  *ngIf="search.hasMoreResultsToLoad"
-  role="form" aria-label="Load more results" aria-labelledby="load-more-results-main-search"
->
-  <span
-    class="loading loading-spinner loading-xs"
-    *ngIf="search.isLoading.value"
-  ></span>
-  {{ "search-interface.load-more-results" | translate }}
-</button></div>
+<div class="flex justify-center">
+  <button
+    class="btn btn-primary shadow hover:shadow-lg transition-shadow duration-200"
+    (click)="loadMore()"
+    [disabled]="search.isLoading.value"
+    *ngIf="search.hasMoreResultsToLoad"
+    role="form"
+    aria-label="Load more results"
+    aria-labelledby="load-more-results-main-search"
+  >
+    <span
+      class="loading loading-spinner loading-xs"
+      *ngIf="search.isLoading.value"
+    ></span>
+    {{ "search-interface.load-more-results" | translate }}
+  </button>
+</div>

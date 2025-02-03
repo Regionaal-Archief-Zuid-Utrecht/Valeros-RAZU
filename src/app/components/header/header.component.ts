@@ -37,7 +37,7 @@ export class HeaderComponent {
     public router: Router,
     public url: UrlService,
     public translate: TranslateService,
-    private headerPosition: HeaderPositionService
+    private headerPosition: HeaderPositionService,
   ) {}
 
   // Navigation methods
@@ -54,7 +54,7 @@ export class HeaderComponent {
   // Styling methods
   getScaleClasses(): string {
     const baseClasses = ['w-fit']; // Always add width class
-    
+
     // Add text size classes based on scale
     switch (this.settings.scale) {
       case 'small':
@@ -91,11 +91,11 @@ export class HeaderComponent {
   getContentGap(): string {
     switch (this.settings.gapBeforeContent) {
       case 'small':
-        return 'h-12'; // 3rem 
+        return 'h-12'; // 3rem
       case 'large':
-        return 'h-20'; // 5rem 
+        return 'h-20'; // 5rem
       default:
-        return 'h-16'; // 4rem 
+        return 'h-16'; // 4rem
     }
   }
 
@@ -103,7 +103,7 @@ export class HeaderComponent {
     return this.headerPosition.getPlaceholderClasses(
       this.settings,
       this.getHeaderHeight(),
-      this.getContentGap()
+      this.getContentGap(),
     );
   }
 

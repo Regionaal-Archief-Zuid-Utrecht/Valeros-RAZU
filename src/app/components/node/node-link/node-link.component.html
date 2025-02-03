@@ -2,7 +2,8 @@
   <!-- class="inline" -->
   <float-ui-content #popupContent class="hidden">
     <a class="btn btn-sm mr-2 !font-sans" [href]="processedUrl" target="_blank">
-      <ng-icon [svg]="featherExternalLink" /> {{ "records-interface.open-link" | translate }} Open link
+      <ng-icon [svg]="featherExternalLink" />
+      {{ "records-interface.open-link" | translate }} Open link
     </a>
 
     <a
@@ -11,9 +12,9 @@
       [queryParams]="{ q: wrapWithDoubleQuotes(processedUrl) }"
       target="_blank"
     >
-      <ng-icon [svg]="featherSearch" /> {{ "records-interface.search" | translate }}
+      <ng-icon [svg]="featherSearch" />
+      {{ "records-interface.search" | translate }}
     </a>
-
 
     <!--    TODO: Depending on where this is presented, determine if the filter should be field or value-->
     <!--    <button-->

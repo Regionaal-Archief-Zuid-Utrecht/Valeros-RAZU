@@ -15,7 +15,14 @@ import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 @Component({
   selector: 'app-node-direction-table',
   standalone: true,
-  imports: [NgForOf, NgClass, NodeTableCellComponent, NgIf, NodeLinkComponent, TranslatePipe],
+  imports: [
+    NgForOf,
+    NgClass,
+    NodeTableCellComponent,
+    NgIf,
+    NodeLinkComponent,
+    TranslatePipe,
+  ],
   templateUrl: './node-direction-table.component.html',
   styleUrl: './node-direction-table.component.scss',
 })

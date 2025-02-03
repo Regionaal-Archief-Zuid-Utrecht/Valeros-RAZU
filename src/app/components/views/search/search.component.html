@@ -29,7 +29,7 @@
         : '',
       Settings.filtering.filterPanelLocation == FilterPanelLocation.Right
         ? 'lg:flex-row-reverse'
-        : ''
+        : '',
     ]"
   >
     <div
@@ -39,7 +39,7 @@
         shouldShowHomeIntro || details.showing.value ? 'hidden' : '',
         settings.showingFilterPanelOnSide()
           ? 'w-full lg:w-1/4 lg:overflow-y-auto'
-          : ''
+          : '',
       ]"
     >
       <app-filter-options />
@@ -49,20 +49,21 @@
       class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
       [ngClass]="[
         shouldShowHomeIntro ? 'hidden' : '',
-        settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : ''
+        settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '',
       ]"
       #scrollContainer
     >
       <app-details *ngIf="details.showing.value" />
 
-      <div class="flex flex-row sticky -top-2 bg-background z-10 p-2 " *ngIf="!details.showing.value">
+      <div
+        class="flex flex-row sticky -top-2 bg-background z-10 p-2"
+        *ngIf="!details.showing.value"
+      >
         <app-search-hits-counter class="w-1/2 lg:w-3/4" />
         <app-sort-select class="w-1/2 lg:w-1/4 mb-2" />
       </div>
 
       <div *ngIf="!details.showing.value" class="overflow-hidden">
-        
-
         <!--    TODO: Bring back masonry grid-->
         <!--    <app-nodes-masonry-grid-->
         <!--      [nodes]="search.results.value.nodes-->

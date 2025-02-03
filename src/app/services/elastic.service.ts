@@ -74,7 +74,12 @@ export class ElasticService {
   private _getFieldOrValueFilterQueries(
     filters: FilterModel[],
     boost?: number,
-  ): (ElasticFieldExistsQuery | ElasticQuery | ElasticFullTextMatchQuery | ElasticShouldQueries)[] {
+  ): (
+    | ElasticFieldExistsQuery
+    | ElasticQuery
+    | ElasticFullTextMatchQuery
+    | ElasticShouldQueries
+  )[] {
     const fieldOrValueFilters = filters.filter(
       (filter) =>
         filter.type === FilterType.Value || filter.type === FilterType.Field,

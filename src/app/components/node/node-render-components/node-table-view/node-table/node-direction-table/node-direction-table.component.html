@@ -7,7 +7,8 @@
     "
   >
     <span [ngClass]="[smallFontSize ? 'text-sm' : '']"
-      >{{ "records-interface.objects-that-point-to" | translate }} <app-node-link [url]="nodes.getId(node)"
+      >{{ "records-interface.objects-that-point-to" | translate }}
+      <app-node-link [url]="nodes.getId(node)"
     /></span>
   </div>
 

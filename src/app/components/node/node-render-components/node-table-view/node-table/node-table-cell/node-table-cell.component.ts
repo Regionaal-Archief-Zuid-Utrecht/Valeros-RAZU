@@ -19,8 +19,8 @@ import { LdtoUrlBestandComponent } from '../../../predicate-render-components/ld
 import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
 import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
 import { LdtoOmvangComponent } from '../../../predicate-render-components/ldto-omvang/ldto-omvang.component';
-import { LdtoEventComponent } from "../../../predicate-render-components/ldto-event/ldto-event.component";
-import { LdtoHeeftRepresentatieComponent } from "../../../predicate-render-components/ldto-heeft-representatie/ldto-heeft-representatie.component";
+import { LdtoEventComponent } from '../../../predicate-render-components/ldto-event/ldto-event.component';
+import { LdtoHeeftRepresentatieComponent } from '../../../predicate-render-components/ldto-heeft-representatie/ldto-heeft-representatie.component';
 
 export enum TableCellShowOptions {
   Pred,
@@ -47,8 +47,8 @@ export enum TableCellShowOptions {
     RicoIdentifierComponent,
     LdtoOmvangComponent,
     LdtoEventComponent,
-    LdtoHeeftRepresentatieComponent
-],
+    LdtoHeeftRepresentatieComponent,
+  ],
   templateUrl: './node-table-cell.component.html',
   styleUrl: './node-table-cell.component.scss',
 })

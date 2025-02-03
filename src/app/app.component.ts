@@ -5,7 +5,6 @@ import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,14 +15,15 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent {
   title = 'view-a-LOD';
 
-  constructor(private titleService: Title,
-    private translate: TranslateService) {
+  constructor(
+    private titleService: Title,
+    private translate: TranslateService,
+  ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
     this.translate.use('nl');
     this.translate.get('general.page-title').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
-
   }
 }

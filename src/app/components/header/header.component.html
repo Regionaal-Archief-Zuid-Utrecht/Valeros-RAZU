@@ -4,30 +4,56 @@
   role="banner"
   aria-labelledby="main-header"
 >
-  <button class="text-left inline-flex items-center" [class.mr-3]="settings.showTitle || settings.showButton" (click)="onButtonClicked('')" role="navigation" aria-labelledby="header-home-button">
-    <img *ngIf="settings.showLogo" [src]="settings.logoPath" alt="Logo" [class.mr-3]="settings.showTitle" class="h-8">
+  <button
+    class="text-left inline-flex items-center"
+    [class.mr-3]="settings.showTitle || settings.showButton"
+    (click)="onButtonClicked('')"
+    role="navigation"
+    aria-labelledby="header-home-button"
+  >
+    <img
+      *ngIf="settings.showLogo"
+      [src]="settings.logoPath"
+      alt="Logo"
+      [class.mr-3]="settings.showTitle"
+      class="h-8"
+    />
     <div *ngIf="settings.showTitle">
-      <h1><div
-        class="font-semibold"
-        [innerHTML]="(settings.titleType === 'short' ? 'general.title-short' : 'general.title-full') | translate"
-      ></div></h1>
+      <h1>
+        <div
+          class="font-semibold"
+          [innerHTML]="
+            (settings.titleType === 'short'
+              ? 'general.title-short'
+              : 'general.title-full'
+            ) | translate
+          "
+        ></div>
+      </h1>
     </div>
   </button>
 
-  <div *ngIf="settings.showButton"> <!--class="flex-grow"-->
+  <div *ngIf="settings.showButton">
+    <!--class="flex-grow"-->
     <button
       class="btn btn-primary btn-xs rounded-full text-center inline-block float-right"
-      [ngClass]="settings.scale === 'small' ? 'w-8 h-8' : settings.scale === 'large' ? 'w-12 h-12' : 'w-9 sm:w-10 h-9 sm:h-10'"
+      [ngClass]="
+        settings.scale === 'small'
+          ? 'w-8 h-8'
+          : settings.scale === 'large'
+            ? 'w-12 h-12'
+            : 'w-9 sm:w-10 h-9 sm:h-10'
+      "
       (click)="onButtonClicked(buttonUrl)"
       [attr.aria-label]="
         view === HeaderView.ShowingColofon
           ? 'homescreen.go-to-search'
-          : 'homescreen.go-to-colofon'
-      | translate "
+          : ('homescreen.go-to-colofon' | translate)
+      "
       role="navigation"
       aria-labelledby="header-colofon-button"
     >
-      <span class="text-lg sm:text-2xl font-light" >
+      <span class="text-lg sm:text-2xl font-light">
         <ng-icon
           [svg]="featherX"
           *ngIf="view === HeaderView.ShowingColofon"

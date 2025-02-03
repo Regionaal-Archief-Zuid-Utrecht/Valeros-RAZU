@@ -1,5 +1,5 @@
 {
-	"general": {
+  "general": {
     "site-holder-full": "Regionaal Archief Zuid-Utrecht",
     "site-holder-short": "RAZU",
     "title-full": "E-depot of the Regional Archives South-Utrecht",
@@ -9,17 +9,17 @@
     "back": "Back"
   },
   "homescreen": {
-		"flavour-text-part-1": "Here you can search trough the combined archives of the municipalities of",
-		"flavour-text-part-2-emphasis": "Bunnik, Houten, Rhenen, Utrechtse Heuvelrug, Vijfheerenlanden en Wijk bij Duurstede",
-		"flavour-text-part-3": ".",
-		"hero-text-part-1": "Welcome to the digital archive of",
-		"hero-text-part-2-emphasis": "South-Utrecht",
-		"hero-text-part-3": "The Utrecht Archives",
+    "flavour-text-part-1": "Here you can search trough the combined archives of the municipalities of",
+    "flavour-text-part-2-emphasis": "Bunnik, Houten, Rhenen, Utrechtse Heuvelrug, Vijfheerenlanden en Wijk bij Duurstede",
+    "flavour-text-part-3": ".",
+    "hero-text-part-1": "Welcome to the digital archive of",
+    "hero-text-part-2-emphasis": "South-Utrecht",
+    "hero-text-part-3": "The Utrecht Archives",
     "go-to-search": "Go to search",
     "go-to-colofon": "Go to colofon",
     "more-info": "More info"
-	},
-  "search-interface" : {
+  },
+  "search-interface": {
     "search": "Search",
     "search-placeholder": "Search",
     "no-results-found": "No results found",
@@ -36,8 +36,8 @@
     "filters_active_singular": "active",
     "filters_active_plural": "active",
     "clear_filters": "Clear filters"
-	},
-  "records-interface" :{
+  },
+  "records-interface": {
     "pointer-to": "pointer to",
     "points-to": "points to",
     "is-part-of": "is part of",

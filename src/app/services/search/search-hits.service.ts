@@ -51,7 +51,8 @@ export class SearchHitsService {
         }
 
         // Add endpointId to the source
-        (hit._source as ElasticNodeModel)['endpointId'] = searchResponse.endpointId;
+        (hit._source as ElasticNodeModel)['endpointId'] =
+          searchResponse.endpointId;
 
         const id = hit._source['@id'];
         if (!id) {
@@ -70,13 +71,22 @@ export class SearchHitsService {
             ...hit._source,
             // Keep track of all endpoints this record came from
             endpointId: Array.isArray((existingHit._source as any).endpointId)
-              ? [...(existingHit._source as any).endpointId, searchResponse.endpointId]
-              : [(existingHit._source as any).endpointId, searchResponse.endpointId],
+              ? [
+                  ...(existingHit._source as any).endpointId,
+                  searchResponse.endpointId,
+                ]
+              : [
+                  (existingHit._source as any).endpointId,
+                  searchResponse.endpointId,
+                ],
           };
 
           existingHit._source = mergedSource;
           // Use the highest score if available
-          existingHit._score = Math.max(existingHit._score ?? 0, hit._score ?? 0);
+          existingHit._score = Math.max(
+            existingHit._score ?? 0,
+            hit._score ?? 0,
+          );
         } else {
           // New ID, just add it to the map
           hitsMap.set(id, hit);

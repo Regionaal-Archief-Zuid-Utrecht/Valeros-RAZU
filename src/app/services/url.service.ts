@@ -54,7 +54,6 @@ export class UrlService {
   }
 
   private async _updateUrlToReflectEndpoints(endpointIds: string[]) {
-
     let endpointsParam: string | null = null;
     if (endpointIds && endpointIds.length > 0) {
       endpointsParam = endpointIds.join(',');
@@ -125,7 +124,6 @@ export class UrlService {
     if (linkToDetails) {
       return this.details.getLinkFromUrl(url);
     }
-
 
     url = url.replaceAll(
       'hetutrechtsarchief.nl/id',

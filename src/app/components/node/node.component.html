@@ -2,10 +2,11 @@
   class="w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
   *ngIf="node"
   [ngClass]="[
-    shouldShowImageNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
+    shouldShowImageNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6',
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
-  role="main" aria-labelledby="search-results"
+  role="main"
+  aria-labelledby="search-results"
   [attr.aria-label]="title"
 >
   <a
@@ -25,9 +26,51 @@
   </a>
 
   <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value">
+    <div
+      [ngClass]="shouldShowImageNextToTable() ? 'p-6' : 'p-0'"
+      class="flex-grow relative"
+    >
+      <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
+        <app-node-link [url]="details.getLink(node)" [label]="title" />
+      </div>
+
+      <div class="w-full sm:px-4 sm:pr-32">
+        <app-node-table-row
+          [label]="'records-interface.part-of' | translate"
+          *ngIf="showParents && parents.length > 0"
+        >
+          <app-node-hierarchy [nodes]="parents" />
+        </app-node-table-row>
+
+        <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
+        <app-node-table-row
+          [label]="'records-interface.type' | translate"
+          *ngIf="showTypes && types.length > 0"
+        >
+          <app-node-types [types]="types" />
+        </app-node-table-row>
+      </div>
+
+      <div class="sm:pr-32">
+        <app-node-renderer [node]="node" />
+      </div>
+
+      <div
+        class="absolute"
+        [ngClass]="[
+          shouldShowImageNextToTable()
+            ? 'right-6 bottom-6'
+            : 'right-0 bottom-0',
+        ]"
+      >
+        <app-node-details-button [node]="node" />
+      </div>
+    </div>
+  </a>
   <div
     [ngClass]="shouldShowImageNextToTable() ? 'p-6' : 'p-0'"
     class="flex-grow relative"
+    *ngIf="details.showing.value"
   >
     <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
       <app-node-link [url]="details.getLink(node)" [label]="title" />
@@ -48,67 +91,27 @@
       >
         <app-node-types [types]="types" />
       </app-node-table-row>
+      <app-node-table-row
+        [label]="'records-interface.organisation' | translate"
+        *ngIf="showOrganization"
+      >
+        <app-node-endpoint [endpointId]="nodes.getEndpointId(node)" />
+      </app-node-table-row>
     </div>
 
     <div class="sm:pr-32">
       <app-node-renderer [node]="node" />
     </div>
 
+    <div class="mt-8 font-mono text-sm">
+      <app-node-permalink-button [node]="node" />
+    </div>
+
     <div
       class="absolute"
       [ngClass]="[
-        shouldShowImageNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
+        shouldShowImageNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
       ]"
-    >
-      <app-node-details-button [node]="node" />
-    </div>
+    ></div>
   </div>
-  </a>
-  <div
-  [ngClass]="shouldShowImageNextToTable() ? 'p-6' : 'p-0'"
-  class="flex-grow relative"
- *ngIf="details.showing.value">
-  <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
-    <app-node-link [url]="details.getLink(node)" [label]="title" />
-  </div>
-
-  <div class="w-full sm:px-4 sm:pr-32">
-    <app-node-table-row
-      [label]="'records-interface.part-of' | translate"
-      *ngIf="showParents && parents.length > 0"
-    >
-      <app-node-hierarchy [nodes]="parents" />
-    </app-node-table-row>
-
-    <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
-    <app-node-table-row
-      [label]="'records-interface.type' | translate"
-      *ngIf="showTypes && types.length > 0"
-    >
-      <app-node-types [types]="types" />
-    </app-node-table-row>
-    <app-node-table-row
-      [label]="'records-interface.organisation' | translate"
-      *ngIf="showOrganization"
-    >
-      <app-node-endpoint [endpointId]="nodes.getEndpointId(node)" />
-    </app-node-table-row>
-  </div>
-
-  <div class="sm:pr-32">
-    <app-node-renderer [node]="node" />
-  </div>
-
-  <div class="mt-8 font-mono text-sm">
-    <app-node-permalink-button [node]="node" />
-  </div>
-
-  <div
-    class="absolute"
-    [ngClass]="[
-      shouldShowImageNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
-    ]"
-  >
-  </div>
-</div>
 </div>

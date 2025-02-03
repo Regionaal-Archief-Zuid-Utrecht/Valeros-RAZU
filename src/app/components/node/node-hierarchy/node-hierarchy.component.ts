@@ -8,12 +8,19 @@ import { SettingsService } from '../../../services/settings.service';
 import { NodeLinkComponent } from '../node-link/node-link.component';
 import { featherChevronRight } from '@ng-icons/feather-icons';
 import { Settings } from '../../../config/settings';
-import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';    
+import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';
 
 @Component({
   selector: 'app-node-hierarchy',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgIcon, NodeLinkComponent, AccessibleIconDirective],
+  imports: [
+    NgForOf,
+    NgIf,
+    NgClass,
+    NgIcon,
+    NodeLinkComponent,
+    AccessibleIconDirective,
+  ],
   templateUrl: './node-hierarchy.component.html',
   styleUrl: './node-hierarchy.component.scss',
 })

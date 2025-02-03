@@ -13,17 +13,23 @@
   <!--  {{ node | json }}-->
 
   <!--  TODO: Show direction here? -->
-  <p class="mt-2" *ngIf="commentIds && commentIds.length > 0">{{ 'records-interface.comment' | translate }}:</p>
+  <p class="mt-2" *ngIf="commentIds && commentIds.length > 0">
+    {{ "records-interface.comment" | translate }}:
+  </p>
   <div *ngFor="let id of commentIds">
     <app-node-link [url]="id" [shouldTruncate]="false"> </app-node-link>
   </div>
 
-  <p class="mt-2" *ngIf="dates && dates.length > 0">{{ 'records-interface.period' | translate }}:</p>
+  <p class="mt-2" *ngIf="dates && dates.length > 0">
+    {{ "records-interface.period" | translate }}:
+  </p>
   <div *ngFor="let id of dates">
     <app-node-link [url]="id" [shouldTruncate]="false"> </app-node-link>
   </div>
 
-  <p class="mt-2" *ngIf="creators && creators.length > 0">{{ 'records-interface.maker' | translate }}:</p>
+  <p class="mt-2" *ngIf="creators && creators.length > 0">
+    {{ "records-interface.maker" | translate }}:
+  </p>
   <div *ngFor="let id of creators">
     <app-node-link [url]="id" [shouldTruncate]="false"></app-node-link>
   </div>

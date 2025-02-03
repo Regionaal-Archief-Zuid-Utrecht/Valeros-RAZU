@@ -23,7 +23,7 @@ export class EndpointService {
     this._initUpdateEndpointsOnUrlChange();
   }
 
-    getEndpointUrls(endpointId: string): EndpointUrlsModel[] | null {
+  getEndpointUrls(endpointId: string): EndpointUrlsModel[] | null {
     const endpoints = Settings.endpoints as EndpointsModel;
     if (!(endpointId in endpoints)) {
       console.warn(`${endpointId} endpoint not configured`);

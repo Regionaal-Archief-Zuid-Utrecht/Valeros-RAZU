@@ -107,7 +107,6 @@ export class AutocompleteService {
   private async _getOptions(
     searchInput: string,
   ): Promise<AutocompleteOptionModel[]> {
-
     if (!searchInput) {
       return [];
     }

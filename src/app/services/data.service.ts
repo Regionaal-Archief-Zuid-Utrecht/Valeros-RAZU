@@ -19,7 +19,7 @@ export class DataService {
         let normalizedPred = pred.replaceAll(' ', '.');
         // Then clean up any potential double dots that might occur
         normalizedPred = normalizedPred.replaceAll('..', '.');
-        
+
         // Only update if we actually changed something
         if (normalizedPred !== pred) {
           node[normalizedPred] = obj;

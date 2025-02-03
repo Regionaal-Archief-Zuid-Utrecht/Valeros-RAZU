@@ -11,14 +11,23 @@ import { NgIcon } from '@ng-icons/core';
 @Component({
   selector: 'app-colofon',
   standalone: true,
-  imports: [HeaderComponent, ViewContainerComponent, NgClass, TranslatePipe, NgIcon],
+  imports: [
+    HeaderComponent,
+    ViewContainerComponent,
+    NgClass,
+    TranslatePipe,
+    NgIcon,
+  ],
   templateUrl: './colofon.component.html',
   styleUrl: './colofon.component.scss',
 })
 export class ColofonComponent {
   protected readonly HeaderView = HeaderView;
   protected readonly featherX = featherX;
-  constructor(public router: Router, public url: UrlService) {}
+  constructor(
+    public router: Router,
+    public url: UrlService,
+  ) {}
   async onButtonClicked(url: string) {
     this.url.ignoreQueryParamChange = true;
     await this.router.navigateByUrl(url);
