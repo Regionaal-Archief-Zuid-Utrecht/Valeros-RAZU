@@ -140,12 +140,12 @@ export const Settings = {
         {
           elastic:
             'https://api.data.razu.nl/datasets/id/object/services/object/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql2',
         },
         // This is how an enriched endpoint would look like
         {
           elastic: 'https://ontwikkel.viewer.razu.nl/sura/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql2',
         },
       ],
     },
