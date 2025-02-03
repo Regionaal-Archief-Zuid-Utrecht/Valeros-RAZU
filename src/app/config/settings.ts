@@ -211,6 +211,12 @@ export const Settings = {
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
+      archief: {
+        label: 'Archief',
+        fieldIds: ['archief'],
+        values: [],
+        hideValueIds: [...hideFilterOptionValueIds],
+      },
       aggregatieniveau: {
         label: 'Aggregatieniveau',
         fieldIds: ['aggregatieniveau'],
