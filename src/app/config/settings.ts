@@ -138,15 +138,14 @@ export const Settings = {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
         {
-          elastic:
-            'https://api.data.razu.nl/datasets/id/object/services/object/_search',
+          elastic: 'https://es.digitopia.nl/ldto-objects/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
-        // This is how an enriched endpoint would look like
-        {
-          elastic: 'https://ontwikkel.viewer.razu.nl/sura/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
-        },
+        // // This is how an enriched endpoint would look like
+        // {
+        //   elastic: 'http://localhost:8000/sura/_search',
+        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        // },
       ],
     },
   },
