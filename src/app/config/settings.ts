@@ -37,6 +37,7 @@ const parentPredicates: string[] = [
   // 'https://schema.org/isPartOf',
   // 'https://schema.org/hadPrimarySource',
   'is_onderdeel_van',
+  'https://data.razu.nl/def/ldto/isOnderdeelVan',
 ];
 
 export const labelPredicates: string[] = [
@@ -498,6 +499,7 @@ export const Settings = {
       ],
       [PredicateVisibility.Hide]: [
         ...typePredicates,
+        ...parentPredicates,
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
         'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
