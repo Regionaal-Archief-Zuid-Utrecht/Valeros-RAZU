@@ -28,14 +28,14 @@ const typePredicates: string[] = [
   // 'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
   'https://schema.org/additionalType',
   // 'http://www.wikidata.org/entity/P31',
-  'http://www.nationaalarchief.nl/mdto#classificatie',
+  'https://data.razu.nl/def/ldto/classificatie',
 ];
 
 const parentPredicates: string[] = [
   // 'https://www.ica.org/standards/RiC/ontology#isOrWasIncludedIn',
   // 'https://schema.org/isPartOf',
   // 'https://schema.org/hadPrimarySource',
-  'http://www.nationaalarchief.nl/mdto#isOnderdeelVan',
+  'https://data.razu.nl/def/ldto/isOnderdeelVan',
 ];
 
 export const labelPredicates: string[] = [
@@ -44,24 +44,24 @@ export const labelPredicates: string[] = [
   'https://schema.org/name',
   // 'https://www.ica.org/standards/RiC/ontology#title',
   // 'https://www.ica.org/standards/RiC/ontology#textualValue',
-  'http://www.nationaalarchief.nl/mdto#naam',
-  'http://www.nationaalarchief.nl/mdto#begripLabel',
-  'http://www.nationaalarchief.nl/mdto#verwijzingNaam',
-  'http://www.nationaalarchief.nl/mdto#identificatieKenmerk',
+  'https://data.razu.nl/def/ldto/naam',
+  'https://data.razu.nl/def/ldto/begripLabel',
+  'https://data.razu.nl/def/ldto/verwijzingNaam',
+  'https://data.razu.nl/def/ldto/identificatieKenmerk',
 ];
 
 const hideFilterOptionValueIds = [
-  'http://www.nationaalarchief.nl/mdto#ChecksumGegevens',
+  'https://data.razu.nl/def/ldto/ChecksumGegevens',
   // 'http://www.w3.org/ns/shacl#NodeShape',
   // 'http://www.w3.org/2002/07/owl#Ontology',
-  'http://www.nationaalarchief.nl/mdto#begripBegrippenlijst',
-  'http://www.nationaalarchief.nl/mdto#verwijzingIdentificatie',
-  'http://www.nationaalarchief.nl/mdto#GerelateerdInformatieobjectGegevens',
-  'http://www.nationaalarchief.nl/mdto#Object',
-  'http://www.nationaalarchief.nl/mdto#DekkingInTijdGegevens',
-  'http://www.nationaalarchief.nl/mdto#VerwijzingGegevens',
-  'http://www.nationaalarchief.nl/mdto#BegripGegevens',
-  'http://www.nationaalarchief.nl/mdto#IdentificatieGegevens',
+  'https://data.razu.nl/def/ldto/begripBegrippenlijst',
+  'https://data.razu.nl/def/ldto/verwijzingIdentificatie',
+  'https://data.razu.nl/def/ldto/GerelateerdInformatieobjectGegevens',
+  'https://data.razu.nl/def/ldto/Object',
+  'https://data.razu.nl/def/ldto/DekkingInTijdGegevens',
+  'https://data.razu.nl/def/ldto/VerwijzingGegevens',
+  'https://data.razu.nl/def/ldto/BegripGegevens',
+  'https://data.razu.nl/def/ldto/IdentificatieGegevens',
   // 'https://creativecommons.org/ns#License',
   // 'https://schema.org/Collection',
   // 'https://schema.org/Comment',
@@ -80,7 +80,7 @@ const hideFilterOptionValueIds = [
   // 'https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Fonds',
   // 'https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series',
   // 'http://dbpedia.org/ontology/Place',
-  'http://www.nationaalarchief.nl/mdto#BetrokkeneGegevens',
+  'https://data.razu.nl/def/ldto/BetrokkeneGegevens',
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
   'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
@@ -94,7 +94,7 @@ const peopleValueIds = [
   // 'https://schema.org/Person',
   // 'https://data.cbg.nl/pico#PersonObservation',
   // 'http://xmlns.com/foaf/0.1/Agent',
-  'http://www.nationaalarchief.nl/mdto#archiefvormer',
+  'https://data.razu.nl/def/ldto/archiefvormer',
 ];
 
 const publicationValueIds = [
@@ -119,8 +119,8 @@ const archivesValueIds = [
   // 'https://schema.org/ArchiveComponent',
   // 'https://schema.org/SheetMusic',
   // 'https://www.ica.org/standards/RiC/ontology#Record',
-  'http://www.nationaalarchief.nl/mdto#Bestand',
-  'http://www.nationaalarchief.nl/mdto#Informatieobject',
+  'https://data.razu.nl/def/ldto/Bestand',
+  'https://data.razu.nl/def/ldto/Informatieobject',
 ];
 
 const visualMaterialValueIds = [
@@ -206,19 +206,19 @@ export const Settings = {
     filterOptions: {
       archiefVormer: {
         label: 'Archiefvormer',
-        fieldIds: ['http://www.nationaalarchief.nl/mdto#archiefvormer'],
+        fieldIds: ['https://data.razu.nl/def/ldto/archiefvormer'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
       aggregatieniveau: {
         label: 'Aggregatieniveau',
-        fieldIds: ['http://www.nationaalarchief.nl/mdto#aggregatieniveau'],
+        fieldIds: ['https://data.razu.nl/def/ldto/aggregatieniveau'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
       type: {
         label: 'Soort',
-        fieldIds: ['http://www.nationaalarchief.nl/mdto#classificatie'],
+        fieldIds: ['https://data.razu.nl/def/ldto/classificatie'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
@@ -253,7 +253,7 @@ export const Settings = {
           'https://schema.org/Place',
           'https://schema.org/PostalAddress',
           'https://www.ica.org/standards/RiC/ontology#Place',
-          'http://www.nationaalarchief.nl/mdto#dekkingInRuimte',
+          'https://data.razu.nl/def/ldto/dekkingInRuimte',
           'http://www.opengis.net/ont/geosparql#Geometry',
         ],
       },
@@ -336,8 +336,8 @@ export const Settings = {
     images: imagePredicates,
     hopImages: [
       [
-        'http://www.nationaalarchief.nl/mdto#heeftRepresentatie',
-        'http://www.nationaalarchief.nl/mdto#URLBestand',
+        'https://data.razu.nl/def/ldto/heeftRepresentatie',
+        'https://data.razu.nl/def/ldto/URLBestand',
       ],
     ],
   },
@@ -373,38 +373,38 @@ export const Settings = {
       'http://www.wikidata.org/entity/P31': {
         componentId: 'node-type',
       },
-      'http://www.nationaalarchief.nl/mdto#omvang': {
-        componentId: 'mdto-omvang',
+      'https://data.razu.nl/def/ldto/omvang': {
+        componentId: 'ldto-omvang',
       },
-      'http://www.nationaalarchief.nl/mdto#heeftRepresentatie': {
-        componentId: 'mdto-heeft-representatie',
+      'https://data.razu.nl/def/ldto/heeftRepresentatie': {
+        componentId: 'ldto-heeft-representatie',
         hopLinkSettings: {
-          preds: ['http://www.nationaalarchief.nl/mdto#URLBestand'],
+          preds: ['https://data.razu.nl/def/ldto/URLBestand'],
           showOriginalLink: true,
         },
       },
-      'http://www.nationaalarchief.nl/mdto#event': {
-        componentId: 'mdto-event',
+      'https://data.razu.nl/def/ldto/event': {
+        componentId: 'ldto-event',
       },
-      'http://www.nationaalarchief.nl/mdto#betrokkene': {
+      'https://data.razu.nl/def/ldto/betrokkene': {
         componentId: 'hop-link',
         hopLinkSettings: {
-          preds: ['http://www.nationaalarchief.nl/mdto#Actor'],
+          preds: ['https://data.razu.nl/def/ldto/Actor'],
         },
       },
-      'http://www.nationaalarchief.nl/mdto#gerelateerdInformatieobject': {
+      'https://data.razu.nl/def/ldto/gerelateerdInformatieobject': {
         componentId: 'hop-link',
         hopLinkSettings: {
           preds: [
-            'http://www.nationaalarchief.nl/mdto#gerelateerdInformatieobjectVerwijzing',
+            'https://data.razu.nl/def/ldto/gerelateerdInformatieobjectVerwijzing',
           ],
           showHops: false,
         },
       },
-      'http://www.nationaalarchief.nl/mdto#beperkingGebruik': {
+      'https://data.razu.nl/def/ldto/beperkingGebruik': {
         componentId: 'hop-link',
         hopLinkSettings: {
-          preds: ['http://www.nationaalarchief.nl/mdto#beperkingGebruikType'],
+          preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType'],
           showHops: false,
         },
       },
@@ -415,11 +415,11 @@ export const Settings = {
           showOriginalLink: true,
         },
       },
-      'http://www.nationaalarchief.nl/mdto#dekkingInTijd': {
-        componentId: 'mdto-dekking-in-tijd',
+      'https://data.razu.nl/def/ldto/dekkingInTijd': {
+        componentId: 'ldto-dekking-in-tijd',
       },
-      'http://www.nationaalarchief.nl/mdto#URLBestand': {
-        componentId: 'mdto-url-bestand',
+      'https://data.razu.nl/def/ldto/URLBestand': {
+        componentId: 'ldto-url-bestand',
       },
       'https://www.ica.org/standards/RiC/ontology#hasOrHadIdentifier': {
         componentId: 'rico-identifier',
@@ -453,14 +453,14 @@ export const Settings = {
       [PredicateVisibility.Show]: [],
       [PredicateVisibility.Details]: [
         ...imagePredicates,
-        'http://www.nationaalarchief.nl/mdto#naam',
+        'https://data.razu.nl/def/ldto/naam',
         // ...typePredicates,
         'https://schema.org/author',
-        'http://www.nationaalarchief.nl/mdto#omschrijving',
-        'http://www.nationaalarchief.nl/mdto#dekkingInRuimte',
-        'http://www.nationaalarchief.nl/mdto#dekkingInTijd',
-        'http://www.nationaalarchief.nl/mdto#URLBestand',
-        'http://www.nationaalarchief.nl/mdto#heeftRepresentatie',
+        'https://data.razu.nl/def/ldto/omschrijving',
+        'https://data.razu.nl/def/ldto/dekkingInRuimte',
+        'https://data.razu.nl/def/ldto/dekkingInTijd',
+        'https://data.razu.nl/def/ldto/URLBestand',
+        'https://data.razu.nl/def/ldto/heeftRepresentatie',
         'https://www.ica.org/standards/RiC/ontology#expressedDateValue',
         'https://www.ica.org/standards/RiC/ontology#hasCreator',
         '*',
@@ -485,8 +485,8 @@ export const Settings = {
   alwaysHidePredicates: [
     '@id',
     'endpointId',
-    'http://www.nationaalarchief.nl/mdto#checksum',
-    'http://www.nationaalarchief.nl/mdto#waardering',
+    'https://data.razu.nl/def/ldto/checksum',
+    'https://data.razu.nl/def/ldto/waardering',
     'https://schema.org/breadcrumb',
     // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
     // 'https://hetutrechtsarchief.nl/def/isDescendantOf',
@@ -495,16 +495,16 @@ export const Settings = {
   onlyShowNodes: {
     onlyShowInformatieObject: {
       fieldIds: [...typePredicates],
-      valueIds: ['http://www.nationaalarchief.nl/mdto#Informatieobject'],
+      valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
       type: FilterType.FieldAndValue,
     },
   },
   hideTypePredicates: [
-    'http://www.nationaalarchief.nl/mdto#BeperkingGebruikGegevens',
-    'http://www.nationaalarchief.nl/mdto#DekkingInTijdGegevens',
-    'http://www.nationaalarchief.nl/mdto#IdentificatieGegevens',
-    'http://www.nationaalarchief.nl/mdto#Informatieobject',
-    'http://www.nationaalarchief.nl/mdto#EventGegevens',
+    'https://data.razu.nl/def/ldto/BeperkingGebruikGegevens',
+    'https://data.razu.nl/def/ldto/DekkingInTijdGegevens',
+    'https://data.razu.nl/def/ldto/IdentificatieGegevens',
+    'https://data.razu.nl/def/ldto/Informatieobject',
+    'https://data.razu.nl/def/ldto/EventGegevens',
   ],
   alwaysHideNodes: {
     hideSkosConcept: {
@@ -535,7 +535,7 @@ export const Settings = {
     'https://data.cbg.nl/pico#': 'pico:',
     'https://w3id.org/pnv#': 'pnv:',
     'http://xmlns.com/foaf/0.1/': 'foaf:',
-    'http://www.nationaalarchief.nl/mdto#': 'mdto:',
+    'https://data.razu.nl/def/ldto/': 'ldto:',
     'https://data.razu.nl/Kasteel-Amerongen/': 'ska:',
     'https://data.razu.nl/razu/': 'razu:',
     'https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#':
