@@ -35,10 +35,11 @@ const parentPredicates: string[] = [
   // 'https://www.ica.org/standards/RiC/ontology#isOrWasIncludedIn',
   // 'https://schema.org/isPartOf',
   // 'https://schema.org/hadPrimarySource',
-  'https://data.razu.nl/def/ldto/isOnderdeelVan',
+  'is_onderdeel_van',
 ];
 
 export const labelPredicates: string[] = [
+  'naam',
   'http://www.w3.org/2000/01/rdf-schema#label',
   'http://www.w3.org/2004/02/skos/core#prefLabel',
   'https://schema.org/name',
@@ -205,34 +206,34 @@ export const Settings = {
     filterOptions: {
       archiefVormer: {
         label: 'Archiefvormer',
-        fieldIds: ['https://data.razu.nl/def/ldto/archiefvormer'],
+        fieldIds: ['archiefvormer'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
       aggregatieniveau: {
         label: 'Aggregatieniveau',
-        fieldIds: ['https://data.razu.nl/def/ldto/aggregatieniveau'],
+        fieldIds: ['aggregatieniveau'],
         values: [],
         hideValueIds: [...hideFilterOptionValueIds],
       },
-      type: {
-        label: 'Soort',
-        fieldIds: ['https://data.razu.nl/def/ldto/classificatie'],
-        values: [],
-        hideValueIds: [...hideFilterOptionValueIds],
-      },
-      licentie: {
-        label: 'Licentie',
-        fieldIds: ['_licentie'],
-        values: [],
-        hideValueIds: [],
-      },
-      openbaarheid: {
-        label: 'Openbaarheidsstatus',
-        fieldIds: ['_openbaarheid'],
-        values: [],
-        hideValueIds: [],
-      },
+      // type: {
+      //   label: 'Soort',
+      //   fieldIds: ['classificatie'],
+      //   values: [],
+      //   hideValueIds: [...hideFilterOptionValueIds],
+      // },
+      // licentie: {
+      //   label: 'Licentie',
+      //   fieldIds: ['_licentie'],
+      //   values: [],
+      //   hideValueIds: [],
+      // },
+      // openbaarheid: {
+      //   label: 'Openbaarheidsstatus',
+      //   fieldIds: ['_openbaarheid'],
+      //   values: [],
+      //   hideValueIds: [],
+      // },
     },
   },
   clustering: {
@@ -449,7 +450,12 @@ export const Settings = {
   imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
   predicateVisibility: {
     [ViewMode.List]: {
-      [PredicateVisibility.Show]: [],
+      [PredicateVisibility.Show]: [
+        'classificatie',
+        'archiefvormer',
+        'aggregatieniveau',
+        'archief',
+      ],
       [PredicateVisibility.Details]: [
         ...imagePredicates,
         'https://data.razu.nl/def/ldto/naam',
@@ -492,11 +498,11 @@ export const Settings = {
     'http://purl.org/dc/terms/hasFormat',
   ],
   onlyShowNodes: {
-    onlyShowInformatieObject: {
-      fieldIds: [...typePredicates],
-      valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
-      type: FilterType.FieldAndValue,
-    },
+    // onlyShowInformatieObject: {
+    //   fieldIds: [...typePredicates],
+    //   valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
+    //   type: FilterType.FieldAndValue,
+    // },
   },
   hideTypePredicates: [
     'https://data.razu.nl/def/ldto/BeperkingGebruikGegevens',
