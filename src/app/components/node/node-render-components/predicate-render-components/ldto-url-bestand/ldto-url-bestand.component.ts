@@ -5,7 +5,7 @@ import {
   wrapWithAngleBrackets,
 } from '../../../../../helpers/util.helper';
 import { ApiService } from '../../../../../services/api.service';
-import { Settings } from '../../../../../config/settings';
+import { EndpointService } from '../../../../../services/endpoint.service';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { NgIf } from '@angular/common';
@@ -13,7 +13,6 @@ import {
   EndpointModel,
   EndpointUrlsModel,
 } from '../../../../../models/endpoint.model';
-import { EndpointService } from '../../../../../services/endpoint.service';
 
 @Component({
   selector: 'app-ldto-url-bestand',
@@ -49,16 +48,18 @@ export class LdtoUrlBestandComponent implements OnInit {
 ${wrapWithAngleBrackets(this.nodeId)} <https://data.razu.nl/def/ldto/bestandsformaat> ?b .
 ?b <http://schema.org/identifier> ?bestandsformaat .`;
 
-    const endpointUrls: EndpointUrlsModel[] =
-      this.endpoints.getAllEnabledUrls();
+    const razuUrls = this.endpoints.getEndpointUrls('razu');
+    if (!razuUrls) {
+      return;
+    }
 
     const query = `
   SELECT ?bestandsformaat WHERE {
-    ${this.sparql.getFederatedQuery(queryTemplate, endpointUrls)}
-  } LIMIT 100`;
+      ${this.sparql.getFederatedQuery(queryTemplate, razuUrls)}
+    } LIMIT 100`;
 
     const response = await this.api.postData<{ bestandsformaat: string }[]>(
-      Settings.endpoints.razu.endpointUrls[0].sparql,
+      razuUrls[0].sparql,
       {
         query: query,
       },
