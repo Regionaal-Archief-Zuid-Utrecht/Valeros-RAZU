@@ -20,7 +20,7 @@
     <app-node-images
       [imageUrls]="images"
       [shownInTableCell]="false"
-      [useViewer]="this.details.showing.value"
+      [showAsThumb]="!this.details.showing.value"
       [imageLabel]="title"
     />
   </a>
