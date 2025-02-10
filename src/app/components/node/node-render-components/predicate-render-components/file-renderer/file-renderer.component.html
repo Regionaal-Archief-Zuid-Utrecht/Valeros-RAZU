@@ -32,12 +32,22 @@
           [fileType]="getFileType(url)"
           [style.height]="fullHeight ? '100%' : '16rem'"
         ></app-doc-viewer>
+
+        <ng-container *ngSwitchDefault>
+          <a
+            [href]="url"
+            target="_blank"
+            class="clickable break-words"
+            *ngIf="!isThumb && !fullHeight"
+            >{{ url }}</a
+          >
+        </ng-container>
       </ng-container>
 
       <a
         [href]="url"
         target="_blank"
-        class="clickable"
+        class="clickable break-words"
         *ngIf="hopSettings?.showOriginalLink"
         >{{ url }}</a
       >
