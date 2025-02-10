@@ -12,12 +12,38 @@ export class MimeTypeService {
     '.gif': 'image/gif',
     '.bmp': 'image/bmp',
     '.webp': 'image/webp',
+    '.tiff': 'image/tiff',
+    '.svg': 'image/svg+xml',
+    '.ai': 'application/postscript',
+    '.psd': 'image/vnd.adobe.photoshop',
     '.pdf': 'application/pdf',
     '.doc': 'application/msword',
     '.docx':
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.xls': 'application/vnd.ms-excel',
+    '.xlsx':
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    '.ppt': 'application/vnd.ms-powerpoint',
+    '.pptx':
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    '.pages': 'application/x-iwork-pages-sffpages',
+    '.xps': 'application/vnd.ms-xpsdocument',
+    '.txt': 'text/plain',
     '.html': 'text/html',
     '.htm': 'text/html',
+    '.css': 'text/css',
+    '.php': 'application/x-httpd-php',
+    '.c': 'text/x-c',
+    '.cpp': 'text/x-c++',
+    '.h': 'text/x-c',
+    '.hpp': 'text/x-c++',
+    '.js': 'application/javascript',
+    '.eps': 'application/postscript',
+    '.ps': 'application/postscript',
+    '.dxf': 'application/dxf',
+    '.ttf': 'application/x-font-ttf',
+    '.zip': 'application/zip',
+    '.rar': 'application/x-rar-compressed',
   };
 
   getMimeType(url: string): string | null {

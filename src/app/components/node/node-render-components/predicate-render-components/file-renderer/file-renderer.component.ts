@@ -39,8 +39,28 @@ export class FileRendererComponent implements OnInit, OnChanges {
     [FileType.IMAGE]: ['image/'],
     [FileType.PDF]: ['application/pdf'],
     [FileType.DOC]: [
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/postscript', // .ai files
+      'image/vnd.adobe.photoshop', // .psd files
+      'application/msword', // .doc
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+      'application/vnd.ms-excel', // .xls
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+      'application/vnd.ms-powerpoint', // .ppt
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
+      'application/x-iwork-pages-sffpages', // .pages
+      'application/vnd.ms-xpsdocument', // .xps
+      'text/plain', // .txt
+      'text/html', // .html, .htm
+      'text/css', // .css
+      'application/x-httpd-php', // .php
+      'text/x-c', // .c, .h
+      'text/x-c++', // .cpp, .hpp
+      'application/javascript', // .js
+      'application/postscript', // .eps, .ps
+      'application/dxf', // .dxf
+      'application/x-font-ttf', // .ttf
+      'application/zip', // .zip
+      'application/x-rar-compressed', // .rar
     ],
   } as const;
 
