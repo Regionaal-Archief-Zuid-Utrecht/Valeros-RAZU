@@ -404,7 +404,7 @@ export const Settings = {
         componentId: 'ldto-omvang',
       },
       'https://data.razu.nl/def/ldto/heeftRepresentatie': {
-        componentId: 'ldto-heeft-representatie',
+        componentId: 'file-renderer',
         hopLinkSettings: {
           preds: ['https://data.razu.nl/def/ldto/URLBestand'],
           showOriginalLink: true,

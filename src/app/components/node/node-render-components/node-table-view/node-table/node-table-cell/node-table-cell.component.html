@@ -59,29 +59,15 @@
           [fileUrl]="objValue"
         />
 
-        <app-file-renderer
-          *ngIf="shouldRenderComponentIds.includes('file-renderer')"
-          [urls]="objValue"
-          [hopSettings]="
-            renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            )
-          "
-        />
-
         <app-ldto-event
           *ngIf="shouldRenderComponentIds.includes('ldto-event')"
           [id]="objValue"
         />
 
-        <app-ldto-heeft-representatie
-          *ngIf="shouldRenderComponentIds.includes('ldto-heeft-representatie')"
-          [id]="objValue"
-          [settings]="
+        <app-file-renderer
+          *ngIf="shouldRenderComponentIds.includes('file-renderer')"
+          [urls]="objValue"
+          [hopSettings]="
             renderComponent.getSettingByKey(
               'hopLinkSettings',
               node,

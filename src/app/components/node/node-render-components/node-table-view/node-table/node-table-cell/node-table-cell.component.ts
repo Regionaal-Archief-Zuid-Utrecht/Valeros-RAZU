@@ -20,7 +20,6 @@ import { HopImageComponent } from '../../../predicate-render-components/hop-comp
 import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
 import { LdtoOmvangComponent } from '../../../predicate-render-components/ldto-omvang/ldto-omvang.component';
 import { LdtoEventComponent } from '../../../predicate-render-components/ldto-event/ldto-event.component';
-import { LdtoHeeftRepresentatieComponent } from '../../../predicate-render-components/ldto-heeft-representatie/ldto-heeft-representatie.component';
 import { FileRendererComponent } from '../../../predicate-render-components/file-renderer/file-renderer.component';
 
 export enum TableCellShowOptions {
@@ -48,7 +47,6 @@ export enum TableCellShowOptions {
     RicoIdentifierComponent,
     LdtoOmvangComponent,
     LdtoEventComponent,
-    LdtoHeeftRepresentatieComponent,
     FileRendererComponent,
   ],
   templateUrl: './node-table-cell.component.html',

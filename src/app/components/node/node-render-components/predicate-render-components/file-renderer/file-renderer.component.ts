@@ -15,6 +15,7 @@ import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-se
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { MimeTypeService } from '../../../../../services/mime-type.service';
 import { FileType } from '../../../../../models/file-type.model';
+import { UrlService } from '../../../../../services/url.service';
 
 @Component({
   selector: 'app-file-renderer',
@@ -77,6 +78,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
   constructor(
     private sparql: SparqlService,
     private mimeTypeService: MimeTypeService,
+    private urlService: UrlService,
   ) {}
 
   ngOnInit(): void {
@@ -100,6 +102,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
     this.loading = true;
 
     try {
+      let unprocessedUrls: string[];
       if (
         this.hopSettings &&
         this.hopSettings.preds &&
@@ -110,10 +113,17 @@ export class FileRendererComponent implements OnInit, OnChanges {
         );
 
         const results = await Promise.all(urlPromises);
-        this.fileUrls = results.flat();
+        unprocessedUrls = results.flat();
       } else {
-        this.fileUrls = validUrls;
+        unprocessedUrls = validUrls;
       }
+
+      // Process all URLs through the URL service
+      this.fileUrls = await Promise.all(
+        unprocessedUrls.map((url) => this.urlService.processUrl(url, false)),
+      );
+
+      console.log('FILE URLS', this.fileUrls);
 
       await Promise.all(
         this.fileUrls.map(async (url) => {

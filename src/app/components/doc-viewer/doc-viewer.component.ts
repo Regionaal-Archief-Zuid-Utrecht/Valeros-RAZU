@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, Input, type OnInit } from '@angular/core';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FileType, ViewerType } from '../../models/file-type.model';
+import { UrlService } from '../../services/url.service';
 
 @Component({
   selector: 'app-doc-viewer',
@@ -13,6 +14,8 @@ import { FileType, ViewerType } from '../../models/file-type.model';
 export class DocViewerComponent implements OnInit {
   @Input() url?: string;
   @Input() fileType?: FileType;
+
+  constructor() {}
 
   ngOnInit(): void {}
 
