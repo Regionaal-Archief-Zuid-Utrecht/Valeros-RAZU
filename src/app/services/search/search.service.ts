@@ -23,6 +23,8 @@ import { SortOptionModel } from '../../models/settings/sort-option.model';
 import { Config } from '../../config/config';
 import { UrlService } from '../url.service';
 import { UiService } from '../ui.service';
+import { SettingsService } from '../settings.service';
+import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +57,7 @@ export class SearchService {
     private sort: SortService,
     private router: Router,
     private ui: UiService,
+    private settings: SettingsService,
   ) {
     this.initSearchOnUrlChange();
     this.initSearchOnFilterChange();
@@ -90,8 +93,13 @@ export class SearchService {
 
     const hitNodes: NodeModel[] = this.hits.parseToNodes(hits);
     // TODO: Run async, show initial hits in the meanwhile
-    const enrichedNodes =
-      await this.nodes.enrichWithIncomingRelations(hitNodes);
+    let enrichedNodes = hitNodes;
+    const shouldEnrichWithIncomingRelations = this.settings.hasViewModeSetting(
+      ViewModeSetting.EnrichWithIncomingRelations,
+    );
+    if (shouldEnrichWithIncomingRelations) {
+      enrichedNodes = await this.nodes.enrichWithIncomingRelations(hitNodes);
+    }
 
     if (!enrichedNodes || enrichedNodes.length === 0) {
       this.results.next({

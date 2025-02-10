@@ -5,4 +5,5 @@ export enum ViewModeSetting {
   ShowTypes,
   ShowFileNextToTable,
   ShowOrganization,
+  EnrichWithIncomingRelations,
 }

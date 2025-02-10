@@ -464,6 +464,7 @@ export const Settings = {
       [ViewModeSetting.ShowTitle]: true,
       [ViewModeSetting.ShowOrganization]: false,
       [ViewModeSetting.ShowFileNextToTable]: true,
+      [ViewModeSetting.EnrichWithIncomingRelations]: false, // NOTE: Detail view always enriches with incoming relations, regardless of this setting
     },
     [ViewMode.Grid]: {
       [ViewModeSetting.ShowTitle]: true,
@@ -471,6 +472,7 @@ export const Settings = {
       [ViewModeSetting.ShowTypes]: true,
       [ViewModeSetting.ShowOrganization]: false,
       [ViewModeSetting.ShowFileNextToTable]: true,
+      [ViewModeSetting.EnrichWithIncomingRelations]: false,
     },
   },
   largeFileRendererWidth: { search: '30%', details: '40%' },
