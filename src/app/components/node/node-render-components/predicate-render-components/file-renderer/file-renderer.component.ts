@@ -8,7 +8,13 @@ import {
   type OnInit,
 } from '@angular/core';
 import { SparqlService } from '../../../../../services/sparql.service';
-import { NgForOf, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import {
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { DocViewerComponent } from '../../../../doc-viewer/doc-viewer.component';
 import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-settings.model';
@@ -28,6 +34,7 @@ import { UrlService } from '../../../../../services/url.service';
     NodeLinkComponent,
     NgSwitch,
     NgSwitchCase,
+    NgSwitchDefault,
   ],
   templateUrl: './file-renderer.component.html',
   styleUrl: './file-renderer.component.css',
@@ -49,6 +56,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
       'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
       'application/x-iwork-pages-sffpages', // .pages
       'application/vnd.ms-xpsdocument', // .xps
+      // 'application/oxps', // .oxps
       'text/plain', // .txt
       'text/html', // .html, .htm
       'text/css', // .css
@@ -63,8 +71,6 @@ export class FileRendererComponent implements OnInit, OnChanges {
       'application/x-rar-compressed', // .rar
     ],
   } as const;
-
-  @Output() loaded = new EventEmitter<void>();
 
   @Input() urls: string | string[] = [];
   @Input() hopSettings?: HopLinkSettingsModel;
@@ -155,7 +161,6 @@ export class FileRendererComponent implements OnInit, OnChanges {
       );
     } finally {
       this.loading = false;
-      this.loaded.emit();
     }
   }
 
