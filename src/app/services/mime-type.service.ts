@@ -28,6 +28,7 @@ export class MimeTypeService {
       'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     '.pages': 'application/x-iwork-pages-sffpages',
     '.xps': 'application/vnd.ms-xpsdocument',
+    '.oxps': 'application/oxps',
     '.txt': 'text/plain',
     '.html': 'text/html',
     '.htm': 'text/html',
