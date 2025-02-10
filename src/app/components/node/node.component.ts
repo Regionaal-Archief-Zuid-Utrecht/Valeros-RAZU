@@ -170,7 +170,7 @@ export class NodeComponent implements OnInit {
   }
 
   async retrieveParents() {
-    if (!this.node) {
+    if (!this.node || !this.showParents) {
       return;
     }
 

@@ -459,7 +459,7 @@ export const Settings = {
   viewModes: {
     [ViewMode.List]: {
       [ViewModeSetting.ShowDetails]: true,
-      [ViewModeSetting.ShowParents]: true,
+      [ViewModeSetting.ShowParents]: false,
       [ViewModeSetting.ShowTypes]: true,
       [ViewModeSetting.ShowTitle]: true,
       [ViewModeSetting.ShowOrganization]: false,
