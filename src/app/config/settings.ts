@@ -322,7 +322,7 @@ export const Settings = {
   },
   search: {
     resultsPerPagePerEndpoint: 10,
-    maxResultsForCounting: 1000,
+    maxResultsForCounting: 500,
     autocomplete: {
       enabled: true,
       maxAutocompleteOptionsPerEndpoint: 50,
