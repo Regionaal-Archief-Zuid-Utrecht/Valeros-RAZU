@@ -149,9 +149,11 @@ export class NodeComponent implements OnInit {
       ),
     );
 
-    const nodeId: string = this.nodes.getId(this.node);
-    const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
-    this.files.next([...this.files.value, ...hopImageUrls]);
+    if (this.details.isShowing()) {
+      const nodeId: string = this.nodes.getId(this.node);
+      const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
+      this.files.next([...this.files.value, ...hopImageUrls]);
+    }
   }
 
   initTypes() {
