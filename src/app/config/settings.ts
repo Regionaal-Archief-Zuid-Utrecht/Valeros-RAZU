@@ -407,7 +407,7 @@ export const Settings = {
         componentId: 'file-renderer',
         hopLinkSettings: {
           preds: ['https://data.razu.nl/def/ldto/URLBestand'],
-          showOriginalLink: true,
+          showOriginalLink: false,
         },
       },
       'https://data.razu.nl/def/ldto/event': {
