@@ -123,7 +123,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
         unprocessedUrls.map((url) => this.urlService.processUrl(url, false)),
       );
 
-      console.log('FILE URLS', this.fileUrls);
+      // console.log('FILE URLS', this.fileUrls);
 
       await Promise.all(
         this.fileUrls.map(async (url) => {
