@@ -77,6 +77,7 @@ export class NodeComponent implements OnInit {
   types: TypeModel[] = [];
   files: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   filesLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  hasViewer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   showTitle = this.settings.hasViewModeSetting(ViewModeSetting.ShowTitle);
   showParents = this.settings.hasViewModeSetting(ViewModeSetting.ShowParents);
@@ -195,9 +196,11 @@ export class NodeComponent implements OnInit {
 
   shouldShowFileNextToTable(): boolean {
     return (
-      this.showFileNextToTable && this.files && this.files.value.length > 0
+      this.showFileNextToTable &&
+      this.files &&
+      this.files.value.length > 0 &&
+      this.hasViewer.value
     );
-    // && this.filesLoaded.value;
   }
 
   protected readonly Settings = Settings;

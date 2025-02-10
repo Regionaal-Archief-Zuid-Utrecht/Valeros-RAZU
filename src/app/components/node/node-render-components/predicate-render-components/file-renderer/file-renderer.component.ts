@@ -77,6 +77,8 @@ export class FileRendererComponent implements OnInit, OnChanges {
   @Input() fullHeight = false;
   @Input() isThumb = false;
 
+  @Output() hasViewer = new EventEmitter<boolean>();
+
   fileUrls: string[] = [];
   loading = false;
   urlMimeTypes = new Map<string, string>();
@@ -144,12 +146,9 @@ export class FileRendererComponent implements OnInit, OnChanges {
         unprocessedUrls = validUrls;
       }
 
-      // Process all URLs through the URL service
       this.fileUrls = await Promise.all(
         unprocessedUrls.map((url) => this.urlService.processUrl(url, false)),
       );
-
-      // console.log('FILE URLS', this.fileUrls);
 
       await Promise.all(
         this.fileUrls.map(async (url) => {
@@ -159,6 +158,17 @@ export class FileRendererComponent implements OnInit, OnChanges {
           }
         }),
       );
+
+      const hasViewer = this.fileUrls.some((url) => {
+        const type = this.getFileType(url);
+        return (
+          type === FileType.IMAGE ||
+          type === FileType.PDF ||
+          type === FileType.DOC
+        );
+      });
+
+      this.hasViewer.emit(hasViewer);
     } finally {
       this.loading = false;
     }

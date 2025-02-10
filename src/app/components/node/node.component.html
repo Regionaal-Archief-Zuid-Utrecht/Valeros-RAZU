@@ -23,6 +23,7 @@
       [urls]="files.value"
       [fullHeight]="true"
       [isThumb]="!details.showing.value"
+      (hasViewer)="hasViewer.next($event)"
     />
   </a>
 
