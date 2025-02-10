@@ -36,8 +36,6 @@ export class NodeImagesComponent
   @Input() useViewer = true;
   @Input() imageLabel?: string;
 
-  processedImageUrls: string[] = [];
-
   constructor(
     public urlService: UrlService,
     private ngZone: NgZone,
@@ -46,8 +44,7 @@ export class NodeImagesComponent
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.initImageViewer(this.processedImageUrls);
-    this._processImageUrls();
+    this.initImageViewer(this.imageUrls);
   }
 
   // TODO: Refactor OSD into separate component
@@ -57,13 +54,16 @@ export class NodeImagesComponent
     }
   }
 
-  initImageViewer(imgUrls: string[]) {
+  initImageViewer(imgUrls: string[] | undefined) {
     if (!this.useViewer) {
       return;
     }
     if (!this.viewerElem) {
       // TODO
       console.warn('Viewer elem not yet initialized');
+      return;
+    }
+    if (!imgUrls) {
       return;
     }
 
@@ -120,25 +120,12 @@ export class NodeImagesComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['imageUrls']) {
-      this._processImageUrls();
+      this.initImageViewer(this.imageUrls);
     }
   }
 
   ngOnDestroy() {
     this.destroyImageViewer();
-  }
-
-  private async _processImageUrls() {
-    if (!this.imageUrls) {
-      return;
-    }
-
-    this.processedImageUrls = await this.urlService.processUrls(
-      this.imageUrls,
-      false,
-    );
-
-    this.initImageViewer(this.processedImageUrls);
   }
 
   protected readonly Config = Config;

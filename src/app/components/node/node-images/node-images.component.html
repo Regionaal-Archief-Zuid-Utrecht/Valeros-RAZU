@@ -7,10 +7,10 @@
 
 <div
   class="w-full h-full overflow-y-scroll"
-  *ngIf="!this.useViewer && this.processedImageUrls.length > 0"
+  *ngIf="!this.useViewer && this.imageUrls && this.imageUrls.length > 0"
 >
   <img
-    [src]="this.processedImageUrls[0]"
+    [src]="this.imageUrls[0]"
     [alt]="this.imageLabel ?? 'Unknown image'"
     class="w-full h-full object-cover"
     (error)="onImageLoadError($event)"
