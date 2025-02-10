@@ -1,0 +1,7 @@
+<ng-container *ngIf="url">
+  <ngx-doc-viewer
+    [url]="url"
+    [viewer]="getViewer()"
+    (loaded)="onLoaded()"
+  ></ngx-doc-viewer>
+</ng-container>
