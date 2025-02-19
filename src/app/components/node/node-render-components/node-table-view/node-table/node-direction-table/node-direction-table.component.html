@@ -15,16 +15,13 @@
   <div class="break-all" [ngClass]="[smallFontSize ? 'text-xs' : '']">
     <ng-container *ngFor="let predicateSection of predicateSections">
       <ng-container *ngIf="sectionHasPredsToShow(predicateSection, direction)">
+        <!-- Pred section header -->
         <div class="italic">
-          <!-- <hr class="opacity-10" /> -->
           {{ predicateSection.label }}
         </div>
+
+        <!-- Preds -->
         <ng-container *ngFor="let pred of predicateSection.predicates">
-          <!-- <div>
-          {{ pred }}
-          {{ getNumPredValues(pred, direction) }}
-          {{ predicateVisibilities[pred] === visibility }}
-        </div> -->
           <div
             class="sm:flex sm:gap-4 sm:px-4 my-4 sm:my-2 hover:bg-gray-200 hover:shadow-sm transition-shadow duration-100 rounded-md"
             *ngIf="
@@ -58,10 +55,6 @@
             </td>
           </div>
         </ng-container>
-        <!-- <div class="divider w-2 align-self: center;" *ngIf="
-      predicateVisibilities[pred] === visibility &&
-      getNumPredValues(pred, direction) > 0
-    "></div> -->
       </ng-container>
     </ng-container>
   </div>
