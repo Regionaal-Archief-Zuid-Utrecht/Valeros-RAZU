@@ -1,18 +1,24 @@
-<div
-  class="w-full h-full relative"
-  [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
-  id="mirador"
-  *ngIf="useViewer"
-></div>
+<ng-container *ngIf="imageUrls && imageUrls.length > 0">
+  <!-- MIRADOR VIEWER -->
+  <div
+    class="w-full h-full relative"
+    [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
+    id="mirador"
+    *ngIf="useViewer && !shownInTableCell"
+  ></div>
 
-<div
-  class="w-full h-full overflow-y-scroll"
-  *ngIf="!this.useViewer && this.imageUrls && this.imageUrls.length > 0"
->
-  <img
-    [src]="this.imageUrls[0]"
-    [alt]="this.imageLabel ?? 'Unknown image'"
-    class="w-full h-full object-cover"
-    (error)="onImageLoadError($event)"
-  />
-</div>
+  <!-- LINKS (inside table cell) -->
+  <div *ngIf="shownInTableCell">
+    <app-node-link [url]="id" *ngFor="let id of imageUrls"></app-node-link>
+  </div>
+
+  <!-- THUMB -->
+  <div class="w-full h-full overflow-y-scroll" *ngIf="!useViewer">
+    <img
+      [src]="imageUrls[0]"
+      [alt]="imageLabel ?? 'Unknown image'"
+      class="w-full h-full object-cover"
+      (error)="onImageLoadError($event)"
+    />
+  </div>
+</ng-container>

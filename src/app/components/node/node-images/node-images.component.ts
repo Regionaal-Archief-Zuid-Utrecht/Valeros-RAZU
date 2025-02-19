@@ -18,11 +18,12 @@ import { UrlService } from '../../../services/url.service';
 import { Settings } from '../../../config/settings';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
+import { NodeLinkComponent } from "../node-link/node-link.component";
 
 @Component({
   selector: 'app-node-images',
   standalone: true,
-  imports: [NgForOf, NgIf, JsonPipe, NgClass],
+  imports: [NgForOf, NgIf, JsonPipe, NgClass, NodeLinkComponent],
   templateUrl: './node-images.component.html',
   styleUrl: './node-images.component.scss',
   encapsulation: ViewEncapsulation.None,
