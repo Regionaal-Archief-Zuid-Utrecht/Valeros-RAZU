@@ -256,7 +256,7 @@ export class ElasticService {
         return {
           [elasticField]: {
             order: sort.order === SortOrder.Ascending ? 'asc' : 'desc',
-            unmapped_type: 'string',
+            unmapped_type: 'keyword',
           },
         };
       },

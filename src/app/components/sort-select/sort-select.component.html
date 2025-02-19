@@ -5,12 +5,12 @@
       role="listbox"
       aria-labelledby="sort-select"
       aria-label="Sort dropdown"
+      (change)="onChange($event)"
     >
       <option
         *ngFor="let sortOptionId of Object.keys(Settings.sorting.options)"
         [value]="sortOptionId"
         [selected]="sortOptionId === sorting.current.value?.id"
-        (change)="onChange(sortOptionId)"
       >
         {{ sorting.getById(sortOptionId)?.label }}
       </option>
