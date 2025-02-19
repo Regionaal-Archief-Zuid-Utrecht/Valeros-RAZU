@@ -20,7 +20,6 @@
             "outputPath": "dist/view-a-lod",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "externalDependencies": ["http", "https", "url", "util", "net"],
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -35,6 +34,7 @@
           },
           "configurations": {
             "production": {
+              "externalDependencies": ["http", "https", "url", "util", "net"],
               "budgets": [
                 {
                   "type": "initial",
