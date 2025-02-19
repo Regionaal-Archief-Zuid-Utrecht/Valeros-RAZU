@@ -482,10 +482,10 @@ export const Settings = {
       [PredicateVisibility.Show]: [
         {
           predicates: [
-            'classificatie',
-            'archiefvormer',
             'aggregatieniveau',
             'archief',
+            'classificatie',
+            'archiefvormer',
           ],
         },
       ],
@@ -495,15 +495,23 @@ export const Settings = {
           predicates: [...imagePredicates],
         },
         {
+          label: 'Dekking',
+          predicates: [
+            'https://data.razu.nl/def/ldto/dekkingInRuimte',
+            'https://data.razu.nl/def/ldto/dekkingInTijd',
+          ],
+        },
+        {
+          label: 'Representatie',
+          predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
+        },
+        {
           label: 'Metadata',
           predicates: [
             'https://data.razu.nl/def/ldto/naam',
             'https://schema.org/author',
             'https://data.razu.nl/def/ldto/omschrijving',
-            'https://data.razu.nl/def/ldto/dekkingInRuimte',
-            'https://data.razu.nl/def/ldto/dekkingInTijd',
             'https://data.razu.nl/def/ldto/URLBestand',
-            'https://data.razu.nl/def/ldto/heeftRepresentatie',
             'https://www.ica.org/standards/RiC/ontology#expressedDateValue',
             'https://www.ica.org/standards/RiC/ontology#hasCreator',
             '*',
