@@ -272,6 +272,9 @@ export class ElasticService {
     from?: number,
     size?: number,
   ): any {
+    if (query === undefined) {
+      return;
+    }
     query = query.trim();
 
     const queryData: any = {
