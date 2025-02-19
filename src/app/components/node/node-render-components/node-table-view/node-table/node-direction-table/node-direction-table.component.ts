@@ -54,7 +54,7 @@ export class NodeDirectionTableComponent {
     const nodePreds = Object.keys(this.node);
     const sortedNodePreds = sortByArrayOrder(
       nodePreds,
-      this.settings.getVisiblePredicates()[this.visibility],
+      this.settings.getVisiblePredicatesFlattened(this.visibility),
     );
     this.nodePreds = sortedNodePreds;
   }

@@ -1,5 +1,10 @@
 import { ViewMode } from '../view-mode.enum';
 
+export interface PredicateSection {
+  label: string | null;
+  predicates: string[];
+}
+
 export type PredicateVisibilitySettings = {
   [v in ViewMode]: PredicateVisibilityEntries;
 };
@@ -11,5 +16,5 @@ export enum PredicateVisibility {
 }
 
 export type PredicateVisibilityEntries = {
-  [v in PredicateVisibility]: string[];
+  [v in PredicateVisibility]: PredicateSection[];
 };

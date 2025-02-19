@@ -42,23 +42,34 @@ export class SettingsService {
     )[this.viewModes.current.value];
   }
 
+  getVisiblePredicatesFlattened(visibility: PredicateVisibility): string[] {
+    const visibilityEntries = this.getVisiblePredicates();
+    return visibilityEntries[visibility].flatMap(
+      (section) => section.predicates,
+    );
+  }
+
   getPredicateVisibility(predicateId: string): PredicateVisibility {
     if ((Settings.alwaysHidePredicates as string[]).includes(predicateId)) {
       return PredicateVisibility.Hide;
     }
-
-    const visiblePredicates: PredicateVisibilityEntries =
-      this.getVisiblePredicates();
-    if (visiblePredicates[PredicateVisibility.Hide].includes(predicateId)) {
+    const hidePredicates = this.getVisiblePredicatesFlattened(
+      PredicateVisibility.Hide,
+    );
+    if (hidePredicates.includes(predicateId)) {
       return PredicateVisibility.Hide;
     }
 
-    const showPreds = visiblePredicates[PredicateVisibility.Show];
-    const detailPreds = visiblePredicates[PredicateVisibility.Details];
+    const showPredicates = this.getVisiblePredicatesFlattened(
+      PredicateVisibility.Show,
+    );
+    const detailPredicates = this.getVisiblePredicatesFlattened(
+      PredicateVisibility.Details,
+    );
 
-    const shouldShowAllPredsNotShownInDetails = showPreds.includes('*');
-    const predIsShownInDetails = detailPreds.includes(predicateId);
-    const shouldShowPred = showPreds.includes(predicateId);
+    const shouldShowAllPredsNotShownInDetails = showPredicates.includes('*');
+    const predIsShownInDetails = detailPredicates.includes(predicateId);
+    const shouldShowPred = showPredicates.includes(predicateId);
 
     if (
       (shouldShowAllPredsNotShownInDetails && !predIsShownInDetails) ||
@@ -67,9 +78,9 @@ export class SettingsService {
       return PredicateVisibility.Show;
     }
 
-    const shouldShowRemainingPredsInDetails = detailPreds.includes('*');
-    const predIsAlreadyShown = showPreds.includes(predicateId);
-    const shouldShowDetailPred = detailPreds.includes(predicateId);
+    const shouldShowRemainingPredsInDetails = detailPredicates.includes('*');
+    const predIsAlreadyShown = showPredicates.includes(predicateId);
+    const shouldShowDetailPred = detailPredicates.includes(predicateId);
     if (
       (shouldShowRemainingPredsInDetails && !predIsAlreadyShown) ||
       shouldShowDetailPred
