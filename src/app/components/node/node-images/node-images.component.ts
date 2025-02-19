@@ -37,6 +37,8 @@ export class NodeImagesComponent
   @Input() useViewer = true;
   @Input() imageLabel?: string;
 
+  processedImageUrls: string[] = [];
+
   constructor(
     public urlService: UrlService,
     private ngZone: NgZone,
@@ -45,9 +47,7 @@ export class NodeImagesComponent
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    this.initImageViewer(this.imageUrls);
-  }
+  ngAfterViewInit() {}
 
   destroyImageViewer() {
     if (this._imageViewer) {
@@ -116,8 +116,20 @@ export class NodeImagesComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['imageUrls']) {
-      this.initImageViewer(this.imageUrls);
+      this._processImageUrls().then(() => {
+        this.initImageViewer(this.processedImageUrls);
+      });
     }
+  }
+
+  private async _processImageUrls() {
+    if (!this.imageUrls) {
+      return;
+    }
+    this.processedImageUrls = await this.urlService.processUrls(
+      this.imageUrls,
+      false,
+    );
   }
 
   ngOnDestroy() {
