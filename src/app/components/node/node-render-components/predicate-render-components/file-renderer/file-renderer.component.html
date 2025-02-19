@@ -1,58 +1,55 @@
 <div class="w-full h-full" *ngIf="!loading && fileUrls.length > 0">
-  <!-- All images - pass full array to node-images -->
-  <app-node-images
-    *ngIf="allFilesType === FileType.IMAGE"
-    [imageUrls]="displayUrls"
-    [shownInTableCell]="!fullHeight"
-    [useViewer]="!isThumb"
-    class="mb-4 h-full"
-  ></app-node-images>
+  <ng-container *ngIf="shownInTableCell">
+    <app-node-link [url]="url" *ngFor="let url of fileUrls"></app-node-link>
+  </ng-container>
 
-  <!-- Mixed content or all documents - handle individually -->
-  <div *ngIf="allFilesType !== FileType.IMAGE" class="mb-4 h-full">
-    <div *ngFor="let url of displayUrls" class="mb-4 h-full">
-      <ng-container [ngSwitch]="getFileType(url)">
-        <app-node-images
-          *ngSwitchCase="FileType.IMAGE"
-          [imageUrls]="[url]"
-          [shownInTableCell]="!fullHeight"
-          [useViewer]="!isThumb"
-        ></app-node-images>
+  <ng-container *ngIf="!shownInTableCell">
+    <ng-container *ngIf="isThumb">
+      <!-- Thumbnail view - show first item only with appropriate icon -->
+      <app-node-images
+        [imageUrls]="[getThumbUrl(displayUrls[0])]"
+        [useViewer]="false"
+        class="mb-4 h-full"
+      ></app-node-images>
+    </ng-container>
 
-        <app-doc-viewer
-          *ngSwitchCase="FileType.PDF"
-          [url]="url"
-          [fileType]="getFileType(url)"
-          [style.height]="fullHeight ? '100%' : '16rem'"
-        ></app-doc-viewer>
+    <ng-container *ngIf="!isThumb">
+      <!-- All images - pass full array to node-images -->
+      <app-node-images
+        *ngIf="allFilesType === FileType.IMAGE"
+        [imageUrls]="displayUrls"
+        [shownInTableCell]="shownInTableCell"
+        [useViewer]="true"
+        class="mb-4 h-full"
+      ></app-node-images>
 
-        <app-doc-viewer
-          *ngSwitchCase="FileType.DOC"
-          [url]="url"
-          [fileType]="getFileType(url)"
-          [style.height]="fullHeight ? '100%' : '16rem'"
-        ></app-doc-viewer>
+      <!-- Mixed content or all documents - handle individually -->
+      <div *ngIf="allFilesType !== FileType.IMAGE" class="mb-4 h-full">
+        <div *ngFor="let url of displayUrls" class="mb-4 h-full">
+          <app-node-images
+            *ngIf="getFileType(url) === FileType.IMAGE"
+            [imageUrls]="[url]"
+            [shownInTableCell]="shownInTableCell"
+            [useViewer]="true"
+          ></app-node-images>
 
-        <ng-container *ngSwitchDefault>
-          <a
-            [href]="url"
-            target="_blank"
-            class="clickable break-words"
-            *ngIf="!isThumb && !fullHeight"
-            >{{ url }}</a
-          >
-        </ng-container>
-      </ng-container>
+          <app-node-link
+            [url]="url"
+            *ngIf="getFileType(url) === FileType.UNKNOWN"
+          ></app-node-link>
 
-      <a
-        [href]="url"
-        target="_blank"
-        class="clickable break-words"
-        *ngIf="hopSettings?.showOriginalLink"
-        >{{ url }}</a
-      >
-    </div>
-  </div>
-
-  <span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
+          <app-doc-viewer
+            *ngIf="
+              getFileType(url) !== FileType.IMAGE &&
+              getFileType(url) !== FileType.UNKNOWN
+            "
+            [url]="url"
+            [fileType]="getFileType(url)"
+            [style.height]="!shownInTableCell ? '100%' : '16rem'"
+          ></app-doc-viewer>
+        </div>
+      </div>
+    </ng-container>
+    <span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
+  </ng-container>
 </div>

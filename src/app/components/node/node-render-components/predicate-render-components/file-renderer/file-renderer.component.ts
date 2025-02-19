@@ -42,21 +42,35 @@ import { UrlService } from '../../../../../services/url.service';
 export class FileRendererComponent implements OnInit, OnChanges {
   protected readonly FileType = FileType;
 
+  private static readonly THUMB_IMAGES: Record<FileType, string> = {
+    [FileType.PDF]: '/assets/img/file-types/pdf.png',
+    [FileType.DOC]: '/assets/img/file-types/doc.png',
+    [FileType.IMAGE]: '/assets/img/file-types/image.png',
+    [FileType.PPT]: '/assets/img/file-types/ppt.png',
+    [FileType.XLS]: '/assets/img/file-types/xls.png',
+    [FileType.OTHER_VIEWABLE_FILE]: '/assets/img/file-types/file.png',
+    [FileType.UNKNOWN]: '/assets/img/file-types/file.png',
+  };
+
   private static readonly SUPPORTED_MIME_TYPES = {
     [FileType.IMAGE]: ['image/'],
     [FileType.PDF]: ['application/pdf'],
     [FileType.DOC]: [
-      'application/postscript', // .ai files
-      'image/vnd.adobe.photoshop', // .psd files
       'application/msword', // .doc
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+      'application/x-iwork-pages-sffpages', // .pages
+    ],
+    [FileType.XLS]: [
       'application/vnd.ms-excel', // .xls
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+    ],
+    [FileType.PPT]: [
       'application/vnd.ms-powerpoint', // .ppt
       'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
-      'application/x-iwork-pages-sffpages', // .pages
-      'application/vnd.ms-xpsdocument', // .xps
-      // 'application/oxps', // .oxps
+    ],
+    [FileType.OTHER_VIEWABLE_FILE]: [
+      'application/postscript', // .ai files
+      'image/vnd.adobe.photoshop', // .psd files
       'text/plain', // .txt
       'text/html', // .html, .htm
       'text/css', // .css
@@ -69,12 +83,14 @@ export class FileRendererComponent implements OnInit, OnChanges {
       'application/x-font-ttf', // .ttf
       'application/zip', // .zip
       'application/x-rar-compressed', // .rar
+      'application/vnd.ms-xpsdocument', // .xps
+      // 'application/oxps', // .oxps
     ],
   } as const;
 
   @Input() urls: string | string[] = [];
   @Input() hopSettings?: HopLinkSettingsModel;
-  @Input() fullHeight = false;
+  @Input() shownInTableCell = false;
   @Input() isThumb = false;
 
   @Output() hasViewer = new EventEmitter<boolean>();
@@ -93,12 +109,10 @@ export class FileRendererComponent implements OnInit, OnChanges {
     const types = new Set(this.fileUrls.map((url) => this.getFileType(url)));
     if (types.size === 1) {
       const type = types.values().next().value;
-      if (
-        type === FileType.IMAGE ||
-        type === FileType.DOC ||
-        type === FileType.PDF
-      )
-        return type;
+      if (!type) {
+        return FileType.UNKNOWN;
+      }
+      return type;
     }
     return FileType.UNKNOWN;
   }
@@ -161,11 +175,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
 
       const hasViewer = this.fileUrls.some((url) => {
         const type = this.getFileType(url);
-        return (
-          type === FileType.IMAGE ||
-          type === FileType.PDF ||
-          type === FileType.DOC
-        );
+        return type !== FileType.UNKNOWN;
       });
 
       this.hasViewer.emit(hasViewer);
@@ -187,5 +197,13 @@ export class FileRendererComponent implements OnInit, OnChanges {
     }
 
     return FileType.UNKNOWN;
+  }
+
+  protected getThumbUrl(url: string): string {
+    const fileType = this.getFileType(url);
+    if (fileType === FileType.IMAGE) {
+      return url;
+    }
+    return FileRendererComponent.THUMB_IMAGES[fileType];
   }
 }

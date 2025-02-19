@@ -21,7 +21,7 @@
   >
     <app-file-renderer
       [urls]="files.value"
-      [fullHeight]="true"
+      [shownInTableCell]="false"
       [isThumb]="!details.showing.value"
       (hasViewer)="hasViewer.next($event)"
     />

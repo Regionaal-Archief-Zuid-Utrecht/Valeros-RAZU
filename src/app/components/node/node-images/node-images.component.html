@@ -4,13 +4,8 @@
     class="w-full h-full relative"
     [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
     id="mirador"
-    *ngIf="useViewer && !shownInTableCell"
+    *ngIf="useViewer"
   ></div>
-
-  <!-- LINKS (inside table cell) -->
-  <div *ngIf="shownInTableCell">
-    <app-node-link [url]="id" *ngFor="let id of imageUrls"></app-node-link>
-  </div>
 
   <!-- THUMB -->
   <div class="w-full h-full overflow-y-scroll" *ngIf="!useViewer">

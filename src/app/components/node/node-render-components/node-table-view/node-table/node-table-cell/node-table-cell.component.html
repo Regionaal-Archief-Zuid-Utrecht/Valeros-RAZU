@@ -67,6 +67,7 @@
         <app-file-renderer
           *ngIf="shouldRenderComponentIds.includes('file-renderer')"
           [urls]="objValue"
+          [shownInTableCell]="true"
           [hopSettings]="
             renderComponent.getSettingByKey(
               'hopLinkSettings',

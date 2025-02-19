@@ -24,7 +24,7 @@ export class DocViewerComponent implements OnInit {
 
     switch (this.fileType) {
       case FileType.PDF:
-        return ViewerType.PDF;
+        return ViewerType.GOOGLE; // ViewerType.PDF
       case FileType.DOC:
         return ViewerType.GOOGLE; // TODO: Support mammoth?
       default:
