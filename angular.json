@@ -20,6 +20,7 @@
             "outputPath": "dist/view-a-lod",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "externalDependencies": ["http", "https", "url", "util", "net"],
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -38,7 +39,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1mb",
-                  "maximumError": "2mb"
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
