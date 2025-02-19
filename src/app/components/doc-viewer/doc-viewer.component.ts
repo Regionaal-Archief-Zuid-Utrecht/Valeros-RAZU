@@ -15,9 +15,15 @@ export class DocViewerComponent implements OnInit {
   @Input() url?: string;
   @Input() fileType?: FileType;
 
+  loadingGoogleViewer = false;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.getViewer() === ViewerType.GOOGLE) {
+      this.loadingGoogleViewer = true;
+    }
+  }
 
   getViewer(): ViewerType {
     if (!this.fileType) return ViewerType.GOOGLE;
@@ -32,7 +38,7 @@ export class DocViewerComponent implements OnInit {
     }
   }
 
-  onLoaded() {
-    // console.log('Loaded doc');
+  onLoadedGoogleViewer() {
+    this.loadingGoogleViewer = false;
   }
 }
