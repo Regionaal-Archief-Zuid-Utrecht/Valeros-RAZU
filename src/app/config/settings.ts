@@ -428,13 +428,6 @@ export const Settings = {
           showHops: false,
         },
       },
-      'https://data.razu.nl/def/ldto/beperkingGebruik': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType'],
-          showHops: false,
-        },
-      },
       'http://www.w3.org/ns/prov#hadPrimarySource': {
         componentId: 'hop-image',
         hopLinkSettings: {
