@@ -7,7 +7,12 @@
     <ng-container *ngIf="isThumb">
       <!-- Thumbnail view - show first item only with appropriate icon -->
       <app-node-images
-        [imageUrls]="[getThumbUrl(displayUrls[0])]"
+        [imageUrls]="[
+          fileRenderService.getThumbUrl(
+            displayUrls[0],
+            getFileType(displayUrls[0])
+          )
+        ]"
         [useViewer]="false"
         class="mb-4 h-full"
       ></app-node-images>
