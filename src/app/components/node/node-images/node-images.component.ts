@@ -18,7 +18,7 @@ import { UrlService } from '../../../services/url.service';
 import { Settings } from '../../../config/settings';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
-import { NodeLinkComponent } from "../node-link/node-link.component";
+import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-images',
@@ -68,7 +68,16 @@ export class NodeImagesComponent
 
     this._imageViewer = this.ngZone.runOutsideAngular(() => {
       const manifestUrl = this.iiifService.createManifestBlob(imgUrls);
-      console.log('Manifest URL', manifestUrl);
+      const containerId = 'mirador';
+      const containerElem = document.getElementById(containerId);
+      if (!containerElem) {
+        console.warn('Container element not found', containerId);
+        return;
+      }
+      // console.log(
+      //   'Manifest URL',
+      //   manifestUrl,
+      // );
 
       const miradorInstance = Mirador.viewer({
         id: 'mirador',
