@@ -6,7 +6,7 @@ import {
   PredicateVisibility,
 } from '../../../../../../models/settings/predicate-visibility-settings.model';
 import { NodeService } from '../../../../../../services/node.service';
-import { SettingsService } from '../../../../../../services/settings.service';
+import { PredicateVisibilityService } from '../../../../../../services/predicate-visibility.service';
 import { sortByArrayOrder } from '../../../../../../helpers/util.helper';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
@@ -42,7 +42,7 @@ export class NodeDirectionTableComponent {
 
   constructor(
     public nodes: NodeService,
-    public settings: SettingsService,
+    private predVisibility: PredicateVisibilityService,
   ) {}
 
   ngOnInit() {
@@ -55,46 +55,10 @@ export class NodeDirectionTableComponent {
       return;
     }
     const nodePreds = Object.keys(this.node);
-    // const sortedNodePreds = sortByArrayOrder(
-    //   nodePreds,
-    //   this.settings.getVisiblePredicatesFlattened(this.visibility),
-    // );
-
-    // Get all predicate sections for current visibility
-    const settingsSections = this.settings.getVisiblePredicates()[this.visibility];
-
-    // Initialize sections in the order they appear in settings
-    const orderedSections = settingsSections.map(section => ({
-      ...section,
-      predicates: [] as string[] // Start with empty predicates array
-    }));
-
-    // Find the wildcard section if it exists
-    const wildcardSectionIndex = settingsSections.findIndex(section => 
-      section.predicates.includes('*')
+    this.predicateSections = this.predVisibility.getSections(
+      nodePreds,
+      this.visibility,
     );
-
-    // For each predicate in node
-    nodePreds.forEach((pred) => {
-      // First try to find section that explicitly lists this predicate
-      const explicitSectionIndex = settingsSections.findIndex(section => 
-        section.predicates.includes(pred)
-      );
-      
-      const sectionIndex = explicitSectionIndex >= 0 ? explicitSectionIndex : wildcardSectionIndex;
-      if (sectionIndex >= 0) {
-        orderedSections[sectionIndex].predicates.push(pred);
-      }
-    });
-
-    // Sort predicates within each section according to settings order
-    orderedSections.forEach((section, index) => {
-      const settingsPredicates = settingsSections[index].predicates;
-      section.predicates = sortByArrayOrder(section.predicates, settingsPredicates);
-    });
-
-    // Set the ordered sections
-    this.predicateSections = orderedSections;
   }
 
   initPredData() {
@@ -103,7 +67,7 @@ export class NodeDirectionTableComponent {
     }
     for (const pred of Object.keys(this.node)) {
       this.predicateVisibilities[pred] =
-        this.settings.getPredicateVisibility(pred);
+        this.predVisibility.getVisibility(pred);
 
       for (const direction of [Direction.Outgoing, Direction.Incoming]) {
         if (!this.numPredValues[pred]) {
@@ -143,11 +107,14 @@ export class NodeDirectionTableComponent {
     // return this.visibility === PredicateVisibility.Details;
   }
 
-  sectionHasPredsToShow(section: PredicateSection, direction: Direction): boolean {
+  sectionHasPredsToShow(
+    section: PredicateSection,
+    direction: Direction,
+  ): boolean {
     return section.predicates.some(
-      pred =>
+      (pred) =>
         this.predicateVisibilities[pred] === this.visibility &&
-        this.getNumPredValues(pred, direction) > 0
+        this.getNumPredValues(pred, direction) > 0,
     );
   }
 

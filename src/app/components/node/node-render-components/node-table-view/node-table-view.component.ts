@@ -11,6 +11,7 @@ import { ViewModeSetting } from '../../../../models/settings/view-mode-setting.e
 import { featherChevronDown, featherChevronUp } from '@ng-icons/feather-icons';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
 import { DetailsService } from '../../../../services/details.service';
+import { PredicateVisibilityService } from '../../../../services/predicate-visibility.service';
 
 @Component({
   selector: 'app-node-table-view',
@@ -38,6 +39,7 @@ export class NodeTableViewComponent
     public settings: SettingsService,
     public override nodes: NodeService,
     public details: DetailsService,
+    public predVisibility: PredicateVisibilityService,
   ) {
     super(nodes);
   }
@@ -56,7 +58,7 @@ export class NodeTableViewComponent
 
     const visiblePreds = Object.keys(
       Object.entries(this.node).filter(([pred, _]) => {
-        return this.settings.getPredicateVisibility(pred) === visibility;
+        return this.predVisibility.getVisibility(pred) === visibility;
       }),
     );
     return visiblePreds.length;
