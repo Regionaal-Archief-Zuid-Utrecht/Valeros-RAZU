@@ -213,6 +213,30 @@ export class SearchService {
     this.hasMoreResultsToLoad = hits && hits.length > 0;
   }
 
+  private _calculateTotalHits(
+    responses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
+  ): { total: number; isCapped: boolean } {
+    let isCapped = false;
+    const total = responses.reduce((total, response) => {
+      const hitTotal = response.hits.total;
+      if (typeof hitTotal === 'number') {
+        return total + hitTotal;
+      } else if (typeof hitTotal === 'object' && hitTotal !== null) {
+        if (hitTotal.relation !== 'eq') {
+          isCapped = true;
+        }
+        return (
+          total +
+          (hitTotal.relation === 'eq'
+            ? hitTotal.value
+            : Math.min(hitTotal.value, Settings.search.maxResultsForCounting))
+        );
+      }
+      return total;
+    }, 0);
+    return { total, isCapped };
+  }
+
   async execute(clearResults = false, clearFilters = true) {
     // if (this.queryStr === '') {
     //   return;
@@ -242,14 +266,7 @@ export class SearchService {
     try {
       const searchQueryIdOfRequest = this._searchQueryId;
 
-      // First get all results for counting and filter options
-      const countingResponses = await this.elastic.searchNodesForCounting(
-        this.queryStr,
-        this.filters.enabled.value,
-        this.filters.onlyShowResultsWithImages.value,
-      );
-
-      // Then get paginated results for display
+      // Get paginated results for display
       const displayResponses = await this.elastic.searchNodes(
         this.queryStr,
         this.page * Settings.search.resultsPerPagePerEndpoint,
@@ -258,20 +275,15 @@ export class SearchService {
         this.filters.onlyShowResultsWithImages.value,
       );
 
+      const { total, isCapped } = this._calculateTotalHits(displayResponses);
+      this.numberOfHits = total;
+      this.numberOfHitsIsCappedByElastic = isCapped;
+
       // TODO: Cancel requests if we know there's a new request already (note: cancelling promises not easily supported at the moment)
       const responsesAreOutdated =
         this._searchQueryId !== searchQueryIdOfRequest;
       if (responsesAreOutdated) {
         return;
-      }
-
-      // Update total hits from the counting response
-      const countingHits = this.hits.getFromSearchResponses(countingResponses);
-      const countingNodes = this.hits.parseToNodes(countingHits);
-      this.numberOfHits = countingNodes.length;
-      if (this.numberOfHits > 10000) {
-        this.numberOfHits = 10000;
-        this.numberOfHitsIsCappedByElastic = true;
       }
 
       // Update displayed results from the paginated response
@@ -283,7 +295,7 @@ export class SearchService {
         this.page++;
       }
 
-      // Now update filter options with all nodes from counting response
+      // Update filter options
       if (clearFilters) {
         await this.filters.updateFilterOptionValues(this.queryStr);
       }
