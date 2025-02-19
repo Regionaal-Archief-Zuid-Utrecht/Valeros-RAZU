@@ -491,23 +491,11 @@ export const Settings = {
       ],
       [PredicateVisibility.Details]: [
         {
-          label: 'Afbeeldingen',
-          predicates: [...imagePredicates],
-        },
-        {
-          label: 'Dekking',
           predicates: [
+            ...imagePredicates,
+            'https://data.razu.nl/def/ldto/heeftRepresentatie',
             'https://data.razu.nl/def/ldto/dekkingInRuimte',
             'https://data.razu.nl/def/ldto/dekkingInTijd',
-          ],
-        },
-        {
-          label: 'Representatie',
-          predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
-        },
-        {
-          label: 'Metadata',
-          predicates: [
             'https://data.razu.nl/def/ldto/naam',
             'https://schema.org/author',
             'https://data.razu.nl/def/ldto/omschrijving',
