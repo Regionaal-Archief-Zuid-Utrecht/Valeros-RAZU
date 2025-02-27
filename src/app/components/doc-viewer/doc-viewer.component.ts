@@ -16,6 +16,10 @@ export class DocViewerComponent implements OnInit {
   @Input() fileType?: FileType;
 
   loadingGoogleViewer = false;
+  convertingToPdf = false;
+
+  // TODO: Remove Google viewer, use PDF viewer + Gotenberg conversion for all doc types and simply hide viewer if request fails.
+  private readonly OFFICE_TYPES = [FileType.DOC, FileType.PPT, FileType.XLS];
 
   constructor() {}
 
@@ -25,14 +29,20 @@ export class DocViewerComponent implements OnInit {
     }
   }
 
+  private convertToPdf(url: string): string {
+    return `https://ontwikkel.viewer.razu.nl/gotenberg/convert?url=${encodeURIComponent(url)}`;
+  }
+
   getViewer(): ViewerType {
     if (!this.fileType) return ViewerType.GOOGLE;
 
     switch (this.fileType) {
       case FileType.PDF:
-        return ViewerType.GOOGLE; // ViewerType.PDF
+        return ViewerType.PDF;
       case FileType.DOC:
-        return ViewerType.GOOGLE; // TODO: Support mammoth?
+      case FileType.PPT:
+      case FileType.XLS:
+        return ViewerType.PDF;
       default:
         return ViewerType.GOOGLE;
     }
@@ -40,5 +50,14 @@ export class DocViewerComponent implements OnInit {
 
   onLoadedGoogleViewer() {
     this.loadingGoogleViewer = false;
+  }
+
+  getViewerUrl(): string {
+    if (!this.url || !this.fileType) return '';
+
+    if (this.OFFICE_TYPES.includes(this.fileType)) {
+      return this.convertToPdf(this.url);
+    }
+    return this.url;
   }
 }

@@ -5,7 +5,7 @@
   ></span>
 
   <ngx-doc-viewer
-    [url]="url"
+    [url]="getViewerUrl()"
     [viewer]="getViewer()"
     (loaded)="onLoadedGoogleViewer()"
   ></ngx-doc-viewer>
