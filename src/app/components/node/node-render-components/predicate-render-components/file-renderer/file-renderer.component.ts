@@ -23,6 +23,8 @@ import { MimeTypeService } from '../../../../../services/mime-type.service';
 import { FileType } from '../../../../../models/file-type.model';
 import { UrlService } from '../../../../../services/url.service';
 import { FileRenderService } from '../../../../../services/file-render.service';
+import { NgIcon } from '@ng-icons/core';
+import { featherDownload } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-file-renderer',
@@ -33,6 +35,7 @@ import { FileRenderService } from '../../../../../services/file-render.service';
     NodeImagesComponent,
     DocViewerComponent,
     NodeLinkComponent,
+    NgIcon,
     NgSwitch,
     NgSwitchCase,
     NgSwitchDefault,
@@ -98,4 +101,6 @@ export class FileRendererComponent implements OnInit, OnChanges {
     const mimeType = this.urlMimeTypes.get(url);
     return this.fileRenderService.getFileType(mimeType);
   }
+
+  protected readonly featherDownload = featherDownload;
 }
