@@ -4,13 +4,13 @@
   </ng-container>
 
   <ng-container *ngIf="!shownInTableCell">
+    <!-- Thumbnail view - show first item only with appropriate icon -->
     <ng-container *ngIf="isThumb">
-      <!-- Thumbnail view - show first item only with appropriate icon -->
       <app-node-images
         [imageUrls]="[
-          fileRenderService.getThumbUrl(
+          fileRenderService.getThumbImageUrl(
             displayUrls[0],
-            getFileType(displayUrls[0])
+            fileRenderService.getFileType(displayUrls[0])
           )
         ]"
         [useViewer]="false"
@@ -21,7 +21,7 @@
     <ng-container *ngIf="!isThumb">
       <!-- All images - pass full array to node-images -->
       <app-node-images
-        *ngIf="allFilesType === FileType.IMAGE"
+        *ngIf="unifiedFileType === FileType.IMAGE"
         [imageUrls]="displayUrls"
         [shownInTableCell]="shownInTableCell"
         [useViewer]="true"
@@ -29,10 +29,10 @@
       ></app-node-images>
 
       <!-- Mixed content or all documents - handle individually -->
-      <div *ngIf="allFilesType !== FileType.IMAGE" class="mb-4 h-full">
+      <div *ngIf="unifiedFileType !== FileType.IMAGE" class="mb-4 h-full">
         <div *ngFor="let url of displayUrls" class="mb-4 h-full">
           <app-node-images
-            *ngIf="getFileType(url) === FileType.IMAGE"
+            *ngIf="fileRenderService.getFileType(url) === FileType.IMAGE"
             [imageUrls]="[url]"
             [shownInTableCell]="shownInTableCell"
             [useViewer]="true"
@@ -40,16 +40,16 @@
 
           <app-node-link
             [url]="url"
-            *ngIf="getFileType(url) === FileType.UNKNOWN"
+            *ngIf="fileRenderService.getFileType(url) === FileType.UNKNOWN"
           ></app-node-link>
 
           <app-doc-viewer
             *ngIf="
-              getFileType(url) !== FileType.IMAGE &&
-              getFileType(url) !== FileType.UNKNOWN
+              fileRenderService.getFileType(url) !== FileType.IMAGE &&
+              fileRenderService.getFileType(url) !== FileType.UNKNOWN
             "
             [url]="url"
-            [fileType]="getFileType(url)"
+            [fileType]="fileRenderService.getFileType(url)"
             [style.height]="!shownInTableCell ? '100%' : '16rem'"
           ></app-doc-viewer>
         </div>

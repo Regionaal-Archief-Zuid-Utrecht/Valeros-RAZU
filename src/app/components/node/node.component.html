@@ -9,6 +9,8 @@
   aria-labelledby="search-results"
   [attr.aria-label]="title"
 >
+  <!-- File renderer in details view, thumb on search page (left side of node) -->
+  <!-- TODO: Remove link when showing in details view -->
   <a
     [routerLink]="details.getLink(node)"
     class="inline-block h-48 sm:h-auto"
@@ -27,6 +29,7 @@
     />
   </a>
 
+  <!-- Node info table on search page -->
   <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value">
     <div
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
@@ -67,6 +70,8 @@
       </div>
     </div>
   </a>
+
+  <!-- Details page node table -->
   <div
     [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
     class="flex-grow relative"

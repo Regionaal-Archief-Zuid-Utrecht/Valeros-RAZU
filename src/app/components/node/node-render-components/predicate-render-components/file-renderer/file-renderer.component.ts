@@ -7,21 +7,12 @@ import {
   SimpleChanges,
   type OnInit,
 } from '@angular/core';
-import { SparqlService } from '../../../../../services/sparql.service';
-import {
-  NgForOf,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { DocViewerComponent } from '../../../../doc-viewer/doc-viewer.component';
 import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-settings.model';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
-import { MimeTypeService } from '../../../../../services/mime-type.service';
 import { FileType } from '../../../../../models/file-type.model';
-import { UrlService } from '../../../../../services/url.service';
 import { FileRenderService } from '../../../../../services/file-render.service';
 
 @Component({
@@ -33,9 +24,6 @@ import { FileRenderService } from '../../../../../services/file-render.service';
     NodeImagesComponent,
     DocViewerComponent,
     NodeLinkComponent,
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
   ],
   templateUrl: './file-renderer.component.html',
   styleUrl: './file-renderer.component.css',
@@ -52,50 +40,57 @@ export class FileRendererComponent implements OnInit, OnChanges {
 
   fileUrls: string[] = [];
   loading = false;
-  urlMimeTypes = new Map<string, string>();
-
-  get displayUrls(): string[] {
-    return this.isThumb ? this.fileUrls.slice(0, 1) : this.fileUrls;
-  }
-
-  get allFilesType(): FileType {
-    const fileTypes = this.fileUrls.map((url) => this.getFileType(url));
-    return this.fileRenderService.getCommonFileType(fileTypes);
-  }
 
   constructor(public fileRenderService: FileRenderService) {}
 
   ngOnInit(): void {
-    void this.initFileUrls();
+    void this._initFileUrls();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['urls'] && !changes['urls'].firstChange) {
-      void this.initFileUrls();
+      void this._initFileUrls();
     }
   }
 
-  private async initFileUrls() {
+  get displayUrls(): string[] {
+    if (this.isThumb) {
+      return this.fileUrls.slice(0, 1);
+    }
+
+    return this.fileUrls;
+  }
+
+  get unifiedFileType(): FileType {
+    const fileTypes = this.fileUrls.map((url) =>
+      this.fileRenderService.getFileType(url),
+    );
+    return this.fileRenderService.findUnifiedFileType(fileTypes);
+  }
+
+  private _initHasViewer() {
+    const fileTypes = this.fileUrls.map((fileUrl) =>
+      this.fileRenderService.getFileType(fileUrl),
+    );
+    const hasViewableFiles = fileTypes.some(
+      (type) => type !== FileType.UNKNOWN,
+    );
+    this.hasViewer.emit(hasViewableFiles);
+  }
+
+  private async _initFileUrls() {
     this.loading = true;
 
     try {
-      const { fileUrls, mimeTypes } = await this.fileRenderService.processUrls(
+      const fileUrls = await this.fileRenderService.processUrls(
         this.urls,
         this.hopSettings?.preds,
       );
 
       this.fileUrls = fileUrls;
-      this.urlMimeTypes = mimeTypes;
-
-      const hasViewer = this.fileRenderService.hasViewer(fileUrls, mimeTypes);
-      this.hasViewer.emit(hasViewer);
+      this._initHasViewer();
     } finally {
       this.loading = false;
     }
-  }
-
-  getFileType(url: string): FileType {
-    const mimeType = this.urlMimeTypes.get(url);
-    return this.fileRenderService.getFileType(mimeType);
   }
 }

@@ -1,15 +1,4 @@
 <ng-container *ngIf="url">
-  <span
-    class="loading loading-spinner text-center block mx-auto mt-4"
-    *ngIf="loadingGoogleViewer"
-  ></span>
-
-  <ngx-doc-viewer
-    [url]="getViewerUrl()"
-    [viewer]="getViewer()"
-    (loaded)="onLoadedGoogleViewer()"
-  ></ngx-doc-viewer>
-  <!--     [googleCheckContentLoaded]="true"
-    [googleCheckInterval]="250"
-    [googleMaxChecks]="5" -->
+  <!-- TODO: Add spinner while loading -->
+  <ngx-doc-viewer [url]="getPdfUrl()" [viewer]="'pdf'"></ngx-doc-viewer>
 </ng-container>

@@ -197,12 +197,19 @@ export class NodeComponent implements OnInit {
   }
 
   shouldShowFileNextToTable(): boolean {
-    return (
-      this.showFileNextToTable &&
-      this.files &&
-      this.files.value.length > 0 &&
-      this.hasViewer.value
-    );
+    const hasFiles =
+      this.showFileNextToTable && this.files && this.files.value.length > 0;
+
+    if (!hasFiles) {
+      return false;
+    }
+
+    const isShowingDetails = this.details.showing.value;
+    const hasViewer = this.hasViewer.value;
+    if (!isShowingDetails || (isShowingDetails && hasViewer)) {
+      return true;
+    }
+    return false;
   }
 
   protected readonly Settings = Settings;
