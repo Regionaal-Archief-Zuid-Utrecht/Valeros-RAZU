@@ -14,6 +14,8 @@ import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-se
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { FileType } from '../../../../../models/file-type.model';
 import { FileRenderService } from '../../../../../services/file-render.service';
+import { NgIcon } from '@ng-icons/core';
+import { featherDownload } from '@ng-icons/feather-icons';
 
 @Component({
   selector: 'app-file-renderer',
@@ -24,6 +26,7 @@ import { FileRenderService } from '../../../../../services/file-render.service';
     NodeImagesComponent,
     DocViewerComponent,
     NodeLinkComponent,
+    NgIcon,
   ],
   templateUrl: './file-renderer.component.html',
   styleUrl: './file-renderer.component.css',
@@ -93,4 +96,6 @@ export class FileRendererComponent implements OnInit, OnChanges {
       this.loading = false;
     }
   }
+
+  protected readonly featherDownload = featherDownload;
 }
