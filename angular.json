@@ -38,7 +38,7 @@
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/ngx-float-ui/css/theme-white.css"
             ],
-            "scripts": ["node_modules/mammoth/mammoth.browser.min.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -104,7 +104,7 @@
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/ngx-float-ui/css/theme-white.css"
             ],
-            "scripts": ["node_modules/mammoth/mammoth.browser.min.js"]
+            "scripts": []
           }
         }
       }

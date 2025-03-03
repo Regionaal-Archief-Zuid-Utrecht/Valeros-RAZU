@@ -30,7 +30,6 @@
     "@types/openseadragon": "^3.0.10",
     "@ulb-darmstadt/shacl-form": "^1.4.6",
     "leaflet": "^1.9.4",
-    "mammoth": "^1.9.0",
     "mirador": "^3.4.3",
     "ng2-pdfjs-viewer": "^17.0.3",
     "ngx-float-ui": "^17.1.3",
