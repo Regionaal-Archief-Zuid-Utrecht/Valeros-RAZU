@@ -35,7 +35,7 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.initPdfViewer();
+    // this.initPdfViewer();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,6 +45,8 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   initPdfViewer() {
+    console.log('Initializing PDF viewer...');
+
     const pdfUrl = this._getPdfUrl();
     this.isConvertingPDF = true;
     this.http
