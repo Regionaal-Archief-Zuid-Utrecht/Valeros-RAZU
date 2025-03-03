@@ -11,7 +11,6 @@ import {
   type OnInit,
 } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FileType } from '../../models/file-type.model';
 import { Settings } from '../../config/settings';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
@@ -20,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-doc-viewer',
   standalone: true,
-  imports: [NgxDocViewerModule, NgIf, PdfJsViewerModule],
+  imports: [NgIf, PdfJsViewerModule],
   templateUrl: './doc-viewer.component.html',
   styleUrl: './doc-viewer.component.css',
 })
