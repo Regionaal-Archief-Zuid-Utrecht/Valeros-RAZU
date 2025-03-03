@@ -4,7 +4,9 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   ViewChild,
   type OnInit,
 } from '@angular/core';
@@ -22,7 +24,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './doc-viewer.component.html',
   styleUrl: './doc-viewer.component.css',
 })
-export class DocViewerComponent implements OnInit, AfterViewInit {
+export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() url?: string;
   @Input() fileType?: FileType;
   @ViewChild('pdfViewer') pdfViewer: any;
@@ -36,6 +38,12 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initPdfViewer();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['url']) {
+      this.initPdfViewer();
+    }
   }
 
   initPdfViewer() {
