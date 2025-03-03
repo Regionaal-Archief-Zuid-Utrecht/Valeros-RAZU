@@ -28,6 +28,7 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
   @ViewChild('pdfViewer') pdfViewer: any;
   @Output() error = new EventEmitter<Error>();
   isConvertingPDF = false;
+  isLoadingPdf = false;
 
   constructor(private http: HttpClient) {}
 
@@ -42,11 +43,17 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
     this.isConvertingPDF = true;
     this.http
       .get(pdfUrl, { responseType: 'blob' })
-      .pipe(finalize(() => (this.isConvertingPDF = false)))
+      .pipe(
+        finalize(() => {
+          this.isConvertingPDF = false;
+        }),
+      )
       .subscribe({
         next: (result) => {
           this.pdfViewer.pdfSrc = result;
           this.pdfViewer.refresh();
+          this.isConvertingPDF = false;
+          this.isLoadingPdf = true;
         },
         error: (error) => {
           console.error('Error loading PDF:', error);
