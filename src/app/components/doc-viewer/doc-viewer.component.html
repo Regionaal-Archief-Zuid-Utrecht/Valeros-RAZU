@@ -1,14 +1,13 @@
 <ng-container *ngIf="url">
-  <div class="text-center my-2" *ngIf="isConvertingPDF || isLoadingPdf">
+  <div class="text-center my-2" *ngIf="isConvertingPDF">
+    <!--  || isLoadingPdf -->
     <span class="loading loading-spinner relative top-[0.4rem] mr-2"></span>
     <span class="italic" *ngIf="isConvertingPDF"
-      >Bestand converteren naar PDF...</span
-    >
-    <span class="italic" *ngIf="isLoadingPdf">Bestand laden...</span>
+      >Bestand converteren naar PDF...
+    </span>
   </div>
 
   <ng2-pdfjs-viewer
     #pdfViewer
-    (onDocumentLoad)="isLoadingPdf = false"
   ></ng2-pdfjs-viewer>
 </ng-container>

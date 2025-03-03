@@ -29,7 +29,6 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('pdfViewer') pdfViewer: any;
   @Output() error = new EventEmitter<Error>();
   isConvertingPDF = false;
-  isLoadingPdf = false;
 
   constructor(private http: HttpClient) {}
 
@@ -59,8 +58,6 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
         next: (result) => {
           this.pdfViewer.pdfSrc = result;
           this.pdfViewer.refresh();
-          this.isConvertingPDF = false;
-          this.isLoadingPdf = true;
         },
         error: (error) => {
           console.error('Error loading PDF:', error);
