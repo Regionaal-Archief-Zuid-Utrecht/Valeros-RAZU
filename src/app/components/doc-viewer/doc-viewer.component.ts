@@ -22,6 +22,10 @@ export class DocViewerComponent implements OnInit {
   getPdfUrl(): string {
     if (!this.url || !this.fileType) return '';
 
+    if (this.fileType === FileType.PDF) {
+      return this.url;
+    }
+
     return Settings.pdfConversionUrl + encodeURIComponent(this.url);
   }
 }
