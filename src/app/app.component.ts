@@ -4,11 +4,18 @@ import { RouterOutlet } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NgIconComponent, TranslateModule],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    NgIconComponent,
+    TranslateModule,
+    PdfJsViewerModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
