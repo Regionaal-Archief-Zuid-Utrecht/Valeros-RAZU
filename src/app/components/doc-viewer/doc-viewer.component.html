@@ -1,4 +1,8 @@
 <ng-container *ngIf="url">
-  <!-- TODO: Add spinner while loading -->
+  <div class="text-center my-2" *ngIf="isConvertingPDF">
+    <span class="loading loading-spinner relative top-[0.4rem] mr-2"></span>
+    <span class="italic">Bestand converteren naar PDF...</span>
+  </div>
+
   <ng2-pdfjs-viewer #pdfViewer></ng2-pdfjs-viewer>
 </ng-container>

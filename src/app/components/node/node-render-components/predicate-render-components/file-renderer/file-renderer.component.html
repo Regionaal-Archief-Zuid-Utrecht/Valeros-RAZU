@@ -60,6 +60,7 @@
             [url]="url"
             [fileType]="fileRenderService.getFileType(url)"
             [style.height]="!shownInTableCell ? '100%' : '16rem'"
+            (error)="hasViewer.emit(false)"
           ></app-doc-viewer>
         </div>
       </div>

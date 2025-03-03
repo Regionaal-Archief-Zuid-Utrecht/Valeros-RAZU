@@ -2,10 +2,13 @@ import { NgIf } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
   type OnInit,
 } from '@angular/core';
+import { finalize } from 'rxjs/operators';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FileType } from '../../models/file-type.model';
 import { Settings } from '../../config/settings';
@@ -23,6 +26,8 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
   @Input() url?: string;
   @Input() fileType?: FileType;
   @ViewChild('pdfViewer') pdfViewer: any;
+  @Output() error = new EventEmitter<Error>();
+  isConvertingPDF = false;
 
   constructor(private http: HttpClient) {}
 
@@ -34,10 +39,20 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
 
   initPdfViewer() {
     const pdfUrl = this._getPdfUrl();
-    this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((result) => {
-      this.pdfViewer.pdfSrc = result;
-      this.pdfViewer.refresh();
-    });
+    this.isConvertingPDF = true;
+    this.http
+      .get(pdfUrl, { responseType: 'blob' })
+      .pipe(finalize(() => (this.isConvertingPDF = false)))
+      .subscribe({
+        next: (result) => {
+          this.pdfViewer.pdfSrc = result;
+          this.pdfViewer.refresh();
+        },
+        error: (error) => {
+          console.error('Error loading PDF:', error);
+          this.error.emit(error);
+        },
+      });
   }
 
   private _getPdfUrl(): string {
