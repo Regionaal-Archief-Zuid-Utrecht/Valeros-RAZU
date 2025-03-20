@@ -1,5 +1,5 @@
 # view-a-LOD
-![image](https://github.com/user-attachments/assets/f47a545e-b86b-48e4-aaa7-51159863aa42)
+<a href="https://lodpilot.kasteelamerongen.nl/" target="_blank">![image](https://github.com/user-attachments/assets/93450639-4a0b-4a28-8db8-05eff3bd2257)</a>
 
 > [!WARNING]  
 > This project is actively being developed, but not yet ready for production.
@@ -22,6 +22,8 @@ view-a-LOD allows you to easily configure:
 
 ## Projects using view-a-LOD
 ### Kasteel Amerongen pilot project
+<a href="https://lodpilot.kasteelamerongen.nl/" target="_blank"><img src="https://github.com/user-attachments/assets/93450639-4a0b-4a28-8db8-05eff3bd2257" width="800" /></a>
+
 view-a-LOD was initially developed as a **Kasteel Amerongen [pilot project](https://lodpilot.kasteelamerongen.nl/)**, using Linked Open Data standards to bring together data of [Het Utrechts Archief](https://hetutrechtsarchief.nl/), [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/) and [Kasteel Amerongen](https://www.kasteelamerongen.nl/) in a single search interface.
 
 You can try the prototoype at [lodpilot.kasteelamerongen.nl](https://lodpilot.kasteelamerongen.nl).
@@ -29,6 +31,8 @@ You can try the prototoype at [lodpilot.kasteelamerongen.nl](https://lodpilot.ka
 For additional context, consider checking out the [NDE podcast](https://netwerkdigitaalerfgoed.nl/nieuws/podcast-paulus-en-de-nijs-op-reis-hoe-linked-data-verspreide-archieven-kasteel-amerongen-herenigt/) on the project. 
 
 ### RAZU viewer
+<img src="https://github.com/user-attachments/assets/bf3abefe-f84c-439b-b6eb-74be33135dca" width="800" />
+
 The **[Regionaal Archief Zuid-Utrecht fork](https://github.com/Regionaal-Archief-Zuid-Utrecht/view-a-LOD-RAZU/tree/develop)** is being actively developed, and extends the pilot project's functionality with various features such as:
 1. A built-in PDF viewer ([PDF.js](https://github.com/mozilla/pdf.js/)).
 2. IIIF viewer ([Mirador](https://github.com/ProjectMirador/mirador)).
