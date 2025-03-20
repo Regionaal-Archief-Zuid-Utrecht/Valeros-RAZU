@@ -16,7 +16,7 @@ We believe that end users should not have to deal with the complexities of Linke
 Most Linked Data viewers are data-agnostic, meaning that they generally treat all (meta)data equally and visualize it in a single, unified manner. For the end user, however, some information might be more interesting to see than others, and you may find that different types of data require distinct visualization methods.
 
 view-a-LOD allows you to easily configure:
-1. **What** data to show to the end user (e.g. hiding all `mdto:checksum` fields for a node, or hiding all `skos:concept` nodes from the search hits).
+1. **What** data to show to the end user (e.g. hiding all `mdto:checksum` fields for a node, or hiding all `skos:Concept` nodes from the search hits).
 2. **Where/when** to show data to the end user (e.g. always show a field on the search hits page, or only on the details page?).
 3. **How** to display data for the end user, rendering different data in different ways (e.g. use a built-in image component for all `foaf:depiction` fields, a map component for `sdo:contentLocation` fields, or create a custom component for rendering your ontology-specific predicates).
 
