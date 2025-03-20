@@ -4,7 +4,7 @@
 > [!WARNING]  
 > This project is still in the prototyping stage, and not yet ready for production.
 
-A **flexible and configurable Linked Open Data viewer** using SPARQL and Elastic endpoints, currently built on [Triply](https://triply.cc/) infrastructure.
+A **flexible and configurable Linked Open Data viewer** using SPARQL and Elastic endpoints.
 
 For technical documentation, please check the [project wiki](https://github.com/Simon-Dirks/view-a-LOD/wiki).
 
