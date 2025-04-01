@@ -1,11 +1,6 @@
 <ng-container *ngIf="imageUrls && imageUrls.length > 0">
   <!-- MIRADOR VIEWER -->
-  <div
-    class="w-full h-full relative"
-    [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
-    id="mirador"
-    *ngIf="useViewer"
-  ></div>
+  <app-mirador *ngIf="useViewer" [imageUrls]="imageUrls"></app-mirador>
 
   <!-- THUMB -->
   <div class="w-full h-full overflow-y-scroll" *ngIf="!useViewer">
