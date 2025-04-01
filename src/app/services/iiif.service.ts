@@ -12,6 +12,7 @@ import {
 import { NodeModel } from '../models/node.model';
 import { NodeService } from './node.service';
 import { LabelsCacheService } from './cache/labels-cache.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,7 @@ import { LabelsCacheService } from './cache/labels-cache.service';
 export class IIIFService {
   private _blobUrls: Set<string> = new Set();
 
-  constructor(
-    private sparql: SparqlService,
-    private nodes: NodeService,
-    private labelsCache: LabelsCacheService,
-  ) {}
+  constructor(private sparql: SparqlService) {}
 
   private _getCanvasesFromUrls(imgUrls: string[]): Canvas[] {
     // TODO: Stop using example.org here, and properly retrieve the image dimensions etc
@@ -60,7 +57,9 @@ export class IIIFService {
 
   private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
     const itemsData: IIIFItemData[] = await this.sparql.getIIIFItemsData(id);
-    // TODO: Add annotations
+
+    const altoSample = '/assets/alto/b18035723_0006.JP2.xml';
+
     const canvases: Canvas[] = itemsData.map((itemData: IIIFItemData) => {
       const canvas: Canvas = {
         id: `https://data.razu.nl/iiif/canvas/${itemData.file}`,
@@ -85,6 +84,14 @@ export class IIIFService {
               },
             ],
           },
+        ],
+        seeAlso: [
+          {
+            '@id': altoSample,
+            profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
+            format: 'text/xml+alto',
+            label: 'METS-ALTO XML',
+          } as any,
         ],
         thumbnail: [
           {
