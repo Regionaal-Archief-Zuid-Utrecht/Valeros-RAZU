@@ -11,6 +11,8 @@ import {
 import { NgClass, NgFor, NgIf } from '@angular/common';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
+// @ts-ignore
+import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../services/iiif.service';
 import { NodeModel } from '../../models/node.model';
 
@@ -70,7 +72,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         return;
       }
 
-      return Mirador.viewer({
+      const config = {
         id: 'mirador',
         workspace: {
           type: 'single',
@@ -78,6 +80,13 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         },
         workspaceControlPanel: {
           enabled: false,
+        },
+        window: {
+          textOverlay: {
+            enabled: true,
+            selectable: true,
+            visible: false,
+          },
         },
         windows: [
           {
@@ -89,7 +98,9 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
             allowClose: false,
           },
         ],
-      });
+      };
+
+      return Mirador.viewer(config, [...textOverlayPlugin]);
     });
   }
 }
