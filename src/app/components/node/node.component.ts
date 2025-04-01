@@ -224,7 +224,17 @@ export class NodeComponent implements OnInit {
 
   shouldShowMiradorNextToTable(): boolean {
     // TODO: Implement
-    return !this.shouldShowFileNextToTable();
+    if (!this.node) {
+      return false;
+    }
+    if (this.shouldShowFileNextToTable()) {
+      return false;
+    }
+
+    const nodeId = this.nodes.getId(this.node);
+    const isTestNode =
+      nodeId === 'https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-689-26';
+    return isTestNode;
   }
 
   protected readonly Settings = Settings;

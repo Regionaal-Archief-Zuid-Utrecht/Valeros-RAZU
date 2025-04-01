@@ -30,7 +30,7 @@
     <app-mirador
       [nodeId]="nodes.getId(node)"
       [nodeLabel]="labelsCache.labels[nodes.getId(node)]"
-      [class.hidden]="!shouldShowMiradorNextToTable()"
+      *ngIf="shouldShowMiradorNextToTable()"
     ></app-mirador>
   </a>
 
