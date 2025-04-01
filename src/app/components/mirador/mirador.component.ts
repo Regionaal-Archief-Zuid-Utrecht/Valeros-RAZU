@@ -17,7 +17,7 @@ import { NodeModel } from '../../models/node.model';
 @Component({
   selector: 'app-mirador',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [],
   templateUrl: './mirador.component.html',
   styleUrl: './mirador.component.scss',
 })
