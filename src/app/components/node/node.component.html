@@ -29,6 +29,7 @@
     />
     <app-mirador
       [nodeId]="nodes.getId(node)"
+      [nodeLabel]="labelsCache.labels[nodes.getId(node)]"
       [class.hidden]="!shouldShowMiradorNextToTable()"
     ></app-mirador>
   </a>

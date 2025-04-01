@@ -25,6 +25,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
 
   @Input() nodeId?: string;
+  @Input() nodeLabel?: string;
   @Input() imageUrls?: string[];
 
   constructor(
@@ -37,7 +38,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['imageUrls'] || changes['nodeId']) {
+    if (changes['imageUrls'] || changes['nodeId'] || changes['nodeLabel']) {
       this.initViewer();
     }
   }
@@ -58,6 +59,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     this._viewer = this.ngZone.runOutsideAngular(async () => {
       const manifestUrl = await this.iiifService.createManifestBlob(
         this.nodeId,
+        this.nodeLabel,
         this.imageUrls,
       );
       const containerId = 'mirador';

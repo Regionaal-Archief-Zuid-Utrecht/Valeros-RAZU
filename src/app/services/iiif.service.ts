@@ -108,6 +108,7 @@ export class IIIFService {
 
   async generateCanvasesManifest(
     id: string,
+    label: string,
     canvases: Canvas[],
   ): Promise<Manifest> {
     const manifest: Manifest = {
@@ -115,7 +116,7 @@ export class IIIFService {
       id: id,
       type: 'Manifest',
       label: {
-        nl: [''], // TODO: Add label (if necessary)
+        nl: [label],
       },
       items: canvases,
     };
@@ -123,7 +124,11 @@ export class IIIFService {
     return manifest;
   }
 
-  async createManifestBlob(nodeId?: string, imageUrls?: string[]) {
+  async createManifestBlob(
+    nodeId?: string,
+    nodeLabel?: string,
+    imageUrls?: string[],
+  ) {
     let canvases: Canvas[] = [];
     if (imageUrls) {
       console.log('Creating manifest from image URLs', imageUrls);
@@ -134,7 +139,8 @@ export class IIIFService {
     }
 
     const manifest: Manifest = await this.generateCanvasesManifest(
-      nodeId ?? 'N/A',
+      nodeId ?? '',
+      nodeLabel ?? '',
       canvases,
     );
 

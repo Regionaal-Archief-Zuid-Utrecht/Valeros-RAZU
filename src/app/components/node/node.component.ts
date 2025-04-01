@@ -102,6 +102,7 @@ export class NodeComponent implements OnInit {
     public router: Router,
     public routing: RoutingService,
     public location: Location,
+    public labelsCache: LabelsCacheService,
   ) {}
 
   ngOnInit() {
