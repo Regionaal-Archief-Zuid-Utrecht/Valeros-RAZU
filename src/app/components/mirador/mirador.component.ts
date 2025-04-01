@@ -39,6 +39,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['imageUrls'] || changes['nodeId'] || changes['nodeLabel']) {
+      console.log('Changes detected, reinitializing viewer', changes);
       this.initViewer();
     }
   }
