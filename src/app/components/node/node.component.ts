@@ -40,6 +40,7 @@ import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { BehaviorSubject } from 'rxjs';
+import { MiradorComponent } from '../mirador/mirador.component';
 
 @Component({
   selector: 'app-node',
@@ -64,6 +65,7 @@ import { BehaviorSubject } from 'rxjs';
     RouterLink,
     TranslatePipe,
     FileRendererComponent,
+    MiradorComponent,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -77,7 +79,8 @@ export class NodeComponent implements OnInit {
   types: TypeModel[] = [];
   files: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   filesLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  hasViewer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  canShowUsingFileRenderer: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   showTitle = this.settings.hasViewModeSetting(ViewModeSetting.ShowTitle);
   showParents = this.settings.hasViewModeSetting(ViewModeSetting.ShowParents);
@@ -186,14 +189,20 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  get fileRendererWidth(): string {
+  get sectionNextToTableWidth(): string {
     if (window.innerWidth < 640) {
       return '100%';
     }
 
     return this.details.showing.value
-      ? Settings.largeFileRendererWidth.details
-      : Settings.largeFileRendererWidth.search;
+      ? Settings.sectionNextToTableWidth.details
+      : Settings.sectionNextToTableWidth.search;
+  }
+
+  shouldShowSectionNextToTable(): boolean {
+    return (
+      this.shouldShowFileNextToTable() || this.shouldShowMiradorNextToTable()
+    );
   }
 
   shouldShowFileNextToTable(): boolean {
@@ -205,11 +214,16 @@ export class NodeComponent implements OnInit {
     }
 
     const isShowingDetails = this.details.showing.value;
-    const hasViewer = this.hasViewer.value;
+    const hasViewer = this.canShowUsingFileRenderer.value;
     if (!isShowingDetails || (isShowingDetails && hasViewer)) {
       return true;
     }
     return false;
+  }
+
+  shouldShowMiradorNextToTable(): boolean {
+    // TODO: Implement
+    return !this.shouldShowFileNextToTable();
   }
 
   protected readonly Settings = Settings;

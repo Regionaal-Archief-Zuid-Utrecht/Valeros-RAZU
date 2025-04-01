@@ -470,7 +470,7 @@ export const Settings = {
       [ViewModeSetting.EnrichWithIncomingRelations]: false,
     },
   },
-  largeFileRendererWidth: { search: '30%', details: '40%' },
+  sectionNextToTableWidth: { search: '30%', details: '40%' },
   imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
   predicateVisibility: {
     [ViewMode.List]: {

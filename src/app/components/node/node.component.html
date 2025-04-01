@@ -1,8 +1,8 @@
 <div
-  class="w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
+  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
   *ngIf="node"
   [ngClass]="[
-    shouldShowFileNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
+    shouldShowSectionNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
   role="main"
@@ -12,20 +12,25 @@
   <!-- File renderer in details view, thumb on search page (left side of node) -->
   <a
     [routerLink]="details.showing.value ? null : details.getLink(node)"
-    class="inline-block h-48 sm:h-auto"
+    class="h-48 sm:h-auto"
     [ngClass]="[
       details.showing.value ? 'cursor-default' : '',
-      shouldShowFileNextToTable() ? '' : 'hidden'
+      shouldShowSectionNextToTable() ? 'inline-block' : 'hidden'
     ]"
-    [style.width]="fileRendererWidth"
-    [style.min-width]="fileRendererWidth"
+    [style.width]="sectionNextToTableWidth"
+    [style.min-width]="sectionNextToTableWidth"
   >
     <app-file-renderer
       [urls]="files.value"
       [shownInTableCell]="false"
       [isThumb]="!details.showing.value"
-      (hasViewer)="hasViewer.next($event)"
+      (hasViewer)="canShowUsingFileRenderer.next($event)"
+      [class.hidden]="!shouldShowFileNextToTable()"
     />
+    <app-mirador
+      [nodeId]="nodes.getId(node)"
+      [class.hidden]="!shouldShowMiradorNextToTable()"
+    ></app-mirador>
   </a>
 
   <!-- Node info table on search page -->
@@ -72,7 +77,7 @@
 
   <!-- Details page node table -->
   <div
-    [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
+    [ngClass]="shouldShowSectionNextToTable() ? 'p-6' : 'p-0'"
     class="flex-grow relative"
     *ngIf="details.showing.value"
   >

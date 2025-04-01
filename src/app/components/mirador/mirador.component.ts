@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 import { IIIFService } from '../../services/iiif.service';
@@ -17,6 +17,7 @@ import { NodeModel } from '../../models/node.model';
 @Component({
   selector: 'app-mirador',
   standalone: true,
+  imports: [NgFor, NgIf],
   templateUrl: './mirador.component.html',
   styleUrl: './mirador.component.scss',
 })
@@ -32,12 +33,12 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.initViewer(this.imageUrls);
+    this.initViewer();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['imageUrls']) {
-      this.initViewer(this.imageUrls);
+    if (changes['imageUrls'] || changes['nodeId']) {
+      this.initViewer();
     }
   }
 
@@ -51,11 +52,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
   }
 
-  private initViewer(imgUrls: string[] | undefined) {
-    if (!imgUrls || imgUrls.length === 0) {
-      return;
-    }
-
+  private initViewer() {
     this.destroyViewer();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
