@@ -256,7 +256,7 @@ export class ElasticService {
         return {
           [elasticField]: {
             order: sort.order === SortOrder.Ascending ? 'asc' : 'desc',
-            unmapped_type: 'string',
+            unmapped_type: 'keyword',
           },
         };
       },
@@ -272,6 +272,9 @@ export class ElasticService {
     from?: number,
     size?: number,
   ): any {
+    if (query === undefined) {
+      return;
+    }
     query = query.trim();
 
     const queryData: any = {

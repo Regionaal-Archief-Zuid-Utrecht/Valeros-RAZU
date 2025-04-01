@@ -1,9 +1,0 @@
-<span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
-
-<app-ldto-url-bestand
-  *ngFor="let hopObjId of hopObjIds"
-  [fileUrl]="hopObjId"
-  [nodeId]="id"
-/>
-
-<app-node-link [url]="id" *ngIf="settings?.showOriginalLink" />

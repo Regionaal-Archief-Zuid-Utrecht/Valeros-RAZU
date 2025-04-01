@@ -38,6 +38,8 @@ import { NodePermalinkButtonComponent } from './node-permalink-button/node-perma
 import { Router, RouterLink } from '@angular/router';
 import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-node',
@@ -61,6 +63,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     NodePermalinkButtonComponent,
     RouterLink,
     TranslatePipe,
+    FileRendererComponent,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -72,7 +75,9 @@ export class NodeComponent implements OnInit {
   id?: string;
   title = '';
   types: TypeModel[] = [];
-  images: string[] = [];
+  files: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  filesLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  hasViewer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   showTitle = this.settings.hasViewModeSetting(ViewModeSetting.ShowTitle);
   showParents = this.settings.hasViewModeSetting(ViewModeSetting.ShowParents);
@@ -80,8 +85,8 @@ export class NodeComponent implements OnInit {
   showOrganization = this.settings.hasViewModeSetting(
     ViewModeSetting.ShowOrganization,
   );
-  showImageNextToTable = this.settings.hasViewModeSetting(
-    ViewModeSetting.ShowImageNextToTable,
+  showFileNextToTable = this.settings.hasViewModeSetting(
+    ViewModeSetting.ShowFileNextToTable,
   );
 
   constructor(
@@ -100,7 +105,7 @@ export class NodeComponent implements OnInit {
     void this.retrieveParents();
     this.initTitle();
     this.initTypes();
-    this.initImages();
+    this.initFiles();
 
     if (!this.node) {
       return;
@@ -130,21 +135,25 @@ export class NodeComponent implements OnInit {
     return hopImageUrls.flat();
   }
 
-  async initImages() {
+  async initFiles() {
     if (!this.node) {
       return;
     }
 
-    this.images = this.nodes.getObjValues(
-      this.node,
-      Settings.predicates.images,
-      undefined,
-      true,
+    this.files.next(
+      this.nodes.getObjValues(
+        this.node,
+        Settings.predicates.images,
+        undefined,
+        true,
+      ),
     );
 
-    const nodeId: string = this.nodes.getId(this.node);
-    const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
-    this.images.push(...hopImageUrls);
+    if (this.details.isShowing()) {
+      const nodeId: string = this.nodes.getId(this.node);
+      const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
+      this.files.next([...this.files.value, ...hopImageUrls]);
+    }
   }
 
   initTypes() {
@@ -163,7 +172,7 @@ export class NodeComponent implements OnInit {
   }
 
   async retrieveParents() {
-    if (!this.node) {
+    if (!this.node || !this.showParents) {
       return;
     }
 
@@ -177,18 +186,30 @@ export class NodeComponent implements OnInit {
     );
   }
 
-  get imageWidth(): string {
+  get fileRendererWidth(): string {
     if (window.innerWidth < 640) {
       return '100%';
     }
 
     return this.details.showing.value
-      ? Settings.largeImageWidth.details
-      : Settings.largeImageWidth.search;
+      ? Settings.largeFileRendererWidth.details
+      : Settings.largeFileRendererWidth.search;
   }
 
-  shouldShowImageNextToTable(): boolean {
-    return this.showImageNextToTable && this.images && this.images.length > 0;
+  shouldShowFileNextToTable(): boolean {
+    const hasFiles =
+      this.showFileNextToTable && this.files && this.files.value.length > 0;
+
+    if (!hasFiles) {
+      return false;
+    }
+
+    const isShowingDetails = this.details.showing.value;
+    const hasViewer = this.hasViewer.value;
+    if (!isShowingDetails || (isShowingDetails && hasViewer)) {
+      return true;
+    }
+    return false;
   }
 
   protected readonly Settings = Settings;

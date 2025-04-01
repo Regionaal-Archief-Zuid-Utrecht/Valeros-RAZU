@@ -64,10 +64,11 @@
           [id]="objValue"
         />
 
-        <app-ldto-heeft-representatie
-          *ngIf="shouldRenderComponentIds.includes('ldto-heeft-representatie')"
-          [id]="objValue"
-          [settings]="
+        <app-file-renderer
+          *ngIf="shouldRenderComponentIds.includes('file-renderer')"
+          [urls]="objValue"
+          [shownInTableCell]="true"
+          [hopSettings]="
             renderComponent.getSettingByKey(
               'hopLinkSettings',
               node,

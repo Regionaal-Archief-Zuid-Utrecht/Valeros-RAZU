@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { Direction, NodeModel } from '../../../../../../models/node.model';
-import { PredicateVisibility } from '../../../../../../models/settings/predicate-visibility-settings.model';
+import {
+  PredicateSection,
+  PredicateVisibility,
+} from '../../../../../../models/settings/predicate-visibility-settings.model';
 import { NodeService } from '../../../../../../services/node.service';
-import { SettingsService } from '../../../../../../services/settings.service';
+import { PredicateVisibilityService } from '../../../../../../services/predicate-visibility.service';
 import { sortByArrayOrder } from '../../../../../../helpers/util.helper';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
@@ -31,7 +34,7 @@ export class NodeDirectionTableComponent {
   @Input() visibility!: PredicateVisibility;
   @Input() direction!: Direction;
 
-  nodePreds: string[] = [];
+  predicateSections: PredicateSection[] = [];
   predicateVisibilities: { [pred: string]: PredicateVisibility } = {};
   numPredValues: {
     [pred: string]: { [direction in Direction]: number };
@@ -39,7 +42,7 @@ export class NodeDirectionTableComponent {
 
   constructor(
     public nodes: NodeService,
-    public settings: SettingsService,
+    private predVisibility: PredicateVisibilityService,
   ) {}
 
   ngOnInit() {
@@ -52,11 +55,10 @@ export class NodeDirectionTableComponent {
       return;
     }
     const nodePreds = Object.keys(this.node);
-    const sortedNodePreds = sortByArrayOrder(
+    this.predicateSections = this.predVisibility.getSections(
       nodePreds,
-      this.settings.getVisiblePredicates()[this.visibility],
+      this.visibility,
     );
-    this.nodePreds = sortedNodePreds;
   }
 
   initPredData() {
@@ -65,7 +67,7 @@ export class NodeDirectionTableComponent {
     }
     for (const pred of Object.keys(this.node)) {
       this.predicateVisibilities[pred] =
-        this.settings.getPredicateVisibility(pred);
+        this.predVisibility.getVisibility(pred);
 
       for (const direction of [Direction.Outgoing, Direction.Incoming]) {
         if (!this.numPredValues[pred]) {
@@ -82,7 +84,7 @@ export class NodeDirectionTableComponent {
   }
 
   getNumPredValues(pred: string, direction: Direction) {
-    if (!pred || direction === undefined) {
+    if (!pred || direction === undefined || !this.numPredValues[pred]) {
       return 0;
     }
 
@@ -103,6 +105,17 @@ export class NodeDirectionTableComponent {
   get smallFontSize(): boolean {
     return false;
     // return this.visibility === PredicateVisibility.Details;
+  }
+
+  sectionHasPredsToShow(
+    section: PredicateSection,
+    direction: Direction,
+  ): boolean {
+    return section.predicates.some(
+      (pred) =>
+        this.predicateVisibilities[pred] === this.visibility &&
+        this.getNumPredValues(pred, direction) > 0,
+    );
   }
 
   protected readonly Direction = Direction;

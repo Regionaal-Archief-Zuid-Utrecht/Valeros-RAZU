@@ -18,11 +18,12 @@ import { UrlService } from '../../../services/url.service';
 import { Settings } from '../../../config/settings';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
+import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-images',
   standalone: true,
-  imports: [NgForOf, NgIf, JsonPipe, NgClass],
+  imports: [NgForOf, NgIf, JsonPipe, NgClass, NodeLinkComponent],
   templateUrl: './node-images.component.html',
   styleUrl: './node-images.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -34,10 +35,8 @@ export class NodeImagesComponent
 
   @Input() imageUrls?: string[];
   @Input() shownInTableCell = true;
-  @Input() showAsThumb = false;
+  @Input() useViewer = true;
   @Input() imageLabel?: string;
-
-  processedImageUrls: string[] = [];
 
   constructor(
     public urlService: UrlService,
@@ -45,14 +44,10 @@ export class NodeImagesComponent
     private iiifService: IIIFService,
   ) {}
 
-  ngOnInit() {
-    this._processImageUrls();
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    if (this.processedImageUrls.length > 0) {
-      this.initImageViewer(this.processedImageUrls);
-    }
+    this.initImageViewer(this.imageUrls);
   }
 
   destroyImageViewer() {
@@ -61,8 +56,11 @@ export class NodeImagesComponent
     }
   }
 
-  initImageViewer(imgUrls: string[]) {
-    if (!imgUrls.length) {
+  initImageViewer(imgUrls: string[] | undefined) {
+    if (!this.useViewer) {
+      return;
+    }
+    if (!imgUrls || imgUrls.length === 0) {
       return;
     }
 
@@ -70,9 +68,18 @@ export class NodeImagesComponent
 
     this._imageViewer = this.ngZone.runOutsideAngular(() => {
       const manifestUrl = this.iiifService.createManifestBlob(imgUrls);
-      console.log('Manifest URL', manifestUrl);
+      const containerId = 'mirador';
+      const containerElem = document.getElementById(containerId);
+      if (!containerElem) {
+        console.warn('Container element not found', containerId);
+        return;
+      }
+      // console.log(
+      //   'Manifest URL',
+      //   manifestUrl,
+      // );
 
-      return Mirador.viewer({
+      const miradorInstance = Mirador.viewer({
         id: 'mirador',
         workspace: {
           type: 'single',
@@ -92,30 +99,39 @@ export class NodeImagesComponent
           },
         ],
       });
+
+      // Center image after load
+      miradorInstance.store.subscribe(() => {
+        const state = miradorInstance.store.getState();
+        const windows = state.windows || {};
+        const windowIds = Object.keys(windows);
+
+        if (windowIds.length > 0) {
+          const windowId = windowIds[0];
+          const canvasId = windows[windowId]?.canvasId;
+
+          if (canvasId && state.viewers?.[windowId]?.viewer) {
+            const viewer = state.viewers[windowId].viewer;
+            if (viewer && !viewer.__centered) {
+              viewer.viewport.goHome();
+              viewer.__centered = true;
+            }
+          }
+        }
+      });
+
+      return miradorInstance;
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['imageUrls']) {
-      this._processImageUrls();
+      this.initImageViewer(this.imageUrls);
     }
   }
 
   ngOnDestroy() {
     this.destroyImageViewer();
-  }
-
-  private async _processImageUrls() {
-    if (!this.imageUrls) {
-      return;
-    }
-
-    this.processedImageUrls = await this.urlService.processUrls(
-      this.imageUrls,
-      false,
-    );
-
-    this.initImageViewer(this.processedImageUrls);
   }
 
   onImageLoadError($event: ErrorEvent) {

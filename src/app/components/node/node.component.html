@@ -2,32 +2,36 @@
   class="w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
   *ngIf="node"
   [ngClass]="[
-    shouldShowImageNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6',
+    shouldShowFileNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
   role="main"
   aria-labelledby="search-results"
   [attr.aria-label]="title"
 >
+  <!-- File renderer in details view, thumb on search page (left side of node) -->
   <a
-    *ngIf="shouldShowImageNextToTable()"
-    [routerLink]="details.getLink(node)"
+    [routerLink]="details.showing.value ? null : details.getLink(node)"
     class="inline-block h-48 sm:h-auto"
-    [ngClass]="[details.showing.value ? 'cursor-default' : '']"
-    [style.width]="imageWidth"
-    [style.min-width]="imageWidth"
+    [ngClass]="[
+      details.showing.value ? 'cursor-default' : '',
+      shouldShowFileNextToTable() ? '' : 'hidden'
+    ]"
+    [style.width]="fileRendererWidth"
+    [style.min-width]="fileRendererWidth"
   >
-    <app-node-images
-      [imageUrls]="images"
+    <app-file-renderer
+      [urls]="files.value"
       [shownInTableCell]="false"
-      [showAsThumb]="!this.details.showing.value"
-      [imageLabel]="title"
+      [isThumb]="!details.showing.value"
+      (hasViewer)="hasViewer.next($event)"
     />
   </a>
 
+  <!-- Node info table on search page -->
   <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value">
     <div
-      [ngClass]="shouldShowImageNextToTable() ? 'p-6' : 'p-0'"
+      [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
       class="flex-grow relative"
     >
       <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
@@ -58,17 +62,17 @@
       <div
         class="absolute"
         [ngClass]="[
-          shouldShowImageNextToTable()
-            ? 'right-6 bottom-6'
-            : 'right-0 bottom-0',
+          shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
         ]"
       >
         <app-node-details-button [node]="node" />
       </div>
     </div>
   </a>
+
+  <!-- Details page node table -->
   <div
-    [ngClass]="shouldShowImageNextToTable() ? 'p-6' : 'p-0'"
+    [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
     class="flex-grow relative"
     *ngIf="details.showing.value"
   >
@@ -110,7 +114,7 @@
     <div
       class="absolute"
       [ngClass]="[
-        shouldShowImageNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
+        shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
       ]"
     ></div>
   </div>

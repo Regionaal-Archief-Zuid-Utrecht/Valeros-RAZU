@@ -23,7 +23,8 @@ export class SortSelectComponent {
     public ui: UiService,
   ) {}
 
-  onChange(selectedId: string) {
+  onChange(event: any) {
+    const selectedId: string = event.target.value;
     this.sorting.select(selectedId);
   }
 

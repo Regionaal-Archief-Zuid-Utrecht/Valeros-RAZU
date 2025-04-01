@@ -1,18 +1,19 @@
-<div
-  class="w-full h-full relative"
-  [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
-  id="mirador"
-  *ngIf="!showAsThumb"
-></div>
+<ng-container *ngIf="imageUrls && imageUrls.length > 0">
+  <!-- MIRADOR VIEWER -->
+  <div
+    class="w-full h-full relative"
+    [ngClass]="[shownInTableCell ? 'viewer-small-ui' : '']"
+    id="mirador"
+    *ngIf="useViewer"
+  ></div>
 
-<div
-  class="w-full h-full overflow-y-scroll"
-  *ngIf="showAsThumb && this.processedImageUrls.length > 0"
->
-  <img
-    [src]="this.processedImageUrls[0]"
-    [alt]="this.imageLabel ?? 'Unknown image'"
-    class="w-full h-full object-cover"
-    (error)="onImageLoadError($event)"
-  />
-</div>
+  <!-- THUMB -->
+  <div class="w-full h-full overflow-y-scroll" *ngIf="!useViewer">
+    <img
+      [src]="imageUrls[0]"
+      [alt]="imageLabel ?? 'Unknown image'"
+      class="w-full h-full object-cover"
+      (error)="onImageLoadError($event)"
+    />
+  </div>
+</ng-container>

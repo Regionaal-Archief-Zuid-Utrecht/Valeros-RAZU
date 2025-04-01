@@ -31,6 +31,7 @@
     "@ulb-darmstadt/shacl-form": "^1.4.6",
     "leaflet": "^1.9.4",
     "mirador": "^3.4.3",
+    "ng2-pdfjs-viewer": "^17.0.3",
     "ngx-float-ui": "^17.1.3",
     "ngx-masonry": "^14.0.1",
     "ngx-matomo-client": "^6.3.1",

@@ -3,6 +3,7 @@ export enum ViewModeSetting {
   ShowParents,
   ShowTitle,
   ShowTypes,
-  ShowImageNextToTable,
+  ShowFileNextToTable,
   ShowOrganization,
+  EnrichWithIncomingRelations,
 }

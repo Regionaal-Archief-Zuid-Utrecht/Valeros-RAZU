@@ -34,49 +34,4 @@ export class SettingsService {
     ];
     return viewModeSettings?.[viewModeSetting];
   }
-
-  getVisiblePredicates(): PredicateVisibilityEntries {
-    // TODO: Fix type issue
-    return (
-      Settings.predicateVisibility as unknown as PredicateVisibilitySettings
-    )[this.viewModes.current.value];
-  }
-
-  getPredicateVisibility(predicateId: string): PredicateVisibility {
-    if ((Settings.alwaysHidePredicates as string[]).includes(predicateId)) {
-      return PredicateVisibility.Hide;
-    }
-
-    const visiblePredicates: PredicateVisibilityEntries =
-      this.getVisiblePredicates();
-    if (visiblePredicates[PredicateVisibility.Hide].includes(predicateId)) {
-      return PredicateVisibility.Hide;
-    }
-
-    const showPreds = visiblePredicates[PredicateVisibility.Show];
-    const detailPreds = visiblePredicates[PredicateVisibility.Details];
-
-    const shouldShowAllPredsNotShownInDetails = showPreds.includes('*');
-    const predIsShownInDetails = detailPreds.includes(predicateId);
-    const shouldShowPred = showPreds.includes(predicateId);
-
-    if (
-      (shouldShowAllPredsNotShownInDetails && !predIsShownInDetails) ||
-      shouldShowPred
-    ) {
-      return PredicateVisibility.Show;
-    }
-
-    const shouldShowRemainingPredsInDetails = detailPreds.includes('*');
-    const predIsAlreadyShown = showPreds.includes(predicateId);
-    const shouldShowDetailPred = detailPreds.includes(predicateId);
-    if (
-      (shouldShowRemainingPredsInDetails && !predIsAlreadyShown) ||
-      shouldShowDetailPred
-    ) {
-      return PredicateVisibility.Details;
-    }
-
-    return PredicateVisibility.Hide;
-  }
 }

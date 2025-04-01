@@ -75,10 +75,11 @@ export class AutocompleteService {
           const elasticLabelPredicate =
             this.data.replacePeriodsWithSpaces(predicate);
           if (elasticLabelPredicate in hitNode) {
-            const hitLabels = hitNode[elasticLabelPredicate] as string[];
-            for (const hitLabel of hitLabels) {
-              optionsSet[id].add(hitLabel);
-            }
+            optionsSet[id].add(hitNode[elasticLabelPredicate]);
+            // const hitLabels = hitNode[elasticLabelPredicate] as string[];
+            // for (const hitLabel of hitLabels) {
+            //   optionsSet[id].add(hitLabel);
+            // }
           }
         });
       }

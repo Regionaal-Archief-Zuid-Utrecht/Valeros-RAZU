@@ -9,6 +9,7 @@ import { intersects } from '../../../helpers/util.helper';
 import { ClusterValuesSettingsModel } from '../../../models/settings/cluster-values-settings.model';
 import { SettingsService } from '../../../services/settings.service';
 import { PredicateVisibility } from '../../../models/settings/predicate-visibility-settings.model';
+import { PredicateVisibilityService } from '../../../services/predicate-visibility.service';
 
 @Component({
   selector: 'app-node-types',
@@ -25,6 +26,7 @@ export class NodeTypesComponent {
   constructor(
     public clusters: ClusterService,
     public settings: SettingsService,
+    public predVisibility: PredicateVisibilityService,
   ) {}
 
   ngOnInit() {
@@ -39,8 +41,7 @@ export class NodeTypesComponent {
 
     return this.types?.filter(
       (t) =>
-        this.settings.getPredicateVisibility(t.id) !==
-          PredicateVisibility.Hide &&
+        this.predVisibility.getVisibility(t.id) !== PredicateVisibility.Hide &&
         !(Settings.hideTypePredicates as string[]).includes(t.id),
     );
   }

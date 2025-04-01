@@ -1,0 +1,70 @@
+<div class="w-full h-full" *ngIf="!loading && fileUrls.length > 0">
+  <ng-container *ngIf="shownInTableCell">
+    <a
+      [href]="url"
+      download
+      class="btn btn-xs btn-primary"
+      *ngFor="let url of fileUrls"
+    >
+      <ng-icon [svg]="featherDownload" class="mr-1" />
+
+      Download bestand
+    </a>
+  </ng-container>
+
+  <ng-container *ngIf="!shownInTableCell">
+    <!-- Thumbnail view - show first item only with appropriate icon -->
+    <ng-container *ngIf="isThumb">
+      <app-node-images
+        [imageUrls]="[
+          fileRenderService.getThumbImageUrl(
+            displayUrls[0],
+            fileRenderService.getFileType(displayUrls[0])
+          )
+        ]"
+        [useViewer]="false"
+        class="mb-4 h-full"
+      ></app-node-images>
+    </ng-container>
+
+    <ng-container *ngIf="!isThumb">
+      <!-- All images - pass full array to node-images -->
+      <app-node-images
+        *ngIf="unifiedFileType === FileType.IMAGE"
+        [imageUrls]="displayUrls"
+        [shownInTableCell]="shownInTableCell"
+        [useViewer]="true"
+        class="mb-4 h-full"
+      ></app-node-images>
+
+      <!-- Mixed content or all documents - handle individually -->
+      <div *ngIf="unifiedFileType !== FileType.IMAGE" class="mb-4 h-full">
+        <div *ngFor="let url of displayUrls" class="mb-4 h-full">
+          <app-node-images
+            *ngIf="fileRenderService.getFileType(url) === FileType.IMAGE"
+            [imageUrls]="[url]"
+            [shownInTableCell]="shownInTableCell"
+            [useViewer]="true"
+          ></app-node-images>
+
+          <app-node-link
+            [url]="url"
+            *ngIf="fileRenderService.getFileType(url) === FileType.UNKNOWN"
+          ></app-node-link>
+
+          <app-doc-viewer
+            *ngIf="
+              fileRenderService.getFileType(url) !== FileType.IMAGE &&
+              fileRenderService.getFileType(url) !== FileType.UNKNOWN
+            "
+            [url]="url"
+            [fileType]="fileRenderService.getFileType(url)"
+            [style.height]="!shownInTableCell ? '100%' : '16rem'"
+            (error)="hasViewer.emit(false)"
+          ></app-doc-viewer>
+        </div>
+      </div>
+    </ng-container>
+    <span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
+  </ng-container>
+</div>
