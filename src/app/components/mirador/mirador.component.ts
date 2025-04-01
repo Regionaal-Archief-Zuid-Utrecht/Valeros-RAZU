@@ -25,6 +25,7 @@ import { NodeModel } from '../../models/node.model';
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
+  private _initializeDebounceTimer?: number;
 
   @Input() nodeId?: string;
   @Input() nodeLabel?: string;
@@ -41,8 +42,17 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['imageUrls'] || changes['nodeId'] || changes['nodeLabel']) {
-      console.log('Changes detected, reinitializing viewer', changes);
-      this.initViewer();
+      if (this._initializeDebounceTimer) {
+        console.log('Cancelling previous initialization attempt');
+
+        window.clearTimeout(this._initializeDebounceTimer);
+      }
+
+      this._initializeDebounceTimer = window.setTimeout(() => {
+        console.log('Initializing viewer after changes', changes);
+        this.initViewer();
+        this._initializeDebounceTimer = undefined;
+      }, 100);
     }
   }
 
@@ -51,6 +61,10 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   private destroyViewer() {
+    if (this._initializeDebounceTimer) {
+      window.clearTimeout(this._initializeDebounceTimer);
+      this._initializeDebounceTimer = undefined;
+    }
     if (this._viewer) {
       this._viewer = undefined;
     }
