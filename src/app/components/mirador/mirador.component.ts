@@ -72,24 +72,21 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   private initCenterImageAfterLoad(miradorInstance: any) {
     miradorInstance.store.subscribe(() => {
-      setTimeout(() => {
-        const state = miradorInstance.store.getState();
-        const windows = state.windows || {};
-        const windowIds = Object.keys(windows);
-
-        if (windowIds.length > 0) {
-          const windowId = windowIds[0];
-          const canvasId = windows[windowId]?.canvasId;
-
-          if (canvasId && state.viewers?.[windowId]?.viewer) {
-            const viewer = state.viewers[windowId].viewer;
-            if (viewer && !viewer.__centered) {
-              viewer.viewport.goHome();
-              viewer.__centered = true;
-            }
-          }
-        }
-      }, 1);
+      // TODO: Implement
+      // const state = miradorInstance.store.getState();
+      // const windows = state.windows || {};
+      // const windowIds = Object.keys(windows);
+      // if (windowIds.length > 0) {
+      //   const windowId = windowIds[0];
+      //   const canvasId = windows[windowId]?.canvasId;
+      //   if (canvasId && state.viewers?.[windowId]?.viewer) {
+      //     const viewer = state.viewers[windowId].viewer;
+      //     if (viewer && !viewer.__centered) {
+      //       viewer.viewport.goHome();
+      //       viewer.__centered = true;
+      //     }
+      //   }
+      // }
     });
   }
 
