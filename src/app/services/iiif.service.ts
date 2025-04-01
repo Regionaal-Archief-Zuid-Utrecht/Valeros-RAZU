@@ -1,4 +1,14 @@
 import { Injectable } from '@angular/core';
+import { SparqlService } from './sparql.service';
+import { ApiService } from './api.service';
+import { IIIFItem as IIIFItemData } from '../models/IIIF/iiif-item.model';
+import {
+  Manifest,
+  Canvas,
+  AnnotationPage,
+  Annotation,
+  ImageService,
+} from '@iiif/presentation-3';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +16,7 @@ import { Injectable } from '@angular/core';
 export class IIIFService {
   private _blobUrls: Set<string> = new Set();
 
-  constructor() {}
+  constructor(private sparql: SparqlService) {}
 
   generateManifest(imgUrls: string[]) {
     const imageManifestSample = {
@@ -42,301 +52,80 @@ export class IIIFService {
         ],
       })),
     };
-    const newspaperManifestSample = {
-      '@context': 'http://iiif.io/api/presentation/3/context.json',
-      id: 'https://k3.digitopia.nl/manifest/razu_manifest_4c.json',
-      type: 'Manifest',
-      label: {
-        nl: ['De Amerongsche Courant, jaarg. 4, nr. 183 (1878-04-04)'],
-      },
-      items: [
-        {
-          id: 'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-1',
-          type: 'Canvas',
-          height: 4659,
-          width: 3364,
-          items: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-1/painting-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-1',
-                  type: 'Annotation',
-                  motivation: 'painting',
-                  body: {
-                    id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-2.tif/full/max/0/default.jpg',
-                    type: 'Image',
-                    format: 'image/jpeg',
-                    service: [
-                      {
-                        id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-2.tif',
-                        type: 'ImageService2',
-                        profile: 'http://iiif.io/api/image/2/level2.json',
-                      },
-                    ],
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-1',
-                },
-              ],
-            },
-          ],
-          annotations: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-1/supplementing-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-1-alto',
-                  type: 'Annotation',
-                  motivation: 'supplementing',
-                  body: {
-                    id: 'https://data.razu.nl/alto/NL-WbDRAZU-K50907905-689-3.alto.xml',
-                    type: 'Dataset',
-                    format: 'application/xml',
-                    label: {
-                      nl: ['ALTO XML'],
-                    },
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-1',
-                },
-              ],
-            },
-          ],
-          thumbnail: [
-            {
-              id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-2.tif/full/200,/0/default.jpg',
-              type: 'Image',
-              format: 'image/jpeg',
-              service: [
-                {
-                  id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-2.tif',
-                  type: 'ImageService2',
-                  profile: 'http://iiif.io/api/image/2/level2.json',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-2',
-          type: 'Canvas',
-          height: 4743,
-          width: 3514,
-          items: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-2/painting-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-2',
-                  type: 'Annotation',
-                  motivation: 'painting',
-                  body: {
-                    id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-5.tif/full/max/0/default.jpg',
-                    type: 'Image',
-                    format: 'image/jpeg',
-                    service: [
-                      {
-                        id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-5.tif',
-                        type: 'ImageService2',
-                        profile: 'http://iiif.io/api/image/2/level2.json',
-                      },
-                    ],
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-2',
-                },
-              ],
-            },
-          ],
-          annotations: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-2/supplementing-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-2-alto',
-                  type: 'Annotation',
-                  motivation: 'supplementing',
-                  body: {
-                    id: 'https://data.razu.nl/alto/NL-WbDRAZU-K50907905-689-6.alto.xml',
-                    type: 'Dataset',
-                    format: 'application/xml',
-                    label: {
-                      nl: ['ALTO XML'],
-                    },
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-2',
-                },
-              ],
-            },
-          ],
-          thumbnail: [
-            {
-              id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-5.tif/full/200,/0/default.jpg',
-              type: 'Image',
-              format: 'image/jpeg',
-              service: [
-                {
-                  id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-5.tif',
-                  type: 'ImageService2',
-                  profile: 'http://iiif.io/api/image/2/level2.json',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-3',
-          type: 'Canvas',
-          height: 4741,
-          width: 3434,
-          items: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-3/painting-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-3',
-                  type: 'Annotation',
-                  motivation: 'painting',
-                  body: {
-                    id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-8.tif/full/max/0/default.jpg',
-                    type: 'Image',
-                    format: 'image/jpeg',
-                    service: [
-                      {
-                        id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-8.tif',
-                        type: 'ImageService2',
-                        profile: 'http://iiif.io/api/image/2/level2.json',
-                      },
-                    ],
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-3',
-                },
-              ],
-            },
-          ],
-          annotations: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-3/supplementing-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-3-alto',
-                  type: 'Annotation',
-                  motivation: 'supplementing',
-                  body: {
-                    id: 'https://data.razu.nl/alto/NL-WbDRAZU-K50907905-689-9.alto.xml',
-                    type: 'Dataset',
-                    format: 'application/xml',
-                    label: {
-                      nl: ['ALTO XML'],
-                    },
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-3',
-                },
-              ],
-            },
-          ],
-          thumbnail: [
-            {
-              id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-8.tif/full/200,/0/default.jpg',
-              type: 'Image',
-              format: 'image/jpeg',
-              service: [
-                {
-                  id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-8.tif',
-                  type: 'ImageService2',
-                  profile: 'http://iiif.io/api/image/2/level2.json',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-4',
-          type: 'Canvas',
-          height: 4697,
-          width: 3385,
-          items: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-4/painting-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-4',
-                  type: 'Annotation',
-                  motivation: 'painting',
-                  body: {
-                    id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-11.tif/full/max/0/default.jpg',
-                    type: 'Image',
-                    format: 'image/jpeg',
-                    service: [
-                      {
-                        id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-11.tif',
-                        type: 'ImageService2',
-                        profile: 'http://iiif.io/api/image/2/level2.json',
-                      },
-                    ],
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-4',
-                },
-              ],
-            },
-          ],
-          annotations: [
-            {
-              id: 'https://data.razu.nl/iiif/page/NL-WbDRAZU-K50907905-689-4/supplementing-annotation-page',
-              type: 'AnnotationPage',
-              items: [
-                {
-                  id: 'https://data.razu.nl/iiif/annotation/NL-WbDRAZU-K50907905-689-4-alto',
-                  type: 'Annotation',
-                  motivation: 'supplementing',
-                  body: {
-                    id: 'https://data.razu.nl/alto/NL-WbDRAZU-K50907905-689-12.alto.xml',
-                    type: 'Dataset',
-                    format: 'application/xml',
-                    label: {
-                      nl: ['ALTO XML'],
-                    },
-                  },
-                  target:
-                    'https://data.razu.nl/iiif/canvas/NL-WbDRAZU-K50907905-689-4',
-                },
-              ],
-            },
-          ],
-          thumbnail: [
-            {
-              id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-11.tif/full/200,/0/default.jpg',
-              type: 'Image',
-              format: 'image/jpeg',
-              service: [
-                {
-                  id: 'https://dev.iiif.razu.nl/iiif/2/NL-WbDRAZU-K50907905-689-11.tif',
-                  type: 'ImageService2',
-                  profile: 'http://iiif.io/api/image/2/level2.json',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-    return newspaperManifestSample;
+
+    return imageManifestSample;
   }
 
-  createManifestBlob(imgUrls: string[]) {
-    const manifest = this.generateManifest(imgUrls);
+  private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
+    const itemsData: IIIFItemData[] = await this.sparql.getIIIFItemsData(id);
+    // TODO: Add annotations
+    const canvases: Canvas[] = itemsData.map((itemData: IIIFItemData) => {
+      const canvas: Canvas = {
+        id: `https://data.razu.nl/iiif/canvas/${itemData.file}`,
+        type: 'Canvas',
+        height: itemData.height,
+        width: itemData.width,
+        items: [
+          {
+            id: `https://data.razu.nl/iiif/page/${itemData.file}/painting-annotation-page`,
+            type: 'AnnotationPage',
+            items: [
+              {
+                id: `https://data.razu.nl/iiif/annotation/${itemData.file}`,
+                type: 'Annotation',
+                motivation: 'painting',
+                body: {
+                  id: `${itemData.iiifService}/full/full/0/default.jpg`,
+                  type: 'Image',
+                  format: 'image/jpeg',
+                },
+                target: `https://data.razu.nl/iiif/canvas/${itemData.file}`,
+              },
+            ],
+          },
+        ],
+        thumbnail: [
+          {
+            id: `${itemData.iiifService}/full/200,/0/default.jpg`,
+            type: 'Image',
+            format: 'image/jpeg',
+            service: [
+              {
+                id: `${itemData.iiifService}`,
+                type: 'ImageService2',
+                profile: 'http://iiif.io/api/image/2/level2.json',
+              },
+            ],
+          },
+        ],
+      };
+      return canvas;
+    });
+    return canvases;
+  }
+
+  async generateCanvasesManifest(canvases: Canvas[]): Promise<Manifest> {
+    // TODO: Add ID and label
+    const manifest: Manifest = {
+      '@context': 'http://iiif.io/api/presentation/3/context.json',
+      id: 'TODO',
+      type: 'Manifest',
+      label: {
+        nl: ['TODO'],
+      },
+      items: canvases,
+    };
+
+    return manifest;
+  }
+
+  async createManifestBlob(imgUrls: string[]) {
+    // const manifest = this.generateManifest(imgUrls);
+    const canvases: Canvas[] = await this._retrieveCanvasesUsingSparql(
+      'https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-689-26',
+    );
+    const manifest: Manifest = await this.generateCanvasesManifest(canvases);
+
     const manifestFile = new File([JSON.stringify(manifest)], 'manifest.json', {
       type: 'application/json',
     });

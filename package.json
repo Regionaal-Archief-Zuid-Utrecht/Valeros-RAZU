@@ -22,6 +22,7 @@
     "@colsen1991/ngx-translate-extract-marker": "^2.0.8",
     "@elastic/elasticsearch": "^8.13.0",
     "@floating-ui/dom": "^1.6.4",
+    "@iiif/presentation-3": "^2.2.3",
     "@ng-icons/core": "^27.2.0",
     "@ng-icons/feather-icons": "^27.2.0",
     "@ng-icons/font-awesome": "^27.2.0",

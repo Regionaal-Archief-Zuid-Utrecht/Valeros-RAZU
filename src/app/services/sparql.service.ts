@@ -10,6 +10,7 @@ import { SettingsService } from './settings.service';
 import { EndpointService } from './endpoint.service';
 import { EndpointUrlsModel } from '../models/endpoint.model';
 import { SparqlPredObjModel } from '../models/sparql/sparql-pred-obj.model';
+import { IIIFItem } from '../models/IIIF/iiif-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -287,5 +288,44 @@ LIMIT 10000`;
       endpointId: endpointIdsObjs,
       ...nodeData,
     };
+  }
+
+  async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
+    const iiifDataQueryTemplate = `
+?fileURI a ldto:Bestand ;
+ldto:isRepresentatieVan <${id}> ;
+ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ; # JPG format
+ldto:naam ?name ;
+ldto:URLBestand ?url ;
+iiif:service ?iiifService ;
+schema:width ?width ;
+schema:height ?height ;
+schema:position ?position .
+  `;
+
+    const query = `
+PREFIX ldto: <https://data.razu.nl/def/ldto/>
+PREFIX iiif: <http://iiif.io/api/presentation/3#>
+PREFIX schema: <http://schema.org/>
+SELECT DISTINCT ?fileURI ?name ?url ?iiifService ?width ?height ?position WHERE {
+ ${this.getFederatedQuery(iiifDataQueryTemplate)}
+} ORDER BY ?position`;
+
+    try {
+      const iiifItems: IIIFItem[] = await this.api.postData<IIIFItem[]>(
+        this.endpoints.getFirstUrls().sparql,
+        {
+          query: query,
+        },
+      );
+
+      return iiifItems.map((item) => {
+        item.file = item.fileURI.split('/').pop() || '';
+        return item;
+      });
+    } catch (error) {
+      console.warn('Failed to fetch IIIF items data:', error);
+      return [];
+    }
   }
 }
