@@ -9,6 +9,9 @@ import {
   Annotation,
   ImageService,
 } from '@iiif/presentation-3';
+import { NodeModel } from '../models/node.model';
+import { NodeService } from './node.service';
+import { LabelsCacheService } from './cache/labels-cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,44 +19,43 @@ import {
 export class IIIFService {
   private _blobUrls: Set<string> = new Set();
 
-  constructor(private sparql: SparqlService) {}
+  constructor(
+    private sparql: SparqlService,
+    private nodes: NodeService,
+    private labelsCache: LabelsCacheService,
+  ) {}
 
-  generateManifest(imgUrls: string[]) {
-    const imageManifestSample = {
-      '@context': 'http://iiif.io/api/presentation/3/context.json',
-      id: 'https://example.org/manifest.json',
-      type: 'Manifest',
-      label: { en: ['Image Collection'] },
-      items: imgUrls.map((url, index) => ({
-        id: `https://example.org/canvas/p${index + 1}`,
-        type: 'Canvas',
-        height: 1800,
-        width: 1200,
-        items: [
-          {
-            id: `https://example.org/page/p${index + 1}/1`,
-            type: 'AnnotationPage',
-            items: [
-              {
-                id: `https://example.org/annotation/p${index + 1}-image`,
-                type: 'Annotation',
-                motivation: 'painting',
-                body: {
-                  id: url,
-                  type: 'Image',
-                  format: 'image/jpeg',
-                  height: 1800,
-                  width: 1200,
-                },
-                target: `https://example.org/canvas/p${index + 1}`,
+  private _getCanvasesFromUrls(imgUrls: string[]): Canvas[] {
+    // TODO: Stop using example.org here, and properly retrieve the image dimensions etc
+    const canvases: Canvas[] = imgUrls.map((url, index) => ({
+      id: `https://example.org/canvas/p${index + 1}`,
+      type: 'Canvas',
+      height: 1800,
+      width: 1200,
+      items: [
+        {
+          id: `https://example.org/page/p${index + 1}/1`,
+          type: 'AnnotationPage',
+          items: [
+            {
+              id: `https://example.org/annotation/p${index + 1}-image`,
+              type: 'Annotation',
+              motivation: 'painting',
+              body: {
+                id: url,
+                type: 'Image',
+                format: 'image/jpeg',
+                height: 1800,
+                width: 1200,
               },
-            ],
-          },
-        ],
-      })),
-    };
+              target: `https://example.org/canvas/p${index + 1}`,
+            },
+          ],
+        },
+      ],
+    }));
 
-    return imageManifestSample;
+    return canvases;
   }
 
   private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
@@ -104,14 +106,16 @@ export class IIIFService {
     return canvases;
   }
 
-  async generateCanvasesManifest(canvases: Canvas[]): Promise<Manifest> {
-    // TODO: Add ID and label
+  async generateCanvasesManifest(
+    id: string,
+    canvases: Canvas[],
+  ): Promise<Manifest> {
     const manifest: Manifest = {
       '@context': 'http://iiif.io/api/presentation/3/context.json',
-      id: 'TODO',
+      id: id,
       type: 'Manifest',
       label: {
-        nl: ['TODO'],
+        nl: [''], // TODO: Add label (if necessary)
       },
       items: canvases,
     };
@@ -119,12 +123,20 @@ export class IIIFService {
     return manifest;
   }
 
-  async createManifestBlob(imgUrls: string[]) {
-    // const manifest = this.generateManifest(imgUrls);
-    const canvases: Canvas[] = await this._retrieveCanvasesUsingSparql(
-      'https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-689-26',
+  async createManifestBlob(nodeId?: string, imageUrls?: string[]) {
+    let canvases: Canvas[] = [];
+    if (imageUrls) {
+      console.log('Creating manifest from image URLs', imageUrls);
+      canvases = this._getCanvasesFromUrls(imageUrls);
+    } else if (nodeId) {
+      console.log('Creating manifest from node ID using SPARQL', nodeId);
+      canvases = await this._retrieveCanvasesUsingSparql(nodeId);
+    }
+
+    const manifest: Manifest = await this.generateCanvasesManifest(
+      nodeId ?? 'N/A',
+      canvases,
     );
-    const manifest: Manifest = await this.generateCanvasesManifest(canvases);
 
     const manifestFile = new File([JSON.stringify(manifest)], 'manifest.json', {
       type: 'application/json',

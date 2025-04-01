@@ -12,6 +12,7 @@ import { NgClass } from '@angular/common';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 import { IIIFService } from '../../services/iiif.service';
+import { NodeModel } from '../../models/node.model';
 
 @Component({
   selector: 'app-mirador',
@@ -22,6 +23,7 @@ import { IIIFService } from '../../services/iiif.service';
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
 
+  @Input() nodeId?: string;
   @Input() imageUrls?: string[];
 
   constructor(
@@ -57,7 +59,10 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     this.destroyViewer();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
-      const manifestUrl = await this.iiifService.createManifestBlob(imgUrls);
+      const manifestUrl = await this.iiifService.createManifestBlob(
+        this.nodeId,
+        this.imageUrls,
+      );
       const containerId = 'mirador';
       const containerElem = document.getElementById(containerId);
       if (!containerElem) {
