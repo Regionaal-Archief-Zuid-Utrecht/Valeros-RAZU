@@ -12,6 +12,8 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 // @ts-ignore
+import { OSDReferences } from 'mirador/dist/es/src/plugins/OSDReferences';
+// @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../services/iiif.service';
 import { NodeModel } from '../../models/node.model';
@@ -72,21 +74,13 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   private initCenterImageAfterLoad(miradorInstance: any) {
     miradorInstance.store.subscribe(() => {
-      // TODO: Implement
-      // const state = miradorInstance.store.getState();
-      // const windows = state.windows || {};
-      // const windowIds = Object.keys(windows);
-      // if (windowIds.length > 0) {
-      //   const windowId = windowIds[0];
-      //   const canvasId = windows[windowId]?.canvasId;
-      //   if (canvasId && state.viewers?.[windowId]?.viewer) {
-      //     const viewer = state.viewers[windowId].viewer;
-      //     if (viewer && !viewer.__centered) {
-      //       viewer.viewport.goHome();
-      //       viewer.__centered = true;
-      //     }
-      //   }
-      // }
+      const windowId = Object.keys(miradorInstance.store.getState().windows)[0];
+      const viewerRef = OSDReferences.get(windowId);
+      if (viewerRef?.current) {
+        viewerRef.current.addOnceHandler('tile-loaded', () => {
+          viewerRef.current.viewport.goHome();
+        });
+      }
     });
   }
 
@@ -136,7 +130,6 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
       this.initCenterImageAfterLoad(miradorInstance);
-
       return miradorInstance;
     });
   }
