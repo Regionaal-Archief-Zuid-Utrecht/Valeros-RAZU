@@ -181,6 +181,7 @@ export class IIIFService {
       nodeLabel ?? '',
       canvases,
     );
+    console.log('Created manifest:', manifest);
 
     const manifestFile = new File([JSON.stringify(manifest)], 'manifest.json', {
       type: 'application/json',
