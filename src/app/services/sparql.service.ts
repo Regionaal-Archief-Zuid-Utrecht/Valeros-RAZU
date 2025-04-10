@@ -299,29 +299,28 @@ LIMIT 10000`;
   }
 
   async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
-    const TIF_FORMAT =
-      'https://data.razu.nl/id/bestandsformaat/52410efcd26ac40a20810e62984b87a1';
-    const JPG_FORMAT =
-      'https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218';
-
     const iiifDataQueryTemplate = `
 ?fileURI a ldto:Bestand ;
-ldto:isRepresentatieVan <${id}> ;
-ldto:bestandsformaat ?format ;
-ldto:naam ?name ;
-ldto:URLBestand ?url ;
-iiif:service ?iiifService ;
-schema:width ?width ;
-schema:height ?height ;
-schema:position ?position .
+          ldto:isRepresentatieVan <${id}> ;
+          ldto:bestandsformaat ?format ;
+          ldto:naam ?name ;
+          ldto:URLBestand ?url ;
+          iiif:service ?iiifService ;
+          schema:width ?width ;
+          schema:height ?height ;
+          schema:position ?position .
 
-FILTER(?format = <${JPG_FORMAT}> || ?format = <${TIF_FORMAT}>) # JPG or TIF`;
+OPTIONAL { ?altoURI schema:about ?fileURI ;
+                    ldto:URLBestand ?altoUrl ;
+                    ldto:naam ?altoName . }
+
+FILTER(?format = <${Settings.viewer.fileFormats.jpg}> || ?format = <${Settings.viewer.fileFormats.tif}>) # JPG, TIF`;
 
     const query = `
 PREFIX ldto: <https://data.razu.nl/def/ldto/>
 PREFIX iiif: <http://iiif.io/api/presentation/3#>
 PREFIX schema: <http://schema.org/>
-SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?position WHERE {
+SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?position ?altoURI ?altoUrl ?altoName WHERE {
  ${this.getFederatedQuery(iiifDataQueryTemplate)}
 } ORDER BY ?position`;
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SparqlService } from './sparql.service';
 import { ApiService } from './api.service';
-import { IIIFItem as IIIFItemData } from '../models/IIIF/iiif-item.model';
+import { IIIFItem as IIIFItem } from '../models/IIIF/iiif-item.model';
 import {
   Manifest,
   Canvas,
@@ -21,7 +21,10 @@ import { Settings } from '../config/settings';
 export class IIIFService {
   private _blobUrls: Set<string> = new Set();
 
-  constructor(private sparql: SparqlService) {}
+  constructor(
+    private sparql: SparqlService,
+    private url: UrlService,
+  ) {}
 
   private _getCanvasesFromUrls(imgUrls: string[]): Canvas[] {
     // TODO: Stop using example.org here, and properly retrieve the image dimensions etc
@@ -56,10 +59,10 @@ export class IIIFService {
     return canvases;
   }
 
-  private _selectPreferredItemsByPosition(
-    items: IIIFItemData[],
+  private _selectPreferredImageFormats(
+    items: IIIFItem[],
     preferredFormats: string[],
-  ): IIIFItemData[] {
+  ): IIIFItem[] {
     // Group items by position
     const itemsByPosition = items.reduce(
       (acc, item) => {
@@ -70,7 +73,7 @@ export class IIIFService {
         acc[position].push(item);
         return acc;
       },
-      {} as { [key: string]: IIIFItemData[] },
+      {} as { [key: string]: IIIFItem[] },
     );
 
     // For each position, try formats in order of preference
@@ -92,60 +95,68 @@ export class IIIFService {
         // No matching format found
         return null;
       })
-      .filter((item): item is IIIFItemData => item !== null);
+      .filter((item): item is IIIFItem => item !== null);
   }
 
   private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
-    let itemsData: IIIFItemData[] = await this.sparql.getIIIFItemsData(id);
+    let itemsData: IIIFItem[] = await this.sparql.getIIIFItemsData(id);
 
-    itemsData = this._selectPreferredItemsByPosition(
+    itemsData = this._selectPreferredImageFormats(
       itemsData,
-      Settings.viewer.preferredFormats,
+      Settings.viewer.preferredImageFormats,
     );
 
-    const altoSample = '/assets/alto/b18035723_0006.JP2.xml';
+    const processAltoUrl = async (item: IIIFItem) => {
+      item.altoUrl = await this.url.processUrl(item.altoUrl);
+      return item;
+    };
+    itemsData = await Promise.all(
+      itemsData.map(async (item) => await processAltoUrl(item)),
+    );
 
-    const canvases: Canvas[] = itemsData.map((itemData: IIIFItemData) => {
+    const canvases: Canvas[] = itemsData.map((item) => {
       const canvas: Canvas = {
-        id: `https://data.razu.nl/iiif/canvas/${itemData.file}`,
+        id: `https://data.razu.nl/iiif/canvas/${item.file}`,
         type: 'Canvas',
-        height: itemData.height,
-        width: itemData.width,
+        height: item.height,
+        width: item.width,
         items: [
           {
-            id: `https://data.razu.nl/iiif/page/${itemData.file}/painting-annotation-page`,
+            id: `https://data.razu.nl/iiif/page/${item.file}/painting-annotation-page`,
             type: 'AnnotationPage',
             items: [
               {
-                id: `https://data.razu.nl/iiif/annotation/${itemData.file}`,
+                id: `https://data.razu.nl/iiif/annotation/${item.file}`,
                 type: 'Annotation',
                 motivation: 'painting',
                 body: {
-                  id: `${itemData.iiifService}/full/max/0/default.jpg`,
+                  id: `${item.iiifService}/full/max/0/default.jpg`,
                   type: 'Image',
                   format: 'image/jpeg',
                 },
-                target: `https://data.razu.nl/iiif/canvas/${itemData.file}`,
+                target: `https://data.razu.nl/iiif/canvas/${item.file}`,
               },
             ],
           },
         ],
-        seeAlso: [
-          {
-            '@id': altoSample,
-            profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
-            format: 'text/xml+alto',
-            label: 'METS-ALTO XML',
-          } as any,
-        ],
+        seeAlso: item.altoUrl
+          ? [
+              {
+                '@id': item.altoUrl,
+                profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
+                format: 'text/xml+alto',
+                label: 'METS-ALTO XML',
+              } as any,
+            ]
+          : [],
         thumbnail: [
           {
-            id: `${itemData.iiifService}/full/200,/0/default.jpg`,
+            id: `${item.iiifService}/full/200,/0/default.jpg`,
             type: 'Image',
             format: 'image/jpeg',
             service: [
               {
-                id: `${itemData.iiifService}`,
+                id: `${item.iiifService}`,
                 type: 'ImageService2',
                 profile: 'http://iiif.io/api/image/2/level2.json',
               },

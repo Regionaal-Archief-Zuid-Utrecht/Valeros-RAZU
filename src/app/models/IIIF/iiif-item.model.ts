@@ -8,4 +8,7 @@ export interface IIIFItem {
   width: number;
   height: number;
   position: number;
+  altoURI: string;
+  altoUrl: string;
+  altoName: string;
 }
