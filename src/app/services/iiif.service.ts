@@ -182,6 +182,14 @@ export class IIIFService {
         nl: [label],
       },
       items: canvases,
+      requiredStatement: {
+        label: {
+          en: [''],
+        },
+        value: {
+          en: [''],
+        },
+      },
     };
 
     return manifest;
