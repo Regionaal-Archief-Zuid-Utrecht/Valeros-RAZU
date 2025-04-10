@@ -1,6 +1,7 @@
 export interface IIIFItem {
   fileURI: string;
   file: string;
+  format: string;
   name: string;
   url: string;
   iiifService: string;

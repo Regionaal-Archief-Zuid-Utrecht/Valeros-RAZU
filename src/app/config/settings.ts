@@ -355,6 +355,8 @@ export const Settings = {
   },
   viewer: {
     showReferenceStrip: true,
+    preferredFormat:
+      'https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218', // JPG is preferred (TIF and JPG are supported)
   },
   showLanguageToggle: false,
   labelMaxChars: 100,

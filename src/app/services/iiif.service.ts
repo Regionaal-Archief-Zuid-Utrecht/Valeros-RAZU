@@ -13,6 +13,7 @@ import { NodeModel } from '../models/node.model';
 import { NodeService } from './node.service';
 import { LabelsCacheService } from './cache/labels-cache.service';
 import { UrlService } from './url.service';
+import { Settings } from '../config/settings';
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +56,38 @@ export class IIIFService {
     return canvases;
   }
 
+  private _selectPreferredItemsByPosition(
+    items: IIIFItemData[],
+    preferredFormat: string,
+  ): IIIFItemData[] {
+    // Group items by position
+    const itemsByPosition = items.reduce(
+      (acc, item) => {
+        const position = item.position;
+        if (!acc[position]) {
+          acc[position] = [];
+        }
+        acc[position].push(item);
+        return acc;
+      },
+      {} as { [key: string]: IIIFItemData[] },
+    );
+
+    // For each position, prefer preferredFormat over other formats if multiple exist
+    return Object.values(itemsByPosition).map((items) =>
+      items.length > 1
+        ? items.find((i) => i.format === preferredFormat) || items[0]
+        : items[0],
+    );
+  }
+
   private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
-    const itemsData: IIIFItemData[] = await this.sparql.getIIIFItemsData(id);
+    let itemsData: IIIFItemData[] = await this.sparql.getIIIFItemsData(id);
+
+    itemsData = this._selectPreferredItemsByPosition(
+      itemsData,
+      Settings.viewer.preferredFormat,
+    );
 
     const altoSample = '/assets/alto/b18035723_0006.JP2.xml';
 
@@ -76,7 +107,7 @@ export class IIIFService {
                 type: 'Annotation',
                 motivation: 'painting',
                 body: {
-                  id: `${itemData.iiifService}/full/full/0/default.jpg`,
+                  id: `${itemData.iiifService}/full/max/0/default.jpg`,
                   type: 'Image',
                   format: 'image/jpeg',
                 },
