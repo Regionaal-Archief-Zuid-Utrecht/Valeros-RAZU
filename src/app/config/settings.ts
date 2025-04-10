@@ -9,14 +9,14 @@ import { HeaderSettings } from '../models/header/header-position.types';
 import { FileType } from '../models/file-type.model';
 import { FileTypeConfig } from '../models/settings/file-type-config.model';
 
-export const imagePredicates: string[] = [
+export const filePredicates: string[] = [
   'http://xmlns.com/foaf/0.1/depiction',
   // 'https://schema.org/thumbnail',
   'https://schema.org/image',
   'bestand_url',
 ];
 
-export const hasImageFilters: FilterModel[] = imagePredicates.map(
+export const hasImageFilters: FilterModel[] = filePredicates.map(
   (imagePred) => {
     return {
       filterId: 'image',
@@ -166,7 +166,7 @@ export const Settings = {
           images: {
             boost: 100,
             filter: {
-              fieldIds: imagePredicates,
+              fieldIds: filePredicates,
               valueIds: [],
               type: FilterType.Field,
             },
@@ -364,7 +364,8 @@ export const Settings = {
     parents: parentPredicates,
     label: labelPredicates,
     type: typePredicates,
-    images: imagePredicates,
+    images: filePredicates,
+    files: filePredicates,
     hopImages: [
       [
         'https://data.razu.nl/def/ldto/heeftRepresentatie',
@@ -489,7 +490,7 @@ export const Settings = {
       [PredicateVisibility.Details]: [
         {
           predicates: [
-            ...imagePredicates,
+            ...filePredicates,
             'https://data.razu.nl/def/ldto/heeftRepresentatie',
             'https://data.razu.nl/def/ldto/dekkingInRuimte',
             'https://data.razu.nl/def/ldto/dekkingInTijd',

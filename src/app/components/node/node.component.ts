@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
 import {
-  AsyncPipe,
-  JsonPipe,
-  KeyValuePipe,
-  Location,
-  NgClass,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { Direction, NodeModel } from '../../models/node.model';
+import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
 import { NodeService } from '../../services/node.service';
 import { Settings } from '../../config/settings';
 import { SparqlService } from '../../services/sparql.service';
@@ -16,11 +16,9 @@ import { DataService } from '../../services/data.service';
 import { ThingWithLabelModel } from '../../models/thing-with-label.model';
 import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
 import { NodeTypesComponent } from './node-types/node-types.component';
-import { NodeImagesComponent } from './node-images/node-images.component';
 import { LabelsCacheService } from '../../services/cache/labels-cache.service';
 import { NodeLinkComponent } from './node-link/node-link.component';
 import { NodeRendererComponent } from './node-renderer/node-renderer.component';
-import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
 import { SettingsService } from '../../services/settings.service';
 import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
 import { TypeModel } from '../../models/type.model';
@@ -31,37 +29,30 @@ import {
   featherArrowRight,
   featherChevronRight,
 } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
 import { DetailsService } from '../../services/details.service';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
-import { Router, RouterLink } from '@angular/router';
 import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
-import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { OnChanges, SimpleChanges } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NodeSectionService } from '../../services/node-section.service';
+import { NodeFileService } from '../../services/node-file.service';
 import { MiradorComponent } from '../mirador/mirador.component';
 
 @Component({
   selector: 'app-node',
   standalone: true,
   imports: [
-    JsonPipe,
     NgIf,
-    NgForOf,
     NodeHierarchyComponent,
     NodeTypesComponent,
-    NodeImagesComponent,
     AsyncPipe,
-    KeyValuePipe,
     NodeLinkComponent,
     NodeRendererComponent,
     NodeEndpointComponent,
     NodeTableRowComponent,
     NgClass,
-    NgIcon,
     NodeDetailsButtonComponent,
     NodePermalinkButtonComponent,
     RouterLink,
@@ -83,15 +74,11 @@ export class NodeComponent implements OnInit, OnChanges {
   filesLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   canShowUsingFileRenderer: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
-
   showTitle = this.settings.hasViewModeSetting(ViewModeSetting.ShowTitle);
   showParents = this.settings.hasViewModeSetting(ViewModeSetting.ShowParents);
   showTypes = this.settings.hasViewModeSetting(ViewModeSetting.ShowTypes);
   showOrganization = this.settings.hasViewModeSetting(
     ViewModeSetting.ShowOrganization,
-  );
-  showFileNextToTable = this.settings.hasViewModeSetting(
-    ViewModeSetting.ShowFileNextToTable,
   );
 
   private shouldShowIIIFSubject = new BehaviorSubject<boolean>(false);
@@ -108,6 +95,8 @@ export class NodeComponent implements OnInit, OnChanges {
     public routing: RoutingService,
     public location: Location,
     public labelsCache: LabelsCacheService,
+    public nodeSection: NodeSectionService,
+    public nodeFile: NodeFileService,
   ) {}
 
   ngOnInit() {
@@ -156,20 +145,15 @@ export class NodeComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.files.next(
-      this.nodes.getObjValues(
-        this.node,
-        Settings.predicates.images,
-        undefined,
-        true,
-      ),
-    );
+    let files = this.nodeFile.getFiles(this.node);
 
     if (this.details.isShowing()) {
-      const nodeId: string = this.nodes.getId(this.node);
-      const hopImageUrls: string[] = await this.getHopImageUrls(nodeId);
-      this.files.next([...this.files.value, ...hopImageUrls]);
+      const nodeId = this.nodes.getId(this.node);
+      const hopImageUrls = await this.getHopImageUrls(nodeId);
+      files = [...files, ...hopImageUrls];
     }
+
+    this.files.next(files);
   }
 
   initTypes() {
@@ -213,46 +197,33 @@ export class NodeComponent implements OnInit, OnChanges {
   }
 
   shouldShowFileNextToTable(): boolean {
-    const hasFiles =
-      this.showFileNextToTable && this.files && this.files.value.length > 0;
-
-    if (!hasFiles) {
-      return false;
-    }
-
-    const isShowingDetails = this.details.showing.value;
-    const hasViewer = this.canShowUsingFileRenderer.value;
-    if (!isShowingDetails || (isShowingDetails && hasViewer)) {
-      return true;
-    }
-    return false;
-  }
-
-  private async checkShouldShowIIIF() {
-    if (
-      !this.node ||
-      this.shouldShowFileNextToTable() ||
-      !this.details.isShowing()
-    ) {
-      this.shouldShowIIIFSubject.next(false);
-      return;
-    }
-
-    const nodeId = this.nodes.getId(this.node);
-    const shouldShowIIIF = await this.sparql.shouldShowIIIF(nodeId);
-    this.shouldShowIIIFSubject.next(shouldShowIIIF);
+    return this.nodeSection.shouldShowFileNextToTable(
+      this.files.value,
+      this.canShowUsingFileRenderer.value,
+    );
   }
 
   shouldShowSectionNextToTable(): Observable<boolean> {
-    return combineLatest([
+    return this.nodeSection.shouldShowSectionNextToTable(
+      this.files.value,
+      this.canShowUsingFileRenderer.value,
       this.shouldShowIIIF$,
-      of(this.shouldShowFileNextToTable()),
-    ]).pipe(
-      map(
-        ([shouldShowIIIF, shouldShowFile]: [boolean, boolean]) =>
-          shouldShowIIIF || shouldShowFile,
-      ),
     );
+  }
+
+  async checkShouldShowIIIF() {
+    const shouldShow = await this.nodeSection.checkShouldShowIIIF(
+      this.node,
+      this.files.value,
+      this.canShowUsingFileRenderer.value,
+    );
+    this.shouldShowIIIFSubject.next(shouldShow);
+  }
+
+  getSectionNextToTableWidth(): string {
+    return this.details.showing.value
+      ? Settings.sectionNextToTableWidth.details
+      : Settings.sectionNextToTableWidth.search;
   }
 
   protected readonly Settings = Settings;
