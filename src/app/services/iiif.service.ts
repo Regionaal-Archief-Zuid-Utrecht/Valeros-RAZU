@@ -58,7 +58,7 @@ export class IIIFService {
 
   private _selectPreferredItemsByPosition(
     items: IIIFItemData[],
-    preferredFormat: string,
+    preferredFormats: string[],
   ): IIIFItemData[] {
     // Group items by position
     const itemsByPosition = items.reduce(
@@ -73,12 +73,26 @@ export class IIIFService {
       {} as { [key: string]: IIIFItemData[] },
     );
 
-    // For each position, prefer preferredFormat over other formats if multiple exist
-    return Object.values(itemsByPosition).map((items) =>
-      items.length > 1
-        ? items.find((i) => i.format === preferredFormat) || items[0]
-        : items[0],
-    );
+    // For each position, try formats in order of preference
+    return Object.values(itemsByPosition)
+      .map((items) => {
+        if (items.length === 1) {
+          // If only one item and its format is in preferred list, return it
+          return preferredFormats.includes(items[0].format) ? items[0] : null;
+        }
+
+        // Try each preferred format in order
+        for (const format of preferredFormats) {
+          const matchingItem = items.find((i) => i.format === format);
+          if (matchingItem) {
+            return matchingItem;
+          }
+        }
+
+        // No matching format found
+        return null;
+      })
+      .filter((item): item is IIIFItemData => item !== null);
   }
 
   private async _retrieveCanvasesUsingSparql(id: string): Promise<Canvas[]> {
@@ -86,7 +100,7 @@ export class IIIFService {
 
     itemsData = this._selectPreferredItemsByPosition(
       itemsData,
-      Settings.viewer.preferredFormat,
+      Settings.viewer.preferredFormats,
     );
 
     const altoSample = '/assets/alto/b18035723_0006.JP2.xml';
