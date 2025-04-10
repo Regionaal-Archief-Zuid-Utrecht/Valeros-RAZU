@@ -2,7 +2,7 @@
   class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
   *ngIf="node"
   [ngClass]="[
-    shouldShowSectionNextToTable() ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
+    (shouldShowSectionNextToTable() | async) ? 'p-0 flex flex-col sm:flex-row' : 'p-6'
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
   role="main"
@@ -15,7 +15,7 @@
     class="h-48 sm:h-auto"
     [ngClass]="[
       details.showing.value ? 'cursor-default' : '',
-      shouldShowSectionNextToTable() ? 'inline-block' : 'hidden'
+      (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden'
     ]"
     [style.width]="sectionNextToTableWidth"
     [style.min-width]="sectionNextToTableWidth"
@@ -30,7 +30,7 @@
     <app-mirador
       [nodeId]="nodes.getId(node)"
       [nodeLabel]="labelsCache.labels[nodes.getId(node)]"
-      *ngIf="shouldShowMiradorNextToTable()"
+      *ngIf="shouldShowIIIF$ | async"
     ></app-mirador>
   </a>
 
@@ -78,7 +78,7 @@
 
   <!-- Details page node table -->
   <div
-    [ngClass]="shouldShowSectionNextToTable() ? 'p-6' : 'p-0'"
+    [ngClass]="(shouldShowSectionNextToTable() | async) ? 'p-6' : 'p-0'"
     class="flex-grow relative"
     *ngIf="details.showing.value"
   >

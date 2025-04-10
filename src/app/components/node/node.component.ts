@@ -39,7 +39,9 @@ import { Router, RouterLink } from '@angular/router';
 import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { MiradorComponent } from '../mirador/mirador.component';
 
 @Component({
@@ -70,7 +72,7 @@ import { MiradorComponent } from '../mirador/mirador.component';
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
 })
-export class NodeComponent implements OnInit {
+export class NodeComponent implements OnInit, OnChanges {
   @Input() node?: NodeModel;
   parents: ThingWithLabelModel[] = [];
 
@@ -92,6 +94,9 @@ export class NodeComponent implements OnInit {
     ViewModeSetting.ShowFileNextToTable,
   );
 
+  private shouldShowIIIFSubject = new BehaviorSubject<boolean>(false);
+  shouldShowIIIF$ = this.shouldShowIIIFSubject.asObservable();
+
   constructor(
     public nodes: NodeService,
     public sparql: SparqlService,
@@ -107,6 +112,7 @@ export class NodeComponent implements OnInit {
 
   ngOnInit() {
     void this.retrieveParents();
+    void this.checkShouldShowIIIF();
     this.initTitle();
     this.initTypes();
     this.initFiles();
@@ -116,6 +122,12 @@ export class NodeComponent implements OnInit {
     }
 
     this.id = this.nodes.getId(this.node);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['node']) {
+      void this.checkShouldShowIIIF();
+    }
   }
 
   initTitle() {
@@ -200,12 +212,6 @@ export class NodeComponent implements OnInit {
       : Settings.sectionNextToTableWidth.search;
   }
 
-  shouldShowSectionNextToTable(): boolean {
-    return (
-      this.shouldShowFileNextToTable() || this.shouldShowMiradorNextToTable()
-    );
-  }
-
   shouldShowFileNextToTable(): boolean {
     const hasFiles =
       this.showFileNextToTable && this.files && this.files.value.length > 0;
@@ -222,19 +228,31 @@ export class NodeComponent implements OnInit {
     return false;
   }
 
-  shouldShowMiradorNextToTable(): boolean {
-    // TODO: Implement
-    if (!this.node) {
-      return false;
-    }
-    if (this.shouldShowFileNextToTable()) {
-      return false;
+  private async checkShouldShowIIIF() {
+    if (
+      !this.node ||
+      this.shouldShowFileNextToTable() ||
+      !this.details.isShowing()
+    ) {
+      this.shouldShowIIIFSubject.next(false);
+      return;
     }
 
     const nodeId = this.nodes.getId(this.node);
-    const isTestNode =
-      nodeId === 'https://data.razu.nl/id/object/NL-WbDRAZU-K50907905-689-26';
-    return isTestNode;
+    const shouldShowIIIF = await this.sparql.shouldShowIIIF(nodeId);
+    this.shouldShowIIIFSubject.next(shouldShowIIIF);
+  }
+
+  shouldShowSectionNextToTable(): Observable<boolean> {
+    return combineLatest([
+      this.shouldShowIIIF$,
+      of(this.shouldShowFileNextToTable()),
+    ]).pipe(
+      map(
+        ([shouldShowIIIF, shouldShowFile]: [boolean, boolean]) =>
+          shouldShowIIIF || shouldShowFile,
+      ),
+    );
   }
 
   protected readonly Settings = Settings;

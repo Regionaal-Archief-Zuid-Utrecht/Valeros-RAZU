@@ -290,6 +290,14 @@ LIMIT 10000`;
     };
   }
 
+  async shouldShowIIIF(id: string): Promise<boolean> {
+    // console.log('Checking should show IIIF for', id);
+
+    // TODO: Consider running a "lighter" query to check this, now the query is executed twice: Once for checking if should show, once for getting data
+    const iiifData = await this.getIIIFItemsData(id);
+    return iiifData.length > 0;
+  }
+
   async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
     const TIF_FORMAT =
       'https://data.razu.nl/id/bestandsformaat/52410efcd26ac40a20810e62984b87a1';
@@ -325,7 +333,6 @@ SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?positio
         },
       );
 
-      
       return iiifItems.map((item) => {
         item.file = item.fileURI.split('/').pop() || '';
         return item;
