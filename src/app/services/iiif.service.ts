@@ -130,7 +130,7 @@ export class IIIFService {
                 type: 'Annotation',
                 motivation: 'painting',
                 body: {
-                  id: `${item.iiifService}/full/max/0/default.jpg`,
+                  id: `${item.iiifService}/full/${item.width},/0/default.jpg`,
                   type: 'Image',
                   format: 'image/jpeg',
                 },
