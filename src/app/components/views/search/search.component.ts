@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxMasonryModule } from 'ngx-masonry';
 import { filter } from 'rxjs';
 import { Settings } from '../../../config/settings';
 import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
@@ -41,7 +40,6 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
     NgForOf,
     SearchInputComponent,
     NgClass,
-    NgxMasonryModule,
     NgIf,
     NodesGridComponent,
     FilterOptionsComponent,

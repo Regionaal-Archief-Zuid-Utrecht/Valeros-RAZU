@@ -64,13 +64,6 @@
       </div>
 
       <div *ngIf="!details.showing.value" class="overflow-hidden">
-        <!--    TODO: Bring back masonry grid-->
-        <!--    <app-nodes-masonry-grid-->
-        <!--      [nodes]="search.results.value.nodes-->
-        <!--      *ngIf="viewModes.current.value === ViewMode.Grid"-->
-        <!--      class="w-full"-->
-        <!--    />-->
-
         <app-nodes-grid
           [nodes]="search.results.value.nodes"
           *ngIf="viewModes.current.value === ViewMode.Grid"
