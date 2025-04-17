@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HopLinkSettingsModel } from '../../../../../../models/settings/hop-link-settings.model';
+import { HopLinkSettings } from '../../../../../../models/settings/hop-link-settings.model';
 import { SparqlService } from '../../../../../../services/sparql.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SparqlService } from '../../../../../../services/sparql.service';
 })
 export class HopComponent {
   @Input() id?: string;
-  @Input() settings?: HopLinkSettingsModel;
+  @Input() settings?: HopLinkSettings;
   @Output() hopObjIdsRetrieved = new EventEmitter<string[]>();
 
   hopObjIds: string[] = [];

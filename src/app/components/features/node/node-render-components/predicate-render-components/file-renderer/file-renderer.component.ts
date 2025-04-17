@@ -11,7 +11,7 @@ import {
 import { NgIcon } from '@ng-icons/core';
 import { featherDownload } from '@ng-icons/feather-icons';
 import { FileType } from '../../../../../../models/file-type.model';
-import { HopLinkSettingsModel } from '../../../../../../models/settings/hop-link-settings.model';
+import { HopLinkSettings } from '../../../../../../models/settings/hop-link-settings.model';
 import { FileRenderService } from '../../../../../../services/file-render.service';
 import { DocViewerComponent } from '../../../../file-viewers/doc-viewer/doc-viewer.component';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
@@ -35,7 +35,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
   protected readonly FileType = FileType;
 
   @Input() urls: string | string[] = [];
-  @Input() hopSettings?: HopLinkSettingsModel;
+  @Input() hopSettings?: HopLinkSettings;
   @Input() shownInTableCell = false;
   @Input() isThumb = false;
 

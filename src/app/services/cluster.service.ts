@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Settings } from '../config/settings';
 import { intersects } from '../helpers/util.helper';
 import { FilterOptionValueModel } from '../models/filters/filter-option.model';
-import { ClusterValuesSettingsModel } from '../models/settings/cluster-values-settings.model';
+import { ClusterValuesSettings } from '../models/settings/cluster-values-settings.model';
 import { TypeModel } from '../models/type.model';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ClusterService {
     } = {};
 
     const allValueIdsToCluster = Object.values(
-      Settings.clustering.filterOptionValues as ClusterValuesSettingsModel,
+      Settings.clustering.filterOptionValues as ClusterValuesSettings,
     ).flatMap((v) => v.valueIds);
     const nonClusteredFilterOptionValues: FilterOptionValueModel[] =
       filterOptionValues.filter(
@@ -32,7 +32,7 @@ export class ClusterService {
       );
 
     for (const [clusterId, clusterSettings] of Object.entries(
-      Settings.clustering.filterOptionValues as ClusterValuesSettingsModel,
+      Settings.clustering.filterOptionValues as ClusterValuesSettings,
     )) {
       let clusterFilterOptionValue: FilterOptionValueModel = {
         ids: [],
@@ -85,7 +85,7 @@ export class ClusterService {
 
   clusterTypes(
     types: TypeModel[],
-    clusters: ClusterValuesSettingsModel,
+    clusters: ClusterValuesSettings,
   ): TypeModel[] {
     if (Object.keys(clusters).length === 0) {
       return types;

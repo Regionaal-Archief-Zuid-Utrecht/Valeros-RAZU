@@ -2,7 +2,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Settings } from '../../../../config/settings';
 import { intersects } from '../../../../helpers/util.helper';
-import { ClusterValuesSettingsModel } from '../../../../models/settings/cluster-values-settings.model';
+import { ClusterValuesSettings } from '../../../../models/settings/cluster-values-settings.model';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
 import { TypeModel } from '../../../../models/type.model';
 import { ClusterService } from '../../../../services/cluster.service';
@@ -54,7 +54,7 @@ export class NodeTypesComponent {
     const typeIds = this.getVisibleTypes().map((t) => t.id);
 
     for (const [clusterId, filterCluster] of Object.entries(
-      Settings.clustering.filterOptionValues as ClusterValuesSettingsModel,
+      Settings.clustering.filterOptionValues as ClusterValuesSettings,
     )) {
       const typesAreClustered = intersects(typeIds, filterCluster.valueIds);
       if (typesAreClustered) {
