@@ -1,4 +1,4 @@
-import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowUpLeft } from '@ng-icons/feather-icons';
@@ -20,7 +20,6 @@ import { LdtoOmvangComponent } from '../../../predicate-render-components/ldto-o
 import { LdtoUrlBestandComponent } from '../../../predicate-render-components/ldto-url-bestand/ldto-url-bestand.component';
 import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
 import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
-import { SdoPhotographComponent } from '../../../type-render-components/sdo-photograph/sdo-photograph.component';
 
 export enum TableCellShowOptions {
   Pred,
@@ -35,12 +34,10 @@ export enum TableCellShowOptions {
     NgIcon,
     NgIf,
     NodeLinkComponent,
-    SdoPhotographComponent,
     NodeImagesComponent,
     MapThumbComponent,
     NodeTypeComponent,
     HopLinkComponent,
-    JsonPipe,
     LdtoDekkingInTijdComponent,
     LdtoUrlBestandComponent,
     HopImageComponent,

@@ -1,11 +1,4 @@
-import {
-  CommonModule,
-  JsonPipe,
-  NgClass,
-  NgForOf,
-  NgIf,
-  NgStyle,
-} from '@angular/common';
+import { CommonModule, NgClass, NgForOf, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -26,8 +19,6 @@ import { SearchService } from '../../../services/search/search.service';
 import { SettingsService } from '../../../services/settings.service';
 import { ViewModeService } from '../../../services/view-mode.service';
 import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
-import { ActiveFiltersComponent } from '../../filters/active-filters/active-filters.component';
-import { EndpointsComponent } from '../../filters/endpoints/endpoints.component';
 import { FilterOptionsComponent } from '../../filters/filter-options/filter-options.component';
 import { HeaderComponent } from '../../header/header.component';
 import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below-search/home-intro-below-search.component';
@@ -35,12 +26,10 @@ import { HomeIntroComponent } from '../../home-intro/home-intro.component';
 import { LangSwitchComponent } from '../../lang-switch/lang-switch.component';
 import { NodeComponent } from '../../node/node.component';
 import { NodesGridComponent } from '../../nodes-grid/nodes-grid.component';
-import { NodesMasonryGridComponent } from '../../nodes-masonry-grid/nodes-masonry-grid.component';
 import { SearchInputComponent } from '../../search-input/search-input.component';
 import { LoadMoreSearchResultsButtonComponent } from '../../search/load-more-search-results-button/load-more-search-results-button.component';
 import { SearchHitsCounterComponent } from '../../search/search-hits-counter/search-hits-counter.component';
 import { SortSelectComponent } from '../../sort-select/sort-select.component';
-import { ViewModeSelectComponent } from '../../view-mode-select/view-mode-select.component';
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
@@ -51,17 +40,11 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
     NodeComponent,
     NgForOf,
     SearchInputComponent,
-    JsonPipe,
-    ViewModeSelectComponent,
     NgClass,
     NgxMasonryModule,
-    NgStyle,
     NgIf,
-    NodesMasonryGridComponent,
-    ActiveFiltersComponent,
     NodesGridComponent,
     FilterOptionsComponent,
-    EndpointsComponent,
     HeaderComponent,
     ViewContainerComponent,
     HomeIntroComponent,

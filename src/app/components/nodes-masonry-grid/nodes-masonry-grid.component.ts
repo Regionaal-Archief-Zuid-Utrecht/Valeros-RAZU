@@ -1,4 +1,4 @@
-import { NgForOf, NgIf } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NodeModel } from '../../models/node.model';
@@ -8,7 +8,7 @@ import { NodeComponent } from '../node/node.component';
 @Component({
   selector: 'app-nodes-masonry-grid',
   standalone: true,
-  imports: [NgxMasonryModule, NodeComponent, NgForOf, NgIf],
+  imports: [NgxMasonryModule, NodeComponent, NgForOf],
   templateUrl: './nodes-masonry-grid.component.html',
   styleUrl: './nodes-masonry-grid.component.scss',
 })

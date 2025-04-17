@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Settings } from '../../../config/settings';
 import { NodeModel } from '../../../models/node.model';
@@ -16,10 +16,7 @@ import { SdoPhotographComponent } from '../node-render-components/type-render-co
   imports: [
     NodeTableViewComponent,
     NgIf,
-    NgSwitch,
-    NgSwitchCase,
     SdoPhotographComponent,
-    JsonPipe,
     GescandInventarisnummerComponent,
     HuaRubriekComponent,
   ],

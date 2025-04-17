@@ -1,4 +1,4 @@
-import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -22,7 +22,6 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import {
   NgxFloatUiContentComponent,
-  NgxFloatUiDirective,
   NgxFloatUiModule,
   NgxFloatUiPlacements,
   NgxFloatUiTriggers,
@@ -47,15 +46,11 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
   standalone: true,
   imports: [
     NgIf,
-    NgClass,
-    JsonPipe,
     RouterLink,
     NgIcon,
     NgxFloatUiContentComponent,
-    NgxFloatUiDirective,
     NgxFloatUiModule,
     NodeLabelComponent,
-    NgForOf,
     TranslatePipe,
   ],
   templateUrl: './node-link.component.html',

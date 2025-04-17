@@ -1,6 +1,5 @@
-import { JsonPipe, KeyValuePipe, NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgIcon } from '@ng-icons/core';
 import { featherChevronDown, featherChevronUp } from '@ng-icons/feather-icons';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
 import { ViewModeSetting } from '../../../../models/settings/view-mode-setting.enum';
@@ -9,22 +8,13 @@ import { DetailsService } from '../../../../services/details.service';
 import { NodeService } from '../../../../services/node/node.service';
 import { PredicateVisibilityService } from '../../../../services/predicate-visibility.service';
 import { SettingsService } from '../../../../services/settings.service';
-import { NodeLinkComponent } from '../../node-link/node-link.component';
 import { NodeRenderComponent } from '../node-render.component';
 import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
   selector: 'app-node-table-view',
   standalone: true,
-  imports: [
-    KeyValuePipe,
-    NodeLinkComponent,
-    NgForOf,
-    NgIf,
-    JsonPipe,
-    NgIcon,
-    NodeTableComponent,
-  ],
+  imports: [NgIf, NodeTableComponent],
   templateUrl: './node-table-view.component.html',
   styleUrl: './node-table-view.component.scss',
 })

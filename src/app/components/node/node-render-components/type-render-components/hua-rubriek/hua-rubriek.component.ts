@@ -1,4 +1,4 @@
-import { JsonPipe, NgForOf } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { labelPredicates } from '../../../../../config/settings';
 import { wrapWithAngleBrackets } from '../../../../../helpers/util.helper';
@@ -13,7 +13,7 @@ import { NodeRenderComponent } from '../../node-render.component';
 @Component({
   selector: 'app-hua-rubriek',
   standalone: true,
-  imports: [JsonPipe, NodeLinkComponent, NgForOf],
+  imports: [NodeLinkComponent, NgForOf],
   templateUrl: './hua-rubriek.component.html',
   styleUrl: './hua-rubriek.component.scss',
 })

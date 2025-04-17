@@ -1,6 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { NgIcon } from '@ng-icons/core';
 import {
   featherGrid,
   featherImage,
@@ -13,7 +11,7 @@ import { ViewModeSelectOptionComponent } from './view-mode-select-option/view-mo
 @Component({
   selector: 'app-view-mode-select',
   standalone: true,
-  imports: [NgIcon, NgIf, NgClass, ViewModeSelectOptionComponent],
+  imports: [ViewModeSelectOptionComponent],
   templateUrl: './view-mode-select.component.html',
   styleUrl: './view-mode-select.component.scss',
 })

@@ -1,22 +1,14 @@
-import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherChevronRight } from '@ng-icons/feather-icons';
-import { NodeLabelComponent } from '../../../../node-label/node-label.component';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { HopComponent } from '../hop.component';
 
 @Component({
   selector: 'app-hop-link',
   standalone: true,
-  imports: [
-    NgIf,
-    JsonPipe,
-    NodeLinkComponent,
-    NgForOf,
-    NgIcon,
-    NodeLabelComponent,
-  ],
+  imports: [NgIf, NodeLinkComponent, NgForOf, NgIcon],
   templateUrl: './hop-link.component.html',
   styleUrl: './hop-link.component.scss',
 })

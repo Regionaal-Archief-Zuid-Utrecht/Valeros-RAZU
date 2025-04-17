@@ -1,18 +1,16 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIcon } from '@ng-icons/core';
 import { featherChevronDown } from '@ng-icons/feather-icons';
 import { Settings } from '../../config/settings';
 import { FilterService } from '../../services/search/filter.service';
 import { SortService } from '../../services/sort.service';
 import { UiService } from '../../services/ui.service';
-import { FilterCountComponent } from '../filters/filter-options/filter-count/filter-count.component';
 
 @Component({
   selector: 'app-sort-select',
   standalone: true,
-  imports: [NgIcon, NgForOf, FilterCountComponent, FormsModule],
+  imports: [NgForOf, FormsModule],
   templateUrl: './sort-select.component.html',
   styleUrl: './sort-select.component.scss',
 })

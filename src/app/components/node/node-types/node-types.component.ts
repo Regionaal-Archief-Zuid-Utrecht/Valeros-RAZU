@@ -8,13 +8,12 @@ import { TypeModel } from '../../../models/type.model';
 import { ClusterService } from '../../../services/cluster.service';
 import { PredicateVisibilityService } from '../../../services/predicate-visibility.service';
 import { SettingsService } from '../../../services/settings.service';
-import { NodeLinkComponent } from '../node-link/node-link.component';
 import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
   selector: 'app-node-types',
   standalone: true,
-  imports: [NgForOf, NgIf, NodeLinkComponent, NodeTypeComponent],
+  imports: [NgForOf, NgIf, NodeTypeComponent],
   templateUrl: './node-types.component.html',
   styleUrl: './node-types.component.scss',
 })
