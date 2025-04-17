@@ -29,7 +29,6 @@
     "@ng-icons/font-awesome": "^27.2.0",
     "@ngx-translate/core": "^16.0.3",
     "@ngx-translate/http-loader": "^16.0.0",
-    "@ulb-darmstadt/shacl-form": "^1.4.6",
     "leaflet": "^1.9.4",
     "mirador": "^3.4.3",
     "mirador-textoverlay": "^0.3.8",
