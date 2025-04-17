@@ -251,6 +251,7 @@ export const Settings = {
     'http://purl.org/dc/terms/hasFormat',
   ],
   onlyShowNodes: {
+    // TODO: There might be a bug here
     // onlyShowInformatieObject: {
     //   fieldIds: [...typePredicates],
     //   valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
@@ -279,7 +280,6 @@ export const Settings = {
       type: FilterType.FieldAndValue,
     },
   },
-
   razu: {
     sura: {
       url: 'https://ontwikkel.viewer.razu.nl/sura/process-url',
