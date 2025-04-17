@@ -1,17 +1,15 @@
-import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { wrapWithAngleBrackets } from '../../../../../../helpers/util.helper';
 import { EndpointUrlsModel } from '../../../../../../models/endpoint.model';
 import { ApiService } from '../../../../../../services/api.service';
 import { EndpointService } from '../../../../../../services/endpoint.service';
 import { SparqlService } from '../../../../../../services/sparql.service';
-import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-rico-identifier',
   standalone: true,
-  imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
+  imports: [NodeLinkComponent],
   templateUrl: './rico-identifier.component.html',
   styleUrl: './rico-identifier.component.scss',
 })
