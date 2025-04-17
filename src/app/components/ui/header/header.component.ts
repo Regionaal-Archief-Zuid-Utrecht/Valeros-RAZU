@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
@@ -8,7 +8,6 @@ import { Settings } from '../../../config/settings';
 import { HeaderSettings } from '../../../models/header/header-position.types';
 import { HeaderPositionService } from '../../../services/header-position.service';
 import { UrlService } from '../../../services/url.service';
-import { LangSwitchComponent } from '../lang-switch/lang-switch.component';
 
 export enum HeaderView {
   ShowingColofon,
@@ -18,14 +17,7 @@ export enum HeaderView {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    NgIcon,
-    NgIf,
-    TranslatePipe,
-    NgClass,
-    LangSwitchComponent,
-    AsyncPipe,
-  ],
+  imports: [NgIcon, NgIf, TranslatePipe, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

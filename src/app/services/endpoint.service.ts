@@ -5,8 +5,8 @@ import { Config } from '../config/config';
 import { Settings } from '../config/settings';
 import {
   EndpointModel,
-  EndpointsModel,
   EndpointUrlsModel,
+  EndpointsModel,
 } from '../models/endpoint.model';
 import { SettingsService } from './settings.service';
 

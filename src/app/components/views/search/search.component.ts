@@ -23,15 +23,15 @@ import { NodeComponent } from '../../features/node/node.component';
 import { LoadMoreSearchResultsButtonComponent } from '../../features/search/load-more-search-results-button/load-more-search-results-button.component';
 import { SearchHitsCounterComponent } from '../../features/search/search-hits-counter/search-hits-counter.component';
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
+import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
+import { HeaderComponent } from '../../ui/header/header.component';
+import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { SortSelectComponent } from '../../ui/sort-select/sort-select.component';
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
-import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { HeaderComponent } from '../../ui/header/header.component';
-import { HomeIntroComponent } from './home-intro/home-intro.component';
-import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
-import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
+import { HomeIntroComponent } from './home-intro/home-intro.component';
+import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
 
 @Component({
   selector: 'app-search',
