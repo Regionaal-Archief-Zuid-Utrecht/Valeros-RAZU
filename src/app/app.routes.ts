@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { SearchComponent } from './components/views/search/search.component';
 import { ColofonComponent } from './components/views/colofon/colofon.component';
+import { SearchComponent } from './components/views/search/search.component';
 
 export const routes: Routes = [
   {

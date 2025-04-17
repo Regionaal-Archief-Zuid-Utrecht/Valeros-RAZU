@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { FilterService } from '../../../services/search/filter.service';
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
-import { NodeLinkComponent } from '../../node/node-link/node-link.component';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgIcon } from '@ng-icons/core';
 import { featherFilter, featherX } from '@ng-icons/feather-icons';
-import { FilterType } from '../../../models/filter.model';
-import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FilterType } from '../../../models/filter.model';
+import { FilterService } from '../../../services/search/filter.service';
+import { NodeLinkComponent } from '../../node/node-link/node-link.component';
 
 @Component({
   selector: 'app-active-filters',

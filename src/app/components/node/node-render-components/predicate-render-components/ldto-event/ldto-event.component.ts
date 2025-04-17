@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { HopLinkComponent } from '../hop-components/hop-link/hop-link.component';
-import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-ldto-event',

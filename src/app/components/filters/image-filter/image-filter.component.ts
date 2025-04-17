@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { faImage } from '@ng-icons/font-awesome/regular';
-import { NgIcon } from '@ng-icons/core';
-import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 import { NgForOf } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UiService } from '../../../services/ui.service';
-import { FilterService } from '../../../services/search/filter.service';
+import { NgIcon } from '@ng-icons/core';
+import { faImage } from '@ng-icons/font-awesome/regular';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FilterService } from '../../../services/search/filter.service';
+import { UiService } from '../../../services/ui.service';
+import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 
 @Component({
   selector: 'app-image-filter',

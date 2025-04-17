@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NodeRenderComponent } from '../../node-render.component';
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../../config/settings';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { NodeRenderComponent } from '../../node-render.component';
 import { NodeTableViewComponent } from '../../node-table-view/node-table-view.component';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sdo-photograph',

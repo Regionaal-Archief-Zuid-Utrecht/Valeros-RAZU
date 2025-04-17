@@ -2,8 +2,8 @@ import {
   Directive,
   ElementRef,
   Input,
-  Renderer2,
   OnDestroy,
+  Renderer2,
 } from '@angular/core';
 
 @Directive({

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { MiradorComponent } from '../../../components/mirador/mirador.component';
 
 @Component({

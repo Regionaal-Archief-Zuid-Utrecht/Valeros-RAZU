@@ -4,7 +4,7 @@
   [ngClass]="[
     (shouldShowSectionNextToTable() | async)
       ? 'p-0 flex flex-col sm:flex-row'
-      : 'p-6',
+      : 'p-6'
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
   role="main"
@@ -17,7 +17,7 @@
     class="h-48 sm:h-auto"
     [ngClass]="[
       details.showing.value ? 'cursor-default' : '',
-      (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden',
+      (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden'
     ]"
     [style.width]="sectionNextToTableWidth"
     [style.min-width]="sectionNextToTableWidth"
@@ -70,7 +70,7 @@
       <div
         class="absolute"
         [ngClass]="[
-          shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
+          shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
         ]"
       >
         <app-node-details-button [node]="node" />
@@ -122,7 +122,7 @@
     <div
       class="absolute"
       [ngClass]="[
-        shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
+        shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
       ]"
     ></div>
   </div>

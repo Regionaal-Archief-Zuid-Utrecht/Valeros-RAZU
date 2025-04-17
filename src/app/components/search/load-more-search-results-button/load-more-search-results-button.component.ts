@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { SearchService } from '../../../services/search/search.service';
+import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { SearchService } from '../../../services/search/search.service';
 
 @Component({
   selector: 'app-load-more-search-results-button',

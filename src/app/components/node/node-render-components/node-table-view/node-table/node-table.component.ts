@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Direction, NodeModel } from '../../../../../models/node.model';
 import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
-import { NodeTableCellComponent } from './node-table-cell/node-table-cell.component';
+import { Direction, NodeModel } from '../../../../../models/node.model';
 import { PredicateVisibility } from '../../../../../models/settings/predicate-visibility-settings.model';
-import { NodeDirectionTableComponent } from './node-direction-table/node-direction-table.component';
 import { NodeService } from '../../../../../services/node/node.service';
+import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { NodeDirectionTableComponent } from './node-direction-table/node-direction-table.component';
+import { NodeTableCellComponent } from './node-table-cell/node-table-cell.component';
 
 @Component({
   selector: 'app-node-table',

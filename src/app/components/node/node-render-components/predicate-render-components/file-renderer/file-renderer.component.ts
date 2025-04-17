@@ -1,3 +1,4 @@
+import { NgForOf, NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,15 +8,14 @@ import {
   SimpleChanges,
   type OnInit,
 } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
-import { NodeImagesComponent } from '../../../node-images/node-images.component';
-import { DocViewerComponent } from '../../../../doc-viewer/doc-viewer.component';
-import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-settings.model';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
-import { FileType } from '../../../../../models/file-type.model';
-import { FileRenderService } from '../../../../../services/file-render.service';
 import { NgIcon } from '@ng-icons/core';
 import { featherDownload } from '@ng-icons/feather-icons';
+import { FileType } from '../../../../../models/file-type.model';
+import { HopLinkSettingsModel } from '../../../../../models/settings/hop-link-settings.model';
+import { FileRenderService } from '../../../../../services/file-render.service';
+import { DocViewerComponent } from '../../../../doc-viewer/doc-viewer.component';
+import { NodeImagesComponent } from '../../../node-images/node-images.component';
+import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-file-renderer',

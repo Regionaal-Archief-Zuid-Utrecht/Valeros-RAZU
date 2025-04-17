@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ViewModeService } from './view-mode.service';
 import { Settings } from '../config/settings';
-import { ViewMode } from '../models/view-mode.enum';
-import { ViewModeSettings } from '../models/settings/view-mode-settings.type';
-import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
-import {
-  PredicateVisibility,
-  PredicateVisibilityEntries,
-  PredicateVisibilitySettings,
-} from '../models/settings/predicate-visibility-settings.model';
 import { FilterPanelLocation } from '../models/settings/filter-panel-location.enum';
+import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
+import { ViewModeSettings } from '../models/settings/view-mode-settings.type';
+import { ViewMode } from '../models/view-mode.enum';
+import { ViewModeService } from './view-mode.service';
 
 @Injectable({
   providedIn: 'root',

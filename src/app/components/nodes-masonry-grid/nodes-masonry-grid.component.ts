@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ViewMode } from '../../models/view-mode.enum';
-import { NgxMasonryModule } from 'ngx-masonry';
-import { NodeComponent } from '../node/node.component';
 import { NgForOf, NgIf } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgxMasonryModule } from 'ngx-masonry';
 import { NodeModel } from '../../models/node.model';
+import { ViewMode } from '../../models/view-mode.enum';
+import { NodeComponent } from '../node/node.component';
 
 @Component({
   selector: 'app-nodes-masonry-grid',

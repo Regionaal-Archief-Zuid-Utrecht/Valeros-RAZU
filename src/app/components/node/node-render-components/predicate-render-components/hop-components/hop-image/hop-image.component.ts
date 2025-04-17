@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { HopComponent } from '../hop.component';
 import { NgForOf, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
-import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { NodeImagesComponent } from '../../../../node-images/node-images.component';
+import { NodeLinkComponent } from '../../../../node-link/node-link.component';
+import { HopComponent } from '../hop.component';
 
 @Component({
   selector: 'app-hop-image',

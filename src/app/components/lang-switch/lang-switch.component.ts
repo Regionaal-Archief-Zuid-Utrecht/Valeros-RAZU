@@ -1,6 +1,6 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NgClass, NgIf } from '@angular/common';
 import { Settings } from '../../config/settings';
 
 @Component({

@@ -1,23 +1,23 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { FilterModel, FilterType } from '../../models/filter.model';
-import {
-  FilterOptionModel,
-  FilterOptionsIdsModel,
-  FilterOptionsModel,
-  FilterOptionValueModel,
-} from '../../models/filter-option.model';
+import { Router } from '@angular/router';
 import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
-import { FieldDocCountsModel } from '../../models/elastic/field-doc-counts.model';
+import { BehaviorSubject } from 'rxjs';
+import { Settings } from '../../config/settings';
 import {
   DocCountModel,
   ElasticAggregationModel,
 } from '../../models/elastic/elastic-aggregation.model';
-import { ElasticService } from '../elastic.service';
-import { DataService } from '../data.service';
-import { Settings } from '../../config/settings';
+import { FieldDocCountsModel } from '../../models/elastic/field-doc-counts.model';
+import {
+  FilterOptionModel,
+  FilterOptionValueModel,
+  FilterOptionsIdsModel,
+  FilterOptionsModel,
+} from '../../models/filter-option.model';
+import { FilterModel, FilterType } from '../../models/filter.model';
 import { ClusterService } from '../cluster.service';
-import { Router } from '@angular/router';
+import { DataService } from '../data.service';
+import { ElasticService } from '../elastic.service';
 
 interface SearchTriggerModel {
   clearFilters: boolean;

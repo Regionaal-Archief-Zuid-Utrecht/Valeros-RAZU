@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Direction, NodeModel } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { NodeService } from './node/node.service';
+import { Direction, NodeModel } from '../models/node.model';
 import {
   RenderComponentSetting,
   RenderComponentSettings,
   RenderMode,
 } from '../models/settings/render-component-settings.type';
+import { NodeService } from './node/node.service';
 
 @Injectable({
   providedIn: 'root',

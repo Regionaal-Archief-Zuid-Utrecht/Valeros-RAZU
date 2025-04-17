@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { NodeLinkComponent } from '../node-link/node-link.component';
+import { Component, Input } from '@angular/core';
 import { EndpointService } from '../../../services/endpoint.service';
+import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-endpoint',

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { FilterType } from '../../../../models/filter.model';
 import { NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FilterType } from '../../../../models/filter.model';
 
 @Component({
   selector: 'app-filter-count',

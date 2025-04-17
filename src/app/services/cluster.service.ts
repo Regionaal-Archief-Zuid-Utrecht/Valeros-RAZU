@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ClusterValuesSettingsModel } from '../models/settings/cluster-values-settings.model';
-import { TypeModel } from '../models/type.model';
-import { FilterOptionValueModel } from '../models/filter-option.model';
 import { Settings } from '../config/settings';
 import { intersects } from '../helpers/util.helper';
+import { FilterOptionValueModel } from '../models/filter-option.model';
+import { ClusterValuesSettingsModel } from '../models/settings/cluster-values-settings.model';
+import { TypeModel } from '../models/type.model';
 
 @Injectable({
   providedIn: 'root',

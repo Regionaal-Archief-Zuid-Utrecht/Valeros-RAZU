@@ -1,13 +1,13 @@
-import { ViewMode } from '../models/view-mode.enum';
-import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
+import { FileType } from '../models/file-type.model';
+import { FilterModel, FilterType } from '../models/filter.model';
+import { HeaderSettings } from '../models/header/header-position.types';
+import { FileTypeConfig } from '../models/settings/file-type-config.model';
+import { FilterPanelLocation } from '../models/settings/filter-panel-location.enum';
 import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
 import { RenderMode } from '../models/settings/render-component-settings.type';
 import { SortOrder } from '../models/settings/sort-order.enum';
-import { FilterPanelLocation } from '../models/settings/filter-panel-location.enum';
-import { FilterModel, FilterType } from '../models/filter.model';
-import { HeaderSettings } from '../models/header/header-position.types';
-import { FileType } from '../models/file-type.model';
-import { FileTypeConfig } from '../models/settings/file-type-config.model';
+import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
+import { ViewMode } from '../models/view-mode.enum';
 
 export const filePredicates: string[] = [
   'http://xmlns.com/foaf/0.1/depiction',

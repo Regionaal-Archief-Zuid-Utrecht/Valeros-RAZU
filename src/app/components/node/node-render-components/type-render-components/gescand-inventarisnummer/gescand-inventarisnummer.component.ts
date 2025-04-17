@@ -1,12 +1,12 @@
+import { JsonPipe, NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
+import { Config } from '../../../../../config/config';
+import { Direction } from '../../../../../models/node.model';
+import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeRenderComponent } from '../../node-render.component';
 import { NodeTableViewComponent } from '../../node-table-view/node-table-view.component';
-import { Direction } from '../../../../../models/node.model';
-import { JsonPipe, NgForOf } from '@angular/common';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
-import { HopLinkComponent } from '../../predicate-render-components/hop-components/hop-link/hop-link.component';
 import { HopImageComponent } from '../../predicate-render-components/hop-components/hop-image/hop-image.component';
-import { Config } from '../../../../../config/config';
+import { HopLinkComponent } from '../../predicate-render-components/hop-components/hop-link/hop-link.component';
 
 @Component({
   selector: 'app-gescand-inventarisnummer',

@@ -1,13 +1,13 @@
+import { NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
+import { featherArrowRight, featherSearch } from '@ng-icons/feather-icons';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
 } from '../../models/autocomplete-option.model';
-import { NgForOf, NgIf } from '@angular/common';
 import { AutocompleteService } from '../../services/autocomplete.service';
-import { featherArrowRight, featherSearch } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-autocomplete',

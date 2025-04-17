@@ -1,19 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SparqlService } from './sparql.service';
-import { ApiService } from './api.service';
-import { IIIFItem as IIIFItem } from '../models/IIIF/iiif-item.model';
-import {
-  Manifest,
-  Canvas,
-  AnnotationPage,
-  Annotation,
-  ImageService,
-} from '@iiif/presentation-3';
-import { NodeModel } from '../models/node.model';
-import { NodeService } from './node/node.service';
-import { LabelsCacheService } from './cache/labels-cache.service';
-import { UrlService } from './url.service';
+import { Canvas, Manifest } from '@iiif/presentation-3';
 import { Settings } from '../config/settings';
+import { IIIFItem } from '../models/IIIF/iiif-item.model';
+import { SparqlService } from './sparql.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',

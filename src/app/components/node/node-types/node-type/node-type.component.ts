@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { NodeLinkComponent } from '../../node-link/node-link.component';
-import { TypeModel } from '../../../../models/type.model';
 import { NgClass } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { TypeModel } from '../../../../models/type.model';
+import { NodeLinkComponent } from '../../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-type',

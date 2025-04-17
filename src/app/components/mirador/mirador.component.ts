@@ -6,9 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
-  ViewEncapsulation,
 } from '@angular/core';
-import { NgClass, NgFor, NgIf } from '@angular/common';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 // @ts-ignore
@@ -16,7 +14,6 @@ import { OSDReferences } from 'mirador/dist/es/src/plugins/OSDReferences';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../services/iiif.service';
-import { NodeModel } from '../../models/node.model';
 
 @Component({
   selector: 'app-mirador',

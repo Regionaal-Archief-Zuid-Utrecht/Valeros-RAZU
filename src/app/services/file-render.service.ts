@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { UrlService } from './url.service';
-import { SparqlService } from './sparql.service';
 import { Settings } from '../config/settings';
 import { FileType } from '../models/file-type.model';
-import { FileTypeConfig } from '../models/settings/file-type-config.model';
+import { SparqlService } from './sparql.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',

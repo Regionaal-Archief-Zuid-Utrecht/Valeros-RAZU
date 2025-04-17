@@ -1,4 +1,5 @@
 import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -10,11 +11,10 @@ import {
   ViewChild,
   type OnInit,
 } from '@angular/core';
-import { finalize } from 'rxjs/operators';
-import { FileType } from '../../models/file-type.model';
-import { Settings } from '../../config/settings';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
-import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
+import { Settings } from '../../config/settings';
+import { FileType } from '../../models/file-type.model';
 
 @Component({
   selector: 'app-doc-viewer',

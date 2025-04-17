@@ -1,44 +1,44 @@
+import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
 import {
   Component,
   Input,
-  OnInit,
   OnChanges,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { Direction, NodeModel } from '../../models/node.model';
-import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
-import { NodeService } from '../../services/node/node.service';
-import { Settings } from '../../config/settings';
-import { SparqlService } from '../../services/sparql.service';
-import { DataService } from '../../services/data.service';
-import { ThingWithLabelModel } from '../../models/thing-with-label.model';
-import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
-import { NodeTypesComponent } from './node-types/node-types.component';
-import { LabelsCacheService } from '../../services/cache/labels-cache.service';
-import { NodeLinkComponent } from './node-link/node-link.component';
-import { NodeRendererComponent } from './node-renderer/node-renderer.component';
-import { SettingsService } from '../../services/settings.service';
-import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
-import { TypeModel } from '../../models/type.model';
-import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
-import { NodeTableRowComponent } from './node-table-row/node-table-row.component';
 import {
   featherArrowLeft,
   featherArrowRight,
   featherChevronRight,
 } from '@ng-icons/feather-icons';
-import { DetailsService } from '../../services/details.service';
-import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
-import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
-import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NodeSectionService } from '../../services/node/node-section.service';
+import { Settings } from '../../config/settings';
+import { Direction, NodeModel } from '../../models/node.model';
+import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
+import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
+import { ThingWithLabelModel } from '../../models/thing-with-label.model';
+import { TypeModel } from '../../models/type.model';
+import { LabelsCacheService } from '../../services/cache/labels-cache.service';
+import { DataService } from '../../services/data.service';
+import { DetailsService } from '../../services/details.service';
 import { NodeFileService } from '../../services/node/node-file.service';
+import { NodeSectionService } from '../../services/node/node-section.service';
+import { NodeService } from '../../services/node/node.service';
+import { RoutingService } from '../../services/routing.service';
+import { SettingsService } from '../../services/settings.service';
+import { SparqlService } from '../../services/sparql.service';
 import { MiradorComponent } from '../mirador/mirador.component';
+import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
+import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
+import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
+import { NodeLinkComponent } from './node-link/node-link.component';
+import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
+import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
+import { NodeRendererComponent } from './node-renderer/node-renderer.component';
+import { NodeTableRowComponent } from './node-table-row/node-table-row.component';
+import { NodeTypesComponent } from './node-types/node-types.component';
 
 @Component({
   selector: 'app-node',

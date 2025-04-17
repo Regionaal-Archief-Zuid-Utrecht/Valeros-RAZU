@@ -1,14 +1,14 @@
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { featherSearch, featherX } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
-import { UrlService } from '../../services/url.service';
+import { featherSearch, featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { LangSwitchComponent } from '../lang-switch/lang-switch.component';
 import { Settings } from '../../config/settings';
-import { HeaderPositionService } from '../../services/header-position.service';
 import { HeaderSettings } from '../../models/header/header-position.types';
+import { HeaderPositionService } from '../../services/header-position.service';
+import { UrlService } from '../../services/url.service';
+import { LangSwitchComponent } from '../lang-switch/lang-switch.component';
 
 export enum HeaderView {
   ShowingColofon,

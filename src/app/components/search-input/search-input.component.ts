@@ -1,21 +1,21 @@
+import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIcon } from '@ng-icons/core';
-import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
-import { SearchService } from '../../services/search/search.service';
-import { Settings } from '../../config/settings';
 import { Router, RouterLink } from '@angular/router';
-import { ElasticService } from '../../services/elastic.service';
-import { DetailsService } from '../../services/details.service';
-import { AutocompleteService } from '../../services/autocomplete.service';
-import { UrlService } from '../../services/url.service';
+import { NgIcon } from '@ng-icons/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Config } from '../../config/config';
+import { Settings } from '../../config/settings';
 import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
 } from '../../models/autocomplete-option.model';
+import { AutocompleteService } from '../../services/autocomplete.service';
+import { DetailsService } from '../../services/details.service';
+import { ElasticService } from '../../services/elastic.service';
+import { SearchService } from '../../services/search/search.service';
+import { UrlService } from '../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-input',

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { featherArrowLeft } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
+import { featherArrowLeft } from '@ng-icons/feather-icons';
+import { TranslatePipe } from '@ngx-translate/core';
 import { DetailsService } from '../../services/details.service';
 import { RoutingService } from '../../services/routing.service';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-details-back-button',

@@ -1,3 +1,4 @@
+import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -9,16 +10,8 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {
-  isValidHttpUrl,
-  isValidUrl,
-  replacePrefixes,
-  wrapWithDoubleQuotes,
-} from '../../../helpers/util.helper';
-import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
-import { LabelsCacheService } from '../../../services/cache/labels-cache.service';
 import { RouterLink } from '@angular/router';
-import { FilterService } from '../../../services/search/filter.service';
+import { NgIcon } from '@ng-icons/core';
 import {
   featherExternalLink,
   featherFilter,
@@ -26,7 +19,7 @@ import {
   featherSearch,
   featherX,
 } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   NgxFloatUiContentComponent,
   NgxFloatUiDirective,
@@ -34,13 +27,20 @@ import {
   NgxFloatUiPlacements,
   NgxFloatUiTriggers,
 } from 'ngx-float-ui';
-import { NodeLabelComponent } from '../node-label/node-label.component';
+import {
+  isValidHttpUrl,
+  isValidUrl,
+  replacePrefixes,
+  wrapWithDoubleQuotes,
+} from '../../../helpers/util.helper';
 import { FilterType } from '../../../models/filter.model';
+import { LabelsCacheService } from '../../../services/cache/labels-cache.service';
+import { DetailsService } from '../../../services/details.service';
+import { ScrollService } from '../../../services/scroll.service';
+import { FilterService } from '../../../services/search/filter.service';
 import { SearchService } from '../../../services/search/search.service';
 import { UrlService } from '../../../services/url.service';
-import { ScrollService } from '../../../services/scroll.service';
-import { DetailsService } from '../../../services/details.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
   selector: 'app-node-link',

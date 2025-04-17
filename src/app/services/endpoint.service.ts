@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, take } from 'rxjs';
+import { Config } from '../config/config';
+import { Settings } from '../config/settings';
 import {
   EndpointModel,
   EndpointsModel,
   EndpointUrlsModel,
 } from '../models/endpoint.model';
-import { Settings } from '../config/settings';
-import { BehaviorSubject, take } from 'rxjs';
 import { SettingsService } from './settings.service';
-import { Config } from '../config/config';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',

@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { ThingWithLabelModel } from '../../../models/thing-with-label.model';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
-import { NodeService } from '../../../services/node/node.service';
+import { Component, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
-import { Config } from '../../../config/config';
-import { SettingsService } from '../../../services/settings.service';
-import { NodeLinkComponent } from '../node-link/node-link.component';
 import { featherChevronRight } from '@ng-icons/feather-icons';
+import { Config } from '../../../config/config';
 import { Settings } from '../../../config/settings';
 import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';
+import { ThingWithLabelModel } from '../../../models/thing-with-label.model';
+import { NodeService } from '../../../services/node/node.service';
+import { SettingsService } from '../../../services/settings.service';
+import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-hierarchy',

@@ -1,30 +1,27 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, skip, take } from 'rxjs';
-import { SearchResultsModel } from '../../models/elastic/search-results.model';
-import { ElasticService } from '../elastic.service';
-import { NodeModel } from '../../models/node.model';
-import { Settings } from '../../config/settings';
-import { SearchHitsService } from './search-hits.service';
-import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
-import { NodeService } from '../node/node.service';
-import { FilterService } from './filter.service';
-import {
-  SearchHit,
-  SearchResponse,
-} from '@elastic/elasticsearch/lib/api/types';
-import { DataService } from '../data.service';
-import { EndpointService } from '../endpoint.service';
-import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DetailsService } from '../details.service';
-import { SortService } from '../sort.service';
-import { SortOptionModel } from '../../models/settings/sort-option.model';
+import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import { BehaviorSubject, skip, take } from 'rxjs';
 import { Config } from '../../config/config';
-import { UrlService } from '../url.service';
-import { UiService } from '../ui.service';
-import { SettingsService } from '../settings.service';
+import { Settings } from '../../config/settings';
+import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
+import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
+import { SearchResultsModel } from '../../models/elastic/search-results.model';
+import { NodeModel } from '../../models/node.model';
+import { SortOptionModel } from '../../models/settings/sort-option.model';
 import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
+import { DataService } from '../data.service';
+import { DetailsService } from '../details.service';
+import { ElasticService } from '../elastic.service';
+import { EndpointService } from '../endpoint.service';
+import { NodeService } from '../node/node.service';
+import { SettingsService } from '../settings.service';
+import { SortService } from '../sort.service';
+import { UiService } from '../ui.service';
+import { UrlService } from '../url.service';
+import { FilterService } from './filter.service';
+import { SearchHitsService } from './search-hits.service';
 
 @Injectable({
   providedIn: 'root',

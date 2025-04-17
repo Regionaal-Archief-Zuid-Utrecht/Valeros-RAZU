@@ -1,16 +1,16 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NodeComponent } from '../../node/node.component';
-import { NodeService } from '../../../services/node/node.service';
-import { NodeModel } from '../../../models/node.model';
-import { JsonPipe, NgIf } from '@angular/common';
-import { SparqlService } from '../../../services/sparql.service';
-import { featherArrowLeft } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
-import { RoutingService } from '../../../services/routing.service';
+import { featherArrowLeft } from '@ng-icons/feather-icons';
+import { NodeModel } from '../../../models/node.model';
 import { DetailsService } from '../../../services/details.service';
+import { NodeService } from '../../../services/node/node.service';
+import { RoutingService } from '../../../services/routing.service';
 import { ScrollService } from '../../../services/scroll.service';
+import { SparqlService } from '../../../services/sparql.service';
 import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
+import { NodeComponent } from '../../node/node.component';
 
 @Component({
   selector: 'app-details',

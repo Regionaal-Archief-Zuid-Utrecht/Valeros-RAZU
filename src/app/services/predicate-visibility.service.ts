@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ViewModeService } from './view-mode.service';
 import { Settings } from '../config/settings';
+import { sortByArrayOrder } from '../helpers/util.helper';
 import {
+  PredicateSection,
   PredicateVisibility,
   PredicateVisibilityEntries,
   PredicateVisibilitySettings,
-  PredicateSection,
 } from '../models/settings/predicate-visibility-settings.model';
-import { sortByArrayOrder } from '../helpers/util.helper';
+import { ViewModeService } from './view-mode.service';
 
 @Injectable({
   providedIn: 'root',

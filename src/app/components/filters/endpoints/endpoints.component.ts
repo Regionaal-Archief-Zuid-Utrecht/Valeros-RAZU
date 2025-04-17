@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { FilterOptionComponent } from '../filter-options/filter-option/filter-option.component';
 import { JsonPipe, NgClass, NgForOf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../config/settings';
-import { NodeLinkComponent } from '../../node/node-link/node-link.component';
 import { EndpointService } from '../../../services/endpoint.service';
-import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 import { FilterService } from '../../../services/search/filter.service';
 import { SearchService } from '../../../services/search/search.service';
-import { FormsModule } from '@angular/forms';
 import { UiService } from '../../../services/ui.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { NodeLinkComponent } from '../../node/node-link/node-link.component';
+import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
+import { FilterOptionComponent } from '../filter-options/filter-option/filter-option.component';
 
 @Component({
   selector: 'app-endpoints',

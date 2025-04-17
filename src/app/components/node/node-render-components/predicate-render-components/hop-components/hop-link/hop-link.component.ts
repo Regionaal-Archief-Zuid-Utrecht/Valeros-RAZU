@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
-import { NodeLinkComponent } from '../../../../node-link/node-link.component';
+import { Component, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherChevronRight } from '@ng-icons/feather-icons';
 import { NodeLabelComponent } from '../../../../node-label/node-label.component';
+import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { HopComponent } from '../hop.component';
 
 @Component({

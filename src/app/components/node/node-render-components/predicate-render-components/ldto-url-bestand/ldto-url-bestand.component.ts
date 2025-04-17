@@ -1,18 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { SparqlService } from '../../../../../services/sparql.service';
 import {
   intersects,
   wrapWithAngleBrackets,
 } from '../../../../../helpers/util.helper';
 import { ApiService } from '../../../../../services/api.service';
 import { EndpointService } from '../../../../../services/endpoint.service';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { SparqlService } from '../../../../../services/sparql.service';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
-import { NgIf } from '@angular/common';
-import {
-  EndpointModel,
-  EndpointUrlsModel,
-} from '../../../../../models/endpoint.model';
+import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-ldto-url-bestand',

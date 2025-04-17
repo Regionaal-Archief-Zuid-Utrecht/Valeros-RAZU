@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { ViewModeService } from '../../../services/view-mode.service';
-import { ViewMode } from '../../../models/view-mode.enum';
 import { NgClass, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
+import { ViewMode } from '../../../models/view-mode.enum';
+import { ViewModeService } from '../../../services/view-mode.service';
 
 @Component({
   selector: 'app-view-mode-select-option',

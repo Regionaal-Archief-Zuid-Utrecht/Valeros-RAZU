@@ -2,7 +2,7 @@
   [id]="id"
   [settings]="{
     preds: ['https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
-    showHops: false,
+    showHops: false
   }"
   (hopObjIdsRetrieved)="this.hasBeginDate = $event.length > 0"
 />
@@ -13,7 +13,7 @@
     [id]="id"
     [settings]="{
       preds: ['https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
-      showHops: false,
+      showHops: false
     }"
     (hopObjIdsRetrieved)="this.hasEndDate = $event.length > 0"
   />
@@ -25,7 +25,7 @@
     [id]="id"
     [settings]="{
       preds: ['https://data.razu.nl/def/ldto/dekkingInTijdType'],
-      showHops: false,
+      showHops: false
     }"
     (hopObjIdsRetrieved)="this.hasType = $event.length > 0"
   />

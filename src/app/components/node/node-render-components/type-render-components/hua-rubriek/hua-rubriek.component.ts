@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { NodeRenderComponent } from '../../node-render.component';
 import { JsonPipe, NgForOf } from '@angular/common';
-import { ApiService } from '../../../../../services/api.service';
-import { SparqlService } from '../../../../../services/sparql.service';
-import { NodeService } from '../../../../../services/node/node.service';
+import { Component } from '@angular/core';
 import { labelPredicates } from '../../../../../config/settings';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { wrapWithAngleBrackets } from '../../../../../helpers/util.helper';
-import { EndpointService } from '../../../../../services/endpoint.service';
 import { EndpointUrlsModel } from '../../../../../models/endpoint.model';
+import { ApiService } from '../../../../../services/api.service';
+import { EndpointService } from '../../../../../services/endpoint.service';
+import { NodeService } from '../../../../../services/node/node.service';
+import { SparqlService } from '../../../../../services/sparql.service';
+import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { NodeRenderComponent } from '../../node-render.component';
 
 @Component({
   selector: 'app-hua-rubriek',

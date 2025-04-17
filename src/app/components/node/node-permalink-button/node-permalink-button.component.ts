@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { NodeModel } from '../../../models/node.model';
-import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
-import { UrlService } from '../../../services/url.service';
-import { NodeService } from '../../../services/node/node.service';
-import { EndpointService } from '../../../services/endpoint.service';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { NodeModel } from '../../../models/node.model';
+import { EndpointService } from '../../../services/endpoint.service';
+import { NodeService } from '../../../services/node/node.service';
+import { UrlService } from '../../../services/url.service';
 
 @Component({
   selector: 'app-node-permalink-button',

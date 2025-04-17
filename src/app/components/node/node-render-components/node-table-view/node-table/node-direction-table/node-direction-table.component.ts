@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Direction, NodeModel } from '../../../../../../models/node.model';
 import {
   PredicateSection,
@@ -7,13 +8,11 @@ import {
 } from '../../../../../../models/settings/predicate-visibility-settings.model';
 import { NodeService } from '../../../../../../services/node/node.service';
 import { PredicateVisibilityService } from '../../../../../../services/predicate-visibility.service';
-import { sortByArrayOrder } from '../../../../../../helpers/util.helper';
-import { TranslatePipe } from '@ngx-translate/core';
+import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import {
   NodeTableCellComponent,
   TableCellShowOptions,
 } from '../node-table-cell/node-table-cell.component';
-import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-direction-table',

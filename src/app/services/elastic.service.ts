@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { hasImageFilters, Settings } from '../config/settings';
-import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
-import { FilterModel, FilterType } from '../models/filter.model';
-import { ElasticQuery } from '../models/elastic/elastic-query.type';
-import { ElasticFieldExistsQuery } from '../models/elastic/elastic-field-exists-query.type';
-import { DataService } from './data.service';
-import { ElasticMatchQueries } from '../models/elastic/elastic-match-queries.type';
 import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
-import { Config } from '../config/config';
-import { SettingsService } from './settings.service';
-import { EndpointService } from './endpoint.service';
+import { hasImageFilters, Settings } from '../config/settings';
 import { ElasticEndpointSearchResponse } from '../models/elastic/elastic-endpoint-search-response.type';
-import { ElasticShouldQueries } from '../models/elastic/elastic-should-queries.type';
-import { SortOrder } from '../models/settings/sort-order.enum';
-import { ElasticSortEntryModel } from '../models/elastic/elastic-sort.model';
-import { SortService } from './sort.service';
-import { FilterOptionsIdsModel } from '../models/filter-option.model';
+import { ElasticFieldExistsQuery } from '../models/elastic/elastic-field-exists-query.type';
 import { ElasticFullTextMatchQuery } from '../models/elastic/elastic-full-text-match-query.type';
 import { ElasticMatchAllQuery } from '../models/elastic/elastic-match-all-query.type';
+import { ElasticMatchQueries } from '../models/elastic/elastic-match-queries.type';
+import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
+import { ElasticQuery } from '../models/elastic/elastic-query.type';
+import { ElasticShouldQueries } from '../models/elastic/elastic-should-queries.type';
+import { ElasticSortEntryModel } from '../models/elastic/elastic-sort.model';
+import { FilterOptionsIdsModel } from '../models/filter-option.model';
+import { FilterModel, FilterType } from '../models/filter.model';
+import { SortOrder } from '../models/settings/sort-order.enum';
+import { ApiService } from './api.service';
+import { DataService } from './data.service';
+import { EndpointService } from './endpoint.service';
+import { SettingsService } from './settings.service';
+import { SortService } from './sort.service';
 
 @Injectable({
   providedIn: 'root',

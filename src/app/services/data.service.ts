@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
-import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
 import { FilterOptionsIdsModel } from '../models/filter-option.model';
 import { FilterModel, FilterType } from '../models/filter.model';
+import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
+import { ThingWithLabelModel } from '../models/thing-with-label.model';
 
 @Injectable({
   providedIn: 'root',

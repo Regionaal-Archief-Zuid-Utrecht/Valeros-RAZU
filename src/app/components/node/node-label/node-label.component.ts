@@ -1,3 +1,4 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
   Component,
   Input,
@@ -5,10 +6,9 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { truncate } from '../../../helpers/util.helper';
-import { Settings } from '../../../config/settings';
-import { NgClass, NgIf } from '@angular/common';
 import striptags from 'striptags';
+import { Settings } from '../../../config/settings';
+import { truncate } from '../../../helpers/util.helper';
 
 @Component({
   selector: 'app-node-label',

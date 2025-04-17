@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgIcon } from '@ng-icons/core';
+import { featherX } from '@ng-icons/feather-icons';
+import { TranslatePipe } from '@ngx-translate/core';
+import { UrlService } from '../../../services/url.service';
 import { HeaderComponent, HeaderView } from '../../header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
-import { featherX } from '@ng-icons/feather-icons';
-import { Router } from '@angular/router';
-import { UrlService } from '../../../services/url.service';
-import { TranslatePipe } from '@ngx-translate/core';
-import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-colofon',

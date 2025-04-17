@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { DetailsService } from './details.service';
-import { FilterModel } from '../models/filter.model';
-import { Config } from '../config/config';
-import { FilterService } from './search/filter.service';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
-import { DataService } from './data.service';
-import { EndpointService } from './endpoint.service';
-import { ApiService } from './api.service';
-import { SuraResponse } from '../models/sura-response.model';
+import { Config } from '../config/config';
 import { Settings } from '../config/settings';
+import { FilterModel } from '../models/filter.model';
+import { SuraResponse } from '../models/sura-response.model';
+import { ApiService } from './api.service';
+import { DataService } from './data.service';
+import { DetailsService } from './details.service';
+import { EndpointService } from './endpoint.service';
+import { FilterService } from './search/filter.service';
 
 @Injectable({
   providedIn: 'root',

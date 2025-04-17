@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
-import { NodeLinkComponent } from '../node-link/node-link.component';
-import { NodeTypeComponent } from './node-type/node-type.component';
-import { ClusterService } from '../../../services/cluster.service';
+import { Component, Input } from '@angular/core';
 import { Settings } from '../../../config/settings';
-import { TypeModel } from '../../../models/type.model';
 import { intersects } from '../../../helpers/util.helper';
 import { ClusterValuesSettingsModel } from '../../../models/settings/cluster-values-settings.model';
-import { SettingsService } from '../../../services/settings.service';
 import { PredicateVisibility } from '../../../models/settings/predicate-visibility-settings.model';
+import { TypeModel } from '../../../models/type.model';
+import { ClusterService } from '../../../services/cluster.service';
 import { PredicateVisibilityService } from '../../../services/predicate-visibility.service';
+import { SettingsService } from '../../../services/settings.service';
+import { NodeLinkComponent } from '../node-link/node-link.component';
+import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
   selector: 'app-node-types',

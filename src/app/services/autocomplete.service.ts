@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, debounceTime, Subject } from 'rxjs';
 import { Settings } from '../config/settings';
-import { ElasticEndpointSearchResponse } from '../models/elastic/elastic-endpoint-search-response.type';
-import { ElasticService } from './elastic.service';
-import { DataService } from './data.service';
-import { FilterModel } from '../models/filter.model';
-import { FilterService } from './search/filter.service';
-import { FilterOptionsIdsModel } from '../models/filter-option.model';
-import { ElasticShouldQueries } from '../models/elastic/elastic-should-queries.type';
 import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
 } from '../models/autocomplete-option.model';
+import { ElasticEndpointSearchResponse } from '../models/elastic/elastic-endpoint-search-response.type';
+import { ElasticShouldQueries } from '../models/elastic/elastic-should-queries.type';
+import { FilterOptionsIdsModel } from '../models/filter-option.model';
+import { FilterModel } from '../models/filter.model';
+import { DataService } from './data.service';
+import { ElasticService } from './elastic.service';
+import { FilterService } from './search/filter.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Direction, NodeModel } from '../../models/node.model';
-import { DataService } from '../data.service';
-import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
+import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
+import { Direction, NodeModel } from '../../models/node.model';
+import { DataService } from '../data.service';
 
 @Injectable({
   providedIn: 'root',

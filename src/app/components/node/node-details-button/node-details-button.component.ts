@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { featherArrowRight } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
-import { DetailsService } from '../../../services/details.service';
-import { NodeModel } from '../../../models/node.model';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NodeService } from '../../../services/node/node.service';
+import { NgIcon } from '@ng-icons/core';
+import { featherArrowRight } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';
+import { NodeModel } from '../../../models/node.model';
+import { DetailsService } from '../../../services/details.service';
+import { NodeService } from '../../../services/node/node.service';
 
 @Component({
   selector: 'app-node-details-button',

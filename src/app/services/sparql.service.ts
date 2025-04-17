@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Direction, NodeModel, NodeObj } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { ApiService } from './api.service';
 import { wrapWithAngleBrackets } from '../helpers/util.helper';
+import { IIIFItem } from '../models/IIIF/iiif-item.model';
+import { EndpointUrlsModel } from '../models/endpoint.model';
+import { Direction, NodeModel, NodeObj } from '../models/node.model';
 import { SparqlIncomingRelationModel } from '../models/sparql/sparql-incoming-relation.model';
 import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
-import { ThingWithLabelModel } from '../models/thing-with-label.model';
-import { SettingsService } from './settings.service';
-import { EndpointService } from './endpoint.service';
-import { EndpointUrlsModel } from '../models/endpoint.model';
 import { SparqlPredObjModel } from '../models/sparql/sparql-pred-obj.model';
-import { IIIFItem } from '../models/IIIF/iiif-item.model';
+import { ThingWithLabelModel } from '../models/thing-with-label.model';
+import { ApiService } from './api.service';
+import { EndpointService } from './endpoint.service';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root',

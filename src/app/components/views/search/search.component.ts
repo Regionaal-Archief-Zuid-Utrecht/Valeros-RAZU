@@ -1,12 +1,4 @@
 import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { NodeComponent } from '../../node/node.component';
-import {
   CommonModule,
   JsonPipe,
   NgClass,
@@ -14,35 +6,43 @@ import {
   NgIf,
   NgStyle,
 } from '@angular/common';
-import { SearchInputComponent } from '../../search-input/search-input.component';
-import { SearchService } from '../../../services/search/search.service';
-import { ViewModeSelectComponent } from '../../view-mode-select/view-mode-select.component';
-import { ViewMode } from '../../../models/view-mode.enum';
-import { NgxMasonryModule } from 'ngx-masonry';
-import { ViewModeService } from '../../../services/view-mode.service';
-import { NodesMasonryGridComponent } from '../../nodes-masonry-grid/nodes-masonry-grid.component';
-import { ActiveFiltersComponent } from '../../filters/active-filters/active-filters.component';
-import { NodesGridComponent } from '../../nodes-grid/nodes-grid.component';
-import { FilterOptionsComponent } from '../../filters/filter-options/filter-options.component';
-import { Settings } from '../../../config/settings';
-import { EndpointsComponent } from '../../filters/endpoints/endpoints.component';
-import { HeaderComponent } from '../../header/header.component';
-import { ViewContainerComponent } from '../view-container/view-container.component';
-import { HomeIntroComponent } from '../../home-intro/home-intro.component';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { filter } from 'rxjs';
+import { Settings } from '../../../config/settings';
+import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
+import { ViewMode } from '../../../models/view-mode.enum';
+import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { ScrollService } from '../../../services/scroll.service';
-import { DetailsService } from '../../../services/details.service';
+import { SearchService } from '../../../services/search/search.service';
+import { SettingsService } from '../../../services/settings.service';
+import { ViewModeService } from '../../../services/view-mode.service';
+import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
+import { ActiveFiltersComponent } from '../../filters/active-filters/active-filters.component';
+import { EndpointsComponent } from '../../filters/endpoints/endpoints.component';
+import { FilterOptionsComponent } from '../../filters/filter-options/filter-options.component';
+import { HeaderComponent } from '../../header/header.component';
 import { HomeIntroBelowSearchComponent } from '../../home-intro/home-intro-below-search/home-intro-below-search.component';
-import { DetailsComponent } from '../details/details.component';
-import { SortSelectComponent } from '../../sort-select/sort-select.component';
+import { HomeIntroComponent } from '../../home-intro/home-intro.component';
+import { LangSwitchComponent } from '../../lang-switch/lang-switch.component';
+import { NodeComponent } from '../../node/node.component';
+import { NodesGridComponent } from '../../nodes-grid/nodes-grid.component';
+import { NodesMasonryGridComponent } from '../../nodes-masonry-grid/nodes-masonry-grid.component';
+import { SearchInputComponent } from '../../search-input/search-input.component';
 import { LoadMoreSearchResultsButtonComponent } from '../../search/load-more-search-results-button/load-more-search-results-button.component';
 import { SearchHitsCounterComponent } from '../../search/search-hits-counter/search-hits-counter.component';
-import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
-import { SettingsService } from '../../../services/settings.service';
-import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
-import { filter } from 'rxjs';
-import { LangSwitchComponent } from '../../lang-switch/lang-switch.component';
+import { SortSelectComponent } from '../../sort-select/sort-select.component';
+import { ViewModeSelectComponent } from '../../view-mode-select/view-mode-select.component';
+import { DetailsComponent } from '../details/details.component';
+import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
   selector: 'app-search',

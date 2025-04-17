@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
 import { JsonPipe, KeyValuePipe, NgForOf, NgIf } from '@angular/common';
-import { NodeLinkComponent } from '../../node-link/node-link.component';
-import { NodeRenderComponent } from '../node-render.component';
+import { Component, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
-import { NodeTableComponent } from './node-table/node-table.component';
-import { NodeService } from '../../../../services/node/node.service';
-import { ViewMode } from '../../../../models/view-mode.enum';
-import { SettingsService } from '../../../../services/settings.service';
-import { ViewModeSetting } from '../../../../models/settings/view-mode-setting.enum';
 import { featherChevronDown, featherChevronUp } from '@ng-icons/feather-icons';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
+import { ViewModeSetting } from '../../../../models/settings/view-mode-setting.enum';
+import { ViewMode } from '../../../../models/view-mode.enum';
 import { DetailsService } from '../../../../services/details.service';
+import { NodeService } from '../../../../services/node/node.service';
 import { PredicateVisibilityService } from '../../../../services/predicate-visibility.service';
+import { SettingsService } from '../../../../services/settings.service';
+import { NodeLinkComponent } from '../../node-link/node-link.component';
+import { NodeRenderComponent } from '../node-render.component';
+import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
   selector: 'app-node-table-view',

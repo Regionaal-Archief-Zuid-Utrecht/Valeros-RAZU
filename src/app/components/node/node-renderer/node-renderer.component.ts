@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { JsonPipe, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
-import { NodeModel } from '../../../models/node.model';
-import { NodeService } from '../../../services/node/node.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Settings } from '../../../config/settings';
-import { RenderComponentService } from '../../../services/render-component.service';
-import { SdoPhotographComponent } from '../node-render-components/type-render-components/sdo-photograph/sdo-photograph.component';
+import { NodeModel } from '../../../models/node.model';
 import { RenderMode } from '../../../models/settings/render-component-settings.type';
+import { NodeService } from '../../../services/node/node.service';
+import { RenderComponentService } from '../../../services/render-component.service';
+import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
 import { GescandInventarisnummerComponent } from '../node-render-components/type-render-components/gescand-inventarisnummer/gescand-inventarisnummer.component';
 import { HuaRubriekComponent } from '../node-render-components/type-render-components/hua-rubriek/hua-rubriek.component';
+import { SdoPhotographComponent } from '../node-render-components/type-render-components/sdo-photograph/sdo-photograph.component';
 
 @Component({
   selector: 'app-node-renderer',

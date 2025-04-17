@@ -1,26 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Direction, NodeModel } from '../../../../../../models/node.model';
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
-import { NodeLinkComponent } from '../../../../node-link/node-link.component';
-import { NodeService } from '../../../../../../services/node/node.service';
-import { Config } from '../../../../../../config/config';
-import { RenderComponentService } from '../../../../../../services/render-component.service';
-import { SdoPhotographComponent } from '../../../type-render-components/sdo-photograph/sdo-photograph.component';
-import { NodeImagesComponent } from '../../../../node-images/node-images.component';
-import { Settings } from '../../../../../../config/settings';
-import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
 import { featherArrowUpLeft } from '@ng-icons/feather-icons';
-import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
-import { HopLinkComponent } from '../../../predicate-render-components/hop-components/hop-link/hop-link.component';
+import { Config } from '../../../../../../config/config';
+import { Settings } from '../../../../../../config/settings';
+import { Direction, NodeModel } from '../../../../../../models/node.model';
 import { RenderMode } from '../../../../../../models/settings/render-component-settings.type';
-import { LdtoDekkingInTijdComponent } from '../../../predicate-render-components/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
-import { LdtoUrlBestandComponent } from '../../../predicate-render-components/ldto-url-bestand/ldto-url-bestand.component';
-import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
-import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
-import { LdtoOmvangComponent } from '../../../predicate-render-components/ldto-omvang/ldto-omvang.component';
-import { LdtoEventComponent } from '../../../predicate-render-components/ldto-event/ldto-event.component';
+import { NodeService } from '../../../../../../services/node/node.service';
+import { RenderComponentService } from '../../../../../../services/render-component.service';
+import { NodeImagesComponent } from '../../../../node-images/node-images.component';
+import { NodeLinkComponent } from '../../../../node-link/node-link.component';
+import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
 import { FileRendererComponent } from '../../../predicate-render-components/file-renderer/file-renderer.component';
+import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
+import { HopLinkComponent } from '../../../predicate-render-components/hop-components/hop-link/hop-link.component';
+import { LdtoDekkingInTijdComponent } from '../../../predicate-render-components/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
+import { LdtoEventComponent } from '../../../predicate-render-components/ldto-event/ldto-event.component';
+import { LdtoOmvangComponent } from '../../../predicate-render-components/ldto-omvang/ldto-omvang.component';
+import { LdtoUrlBestandComponent } from '../../../predicate-render-components/ldto-url-bestand/ldto-url-bestand.component';
+import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
+import { RicoIdentifierComponent } from '../../../predicate-render-components/rico-identifier/rico-identifier.component';
+import { SdoPhotographComponent } from '../../../type-render-components/sdo-photograph/sdo-photograph.component';
 
 export enum TableCellShowOptions {
   Pred,
