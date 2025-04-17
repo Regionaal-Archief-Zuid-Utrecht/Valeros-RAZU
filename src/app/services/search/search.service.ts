@@ -13,15 +13,15 @@ import { SortOptionModel } from '../../models/settings/sort-option.model';
 import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
 import { DataService } from '../data.service';
 import { DetailsService } from '../details.service';
-import { ElasticService } from '../elastic.service';
 import { EndpointService } from '../endpoint.service';
 import { NodeService } from '../node/node.service';
 import { SettingsService } from '../settings.service';
 import { SortService } from '../sort.service';
-import { UiService } from '../ui.service';
 import { UrlService } from '../url.service';
+import { ElasticService } from './elastic.service';
 import { FilterService } from './filter.service';
 import { SearchHitsService } from './search-hits.service';
+import { UiService } from '../ui/ui.service';
 
 @Injectable({
   providedIn: 'root',

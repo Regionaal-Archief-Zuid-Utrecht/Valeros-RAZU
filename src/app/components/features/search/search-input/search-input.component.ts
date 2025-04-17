@@ -10,9 +10,9 @@ import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
 } from '../../../../models/autocomplete-option.model';
-import { AutocompleteService } from '../../../../services/autocomplete.service';
 import { DetailsService } from '../../../../services/details.service';
-import { ElasticService } from '../../../../services/elastic.service';
+import { AutocompleteService } from '../../../../services/search/autocomplete.service';
+import { ElasticService } from '../../../../services/search/elastic.service';
 import { SearchService } from '../../../../services/search/search.service';
 import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';

@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { DetailsService } from './details.service';
-import { NodeService } from './node/node.service';
+import { DetailsService } from '../details.service';
+import { NodeService } from '../node/node.service';
 
 @Injectable({
   providedIn: 'root',

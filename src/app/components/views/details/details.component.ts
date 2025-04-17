@@ -6,8 +6,8 @@ import { NodeModel } from '../../../models/node.model';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';
-import { ScrollService } from '../../../services/scroll.service';
 import { SparqlService } from '../../../services/sparql.service';
+import { ScrollService } from '../../../services/ui/scroll.service';
 import { NodeComponent } from '../../features/node/node.component';
 
 @Component({

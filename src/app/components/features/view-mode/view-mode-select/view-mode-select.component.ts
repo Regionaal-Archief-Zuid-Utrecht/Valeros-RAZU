@@ -4,8 +4,8 @@ import {
   featherImage,
   featherList,
 } from '@ng-icons/feather-icons';
-import { ViewMode } from '../../../models/view-mode.enum';
-import { ViewModeService } from '../../../services/view-mode.service';
+import { ViewMode } from '../../../../models/view-mode.enum';
+import { ViewModeService } from '../../../../services/view-mode.service';
 import { ViewModeSelectOptionComponent } from './view-mode-select-option/view-mode-select-option.component';
 
 @Component({

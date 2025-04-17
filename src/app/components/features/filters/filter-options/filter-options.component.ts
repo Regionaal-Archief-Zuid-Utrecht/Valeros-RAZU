@@ -6,7 +6,7 @@ import { Settings } from '../../../../config/settings';
 import { FilterType } from '../../../../models/filters/filter.model';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SettingsService } from '../../../../services/settings.service';
-import { UiService } from '../../../../services/ui.service';
+import { UiService } from '../../../../services/ui/ui.service';
 import { EndpointsComponent } from '../endpoints/endpoints.component';
 import { ImageFilterComponent } from '../image-filter/image-filter.component';
 import { FilterCountComponent } from './filter-count/filter-count.component';

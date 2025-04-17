@@ -7,7 +7,7 @@ import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
 } from '../../../../models/autocomplete-option.model';
-import { AutocompleteService } from '../../../../services/autocomplete.service';
+import { AutocompleteService } from '../../../../services/search/autocomplete.service';
 
 @Component({
   selector: 'app-search-autocomplete',

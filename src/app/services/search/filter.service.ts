@@ -17,7 +17,7 @@ import {
 import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { ClusterService } from '../cluster.service';
 import { DataService } from '../data.service';
-import { ElasticService } from '../elastic.service';
+import { ElasticService } from './elastic.service';
 
 interface SearchTriggerModel {
   clearFilters: boolean;

@@ -5,7 +5,7 @@ import { NgIcon } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FilterService } from '../../../../services/search/filter.service';
-import { UiService } from '../../../../services/ui.service';
+import { UiService } from '../../../../services/ui/ui.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 
 @Component({

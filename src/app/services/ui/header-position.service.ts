@@ -3,7 +3,7 @@ import {
   HeaderPosition,
   HeaderSettings,
   HeaderVerticalPosition,
-} from '../models/header/header-position.types';
+} from '../../models/header/header-position.types';
 
 @Injectable({
   providedIn: 'root',

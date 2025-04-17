@@ -6,7 +6,7 @@ import { Settings } from '../../../../config/settings';
 import { EndpointService } from '../../../../services/endpoint.service';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SearchService } from '../../../../services/search/search.service';
-import { UiService } from '../../../../services/ui.service';
+import { UiService } from '../../../../services/ui/ui.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 
 @Component({

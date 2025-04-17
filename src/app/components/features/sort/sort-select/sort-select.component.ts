@@ -2,10 +2,10 @@ import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { featherChevronDown } from '@ng-icons/feather-icons';
-import { Settings } from '../../../config/settings';
-import { FilterService } from '../../../services/search/filter.service';
-import { SortService } from '../../../services/sort.service';
-import { UiService } from '../../../services/ui.service';
+import { Settings } from '../../../../config/settings';
+import { FilterService } from '../../../../services/search/filter.service';
+import { SortService } from '../../../../services/sort.service';
+import { UiService } from '../../../../services/ui/ui.service';
 
 @Component({
   selector: 'app-sort-select',

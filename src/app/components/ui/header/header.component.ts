@@ -6,7 +6,7 @@ import { featherSearch, featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../../config/settings';
 import { HeaderSettings } from '../../../models/header/header-position.types';
-import { HeaderPositionService } from '../../../services/header-position.service';
+import { HeaderPositionService } from '../../../services/ui/header-position.service';
 import { UrlService } from '../../../services/url.service';
 
 export enum HeaderView {

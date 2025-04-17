@@ -35,9 +35,9 @@ import {
 import { FilterType } from '../../../../models/filters/filter.model';
 import { LabelsCacheService } from '../../../../services/cache/labels-cache.service';
 import { DetailsService } from '../../../../services/details.service';
-import { ScrollService } from '../../../../services/scroll.service';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SearchService } from '../../../../services/search/search.service';
+import { ScrollService } from '../../../../services/ui/scroll.service';
 import { UrlService } from '../../../../services/url.service';
 import { NodeLabelComponent } from '../node-label/node-label.component';
 
