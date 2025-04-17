@@ -6,8 +6,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
-} from '../../models/autocomplete-option.model';
-import { AutocompleteService } from '../../services/autocomplete.service';
+} from '../../../../models/autocomplete-option.model';
+import { AutocompleteService } from '../../../../services/autocomplete.service';
 
 @Component({
   selector: 'app-search-autocomplete',

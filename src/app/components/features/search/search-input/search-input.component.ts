@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Config } from '../../config/config';
-import { Settings } from '../../config/settings';
+import { Config } from '../../../../config/config';
+import { Settings } from '../../../../config/settings';
 import {
   AutocompleteOptionModel,
   AutocompleteOptionType,
-} from '../../models/autocomplete-option.model';
-import { AutocompleteService } from '../../services/autocomplete.service';
-import { DetailsService } from '../../services/details.service';
-import { ElasticService } from '../../services/elastic.service';
-import { SearchService } from '../../services/search/search.service';
-import { UrlService } from '../../services/url.service';
+} from '../../../../models/autocomplete-option.model';
+import { AutocompleteService } from '../../../../services/autocomplete.service';
+import { DetailsService } from '../../../../services/details.service';
+import { ElasticService } from '../../../../services/elastic.service';
+import { SearchService } from '../../../../services/search/search.service';
+import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
 
 @Component({
