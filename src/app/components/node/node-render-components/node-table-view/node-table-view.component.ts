@@ -4,7 +4,7 @@ import { NodeLinkComponent } from '../../node-link/node-link.component';
 import { NodeRenderComponent } from '../node-render.component';
 import { NgIcon } from '@ng-icons/core';
 import { NodeTableComponent } from './node-table/node-table.component';
-import { NodeService } from '../../../../services/node.service';
+import { NodeService } from '../../../../services/node/node.service';
 import { ViewMode } from '../../../../models/view-mode.enum';
 import { SettingsService } from '../../../../services/settings.service';
 import { ViewModeSetting } from '../../../../models/settings/view-mode-setting.enum';

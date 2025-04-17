@@ -6,7 +6,7 @@ import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { NodeTableCellComponent } from './node-table-cell/node-table-cell.component';
 import { PredicateVisibility } from '../../../../../models/settings/predicate-visibility-settings.model';
 import { NodeDirectionTableComponent } from './node-direction-table/node-direction-table.component';
-import { NodeService } from '../../../../../services/node.service';
+import { NodeService } from '../../../../../services/node/node.service';
 
 @Component({
   selector: 'app-node-table',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NodeModel } from '../models/node.model';
+import { NodeModel } from '../../models/node.model';
 import { NodeService } from './node.service';
-import { Settings } from '../config/settings';
+import { Settings } from '../../config/settings';
 
 @Injectable({
   providedIn: 'root',

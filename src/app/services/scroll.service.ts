@@ -1,5 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { NodeService } from './node.service';
+import { NodeService } from './node/node.service';
 import { DetailsService } from './details.service';
 
 @Injectable({

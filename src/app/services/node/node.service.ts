@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Direction, NodeModel, NodeObj } from '../models/node.model';
-import { SparqlService } from './sparql.service';
+import { Direction, NodeModel, NodeObj } from '../../models/node.model';
+import { SparqlService } from '../sparql.service';
 
 @Injectable({
   providedIn: 'root',

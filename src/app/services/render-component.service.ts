@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Direction, NodeModel } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { NodeService } from './node.service';
+import { NodeService } from './node/node.service';
 import {
   RenderComponentSetting,
   RenderComponentSettings,

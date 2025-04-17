@@ -3,7 +3,7 @@ import { Direction, NodeModel } from '../../../../../../models/node.model';
 import { JsonPipe, NgForOf, NgIf } from '@angular/common';
 import { NgIcon } from '@ng-icons/core';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
-import { NodeService } from '../../../../../../services/node.service';
+import { NodeService } from '../../../../../../services/node/node.service';
 import { Config } from '../../../../../../config/config';
 import { RenderComponentService } from '../../../../../../services/render-component.service';
 import { SdoPhotographComponent } from '../../../type-render-components/sdo-photograph/sdo-photograph.component';

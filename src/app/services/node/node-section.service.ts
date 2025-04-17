@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Settings } from '../config/settings';
-import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
-import { NodeModel } from '../models/node.model';
-import { SparqlService } from './sparql.service';
-import { SettingsService } from './settings.service';
-import { DetailsService } from './details.service';
+import { Settings } from '../../config/settings';
+import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
+import { NodeModel } from '../../models/node.model';
+import { SparqlService } from '../sparql.service';
+import { SettingsService } from '../settings.service';
+import { DetailsService } from '../details.service';
 import { NodeService } from './node.service';
 
 @Injectable({

@@ -10,7 +10,7 @@ import {
   ImageService,
 } from '@iiif/presentation-3';
 import { NodeModel } from '../models/node.model';
-import { NodeService } from './node.service';
+import { NodeService } from './node/node.service';
 import { LabelsCacheService } from './cache/labels-cache.service';
 import { UrlService } from './url.service';
 import { Settings } from '../config/settings';

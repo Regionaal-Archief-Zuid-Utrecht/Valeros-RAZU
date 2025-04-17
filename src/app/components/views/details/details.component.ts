@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NodeComponent } from '../../node/node.component';
-import { NodeService } from '../../../services/node.service';
+import { NodeService } from '../../../services/node/node.service';
 import { NodeModel } from '../../../models/node.model';
 import { JsonPipe, NgIf } from '@angular/common';
 import { SparqlService } from '../../../services/sparql.service';

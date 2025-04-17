@@ -9,7 +9,7 @@ import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Direction, NodeModel } from '../../models/node.model';
 import { SparqlNodeParentModel } from '../../models/sparql/sparql-node-parent.model';
-import { NodeService } from '../../services/node.service';
+import { NodeService } from '../../services/node/node.service';
 import { Settings } from '../../config/settings';
 import { SparqlService } from '../../services/sparql.service';
 import { DataService } from '../../services/data.service';
@@ -36,8 +36,8 @@ import { RoutingService } from '../../services/routing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NodeSectionService } from '../../services/node-section.service';
-import { NodeFileService } from '../../services/node-file.service';
+import { NodeSectionService } from '../../services/node/node-section.service';
+import { NodeFileService } from '../../services/node/node-file.service';
 import { MiradorComponent } from '../mirador/mirador.component';
 
 @Component({

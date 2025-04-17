@@ -7,7 +7,7 @@ import { NodeModel } from '../../models/node.model';
 import { Settings } from '../../config/settings';
 import { SearchHitsService } from './search-hits.service';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
-import { NodeService } from '../node.service';
+import { NodeService } from '../node/node.service';
 import { FilterService } from './filter.service';
 import {
   SearchHit,

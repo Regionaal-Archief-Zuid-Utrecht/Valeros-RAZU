@@ -5,7 +5,7 @@ import { NgIf } from '@angular/common';
 import { DetailsService } from '../../../services/details.service';
 import { NodeModel } from '../../../models/node.model';
 import { RouterLink } from '@angular/router';
-import { NodeService } from '../../../services/node.service';
+import { NodeService } from '../../../services/node/node.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AccessibleIconDirective } from '../../../directives/accessible-icon.directive';
 

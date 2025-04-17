@@ -5,7 +5,7 @@ import {
   PredicateSection,
   PredicateVisibility,
 } from '../../../../../../models/settings/predicate-visibility-settings.model';
-import { NodeService } from '../../../../../../services/node.service';
+import { NodeService } from '../../../../../../services/node/node.service';
 import { PredicateVisibilityService } from '../../../../../../services/predicate-visibility.service';
 import { sortByArrayOrder } from '../../../../../../helpers/util.helper';
 import { TranslatePipe } from '@ngx-translate/core';

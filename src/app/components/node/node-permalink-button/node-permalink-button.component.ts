@@ -3,7 +3,7 @@ import { NodeModel } from '../../../models/node.model';
 import { NgIcon } from '@ng-icons/core';
 import { NgIf } from '@angular/common';
 import { UrlService } from '../../../services/url.service';
-import { NodeService } from '../../../services/node.service';
+import { NodeService } from '../../../services/node/node.service';
 import { EndpointService } from '../../../services/endpoint.service';
 import { TranslatePipe } from '@ngx-translate/core';
 

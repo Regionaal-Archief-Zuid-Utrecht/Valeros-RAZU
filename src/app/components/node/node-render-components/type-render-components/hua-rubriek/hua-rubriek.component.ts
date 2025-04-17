@@ -3,7 +3,7 @@ import { NodeRenderComponent } from '../../node-render.component';
 import { JsonPipe, NgForOf } from '@angular/common';
 import { ApiService } from '../../../../../services/api.service';
 import { SparqlService } from '../../../../../services/sparql.service';
-import { NodeService } from '../../../../../services/node.service';
+import { NodeService } from '../../../../../services/node/node.service';
 import { labelPredicates } from '../../../../../config/settings';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 import { wrapWithAngleBrackets } from '../../../../../helpers/util.helper';

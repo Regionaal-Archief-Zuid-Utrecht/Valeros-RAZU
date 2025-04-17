@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NodeModel } from '../models/node.model';
-import { NodeService } from './node.service';
+import { NodeService } from './node/node.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Config } from '../config/config';
