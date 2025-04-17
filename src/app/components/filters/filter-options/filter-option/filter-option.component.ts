@@ -3,8 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Config } from '../../../../config/config';
 import { formatNumber } from '../../../../helpers/util.helper';
-import { FilterOptionValueModel } from '../../../../models/filter-option.model';
-import { FilterModel, FilterType } from '../../../../models/filter.model';
+import { FilterOptionValueModel } from '../../../../models/filters/filter-option.model';
+import {
+  FilterModel,
+  FilterType,
+} from '../../../../models/filters/filter.model';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SearchService } from '../../../../services/search/search.service';
 import { NodeLinkComponent } from '../../../node/node-link/node-link.component';

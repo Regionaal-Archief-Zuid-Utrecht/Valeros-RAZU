@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { skip } from 'rxjs';
 import { Config } from '../config/config';
 import { Settings } from '../config/settings';
-import { FilterModel } from '../models/filter.model';
+import { FilterModel } from '../models/filters/filter.model';
 import { SuraResponse } from '../models/sura-response.model';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';

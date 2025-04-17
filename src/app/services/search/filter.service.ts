@@ -13,8 +13,8 @@ import {
   FilterOptionValueModel,
   FilterOptionsIdsModel,
   FilterOptionsModel,
-} from '../../models/filter-option.model';
-import { FilterModel, FilterType } from '../../models/filter.model';
+} from '../../models/filters/filter-option.model';
+import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { ClusterService } from '../cluster.service';
 import { DataService } from '../data.service';
 import { ElasticService } from '../elastic.service';

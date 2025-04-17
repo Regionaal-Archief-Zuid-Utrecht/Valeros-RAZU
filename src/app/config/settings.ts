@@ -1,5 +1,5 @@
 import { FileType } from '../models/file-type.model';
-import { FilterModel, FilterType } from '../models/filter.model';
+import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { HeaderSettings } from '../models/header/header-position.types';
 import { FileTypeConfig } from '../models/settings/file-type-config.model';
 import { FilterPanelLocation } from '../models/settings/filter-panel-location.enum';

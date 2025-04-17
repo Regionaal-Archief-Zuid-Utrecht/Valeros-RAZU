@@ -32,7 +32,7 @@ import {
   replacePrefixes,
   wrapWithDoubleQuotes,
 } from '../../../helpers/util.helper';
-import { FilterType } from '../../../models/filter.model';
+import { FilterType } from '../../../models/filters/filter.model';
 import { LabelsCacheService } from '../../../services/cache/labels-cache.service';
 import { DetailsService } from '../../../services/details.service';
 import { ScrollService } from '../../../services/scroll.service';
