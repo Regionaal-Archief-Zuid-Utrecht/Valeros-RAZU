@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NodeModel } from '../../models/node.model';
 import { ViewMode } from '../../models/view-mode.enum';
-import { NodeComponent } from '../node/node.component';
+import { NodeComponent } from '../features/node/node.component';
 
 @Component({
   selector: 'app-nodes-masonry-grid',

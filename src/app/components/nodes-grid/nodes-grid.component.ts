@@ -2,7 +2,7 @@ import { NgForOf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { NodeModel } from '../../models/node.model';
-import { NodeComponent } from '../node/node.component';
+import { NodeComponent } from '../features/node/node.component';
 
 @Component({
   selector: 'app-nodes-grid',

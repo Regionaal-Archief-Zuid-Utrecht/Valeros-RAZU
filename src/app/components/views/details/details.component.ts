@@ -8,7 +8,7 @@ import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';
 import { ScrollService } from '../../../services/scroll.service';
 import { SparqlService } from '../../../services/sparql.service';
-import { NodeComponent } from '../../node/node.component';
+import { NodeComponent } from '../../features/node/node.component';
 
 @Component({
   selector: 'app-details',

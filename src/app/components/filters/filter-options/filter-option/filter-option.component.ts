@@ -10,7 +10,7 @@ import {
 } from '../../../../models/filters/filter.model';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SearchService } from '../../../../services/search/search.service';
-import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
+import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
 
 @Component({
   selector: 'app-filter-option',
