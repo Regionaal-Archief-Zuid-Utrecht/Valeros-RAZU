@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { DocViewerComponent } from "../doc-viewer/doc-viewer.component";
+import { DocViewerComponent } from '../doc-viewer/doc-viewer.component';
 
 @Component({
   selector: 'app-home-intro',
