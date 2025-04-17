@@ -7,5 +7,6 @@
     "angular-*": {
       "externalTemplate": true
     }
-  }
+  },
+  "editor.formatOnSave": true
 }
