@@ -114,14 +114,14 @@ export class AutocompleteService {
 
     this.isLoading = true;
 
-    const filtersForSearchTermOptions: FilterModel[] =
+    const filtersForAutocompleteOptions: FilterModel[] =
       this.data.convertFiltersFromIdsFormat(
         Settings.search.autocomplete
-          .filtersForSearchTermOptions as FilterOptionsIdsModel,
+          .filtersForAutocompleteOptions as FilterOptionsIdsModel,
       );
 
-    const queriesForSearchTermOptions: ElasticShouldQueries[] =
-      this.elastic.getFieldAndValueFilterQueries(filtersForSearchTermOptions);
+    const queriesForAutocompleteOptions: ElasticShouldQueries[] =
+      this.elastic.getFieldAndValueFilterQueries(filtersForAutocompleteOptions);
 
     const query: any = {
       query: {
@@ -137,7 +137,7 @@ export class AutocompleteService {
     };
 
     const searchTermQuery: any = JSON.parse(JSON.stringify(query));
-    searchTermQuery.query.bool.should = queriesForSearchTermOptions;
+    searchTermQuery.query.bool.should = queriesForAutocompleteOptions;
     searchTermQuery.query.bool.minimum_should_match = 1;
 
     const nodeOptions: AutocompleteOptionModel[] =

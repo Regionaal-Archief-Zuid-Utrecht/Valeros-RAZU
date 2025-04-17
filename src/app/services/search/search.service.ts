@@ -17,11 +17,11 @@ import { EndpointService } from '../endpoint.service';
 import { NodeService } from '../node/node.service';
 import { SettingsService } from '../settings.service';
 import { SortService } from '../sort.service';
+import { UiService } from '../ui/ui.service';
 import { UrlService } from '../url.service';
 import { ElasticService } from './elastic.service';
 import { FilterService } from './filter.service';
 import { SearchHitsService } from './search-hits.service';
-import { UiService } from '../ui/ui.service';
 
 @Injectable({
   providedIn: 'root',
@@ -226,7 +226,10 @@ export class SearchService {
           total +
           (hitTotal.relation === 'eq'
             ? hitTotal.value
-            : Math.min(hitTotal.value, Settings.search.maxResultsForCounting))
+            : Math.min(
+                hitTotal.value,
+                Settings.search.maxFilterOptionValuesCount,
+              ))
         );
       }
       return total;

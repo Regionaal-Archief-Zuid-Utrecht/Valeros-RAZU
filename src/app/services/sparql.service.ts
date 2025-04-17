@@ -314,7 +314,7 @@ OPTIONAL { ?altoURI schema:about ?fileURI ;
                     ldto:URLBestand ?altoUrl ;
                     ldto:naam ?altoName . }
 
-FILTER(?format = <${Settings.viewer.fileFormats.jpg}> || ?format = <${Settings.viewer.fileFormats.tif}>) # JPG, TIF`;
+FILTER(?format = <${Settings.iiif.fileFormats.jpg}> || ?format = <${Settings.iiif.fileFormats.tif}>) # JPG, TIF`;
 
     const query = `
 PREFIX ldto: <https://data.razu.nl/def/ldto/>

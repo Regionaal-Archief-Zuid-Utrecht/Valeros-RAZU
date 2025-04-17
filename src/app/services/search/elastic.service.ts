@@ -128,12 +128,12 @@ export class ElasticService {
           field: elasticFieldId + '.keyword',
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
-          size: Settings.search.maxResultsForCounting,
+          size: Settings.search.maxFilterOptionValuesCount,
         },
         aggs: {
           field_hits: {
             top_hits: {
-              size: Settings.search.maxResultsForCounting,
+              size: Settings.search.maxFilterOptionValuesCount,
               _source: '',
             },
           },
@@ -147,7 +147,7 @@ export class ElasticService {
       activeFilters,
       onlyWithImages,
       0,
-      Settings.search.maxResultsForCounting,
+      Settings.search.maxFilterOptionValuesCount,
     );
     queryData.aggs = { ...aggs };
 
@@ -399,7 +399,7 @@ export class ElasticService {
     return this.searchNodes(
       query,
       0,
-      Settings.search.maxResultsForCounting,
+      Settings.search.maxFilterOptionValuesCount,
       filters,
       onlyWithImages,
     );

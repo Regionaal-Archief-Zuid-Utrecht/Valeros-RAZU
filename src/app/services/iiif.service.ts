@@ -93,7 +93,7 @@ export class IIIFService {
 
     itemsData = this._selectPreferredImageFormats(
       itemsData,
-      Settings.viewer.preferredImageFormats,
+      Settings.iiif.preferredImageFormats,
     );
 
     const processAltoUrl = async (item: IIIFItem) => {
