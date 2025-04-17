@@ -29,7 +29,7 @@ import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';
 import { SettingsService } from '../../../services/settings.service';
 import { SparqlService } from '../../../services/sparql.service';
-import { MiradorComponent } from '../../mirador/mirador.component';
+import { MiradorComponent } from '../file-viewers/mirador/mirador.component';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
 import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';

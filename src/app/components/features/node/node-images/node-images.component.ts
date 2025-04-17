@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { MiradorComponent } from '../../../mirador/mirador.component';
+import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
 
 @Component({
   selector: 'app-node-images',

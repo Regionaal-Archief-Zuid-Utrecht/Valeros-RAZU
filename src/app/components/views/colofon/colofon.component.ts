@@ -5,7 +5,7 @@ import { NgIcon } from '@ng-icons/core';
 import { featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UrlService } from '../../../services/url.service';
-import { HeaderComponent, HeaderView } from '../../header/header.component';
+import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
