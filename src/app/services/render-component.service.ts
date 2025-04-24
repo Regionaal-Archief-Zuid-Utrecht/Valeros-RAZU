@@ -114,9 +114,8 @@ export class RenderComponentService {
       nodePreds = predicates ?? [];
     }
 
-    // TODO: Fix type error
     for (const [pred, setting] of Object.entries(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
+      Settings.renderComponents?.[mode] as RenderComponentSettings,
     )) {
       if (direction === undefined) {
         direction = Direction.Outgoing;
@@ -148,9 +147,8 @@ export class RenderComponentService {
   }
 
   getAll(mode: RenderMode): RenderComponentSetting[] {
-    // TODO: Fix type error
     return Object.values(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
+      Settings.renderComponents?.[mode] as RenderComponentSettings,
     );
   }
 }
