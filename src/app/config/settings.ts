@@ -1,4 +1,3 @@
-import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { clusteringSettings } from './settings/clustering.settings';
 import { endpointSettings } from './settings/endpoint.settings';
 import { fileTypeSettings } from './settings/file-types.settings';
@@ -8,25 +7,12 @@ import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
 import { nodeVisibilitySettings } from './settings/node-visibility.settings';
 import { predicateVisibilitySettings } from './settings/predicate-visibility.settings';
-import {
-  filePredicates,
-  predicateSettings,
-} from './settings/predicate.settings';
+import { predicateSettings } from './settings/predicate.settings';
 import { renderComponentSettings } from './settings/render-component.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
 import { viewModeSettings } from './settings/view-mode.settings';
-
-export const hasImageFilters: FilterModel[] = filePredicates.map(
-  (imagePred) => {
-    return {
-      filterId: 'image',
-      fieldId: imagePred,
-      type: FilterType.Field,
-    };
-  },
-);
 
 export const Settings = {
   endpoints: endpointSettings,

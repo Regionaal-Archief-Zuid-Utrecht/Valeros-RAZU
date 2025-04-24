@@ -23,7 +23,6 @@ const hideFilterOptionValueIds: string[] = [
 
 export const filteringSettings: FilteringSettings = {
   showFilterPanel: true,
-  showImageFilter: false, // TODO: Remove
   showOrganizationsFilter: false,
   filterPanelLocation: FilterPanelLocation.Left,
   minNumOfValuesForFilterOptionToAppear: 1,

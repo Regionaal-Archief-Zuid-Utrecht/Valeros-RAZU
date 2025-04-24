@@ -124,10 +124,6 @@ export class SearchService {
       }
       void this.execute(true, s.clearFilters);
     });
-
-    this.filters.onlyShowResultsWithImages.subscribe(() => {
-      void this.execute(true, false);
-    });
   }
 
   initSearchOnEndpointChange() {
@@ -175,12 +171,6 @@ export class SearchService {
         this.filters.onUpdateFromURLParam(filtersParam);
       }
 
-      const onlyWithImages: string | undefined =
-        queryParams[Config.onlyWithImages];
-      if (onlyWithImages) {
-        this.filters.onlyShowResultsWithImages.next(JSON.parse(onlyWithImages));
-      }
-
       setTimeout(() => this._searchOnUrlChange(queryParams));
     });
 
@@ -203,7 +193,6 @@ export class SearchService {
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
-        this.filters.onlyShowResultsWithImages.value,
       );
     const hits: SearchHit<ElasticNodeModel>[] =
       this.hits.getFromSearchResponses(responses);
@@ -269,7 +258,6 @@ export class SearchService {
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
-        this.filters.onlyShowResultsWithImages.value,
       );
 
       const { total, isCapped } = this._calculateTotalHits(displayResponses);

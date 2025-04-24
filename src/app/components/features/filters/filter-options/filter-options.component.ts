@@ -8,7 +8,6 @@ import { FilterService } from '../../../../services/search/filter.service';
 import { SettingsService } from '../../../../services/settings.service';
 import { UiService } from '../../../../services/ui/ui.service';
 import { EndpointsComponent } from '../endpoints/endpoints.component';
-import { ImageFilterComponent } from '../image-filter/image-filter.component';
 import { FilterCountComponent } from './filter-count/filter-count.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
 
@@ -23,7 +22,6 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     FilterCountComponent,
     NgClass,
     FormsModule,
-    ImageFilterComponent,
     TranslatePipe,
   ],
   templateUrl: './filter-options.component.html',

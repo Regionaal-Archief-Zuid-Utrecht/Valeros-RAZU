@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
-import { hasImageFilters, Settings } from '../../config/settings';
+import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticFieldExistsQuery } from '../../models/elastic/elastic-field-exists-query.type';
 import { ElasticFullTextMatchQuery } from '../../models/elastic/elastic-full-text-match-query.type';
@@ -118,7 +118,6 @@ export class ElasticService {
     query: string,
     filterFieldIds: string[],
     activeFilters: FilterModel[],
-    onlyWithImages: boolean,
   ): Promise<SearchResponse<any>[]> {
     const aggs = filterFieldIds.reduce((result: any, fieldId) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
@@ -145,7 +144,6 @@ export class ElasticService {
     const queryData = this._getNodeSearchQuery(
       query,
       activeFilters,
-      onlyWithImages,
       0,
       Settings.search.elasticTopHitsMax,
     );
@@ -267,7 +265,6 @@ export class ElasticService {
   private _getNodeSearchQuery(
     query: string,
     filters: FilterModel[],
-    onlyWithImages: boolean,
     from?: number,
     size?: number,
   ): any {
@@ -315,17 +312,6 @@ export class ElasticService {
     const mustQueries: ElasticShouldQueries[] = [...fieldAndValueFilterQueries];
     if (fieldOrValueFilterQueries && fieldOrValueFilterQueries.length > 0) {
       mustQueries.push({ bool: { should: fieldOrValueFilterQueries } });
-    }
-
-    // Has image filter
-    const hasImageFilterQueries =
-      this._getFieldOrValueFilterQueries(hasImageFilters);
-    const useHasImageFilter =
-      onlyWithImages &&
-      hasImageFilterQueries &&
-      hasImageFilterQueries.length > 0;
-    if (useHasImageFilter) {
-      mustQueries.push({ bool: { should: hasImageFilterQueries } });
     }
 
     // Only show filters (e.g., only show "InformatieObject")
@@ -394,14 +380,12 @@ export class ElasticService {
   async searchNodesForCounting(
     query: string,
     filters: FilterModel[],
-    onlyWithImages: boolean,
   ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
     return this.searchNodes(
       query,
       0,
       Settings.search.elasticTopHitsMax,
       filters,
-      onlyWithImages,
     );
   }
 
@@ -410,15 +394,8 @@ export class ElasticService {
     from: number,
     size: number,
     filters: FilterModel[],
-    onlyWithImages: boolean,
   ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    const queryData = this._getNodeSearchQuery(
-      query,
-      filters,
-      onlyWithImages,
-      from,
-      size,
-    );
+    const queryData = this._getNodeSearchQuery(query, filters, from, size);
 
     return await this.searchEndpoints(queryData);
   }

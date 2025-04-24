@@ -34,15 +34,6 @@ export class UrlService {
     this.filters.enabled.pipe(skip(2)).subscribe((enabledFilters) => {
       void this.updateUrlToReflectFilters(enabledFilters);
     });
-
-    this.filters.onlyShowResultsWithImages
-      .pipe(skip(1))
-      .subscribe(async (onlyWithImages) => {
-        void this._updateUrlParam(
-          Config.onlyWithImages,
-          JSON.stringify(onlyWithImages),
-        );
-      });
   }
 
   private _initUpdateUrlOnEndpointChange() {

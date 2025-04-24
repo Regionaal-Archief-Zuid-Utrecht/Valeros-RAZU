@@ -11,5 +11,4 @@ export const Config = {
   searchParam: 'search',
   filtersParam: 'filters',
   endpointsParam: 'endpoints',
-  onlyWithImages: 'onlyWithImages',
 };
