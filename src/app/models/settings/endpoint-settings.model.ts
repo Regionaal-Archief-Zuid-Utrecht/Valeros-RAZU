@@ -1,6 +1,6 @@
 import { EndpointsModel } from '../endpoint.model';
 
-export interface EndpointSettingsModel {
+export interface EndpointSettings {
   maxNumParallelRequests: number;
   data: EndpointsModel;
   pdfConversionUrl: string;

@@ -28,12 +28,7 @@ const providers = [
   ]),
 ];
 
-const matomoConfigExists: boolean = !!(
-  Settings.matomo &&
-  Settings.matomo.siteId &&
-  Settings.matomo.trackerUrl
-);
-if (matomoConfigExists) {
+if (Settings.matomo) {
   providers.push(
     provideMatomo({
       siteId: Settings.matomo.siteId,

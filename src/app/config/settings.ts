@@ -1,3 +1,4 @@
+import { SettingsModel } from '../models/settings/settings.model';
 import { clusteringSettings } from './settings/clustering.settings';
 import { endpointSettings } from './settings/endpoint.settings';
 import { fileTypeSettings } from './settings/file-types.settings';
@@ -14,7 +15,7 @@ import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
 import { viewModeSettings } from './settings/view-mode.settings';
 
-export const Settings = {
+export const Settings: SettingsModel = {
   endpoints: endpointSettings,
   predicateVisibility: predicateVisibilitySettings,
   nodeVisibility: nodeVisibilitySettings, // E.g. hide all nodes of type "skos:Concept"
