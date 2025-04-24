@@ -310,9 +310,14 @@ LIMIT 10000`;
           schema:height ?height ;
           schema:position ?position .
 
-OPTIONAL { ?altoURI schema:about ?fileURI ;
-                    ldto:URLBestand ?altoUrl ;
-                    ldto:naam ?altoName . }
+OPTIONAL { 
+    ?altoURI schema:about ?fileURI ;
+            ldto:URLBestand ?altoUrl ;
+            ldto:naam ?altoName ;
+            ldto:bestandsformaat ?altoFormat .
+
+            FILTER(?altoFormat = <${Settings.iiif.fileFormats.alto}>)
+}
 
 FILTER(?format = <${Settings.iiif.fileFormats.jpg}> || ?format = <${Settings.iiif.fileFormats.tif}>) # JPG, TIF`;
 
