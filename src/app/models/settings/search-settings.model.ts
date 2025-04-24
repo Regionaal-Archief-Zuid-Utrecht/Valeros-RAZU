@@ -2,6 +2,6 @@ import { AutocompleteSettings } from './autocomplete-settings.model';
 
 export interface SearchSettings {
   resultsPerPagePerEndpoint: number;
-  maxFilterOptionValuesCount: number;
+  elasticTopHitsMax: number;
   autocomplete: AutocompleteSettings;
 }

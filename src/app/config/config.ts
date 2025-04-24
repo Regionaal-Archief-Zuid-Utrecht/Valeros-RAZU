@@ -7,7 +7,6 @@ export const Config = {
   labelFetchIntervalMs: 100, // There's a continuous loop in the cache service checking if there are new labels that need to be retrieved and cached
   maxNumOfFilterOptionsPerField: 30,
   maxImagesToShow: 10,
-  elasticTopHitsMax: 500, // Max 100 by default, tweak index.max_inner_result_window to go higher
   detailsUrl: 'details',
   searchParam: 'search',
   filtersParam: 'filters',

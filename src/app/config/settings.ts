@@ -47,7 +47,6 @@ export const Settings = {
     parents: parentPredicates,
     label: labelPredicates,
     type: typePredicates,
-    images: filePredicates,
     files: filePredicates,
     hopFiles: hopFilePredicates,
   },

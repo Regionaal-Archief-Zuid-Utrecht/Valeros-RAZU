@@ -2,6 +2,7 @@ import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Config } from '../../../../../config/config';
+import { Settings } from '../../../../../config/settings';
 import { formatNumber } from '../../../../../helpers/util.helper';
 import { FilterOptionValueModel } from '../../../../../models/filters/filter-option.model';
 import {
@@ -61,8 +62,8 @@ export class FilterOptionComponent implements OnInit {
   }
 
   getFilterOptionCountStr(count: number): string {
-    if (count >= Config.elasticTopHitsMax) {
-      return ` (${Config.elasticTopHitsMax}+)`;
+    if (count >= Settings.search.elasticTopHitsMax) {
+      return ` (${Settings.search.elasticTopHitsMax}+)`;
     }
 
     return ` (${count})`;

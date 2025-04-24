@@ -226,10 +226,7 @@ export class SearchService {
           total +
           (hitTotal.relation === 'eq'
             ? hitTotal.value
-            : Math.min(
-                hitTotal.value,
-                Settings.search.maxFilterOptionValuesCount,
-              ))
+            : Math.min(hitTotal.value, Settings.search.elasticTopHitsMax))
         );
       }
       return total;
