@@ -1,6 +1,5 @@
 import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
-import { RenderMode } from '../models/settings/render-component-settings.type';
 import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
 import { ViewMode } from '../models/view-mode.enum';
 import { clusteringSettings } from './settings/clustering.settings';
@@ -16,6 +15,7 @@ import {
   predicateSettings,
   typePredicates,
 } from './settings/predicate.settings';
+import { renderComponentSettings } from './settings/render-component.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
@@ -43,79 +43,7 @@ export const Settings = {
   ui: uiSettings,
   predicates: predicateSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  renderComponents: {
-    [RenderMode.ByType]: {},
-    [RenderMode.ByPredicate]: {
-      'http://xmlns.com/foaf/0.1/depiction': {
-        componentId: 'file-renderer',
-      },
-      'https://schema.org/thumbnail': {
-        componentId: 'file-renderer',
-      },
-      // 'https://schema.org/contentLocation': {
-      //   componentId: 'map-thumb',
-      // },
-      'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
-        componentId: 'node-type',
-      },
-      'https://www.ica.org/standards/RiC/ontology#hasRecordSetType': {
-        componentId: 'node-type',
-      },
-      'https://schema.org/additionalType': {
-        componentId: 'node-type',
-      },
-      'http://www.wikidata.org/entity/P31': {
-        componentId: 'node-type',
-      },
-      'https://data.razu.nl/def/ldto/omvang': {
-        componentId: 'ldto-omvang',
-      },
-      'https://data.razu.nl/def/ldto/heeftRepresentatie': {
-        componentId: 'file-renderer',
-        hopLinkSettings: {
-          preds: ['https://data.razu.nl/def/ldto/URLBestand'],
-          showOriginalLink: false,
-        },
-      },
-      'https://data.razu.nl/def/ldto/event': {
-        componentId: 'ldto-event',
-      },
-      'https://data.razu.nl/def/ldto/betrokkene': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: ['https://data.razu.nl/def/ldto/Actor'],
-        },
-      },
-      'https://data.razu.nl/def/ldto/gerelateerdInformatieobject': {
-        componentId: 'hop-link',
-        hopLinkSettings: {
-          preds: [
-            'https://data.razu.nl/def/ldto/gerelateerdInformatieobjectVerwijzing',
-          ],
-          showHops: false,
-        },
-      },
-      'http://www.w3.org/ns/prov#hadPrimarySource': {
-        componentId: 'hop-image',
-        hopLinkSettings: {
-          preds: ['http://xmlns.com/foaf/0.1/depiction'],
-          showOriginalLink: true,
-        },
-      },
-      'https://data.razu.nl/def/ldto/dekkingInTijd': {
-        componentId: 'ldto-dekking-in-tijd',
-      },
-      'https://data.razu.nl/def/ldto/URLBestand': {
-        componentId: 'ldto-url-bestand',
-      },
-      'https://www.ica.org/standards/RiC/ontology#hasOrHadIdentifier': {
-        componentId: 'rico-identifier',
-      },
-      'https://schema.org/identifier': {
-        componentId: 'rico-identifier',
-      },
-    },
-  },
+  renderComponents: renderComponentSettings,
   viewModes: {
     [ViewMode.List]: {
       [ViewModeSetting.ShowDetails]: true,
