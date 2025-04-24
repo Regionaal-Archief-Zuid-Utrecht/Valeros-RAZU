@@ -6,12 +6,11 @@ import { filteringSettings } from './settings/filtering.settings';
 import { iiifSettings } from './settings/iiif.settings';
 import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
+import { nodeVisibilitySettings } from './settings/node-visibility.settings';
 import { predicateVisibilitySettings } from './settings/predicate-visibility.settings';
 import {
   filePredicates,
-  parentPredicates,
   predicateSettings,
-  typePredicates,
 } from './settings/predicate.settings';
 import { renderComponentSettings } from './settings/render-component.settings';
 import { searchSettings } from './settings/search.settings';
@@ -32,6 +31,7 @@ export const hasImageFilters: FilterModel[] = filePredicates.map(
 export const Settings = {
   endpoints: endpointSettings,
   predicateVisibility: predicateVisibilitySettings,
+  nodeVisibility: nodeVisibilitySettings, // E.g. hide all nodes of type "skos:Concept"
   sorting: sortingSettings,
   filtering: filteringSettings,
   clustering: clusteringSettings,
@@ -45,29 +45,6 @@ export const Settings = {
   predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
   matomo: matomoSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  onlyShowNodes: {
-    // TODO: There might be a bug here
-    // onlyShowInformatieObject: {
-    //   fieldIds: [...typePredicates],
-    //   valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
-    //   type: FilterType.FieldAndValue,
-    // },
-  },
-  alwaysHideNodes: {
-    hideSkosConcept: {
-      fieldIds: [...typePredicates],
-      valueIds: ['http://www.w3.org/2004/02/skos/core#concept'],
-      type: FilterType.FieldAndValue,
-    },
-    hideTerms: {
-      fieldIds: [...parentPredicates],
-      valueIds: [
-        // 'https://hetutrechtsarchief.nl/id/trefwoorden',
-        'https://termennetwerk.netwerkdigitaalerfgoed.nl',
-      ],
-      type: FilterType.FieldAndValue,
-    },
-  },
   razu: {
     sura: {
       url: 'https://ontwikkel.viewer.razu.nl/sura/process-url',

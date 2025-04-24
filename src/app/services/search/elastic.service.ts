@@ -330,7 +330,7 @@ export class ElasticService {
 
     // Only show filters (e.g., only show "InformatieObject")
     const onlyShowFilters = this.data.convertFiltersFromIdsFormat(
-      Settings.onlyShowNodes as FilterOptionsIdsModel,
+      Settings.nodeVisibility.onlyShow as FilterOptionsIdsModel,
     );
     const onlyShowQueries: ElasticShouldQueries[] =
       this.getFieldAndValueFilterQueries(onlyShowFilters);
@@ -344,7 +344,7 @@ export class ElasticService {
 
     // Hiding filters (e.g., hiding terms)
     const hideFilters = this.data.convertFiltersFromIdsFormat(
-      Settings.alwaysHideNodes as FilterOptionsIdsModel,
+      Settings.nodeVisibility.alwaysHide as FilterOptionsIdsModel,
     );
     const hideQueries: ElasticShouldQueries[] =
       this.getFieldAndValueFilterQueries(hideFilters);
