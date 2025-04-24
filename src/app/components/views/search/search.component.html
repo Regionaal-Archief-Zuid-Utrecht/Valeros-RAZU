@@ -10,7 +10,7 @@
       <app-search-input class="flex-grow" />
       <app-view-mode-select
         class="flex-grow-0 ml-8"
-        *ngIf="!shouldShowHomeIntro"
+        *ngIf="!shouldShowHomeIntro && Settings.ui.showViewModeSelect"
       />
     </div>
 

@@ -5,5 +5,6 @@ export interface UiSettings {
   labelMaxChars: number;
   sectionNextToTableWidth: { search: string; details: string };
   imageForWhenLoadingFails: string;
+  showViewModeSelect: boolean;
   header: HeaderSettings;
 }

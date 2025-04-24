@@ -5,6 +5,7 @@ export const uiSettings: UiSettings = {
   labelMaxChars: 100,
   sectionNextToTableWidth: { search: '30%', details: '40%' },
   imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
+  showViewModeSelect: true, // Used to switch between list view, grid view, etc.
   header: {
     showLogo: true,
     showTitle: true,
