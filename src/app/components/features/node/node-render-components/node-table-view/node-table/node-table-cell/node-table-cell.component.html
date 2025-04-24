@@ -2,10 +2,6 @@
   <app-node-link [url]="pred" *ngIf="show === TableCellShowOptions.Pred" />
 
   <ng-container *ngIf="show === TableCellShowOptions.Obj">
-    <app-node-images
-      [imageUrls]="images"
-      *ngIf="shouldRenderComponentIds.includes('node-images')"
-    />
 
     <!-- TODO: Retrieve and pass coordinates -->
     <app-map-thumb *ngIf="shouldRenderComponentIds.includes('map-thumb')">

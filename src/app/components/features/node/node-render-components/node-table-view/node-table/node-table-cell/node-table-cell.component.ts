@@ -59,7 +59,7 @@ export class NodeTableCellComponent implements OnInit {
   shouldRenderComponentIds: string[] = [];
   renderComponentIsDefined = false;
 
-  images: string[] = [];
+
   objValues: string[] = [];
 
   constructor(
@@ -71,12 +71,7 @@ export class NodeTableCellComponent implements OnInit {
     this.initRenderComponentIds();
     this.initObjValues();
 
-    this.images = this.nodes.getObjValues(
-      this.node,
-      Settings.predicates.images,
-      undefined,
-      true,
-    );
+
   }
 
   initObjValues() {

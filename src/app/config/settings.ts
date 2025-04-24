@@ -63,10 +63,10 @@ export const Settings = {
     },
     [RenderMode.ByPredicate]: {
       'http://xmlns.com/foaf/0.1/depiction': {
-        componentId: 'node-images',
+        componentId: 'file-renderer',
       },
       'https://schema.org/thumbnail': {
-        componentId: 'node-images',
+        componentId: 'file-renderer',
       },
       // 'https://schema.org/contentLocation': {
       //   componentId: 'map-thumb',
