@@ -1,7 +1,7 @@
 import { ViewMode } from '../view-mode.enum';
 
 export interface PredicateSection {
-  label: string | null;
+  label?: string;
   predicates: string[];
 }
 

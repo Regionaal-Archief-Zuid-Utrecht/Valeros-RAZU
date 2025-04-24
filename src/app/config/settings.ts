@@ -1,6 +1,4 @@
 import { FilterModel, FilterType } from '../models/filters/filter.model';
-import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
-import { ViewMode } from '../models/view-mode.enum';
 import { clusteringSettings } from './settings/clustering.settings';
 import { endpointSettings } from './settings/endpoint.settings';
 import { fileTypeSettings } from './settings/file-types.settings';
@@ -8,6 +6,7 @@ import { filteringSettings } from './settings/filtering.settings';
 import { iiifSettings } from './settings/iiif.settings';
 import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
+import { predicateVisibilitySettings } from './settings/predicate-visibility.settings';
 import {
   filePredicates,
   parentPredicates,
@@ -45,57 +44,7 @@ export const Settings = {
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   renderComponents: renderComponentSettings,
   viewModes: viewModeSettings, // E.g., How are things displayed in list view, grid view, etc.
-  predicateVisibility: {
-    [ViewMode.List]: {
-      [PredicateVisibility.Show]: [
-        {
-          predicates: [
-            'aggregatieniveau',
-            'archief',
-            'classificatie',
-            'archiefvormer',
-          ],
-        },
-      ],
-      [PredicateVisibility.Details]: [
-        {
-          predicates: [
-            ...filePredicates,
-            'https://data.razu.nl/def/ldto/heeftRepresentatie',
-            'https://data.razu.nl/def/ldto/dekkingInRuimte',
-            'https://data.razu.nl/def/ldto/dekkingInTijd',
-            'https://data.razu.nl/def/ldto/naam',
-            'https://schema.org/author',
-            'https://data.razu.nl/def/ldto/omschrijving',
-            'https://data.razu.nl/def/ldto/URLBestand',
-            'https://www.ica.org/standards/RiC/ontology#expressedDateValue',
-            'https://www.ica.org/standards/RiC/ontology#hasCreator',
-            '*',
-          ],
-        },
-      ],
-      [PredicateVisibility.Hide]: [
-        {
-          predicates: [
-            ...typePredicates,
-            ...parentPredicates,
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa10',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a',
-            'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f',
-          ],
-        },
-      ],
-    },
-    [ViewMode.Grid]: {
-      [PredicateVisibility.Show]: [],
-      [PredicateVisibility.Details]: [{ predicates: ['*'] }],
-      [PredicateVisibility.Hide]: [],
-    },
-  },
+  predicateVisibility: predicateVisibilitySettings,
   alwaysHidePredicates: [
     '@id',
     'endpointId',
