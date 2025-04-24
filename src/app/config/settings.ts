@@ -44,7 +44,7 @@ export const Settings = {
   predicates: predicateSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   renderComponents: renderComponentSettings,
-  viewModes: viewModeSettings,
+  viewModes: viewModeSettings, // E.g., How are things displayed in list view, grid view, etc.
   predicateVisibility: {
     [ViewMode.List]: {
       [PredicateVisibility.Show]: [
