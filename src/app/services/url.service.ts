@@ -107,12 +107,13 @@ export class UrlService {
   }
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
-    if (url.includes(Settings.razu.sura.matchUrlsSubstring)) {
-      const suraUrl = await this.api.postData<SuraResponse>(
-        Settings.razu.sura.url + `?url=${url}`,
+    const urlProcessor = Settings.endpoints.urlProcessor;
+    if (urlProcessor && url.includes(urlProcessor.matchSubstring)) {
+      const processedResponse = await this.api.postData<SuraResponse>(
+        urlProcessor.url + `?url=${url}`,
         null,
       );
-      return suraUrl.url;
+      return processedResponse.url;
       // url = this.addParamToUrl(
       //   url,
       //   'token',

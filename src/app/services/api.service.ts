@@ -57,7 +57,7 @@ export class ApiService {
 
   private _processQueue() {
     while (
-      this.activeRequests < Settings.maxNumParallelRequests &&
+      this.activeRequests < Settings.endpoints.maxNumParallelRequests &&
       this.requestQueue.length > 0
     ) {
       const nextRequest = this.requestQueue.shift();

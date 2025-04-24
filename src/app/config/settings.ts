@@ -44,11 +44,4 @@ export const Settings = {
   fileTypes: fileTypeSettings,
   predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
   matomo: matomoSettings,
-  maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  razu: {
-    sura: {
-      url: 'https://ontwikkel.viewer.razu.nl/sura/process-url',
-      matchUrlsSubstring: 'opslag.razu.nl',
-    },
-  },
 };
