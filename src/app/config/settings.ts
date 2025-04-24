@@ -12,9 +12,8 @@ import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
 import {
   filePredicates,
-  hopFilePredicates,
-  labelPredicates,
   parentPredicates,
+  predicateSettings,
   typePredicates,
 } from './settings/predicate.settings';
 import { searchSettings } from './settings/search.settings';
@@ -42,14 +41,8 @@ export const Settings = {
   matomo: matomoSettings,
   fileTypes: fileTypeSettings,
   ui: uiSettings,
+  predicates: predicateSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  predicates: {
-    parents: parentPredicates,
-    label: labelPredicates,
-    type: typePredicates,
-    files: filePredicates,
-    hopFiles: hopFilePredicates,
-  },
   renderComponents: {
     [RenderMode.ByType]: {
       // 'https://schema.org/Photograph': { componentId: 'sdo-photograph' },

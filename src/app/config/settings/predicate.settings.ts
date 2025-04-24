@@ -1,3 +1,5 @@
+import { PredicateSettings } from '../../models/settings/predicate-settings.model';
+
 export const typePredicates: string[] = [
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
   'https://schema.org/additionalType',
@@ -33,3 +35,11 @@ export const hopFilePredicates: string[][] = [
     'https://data.razu.nl/def/ldto/URLBestand',
   ],
 ];
+
+export const predicateSettings: PredicateSettings = {
+  parents: parentPredicates,
+  label: labelPredicates,
+  type: typePredicates,
+  files: filePredicates,
+  hopFiles: hopFilePredicates,
+};
