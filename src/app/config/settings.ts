@@ -44,15 +44,7 @@ export const Settings = {
   predicates: predicateSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   renderComponents: {
-    [RenderMode.ByType]: {
-      // 'https://schema.org/Photograph': { componentId: 'sdo-photograph' },
-      // 'https://hetutrechtsarchief.nl/id/aet/scnni': {
-      //   componentId: 'gescand-inventarisnummer',
-      // },
-      // 'https://hetutrechtsarchief.nl/id/aet/rub': {
-      //   componentId: 'hua-rubriek',
-      // },
-    },
+    [RenderMode.ByType]: {},
     [RenderMode.ByPredicate]: {
       'http://xmlns.com/foaf/0.1/depiction': {
         componentId: 'file-renderer',

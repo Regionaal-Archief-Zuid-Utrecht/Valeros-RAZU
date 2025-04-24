@@ -6,18 +6,11 @@ import { RenderMode } from '../../../../models/settings/render-component-setting
 import { NodeService } from '../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../services/render-component.service';
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
-import { GescandInventarisnummerComponent } from '../node-render-components/type-render-components/gescand-inventarisnummer/gescand-inventarisnummer.component';
-import { HuaRubriekComponent } from '../node-render-components/type-render-components/hua-rubriek/hua-rubriek.component';
 
 @Component({
   selector: 'app-node-renderer',
   standalone: true,
-  imports: [
-    NodeTableViewComponent,
-    NgIf,
-    GescandInventarisnummerComponent,
-    HuaRubriekComponent,
-  ],
+  imports: [NodeTableViewComponent, NgIf],
   templateUrl: './node-renderer.component.html',
   styleUrl: './node-renderer.component.scss',
 })
