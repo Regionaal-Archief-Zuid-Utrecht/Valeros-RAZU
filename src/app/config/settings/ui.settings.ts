@@ -13,7 +13,7 @@ export const uiSettings: UiSettings = {
     titleType: 'short', // Options: 'short', 'regular'
     scale: 'small', // Options: 'small', 'medium', 'large'
     gapBeforeContent: 'small', // Options: 'small', 'medium', 'large'
-    horizontalPosition: 'left', // Options: stick-to-left, left, center, right, stick-to-right
+    horizontalPosition: 'center', // Options: stick-to-left, left, center, right, stick-to-right
     verticalPosition: 'top', // Options: top, middle, bottom, middle only works if horizontalPosition is stick-to-left or stick-to-right
   },
 };
