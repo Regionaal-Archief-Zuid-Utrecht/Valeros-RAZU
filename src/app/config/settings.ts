@@ -13,6 +13,7 @@ import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
+import { uiSettings } from './settings/ui.settings';
 
 export const filePredicates: string[] = [
   'http://xmlns.com/foaf/0.1/depiction',
@@ -70,10 +71,8 @@ export const Settings = {
   namespacePrefixes: namespacePrefixes,
   matomo: matomoSettings,
   fileTypes: fileTypeSettings,
-
+  ui: uiSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  showLanguageToggle: false,
-  labelMaxChars: 100,
   predicates: {
     parents: parentPredicates,
     label: labelPredicates,
@@ -187,8 +186,6 @@ export const Settings = {
       [ViewModeSetting.EnrichWithIncomingRelations]: false,
     },
   },
-  sectionNextToTableWidth: { search: '30%', details: '40%' },
-  imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
   predicateVisibility: {
     [ViewMode.List]: {
       [PredicateVisibility.Show]: [
@@ -287,15 +284,4 @@ export const Settings = {
     },
   },
   pdfConversionUrl: 'https://ontwikkel.viewer.razu.nl/gotenberg/convert?url=',
-  header: {
-    showLogo: true,
-    showTitle: false,
-    showButton: false,
-    logoPath: '/assets/img/logo.svg',
-    titleType: 'short' as const, // Options: 'short', 'regular'
-    scale: 'small' as const, // Options: 'small', 'medium', 'large'
-    gapBeforeContent: 'small' as const, // Options: 'small', 'medium', 'large'
-    horizontalPosition: 'left' as const, // Options: stick-to-left, left, center, right, stick-to-right
-    verticalPosition: 'top' as const, // Options: top, middle, bottom, middle only works if horizontalPosition is stick-to-left or stick-to-right
-  } satisfies HeaderSettings,
 };

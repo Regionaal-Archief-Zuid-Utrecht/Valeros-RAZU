@@ -23,7 +23,7 @@ export enum HeaderView {
 })
 export class HeaderComponent {
   @Input() view: HeaderView = HeaderView.ShowingSearch;
-  readonly settings: HeaderSettings = Settings.header;
+  readonly settings: HeaderSettings = Settings.ui.header;
 
   constructor(
     public router: Router,

@@ -192,8 +192,8 @@ export class NodeComponent implements OnInit, OnChanges {
     }
 
     return this.details.showing.value
-      ? Settings.sectionNextToTableWidth.details
-      : Settings.sectionNextToTableWidth.search;
+      ? Settings.ui.sectionNextToTableWidth.details
+      : Settings.ui.sectionNextToTableWidth.search;
   }
 
   shouldShowFileNextToTable(): boolean {
@@ -222,8 +222,8 @@ export class NodeComponent implements OnInit, OnChanges {
 
   getSectionNextToTableWidth(): string {
     return this.details.showing.value
-      ? Settings.sectionNextToTableWidth.details
-      : Settings.sectionNextToTableWidth.search;
+      ? Settings.ui.sectionNextToTableWidth.details
+      : Settings.ui.sectionNextToTableWidth.search;
   }
 
   protected readonly Settings = Settings;

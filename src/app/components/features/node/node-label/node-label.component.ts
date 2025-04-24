@@ -80,7 +80,7 @@ export class NodeLabelComponent implements OnInit, OnChanges {
     const strippedLabel = striptags(this.label);
     let labelToHighlight = strippedLabel;
     if (this.shouldTruncate && this.showingTruncatedLabel) {
-      labelToHighlight = truncate(strippedLabel, Settings.labelMaxChars);
+      labelToHighlight = truncate(strippedLabel, Settings.ui.labelMaxChars);
     }
     const labelWithHighlightsHtml: string = this.getLabelWithHighlightsHtml(
       labelToHighlight,

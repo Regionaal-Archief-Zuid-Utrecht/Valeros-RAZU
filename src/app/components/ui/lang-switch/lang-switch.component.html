@@ -1,4 +1,4 @@
-<div class="text-right" *ngIf="Settings.showLanguageToggle">
+<div class="text-right" *ngIf="Settings.ui.showLanguageToggle">
   <button
     (click)="translate.use('en')"
     [ngClass]="[translate.currentLang === 'en' ? 'font-bold' : '']"
