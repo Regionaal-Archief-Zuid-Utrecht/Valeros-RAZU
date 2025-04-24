@@ -10,7 +10,7 @@ export type HeaderVerticalPosition = 'top' | 'middle' | 'bottom';
 export interface HeaderSettings {
   showLogo: boolean;
   showTitle: boolean;
-  showButton: boolean;
+  showColofonButton: boolean;
   logoPath: string;
   titleType: 'short' | 'regular';
   scale: HeaderScale;

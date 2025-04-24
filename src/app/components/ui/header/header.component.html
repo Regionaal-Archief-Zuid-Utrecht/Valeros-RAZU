@@ -6,7 +6,7 @@
 >
   <button
     class="text-left inline-flex items-center"
-    [class.mr-3]="settings.showTitle || settings.showButton"
+    [class.mr-3]="settings.showTitle || settings.showColofonButton"
     (click)="onButtonClicked('')"
     role="navigation"
     aria-labelledby="header-home-button"
@@ -33,10 +33,10 @@
     </div>
   </button>
 
-  <div *ngIf="settings.showButton">
+  <div *ngIf="settings.showColofonButton">
     <!--class="flex-grow"-->
     <button
-      class="btn btn-primary btn-xs rounded-full text-center inline-block float-right"
+      class="btn btn-primary btn-xs rounded-full text-center inline-block float-right p-0"
       [ngClass]="
         settings.scale === 'small'
           ? 'w-8 h-8'
@@ -57,7 +57,7 @@
         <ng-icon
           [svg]="featherX"
           *ngIf="view === HeaderView.ShowingColofon"
-          class="relative top-[0.125rem] sm:right-[0.05rem] sm:top-[0.15rem]"
+          class="relative top-[0.1rem]"
         />
         <span
           *ngIf="view === HeaderView.ShowingSearch"
