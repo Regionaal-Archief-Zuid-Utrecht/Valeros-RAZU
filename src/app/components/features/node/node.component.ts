@@ -131,13 +131,13 @@ export class NodeComponent implements OnInit, OnChanges {
     this.title = titles[0];
   }
 
-  async getHopImageUrls(nodeId: string): Promise<string[]> {
-    const hopImagePromises = Settings.predicates.hopImages.map(
-      (hopImagePreds) => this.sparql.getObjIds(nodeId, hopImagePreds),
+  async getHopFileUrls(nodeId: string): Promise<string[]> {
+    const hopFilePromises = Settings.predicates.hopFiles.map((hopFilePreds) =>
+      this.sparql.getObjIds(nodeId, hopFilePreds),
     );
 
-    const hopImageUrls = await Promise.all(hopImagePromises);
-    return hopImageUrls.flat();
+    const hopFileUrls = await Promise.all(hopFilePromises);
+    return hopFileUrls.flat();
   }
 
   async initFiles() {
@@ -149,8 +149,8 @@ export class NodeComponent implements OnInit, OnChanges {
 
     if (this.details.isShowing()) {
       const nodeId = this.nodes.getId(this.node);
-      const hopImageUrls = await this.getHopImageUrls(nodeId);
-      files = [...files, ...hopImageUrls];
+      const hopFileUrls = await this.getHopFileUrls(nodeId);
+      files = [...files, ...hopFileUrls];
     }
 
     this.files.next(files);

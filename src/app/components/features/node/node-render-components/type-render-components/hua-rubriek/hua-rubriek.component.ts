@@ -1,6 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
-import { labelPredicates } from '../../../../../../config/settings';
+import { Settings } from '../../../../../../config/settings';
 import { wrapWithAngleBrackets } from '../../../../../../helpers/util.helper';
 import { EndpointUrlsModel } from '../../../../../../models/endpoint.model';
 import { ApiService } from '../../../../../../services/api.service';
@@ -44,7 +44,7 @@ prefix rico: <https://www.ica.org/standards/RiC/ontology#>
 SELECT ?subject ?subjectLabel
 WHERE {
   ?subject rico:isOrWasIncludedIn <${this.nodes.getId(this.node)}> .
-  ?subject ${labelPredicates.map((p) => wrapWithAngleBrackets(p)).join('|')} ?subjectLabel .
+  ?subject ${Settings.predicates.label.map((p) => wrapWithAngleBrackets(p)).join('|')} ?subjectLabel .
 }`;
 
     const endpointUrls: EndpointUrlsModel[] | null =

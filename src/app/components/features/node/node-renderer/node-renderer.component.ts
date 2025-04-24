@@ -8,7 +8,6 @@ import { RenderComponentService } from '../../../../services/render-component.se
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
 import { GescandInventarisnummerComponent } from '../node-render-components/type-render-components/gescand-inventarisnummer/gescand-inventarisnummer.component';
 import { HuaRubriekComponent } from '../node-render-components/type-render-components/hua-rubriek/hua-rubriek.component';
-import { SdoPhotographComponent } from '../node-render-components/type-render-components/sdo-photograph/sdo-photograph.component';
 
 @Component({
   selector: 'app-node-renderer',
@@ -16,7 +15,6 @@ import { SdoPhotographComponent } from '../node-render-components/type-render-co
   imports: [
     NodeTableViewComponent,
     NgIf,
-    SdoPhotographComponent,
     GescandInventarisnummerComponent,
     HuaRubriekComponent,
   ],

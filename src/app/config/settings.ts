@@ -10,16 +10,16 @@ import { filteringSettings } from './settings/filtering.settings';
 import { iiifSettings } from './settings/iiif.settings';
 import { matomoSettings } from './settings/matomo.settings';
 import { namespacePrefixes } from './settings/namespace-prefixes.settings';
+import {
+  filePredicates,
+  hopFilePredicates,
+  labelPredicates,
+  parentPredicates,
+  typePredicates,
+} from './settings/predicate.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
-
-export const filePredicates: string[] = [
-  'http://xmlns.com/foaf/0.1/depiction',
-  // 'https://schema.org/thumbnail',
-  'https://schema.org/image',
-  'bestand_url',
-];
 
 export const hasImageFilters: FilterModel[] = filePredicates.map(
   (imagePred) => {
@@ -30,35 +30,6 @@ export const hasImageFilters: FilterModel[] = filePredicates.map(
     };
   },
 );
-
-const typePredicates: string[] = [
-  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-  // 'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
-  'https://schema.org/additionalType',
-  // 'http://www.wikidata.org/entity/P31',
-  'https://data.razu.nl/def/ldto/classificatie',
-];
-
-const parentPredicates: string[] = [
-  // 'https://www.ica.org/standards/RiC/ontology#isOrWasIncludedIn',
-  // 'https://schema.org/isPartOf',
-  // 'https://schema.org/hadPrimarySource',
-  'is_onderdeel_van',
-  'https://data.razu.nl/def/ldto/isOnderdeelVan',
-];
-
-export const labelPredicates: string[] = [
-  'naam',
-  'http://www.w3.org/2000/01/rdf-schema#label',
-  'http://www.w3.org/2004/02/skos/core#prefLabel',
-  'https://schema.org/name',
-  // 'https://www.ica.org/standards/RiC/ontology#title',
-  // 'https://www.ica.org/standards/RiC/ontology#textualValue',
-  'https://data.razu.nl/def/ldto/naam',
-  'https://data.razu.nl/def/ldto/begripLabel',
-  'https://data.razu.nl/def/ldto/verwijzingNaam',
-  'https://data.razu.nl/def/ldto/identificatieKenmerk',
-];
 
 export const Settings = {
   endpoints: endpointSettings,
@@ -78,12 +49,7 @@ export const Settings = {
     type: typePredicates,
     images: filePredicates,
     files: filePredicates,
-    hopImages: [
-      [
-        'https://data.razu.nl/def/ldto/heeftRepresentatie',
-        'https://data.razu.nl/def/ldto/URLBestand',
-      ],
-    ],
+    hopFiles: hopFilePredicates,
   },
   renderComponents: {
     [RenderMode.ByType]: {
