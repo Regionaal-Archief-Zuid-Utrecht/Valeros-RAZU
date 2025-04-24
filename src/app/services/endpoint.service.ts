@@ -24,7 +24,7 @@ export class EndpointService {
   }
 
   getEndpointUrls(endpointId: string): EndpointUrlsModel[] | null {
-    const endpoints = Settings.endpoints as EndpointsModel;
+    const endpoints: EndpointsModel = Settings.endpoints.data;
     if (!(endpointId in endpoints)) {
       console.warn(`${endpointId} endpoint not configured`);
       return null;
@@ -45,12 +45,12 @@ export class EndpointService {
   }
 
   getById(endpointId: string): EndpointModel | undefined {
-    const endpoints = Settings.endpoints as EndpointsModel;
+    const endpoints: EndpointsModel = Settings.endpoints.data;
     return endpoints[endpointId] ?? undefined;
   }
 
   getIdBySparqlUrl(sparqlEndpointUrl: string): string {
-    const endpoints = Settings.endpoints as EndpointsModel;
+    const endpoints: EndpointsModel = Settings.endpoints.data;
 
     for (const [endpointId, endpoint] of Object.entries(endpoints)) {
       const endpointMatchesUrl = endpoint.endpointUrls.some(
@@ -94,7 +94,7 @@ export class EndpointService {
 
   getAllEnabled(): EndpointsModel {
     const all: [string, EndpointModel][] = Object.entries(
-      Settings.endpoints as EndpointsModel,
+      Settings.endpoints.data,
     ).filter(([endpointId, _]) => {
       const noFilterEnabled =
         !this.enabledIds.value || this.enabledIds.value.length === 0;

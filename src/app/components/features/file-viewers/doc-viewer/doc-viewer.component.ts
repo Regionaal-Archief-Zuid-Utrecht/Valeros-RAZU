@@ -79,6 +79,6 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
         : this.url;
     }
 
-    return Settings.pdfConversionUrl + encodeURIComponent(this.url);
+    return Settings.endpoints.pdfConversionUrl + encodeURIComponent(this.url);
   }
 }

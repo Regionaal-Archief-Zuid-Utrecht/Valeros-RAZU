@@ -1,5 +1,4 @@
 import { FilterModel, FilterType } from '../models/filters/filter.model';
-import { HeaderSettings } from '../models/header/header-position.types';
 import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
 import { RenderMode } from '../models/settings/render-component-settings.type';
 import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
@@ -283,5 +282,4 @@ export const Settings = {
       matchUrlsSubstring: 'opslag.razu.nl',
     },
   },
-  pdfConversionUrl: 'https://ontwikkel.viewer.razu.nl/gotenberg/convert?url=',
 };
