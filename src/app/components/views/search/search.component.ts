@@ -31,6 +31,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
 import { HomeIntroComponent } from './home-intro/home-intro.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
+import { ViewModeSelectComponent } from "../../features/view-mode/view-mode-select/view-mode-select.component";
 
 @Component({
   selector: 'app-search',
@@ -54,7 +55,8 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
     SearchHitsCounterComponent,
     DetailsBackButtonComponent,
     LangSwitchComponent,
-  ],
+    ViewModeSelectComponent
+],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })

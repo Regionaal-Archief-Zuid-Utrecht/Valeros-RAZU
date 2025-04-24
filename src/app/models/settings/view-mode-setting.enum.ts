@@ -6,4 +6,5 @@ export enum ViewModeSetting {
   ShowFileNextToTable,
   ShowOrganization,
   EnrichWithIncomingRelations,
+  ShowDetailsButton,
 }

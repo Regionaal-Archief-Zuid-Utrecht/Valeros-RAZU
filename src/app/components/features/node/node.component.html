@@ -73,7 +73,7 @@
           shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0'
         ]"
       >
-        <app-node-details-button [node]="node" />
+        <app-node-details-button [node]="node" *ngIf="showDetailsButton" />
       </div>
     </div>
   </a>

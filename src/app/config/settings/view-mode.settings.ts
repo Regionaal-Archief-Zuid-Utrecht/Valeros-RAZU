@@ -11,6 +11,7 @@ export const viewModeSettings: ViewModeSettings = {
     [ViewModeSetting.ShowOrganization]: false,
     [ViewModeSetting.ShowFileNextToTable]: true,
     [ViewModeSetting.EnrichWithIncomingRelations]: false, // NOTE: Detail view always enriches with incoming relations, regardless of this setting
+    [ViewModeSetting.ShowDetailsButton]: true,
   },
   [ViewMode.Grid]: {
     [ViewModeSetting.ShowTitle]: true,
@@ -20,5 +21,6 @@ export const viewModeSettings: ViewModeSettings = {
     [ViewModeSetting.ShowOrganization]: false,
     [ViewModeSetting.ShowFileNextToTable]: true,
     [ViewModeSetting.EnrichWithIncomingRelations]: false,
+    [ViewModeSetting.ShowDetailsButton]: false,
   },
 };
