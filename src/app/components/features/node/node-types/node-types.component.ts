@@ -41,7 +41,7 @@ export class NodeTypesComponent {
     return this.types?.filter(
       (t) =>
         this.predVisibility.getVisibility(t.id) !== PredicateVisibility.Hide &&
-        !(Settings.hideTypePredicates as string[]).includes(t.id),
+        !(Settings.predicateVisibility.hideForTypes as string[]).includes(t.id),
     );
   }
 

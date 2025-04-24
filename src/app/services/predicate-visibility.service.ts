@@ -5,7 +5,7 @@ import {
   PredicateSection,
   PredicateVisibility,
   PredicateVisibilityEntries,
-  PredicateVisibilitySettings,
+  PredicateVisibilitySettingsByViewMode,
 } from '../models/settings/predicate-visibility-settings.model';
 import { ViewModeService } from './view-mode.service';
 
@@ -17,7 +17,8 @@ export class PredicateVisibilityService {
 
   getVisible(): PredicateVisibilityEntries {
     return (
-      Settings.predicateVisibility as unknown as PredicateVisibilitySettings
+      Settings.predicateVisibility
+        .byViewMode as PredicateVisibilitySettingsByViewMode
     )[this.viewModes.current.value];
   }
 
@@ -29,7 +30,11 @@ export class PredicateVisibilityService {
   }
 
   getVisibility(predicateId: string): PredicateVisibility {
-    if ((Settings.alwaysHidePredicates as string[]).includes(predicateId)) {
+    if (
+      (Settings.predicateVisibility.alwaysHide as string[]).includes(
+        predicateId,
+      )
+    ) {
       return PredicateVisibility.Hide;
     }
     const hidePredicates = this.getVisibleFlattened(PredicateVisibility.Hide);

@@ -45,16 +45,6 @@ export const Settings = {
   predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
   matomo: matomoSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  alwaysHidePredicates: [
-    '@id',
-    'endpointId',
-    'https://data.razu.nl/def/ldto/checksum',
-    'https://data.razu.nl/def/ldto/waardering',
-    'https://schema.org/breadcrumb',
-    // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
-    // 'https://hetutrechtsarchief.nl/def/isDescendantOf',
-    'http://purl.org/dc/terms/hasFormat',
-  ],
   onlyShowNodes: {
     // TODO: There might be a bug here
     // onlyShowInformatieObject: {
@@ -63,13 +53,6 @@ export const Settings = {
     //   type: FilterType.FieldAndValue,
     // },
   },
-  hideTypePredicates: [
-    'https://data.razu.nl/def/ldto/BeperkingGebruikGegevens',
-    'https://data.razu.nl/def/ldto/DekkingInTijdGegevens',
-    'https://data.razu.nl/def/ldto/IdentificatieGegevens',
-    'https://data.razu.nl/def/ldto/Informatieobject',
-    'https://data.razu.nl/def/ldto/EventGegevens',
-  ],
   alwaysHideNodes: {
     hideSkosConcept: {
       fieldIds: [...typePredicates],
