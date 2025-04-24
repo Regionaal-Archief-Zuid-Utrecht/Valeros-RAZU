@@ -1,6 +1,5 @@
 import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { PredicateVisibility } from '../models/settings/predicate-visibility-settings.model';
-import { ViewModeSetting } from '../models/settings/view-mode-setting.enum';
 import { ViewMode } from '../models/view-mode.enum';
 import { clusteringSettings } from './settings/clustering.settings';
 import { endpointSettings } from './settings/endpoint.settings';
@@ -19,6 +18,7 @@ import { renderComponentSettings } from './settings/render-component.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
+import { viewModeSettings } from './settings/view-mode.settings';
 
 export const hasImageFilters: FilterModel[] = filePredicates.map(
   (imagePred) => {
@@ -44,25 +44,7 @@ export const Settings = {
   predicates: predicateSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
   renderComponents: renderComponentSettings,
-  viewModes: {
-    [ViewMode.List]: {
-      [ViewModeSetting.ShowDetails]: true,
-      [ViewModeSetting.ShowParents]: false,
-      [ViewModeSetting.ShowTypes]: true,
-      [ViewModeSetting.ShowTitle]: true,
-      [ViewModeSetting.ShowOrganization]: false,
-      [ViewModeSetting.ShowFileNextToTable]: true,
-      [ViewModeSetting.EnrichWithIncomingRelations]: false, // NOTE: Detail view always enriches with incoming relations, regardless of this setting
-    },
-    [ViewMode.Grid]: {
-      [ViewModeSetting.ShowTitle]: true,
-      [ViewModeSetting.ShowDetails]: true,
-      [ViewModeSetting.ShowTypes]: true,
-      [ViewModeSetting.ShowOrganization]: false,
-      [ViewModeSetting.ShowFileNextToTable]: true,
-      [ViewModeSetting.EnrichWithIncomingRelations]: false,
-    },
-  },
+  viewModes: viewModeSettings,
   predicateVisibility: {
     [ViewMode.List]: {
       [PredicateVisibility.Show]: [
