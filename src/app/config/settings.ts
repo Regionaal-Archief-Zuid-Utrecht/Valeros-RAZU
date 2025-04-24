@@ -31,20 +31,20 @@ export const hasImageFilters: FilterModel[] = filePredicates.map(
 
 export const Settings = {
   endpoints: endpointSettings,
+  predicateVisibility: predicateVisibilitySettings,
   sorting: sortingSettings,
   filtering: filteringSettings,
   clustering: clusteringSettings,
+  renderComponents: renderComponentSettings,
+  viewModes: viewModeSettings, // E.g. How are things displayed in list view, grid view, etc.
+  ui: uiSettings,
   search: searchSettings,
   iiif: iiifSettings,
   namespacePrefixes: namespacePrefixes,
-  matomo: matomoSettings,
   fileTypes: fileTypeSettings,
-  ui: uiSettings,
-  predicates: predicateSettings,
+  predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
+  matomo: matomoSettings,
   maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
-  renderComponents: renderComponentSettings,
-  viewModes: viewModeSettings, // E.g., How are things displayed in list view, grid view, etc.
-  predicateVisibility: predicateVisibilitySettings,
   alwaysHidePredicates: [
     '@id',
     'endpointId',
