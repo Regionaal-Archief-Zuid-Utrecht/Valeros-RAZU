@@ -18,7 +18,7 @@ import { viewModeSettings } from './settings/view-mode.settings';
 export const Settings: SettingsModel = {
   endpoints: endpointSettings,
   predicateVisibility: predicateVisibilitySettings,
-  nodeVisibility: nodeVisibilitySettings, // E.g. hide all nodes of type "skos:Concept"
+  nodeVisibility: nodeVisibilitySettings, // E.g. hide all nodes of type "skos:Concept", or only show nodes with a certain type
   sorting: sortingSettings,
   filtering: filteringSettings,
   clustering: clusteringSettings,
