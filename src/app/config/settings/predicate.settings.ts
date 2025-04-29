@@ -15,6 +15,7 @@ export const labelPredicates: string[] = [
   'https://data.razu.nl/def/ldto/verwijzingNaam',
   'https://data.razu.nl/def/ldto/identificatieKenmerk',
   'http://schema.org/copyrightNotice',
+  'http://schema.org/name',
 ];
 
 export const parentPredicates: string[] = [
