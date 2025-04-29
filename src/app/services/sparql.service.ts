@@ -290,6 +290,30 @@ LIMIT 10000`;
     };
   }
 
+  async getCopyrightNotice(id: string): Promise<string | null> {
+    const copyrightQueryTemplate = `
+<${id}> ldto:beperkingGebruik ?beperkingGebruik .
+?beperkingGebruik ldto:beperkingGebruikType ?beperkingGebruikType .
+?beperkingGebruikType schema:copyrightNotice ?copyrightNotice .`;
+
+    const query = `
+    PREFIX ldto: <https://data.razu.nl/def/ldto/>
+    PREFIX schema: <http://schema.org/>
+    SELECT distinct ?copyrightNotice WHERE {
+        ${this.getFederatedQuery(copyrightQueryTemplate)}
+    }`;
+
+    const results: { copyrightNotice: string }[] = await this.api.postData<
+      { copyrightNotice: string }[]
+    >(this.endpoints.getFirstUrls().sparql, {
+      query: query,
+    });
+    if (!results || results.length === 0) {
+      return null;
+    }
+    return results[0].copyrightNotice;
+  }
+
   async shouldShowIIIF(id: string): Promise<boolean> {
     // console.log('Checking should show IIIF for', id);
 

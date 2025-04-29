@@ -166,6 +166,9 @@ export class IIIFService {
     label: string,
     canvases: Canvas[],
   ): Promise<Manifest> {
+    const copyrightNotice: string | null =
+      await this.sparql.getCopyrightNotice(id);
+
     const manifest: Manifest = {
       '@context': 'http://iiif.io/api/presentation/3/context.json',
       id: id,
@@ -176,10 +179,10 @@ export class IIIFService {
       items: canvases,
       requiredStatement: {
         label: {
-          en: [''],
+          en: ['Copyright'],
         },
         value: {
-          en: [''],
+          en: [copyrightNotice ?? ''],
         },
       },
     };
