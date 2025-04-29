@@ -6,11 +6,12 @@ import { RenderMode } from '../../../../models/settings/render-component-setting
 import { NodeService } from '../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../services/render-component.service';
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
+import { SampleTypeRenderComponentComponent } from "../node-render-components/type-render-components/sample-type-render-component/sample-type-render-component.component";
 
 @Component({
   selector: 'app-node-renderer',
   standalone: true,
-  imports: [NodeTableViewComponent, NgIf],
+  imports: [NodeTableViewComponent, NgIf, SampleTypeRenderComponentComponent],
   templateUrl: './node-renderer.component.html',
   styleUrl: './node-renderer.component.scss',
 })

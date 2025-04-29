@@ -1,3 +1,7 @@
 <ng-container *ngIf="node">
   <app-node-table-view [node]="node" *ngIf="!renderComponentIsDefined" />
+
+  <app-sample-type-render-component
+    *ngIf="renderComponentIdsToShow.includes('sample-type-render-component')"
+  />
 </ng-container>
