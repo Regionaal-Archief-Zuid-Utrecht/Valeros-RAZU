@@ -1,6 +1,7 @@
 export const namespacePrefixes: Record<string, string> = {
   'https://www.ica.org/standards/RiC/ontology#': 'rico:',
   'https://schema.org/': 'sdo:',
+  'http://schema.org/': 'sdo:',
   'http://www.w3.org/2004/02/skos/core#': 'skos:',
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf:',
   'http://www.w3.org/2000/01/rdf-schema#': 'rdfs:',
