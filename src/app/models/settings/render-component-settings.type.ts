@@ -12,11 +12,10 @@ export enum RenderMode {
 
 export type RenderComponentSetting = {
   componentId: string;
+  predicates: string[];
   direction?: Direction;
   hopLinkSettings?: HopLinkSettings;
   [key: string]: any;
 };
 
-export type RenderComponentSettings = {
-  [pred: string]: RenderComponentSetting;
-};
+export type RenderComponentSettings = RenderComponentSetting[];
