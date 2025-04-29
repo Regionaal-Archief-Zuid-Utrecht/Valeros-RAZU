@@ -46,6 +46,13 @@ export const renderComponentSettings: RenderComponentsSettings = {
         preds: ['https://data.razu.nl/def/ldto/Actor'],
       },
     },
+    'https://data.razu.nl/def/ldto/beperkingGebruik': {
+      componentId: 'hop-link',
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType'],
+        showHops: false,
+      },
+    },
     'https://data.razu.nl/def/ldto/gerelateerdInformatieobject': {
       componentId: 'hop-link',
       hopLinkSettings: {
