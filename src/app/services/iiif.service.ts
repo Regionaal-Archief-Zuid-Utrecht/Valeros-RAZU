@@ -63,7 +63,6 @@ export class IIIFService {
         canvases.push(makeCanvas(url, index, width, height));
       } catch (e) {
         console.error(`Failed to get dimensions for image ${url}:`, e);
-        canvases.push(makeCanvas(url, index, 1200, 1800));
       }
     }
     return canvases;
@@ -222,7 +221,7 @@ export class IIIFService {
     nodeId?: string,
     nodeLabel?: string,
     imageUrls?: string[],
-  ) {
+  ): Promise<string | null> {
     let canvases: Canvas[] = [];
     if (imageUrls) {
       console.log('Creating manifest from image URLs', imageUrls);
@@ -230,6 +229,10 @@ export class IIIFService {
     } else if (nodeId) {
       console.log('Creating manifest from node ID using SPARQL', nodeId);
       canvases = await this._retrieveCanvasesUsingSparql(nodeId);
+    }
+
+    if (!canvases || canvases.length === 0) {
+      return null;
     }
 
     const manifest: Manifest = await this.generateCanvasesManifest(

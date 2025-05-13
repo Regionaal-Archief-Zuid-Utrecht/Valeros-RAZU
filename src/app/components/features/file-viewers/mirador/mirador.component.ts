@@ -71,11 +71,16 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     this.destroyViewer();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
-      const manifestUrl = await this.iiifService.createManifestBlob(
-        this.nodeId,
-        this.nodeLabel,
-        this.imageUrls,
-      );
+      const manifestUrl: string | null =
+        await this.iiifService.createManifestBlob(
+          this.nodeId,
+          this.nodeLabel,
+          this.imageUrls,
+        );
+      if (!manifestUrl) {
+        console.warn('Failed to create manifest, not initializing viewer');
+        return;
+      }
       const containerId = 'mirador';
       const containerElem = document.getElementById(containerId);
       if (!containerElem) {
