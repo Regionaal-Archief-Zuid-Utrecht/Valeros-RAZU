@@ -8,7 +8,7 @@
     >
       <ng-icon [svg]="featherDownload" class="mr-1" />
 
-      Download bestand
+      {{ getFileNameFromUrl(url) }}
     </a>
   </ng-container>
 
@@ -20,7 +20,7 @@
           fileRenderService.getThumbImageUrl(
             displayUrls[0],
             fileRenderService.getFileType(displayUrls[0])
-          )
+          ),
         ]"
         [useViewer]="false"
         class="mb-4 h-full"

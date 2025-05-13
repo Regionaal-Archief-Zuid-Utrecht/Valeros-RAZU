@@ -97,5 +97,14 @@ export class FileRendererComponent implements OnInit, OnChanges {
     }
   }
 
+  getFileNameFromUrl(url: string): string {
+    try {
+      const cleanUrl = url.split('?')[0].split('#')[0];
+      return decodeURIComponent(cleanUrl.split('/').pop() || 'bestand');
+    } catch {
+      return 'bestand';
+    }
+  }
+
   protected readonly featherDownload = featherDownload;
 }
