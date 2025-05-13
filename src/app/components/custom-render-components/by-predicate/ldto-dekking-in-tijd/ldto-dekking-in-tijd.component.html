@@ -1,8 +1,10 @@
 <app-hop-link
-  [id]="data?.id"
-  [settings]="{
-    preds: ['https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
-    showHops: false,
+  [data]="{
+    value: data?.value ?? '',
+    hopLinkSettings: {
+      preds: ['https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
+      showHops: false,
+    },
   }"
   (hopObjIdsRetrieved)="this.hasBeginDate = $event.length > 0"
 />
@@ -10,10 +12,12 @@
 <div class="inline">
   <span *ngIf="hasBeginDate && hasEndDate"> - </span>
   <app-hop-link
-    [id]="data?.id"
-    [settings]="{
-      preds: ['https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
-      showHops: false,
+    [data]="{
+      value: data?.value ?? '',
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
+        showHops: false,
+      },
     }"
     (hopObjIdsRetrieved)="this.hasEndDate = $event.length > 0"
   />
@@ -22,10 +26,12 @@
 <div class="inline">
   <span *ngIf="hasBeginDate || hasEndDate"> (</span>
   <app-hop-link
-    [id]="data?.id"
-    [settings]="{
-      preds: ['https://data.razu.nl/def/ldto/dekkingInTijdType'],
-      showHops: false,
+    [data]="{
+      value: data?.value ?? '',
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/dekkingInTijdType'],
+        showHops: false,
+      },
     }"
     (hopObjIdsRetrieved)="this.hasType = $event.length > 0"
   />

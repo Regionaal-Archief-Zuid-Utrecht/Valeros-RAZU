@@ -11,11 +11,6 @@ import { NodeImagesComponent } from '../../../features/node/node-images/node-ima
 import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
-interface LdtoUrlBestandData {
-  nodeId?: string;
-  fileUrl?: string;
-}
-
 @Component({
   selector: 'app-ldto-url-bestand',
   standalone: true,
@@ -24,9 +19,10 @@ interface LdtoUrlBestandData {
   styleUrl: './ldto-url-bestand.component.scss',
 })
 export class LdtoUrlBestandComponent
-  extends PredicateRenderComponent<LdtoUrlBestandData>
+  extends PredicateRenderComponent
   implements OnInit
 {
+  fileUrl?: string;
   fileFormats?: string[];
 
   // TODO: Add complete list here
@@ -41,6 +37,7 @@ export class LdtoUrlBestandComponent
   }
 
   ngOnInit() {
+    this.fileUrl = this.data?.value;
     void this.initFileFormat();
   }
 

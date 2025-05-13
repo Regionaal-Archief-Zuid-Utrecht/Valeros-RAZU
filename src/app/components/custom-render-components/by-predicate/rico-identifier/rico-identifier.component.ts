@@ -7,10 +7,6 @@ import { SparqlService } from '../../../../services/sparql.service';
 import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
-interface RicoIdentifierData {
-  id?: string;
-}
-
 @Component({
   selector: 'app-rico-identifier',
   standalone: true,
@@ -19,9 +15,10 @@ interface RicoIdentifierData {
   styleUrl: './rico-identifier.component.scss',
 })
 export class RicoIdentifierComponent
-  extends PredicateRenderComponent<RicoIdentifierData>
+  extends PredicateRenderComponent
   implements OnInit
 {
+  id?: string;
   label?: string;
 
   constructor(
@@ -33,11 +30,12 @@ export class RicoIdentifierComponent
   }
 
   ngOnInit(): void {
+    this.id = this.data?.['value'];
     void this.initLabel();
   }
 
   async initLabel() {
-    if (!this.data?.id) {
+    if (!this.id) {
       return;
     }
 
@@ -52,7 +50,7 @@ export class RicoIdentifierComponent
     }
 
     const queryTemplate = `
-    ${wrapWithAngleBrackets(this.data.id)} <${prefixes.rico}hasIdentifierType>/<${prefixes.rdfs}label> ?typeLabel ; <${prefixes.rico}textualValue> ?value .`;
+    ${wrapWithAngleBrackets(this.id)} <${prefixes.rico}hasIdentifierType>/<${prefixes.rdfs}label> ?typeLabel ; <${prefixes.rico}textualValue> ?value .`;
 
     // TODO: Add type
     const query = `
