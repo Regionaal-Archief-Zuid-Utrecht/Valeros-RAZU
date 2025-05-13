@@ -9,18 +9,10 @@ import { PredicateRenderComponentInput } from '../../../../../../../models/predi
 import { RenderMode } from '../../../../../../../models/settings/render-component-settings.type';
 import { NodeService } from '../../../../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../../../../services/render-component.service';
-import { LdtoDekkingInTijdComponent } from '../../../../../../custom-render-components/by-predicate/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
-import { LdtoEventComponent } from '../../../../../../custom-render-components/by-predicate/ldto-event/ldto-event.component';
-import { LdtoOmvangComponent } from '../../../../../../custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
-import { LdtoUrlBestandComponent } from '../../../../../../custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
 import { PREDICATE_RENDER_COMPONENT_REGISTRY } from '../../../../../../custom-render-components/by-predicate/predicate-render-component-registry';
-import { RicoIdentifierComponent } from '../../../../../../custom-render-components/by-predicate/rico-identifier/rico-identifier.component';
-import { NodeImagesComponent } from '../../../../node-images/node-images.component';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
 import { FileRendererComponent } from '../../../predicate-render-components/file-renderer/file-renderer.component';
-import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
-import { HopLinkComponent } from '../../../predicate-render-components/hop-components/hop-link/hop-link.component';
 import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
 
 export enum TableCellShowOptions {
@@ -36,16 +28,8 @@ export enum TableCellShowOptions {
     NgIcon,
     NgIf,
     NodeLinkComponent,
-    NodeImagesComponent,
     MapThumbComponent,
     NodeTypeComponent,
-    HopLinkComponent,
-    LdtoDekkingInTijdComponent,
-    LdtoUrlBestandComponent,
-    HopImageComponent,
-    RicoIdentifierComponent,
-    LdtoOmvangComponent,
-    LdtoEventComponent,
     FileRendererComponent,
     NgComponentOutlet,
   ],
