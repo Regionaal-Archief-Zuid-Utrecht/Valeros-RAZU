@@ -8,7 +8,7 @@ export const Config = {
   maxNumOfFilterOptionsPerField: 30,
   maxImagesToShow: 10,
   detailsUrl: 'details',
-  searchParam: 'search',
+  searchParam: 'q',
   filtersParam: 'filters',
   endpointsParam: 'endpoints',
 };

@@ -27,7 +27,7 @@ import { SearchHitsService } from './search-hits.service';
   providedIn: 'root',
 })
 export class SearchService {
-  queryStr: string = '';
+  queryStr: string | undefined;
 
   results: BehaviorSubject<SearchResultsModel> =
     new BehaviorSubject<SearchResultsModel>({});
@@ -36,7 +36,6 @@ export class SearchService {
   numberOfHits: number = 0;
   numberOfHitsIsCappedByElastic: boolean = false;
 
-  hasDoneInitialSearch: boolean = false;
   hasMoreResultsToLoad = true;
 
   private _searchQueryId = 0;
@@ -189,7 +188,7 @@ export class SearchService {
   async checkHasMoreResultsToLoad() {
     const responses: ElasticEndpointSearchResponse<ElasticNodeModel>[] =
       await this.elastic.searchNodes(
-        this.queryStr,
+        this.queryStr ?? '',
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
@@ -232,10 +231,6 @@ export class SearchService {
 
     this._searchQueryId++;
 
-    if (this.queryStr !== '') {
-      this.hasDoneInitialSearch = true;
-    }
-
     console.log(
       `Searching for: ${this.queryStr}. Clearing results: ${clearResults}, clearing filters: ${clearFilters}`,
     );
@@ -254,7 +249,7 @@ export class SearchService {
 
       // Get paginated results for display
       const displayResponses = await this.elastic.searchNodes(
-        this.queryStr,
+        this.queryStr ?? '',
         this.page * Settings.search.resultsPerPagePerEndpoint,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
@@ -282,7 +277,7 @@ export class SearchService {
 
       // Update filter options
       if (clearFilters) {
-        await this.filters.updateFilterOptionValues(this.queryStr);
+        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
       }
     } catch (error) {
       console.error('Error searching:', error);

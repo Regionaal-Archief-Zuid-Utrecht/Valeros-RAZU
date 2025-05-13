@@ -1,8 +1,7 @@
-import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Config } from '../../../../config/config';
 import { Settings } from '../../../../config/settings';
@@ -20,22 +19,12 @@ import { SearchAutocompleteComponent } from '../search-autocomplete/search-autoc
 @Component({
   selector: 'app-search-input',
   standalone: true,
-  imports: [
-    FormsModule,
-    NgIcon,
-    NgIf,
-    NgClass,
-    JsonPipe,
-    NgForOf,
-    RouterLink,
-    SearchAutocompleteComponent,
-    TranslatePipe,
-  ],
+  imports: [FormsModule, NgIf, SearchAutocompleteComponent, TranslatePipe],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent implements OnInit, AfterViewInit {
-  searchInput: string = this.search.queryStr;
+  searchInput: string = this.search.queryStr ?? '';
 
   constructor(
     public search: SearchService,
@@ -62,7 +51,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
     this.autocomplete.clearOptions();
     this.autocomplete.searchSubject.next('');
 
-    await this.router.navigate(['/'], {
+    await this.router.navigate(['/search'], {
       queryParams: { [Config.searchParam]: this.searchInput },
       queryParamsHandling: 'merge',
     });

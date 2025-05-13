@@ -23,15 +23,13 @@ import { LoadMoreSearchResultsButtonComponent } from '../../features/search/load
 import { SearchHitsCounterComponent } from '../../features/search/search-hits-counter/search-hits-counter.component';
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { SortSelectComponent } from '../../features/sort/sort-select/sort-select.component';
+import { ViewModeSelectComponent } from '../../features/view-mode/view-mode-select/view-mode-select.component';
 import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { DetailsComponent } from '../details/details.component';
-import { ViewContainerComponent } from '../view-container/view-container.component';
-import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
-import { HomeIntroComponent } from './home-intro/home-intro.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { ViewModeSelectComponent } from "../../features/view-mode/view-mode-select/view-mode-select.component";
+import { ViewContainerComponent } from "../view-container/view-container.component";
 
 @Component({
   selector: 'app-search',
@@ -45,17 +43,15 @@ import { ViewModeSelectComponent } from "../../features/view-mode/view-mode-sele
     NodesGridComponent,
     FilterOptionsComponent,
     HeaderComponent,
-    ViewContainerComponent,
-    HomeIntroComponent,
     CommonModule,
-    HomeIntroBelowSearchComponent,
     DetailsComponent,
     SortSelectComponent,
     LoadMoreSearchResultsButtonComponent,
     SearchHitsCounterComponent,
     DetailsBackButtonComponent,
     LangSwitchComponent,
-    ViewModeSelectComponent
+    ViewModeSelectComponent,
+    ViewContainerComponent
 ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -77,19 +73,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.scroll.initScrollContainer(this.scrollContainer);
-  }
-
-  get shouldShowHomeIntro(): boolean {
-    // TODO: Better way to determine whether or not to show home
-    if (this.router.url === '' || this.router.url === '/') {
-      return true;
-    }
-
-    return (
-      !this.details.showing.value &&
-      !this.search.hasDoneInitialSearch &&
-      this.search.queryStr === ''
-    );
   }
 
   protected readonly ViewMode = ViewMode;

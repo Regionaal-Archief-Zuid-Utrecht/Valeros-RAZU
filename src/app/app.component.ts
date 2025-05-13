@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { RoutingService } from './services/routing.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   constructor(
     private titleService: Title,
     private translate: TranslateService,
+    private routing: RoutingService, // Seems unused, but needed to keep track of navigation history
   ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');

@@ -269,7 +269,7 @@ export class ElasticService {
     size?: number,
   ): any {
     if (query === undefined) {
-      return;
+      return {};
     }
     query = query.trim();
 
