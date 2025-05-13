@@ -45,18 +45,17 @@
 
         <app-ldto-dekking-in-tijd
           *ngIf="shouldRenderComponentIds.includes('ldto-dekking-in-tijd')"
-          [id]="objValue"
+          [data]="{ id: objValue }"
         />
 
         <app-ldto-url-bestand
           *ngIf="shouldRenderComponentIds.includes('ldto-url-bestand')"
-          [nodeId]="nodes.getId(node)"
-          [fileUrl]="objValue"
+          [data]="{ nodeId: nodes.getId(node), fileUrl: objValue }"
         />
 
         <app-ldto-event
           *ngIf="shouldRenderComponentIds.includes('ldto-event')"
-          [id]="objValue"
+          [data]="{ id: objValue }"
         />
 
         <app-file-renderer
@@ -76,12 +75,12 @@
 
         <app-ldto-omvang
           *ngIf="shouldRenderComponentIds.includes('ldto-omvang')"
-          [bytesStr]="objValue"
+          [data]="{ bytesStr: objValue }"
         />
 
         <app-rico-identifier
           *ngIf="shouldRenderComponentIds.includes('rico-identifier')"
-          [id]="objValue"
+          [data]="{ id: objValue }"
         />
 
         <app-node-link [url]="objValue" *ngIf="!renderComponentIsDefined">

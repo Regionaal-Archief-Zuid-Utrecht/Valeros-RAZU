@@ -1,10 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { wrapWithAngleBrackets } from '../../../../helpers/util.helper';
 import { EndpointUrlsModel } from '../../../../models/endpoint.model';
 import { ApiService } from '../../../../services/api.service';
 import { EndpointService } from '../../../../services/endpoint.service';
 import { SparqlService } from '../../../../services/sparql.service';
 import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
+import { PredicateRenderComponent } from '../predicate-render-component.directive';
+
+interface RicoIdentifierData {
+  id?: string;
+}
 
 @Component({
   selector: 'app-rico-identifier',
@@ -13,23 +18,26 @@ import { NodeLinkComponent } from '../../../features/node/node-link/node-link.co
   templateUrl: './rico-identifier.component.html',
   styleUrl: './rico-identifier.component.scss',
 })
-export class RicoIdentifierComponent implements OnInit {
-  @Input() id?: string;
-
+export class RicoIdentifierComponent
+  extends PredicateRenderComponent<RicoIdentifierData>
+  implements OnInit
+{
   label?: string;
 
   constructor(
     public api: ApiService,
     public sparql: SparqlService,
     private endpointService: EndpointService,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     void this.initLabel();
   }
 
   async initLabel() {
-    if (!this.id) {
+    if (!this.data?.id) {
       return;
     }
 
@@ -44,7 +52,7 @@ export class RicoIdentifierComponent implements OnInit {
     }
 
     const queryTemplate = `
-    ${wrapWithAngleBrackets(this.id)} <${prefixes.rico}hasIdentifierType>/<${prefixes.rdfs}label> ?typeLabel ; <${prefixes.rico}textualValue> ?value .`;
+    ${wrapWithAngleBrackets(this.data.id)} <${prefixes.rico}hasIdentifierType>/<${prefixes.rdfs}label> ?typeLabel ; <${prefixes.rico}textualValue> ?value .`;
 
     // TODO: Add type
     const query = `

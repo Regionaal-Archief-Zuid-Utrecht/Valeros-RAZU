@@ -1,6 +1,6 @@
 <!-- TODO: Check if this should be able to support showing multiple events -->
 <app-hop-link
-  [id]="id"
+  [id]="data?.id"
   [settings]="{
     preds: ['https://data.razu.nl/def/ldto/eventType'],
     showHops: false,
@@ -9,7 +9,7 @@
 
 <span [ngClass]="[this.hasTime ? '' : 'hidden']">
   (<app-hop-link
-    [id]="id"
+    [id]="data?.id"
     [settings]="{
       preds: ['https://data.razu.nl/def/ldto/eventTijd'],
       showHops: false,

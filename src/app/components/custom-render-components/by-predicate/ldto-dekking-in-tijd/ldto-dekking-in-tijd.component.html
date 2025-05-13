@@ -1,5 +1,5 @@
 <app-hop-link
-  [id]="id"
+  [id]="data?.id"
   [settings]="{
     preds: ['https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
     showHops: false,
@@ -10,7 +10,7 @@
 <div class="inline">
   <span *ngIf="hasBeginDate && hasEndDate"> - </span>
   <app-hop-link
-    [id]="id"
+    [id]="data?.id"
     [settings]="{
       preds: ['https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
       showHops: false,
@@ -22,7 +22,7 @@
 <div class="inline">
   <span *ngIf="hasBeginDate || hasEndDate"> (</span>
   <app-hop-link
-    [id]="id"
+    [id]="data?.id"
     [settings]="{
       preds: ['https://data.razu.nl/def/ldto/dekkingInTijdType'],
       showHops: false,

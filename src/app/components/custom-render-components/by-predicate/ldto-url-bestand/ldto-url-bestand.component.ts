@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   intersects,
   wrapWithAngleBrackets,
@@ -9,6 +9,12 @@ import { EndpointService } from '../../../../services/endpoint.service';
 import { SparqlService } from '../../../../services/sparql.service';
 import { NodeImagesComponent } from '../../../features/node/node-images/node-images.component';
 import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
+import { PredicateRenderComponent } from '../predicate-render-component.directive';
+
+interface LdtoUrlBestandData {
+  nodeId?: string;
+  fileUrl?: string;
+}
 
 @Component({
   selector: 'app-ldto-url-bestand',
@@ -17,9 +23,10 @@ import { NodeLinkComponent } from '../../../features/node/node-link/node-link.co
   templateUrl: './ldto-url-bestand.component.html',
   styleUrl: './ldto-url-bestand.component.scss',
 })
-export class LdtoUrlBestandComponent implements OnInit {
-  @Input() nodeId?: string;
-  @Input() fileUrl?: string;
+export class LdtoUrlBestandComponent
+  extends PredicateRenderComponent<LdtoUrlBestandData>
+  implements OnInit
+{
   fileFormats?: string[];
 
   // TODO: Add complete list here
@@ -29,19 +36,21 @@ export class LdtoUrlBestandComponent implements OnInit {
     public api: ApiService,
     public sparql: SparqlService,
     public endpoints: EndpointService,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     void this.initFileFormat();
   }
 
   async initFileFormat() {
-    if (!this.nodeId) {
+    if (!this.data?.nodeId) {
       return;
     }
 
     const queryTemplate = `
-${wrapWithAngleBrackets(this.nodeId)} <https://data.razu.nl/def/ldto/bestandsformaat> ?b .
+${wrapWithAngleBrackets(this.data.nodeId)} <https://data.razu.nl/def/ldto/bestandsformaat> ?b .
 ?b <http://schema.org/identifier> ?bestandsformaat .`;
 
     const razuUrls = this.endpoints.getEndpointUrls('razu');

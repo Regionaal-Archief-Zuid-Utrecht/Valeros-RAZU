@@ -1,2 +1,5 @@
-<app-node-images [imageUrls]="[fileUrl]" *ngIf="fileUrl && isImage" />
-<app-node-link [url]="fileUrl" *ngIf="!isImage" />
+<app-node-images
+  [imageUrls]="[data.fileUrl]"
+  *ngIf="data && data.fileUrl && isImage"
+/>
+<app-node-link [url]="data?.fileUrl" *ngIf="!isImage" />

@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { humanFileSize } from '../../../../helpers/util.helper';
+import { PredicateRenderComponent } from '../predicate-render-component.directive';
+
+interface LdtoOmvangData {
+  bytesStr?: string;
+}
 
 @Component({
   selector: 'app-ldto-omvang',
@@ -8,8 +13,10 @@ import { humanFileSize } from '../../../../helpers/util.helper';
   templateUrl: './ldto-omvang.component.html',
   styleUrl: './ldto-omvang.component.scss',
 })
-export class LdtoOmvangComponent implements OnInit {
-  @Input() bytesStr?: string;
+export class LdtoOmvangComponent
+  extends PredicateRenderComponent<LdtoOmvangData>
+  implements OnInit
+{
   humanReadableBytesStr: string = '';
 
   ngOnInit() {
@@ -17,12 +24,12 @@ export class LdtoOmvangComponent implements OnInit {
   }
 
   initHumanReadableBytesStr() {
-    if (!this.bytesStr) {
-      this.humanReadableBytesStr = this.bytesStr ?? '';
+    if (!this.data?.bytesStr) {
+      this.humanReadableBytesStr = this.data?.bytesStr ?? '';
       return;
     }
 
-    const bytes: number = parseInt(this.bytesStr);
+    const bytes: number = parseInt(this.data.bytesStr);
     this.humanReadableBytesStr = humanFileSize(bytes, true, 2);
   }
 }
