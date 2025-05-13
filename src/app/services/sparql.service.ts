@@ -323,6 +323,14 @@ LIMIT 10000`;
   }
 
   async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
+    const altoFormats = Settings.iiif.fileFormats.alto
+      .map((f: string) => `<${f}>`)
+      .join(', ');
+    const imageFormats = [
+      ...Settings.iiif.fileFormats.jpg.map((f: string) => `<${f}>`),
+      ...Settings.iiif.fileFormats.tif.map((f: string) => `<${f}>`),
+    ].join(', ');
+
     const iiifDataQueryTemplate = `
 ?fileURI a ldto:Bestand ;
           ldto:isRepresentatieVan <${id}> ;
@@ -340,10 +348,10 @@ OPTIONAL {
             ldto:naam ?altoName ;
             ldto:bestandsformaat ?altoFormat .
 
-            FILTER(?altoFormat = <${Settings.iiif.fileFormats.alto}>)
+            FILTER(?altoFormat IN (${altoFormats}))
 }
 
-FILTER(?format = <${Settings.iiif.fileFormats.jpg}> || ?format = <${Settings.iiif.fileFormats.tif}>) # JPG, TIF`;
+FILTER(?format IN (${imageFormats})) # JPG, TIF`;
 
     const query = `
 PREFIX ldto: <https://data.razu.nl/def/ldto/>
