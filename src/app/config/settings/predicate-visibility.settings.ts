@@ -67,6 +67,7 @@ export const predicateVisibilitySettings: PredicateVisibilitySettings = {
     'https://data.razu.nl/def/ldto/checksum',
     'https://data.razu.nl/def/ldto/waardering',
     'https://schema.org/breadcrumb',
+    'http://schema.org/mainEntity',
     // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
     // 'https://hetutrechtsarchief.nl/def/isDescendantOf',
     'http://purl.org/dc/terms/hasFormat',
