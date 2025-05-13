@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Direction, NodeModel, NodeObj } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { ApiService } from './api.service';
 import { wrapWithAngleBrackets } from '../helpers/util.helper';
+import { IIIFItem } from '../models/IIIF/iiif-item.model';
+import { EndpointUrlsModel } from '../models/endpoint.model';
+import { Direction, NodeModel, NodeObj } from '../models/node.model';
 import { SparqlIncomingRelationModel } from '../models/sparql/sparql-incoming-relation.model';
 import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
-import { ThingWithLabelModel } from '../models/thing-with-label.model';
-import { SettingsService } from './settings.service';
-import { EndpointService } from './endpoint.service';
-import { EndpointUrlsModel } from '../models/endpoint.model';
 import { SparqlPredObjModel } from '../models/sparql/sparql-pred-obj.model';
+import { ThingWithLabelModel } from '../models/thing-with-label.model';
+import { ApiService } from './api.service';
+import { EndpointService } from './endpoint.service';
+import { SettingsService } from './settings.service';
 
 @Injectable({
   providedIn: 'root',
@@ -83,12 +84,17 @@ SELECT DISTINCT ?sub ?pred WHERE {
 
 limit 500`;
 
-    return await this.api.postData<SparqlIncomingRelationModel[]>(
-      this.endpoints.getFirstUrls().sparql,
-      {
-        query: query,
-      },
-    );
+    try {
+      return await this.api.postData<SparqlIncomingRelationModel[]>(
+        this.endpoints.getFirstUrls().sparql,
+        {
+          query: query,
+        },
+      );
+    } catch (error) {
+      console.warn('Failed to fetch incoming relations:', error);
+      return [];
+    }
   }
 
   async getAllParents(node: NodeModel): Promise<SparqlNodeParentModel[]> {
@@ -114,12 +120,17 @@ SELECT DISTINCT ?id ?title ?parent WHERE {
 
 limit 500`;
 
-    return await this.api.postData<SparqlNodeParentModel[]>(
-      this.endpoints.getFirstUrls().sparql,
-      {
-        query: query,
-      },
-    );
+    try {
+      return await this.api.postData<SparqlNodeParentModel[]>(
+        this.endpoints.getFirstUrls().sparql,
+        {
+          query: query,
+        },
+      );
+    } catch (error) {
+      console.warn('Failed to fetch parent nodes:', error);
+      return [];
+    }
   }
 
   // async getLabelFromLiterals(id: string): Promise<string> {
@@ -184,16 +195,21 @@ SELECT DISTINCT ?s ?label WHERE {
 }
 LIMIT 10000`;
 
-    const response: { s: string; label: string }[] = await this.api.postData<
-      { s: string; label: string }[]
-    >(this.endpoints.getFirstUrls().sparql, {
-      query: query,
-    });
-    const labels: ThingWithLabelModel[] = response.map(({ s, label }) => {
-      return { '@id': s, label: label };
-    });
+    try {
+      const response: { s: string; label: string }[] = await this.api.postData<
+        { s: string; label: string }[]
+      >(this.endpoints.getFirstUrls().sparql, {
+        query: query,
+      });
+      const labels: ThingWithLabelModel[] = response.map(({ s, label }) => {
+        return { '@id': s, label: label };
+      });
 
-    return labels;
+      return labels;
+    } catch (error) {
+      console.warn('Failed to fetch labels:', error);
+      return [];
+    }
 
     // TODO: Bring back fallback label from literals functionality
     // if (!labels || labels.length === 0) {
@@ -215,20 +231,22 @@ SELECT DISTINCT ?o WHERE {
     ${this.getFederatedQuery(queryTemplate)}
 }
 LIMIT 10000`;
-
-    const response: { o: string }[] = await this.api.postData<{ o: string }[]>(
-      this.endpoints.getFirstUrls().sparql,
-      {
+    try {
+      const response: { o: string }[] = await this.api.postData<
+        { o: string }[]
+      >(this.endpoints.getFirstUrls().sparql, {
         query: query,
-      },
-    );
-    const objIds = response.map((item) => item.o);
+      });
+      const objIds = response.map((item) => item.o);
 
-    return objIds;
+      return objIds;
+    } catch (error) {
+      console.warn('Failed to fetch objects:', error);
+      return [];
+    }
   }
 
   async getNode(id: string): Promise<NodeModel> {
-    console.log('Retrieving node details using SPARQL...', id);
     this._ensureEndpointsExist();
 
     const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj .`;
@@ -270,5 +288,94 @@ LIMIT 10000`;
       endpointId: endpointIdsObjs,
       ...nodeData,
     };
+  }
+
+  async getCopyrightNotice(id: string): Promise<string | null> {
+    const copyrightQueryTemplate = `
+<${id}> ldto:beperkingGebruik ?beperkingGebruik .
+?beperkingGebruik ldto:beperkingGebruikType ?beperkingGebruikType .
+?beperkingGebruikType schema:copyrightNotice ?copyrightNotice .`;
+
+    const query = `
+    PREFIX ldto: <https://data.razu.nl/def/ldto/>
+    PREFIX schema: <http://schema.org/>
+    SELECT distinct ?copyrightNotice WHERE {
+        ${this.getFederatedQuery(copyrightQueryTemplate)}
+    }`;
+
+    const results: { copyrightNotice: string }[] = await this.api.postData<
+      { copyrightNotice: string }[]
+    >(this.endpoints.getFirstUrls().sparql, {
+      query: query,
+    });
+    if (!results || results.length === 0) {
+      return null;
+    }
+    return results[0].copyrightNotice;
+  }
+
+  async shouldShowIIIF(id: string): Promise<boolean> {
+    // console.log('Checking should show IIIF for', id);
+
+    // TODO: Consider running a "lighter" query to check this, now the query is executed twice: Once for checking if should show, once for getting data
+    const iiifData = await this.getIIIFItemsData(id);
+    return iiifData.length > 0;
+  }
+
+  async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
+    const altoFormats = Settings.iiif.fileFormats.alto
+      .map((f: string) => `<${f}>`)
+      .join(', ');
+    const imageFormats = [
+      ...Settings.iiif.fileFormats.jpg.map((f: string) => `<${f}>`),
+      ...Settings.iiif.fileFormats.tif.map((f: string) => `<${f}>`),
+    ].join(', ');
+
+    const iiifDataQueryTemplate = `
+?fileURI a ldto:Bestand ;
+          ldto:isRepresentatieVan <${id}> ;
+          ldto:bestandsformaat ?format ;
+          ldto:naam ?name ;
+          ldto:URLBestand ?url ;
+          iiif:service ?iiifService ;
+          schema:width ?width ;
+          schema:height ?height ;
+          schema:position ?position .
+
+OPTIONAL { 
+    ?altoURI schema:about ?fileURI ;
+            ldto:URLBestand ?altoUrl ;
+            ldto:naam ?altoName ;
+            ldto:bestandsformaat ?altoFormat .
+
+            FILTER(?altoFormat IN (${altoFormats}))
+}
+
+FILTER(?format IN (${imageFormats})) # JPG, TIF`;
+
+    const query = `
+PREFIX ldto: <https://data.razu.nl/def/ldto/>
+PREFIX iiif: <http://iiif.io/api/presentation/3#>
+PREFIX schema: <http://schema.org/>
+SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?position ?altoURI ?altoUrl ?altoName WHERE {
+ ${this.getFederatedQuery(iiifDataQueryTemplate)}
+} ORDER BY ?position`;
+
+    try {
+      const iiifItems: IIIFItem[] = await this.api.postData<IIIFItem[]>(
+        this.endpoints.getFirstUrls().sparql,
+        {
+          query: query,
+        },
+      );
+
+      return iiifItems.map((item) => {
+        item.file = item.fileURI.split('/').pop() || '';
+        return item;
+      });
+    } catch (error) {
+      console.warn('Failed to fetch IIIF items data:', error);
+      return [];
+    }
   }
 }

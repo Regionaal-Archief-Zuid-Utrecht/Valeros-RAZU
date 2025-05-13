@@ -4,19 +4,26 @@
   <div class="p-8 pt-2 overflow-y-auto h-full">
     <h2>Het digitale archief van Zuid-Utrecht</h2>
     <p>
-      Het Regionaal Archief Zuid-Utrecht beheert de archieven van de gemeenten Bunnik, Houten, Rhenen, Utrechtse Heuvelrug, Vijfheerenlanden en Wijk bij Duurstede. De digitale stukken zijn doorzoekbaar via deze portal. Voor het doorzoeken van onze papieren archieven kunt u terecht op https://www.razu.nl.
+      Het Regionaal Archief Zuid-Utrecht beheert de archieven van de gemeenten
+      Bunnik, Houten, Rhenen, Utrechtse Heuvelrug, Vijfheerenlanden en Wijk bij
+      Duurstede. De digitale stukken zijn doorzoekbaar via deze portal. Voor het
+      doorzoeken van onze papieren archieven kunt u terecht op
+      https://www.razu.nl.
     </p>
 
     <h2>Linked Open Data</h2>
     <p>
-      Het Regionaal Archief Zuid-Utrecht slaat de informatie over digitale archieven op in de vorm van linked data. Een groot deel daarvan is openbaar gepubliceerd op data.razu.nl. Linked data is niet voor iedereen begrijpelijk. Daarom is deze portal gemaakt die de data eenvoudiger presenteert. Uiteraard kunnen techneuten zelf aan de slag met de data op data.razu.nl!
+      Het Regionaal Archief Zuid-Utrecht slaat de informatie over digitale
+      archieven op in de vorm van linked data. Een groot deel daarvan is
+      openbaar gepubliceerd op data.razu.nl. Linked data is niet voor iedereen
+      begrijpelijk. Daarom is deze portal gemaakt die de data eenvoudiger
+      presenteert. Uiteraard kunnen techneuten zelf aan de slag met de data op
+      data.razu.nl!
     </p>
 
     <h2>Ontwikkeling van deze portal</h2>
     <div>
-      <p>
-        De basis van deze website ligt in een gezamenlijk project van:
-      </p>
+      <p>De basis van deze website ligt in een gezamenlijk project van:</p>
 
       <ul class="list-disc ml-8 mb-2">
         <li>
@@ -43,19 +50,48 @@
         <a href="http://quintenswagerman.nl/" target="_blank"
           >Quinten Swagerman</a
         >
-        in samenwerking met- en opdracht van de deelnemende instellingen. De website is mede mogelijk gemaakt door een bijdrage van het <a href="https://netwerkdigitaalerfgoed.nl/" target="_blank"
-        >Netwerk Digitaal Erfgoed</a> (NDE).
+        in samenwerking met- en opdracht van de deelnemende instellingen. De
+        website is mede mogelijk gemaakt door een bijdrage van het
+        <a href="https://netwerkdigitaalerfgoed.nl/" target="_blank"
+          >Netwerk Digitaal Erfgoed</a
+        >
+        (NDE).
       </p>
     </div>
 
     <h2>Open Source</h2>
     <p>
-      De code van de website is open source beschikbaar op GitHub: 
-      <a href="https://github.com/Simon-Dirks/view-a-LOD" target="_blank" alt="Hyperlink naar de Github pagina van de hoofdversie van deze website."
+      De code van de website is open source beschikbaar op GitHub:
+      <a
+        href="https://github.com/Simon-Dirks/view-a-LOD"
+        target="_blank"
+        alt="Hyperlink naar de Github pagina van de hoofdversie van deze website."
         >de algemene (hoofd) versie vindt u hier</a
-      > en de
-      <a href="https://github.com/Regionaal-Archief-Zuid-Utrecht/view-a-LOD-RAZU" target="_blank" alt="Hyperlink naar de Github pagina van de RAZU-variant van deze website."> RAZU-variant vindt u hier.</a>
+      >
+      en de
+      <a
+        href="https://github.com/Regionaal-Archief-Zuid-Utrecht/view-a-LOD-RAZU"
+        target="_blank"
+        alt="Hyperlink naar de Github pagina van de RAZU-variant van deze website."
+      >
+        RAZU-variant vindt u hier</a
+      >
       (GPL-3.0).
     </p>
+    <div class="flex justify-center w-full">
+      <button
+        class="btn btn-primary btn-xs rounded-full text-center inline-block mx-auto"
+        [ngClass]="'w-9 sm:w-10 h-9 sm:h-10'"
+        (click)="onButtonClicked('')"
+        [attr.aria-label]="'homescreen.go-to-search' | translate"
+      >
+        <span class="text-lg sm:text-2xl font-light">
+          <ng-icon
+            [svg]="featherX"
+            class="relative top-[0.125rem] sm:right-[0.05rem] sm:top-[0.15rem]"
+          />
+        </span>
+      </button>
+    </div>
   </div>
 </app-view-container>

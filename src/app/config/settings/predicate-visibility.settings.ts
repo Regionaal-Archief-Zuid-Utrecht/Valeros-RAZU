@@ -1,0 +1,82 @@
+import {
+  PredicateVisibility,
+  PredicateVisibilitySettings,
+} from '../../models/settings/predicate-visibility-settings.model';
+import { ViewMode } from '../../models/view-mode.enum';
+import {
+  filePredicates,
+  parentPredicates,
+  typePredicates,
+} from './predicate.settings';
+
+export const predicateVisibilitySettings: PredicateVisibilitySettings = {
+  byViewMode: {
+    [ViewMode.List]: {
+      [PredicateVisibility.Show]: [
+        {
+          predicates: [
+            'aggregatieniveau',
+            'archief',
+            'classificatie',
+            'archiefvormer',
+          ],
+        },
+      ],
+      [PredicateVisibility.Details]: [
+        {
+          predicates: [
+            ...filePredicates,
+            'https://data.razu.nl/def/ldto/heeftRepresentatie',
+            'https://data.razu.nl/def/ldto/dekkingInRuimte',
+            'https://data.razu.nl/def/ldto/dekkingInTijd',
+            'https://data.razu.nl/def/ldto/naam',
+            'https://schema.org/author',
+            'https://data.razu.nl/def/ldto/omschrijving',
+            'https://data.razu.nl/def/ldto/URLBestand',
+            'https://www.ica.org/standards/RiC/ontology#expressedDateValue',
+            'https://www.ica.org/standards/RiC/ontology#hasCreator',
+            '*',
+          ],
+        },
+      ],
+      [PredicateVisibility.Hide]: [
+        {
+          predicates: [
+            ...typePredicates,
+            ...parentPredicates,
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa10',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a',
+            'https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f',
+          ],
+        },
+      ],
+    },
+    [ViewMode.Grid]: {
+      [PredicateVisibility.Show]: [],
+      [PredicateVisibility.Details]: [{ predicates: ['*'] }],
+      [PredicateVisibility.Hide]: [],
+    },
+  },
+  alwaysHide: [
+    '@id',
+    'endpointId',
+    'https://data.razu.nl/def/ldto/checksum',
+    'https://data.razu.nl/def/ldto/waardering',
+    'https://schema.org/breadcrumb',
+    'http://schema.org/mainEntity',
+    // 'https://hetutrechtsarchief.nl/def/isDescendentOf',
+    // 'https://hetutrechtsarchief.nl/def/isDescendantOf',
+    'http://purl.org/dc/terms/hasFormat',
+  ],
+  hideForTypes: [
+    'https://data.razu.nl/def/ldto/BeperkingGebruikGegevens',
+    'https://data.razu.nl/def/ldto/DekkingInTijdGegevens',
+    'https://data.razu.nl/def/ldto/IdentificatieGegevens',
+    'https://data.razu.nl/def/ldto/Informatieobject',
+    'https://data.razu.nl/def/ldto/EventGegevens',
+  ],
+};

@@ -1,32 +1,36 @@
 import { Injectable } from '@angular/core';
 
-import { Direction, NodeModel } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { NodeService } from './node.service';
+import { Direction, NodeModel } from '../models/node.model';
 import {
   RenderComponentSetting,
   RenderComponentSettings,
   RenderMode,
 } from '../models/settings/render-component-settings.type';
+import { DataService } from './data.service';
+import { NodeService } from './node/node.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RenderComponentService {
+  constructor(
+    public nodes: NodeService,
+    public data: DataService,
+  ) {}
+
   private _getAllIds(): string[] {
     let renderComponentIds: string[] = [];
     // TODO: Iterate over render modes dynamically
     for (const mode of [RenderMode.ByType, RenderMode.ByPredicate]) {
-      const renderComponentIdsForMode = Object.values(
-        Settings.renderComponents[mode],
-      ).map((r) => r.componentId);
+      const renderComponentIdsForMode = Settings.renderComponents[
+        mode as RenderMode
+      ].map((r) => r.componentId);
       renderComponentIds = renderComponentIds.concat(renderComponentIdsForMode);
     }
     const uniqueRenderComponentIds = Array.from(new Set(renderComponentIds));
     return uniqueRenderComponentIds;
   }
-
-  constructor(public nodes: NodeService) {}
 
   getIdsToShow(
     node: NodeModel,
@@ -114,10 +118,9 @@ export class RenderComponentService {
       nodePreds = predicates ?? [];
     }
 
-    // TODO: Fix type error
-    for (const [pred, setting] of Object.entries(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
-    )) {
+    for (const setting of Settings.renderComponents?.[
+      mode
+    ] as RenderComponentSettings) {
       if (direction === undefined) {
         direction = Direction.Outgoing;
       }
@@ -126,7 +129,8 @@ export class RenderComponentService {
           ? Direction.Outgoing
           : setting.direction;
       const matchesDirection = direction === settingsDirection;
-      if (nodePreds.includes(pred) && matchesDirection) {
+      const hasOverlap = this.data.hasOverlap(nodePreds, setting.predicates);
+      if (hasOverlap && matchesDirection) {
         settings.push(setting);
       }
     }
@@ -148,9 +152,6 @@ export class RenderComponentService {
   }
 
   getAll(mode: RenderMode): RenderComponentSetting[] {
-    // TODO: Fix type error
-    return Object.values(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
-    );
+    return Settings.renderComponents?.[mode] as RenderComponentSettings;
   }
 }

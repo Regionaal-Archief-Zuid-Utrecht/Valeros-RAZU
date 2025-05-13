@@ -1,0 +1,14 @@
+<div class="p-8 flex flex-col-reverse sm:flex-row sm:gap-8 overflow-y-auto">
+  <div class="sm:w-[80%] mx-auto">
+    <h1 class="text-center text-2xl sm:text-5xl mb-0 sm:mb-6 font-bold">
+      {{ "homescreen.hero-text-part-1" | translate }}
+      <span
+        class="text-primary"
+        style="display: block"
+        [innerHTML]="'homescreen.hero-text-part-2-emphasis' | translate"
+      ></span>
+      <span>&nbsp;</span>
+      <span [innerHTML]="'homescreen.hero-text-part-3' | translate"> </span>
+    </h1>
+  </div>
+</div>

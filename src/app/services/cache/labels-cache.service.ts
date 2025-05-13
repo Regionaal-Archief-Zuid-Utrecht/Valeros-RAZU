@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SparqlService } from '../sparql.service';
 import { Config } from '../../config/config';
 import { replacePrefixes } from '../../helpers/util.helper';
+import { SparqlService } from '../sparql.service';
 
 @Injectable({
   providedIn: 'root',
@@ -45,9 +45,7 @@ export class LabelsCacheService {
       }
     });
 
-    // console.log('RETRIEVING LABELS BATCH', idsWithoutLabel);
     const idsAndLabels = await this.sparql.getLabels(idsWithoutLabel);
-    // console.log('RETRIEVED LABELS BATCH', idsAndLabels);
 
     for (const idAndLabel of idsAndLabels) {
       const id = idAndLabel['@id'];

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
+import { FilterOptionsIdsModel } from '../models/filters/filter-option.model';
+import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
-import { FilterOptionsIdsModel } from '../models/filter-option.model';
-import { FilterModel, FilterType } from '../models/filter.model';
+import { ThingWithLabelModel } from '../models/thing-with-label.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +13,26 @@ export class DataService {
 
   replaceElasticNodePredSpacesWithPeriods(node: ElasticNodeModel): void {
     Object.entries(node)
-      .filter(([pred]) => pred.includes(' '))
-      .map(([pred, obj]) => {
-        const predWithoutSpaces = pred.replaceAll(' ', '.');
-        node[predWithoutSpaces] = obj;
-        delete node[pred];
+      .filter(([pred]) => pred.includes(' ') || pred.includes('.'))
+      .forEach(([pred, obj]) => {
+        // First normalize any spaces to dots
+        let normalizedPred = pred.replaceAll(' ', '.');
+        // Then clean up any potential double dots that might occur
+        normalizedPred = normalizedPred.replaceAll('..', '.');
+
+        // Only update if we actually changed something
+        if (normalizedPred !== pred) {
+          node[normalizedPred] = obj;
+          delete node[pred];
+        }
       });
   }
 
   replacePeriodsWithSpaces(s: string): string {
-    return s.replaceAll('.', ' ');
+    // First ensure we don't have any double dots
+    let normalized = s.replaceAll('..', '.');
+    // Then convert to spaces
+    return normalized.replaceAll('.', ' ');
   }
 
   getOrderedParentsFromSparqlResults(

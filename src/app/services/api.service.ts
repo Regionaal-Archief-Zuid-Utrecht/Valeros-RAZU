@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { catchError, lastValueFrom, throwError } from 'rxjs';
-import { PostCacheService } from './cache/post-cache.service';
 import { Settings } from '../config/settings';
+import { PostCacheService } from './cache/post-cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,6 @@ export class ApiService {
     const requestIsCached = requestKey in this.postCache.cache;
 
     if (requestIsCached) {
-      // console.log('Cache:', url, dataStr.slice(0, 200));
       return this.postCache.cache[requestKey];
     }
 
@@ -58,7 +57,7 @@ export class ApiService {
 
   private _processQueue() {
     while (
-      this.activeRequests < Settings.maxNumParallelRequests &&
+      this.activeRequests < Settings.endpoints.maxNumParallelRequests &&
       this.requestQueue.length > 0
     ) {
       const nextRequest = this.requestQueue.shift();

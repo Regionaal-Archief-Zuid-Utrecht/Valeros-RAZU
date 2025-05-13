@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Direction, NodeModel } from '../../models/node.model';
-import { DataService } from '../data.service';
-import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
+import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
+import { Direction, NodeModel } from '../../models/node.model';
+import { DataService } from '../data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,17 +40,61 @@ export class SearchHitsService {
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
   ): SearchHit<ElasticNodeModel>[] {
-    const mergedHits: SearchHit<ElasticNodeModel>[] = searchResponses.flatMap(
-      (searchResponse) => {
-        const hits = searchResponse?.hits?.hits ?? [];
-        hits.forEach(
-          (hit) =>
-            ((hit._source as any)['endpointId'] = searchResponse.endpointId),
-        );
-        return hits;
-      },
-    );
+    // First create a map of hits by their ID to merge duplicates
+    const hitsMap = new Map<string, SearchHit<ElasticNodeModel>>();
 
-    return mergedHits;
+    searchResponses.forEach((searchResponse) => {
+      const hits = searchResponse?.hits?.hits ?? [];
+      hits.forEach((hit) => {
+        if (!hit._source) {
+          return;
+        }
+
+        // Add endpointId to the source
+        (hit._source as ElasticNodeModel)['endpointId'] =
+          searchResponse.endpointId;
+
+        const id = hit._source['@id'];
+        if (!id) {
+          return;
+        }
+
+        if (hitsMap.has(id)) {
+          // Merge the sources if we already have this ID
+          const existingHit = hitsMap.get(id)!;
+          if (!existingHit._source) {
+            return;
+          }
+
+          const mergedSource: ElasticNodeModel = {
+            ...existingHit._source,
+            ...hit._source,
+            // Keep track of all endpoints this record came from
+            endpointId: Array.isArray((existingHit._source as any).endpointId)
+              ? [
+                  ...(existingHit._source as any).endpointId,
+                  searchResponse.endpointId,
+                ]
+              : [
+                  (existingHit._source as any).endpointId,
+                  searchResponse.endpointId,
+                ],
+          };
+
+          existingHit._source = mergedSource;
+          // Use the highest score if available
+          existingHit._score = Math.max(
+            existingHit._score ?? 0,
+            hit._score ?? 0,
+          );
+        } else {
+          // New ID, just add it to the map
+          hitsMap.set(id, hit);
+        }
+      });
+    });
+
+    // Convert map back to array
+    return Array.from(hitsMap.values());
   }
 }
