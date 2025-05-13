@@ -1,10 +1,11 @@
-import { NgForOf, NgIf } from '@angular/common';
+import { NgComponentOutlet, NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowUpLeft } from '@ng-icons/feather-icons';
 import { Config } from '../../../../../../../config/config';
 import { Settings } from '../../../../../../../config/settings';
 import { Direction, NodeModel } from '../../../../../../../models/node.model';
+import { PredicateRenderComponentInput } from '../../../../../../../models/predicate-render-component-input.model';
 import { RenderMode } from '../../../../../../../models/settings/render-component-settings.type';
 import { NodeService } from '../../../../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../../../../services/render-component.service';
@@ -12,6 +13,7 @@ import { LdtoDekkingInTijdComponent } from '../../../../../../custom-render-comp
 import { LdtoEventComponent } from '../../../../../../custom-render-components/by-predicate/ldto-event/ldto-event.component';
 import { LdtoOmvangComponent } from '../../../../../../custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
 import { LdtoUrlBestandComponent } from '../../../../../../custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
+import { PREDICATE_RENDER_COMPONENT_REGISTRY } from '../../../../../../custom-render-components/by-predicate/predicate-render-component-registry';
 import { RicoIdentifierComponent } from '../../../../../../custom-render-components/by-predicate/rico-identifier/rico-identifier.component';
 import { NodeImagesComponent } from '../../../../node-images/node-images.component';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
@@ -45,11 +47,14 @@ export enum TableCellShowOptions {
     LdtoOmvangComponent,
     LdtoEventComponent,
     FileRendererComponent,
+    NgComponentOutlet,
   ],
   templateUrl: './node-table-cell.component.html',
   styleUrl: './node-table-cell.component.scss',
 })
 export class NodeTableCellComponent implements OnInit {
+  public readonly componentRegistry = PREDICATE_RENDER_COMPONENT_REGISTRY;
+
   @Input() pred?: string;
   @Input() node?: NodeModel;
   @Input() direction?: Direction;
@@ -69,6 +74,25 @@ export class NodeTableCellComponent implements OnInit {
   ngOnInit() {
     this.initRenderComponentIds();
     this.initObjValues();
+  }
+
+  getPredicateRenderComponentInput(
+    objValue: string,
+  ): PredicateRenderComponentInput | null {
+    if (!this.node || !this.pred) {
+      return null;
+    }
+    return {
+      nodeId: this.nodes.getId(this.node),
+      value: objValue,
+      hopLinkSettings: this.renderComponent.getSettingByKey(
+        'hopLinkSettings',
+        this.node,
+        RenderMode.ByPredicate,
+        [this.pred],
+        this.direction,
+      ),
+    };
   }
 
   initObjValues() {

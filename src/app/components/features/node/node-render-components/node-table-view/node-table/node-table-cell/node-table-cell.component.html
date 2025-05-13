@@ -15,118 +15,6 @@
           <app-node-type [type]="{ id: objValue }"> </app-node-type>
         </div>
 
-        <!--  -->
-        <app-hop-image
-          *ngIf="shouldRenderComponentIds.includes('hop-image')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-hop-link
-          *ngIf="shouldRenderComponentIds.includes('hop-link')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-ldto-dekking-in-tijd
-          *ngIf="shouldRenderComponentIds.includes('ldto-dekking-in-tijd')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-ldto-url-bestand
-          *ngIf="shouldRenderComponentIds.includes('ldto-url-bestand')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-ldto-event
-          *ngIf="shouldRenderComponentIds.includes('ldto-event')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-ldto-omvang
-          *ngIf="shouldRenderComponentIds.includes('ldto-omvang')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <app-rico-identifier
-          *ngIf="shouldRenderComponentIds.includes('rico-identifier')"
-          [data]="{
-            nodeId: nodes.getId(node),
-            value: objValue,
-            hopLinkSettings: renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            ),
-          }"
-        />
-
-        <!-- 
-        
-        
-        
-        -->
-
         <app-file-renderer
           *ngIf="shouldRenderComponentIds.includes('file-renderer')"
           [urls]="objValue"
@@ -141,6 +29,19 @@
             )
           "
         />
+
+        <!-- Dynamically render predicate render components -->
+        <ng-container *ngFor="let compId of shouldRenderComponentIds">
+          <ng-container *ngIf="componentRegistry[compId]">
+            <ng-container
+              *ngComponentOutlet="
+                componentRegistry[compId];
+                inputs: { data: getPredicateRenderComponentInput(objValue) }
+              "
+            >
+            </ng-container>
+          </ng-container>
+        </ng-container>
 
         <app-node-link [url]="objValue" *ngIf="!renderComponentIsDefined">
           <ng-icon

@@ -1,4 +1,4 @@
-import { HopLinkSettings } from "./settings/hop-link-settings.model";
+import { HopLinkSettings } from './settings/hop-link-settings.model';
 
 export interface PredicateRenderComponentInput {
   value: string;
