@@ -342,10 +342,9 @@ LIMIT 10000`;
           schema:height ?height ;
           schema:position ?position .
 
-OPTIONAL {
-    ?altoURI ldto:URLBestand ?altoUrl ;
-            ldto:isRepresentatieVan <${id}> ;
-            schema:position ?position ;
+OPTIONAL { 
+    ?altoURI schema:about ?fileURI ;
+            ldto:URLBestand ?altoUrl ;
             ldto:naam ?altoName ;
             ldto:bestandsformaat ?altoFormat .
 
