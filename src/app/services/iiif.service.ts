@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Canvas, Manifest } from '@iiif/presentation-3';
 import { Settings } from '../config/settings';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
+import { ImageService } from './image.service';
 import { SparqlService } from './sparql.service';
 import { UrlService } from './url.service';
 
@@ -14,15 +15,23 @@ export class IIIFService {
   constructor(
     private sparql: SparqlService,
     private url: UrlService,
+    private imageService: ImageService,
   ) {}
 
-  private _getCanvasesFromUrls(imgUrls: string[]): Canvas[] {
-    // TODO: Stop using example.org here, and properly retrieve the image dimensions etc
-    const canvases: Canvas[] = imgUrls.map((url, index) => ({
+  private async _getCanvasesFromUrls(imgUrls: string[]): Promise<Canvas[]> {
+    const makeCanvas = (
+      url: string,
+      index: number,
+      width: number,
+      height: number,
+    ): Canvas => ({
       id: `https://example.org/canvas/p${index + 1}`,
       type: 'Canvas',
-      height: 1800,
-      width: 1200,
+      label: {
+        en: [(index + 1).toString()],
+      },
+      height,
+      width,
       items: [
         {
           id: `https://example.org/page/p${index + 1}/1`,
@@ -36,16 +45,27 @@ export class IIIFService {
                 id: url,
                 type: 'Image',
                 format: 'image/jpeg',
-                height: 1800,
-                width: 1200,
+                height,
+                width,
               },
               target: `https://example.org/canvas/p${index + 1}`,
             },
           ],
         },
       ],
-    }));
+    });
 
+    const canvases: Canvas[] = [];
+    for (let [index, url] of imgUrls.entries()) {
+      try {
+        const { width, height } =
+          await this.imageService.getImageDimensions(url);
+        canvases.push(makeCanvas(url, index, width, height));
+      } catch (e) {
+        console.error(`Failed to get dimensions for image ${url}:`, e);
+        canvases.push(makeCanvas(url, index, 1200, 1800));
+      }
+    }
     return canvases;
   }
 
@@ -206,7 +226,7 @@ export class IIIFService {
     let canvases: Canvas[] = [];
     if (imageUrls) {
       console.log('Creating manifest from image URLs', imageUrls);
-      canvases = this._getCanvasesFromUrls(imageUrls);
+      canvases = await this._getCanvasesFromUrls(imageUrls);
     } else if (nodeId) {
       console.log('Creating manifest from node ID using SPARQL', nodeId);
       canvases = await this._retrieveCanvasesUsingSparql(nodeId);
