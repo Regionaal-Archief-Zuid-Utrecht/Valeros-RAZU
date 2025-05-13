@@ -30,7 +30,7 @@
     <ng-container *ngIf="!isThumb">
       <!-- All images - pass full array to node-images -->
       <app-node-images
-        *ngIf="unifiedFileType === FileType.IMAGE"
+        *ngIf="unifiedFileType === FileType.WEB_IMAGE"
         [imageUrls]="displayUrls"
         [shownInTableCell]="shownInTableCell"
         [useViewer]="true"
@@ -38,10 +38,10 @@
       ></app-node-images>
 
       <!-- Mixed content or all documents - handle individually -->
-      <div *ngIf="unifiedFileType !== FileType.IMAGE" class="mb-4 h-full">
+      <div *ngIf="unifiedFileType !== FileType.WEB_IMAGE" class="mb-4 h-full">
         <div *ngFor="let url of displayUrls" class="mb-4 h-full">
           <app-node-images
-            *ngIf="fileRenderService.getFileType(url) === FileType.IMAGE"
+            *ngIf="fileRenderService.getFileType(url) === FileType.WEB_IMAGE"
             [imageUrls]="[url]"
             [shownInTableCell]="shownInTableCell"
             [useViewer]="true"
@@ -54,7 +54,7 @@
 
           <app-doc-viewer
             *ngIf="
-              fileRenderService.getFileType(url) !== FileType.IMAGE &&
+              fileRenderService.getFileType(url) !== FileType.WEB_IMAGE &&
               fileRenderService.getFileType(url) !== FileType.UNKNOWN
             "
             [url]="url"

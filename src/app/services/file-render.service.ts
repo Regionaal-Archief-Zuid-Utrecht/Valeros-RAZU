@@ -14,7 +14,7 @@ export class FileRenderService {
   ) {}
 
   getThumbImageUrl(url: string, fileType: FileType): string {
-    if (fileType === FileType.IMAGE) {
+    if (fileType === FileType.WEB_IMAGE) {
       return url;
     }
 

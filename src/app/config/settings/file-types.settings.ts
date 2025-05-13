@@ -2,18 +2,14 @@ import { FileType } from '../../models/file-type.model';
 import { FileTypeConfig } from '../../models/settings/file-type-config.model';
 
 export const fileTypeSettings: Record<FileType, FileTypeConfig> = {
-  [FileType.IMAGE]: {
-    extensions: [
-      'jpg',
-      'jpeg',
-      'png',
-      'gif',
-      'bmp',
-      'svg',
-      'tiff',
-      'tif',
-      'webp',
-    ],
+  [FileType.WEB_IMAGE]: {
+    // Files that are images, and can be directly rendered in the browser
+    extensions: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'],
+    iconUrl: '/assets/img/file-types/image.png',
+  },
+  [FileType.NON_WEB_IMAGE]: {
+    // Files that are images, but can not be rendered in the browser
+    extensions: ['tif', 'tiff'],
     iconUrl: '/assets/img/file-types/image.png',
   },
   [FileType.PDF]: {
