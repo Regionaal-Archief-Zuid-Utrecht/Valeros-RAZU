@@ -110,6 +110,7 @@ export class IIIFService {
       const canvas: Canvas = {
         id: `https://data.razu.nl/iiif/canvas/${item.file}`,
         type: 'Canvas',
+        label: { en: [item.position.toString()] },
         height: item.height,
         width: item.width,
         items: [
