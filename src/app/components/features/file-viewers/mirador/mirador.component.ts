@@ -10,8 +10,6 @@ import {
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 // @ts-ignore
-import { OSDReferences } from 'mirador/dist/es/src/plugins/OSDReferences';
-// @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../../../services/iiif.service';
 
@@ -69,18 +67,6 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
   }
 
-  private initCenterImageAfterLoad(miradorInstance: any) {
-    miradorInstance.store.subscribe(() => {
-      const windowId = Object.keys(miradorInstance.store.getState().windows)[0];
-      const viewerRef = OSDReferences.get(windowId);
-      if (viewerRef?.current) {
-        viewerRef.current.addOnceHandler('tile-loaded', () => {
-          viewerRef.current.viewport.goHome();
-        });
-      }
-    });
-  }
-
   private initViewer() {
     this.destroyViewer();
 
@@ -132,7 +118,6 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       };
 
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
-      this.initCenterImageAfterLoad(miradorInstance);
       return miradorInstance;
     });
   }

@@ -126,6 +126,13 @@ export class IIIFService {
                   id: `${item.iiifService}/full/${item.width},/0/default.jpg`,
                   type: 'Image',
                   format: 'image/jpeg',
+                  service: [
+                    {
+                      id: `${item.iiifService}`,
+                      type: 'ImageService2',
+                      profile: 'http://iiif.io/api/image/2/level2.json',
+                    },
+                  ],
                 },
                 target: `https://data.razu.nl/iiif/canvas/${item.file}`,
               },
