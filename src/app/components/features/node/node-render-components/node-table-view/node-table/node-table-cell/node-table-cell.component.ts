@@ -12,6 +12,7 @@ import { LdtoDekkingInTijdComponent } from '../../../../../../custom-render-comp
 import { LdtoEventComponent } from '../../../../../../custom-render-components/by-predicate/ldto-event/ldto-event.component';
 import { LdtoOmvangComponent } from '../../../../../../custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
 import { LdtoUrlBestandComponent } from '../../../../../../custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
+import { RicoIdentifierComponent } from '../../../../../../custom-render-components/by-predicate/rico-identifier/rico-identifier.component';
 import { NodeImagesComponent } from '../../../../node-images/node-images.component';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
@@ -19,7 +20,6 @@ import { FileRendererComponent } from '../../../predicate-render-components/file
 import { HopImageComponent } from '../../../predicate-render-components/hop-components/hop-image/hop-image.component';
 import { HopLinkComponent } from '../../../predicate-render-components/hop-components/hop-link/hop-link.component';
 import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
-import { RicoIdentifierComponent } from '../../../../../../custom-render-components/by-predicate/rico-identifier/rico-identifier.component';
 
 export enum TableCellShowOptions {
   Pred,

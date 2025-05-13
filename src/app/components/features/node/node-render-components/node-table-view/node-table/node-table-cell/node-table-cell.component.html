@@ -2,7 +2,6 @@
   <app-node-link [url]="pred" *ngIf="show === TableCellShowOptions.Pred" />
 
   <ng-container *ngIf="show === TableCellShowOptions.Obj">
-
     <!-- TODO: Retrieve and pass coordinates -->
     <app-map-thumb *ngIf="shouldRenderComponentIds.includes('map-thumb')">
     </app-map-thumb>

@@ -10,9 +10,9 @@ import { ViewModeService } from '../../../services/view-mode.service';
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
+import { ViewContainerComponent } from '../view-container/view-container.component';
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
 import { HomeIntroComponent } from './home-intro/home-intro.component';
-import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
   selector: 'app-home',
