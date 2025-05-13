@@ -1,5 +1,5 @@
 import { Component, type OnInit } from '@angular/core';
-import { NodeRenderComponent } from '../../node-render.component';
+import { NodeRenderComponent } from '../../../features/node/node-render-components/node-render.component';
 
 @Component({
   selector: 'app-sample-type-render-component',

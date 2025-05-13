@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { humanFileSize } from '../../../../../../helpers/util.helper';
+import { humanFileSize } from '../../../../helpers/util.helper';
 
 @Component({
   selector: 'app-ldto-omvang',

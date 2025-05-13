@@ -5,8 +5,8 @@ import { NodeModel } from '../../../../models/node.model';
 import { RenderMode } from '../../../../models/settings/render-component-settings.type';
 import { NodeService } from '../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../services/render-component.service';
+import { SampleTypeRenderComponentComponent } from '../../../custom-render-components/by-type/sample-type-render-component/sample-type-render-component.component';
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
-import { SampleTypeRenderComponentComponent } from "../node-render-components/type-render-components/sample-type-render-component/sample-type-render-component.component";
 
 @Component({
   selector: 'app-node-renderer',

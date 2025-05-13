@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { HopLinkComponent } from '../hop-components/hop-link/hop-link.component';
+import { HopLinkComponent } from '../../../features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 
 @Component({
   selector: 'app-ldto-dekking-in-tijd',

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { wrapWithAngleBrackets } from '../../../../../../helpers/util.helper';
-import { EndpointUrlsModel } from '../../../../../../models/endpoint.model';
-import { ApiService } from '../../../../../../services/api.service';
-import { EndpointService } from '../../../../../../services/endpoint.service';
-import { SparqlService } from '../../../../../../services/sparql.service';
-import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { wrapWithAngleBrackets } from '../../../../helpers/util.helper';
+import { EndpointUrlsModel } from '../../../../models/endpoint.model';
+import { ApiService } from '../../../../services/api.service';
+import { EndpointService } from '../../../../services/endpoint.service';
+import { SparqlService } from '../../../../services/sparql.service';
+import { NodeLinkComponent } from '../../../features/node/node-link/node-link.component';
 
 @Component({
   selector: 'app-rico-identifier',
