@@ -44,7 +44,7 @@ export class IIIFService {
               body: {
                 id: url,
                 type: 'Image',
-                format: 'image/jpeg',
+                format: 'image/jpeg', // TODO: Support other file types here as well (see fileTypeSettings for examples)
                 height,
                 width,
               },
