@@ -15,12 +15,13 @@ import {
 
 export const renderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [
+    // Use this to overrule the entire way a node is displayed, based on its type. E.g., for all nodes with type sdo:CreativeWork, render a custom component instead of using the default table view.
     {
       component: SampleTypeRenderComponentComponent,
       componentId: 'sample-type-render-component',
       predicates: [],
     },
-  ], // Use this to overrule the entire way a node is displayed, based on its type. E.g., for all nodes with type sdo:CreativeWork, render a custom component instead of using the default table view.
+  ],
   [RenderMode.ByPredicate]: [
     {
       component: FileRendererComponent,
