@@ -6,10 +6,6 @@
       <div *ngFor="let objValue of objValuesToShow">
         <!-- Explicitly rendered components that need special handling -->
         <ng-container *ngFor="let component of explicitlyRenderedComponents">
-          <!-- TODO: Retrieve and pass coordinates -->
-          <app-map-thumb *ngIf="component === MapThumbComponent">
-          </app-map-thumb>
-
           <div class="mt-1" *ngIf="component === NodeTypeComponent">
             <app-node-type [type]="{ id: objValue }"> </app-node-type>
           </div>

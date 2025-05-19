@@ -15,7 +15,6 @@ import { RenderComponentService } from '../../../../../../../services/render-com
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
 import { FileRendererComponent } from '../../../predicate-render-components/file-renderer/file-renderer.component';
-import { MapThumbComponent } from '../../../predicate-render-components/map-thumb/map-thumb.component';
 
 export enum TableCellShowOptions {
   Pred,
@@ -30,7 +29,6 @@ export enum TableCellShowOptions {
     NgIcon,
     NgIf,
     NodeLinkComponent,
-    MapThumbComponent,
     NodeTypeComponent,
     FileRendererComponent,
     NgComponentOutlet,
@@ -153,7 +151,6 @@ export class NodeTableCellComponent implements OnInit {
   protected readonly RenderMode = RenderMode;
   protected readonly Settings = Settings;
   protected readonly featherArrowUpLeft = featherArrowUpLeft;
-  protected readonly MapThumbComponent = MapThumbComponent;
   protected readonly NodeTypeComponent = NodeTypeComponent;
   protected readonly FileRendererComponent = FileRendererComponent;
 }

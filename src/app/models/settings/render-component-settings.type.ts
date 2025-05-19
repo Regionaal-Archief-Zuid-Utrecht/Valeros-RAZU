@@ -2,7 +2,6 @@ import { Type } from '@angular/core';
 import { PredicateRenderComponent } from '../../components/custom-render-components/by-predicate/predicate-render-component.directive';
 import { TypeRenderComponent } from '../../components/custom-render-components/by-type/type-render-component.component';
 import { FileRendererComponent } from '../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
-import { MapThumbComponent } from '../../components/features/node/node-render-components/predicate-render-components/map-thumb/map-thumb.component';
 import { NodeTypeComponent } from '../../components/features/node/node-types/node-type/node-type.component';
 import { Direction } from '../node.model';
 import { HopLinkSettings } from './hop-link-settings.model';
@@ -16,10 +15,7 @@ export enum RenderMode {
   ByPredicate,
 }
 
-type ExplicitlyRenderedComponent =
-  | FileRendererComponent
-  | NodeTypeComponent
-  | MapThumbComponent;
+type ExplicitlyRenderedComponent = FileRendererComponent | NodeTypeComponent;
 
 export type RenderComponent = Type<
   PredicateRenderComponent | ExplicitlyRenderedComponent | TypeRenderComponent
