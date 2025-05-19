@@ -10,7 +10,9 @@ import {
 } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherDownload } from '@ng-icons/feather-icons';
+import { Settings } from '../../../../../../config/settings';
 import { FileType } from '../../../../../../models/file-type.model';
+import { FileViewer } from '../../../../../../models/file-viewer.enum';
 import { HopLinkSettings } from '../../../../../../models/settings/hop-link-settings.model';
 import { FileRenderService } from '../../../../../../services/file-render.service';
 import { DocViewerComponent } from '../../../../file-viewers/doc-viewer/doc-viewer.component';
@@ -106,5 +108,61 @@ export class FileRendererComponent implements OnInit, OnChanges {
     }
   }
 
+  getUrlsByPreferredViewer(): { urls: string[]; viewer: FileViewer } {
+    const preferredViewerOrder: FileViewer[] =
+      Settings.fileRendering.preferredViewerOrder;
+
+    // TODO: Reduce calls to this function for performance reasons (init once or on prop change)
+
+    if (!preferredViewerOrder || preferredViewerOrder.length === 0) {
+      console.warn('No preferred viewer order, defaulting to link viewer');
+      return { urls: this.fileUrls, viewer: FileViewer.Link };
+    }
+
+    if (this.fileUrls.length === 0) {
+      return { urls: [], viewer: FileViewer.Link };
+    }
+
+    const urlsByViewer = new Map<FileViewer, string[]>();
+    preferredViewerOrder.forEach((viewer) => {
+      urlsByViewer.set(viewer, []);
+    });
+
+    this.fileUrls.forEach((url) => {
+      const fileType = this.fileRenderService.getFileType(url);
+
+      const useImageViewer =
+        fileType === FileType.WEB_IMAGE && urlsByViewer.has(FileViewer.Image);
+
+      const useDocViewer =
+        fileType !== FileType.WEB_IMAGE &&
+        fileType !== FileType.UNKNOWN &&
+        urlsByViewer.has(FileViewer.Doc);
+
+      const useLinkViewer = urlsByViewer.has(FileViewer.Link);
+
+      if (useImageViewer) {
+        urlsByViewer.get(FileViewer.Image)!.push(url);
+      } else if (useDocViewer) {
+        urlsByViewer.get(FileViewer.Doc)!.push(url);
+      } else if (useLinkViewer) {
+        urlsByViewer.get(FileViewer.Link)!.push(url);
+      } else {
+        // Default viewer
+        urlsByViewer.get(FileViewer.Link)!.push(url);
+      }
+    });
+
+    for (const viewer of preferredViewerOrder) {
+      const urls = urlsByViewer.get(viewer);
+      if (urls && urls.length > 0) {
+        return { urls, viewer };
+      }
+    }
+
+    return { urls: this.fileUrls, viewer: FileViewer.Link };
+  }
+
   protected readonly featherDownload = featherDownload;
+  protected readonly FileViewer = FileViewer;
 }

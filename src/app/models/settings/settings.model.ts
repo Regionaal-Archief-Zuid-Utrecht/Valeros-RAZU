@@ -1,7 +1,6 @@
-import { FileType } from '../file-type.model';
 import { ClusteringSettings } from './clustering-settings.model';
 import { EndpointSettings } from './endpoint-settings.model';
-import { FileTypeConfig } from './file-type-config.model';
+import { FileRenderingSettings } from './file-rendering.settings.model';
 import { FilteringSettings } from './filtering-settings.model';
 import { IIIFSettings } from './iiif-settings.model';
 import { MatomoSettings } from './matomo-settings.model';
@@ -28,7 +27,7 @@ export interface SettingsModel {
   search: SearchSettings;
   iiif: IIIFSettings;
   namespacePrefixes: Record<string, string>;
-  fileTypes: Record<FileType, FileTypeConfig>;
+  fileRendering: FileRenderingSettings;
   predicates: PredicateSettings;
   url: UrlSettings;
   matomo?: MatomoSettings;

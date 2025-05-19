@@ -1,7 +1,7 @@
 import { SettingsModel } from '../models/settings/settings.model';
 import { clusteringSettings } from './settings/clustering.settings';
 import { endpointSettings } from './settings/endpoint.settings';
-import { fileTypeSettings } from './settings/file-types.settings';
+import { fileRenderingSettings } from './settings/file-rendering.settings';
 import { filteringSettings } from './settings/filtering.settings';
 import { iiifSettings } from './settings/iiif.settings';
 import { matomoSettings } from './settings/matomo.settings';
@@ -29,7 +29,7 @@ export const Settings: SettingsModel = {
   search: searchSettings,
   iiif: iiifSettings,
   namespacePrefixes: namespacePrefixes,
-  fileTypes: fileTypeSettings,
+  fileRendering: fileRenderingSettings,
   predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
   url: urlSettings,
   matomo: matomoSettings,

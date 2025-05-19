@@ -18,8 +18,9 @@ export class FileRenderService {
       return url;
     }
 
-    const fileIconUrl = Settings.fileTypes[fileType]?.iconUrl;
-    const unknownIconUrl = Settings.fileTypes[FileType.UNKNOWN].iconUrl;
+    const fileIconUrl = Settings.fileRendering.fileTypes[fileType]?.iconUrl;
+    const unknownIconUrl =
+      Settings.fileRendering.fileTypes[FileType.UNKNOWN].iconUrl;
     return fileIconUrl ?? unknownIconUrl;
   }
 
@@ -31,7 +32,9 @@ export class FileRenderService {
 
     if (!fileExtension) return FileType.UNKNOWN;
 
-    for (const [fileType, config] of Object.entries(Settings.fileTypes)) {
+    for (const [fileType, config] of Object.entries(
+      Settings.fileRendering.fileTypes,
+    )) {
       if (config.extensions.includes(fileExtension)) {
         return fileType as FileType;
       }
