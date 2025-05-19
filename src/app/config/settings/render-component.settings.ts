@@ -23,6 +23,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
   ],
   [RenderMode.ByPredicate]: [
+    // Use this to overrule the way a node value is displayed, based on the predicate. E.g., render a file renderer for all values of the predicate http://xmlns.com/foaf/0.1/depiction, instead of using the default node link.
     {
       component: FileRendererComponent,
       componentId: 'file-renderer',
