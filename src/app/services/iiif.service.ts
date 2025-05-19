@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Canvas, Manifest } from '@iiif/presentation-3';
+import mime from 'mime';
 import { Settings } from '../config/settings';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
 import { ImageService } from './image.service';
@@ -19,6 +20,15 @@ export class IIIFService {
   ) {}
 
   private async _getCanvasesFromUrls(imgUrls: string[]): Promise<Canvas[]> {
+    // imgUrls = [
+    //   'https://placehold.co/600x400/png',
+    //   'https://placehold.co/500x400/jpg',
+    //   'https://placehold.co/400x400/gif',
+    //   'https://www.dummyimg.in/placeholder?format=BMP',
+    //   'https://placehold.co/300x400/svg',
+    //   'https://placehold.co/200x400/webp',
+    // ];
+
     const makeCanvas = (
       url: string,
       index: number,
@@ -44,7 +54,7 @@ export class IIIFService {
               body: {
                 id: url,
                 type: 'Image',
-                format: 'image/jpeg', // TODO: Support other file types here as well (see fileTypeSettings for examples)
+                format: mime.getType(url) ?? 'image/jpeg',
                 height,
                 width,
               },
