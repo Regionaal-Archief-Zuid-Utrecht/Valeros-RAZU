@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { PredicateRenderComponent } from '../../components/custom-render-components/by-predicate/predicate-render-component.directive';
-import { SampleTypeRenderComponentComponent } from '../../components/custom-render-components/by-type/sample-type-render-component/sample-type-render-component.component';
+import { TypeRenderComponent } from '../../components/custom-render-components/by-type/type-render-component.component';
 import { FileRendererComponent } from '../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { MapThumbComponent } from '../../components/features/node/node-render-components/predicate-render-components/map-thumb/map-thumb.component';
 import { NodeTypeComponent } from '../../components/features/node/node-types/node-type/node-type.component';
@@ -22,9 +22,7 @@ type ExplicitlyRenderedComponent =
   | MapThumbComponent;
 
 export type RenderComponent = Type<
-  | PredicateRenderComponent
-  | ExplicitlyRenderedComponent
-  | SampleTypeRenderComponentComponent // TODO: Remove, inherit from generic type-based render component directive
+  PredicateRenderComponent | ExplicitlyRenderedComponent | TypeRenderComponent
 >;
 
 export type RenderComponentSetting = {

@@ -3,6 +3,11 @@
 
   <!-- Dynamically render components based on their type -->
   <ng-container *ngFor="let component of componentsToShow">
-    <ng-container *ngComponentOutlet="component"></ng-container>
+    <ng-container
+      *ngComponentOutlet="
+        component;
+        inputs: { data: getTypeRenderComponentInput() }
+      "
+    ></ng-container>
   </ng-container>
 </ng-container>
