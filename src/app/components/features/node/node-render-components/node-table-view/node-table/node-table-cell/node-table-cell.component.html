@@ -2,33 +2,36 @@
   <app-node-link [url]="pred" *ngIf="show === TableCellShowOptions.Pred" />
 
   <ng-container *ngIf="show === TableCellShowOptions.Obj">
-    <!-- TODO: Retrieve and pass coordinates -->
-    <app-map-thumb *ngIf="renderComponents.includes(MapThumbComponent)">
-    </app-map-thumb>
-
     <ng-container>
       <div *ngFor="let objValue of objValuesToShow">
-        <div class="mt-1" *ngIf="renderComponents.includes(NodeTypeComponent)">
-          <app-node-type [type]="{ id: objValue }"> </app-node-type>
-        </div>
+        <!-- Explicitly rendered components that need special handling -->
+        <ng-container *ngFor="let component of explicitlyRenderedComponents">
+          <!-- TODO: Retrieve and pass coordinates -->
+          <app-map-thumb *ngIf="component === MapThumbComponent">
+          </app-map-thumb>
 
-        <app-file-renderer
-          *ngIf="renderComponents.includes(FileRendererComponent)"
-          [urls]="objValue"
-          [shownInTableCell]="true"
-          [hopSettings]="
-            renderComponent.getSettingByKey(
-              'hopLinkSettings',
-              node,
-              RenderMode.ByPredicate,
-              [pred],
-              direction
-            )
-          "
-        />
+          <div class="mt-1" *ngIf="component === NodeTypeComponent">
+            <app-node-type [type]="{ id: objValue }"> </app-node-type>
+          </div>
 
-        <!-- Dynamically render predicate render components -->
-        <ng-container *ngFor="let component of renderComponents">
+          <app-file-renderer
+            *ngIf="component === FileRendererComponent"
+            [urls]="objValue"
+            [shownInTableCell]="true"
+            [hopSettings]="
+              renderComponent.getSettingByKey(
+                'hopLinkSettings',
+                node,
+                RenderMode.ByPredicate,
+                [pred],
+                direction
+              )
+            "
+          />
+        </ng-container>
+
+        <!-- Dynamically rendered components -->
+        <ng-container *ngFor="let component of dynamicallyRenderedComponents">
           <ng-container
             *ngComponentOutlet="
               component;

@@ -33,6 +33,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
         preds: ['https://data.razu.nl/def/ldto/URLBestand'],
         showOriginalLink: false,
       },
+      requiresExplicitRendering: true,
     },
     {
       component: FileRendererComponent,
@@ -42,6 +43,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
         preds: ['https://data.razu.nl/def/ldto/URLBestand'],
         showOriginalLink: false,
       },
+      requiresExplicitRendering: true,
     },
     {
       component: NodeTypeComponent,
@@ -52,6 +54,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
         'https://schema.org/additionalType',
         'http://www.wikidata.org/entity/P31',
       ],
+      requiresExplicitRendering: true,
     },
     {
       component: LdtoOmvangComponent,

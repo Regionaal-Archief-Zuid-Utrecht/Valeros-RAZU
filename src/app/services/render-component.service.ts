@@ -127,4 +127,59 @@ export class RenderComponentService {
 
     return settingsByKey[0];
   }
+
+  private _requiresExplicitRendering(
+    component: RenderComponent,
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): boolean {
+    const settings = this._getSettings(
+      node,
+      mode,
+      predicates,
+      direction,
+    ).filter((setting) => setting.component === component);
+
+    return settings.some(
+      (setting) => setting.requiresExplicitRendering === true,
+    );
+  }
+
+  getDynamicallyRenderedComponents(
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): RenderComponent[] {
+    return this.getComponentsToShow(node, mode, predicates, direction).filter(
+      (component) =>
+        !this._requiresExplicitRendering(
+          component,
+          node,
+          mode,
+          predicates,
+          direction,
+        ),
+    );
+  }
+
+  getExplicitlyRenderedComponents(
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): RenderComponent[] {
+    return this.getComponentsToShow(node, mode, predicates, direction).filter(
+      (component) =>
+        this._requiresExplicitRendering(
+          component,
+          node,
+          mode,
+          predicates,
+          direction,
+        ),
+    );
+  }
 }

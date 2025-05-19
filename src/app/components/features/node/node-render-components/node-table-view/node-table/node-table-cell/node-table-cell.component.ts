@@ -46,6 +46,8 @@ export class NodeTableCellComponent implements OnInit {
 
   numObjValuesToShow = Config.numObjValuesToShowDefault;
   renderComponents: RenderComponent[] = [];
+  explicitlyRenderedComponents: RenderComponent[] = [];
+  dynamicallyRenderedComponents: RenderComponent[] = [];
   hasRenderComponents = false;
 
   objValues: string[] = [];
@@ -104,6 +106,22 @@ export class NodeTableCellComponent implements OnInit {
       preds,
       this.direction,
     );
+
+    this.explicitlyRenderedComponents =
+      this.renderComponent.getExplicitlyRenderedComponents(
+        this.node,
+        RenderMode.ByPredicate,
+        preds,
+        this.direction,
+      );
+
+    this.dynamicallyRenderedComponents =
+      this.renderComponent.getDynamicallyRenderedComponents(
+        this.node,
+        RenderMode.ByPredicate,
+        preds,
+        this.direction,
+      );
 
     this.hasRenderComponents = this.renderComponents.length > 0;
   }

@@ -16,13 +16,15 @@ export enum RenderMode {
   ByPredicate,
 }
 
-// TODO: Create generic type-based render component class (and inherit from there), remove direct reference to sample component here
+type ExplicitlyRenderedComponent =
+  | FileRendererComponent
+  | NodeTypeComponent
+  | MapThumbComponent;
+
 export type RenderComponent = Type<
   | PredicateRenderComponent
-  | FileRendererComponent
-  | SampleTypeRenderComponentComponent
-  | NodeTypeComponent
-  | MapThumbComponent
+  | ExplicitlyRenderedComponent
+  | SampleTypeRenderComponentComponent // TODO: Remove, inherit from generic type-based render component directive
 >;
 
 export type RenderComponentSetting = {
@@ -31,6 +33,7 @@ export type RenderComponentSetting = {
   predicates: string[];
   direction?: Direction;
   hopLinkSettings?: HopLinkSettings;
+  requiresExplicitRendering?: boolean; // Components that require explicit rendering need to be added manually in node-table-cell
   [key: string]: any;
 };
 
