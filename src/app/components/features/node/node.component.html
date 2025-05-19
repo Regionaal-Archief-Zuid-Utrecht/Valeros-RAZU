@@ -14,7 +14,7 @@
   <!-- File renderer in details view, thumb on search page (left side of node) -->
   <a
     [routerLink]="details.showing.value ? null : details.getLink(node)"
-    class="h-48 sm:h-auto"
+    class="h-72 sm:h-auto"
     [ngClass]="[
       details.showing.value ? 'cursor-default' : '',
       (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden',
