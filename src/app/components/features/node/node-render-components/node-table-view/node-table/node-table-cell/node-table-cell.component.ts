@@ -2,7 +2,6 @@ import { NgComponentOutlet, NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowUpLeft } from '@ng-icons/feather-icons';
-import { Config } from '../../../../../../../config/config';
 import { Settings } from '../../../../../../../config/settings';
 import { Direction, NodeModel } from '../../../../../../../models/node.model';
 import { PredicateRenderComponentInput } from '../../../../../../../models/predicate-render-component-input.model';
@@ -42,7 +41,7 @@ export class NodeTableCellComponent implements OnInit {
   @Input() direction?: Direction;
   @Input() show?: TableCellShowOptions;
 
-  numObjValuesToShow = Config.numObjValuesToShowDefault;
+  numObjValuesToShow = Settings.ui.objValues.numToShowByDefault;
   renderComponents: RenderComponent[] = [];
   explicitlyRenderedComponents: RenderComponent[] = [];
   dynamicallyRenderedComponents: RenderComponent[] = [];
@@ -137,13 +136,13 @@ export class NodeTableCellComponent implements OnInit {
   }
 
   loadMoreObjValues() {
-    this.numObjValuesToShow += Config.additionalNumObjValuesToShowOnClick;
+    this.numObjValuesToShow += Settings.ui.objValues.additionalNumToShowOnClick;
   }
 
   get showMoreLabel(): string {
     return `Laad nog ${Math.min(
       this.numObjValuesNotShown,
-      Config.additionalNumObjValuesToShowOnClick,
+      Settings.ui.objValues.additionalNumToShowOnClick,
     )} resultaten`;
   }
 

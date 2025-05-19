@@ -7,4 +7,14 @@ export interface UiSettings {
   imageForWhenLoadingFails: string;
   showViewModeSelect: boolean;
   header: HeaderSettings;
+  minNumParentsToAllowTreeExpand: number;
+  objValues: {
+    numToShowByDefault: number;
+    additionalNumToShowOnClick: number;
+  };
+  filterOptions: {
+    numToShowByDefault: number;
+    additionalNumToShowOnClick: number;
+  };
+  labelFetchIntervalMs: number;
 }

@@ -12,6 +12,7 @@ import { RenderComponentsSettings } from './render-component-settings.type';
 import { SearchSettings } from './search-settings.model';
 import { SortingSettings } from './sorting-settings.model';
 import { UiSettings } from './ui-settings.model';
+import { UrlSettings } from './url-settings.model';
 import { ViewModeSettings } from './view-mode-settings.type';
 
 export interface SettingsModel {
@@ -29,5 +30,6 @@ export interface SettingsModel {
   namespacePrefixes: Record<string, string>;
   fileTypes: Record<FileType, FileTypeConfig>;
   predicates: PredicateSettings;
+  url: UrlSettings;
   matomo?: MatomoSettings;
 }

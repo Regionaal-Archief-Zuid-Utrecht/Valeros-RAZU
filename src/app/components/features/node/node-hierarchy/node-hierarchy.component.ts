@@ -2,7 +2,6 @@ import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherChevronRight } from '@ng-icons/feather-icons';
-import { Config } from '../../../../config/config';
 import { Settings } from '../../../../config/settings';
 import { AccessibleIconDirective } from '../../../../directives/accessible-icon.directive';
 import { ThingWithLabelModel } from '../../../../models/thing-with-label.model';
@@ -44,7 +43,7 @@ export class NodeHierarchyComponent {
   get allowExpand(): boolean {
     return (
       this.hasLoadedNodes &&
-      this.nodes.length >= Config.minNumParentsToAllowTreeExpand
+      this.nodes.length >= Settings.ui.minNumParentsToAllowTreeExpand
     );
   }
 

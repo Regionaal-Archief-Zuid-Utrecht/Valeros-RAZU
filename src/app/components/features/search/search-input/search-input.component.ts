@@ -3,7 +3,6 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Config } from '../../../../config/config';
 import { Settings } from '../../../../config/settings';
 import {
   AutocompleteOptionModel,
@@ -52,7 +51,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
     this.autocomplete.searchSubject.next('');
 
     await this.router.navigate(['/search'], {
-      queryParams: { [Config.searchParam]: this.searchInput },
+      queryParams: { [Settings.url.params.search]: this.searchInput },
       queryParamsHandling: 'merge',
     });
   }

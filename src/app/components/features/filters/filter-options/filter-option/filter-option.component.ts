@@ -1,7 +1,6 @@
 import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Config } from '../../../../../config/config';
 import { Settings } from '../../../../../config/settings';
 import { formatNumber } from '../../../../../helpers/util.helper';
 import { FilterOptionValueModel } from '../../../../../models/filters/filter-option.model';
@@ -25,7 +24,7 @@ export class FilterOptionComponent implements OnInit {
   @Input() fieldIds?: string[];
   @Input() values?: FilterOptionValueModel[];
 
-  numShowing = Config.numFilterOptionsToShowDefault;
+  numShowing = Settings.ui.filterOptions.numToShowByDefault;
 
   constructor(
     public filterService: FilterService,
@@ -38,7 +37,7 @@ export class FilterOptionComponent implements OnInit {
 
   initResetNumShowingOnSearchResultsUpdate() {
     this.search.results.subscribe(() => {
-      this.numShowing = Config.numFilterOptionsToShowDefault;
+      this.numShowing = Settings.ui.filterOptions.numToShowByDefault;
     });
   }
 
@@ -77,10 +76,9 @@ export class FilterOptionComponent implements OnInit {
   }
 
   onShowMoreClicked() {
-    this.numShowing += Config.additionalFilterOptionsToShowOnClick;
+    this.numShowing += Settings.ui.filterOptions.additionalNumToShowOnClick;
   }
 
   protected readonly FilterType = FilterType;
   protected readonly formatNumber = formatNumber;
-  protected readonly Config = Config;
 }

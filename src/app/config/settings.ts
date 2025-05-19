@@ -13,6 +13,7 @@ import { renderComponentSettings } from './settings/render-component.settings';
 import { searchSettings } from './settings/search.settings';
 import { sortingSettings } from './settings/sorting.settings';
 import { uiSettings } from './settings/ui.settings';
+import { urlSettings } from './settings/url.settings';
 import { viewModeSettings } from './settings/view-mode.settings';
 
 export const Settings: SettingsModel = {
@@ -30,5 +31,6 @@ export const Settings: SettingsModel = {
   namespacePrefixes: namespacePrefixes,
   fileTypes: fileTypeSettings,
   predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
+  url: urlSettings,
   matomo: matomoSettings,
 };
