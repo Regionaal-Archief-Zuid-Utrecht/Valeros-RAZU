@@ -14,15 +14,7 @@
             *ngIf="component === FileRendererComponent"
             [urls]="objValue"
             [shownInTableCell]="true"
-            [hopSettings]="
-              renderComponent.getSettingByKey(
-                'hopLinkSettings',
-                node,
-                RenderMode.ByPredicate,
-                [pred],
-                direction
-              )
-            "
+            [hopSettings]="getSettingByKey('hopLinkSettings')"
           />
         </ng-container>
 

@@ -146,6 +146,20 @@ export class NodeTableCellComponent implements OnInit {
     )} resultaten`;
   }
 
+  getSettingByKey(key: string): any {
+    if (!this.node || !this.pred || !this.direction) {
+      return [];
+    }
+
+    return this.renderComponent.getSettingByKey(
+      key,
+      this.node,
+      RenderMode.ByPredicate,
+      [this.pred],
+      this.direction,
+    );
+  }
+
   protected readonly TableCellShowOptions = TableCellShowOptions;
   protected readonly RenderMode = RenderMode;
   protected readonly Settings = Settings;
