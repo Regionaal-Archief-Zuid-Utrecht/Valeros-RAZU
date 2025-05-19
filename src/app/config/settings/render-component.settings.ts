@@ -104,7 +104,10 @@ export const renderComponentSettings: RenderComponentsSettings = {
     {
       component: FileRendererComponent,
       componentId: 'file-renderer',
-      predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
+      predicates: [
+        'https://data.razu.nl/def/ldto/heeftRepresentatie',
+        'https://data.razu.nl/def/ldto/isRepresentatieVan',
+      ],
       hopLinkSettings: {
         preds: ['https://data.razu.nl/def/ldto/URLBestand'],
         showOriginalLink: false,
