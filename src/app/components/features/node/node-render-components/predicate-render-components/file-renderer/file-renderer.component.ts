@@ -45,6 +45,8 @@ export class FileRendererComponent implements OnInit, OnChanges {
 
   fileUrls: string[] = [];
   loading = false;
+  private _preferredViewerData: { urls: string[]; viewer: FileViewer } | null =
+    null;
 
   constructor(public fileRenderService: FileRenderService) {}
 
@@ -73,6 +75,13 @@ export class FileRendererComponent implements OnInit, OnChanges {
     return this.fileRenderService.findUnifiedFileType(fileTypes);
   }
 
+  get preferredViewerData(): { urls: string[]; viewer: FileViewer } {
+    if (!this._preferredViewerData) {
+      this._preferredViewerData = this._initPreferredViewerData();
+    }
+    return this._preferredViewerData;
+  }
+
   private _initHasViewer() {
     const fileTypes = this.fileUrls.map((fileUrl) =>
       this.fileRenderService.getFileType(fileUrl),
@@ -85,6 +94,7 @@ export class FileRendererComponent implements OnInit, OnChanges {
 
   private async _initFileUrls() {
     this.loading = true;
+    this._preferredViewerData = null;
 
     try {
       const fileUrls = await this.fileRenderService.processUrls(
@@ -108,11 +118,12 @@ export class FileRendererComponent implements OnInit, OnChanges {
     }
   }
 
-  getUrlsByPreferredViewer(): { urls: string[]; viewer: FileViewer } {
+  private _initPreferredViewerData(): {
+    urls: string[];
+    viewer: FileViewer;
+  } {
     const preferredViewerOrder: FileViewer[] =
       Settings.fileRendering.preferredViewerOrder;
-
-    // TODO: Reduce calls to this function for performance reasons (init once or on prop change)
 
     if (!preferredViewerOrder || preferredViewerOrder.length === 0) {
       console.warn('No preferred viewer order, defaulting to link viewer');

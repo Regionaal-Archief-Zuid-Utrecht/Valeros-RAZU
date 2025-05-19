@@ -41,27 +41,21 @@
       <div *ngIf="unifiedFileType !== FileType.WEB_IMAGE" class="mb-4 h-full">
         <div class="mb-4 h-full">
           <!-- Only show images -->
-          <ng-container
-            *ngIf="getUrlsByPreferredViewer().viewer === FileViewer.Image"
-          >
+          <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Image">
             <app-node-images
-              [imageUrls]="getUrlsByPreferredViewer().urls"
+              [imageUrls]="preferredViewerData.urls"
               [shownInTableCell]="shownInTableCell"
               [useViewer]="true"
             ></app-node-images>
           </ng-container>
 
           <!-- Only show docs -->
-          <ng-container
-            *ngIf="getUrlsByPreferredViewer().viewer === FileViewer.Doc"
-          >
+          <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Doc">
             <!-- NOTE: Only shows first doc -->
             <app-doc-viewer
-              [url]="getUrlsByPreferredViewer().urls[0]"
+              [url]="preferredViewerData.urls[0]"
               [fileType]="
-                fileRenderService.getFileType(
-                  getUrlsByPreferredViewer().urls[0]
-                )
+                fileRenderService.getFileType(preferredViewerData.urls[0])
               "
               [style.height]="!shownInTableCell ? '100%' : '16rem'"
               (error)="hasViewer.emit(false)"
@@ -69,10 +63,8 @@
           </ng-container>
 
           <!-- Only show links -->
-          <ng-container
-            *ngIf="getUrlsByPreferredViewer().viewer === FileViewer.Link"
-          >
-            <ng-container *ngFor="let url of getUrlsByPreferredViewer().urls">
+          <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Link">
+            <ng-container *ngFor="let url of preferredViewerData.urls">
               <app-node-link [url]="url"></app-node-link>
             </ng-container>
           </ng-container>
