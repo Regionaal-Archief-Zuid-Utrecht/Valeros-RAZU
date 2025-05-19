@@ -104,19 +104,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     {
       component: FileRendererComponent,
       componentId: 'file-renderer',
-      predicates: [
-        'http://xmlns.com/foaf/0.1/depiction',
-        'https://schema.org/thumbnail',
-      ],
-      hopLinkSettings: {
-        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
-        showOriginalLink: false,
-      },
-      requiresExplicitRendering: true,
-    },
-    {
-      component: FileRendererComponent,
-      componentId: 'file-renderer',
       predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
       hopLinkSettings: {
         preds: ['https://data.razu.nl/def/ldto/URLBestand'],
@@ -124,5 +111,14 @@ export const renderComponentSettings: RenderComponentsSettings = {
       },
       requiresExplicitRendering: true,
     },
+    // {
+    //   component: FileRendererComponent,
+    //   componentId: 'file-renderer',
+    //   predicates: [
+    //     'http://xmlns.com/foaf/0.1/depiction',
+    //     'https://schema.org/thumbnail',
+    //   ],
+    //   requiresExplicitRendering: true,
+    // },
   ],
 };
