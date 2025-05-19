@@ -68,13 +68,6 @@ export class FileRendererComponent implements OnInit, OnChanges {
     return this.fileUrls;
   }
 
-  get unifiedFileType(): FileType {
-    const fileTypes = this.fileUrls.map((url) =>
-      this.fileRenderService.getFileType(url),
-    );
-    return this.fileRenderService.findUnifiedFileType(fileTypes);
-  }
-
   get preferredViewerData(): { urls: string[]; viewer: FileViewer } {
     if (!this._preferredViewerData) {
       this._preferredViewerData = this._initPreferredViewerData();

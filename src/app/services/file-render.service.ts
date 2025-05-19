@@ -43,17 +43,6 @@ export class FileRenderService {
     return FileType.UNKNOWN;
   }
 
-  findUnifiedFileType(fileTypes: FileType[]): FileType {
-    if (fileTypes.length === 0) return FileType.UNKNOWN;
-
-    const uniqueTypes = new Set(fileTypes);
-    if (uniqueTypes.size === 1) {
-      const type = fileTypes[0];
-      return type || FileType.UNKNOWN;
-    }
-    return FileType.UNKNOWN;
-  }
-
   async processUrls(
     inputUrls: string | string[],
     hopPreds?: string[],
