@@ -23,7 +23,6 @@ export type RenderComponent = Type<
 
 export type RenderComponentSetting = {
   component: RenderComponent;
-  componentId: string;
   predicates: string[];
   direction?: Direction;
   hopLinkSettings?: HopLinkSettings;

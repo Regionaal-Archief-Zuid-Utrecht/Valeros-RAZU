@@ -18,7 +18,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     // Use this to overrule the entire way a node is displayed, based on its type. E.g., for all nodes with type sdo:CreativeWork, render a custom component instead of using the default table view.
     {
       component: SampleTypeRenderComponentComponent,
-      componentId: 'sample-type-render-component',
       predicates: [],
     },
   ],
@@ -26,17 +25,14 @@ export const renderComponentSettings: RenderComponentsSettings = {
     // Use this to overrule the way a node value is displayed, based on the predicate. E.g., render a file renderer for all values of the predicate http://xmlns.com/foaf/0.1/depiction, instead of using the default node link.
     {
       component: LdtoOmvangComponent,
-      componentId: 'ldto-omvang',
       predicates: ['https://data.razu.nl/def/ldto/omvang'],
     },
     {
       component: LdtoEventComponent,
-      componentId: 'ldto-event',
       predicates: ['https://data.razu.nl/def/ldto/event'],
     },
     {
       component: HopLinkComponent,
-      componentId: 'hop-link',
       predicates: ['https://data.razu.nl/def/ldto/betrokkene'],
       hopLinkSettings: {
         preds: ['https://data.razu.nl/def/ldto/Actor'],
@@ -45,7 +41,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: HopLinkComponent,
-      componentId: 'hop-link',
       predicates: ['https://data.razu.nl/def/ldto/beperkingGebruik'],
       hopLinkSettings: {
         preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType'],
@@ -54,7 +49,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: HopLinkComponent,
-      componentId: 'hop-link',
       predicates: ['https://data.razu.nl/def/ldto/gerelateerdInformatieobject'],
       hopLinkSettings: {
         preds: [
@@ -65,7 +59,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: HopImageComponent,
-      componentId: 'hop-image',
       predicates: ['http://www.w3.org/ns/prov#hadPrimarySource'],
       hopLinkSettings: {
         preds: ['http://xmlns.com/foaf/0.1/depiction'],
@@ -74,17 +67,14 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: LdtoDekkingInTijdComponent,
-      componentId: 'ldto-dekking-in-tijd',
       predicates: ['https://data.razu.nl/def/ldto/dekkingInTijd'],
     },
     {
       component: LdtoUrlBestandComponent,
-      componentId: 'ldto-url-bestand',
       predicates: ['https://data.razu.nl/def/ldto/URLBestand'],
     },
     {
       component: RicoIdentifierComponent,
-      componentId: 'rico-identifier',
       predicates: [
         'https://www.ica.org/standards/RiC/ontology#hasOrHadIdentifier',
         'https://schema.org/identifier',
@@ -92,7 +82,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: NodeTypeComponent,
-      componentId: 'node-type',
       predicates: [
         'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
         'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
@@ -103,7 +92,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: FileRendererComponent,
-      componentId: 'file-renderer',
       predicates: [
         'https://data.razu.nl/def/ldto/heeftRepresentatie',
         'https://data.razu.nl/def/ldto/isRepresentatieVan',
@@ -116,7 +104,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
     // {
     //   component: FileRendererComponent,
-    //   componentId: 'file-renderer',
     //   predicates: [
     //     'http://xmlns.com/foaf/0.1/depiction',
     //     'https://schema.org/thumbnail',
