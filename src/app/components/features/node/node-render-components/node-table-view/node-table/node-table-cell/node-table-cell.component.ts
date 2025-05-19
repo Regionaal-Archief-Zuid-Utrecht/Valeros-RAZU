@@ -147,7 +147,7 @@ export class NodeTableCellComponent implements OnInit {
   }
 
   getSettingByKey(key: string): any {
-    if (!this.node || !this.pred || !this.direction) {
+    if (!this.node || !this.pred || this.direction === undefined) {
       return [];
     }
 
