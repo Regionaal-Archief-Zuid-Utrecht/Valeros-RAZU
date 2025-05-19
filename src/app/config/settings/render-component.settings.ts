@@ -25,40 +25,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByPredicate]: [
     // Use this to overrule the way a node value is displayed, based on the predicate. E.g., render a file renderer for all values of the predicate http://xmlns.com/foaf/0.1/depiction, instead of using the default node link.
     {
-      component: FileRendererComponent,
-      componentId: 'file-renderer',
-      predicates: [
-        'http://xmlns.com/foaf/0.1/depiction',
-        'https://schema.org/thumbnail',
-      ],
-      hopLinkSettings: {
-        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
-        showOriginalLink: false,
-      },
-      requiresExplicitRendering: true, // Components that require explicit rendering allow for more component flexibility in terms of input parameters, but need to be added manually in node-table-cell
-    },
-    {
-      component: FileRendererComponent,
-      componentId: 'file-renderer',
-      predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
-      hopLinkSettings: {
-        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
-        showOriginalLink: false,
-      },
-      requiresExplicitRendering: true,
-    },
-    {
-      component: NodeTypeComponent,
-      componentId: 'node-type',
-      predicates: [
-        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-        'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
-        'https://schema.org/additionalType',
-        'http://www.wikidata.org/entity/P31',
-      ],
-      requiresExplicitRendering: true,
-    },
-    {
       component: LdtoOmvangComponent,
       componentId: 'ldto-omvang',
       predicates: ['https://data.razu.nl/def/ldto/omvang'],
@@ -123,6 +89,40 @@ export const renderComponentSettings: RenderComponentsSettings = {
         'https://www.ica.org/standards/RiC/ontology#hasOrHadIdentifier',
         'https://schema.org/identifier',
       ],
+    },
+    {
+      component: NodeTypeComponent,
+      componentId: 'node-type',
+      predicates: [
+        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+        'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
+        'https://schema.org/additionalType',
+        'http://www.wikidata.org/entity/P31',
+      ],
+      requiresExplicitRendering: true, // The node type component is a built-in component used elsewhere throughout the code-base, so it is not exclusively used as a predicate render component. Because of this, it has its own pre-defined input props, which is why we use those instead of the default data structure (PredicateRenderComponentInput). To do this, however, we need to manually and explicitly configure how to render this component in node-table-cell.
+    },
+    {
+      component: FileRendererComponent,
+      componentId: 'file-renderer',
+      predicates: [
+        'http://xmlns.com/foaf/0.1/depiction',
+        'https://schema.org/thumbnail',
+      ],
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
+        showOriginalLink: false,
+      },
+      requiresExplicitRendering: true,
+    },
+    {
+      component: FileRendererComponent,
+      componentId: 'file-renderer',
+      predicates: ['https://data.razu.nl/def/ldto/heeftRepresentatie'],
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
+        showOriginalLink: false,
+      },
+      requiresExplicitRendering: true,
     },
   ],
 };
