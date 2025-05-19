@@ -72,7 +72,7 @@ export class IIIFService {
           await this.imageService.getImageDimensions(url);
         canvases.push(makeCanvas(url, index, width, height));
       } catch (e) {
-        console.error(`Failed to get dimensions for image ${url}:`, e);
+        console.error(`Failed to get dimensions for image ${url} :`, e);
       }
     }
     return canvases;
