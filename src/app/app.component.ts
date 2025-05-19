@@ -14,7 +14,7 @@ import { RoutingService } from './services/routing.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'view-a-LOD';
+  title = 'Valeros';
 
   constructor(
     private titleService: Title,
