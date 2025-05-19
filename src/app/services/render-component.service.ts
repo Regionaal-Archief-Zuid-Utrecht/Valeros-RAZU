@@ -81,10 +81,9 @@ export class RenderComponentService {
       if (direction === undefined) {
         direction = Direction.Outgoing;
       }
+
       const settingsDirection =
-        setting.direction === undefined
-          ? Direction.Outgoing
-          : setting.direction;
+        setting.direction === undefined ? direction : setting.direction;
       const matchesDirection = direction === settingsDirection;
       const hasOverlap = this.data.hasOverlap(nodePreds, setting.predicates);
       if (hasOverlap && matchesDirection) {
