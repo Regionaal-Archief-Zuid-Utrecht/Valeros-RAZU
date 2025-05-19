@@ -3,20 +3,17 @@
 
   <ng-container *ngIf="show === TableCellShowOptions.Obj">
     <!-- TODO: Retrieve and pass coordinates -->
-    <app-map-thumb *ngIf="shouldRenderComponentIds.includes('map-thumb')">
+    <app-map-thumb *ngIf="renderComponents.includes(MapThumbComponent)">
     </app-map-thumb>
 
     <ng-container>
       <div *ngFor="let objValue of objValuesToShow">
-        <div
-          class="mt-1"
-          *ngIf="shouldRenderComponentIds.includes('node-type')"
-        >
+        <div class="mt-1" *ngIf="renderComponents.includes(NodeTypeComponent)">
           <app-node-type [type]="{ id: objValue }"> </app-node-type>
         </div>
 
         <app-file-renderer
-          *ngIf="shouldRenderComponentIds.includes('file-renderer')"
+          *ngIf="renderComponents.includes(FileRendererComponent)"
           [urls]="objValue"
           [shownInTableCell]="true"
           [hopSettings]="
@@ -31,19 +28,18 @@
         />
 
         <!-- Dynamically render predicate render components -->
-        <ng-container *ngFor="let compId of shouldRenderComponentIds">
-          <ng-container *ngIf="componentRegistry[compId]">
-            <ng-container
-              *ngComponentOutlet="
-                componentRegistry[compId];
-                inputs: { data: getPredicateRenderComponentInput(objValue) }
-              "
-            >
-            </ng-container>
+        <ng-container *ngFor="let component of renderComponents">
+          <ng-container
+            *ngComponentOutlet="
+              component;
+              inputs: { data: getPredicateRenderComponentInput(objValue) }
+            "
+          >
           </ng-container>
         </ng-container>
 
-        <app-node-link [url]="objValue" *ngIf="!renderComponentIsDefined">
+        <!-- Default rendering if no components are available -->
+        <app-node-link [url]="objValue" *ngIf="!hasRenderComponents">
           <ng-icon
             [svg]="featherArrowUpLeft"
             class="opacity-40"

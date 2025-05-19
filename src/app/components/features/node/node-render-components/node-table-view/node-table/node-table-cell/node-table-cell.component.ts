@@ -6,10 +6,12 @@ import { Config } from '../../../../../../../config/config';
 import { Settings } from '../../../../../../../config/settings';
 import { Direction, NodeModel } from '../../../../../../../models/node.model';
 import { PredicateRenderComponentInput } from '../../../../../../../models/predicate-render-component-input.model';
-import { RenderMode } from '../../../../../../../models/settings/render-component-settings.type';
+import {
+  RenderComponent,
+  RenderMode,
+} from '../../../../../../../models/settings/render-component-settings.type';
 import { NodeService } from '../../../../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../../../../services/render-component.service';
-import { PREDICATE_RENDER_COMPONENT_REGISTRY } from '../../../../../../custom-render-components/by-predicate/predicate-render-component-registry';
 import { NodeLinkComponent } from '../../../../node-link/node-link.component';
 import { NodeTypeComponent } from '../../../../node-types/node-type/node-type.component';
 import { FileRendererComponent } from '../../../predicate-render-components/file-renderer/file-renderer.component';
@@ -37,16 +39,14 @@ export enum TableCellShowOptions {
   styleUrl: './node-table-cell.component.scss',
 })
 export class NodeTableCellComponent implements OnInit {
-  public readonly componentRegistry = PREDICATE_RENDER_COMPONENT_REGISTRY;
-
   @Input() pred?: string;
   @Input() node?: NodeModel;
   @Input() direction?: Direction;
   @Input() show?: TableCellShowOptions;
 
   numObjValuesToShow = Config.numObjValuesToShowDefault;
-  shouldRenderComponentIds: string[] = [];
-  renderComponentIsDefined = false;
+  renderComponents: RenderComponent[] = [];
+  hasRenderComponents = false;
 
   objValues: string[] = [];
 
@@ -56,7 +56,7 @@ export class NodeTableCellComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initRenderComponentIds();
+    this.initRenderComponents();
     this.initObjValues();
   }
 
@@ -91,26 +91,21 @@ export class NodeTableCellComponent implements OnInit {
     );
   }
 
-  initRenderComponentIds() {
+  initRenderComponents() {
     if (!this.node) {
       return;
     }
 
     const preds = this.pred ? [this.pred] : [];
 
-    this.shouldRenderComponentIds = this.renderComponent.getIdsToShow(
+    this.renderComponents = this.renderComponent.getComponentsToShow(
       this.node,
       RenderMode.ByPredicate,
       preds,
       this.direction,
     );
 
-    this.renderComponentIsDefined = this.renderComponent.isDefined(
-      this.node,
-      RenderMode.ByPredicate,
-      preds,
-      this.direction,
-    );
+    this.hasRenderComponents = this.renderComponents.length > 0;
   }
 
   get isIncoming() {
@@ -140,4 +135,7 @@ export class NodeTableCellComponent implements OnInit {
   protected readonly RenderMode = RenderMode;
   protected readonly Settings = Settings;
   protected readonly featherArrowUpLeft = featherArrowUpLeft;
+  protected readonly MapThumbComponent = MapThumbComponent;
+  protected readonly NodeTypeComponent = NodeTypeComponent;
+  protected readonly FileRendererComponent = FileRendererComponent;
 }

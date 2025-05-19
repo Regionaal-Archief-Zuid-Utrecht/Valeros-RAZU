@@ -1,7 +1,8 @@
 <ng-container *ngIf="node">
-  <app-node-table-view [node]="node" *ngIf="!renderComponentIsDefined" />
+  <app-node-table-view [node]="node" *ngIf="!hasComponents" />
 
-  <app-sample-type-render-component
-    *ngIf="renderComponentIdsToShow.includes('sample-type-render-component')"
-  />
+  <!-- Dynamically render components based on their type -->
+  <ng-container *ngFor="let component of componentsToShow">
+    <ng-container *ngComponentOutlet="component"></ng-container>
+  </ng-container>
 </ng-container>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Settings } from '../config/settings';
 import { Direction, NodeModel } from '../models/node.model';
 import {
+  RenderComponent,
   RenderComponentSetting,
   RenderComponentSettings,
   RenderMode,
@@ -19,88 +20,44 @@ export class RenderComponentService {
     public data: DataService,
   ) {}
 
-  private _getAllIds(): string[] {
-    let renderComponentIds: string[] = [];
+  private _getAllComponents(): RenderComponent[] {
+    let components: RenderComponent[] = [];
     // TODO: Iterate over render modes dynamically
     for (const mode of [RenderMode.ByType, RenderMode.ByPredicate]) {
-      const renderComponentIdsForMode = Settings.renderComponents[
+      const componentsForMode: RenderComponent[] = Settings.renderComponents[
         mode as RenderMode
-      ].map((r) => r.componentId);
-      renderComponentIds = renderComponentIds.concat(renderComponentIdsForMode);
-    }
-    const uniqueRenderComponentIds = Array.from(new Set(renderComponentIds));
-    return uniqueRenderComponentIds;
-  }
-
-  getIdsToShow(
-    node: NodeModel,
-    mode: RenderMode,
-    predicates?: string[],
-    direction?: Direction,
-  ): string[] {
-    const idsToShow: string[] = [];
-    for (const renderComponentId of this._getAllIds()) {
-      const shouldShow = this.shouldShow(
-        node,
-        mode,
-        renderComponentId,
-        predicates,
-        direction,
-      );
-      if (shouldShow) {
-        idsToShow.push(renderComponentId);
-      }
+      ].map((r) => r.component);
+      components = components.concat(componentsForMode);
     }
 
-    return idsToShow;
+    const uniqueComponents = Array.from(new Set(components));
+    return uniqueComponents;
   }
 
-  shouldShow(
+  private _shouldShowComponent(
     node: NodeModel,
     mode: RenderMode,
-    renderComponentId: string,
+    component: RenderComponent,
     predicates?: string[],
     direction?: Direction,
-  ) {
-    return this.getIds(node, mode, predicates, direction).includes(
-      renderComponentId,
+  ): boolean {
+    return this._getComponents(node, mode, predicates, direction).includes(
+      component,
     );
   }
 
-  getIds(
+  private _getComponents(
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
     direction?: Direction,
-  ): string[] {
-    return this.getSettings(node, mode, predicates, direction).map(
-      (r) => r.componentId,
+  ): RenderComponent[] {
+    return this._getSettings(node, mode, predicates, direction).map(
+      (setting) => setting.component,
     );
   }
 
-  getSettingByKey(
-    settingKey: string,
-    node: NodeModel,
-    mode: RenderMode,
-    predicates?: string[],
-    direction?: Direction,
-  ): any {
-    // TODO: Reduce calls to this function if needed for performance reasons
-    const settingsByKey = this.getSettings(
-      node,
-      mode,
-      predicates,
-      direction,
-    ).map((s) => s?.[settingKey]);
-
-    if (!settingsByKey || settingsByKey.length === 0) {
-      return [];
-    }
-
-    return settingsByKey[0];
-  }
-
-  getSettings(
+  private _getSettings(
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
@@ -138,20 +95,36 @@ export class RenderComponentService {
     return settings;
   }
 
-  isDefined(
+  getComponentsToShow(
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
     direction?: Direction,
-  ): boolean {
-    return (
-      this.getAll(mode).filter((c) =>
-        this.getIds(node, mode, predicates, direction).includes(c.componentId),
-      ).length > 0
+  ): RenderComponent[] {
+    return this._getAllComponents().filter((component: RenderComponent) =>
+      this._shouldShowComponent(node, mode, component, predicates, direction),
     );
   }
 
-  getAll(mode: RenderMode): RenderComponentSetting[] {
-    return Settings.renderComponents?.[mode] as RenderComponentSettings;
+  getSettingByKey(
+    settingKey: string,
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): any {
+    // TODO: Reduce calls to this function if needed for performance reasons
+    const settingsByKey = this._getSettings(
+      node,
+      mode,
+      predicates,
+      direction,
+    ).map((s) => s?.[settingKey]);
+
+    if (!settingsByKey || settingsByKey.length === 0) {
+      return [];
+    }
+
+    return settingsByKey[0];
   }
 }

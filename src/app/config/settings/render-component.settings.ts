@@ -3,9 +3,11 @@ import { LdtoEventComponent } from '../../components/custom-render-components/by
 import { LdtoOmvangComponent } from '../../components/custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
 import { LdtoUrlBestandComponent } from '../../components/custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
 import { RicoIdentifierComponent } from '../../components/custom-render-components/by-predicate/rico-identifier/rico-identifier.component';
+import { SampleTypeRenderComponentComponent } from '../../components/custom-render-components/by-type/sample-type-render-component/sample-type-render-component.component';
 import { FileRendererComponent } from '../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { HopImageComponent } from '../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-image/hop-image.component';
 import { HopLinkComponent } from '../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
+import { NodeTypeComponent } from '../../components/features/node/node-types/node-type/node-type.component';
 import {
   RenderComponentsSettings,
   RenderMode,
@@ -14,6 +16,7 @@ import {
 export const renderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [
     {
+      component: SampleTypeRenderComponentComponent,
       componentId: 'sample-type-render-component',
       predicates: [],
     },
@@ -41,6 +44,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
       },
     },
     {
+      component: NodeTypeComponent,
       componentId: 'node-type',
       predicates: [
         'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',

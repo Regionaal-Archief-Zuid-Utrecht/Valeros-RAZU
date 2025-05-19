@@ -1,25 +1,27 @@
-import { NgIf } from '@angular/common';
+import { NgComponentOutlet, NgForOf, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Settings } from '../../../../config/settings';
 import { NodeModel } from '../../../../models/node.model';
-import { RenderMode } from '../../../../models/settings/render-component-settings.type';
+import {
+  RenderComponent,
+  RenderMode,
+} from '../../../../models/settings/render-component-settings.type';
 import { NodeService } from '../../../../services/node/node.service';
 import { RenderComponentService } from '../../../../services/render-component.service';
-import { SampleTypeRenderComponentComponent } from '../../../custom-render-components/by-type/sample-type-render-component/sample-type-render-component.component';
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
 
 @Component({
   selector: 'app-node-renderer',
   standalone: true,
-  imports: [NodeTableViewComponent, NgIf, SampleTypeRenderComponentComponent],
+  imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
   templateUrl: './node-renderer.component.html',
   styleUrl: './node-renderer.component.scss',
 })
 export class NodeRendererComponent implements OnInit {
   @Input() node?: NodeModel;
 
-  renderComponentIdsToShow: string[] = [];
-  renderComponentIsDefined = false;
+  componentsToShow: RenderComponent[] = [];
+  hasComponents = false;
 
   constructor(
     public nodes: NodeService,
@@ -27,22 +29,19 @@ export class NodeRendererComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initRenderComponentIds();
+    this.initComponents();
   }
 
-  initRenderComponentIds() {
+  initComponents() {
     if (!this.node) {
       return;
     }
-    this.renderComponentIdsToShow = this.renderComponents.getIdsToShow(
+    this.componentsToShow = this.renderComponents.getComponentsToShow(
       this.node,
       RenderMode.ByType,
     );
 
-    this.renderComponentIsDefined = this.renderComponents.isDefined(
-      this.node,
-      RenderMode.ByType,
-    );
+    this.hasComponents = this.componentsToShow.length > 0;
   }
 
   protected readonly Settings = Settings;
