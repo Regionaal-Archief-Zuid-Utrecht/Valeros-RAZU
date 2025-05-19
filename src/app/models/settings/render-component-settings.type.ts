@@ -31,7 +31,7 @@ export type RenderComponentSetting = {
   predicates: string[];
   direction?: Direction;
   hopLinkSettings?: HopLinkSettings;
-  requiresExplicitRendering?: boolean; // Components that require explicit rendering need to be added manually in node-table-cell
+  requiresExplicitRendering?: boolean;
   [key: string]: any;
 };
 

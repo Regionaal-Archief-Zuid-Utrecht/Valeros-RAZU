@@ -35,7 +35,7 @@ export const renderComponentSettings: RenderComponentsSettings = {
         preds: ['https://data.razu.nl/def/ldto/URLBestand'],
         showOriginalLink: false,
       },
-      requiresExplicitRendering: true,
+      requiresExplicitRendering: true, // Components that require explicit rendering allow for more component flexibility in terms of input parameters, but need to be added manually in node-table-cell
     },
     {
       component: FileRendererComponent,
