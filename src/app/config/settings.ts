@@ -19,18 +19,18 @@ import { viewModeSettings } from './default-settings/view-mode.settings';
 export const Settings: SettingsModel = {
   endpoints: endpointSettings,
   predicateVisibility: predicateVisibilitySettings,
-  nodeVisibility: nodeVisibilitySettings, // E.g. hide all nodes of type "skos:Concept", or only show nodes with a certain type
+  nodeVisibility: nodeVisibilitySettings,
   sorting: sortingSettings,
   filtering: filteringSettings,
   clustering: clusteringSettings,
   renderComponents: renderComponentSettings,
-  viewModes: viewModeSettings, // E.g. How are things displayed in list view, grid view, etc.
+  viewModes: viewModeSettings,
   ui: uiSettings,
   search: searchSettings,
   iiif: iiifSettings,
   namespacePrefixes: namespacePrefixes,
   fileRendering: fileRenderingSettings,
-  predicates: predicateSettings, // E.g. what predicates are used for parents, labels, types, files, etc.
+  predicates: predicateSettings,
   url: urlSettings,
   matomo: matomoSettings,
 };

@@ -17,17 +17,26 @@ import { ViewModeSettings } from './view-mode-settings.type';
 export interface SettingsModel {
   endpoints: EndpointSettings;
   predicateVisibility: PredicateVisibilitySettings;
+  /**
+   * E.g. hide all nodes of type "skos:Concept", or only show nodes with a certain type
+   */
   nodeVisibility: NodeVisibilitySettings;
   sorting: SortingSettings;
   filtering: FilteringSettings;
   clustering: ClusteringSettings;
   renderComponents: RenderComponentsSettings;
+  /**
+   * E.g. How are things displayed in list view, grid view, etc.
+   */
   viewModes: ViewModeSettings;
   ui: UiSettings;
   search: SearchSettings;
   iiif: IIIFSettings;
   namespacePrefixes: Record<string, string>;
   fileRendering: FileRenderingSettings;
+  /**
+   * E.g. what predicates are used for parents, labels, types, files, etc.
+   */
   predicates: PredicateSettings;
   url: UrlSettings;
   matomo?: MatomoSettings;
