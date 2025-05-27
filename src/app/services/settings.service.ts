@@ -15,11 +15,15 @@ export class SettingsService {
   }
 
   private _checkEndpoints() {
-    if (Object.keys(Settings.endpoints.data).length === 0) {
+    if (!this.hasEndpoints()) {
       console.warn(
         'No endpoints configured, add endpoints in the endpoint settings.',
       );
     }
+  }
+
+  hasEndpoints(): boolean {
+    return Object.keys(Settings.endpoints.data).length > 0;
   }
 
   showingFilterPanelOnSide(): boolean {

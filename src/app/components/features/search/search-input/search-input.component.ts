@@ -2,6 +2,8 @@ import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgIcon } from '@ng-icons/core';
+import { featherAlertTriangle } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../config/settings';
 import {
@@ -12,13 +14,20 @@ import { DetailsService } from '../../../../services/details.service';
 import { AutocompleteService } from '../../../../services/search/autocomplete.service';
 import { ElasticService } from '../../../../services/search/elastic.service';
 import { SearchService } from '../../../../services/search/search.service';
+import { SettingsService } from '../../../../services/settings.service';
 import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
 
 @Component({
   selector: 'app-search-input',
   standalone: true,
-  imports: [FormsModule, NgIf, SearchAutocompleteComponent, TranslatePipe],
+  imports: [
+    FormsModule,
+    NgIf,
+    SearchAutocompleteComponent,
+    TranslatePipe,
+    NgIcon,
+  ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
@@ -32,6 +41,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
     public details: DetailsService,
     public autocomplete: AutocompleteService,
     public url: UrlService,
+    public settings: SettingsService,
   ) {}
 
   ngOnInit() {}
@@ -88,4 +98,5 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
   }
 
   protected readonly Settings = Settings;
+  protected readonly featherAlertTriangle = featherAlertTriangle;
 }

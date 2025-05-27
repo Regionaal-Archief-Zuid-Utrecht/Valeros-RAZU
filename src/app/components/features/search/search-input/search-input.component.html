@@ -1,4 +1,13 @@
 <div
+  role="alert"
+  class="alert alert-soft mb-4"
+  *ngIf="!settings.hasEndpoints()"
+>
+  <ng-icon [svg]="featherAlertTriangle" />
+  <span>Let op: Geen endpoints gevonden</span>
+</div>
+
+<div
   class="dropdown dropdown-bottom z-20 flex"
   role="search"
   aria-labelledby="main-search"
