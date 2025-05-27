@@ -8,3 +8,12 @@ export const filteringSettings: FilteringSettings = {
   minNumOfValuesForFilterOptionToAppear: 1,
   filterOptions: {},
 };
+
+// Example:
+// filterOptions: {
+//   license: {
+//     label: 'Licentie',
+//     fieldIds: ['https://schema.org/license'],
+//     values: [],
+//   },
+// },
