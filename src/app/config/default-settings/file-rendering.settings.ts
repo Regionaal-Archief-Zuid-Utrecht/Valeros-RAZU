@@ -4,8 +4,8 @@ import { FileRenderingSettings } from '../../models/settings/file-rendering.sett
 
 export const fileRenderingSettings: FileRenderingSettings = {
   preferredViewerOrder: [
-    FileViewer.Image,
-    FileViewer.Doc,
+    FileViewer.Image, // Mirador
+    FileViewer.Doc, // PDF.js
     FileViewer.Link,
   ] as FileViewer[], // If a node refers to multiple files with different file types (e.g., two images and a doc), we can not show both the image and the doc renderers. Instead, choose a preferred viewer based on the order defined here (e.g., prefer rendering the images over rendering the doc).
   fileTypes: {
