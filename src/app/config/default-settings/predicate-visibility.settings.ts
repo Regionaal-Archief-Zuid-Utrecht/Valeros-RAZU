@@ -3,6 +3,7 @@ import {
   PredicateVisibilitySettings,
 } from '../../models/settings/predicate-visibility-settings.model';
 import { ViewMode } from '../../models/view-mode.enum';
+import { typePredicates } from './predicate.settings';
 
 export const predicateVisibilitySettings: PredicateVisibilitySettings = {
   byViewMode: {
@@ -17,6 +18,6 @@ export const predicateVisibilitySettings: PredicateVisibilitySettings = {
       [PredicateVisibility.Hide]: [],
     },
   },
-  alwaysHide: ['@id', 'endpointId'],
+  alwaysHide: ['@id', 'endpointId', ...typePredicates],
   hideForTypes: [],
 };
