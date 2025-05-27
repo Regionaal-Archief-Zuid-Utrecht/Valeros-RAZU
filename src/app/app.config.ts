@@ -28,7 +28,8 @@ const providers = [
   ]),
 ];
 
-if (Settings.matomo) {
+if (Settings.matomo && Settings.matomo.siteId && Settings.matomo.trackerUrl) {
+  console.log('Matomo settings:', Settings.matomo);
   providers.push(
     provideMatomo({
       siteId: Settings.matomo.siteId,
