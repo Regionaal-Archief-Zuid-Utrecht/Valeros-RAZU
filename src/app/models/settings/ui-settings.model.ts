@@ -1,4 +1,4 @@
-import { HeaderSettings } from '../header/header-position.types';
+import { HeaderSettings } from './header-settings.model';
 
 export interface UiSettings {
   showLanguageToggle: boolean;
