@@ -1,7 +1,8 @@
 import { EndpointSettings } from '../../models/settings/endpoint-settings.model';
+import { endpointSettings } from '../default-settings/endpoint.settings';
 
-export const endpointSettings: EndpointSettings = {
-  maxNumParallelRequests: 4, // 4 SPARQL workers max for Triply
+export const razuEndpointSettings: EndpointSettings = {
+  ...endpointSettings,
   data: {
     razu: {
       label: 'Regionaal Archief Zuid-Utrecht',
