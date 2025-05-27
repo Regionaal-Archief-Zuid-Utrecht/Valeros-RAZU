@@ -1,4 +1,4 @@
-import { UrlSettings } from "../../models/settings/url-settings.model";
+import { UrlSettings } from '../../models/settings/url-settings.model';
 
 export const urlSettings: UrlSettings = {
   urls: {
