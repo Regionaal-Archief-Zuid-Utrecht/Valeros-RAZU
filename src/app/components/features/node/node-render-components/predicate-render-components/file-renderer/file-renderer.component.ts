@@ -105,9 +105,14 @@ export class FileRendererComponent implements OnInit, OnChanges {
   getFileNameFromUrl(url: string): string {
     try {
       const cleanUrl = url.split('?')[0].split('#')[0];
-      return decodeURIComponent(cleanUrl.split('/').pop() || 'bestand');
+      const lastSegment = decodeURIComponent(cleanUrl.split('/').pop() || '');
+      if (lastSegment && lastSegment.includes('.')) {
+        return lastSegment;
+      }
+
+      return 'Download bestand';
     } catch {
-      return 'bestand';
+      return 'Download bestand';
     }
   }
 
