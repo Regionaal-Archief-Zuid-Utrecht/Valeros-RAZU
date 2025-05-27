@@ -5,7 +5,7 @@ export const uiSettings: UiSettings = {
   labelMaxChars: 100,
   sectionNextToTableWidth: { search: '30%', details: '40%' },
   imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
-  showViewModeSelect: true, // Used to switch between list view, grid view, etc.
+  showViewModeSelect: true,
   minNumParentsToAllowTreeExpand: 3,
   objValues: {
     numToShowByDefault: 5,
@@ -15,7 +15,7 @@ export const uiSettings: UiSettings = {
     numToShowByDefault: 10,
     additionalNumToShowOnClick: 10,
   },
-  labelFetchIntervalMs: 100, // There's a continuous loop in the cache service checking if there are new labels that need to be retrieved and cached
+  labelFetchIntervalMs: 100,
   header: {
     showLogo: true,
     showTitle: true,
