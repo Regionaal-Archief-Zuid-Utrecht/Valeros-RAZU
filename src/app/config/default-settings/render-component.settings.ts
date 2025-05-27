@@ -19,3 +19,13 @@ export const renderComponentSettings: RenderComponentsSettings = {
     },
   ],
 };
+
+// Example:
+// [RenderMode.ByType]: [
+//   {
+//     component: SampleTypeRenderComponentComponent,
+//     predicates: [
+//       '...',
+//     ],
+//   },
+// ],
