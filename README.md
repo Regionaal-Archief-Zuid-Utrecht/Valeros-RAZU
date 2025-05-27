@@ -48,7 +48,7 @@ The **[Regionaal Archief Zuid-Utrecht fork](https://github.com/Regionaal-Archief
 3. On-the-fly Office (doc, ppt, xls, etc) document to PDF conversion ([Gotenberg](https://github.com/gotenberg/gotenberg)).
 4. Token generation ([SURA](https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA)).
 
-If of general (non-RAZU-specific) use, these features will be merged into this main repository in the near future.
+If of general (non-RAZU-specific) use, these features will be merged into the main repository in the near future.
 
 ## Dev
 
