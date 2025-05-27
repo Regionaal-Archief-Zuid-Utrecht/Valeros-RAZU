@@ -5,20 +5,20 @@ import { ViewMode } from '../../models/view-mode.enum';
 export const viewModeSettings: ViewModeSettings = {
   [ViewMode.List]: {
     [ViewModeSetting.ShowDetails]: true,
-    [ViewModeSetting.ShowParents]: false,
+    [ViewModeSetting.ShowParents]: true,
     [ViewModeSetting.ShowTypes]: true,
     [ViewModeSetting.ShowTitle]: true,
-    [ViewModeSetting.ShowOrganization]: false,
+    [ViewModeSetting.ShowOrganization]: true,
     [ViewModeSetting.ShowFileNextToTable]: true,
-    [ViewModeSetting.EnrichWithIncomingRelations]: false, // NOTE: Detail view always enriches with incoming relations, regardless of this setting
+    [ViewModeSetting.EnrichWithIncomingRelations]: false,
     [ViewModeSetting.ShowDetailsButton]: true,
   },
   [ViewMode.Grid]: {
     [ViewModeSetting.ShowTitle]: true,
     [ViewModeSetting.ShowDetails]: true,
-    [ViewModeSetting.ShowParents]: false,
+    [ViewModeSetting.ShowParents]: true,
     [ViewModeSetting.ShowTypes]: true,
-    [ViewModeSetting.ShowOrganization]: false,
+    [ViewModeSetting.ShowOrganization]: true,
     [ViewModeSetting.ShowFileNextToTable]: true,
     [ViewModeSetting.EnrichWithIncomingRelations]: false,
     [ViewModeSetting.ShowDetailsButton]: false,
