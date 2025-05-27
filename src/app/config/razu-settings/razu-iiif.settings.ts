@@ -1,5 +1,4 @@
 import { IIIFSettings } from '../../models/settings/iiif-settings.model';
-import { iiifSettings } from '../default-settings/iiif.settings';
 
 const jpgFileFormats = [
   'https://data.razu.nl/id/bestandsformaat/127b5ecb9c9f8ff3b43d69ba014e4f6d',
@@ -17,7 +16,6 @@ const altoFileFormats = [
 ];
 
 export const razuIiifSettings: IIIFSettings = {
-  ...iiifSettings,
   fileFormats: {
     jpg: jpgFileFormats,
     tif: tifFileFormats,
