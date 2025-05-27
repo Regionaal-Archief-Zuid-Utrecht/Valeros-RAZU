@@ -15,7 +15,7 @@ const altoFileFormats = [
   'https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e',
 ];
 
-export const razuIiifSettings: IIIFSettings = {
+export const razuIIIFSettings: IIIFSettings = {
   fileFormats: {
     jpg: jpgFileFormats,
     tif: tifFileFormats,
