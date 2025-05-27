@@ -7,7 +7,7 @@
 
 Valeros allows **easy setup of a faceted search Linked Open Data viewer**, working across ontologies and organizations out-of-the-box. It is designed to be flexible and configurable, allowing you to tweak how, where, and when to show data to your end users. As a front-end/client-side viewer, it is simple and cheap to host and deploy. As a back-end, it uses Elasticsearch for efficient search and filtering, and (optionally) SPARQL for asynchronous enrichment of search results.
 
-For **technical documentation**, please check the [project wiki](https://github.com/Simon-Dirks/Valeros/wiki).
+For **technical documentation**, please check the [project wiki](https://github.com/view-a-LOD/Valeros/wiki).
 
 This project started as a collaboration between [Het Utrechts Archief](https://hetutrechtsarchief.nl/), [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/) and [Kasteel Amerongen](https://www.kasteelamerongen.nl/), developed by [Simon Dirks](https://simondirks.com). The RAZU fork builds on this pilot project, adding features such as a built-in PDF viewer ([PDF.js](https://github.com/mozilla/pdf.js/)), IIIF viewer ([Mirador](https://github.com/ProjectMirador/mirador)), on-the-fly Office (doc, ppt, xls, etc) document to PDF conversion ([Gotenberg](https://github.com/gotenberg/gotenberg)), and token generation ([SURA](https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA)).
 
