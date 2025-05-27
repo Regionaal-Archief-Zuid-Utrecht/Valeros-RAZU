@@ -19,5 +19,5 @@ export const predicateVisibilitySettings: PredicateVisibilitySettings = {
     },
   },
   alwaysHide: ['@id', 'endpointId', ...typePredicates],
-  hideForTypes: [],
+  hideTypeBadges: [],
 };

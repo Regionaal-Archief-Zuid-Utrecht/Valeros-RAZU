@@ -67,7 +67,7 @@ export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
     'http://schema.org/mainEntity',
     'http://purl.org/dc/terms/hasFormat',
   ],
-  hideForTypes: [
+  hideTypeBadges: [
     'https://data.razu.nl/def/ldto/BeperkingGebruikGegevens',
     'https://data.razu.nl/def/ldto/DekkingInTijdGegevens',
     'https://data.razu.nl/def/ldto/IdentificatieGegevens',

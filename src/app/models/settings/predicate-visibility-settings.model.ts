@@ -12,7 +12,11 @@ export type PredicateVisibilitySettingsByViewMode = {
 export interface PredicateVisibilitySettings {
   byViewMode: PredicateVisibilitySettingsByViewMode;
   alwaysHide: string[];
-  hideForTypes: string[];
+
+  /** By default, types are rendered using the NodeTypeComponent.
+   * If a type should not be displayed for a node, add it to this list.
+   */
+  hideTypeBadges: string[];
 }
 
 export enum PredicateVisibility {
