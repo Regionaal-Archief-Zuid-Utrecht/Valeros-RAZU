@@ -9,7 +9,7 @@ import {
 export const razuNodeVisibilitySettings: NodeVisibilitySettings = {
   ...nodeVisibilitySettings,
   onlyShow: {
-    // TODO: There might be a bug here
+    // TODO: There might be a bug here, meaning this functionality might not work as expected
     // onlyShowInformatieObject: {
     //   fieldIds: [...typePredicates],
     //   valueIds: ['https://data.razu.nl/def/ldto/Informatieobject'],
