@@ -11,7 +11,6 @@ export const renderComponentSettings: RenderComponentsSettings = {
       component: NodeTypeComponent,
       predicates: [
         'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-        'https://www.ica.org/standards/RiC/ontology#hasRecordSetType',
         'https://schema.org/additionalType',
         'http://www.wikidata.org/entity/P31',
       ],
