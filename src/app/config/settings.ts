@@ -15,7 +15,6 @@ import { sortingSettings } from './default-settings/sorting.settings';
 import { uiSettings } from './default-settings/ui.settings';
 import { urlSettings } from './default-settings/url.settings';
 import { viewModeSettings } from './default-settings/view-mode.settings';
-import { razuSettings } from './razu-settings/razu-settings';
 
 const defaultSettings: SettingsModel = {
   endpoints: endpointSettings,
@@ -36,4 +35,4 @@ const defaultSettings: SettingsModel = {
   matomo: matomoSettings,
 };
 
-export const Settings: SettingsModel = razuSettings;
+export const Settings: SettingsModel = defaultSettings;
