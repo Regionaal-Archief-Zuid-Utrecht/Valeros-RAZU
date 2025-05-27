@@ -10,7 +10,17 @@ import { ViewModeService } from './view-mode.service';
   providedIn: 'root',
 })
 export class SettingsService {
-  constructor(public viewModes: ViewModeService) {}
+  constructor(public viewModes: ViewModeService) {
+    this._checkEndpoints();
+  }
+
+  private _checkEndpoints() {
+    if (Object.keys(Settings.endpoints.data).length === 0) {
+      console.warn(
+        'No endpoints configured, add endpoints in the endpoint settings.',
+      );
+    }
+  }
 
   showingFilterPanelOnSide(): boolean {
     return (

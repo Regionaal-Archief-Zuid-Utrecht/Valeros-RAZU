@@ -103,11 +103,6 @@ export class EndpointService {
       return this.isEnabled(endpointId);
     });
 
-    if (all.length === 0) {
-      console.warn(
-        'No enabled endpoints found, add endpoints in the endpoint settings.',
-      );
-    }
     return Object.fromEntries(all);
   }
 
