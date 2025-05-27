@@ -6,7 +6,7 @@
 
 Valeros allows **easy setup of a faceted search Linked Open Data viewer**, working across ontologies and organizations out-of-the-box. It is designed to be flexible and configurable, allowing you to tweak how, where, and when to show data to your end users. As a front-end/client-side viewer, it is simple and cheap to host and deploy. As a back-end, it uses Elasticsearch for efficient search and filtering, and (optionally) SPARQL for asynchronous enrichment of search results. 
 
-For **technical documentation**, please check the [project wiki](https://github.com/Simon-Dirks/Valeros/wiki).
+For **technical documentation**, please check the [project wiki](https://github.com/view-a-LOD/Valeros/wiki).
 
 This project is a collaboration between [Het Utrechts Archief](https://hetutrechtsarchief.nl/), [Regionaal Archief Zuid-Utrecht](https://www.razu.nl/) and [Kasteel Amerongen](https://www.kasteelamerongen.nl/), developed by [Simon Dirks](https://simondirks.com). If you have any questions or comments about the project, please reach out to mail@simondirks.com.
 
