@@ -1,5 +1,5 @@
-import { FilteringSettings } from '../../models/settings/filtering-settings.model';
-import { filteringSettings } from '../default-settings/filtering.settings';
+import { FilteringSettings } from '../../../models/settings/filtering-settings.model';
+import { filteringSettings } from '../../default-settings/filtering.settings';
 
 const hideFilterOptionValueIds: string[] = [
   'https://data.razu.nl/def/ldto/ChecksumGegevens',

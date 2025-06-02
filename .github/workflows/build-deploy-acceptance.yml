@@ -1,9 +1,9 @@
-name: Build and Deploy
+name: Build and Deploy (Acceptance)
 
 on:
   push:
     branches:
-      - main
+      - accept
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,11 +20,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Build
-        env:
-          APP_ENV: production
         run: |
           npm install
-          npm run-script build
+          npm run-script build:acceptance
       - name: Deploy to VPS # TODO: Remove previous deploy using ssh action?
         uses: appleboy/scp-action@v0.1.7
         with:

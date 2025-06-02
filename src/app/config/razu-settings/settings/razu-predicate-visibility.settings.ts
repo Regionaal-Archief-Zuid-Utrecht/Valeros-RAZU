@@ -1,14 +1,14 @@
 import {
   PredicateVisibility,
   PredicateVisibilitySettings,
-} from '../../models/settings/predicate-visibility-settings.model';
-import { ViewMode } from '../../models/view-mode.enum';
-import { predicateVisibilitySettings } from '../default-settings/predicate-visibility.settings';
+} from '../../../models/settings/predicate-visibility-settings.model';
+import { ViewMode } from '../../../models/view-mode.enum';
+import { predicateVisibilitySettings } from '../../default-settings/predicate-visibility.settings';
 import {
   filePredicates,
   parentPredicates,
   typePredicates,
-} from '../default-settings/predicate.settings';
+} from '../../default-settings/predicate.settings';
 
 export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
   byViewMode: {

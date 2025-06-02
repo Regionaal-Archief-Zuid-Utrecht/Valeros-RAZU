@@ -54,7 +54,35 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
+                  "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.production.settings.ts"
+                }
+              ]
+            },
+            "acceptance": {
+              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
+                  "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.acceptance.settings.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

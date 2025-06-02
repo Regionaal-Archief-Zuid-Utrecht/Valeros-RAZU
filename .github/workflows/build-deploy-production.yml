@@ -1,9 +1,9 @@
-name: Build and Deploy (Dev)
+name: Build and Deploy (Production)
 
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,14 +22,14 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run-script build:dev
+          npm run-script build:prod
       - name: Deploy to VPS # TODO: Remove previous deploy using ssh action?
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEV_HOST }}
-          username: ${{ secrets.DEV_USERNAME }}
-          password: ${{ secrets.DEV_PASSWORD }}
-          port: ${{ secrets.DEV_PORT }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
           source: "dist/view-a-lod/browser/*"
-          target: ${{ secrets.DEV_SERVER_DEPLOY_DIR }}
+          target: ${{ secrets.SERVER_DEPLOY_DIR }}
           strip_components: 3

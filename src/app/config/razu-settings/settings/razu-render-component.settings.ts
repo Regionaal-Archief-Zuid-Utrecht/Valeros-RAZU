@@ -1,14 +1,14 @@
-import { LdtoDekkingInTijdComponent } from '../../components/custom-render-components/by-predicate/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
-import { LdtoEventComponent } from '../../components/custom-render-components/by-predicate/ldto-event/ldto-event.component';
-import { LdtoOmvangComponent } from '../../components/custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
-import { LdtoUrlBestandComponent } from '../../components/custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
-import { FileRendererComponent } from '../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
-import { HopLinkComponent } from '../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
+import { LdtoDekkingInTijdComponent } from '../../../components/custom-render-components/by-predicate/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
+import { LdtoEventComponent } from '../../../components/custom-render-components/by-predicate/ldto-event/ldto-event.component';
+import { LdtoOmvangComponent } from '../../../components/custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
+import { LdtoUrlBestandComponent } from '../../../components/custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
+import { FileRendererComponent } from '../../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
+import { HopLinkComponent } from '../../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 import {
   RenderComponentsSettings,
   RenderMode,
-} from '../../models/settings/render-component-settings.type';
-import { renderComponentSettings } from '../default-settings/render-component.settings';
+} from '../../../models/settings/render-component-settings.type';
+import { renderComponentSettings } from '../../default-settings/render-component.settings';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [],

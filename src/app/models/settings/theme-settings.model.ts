@@ -1,6 +1,4 @@
-import { Env } from '../env.type';
-
-export interface Theme {
+export interface ThemeSettings {
   primary: string;
   neutral: string;
   accent: string;
@@ -13,5 +11,3 @@ export interface Theme {
   '--rounded-badge': string;
   [key: string]: string;
 }
-
-export type ThemeSettings = Record<Env, Theme>;

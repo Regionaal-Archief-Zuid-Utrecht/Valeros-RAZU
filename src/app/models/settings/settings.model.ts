@@ -10,7 +10,7 @@ import { PredicateVisibilitySettings } from './predicate-visibility-settings.mod
 import { RenderComponentsSettings } from './render-component-settings.type';
 import { SearchSettings } from './search-settings.model';
 import { SortingSettings } from './sorting-settings.model';
-import { ThemeSettings } from './theme.model';
+import { ThemeSettings } from './theme-settings.model';
 import { UiSettings } from './ui-settings.model';
 import { UrlSettings } from './url-settings.model';
 import { ViewModeSettings } from './view-mode-settings.type';

@@ -1,10 +1,10 @@
-import { PredicateSettings } from '../../models/settings/predicate-settings.model';
+import { PredicateSettings } from '../../../models/settings/predicate-settings.model';
 import {
   filePredicates,
   labelPredicates,
   parentPredicates,
   typePredicates,
-} from '../default-settings/predicate.settings';
+} from '../../default-settings/predicate.settings';
 
 export const razuTypePredicates: string[] = [
   ...typePredicates,
