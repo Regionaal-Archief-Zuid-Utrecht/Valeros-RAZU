@@ -1,102 +1,63 @@
 import { Injectable } from '@angular/core';
 
-import { Direction, NodeModel } from '../models/node.model';
 import { Settings } from '../config/settings';
-import { NodeService } from './node.service';
+import { Direction, NodeModel } from '../models/node.model';
 import {
+  RenderComponent,
   RenderComponentSetting,
   RenderComponentSettings,
   RenderMode,
 } from '../models/settings/render-component-settings.type';
+import { DataService } from './data.service';
+import { NodeService } from './node/node.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RenderComponentService {
-  private _getAllIds(): string[] {
-    let renderComponentIds: string[] = [];
+  constructor(
+    public nodes: NodeService,
+    public data: DataService,
+  ) {}
+
+  private _getAllComponents(): RenderComponent[] {
+    let components: RenderComponent[] = [];
     // TODO: Iterate over render modes dynamically
     for (const mode of [RenderMode.ByType, RenderMode.ByPredicate]) {
-      const renderComponentIdsForMode = Object.values(
-        Settings.renderComponents[mode],
-      ).map((r) => r.componentId);
-      renderComponentIds = renderComponentIds.concat(renderComponentIdsForMode);
-    }
-    const uniqueRenderComponentIds = Array.from(new Set(renderComponentIds));
-    return uniqueRenderComponentIds;
-  }
-
-  constructor(public nodes: NodeService) {}
-
-  getIdsToShow(
-    node: NodeModel,
-    mode: RenderMode,
-    predicates?: string[],
-    direction?: Direction,
-  ): string[] {
-    const idsToShow: string[] = [];
-    for (const renderComponentId of this._getAllIds()) {
-      const shouldShow = this.shouldShow(
-        node,
-        mode,
-        renderComponentId,
-        predicates,
-        direction,
-      );
-      if (shouldShow) {
-        idsToShow.push(renderComponentId);
-      }
+      const componentsForMode: RenderComponent[] = Settings.renderComponents[
+        mode as RenderMode
+      ].map((r) => r.component);
+      components = components.concat(componentsForMode);
     }
 
-    return idsToShow;
+    const uniqueComponents = Array.from(new Set(components));
+    return uniqueComponents;
   }
 
-  shouldShow(
+  private _shouldShowComponent(
     node: NodeModel,
     mode: RenderMode,
-    renderComponentId: string,
+    component: RenderComponent,
     predicates?: string[],
     direction?: Direction,
-  ) {
-    return this.getIds(node, mode, predicates, direction).includes(
-      renderComponentId,
+  ): boolean {
+    return this._getComponents(node, mode, predicates, direction).includes(
+      component,
     );
   }
 
-  getIds(
+  private _getComponents(
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
     direction?: Direction,
-  ): string[] {
-    return this.getSettings(node, mode, predicates, direction).map(
-      (r) => r.componentId,
+  ): RenderComponent[] {
+    return this._getSettings(node, mode, predicates, direction).map(
+      (setting) => setting.component,
     );
   }
 
-  getSettingByKey(
-    settingKey: string,
-    node: NodeModel,
-    mode: RenderMode,
-    predicates?: string[],
-    direction?: Direction,
-  ): any {
-    // TODO: Reduce calls to this function if needed for performance reasons
-    const settingsByKey = this.getSettings(
-      node,
-      mode,
-      predicates,
-      direction,
-    ).map((s) => s?.[settingKey]);
-
-    if (!settingsByKey || settingsByKey.length === 0) {
-      return [];
-    }
-
-    return settingsByKey[0];
-  }
-
-  getSettings(
+  private _getSettings(
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
@@ -114,19 +75,18 @@ export class RenderComponentService {
       nodePreds = predicates ?? [];
     }
 
-    // TODO: Fix type error
-    for (const [pred, setting] of Object.entries(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
-    )) {
+    for (const setting of Settings.renderComponents?.[
+      mode
+    ] as RenderComponentSettings) {
       if (direction === undefined) {
         direction = Direction.Outgoing;
       }
+
       const settingsDirection =
-        setting.direction === undefined
-          ? Direction.Outgoing
-          : setting.direction;
+        setting.direction === undefined ? direction : setting.direction;
       const matchesDirection = direction === settingsDirection;
-      if (nodePreds.includes(pred) && matchesDirection) {
+      const hasOverlap = this.data.hasOverlap(nodePreds, setting.predicates);
+      if (hasOverlap && matchesDirection) {
         settings.push(setting);
       }
     }
@@ -134,23 +94,91 @@ export class RenderComponentService {
     return settings;
   }
 
-  isDefined(
+  getComponentsToShow(
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): RenderComponent[] {
+    return this._getAllComponents().filter((component: RenderComponent) =>
+      this._shouldShowComponent(node, mode, component, predicates, direction),
+    );
+  }
+
+  getSettingByKey(
+    settingKey: string,
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): any {
+    // TODO: Reduce calls to this function if needed for performance reasons
+    const settingsByKey = this._getSettings(
+      node,
+      mode,
+      predicates,
+      direction,
+    ).map((s) => s?.[settingKey]);
+
+    if (!settingsByKey || settingsByKey.length === 0) {
+      return [];
+    }
+
+    return settingsByKey[0];
+  }
+
+  private _requiresExplicitRendering(
+    component: RenderComponent,
     node: NodeModel,
     mode: RenderMode,
     predicates?: string[],
     direction?: Direction,
   ): boolean {
-    return (
-      this.getAll(mode).filter((c) =>
-        this.getIds(node, mode, predicates, direction).includes(c.componentId),
-      ).length > 0
+    const settings = this._getSettings(
+      node,
+      mode,
+      predicates,
+      direction,
+    ).filter((setting) => setting.component === component);
+
+    return settings.some(
+      (setting) => setting.requiresExplicitRendering === true,
     );
   }
 
-  getAll(mode: RenderMode): RenderComponentSetting[] {
-    // TODO: Fix type error
-    return Object.values(
-      Settings.renderComponents?.[mode] as unknown as RenderComponentSettings,
+  getDynamicallyRenderedComponents(
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): RenderComponent[] {
+    return this.getComponentsToShow(node, mode, predicates, direction).filter(
+      (component) =>
+        !this._requiresExplicitRendering(
+          component,
+          node,
+          mode,
+          predicates,
+          direction,
+        ),
+    );
+  }
+
+  getExplicitlyRenderedComponents(
+    node: NodeModel,
+    mode: RenderMode,
+    predicates?: string[],
+    direction?: Direction,
+  ): RenderComponent[] {
+    return this.getComponentsToShow(node, mode, predicates, direction).filter(
+      (component) =>
+        this._requiresExplicitRendering(
+          component,
+          node,
+          mode,
+          predicates,
+          direction,
+        ),
     );
   }
 }

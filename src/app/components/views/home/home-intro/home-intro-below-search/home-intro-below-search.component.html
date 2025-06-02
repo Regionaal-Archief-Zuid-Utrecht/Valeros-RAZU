@@ -1,0 +1,20 @@
+<p class="text-center mt-12 text-base sm:text-lg sm:w-3/4 px-2 mx-auto">
+  <span [innerHTML]="'homescreen.flavour-text-part-1' | translate"></span>
+  <span>&nbsp;</span>
+  <span class="font-bold">{{
+    "homescreen.flavour-text-part-2-emphasis" | translate
+  }}</span
+  ><span>&nbsp;</span>
+  <span [innerHTML]="'homescreen.flavour-text-part-3' | translate"></span>
+</p>
+
+<div class="mx-auto text-center my-6">
+  <div
+    class="rounded-full bg-black h-6 w-6 text-lg text-white text-center mx-auto"
+  >
+    <span class="relative bottom-[0.15rem]">?</span>
+  </div>
+  <button class="underline" (click)="router.navigateByUrl('colofon')">
+    {{ "homescreen.more-info" | translate }}
+  </button>
+</div>

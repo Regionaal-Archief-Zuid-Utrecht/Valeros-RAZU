@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ViewMode } from '../models/view-mode.enum';
 import { BehaviorSubject } from 'rxjs';
+import { ViewMode } from '../models/view-mode.enum';
 
 @Injectable({
   providedIn: 'root',

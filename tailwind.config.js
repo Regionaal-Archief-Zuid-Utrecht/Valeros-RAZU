@@ -8,11 +8,12 @@ module.exports = {
         mono: ["Familjen Grotesk", "sans-serif"],
       },
       screens: {
-        'wide': '1600px',
+        wide: "1600px",
       },
       colors: {
-        'background': '#E5E4E2',
-    },},
+        background: "#E5E4E2",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -28,9 +29,9 @@ module.exports = {
           // "primary-content": "white",
           // background: "#E5E4E2",
           // search_background: "#E5E4E2",
-          // "--rounded-box": "1rem",
-          // "--rounded-btn": "1rem",
-          // "--rounded-badge": "1rem",
+          // "--rounded-box": "0.375rem",
+          // "--rounded-btn": "0.375rem",
+          // "--rounded-badge": "0.375rem",
           // black: "#000000",
 
           // // DEVELOPMENT:
@@ -45,7 +46,7 @@ module.exports = {
           // "--rounded-btn": "1rem",
           // "--rounded-badge": "1rem",
           // // black: "#000000",
-          
+
           // ACCEPT:
           primary: "#2e7d32", // Dark green for primary elements
           neutral: "#66bb6a", // Medium green for neutral elements
@@ -66,10 +67,9 @@ module.exports = {
           // "primary-content": "white", // White text to maintain contrast
           // background: "#e3f2fd", // Very light blue for the background
           // search_background: "#e3f2fd", // Match background color
-          // "--rounded-box": "1rem",
-          // "--rounded-btn": "1rem",
-          // "--rounded-badge": "1rem",
-
+          // "--rounded-box": "0.375rem",
+          // "--rounded-btn": "0.375rem",
+          // "--rounded-badge": "0.375rem",
         },
       },
     ],
