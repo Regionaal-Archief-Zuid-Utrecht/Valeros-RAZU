@@ -1,4 +1,4 @@
-import { AutocompleteSettings } from '../../models/settings/autocomplete-settings.model';
+import { AutocompleteSettings } from '../../../models/settings/autocomplete-settings.model';
 
 export const autocompleteSettings: AutocompleteSettings = {
   enabled: true,

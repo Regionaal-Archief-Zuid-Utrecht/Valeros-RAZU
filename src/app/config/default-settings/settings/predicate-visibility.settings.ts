@@ -1,8 +1,8 @@
 import {
   PredicateVisibility,
   PredicateVisibilitySettings,
-} from '../../models/settings/predicate-visibility-settings.model';
-import { ViewMode } from '../../models/view-mode.enum';
+} from '../../../models/settings/predicate-visibility-settings.model';
+import { ViewMode } from '../../../models/view-mode.enum';
 import { typePredicates } from './predicate.settings';
 
 export const predicateVisibilitySettings: PredicateVisibilitySettings = {

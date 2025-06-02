@@ -1,5 +1,5 @@
-import { HeaderPosition } from '../../models/settings/header-settings.model';
-import { UiSettings } from '../../models/settings/ui-settings.model';
+import { HeaderPosition } from '../../../models/settings/header-settings.model';
+import { UiSettings } from '../../../models/settings/ui-settings.model';
 
 export const uiSettings: UiSettings = {
   showLanguageToggle: false,

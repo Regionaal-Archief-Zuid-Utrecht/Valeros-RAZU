@@ -1,8 +1,8 @@
-import { NodeTypeComponent } from '../../components/features/node/node-types/node-type/node-type.component';
+import { NodeTypeComponent } from '../../../components/features/node/node-types/node-type/node-type.component';
 import {
   RenderComponentsSettings,
   RenderMode,
-} from '../../models/settings/render-component-settings.type';
+} from '../../../models/settings/render-component-settings.type';
 
 export const renderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [],

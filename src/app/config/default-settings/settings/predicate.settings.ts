@@ -1,4 +1,4 @@
-import { PredicateSettings } from '../../models/settings/predicate-settings.model';
+import { PredicateSettings } from '../../../models/settings/predicate-settings.model';
 
 export const typePredicates: string[] = [
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',

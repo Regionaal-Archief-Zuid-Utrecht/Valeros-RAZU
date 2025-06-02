@@ -4,7 +4,7 @@ import {
   labelPredicates,
   parentPredicates,
   typePredicates,
-} from '../../default-settings/predicate.settings';
+} from '../../default-settings/settings/predicate.settings';
 
 export const razuTypePredicates: string[] = [
   ...typePredicates,

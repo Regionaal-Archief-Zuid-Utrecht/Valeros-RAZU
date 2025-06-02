@@ -1,4 +1,4 @@
-import { IIIFSettings } from '../../models/settings/iiif-settings.model';
+import { IIIFSettings } from '../../../models/settings/iiif-settings.model';
 
 export const iiifSettings: IIIFSettings = {
   fileFormats: {

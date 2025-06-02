@@ -1,10 +1,10 @@
 import { FilterType } from '../../../models/filters/filter.model';
 import { NodeVisibilitySettings } from '../../../models/settings/node-visibility-settings.model';
-import { nodeVisibilitySettings } from '../../default-settings/node-visibility.settings';
+import { nodeVisibilitySettings } from '../../default-settings/settings/node-visibility.settings';
 import {
   parentPredicates,
   typePredicates,
-} from '../../default-settings/predicate.settings';
+} from '../../default-settings/settings/predicate.settings';
 
 export const razuNodeVisibilitySettings: NodeVisibilitySettings = {
   ...nodeVisibilitySettings,

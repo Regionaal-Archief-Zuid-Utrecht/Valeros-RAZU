@@ -1,6 +1,6 @@
-import { ViewModeSetting } from '../../models/settings/view-mode-setting.enum';
-import { ViewModeSettings } from '../../models/settings/view-mode-settings.type';
-import { ViewMode } from '../../models/view-mode.enum';
+import { ViewModeSetting } from '../../../models/settings/view-mode-setting.enum';
+import { ViewModeSettings } from '../../../models/settings/view-mode-settings.type';
+import { ViewMode } from '../../../models/view-mode.enum';
 
 export const viewModeSettings: ViewModeSettings = {
   [ViewMode.List]: {

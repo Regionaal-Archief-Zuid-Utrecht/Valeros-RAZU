@@ -8,7 +8,7 @@ import {
   RenderComponentsSettings,
   RenderMode,
 } from '../../../models/settings/render-component-settings.type';
-import { renderComponentSettings } from '../../default-settings/render-component.settings';
+import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [],

@@ -1,5 +1,5 @@
-import { SortOrder } from '../../models/settings/sort-order.enum';
-import { SortingSettings } from '../../models/settings/sorting-settings.model';
+import { SortOrder } from '../../../models/settings/sort-order.enum';
+import { SortingSettings } from '../../../models/settings/sorting-settings.model';
 import { labelPredicates } from './predicate.settings';
 
 export const sortingSettings: SortingSettings = {

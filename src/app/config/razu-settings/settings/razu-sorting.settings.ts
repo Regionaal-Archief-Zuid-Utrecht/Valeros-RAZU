@@ -1,6 +1,6 @@
 import { SortOrder } from '../../../models/settings/sort-order.enum';
 import { SortingSettings } from '../../../models/settings/sorting-settings.model';
-import { sortingSettings } from '../../default-settings/sorting.settings';
+import { sortingSettings } from '../../default-settings/settings/sorting.settings';
 import { razuLabelPredicates } from './razu-predicate.settings';
 
 export const razuSortingSettings: SortingSettings = {

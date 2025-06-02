@@ -1,4 +1,4 @@
-import { SearchSettings } from '../../models/settings/search-settings.model';
+import { SearchSettings } from '../../../models/settings/search-settings.model';
 import { autocompleteSettings } from './autocomplete.settings';
 
 export const searchSettings: SearchSettings = {

@@ -1,5 +1,5 @@
 import { EndpointSettings } from '../../../../models/settings/endpoint-settings.model';
-import { endpointSettings } from '../../../default-settings/endpoint.settings';
+import { endpointSettings } from '../../../default-settings/settings/endpoint.settings';
 
 export const razuEndpointSettings: EndpointSettings = {
   ...endpointSettings,

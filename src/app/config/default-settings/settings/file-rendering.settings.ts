@@ -1,6 +1,6 @@
-import { FileType } from '../../models/file-type.model';
-import { FileViewer } from '../../models/file-viewer.enum';
-import { FileRenderingSettings } from '../../models/settings/file-rendering.settings.model';
+import { FileType } from '../../../models/file-type.model';
+import { FileViewer } from '../../../models/file-viewer.enum';
+import { FileRenderingSettings } from '../../../models/settings/file-rendering.settings.model';
 
 export const fileRenderingSettings: FileRenderingSettings = {
   preferredViewerOrder: [
