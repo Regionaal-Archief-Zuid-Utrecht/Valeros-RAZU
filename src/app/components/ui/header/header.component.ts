@@ -5,7 +5,10 @@ import { NgIcon } from '@ng-icons/core';
 import { featherSearch, featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../../config/settings';
-import { HeaderPosition, HeaderSettings } from '../../../models/settings/header-settings.model';
+import {
+  HeaderPosition,
+  HeaderSettings,
+} from '../../../models/settings/header-settings.model';
 import { UrlService } from '../../../services/url.service';
 
 export enum HeaderView {
