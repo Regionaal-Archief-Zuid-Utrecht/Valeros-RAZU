@@ -23,6 +23,9 @@ const getThemeForEnvironment = () => {
     } else if (hasConfiguration(args, "acceptance")) {
       console.log("Using acceptance theme");
       return acceptanceTheme;
+    } else if (hasConfiguration(args, "test")) {
+      console.log("Using test theme");
+      return testTheme;
     }
   }
 

@@ -42,3 +42,17 @@ export const productionTheme: ThemeSettings = {
   '--rounded-badge': '0.375rem',
   'primary-content': 'white',
 };
+
+export const testTheme: ThemeSettings = {
+  ...daisyuiBase['light'],
+  primary: '#1565c0',
+  neutral: '#42a5f5',
+  accent: '#90caf9',
+  secondary: '#1976d2',
+  background: '#e3f2fd',
+  search_background: '#e3f2fd',
+  '--rounded-box': '0.375rem',
+  '--rounded-btn': '0.375rem',
+  '--rounded-badge': '0.375rem',
+  'primary-content': 'white',
+};
