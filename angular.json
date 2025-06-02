@@ -113,9 +113,19 @@
             },
             "dev-build": {
               "externalDependencies": ["http", "https", "url", "util", "net"],
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
             }
           },
           "defaultConfiguration": "production"
