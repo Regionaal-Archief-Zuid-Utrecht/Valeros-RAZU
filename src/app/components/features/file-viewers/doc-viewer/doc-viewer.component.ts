@@ -47,7 +47,14 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   initPdfViewer() {
     console.log('Initializing PDF viewer...');
 
-    const pdfUrl = this._getPdfUrl();
+    const pdfUrl: string | null = this._getPdfUrl();
+    if (!pdfUrl) {
+      this.error.emit(new Error('No PDF URL found'));
+      return;
+    }
+
+    // TODO: If file type is PDF, bypass Gotenberg and set pdfSrc directly to PDF contents
+    // For now, keeping Gotenberg in there as a quick way to get file contents (PDF viewer seems to need PDF content, not a URL)
     this.isConvertingPDF = true;
     this.http
       .get(pdfUrl, { responseType: 'blob' })
@@ -68,8 +75,8 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
       });
   }
 
-  private _getPdfUrl(): string {
-    if (!this.url || !this.fileType) return '';
+  private _getPdfUrl(): string | null {
+    if (!this.url || !this.fileType) return null;
 
     if (this.fileType === FileType.PDF) {
       // TODO: Fix CORS issues on localhost / dev without corsproxy
@@ -79,6 +86,12 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
         : this.url;
     }
 
+    if (!Settings.endpoints.pdfConversionUrl) {
+      console.warn(
+        'No PDF conversion URL found, add one in the endpoint settings.',
+      );
+      return null;
+    }
     return Settings.endpoints.pdfConversionUrl + encodeURIComponent(this.url);
   }
 }

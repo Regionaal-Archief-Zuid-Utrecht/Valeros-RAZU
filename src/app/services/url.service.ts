@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
-import { Config } from '../config/config';
 import { Settings } from '../config/settings';
 import { FilterModel } from '../models/filters/filter.model';
 import { SuraResponse } from '../models/sura-response.model';
@@ -51,7 +50,7 @@ export class UrlService {
     }
 
     setTimeout(async () => {
-      await this._updateUrlParam(Config.endpointsParam, endpointsParam);
+      await this._updateUrlParam(Settings.url.params.endpoints, endpointsParam);
     });
   }
 
@@ -66,7 +65,7 @@ export class UrlService {
       filters,
     );
 
-    void this._updateUrlParam(Config.filtersParam, enabledFiltersParam);
+    void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
   }
 
   private async _updateUrlParam(key: string, param: string | null) {

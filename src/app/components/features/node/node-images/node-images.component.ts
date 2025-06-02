@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Settings } from '../../../../config/settings';
 import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
 
 @Component({
@@ -17,6 +18,6 @@ export class NodeImagesComponent {
 
   onImageLoadError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
-    imgElement.src = '/assets/images/default.png';
+    imgElement.src = Settings.ui.imageForWhenLoadingFails;
   }
 }

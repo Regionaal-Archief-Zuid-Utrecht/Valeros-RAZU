@@ -14,12 +14,13 @@ export class FileRenderService {
   ) {}
 
   getThumbImageUrl(url: string, fileType: FileType): string {
-    if (fileType === FileType.IMAGE) {
+    if (fileType === FileType.WEB_IMAGE) {
       return url;
     }
 
-    const fileIconUrl = Settings.fileTypes[fileType]?.iconUrl;
-    const unknownIconUrl = Settings.fileTypes[FileType.UNKNOWN].iconUrl;
+    const fileIconUrl = Settings.fileRendering.fileTypes[fileType]?.iconUrl;
+    const unknownIconUrl =
+      Settings.fileRendering.fileTypes[FileType.UNKNOWN].iconUrl;
     return fileIconUrl ?? unknownIconUrl;
   }
 
@@ -31,23 +32,14 @@ export class FileRenderService {
 
     if (!fileExtension) return FileType.UNKNOWN;
 
-    for (const [fileType, config] of Object.entries(Settings.fileTypes)) {
+    for (const [fileType, config] of Object.entries(
+      Settings.fileRendering.fileTypes,
+    )) {
       if (config.extensions.includes(fileExtension)) {
         return fileType as FileType;
       }
     }
 
-    return FileType.UNKNOWN;
-  }
-
-  findUnifiedFileType(fileTypes: FileType[]): FileType {
-    if (fileTypes.length === 0) return FileType.UNKNOWN;
-
-    const uniqueTypes = new Set(fileTypes);
-    if (uniqueTypes.size === 1) {
-      const type = fileTypes[0];
-      return type || FileType.UNKNOWN;
-    }
     return FileType.UNKNOWN;
   }
 

@@ -28,8 +28,8 @@ import { DetailsBackButtonComponent } from '../../ui/details-back-button/details
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { DetailsComponent } from '../details/details.component';
+import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { ViewContainerComponent } from "../view-container/view-container.component";
 
 @Component({
   selector: 'app-search',
@@ -51,8 +51,8 @@ import { ViewContainerComponent } from "../view-container/view-container.compone
     DetailsBackButtonComponent,
     LangSwitchComponent,
     ViewModeSelectComponent,
-    ViewContainerComponent
-],
+    ViewContainerComponent,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })

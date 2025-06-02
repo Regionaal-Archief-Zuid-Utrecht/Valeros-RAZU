@@ -2,8 +2,7 @@
   "general": {
     "site-holder-full": "Regionaal Archief Zuid-Utrecht",
     "site-holder-short": "RAZU",
-    "title-full": "RAZU - Digitaal archief van Zuid-Utrecht",
-    "title-short": "E-depot RAZU",
+    "title": "E-depot RAZU",
     "page-title": "RAZU - Digitaal archief van Zuid-Utrecht",
     "and": "en",
     "back": "Terug"
@@ -14,7 +13,6 @@
     "flavour-text-part-3": ".",
     "hero-text-part-1": "Welkom bij het digitale archief van",
     "hero-text-part-2-emphasis": "Zuid-Utrecht",
-    "hero-text-part-3": "",
     "go-to-search": "Ga naar zoeken",
     "go-to-colofon": "Ga naar colofon",
     "more-info": "Meer info"

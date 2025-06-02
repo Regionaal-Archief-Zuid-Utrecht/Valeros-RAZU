@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HopLinkSettings } from '../../../../../../models/settings/hop-link-settings.model';
 import { SparqlService } from '../../../../../../services/sparql.service';
+import { PredicateRenderComponent } from '../../../../../custom-render-components/by-predicate/predicate-render-component.directive';
 
 @Component({
   selector: 'app-hop-component',
@@ -8,17 +9,22 @@ import { SparqlService } from '../../../../../../services/sparql.service';
   imports: [],
   template: ``,
 })
-export class HopComponent {
-  @Input() id?: string;
-  @Input() settings?: HopLinkSettings;
+export class HopComponent extends PredicateRenderComponent {
+  id?: string;
+  settings?: HopLinkSettings;
+
   @Output() hopObjIdsRetrieved = new EventEmitter<string[]>();
 
   hopObjIds: string[] = [];
   loading = false;
 
-  constructor(public sparql: SparqlService) {}
+  constructor(public sparql: SparqlService) {
+    super();
+  }
 
   ngOnInit() {
+    this.id = this.data?.value;
+    this.settings = this.data?.hopLinkSettings;
     void this.initObjIdsForHop();
   }
 

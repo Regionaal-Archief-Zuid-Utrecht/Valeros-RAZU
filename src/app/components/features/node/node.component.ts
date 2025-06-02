@@ -20,7 +20,6 @@ import { ViewModeSetting } from '../../../models/settings/view-mode-setting.enum
 import { SparqlNodeParentModel } from '../../../models/sparql/sparql-node-parent.model';
 import { ThingWithLabelModel } from '../../../models/thing-with-label.model';
 import { TypeModel } from '../../../models/type.model';
-import { ViewMode } from '../../../models/view-mode.enum';
 import { LabelsCacheService } from '../../../services/cache/labels-cache.service';
 import { DataService } from '../../../services/data.service';
 import { DetailsService } from '../../../services/details.service';
@@ -30,7 +29,6 @@ import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';
 import { SettingsService } from '../../../services/settings.service';
 import { SparqlService } from '../../../services/sparql.service';
-import { ViewModeService } from '../../../services/view-mode.service';
 import { MiradorComponent } from '../file-viewers/mirador/mirador.component';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';

@@ -14,12 +14,12 @@ import { RoutingService } from './services/routing.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'view-a-LOD';
+  title = 'Valeros';
 
   constructor(
     private titleService: Title,
     private translate: TranslateService,
-    private routing: RoutingService, // Seems unused, but needed to keep track of navigation history
+    private routing: RoutingService,
   ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
@@ -27,5 +27,6 @@ export class AppComponent {
     this.translate.get('general.page-title').subscribe((res: string) => {
       this.titleService.setTitle(res);
     });
+    this.routing.initHistoryTracking();
   }
 }

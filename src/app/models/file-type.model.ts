@@ -1,5 +1,6 @@
 export enum FileType {
-  IMAGE = 'image',
+  WEB_IMAGE = 'image',
+  NON_WEB_IMAGE = 'non_web_image',
   PDF = 'pdf',
   DOC = 'doc',
   XLS = 'xls',

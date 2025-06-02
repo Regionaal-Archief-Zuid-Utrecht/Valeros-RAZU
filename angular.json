@@ -35,7 +35,6 @@
             "styles": [
               "src/styles.scss",
               "src/theme.scss",
-              "node_modules/leaflet/dist/leaflet.css",
               "node_modules/ngx-float-ui/css/theme-white.css"
             ],
             "scripts": []
@@ -101,7 +100,6 @@
             "styles": [
               "src/styles.scss",
               "src/theme.scss",
-              "node_modules/leaflet/dist/leaflet.css",
               "node_modules/ngx-float-ui/css/theme-white.css"
             ],
             "scripts": []

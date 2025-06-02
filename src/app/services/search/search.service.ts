@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
 import { BehaviorSubject, skip, take } from 'rxjs';
-import { Config } from '../../config/config';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
@@ -152,7 +151,7 @@ export class SearchService {
       return;
     }
 
-    const queryStr = queryParams[Config.searchParam];
+    const queryStr = queryParams[Settings.url.params.search];
     const queryStrChanged = queryStr !== this.queryStr;
     if (queryStrChanged) {
       this.queryStr = queryStr;
@@ -165,7 +164,8 @@ export class SearchService {
   initSearchOnUrlChange() {
     this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
       console.log('INITIAL LOAD');
-      const filtersParam: string | undefined = queryParams[Config.filtersParam];
+      const filtersParam: string | undefined =
+        queryParams[Settings.url.params.filters];
       if (filtersParam) {
         this.filters.onUpdateFromURLParam(filtersParam);
       }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Canvas, Manifest } from '@iiif/presentation-3';
+import mime from 'mime';
 import { Settings } from '../config/settings';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
 import { ImageService } from './image.service';
@@ -19,6 +20,15 @@ export class IIIFService {
   ) {}
 
   private async _getCanvasesFromUrls(imgUrls: string[]): Promise<Canvas[]> {
+    // imgUrls = [
+    //   'https://placehold.co/600x400/png',
+    //   'https://placehold.co/500x400/jpg',
+    //   'https://placehold.co/400x400/gif',
+    //   'https://www.dummyimg.in/placeholder?format=BMP',
+    //   'https://placehold.co/300x400/svg',
+    //   'https://placehold.co/200x400/webp',
+    // ];
+
     const makeCanvas = (
       url: string,
       index: number,
@@ -44,7 +54,7 @@ export class IIIFService {
               body: {
                 id: url,
                 type: 'Image',
-                format: 'image/jpeg',
+                format: mime.getType(url) ?? 'image/jpeg',
                 height,
                 width,
               },
@@ -62,8 +72,7 @@ export class IIIFService {
           await this.imageService.getImageDimensions(url);
         canvases.push(makeCanvas(url, index, width, height));
       } catch (e) {
-        console.error(`Failed to get dimensions for image ${url}:`, e);
-        canvases.push(makeCanvas(url, index, 1200, 1800));
+        console.error(`Failed to get dimensions for image ${url} :`, e);
       }
     }
     return canvases;
@@ -222,7 +231,7 @@ export class IIIFService {
     nodeId?: string,
     nodeLabel?: string,
     imageUrls?: string[],
-  ) {
+  ): Promise<string | null> {
     let canvases: Canvas[] = [];
     if (imageUrls) {
       console.log('Creating manifest from image URLs', imageUrls);
@@ -230,6 +239,10 @@ export class IIIFService {
     } else if (nodeId) {
       console.log('Creating manifest from node ID using SPARQL', nodeId);
       canvases = await this._retrieveCanvasesUsingSparql(nodeId);
+    }
+
+    if (!canvases || canvases.length === 0) {
+      return null;
     }
 
     const manifest: Manifest = await this.generateCanvasesManifest(

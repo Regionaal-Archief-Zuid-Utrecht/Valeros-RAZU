@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
-import { Config } from '../config/config';
 import { Settings } from '../config/settings';
 import {
   EndpointModel,
@@ -36,7 +35,7 @@ export class EndpointService {
   private _initUpdateEndpointsOnUrlChange() {
     void this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
       const endpointsParam: string | undefined =
-        queryParams[Config.endpointsParam];
+        queryParams[Settings.url.params.endpoints];
       if (endpointsParam) {
         const endpointIds: string[] = endpointsParam.split(',');
         this.enabledIds.next(endpointIds);

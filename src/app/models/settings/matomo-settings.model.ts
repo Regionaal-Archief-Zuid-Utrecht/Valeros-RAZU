@@ -1,4 +1,4 @@
 export interface MatomoSettings {
-  siteId: string;
-  trackerUrl: string;
+  siteId?: string;
+  trackerUrl?: string;
 }
