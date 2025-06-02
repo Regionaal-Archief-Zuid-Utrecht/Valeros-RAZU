@@ -26,10 +26,10 @@ jobs:
       - name: Deploy to VPS # TODO: Remove previous deploy using ssh action?
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.ACCEPTANCE_HOST }}
+          username: ${{ secrets.ACCEPTANCE_USERNAME }}
+          password: ${{ secrets.ACCEPTANCE_PASSWORD }}
+          port: ${{ secrets.ACCEPTANCE_PORT }}
           source: "dist/view-a-lod/browser/*"
-          target: ${{ secrets.SERVER_DEPLOY_DIR }}
+          target: ${{ secrets.ACCEPTANCE_SERVER_DEPLOY_DIR }}
           strip_components: 3
