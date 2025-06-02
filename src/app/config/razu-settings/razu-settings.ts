@@ -12,6 +12,7 @@ import { razuPredicateSettings } from './razu-predicate.settings';
 import { razuRenderComponentSettings } from './razu-render-component.settings';
 import { razuSearchSettings } from './razu-search.settings';
 import { razuSortingSettings } from './razu-sorting.settings';
+import { razuThemeSettings } from './razu-theme.settings';
 import { razuUiSettings } from './razu-ui.settings';
 import { razuUrlSettings } from './razu-url.settings';
 import { razuViewModeSettings } from './razu-view-mode.settings';
@@ -33,4 +34,5 @@ export const razuSettings: SettingsModel = {
   predicates: razuPredicateSettings,
   url: razuUrlSettings,
   matomo: razuMatomoSettings,
+  theme: razuThemeSettings,
 };

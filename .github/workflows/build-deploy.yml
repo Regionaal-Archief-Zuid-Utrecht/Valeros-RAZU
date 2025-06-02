@@ -20,6 +20,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Build
+        env:
+          APP_ENV: production
         run: |
           npm install
           npm run-script build
