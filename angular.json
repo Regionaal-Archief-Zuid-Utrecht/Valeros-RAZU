@@ -110,6 +110,12 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "dev-build": {
+              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
