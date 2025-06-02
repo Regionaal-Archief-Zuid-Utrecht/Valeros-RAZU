@@ -34,30 +34,30 @@ module.exports = {
           // "--rounded-badge": "0.375rem",
           // black: "#000000",
 
-          // // DEVELOPMENT:
-          // primary: "#4a4a4a", // Dark gray for primary elements
-          // neutral: "#808080", // Medium gray for neutral elements
-          // accent: "#b3b3b3", // Light gray for highlighting search results
-          // secondary: "#6d6d6d", // A slightly darker gray for secondary elements
-          // "primary-content": "white", // White text to maintain contrast
-          // background: "#f2f2f2",
-          // search_background: "#f2f2f2", // Very light gray for the background
-          // "--rounded-box": "1rem",
-          // "--rounded-btn": "1rem",
-          // "--rounded-badge": "1rem",
-          // // black: "#000000",
-
-          // ACCEPT:
-          primary: "#2e7d32", // Dark green for primary elements
-          neutral: "#66bb6a", // Medium green for neutral elements
-          accent: "#a5d6a7", // Light green for highlighting search results
-          secondary: "#388e3c", // A slightly darker green for secondary elements
+          // DEVELOPMENT:
+          primary: "#4a4a4a", // Dark gray for primary elements
+          neutral: "#808080", // Medium gray for neutral elements
+          accent: "#b3b3b3", // Light gray for highlighting search results
+          secondary: "#6d6d6d", // A slightly darker gray for secondary elements
           "primary-content": "white", // White text to maintain contrast
-          background: "#e8f5e9", // Very light green for the background
-          search_background: "#e8f5e9", // Match background color
+          background: "#f2f2f2",
+          search_background: "#f2f2f2", // Very light gray for the background
           "--rounded-box": "1rem",
           "--rounded-btn": "1rem",
           "--rounded-badge": "1rem",
+          // black: "#000000",
+
+          // // ACCEPT:
+          // primary: "#2e7d32", // Dark green for primary elements
+          // neutral: "#66bb6a", // Medium green for neutral elements
+          // accent: "#a5d6a7", // Light green for highlighting search results
+          // secondary: "#388e3c", // A slightly darker green for secondary elements
+          // "primary-content": "white", // White text to maintain contrast
+          // background: "#e8f5e9", // Very light green for the background
+          // search_background: "#e8f5e9", // Match background color
+          // "--rounded-box": "1rem",
+          // "--rounded-btn": "1rem",
+          // "--rounded-badge": "1rem",
 
           // // TEST:
           // primary: "#1565c0", // Dark blue for primary elements
