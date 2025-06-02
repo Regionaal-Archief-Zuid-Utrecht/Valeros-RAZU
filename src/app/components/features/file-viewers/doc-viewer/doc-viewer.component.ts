@@ -52,6 +52,9 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
       this.error.emit(new Error('No PDF URL found'));
       return;
     }
+
+    // TODO: If file type is PDF, bypass Gotenberg and set pdfSrc directly to PDF contents
+    // For now, keeping Gotenberg in there as a quick way to get file contents (PDF viewer seems to need PDF content, not a URL)
     this.isConvertingPDF = true;
     this.http
       .get(pdfUrl, { responseType: 'blob' })
