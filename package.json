@@ -8,6 +8,7 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "build:dev": "ng build --configuration development",
+    "build:dev-build": "ng build --configuration dev-build",
     "build:test": "ng build --configuration test",
     "build:acceptance": "ng build --configuration acceptance",
     "build:prod": "ng build --configuration production",
