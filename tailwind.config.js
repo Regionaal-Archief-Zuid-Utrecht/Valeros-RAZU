@@ -18,6 +18,10 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light"],
+    themes: [
+      {
+        main: require("./tailwind-theme-export.js"),
+      },
+    ],
   },
 };
