@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { NodeModel } from '../models/node.model';
-import { NodeService } from './node.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { Config } from '../config/config';
+import { Settings } from '../config/settings';
 import { isValidHttpUrl } from '../helpers/util.helper';
+import { NodeModel } from '../models/node.model';
+import { NodeService } from './node/node.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,9 @@ export class DetailsService {
   private _updateShowingOnRouteChange() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const isShowingDetails = event.url.startsWith(`/${Config.detailsUrl}`);
+        const isShowingDetails = event.url.startsWith(
+          `/${Settings.url.urls.details}`,
+        );
         const stateChanged = this.showing.value !== isShowingDetails;
         if (stateChanged) {
           this.showing.next(isShowingDetails);
@@ -32,7 +34,7 @@ export class DetailsService {
   }
 
   isShowing(): boolean {
-    return this.router.url.startsWith(`/${Config.detailsUrl}`);
+    return this.router.url.startsWith(`/${Settings.url.urls.details}`);
   }
 
   getLink(node: NodeModel): string {
@@ -42,12 +44,12 @@ export class DetailsService {
 
   getLinkFromUrl(url: string): string {
     const isAlreadyDetailsUrl = decodeURIComponent(url).startsWith(
-      `/${Config.detailsUrl}`,
+      `/${Settings.url.urls.details}`,
     );
     if (isAlreadyDetailsUrl || !isValidHttpUrl(url)) {
       return url;
     }
 
-    return `/${Config.detailsUrl}/` + encodeURIComponent(url);
+    return `/${Settings.url.urls.details}/` + encodeURIComponent(url);
   }
 }

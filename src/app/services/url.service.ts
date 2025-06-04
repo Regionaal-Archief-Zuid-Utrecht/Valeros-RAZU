@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { DetailsService } from './details.service';
-import { FilterModel } from '../models/filter.model';
-import { Config } from '../config/config';
-import { FilterService } from './search/filter.service';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
-import { DataService } from './data.service';
-import { EndpointService } from './endpoint.service';
-import { ApiService } from './api.service';
-import { SuraResponse } from '../models/sura-response.model';
 import { Settings } from '../config/settings';
+import { FilterModel } from '../models/filters/filter.model';
+import { SuraResponse } from '../models/sura-response.model';
+import { ApiService } from './api.service';
+import { DataService } from './data.service';
+import { DetailsService } from './details.service';
+import { EndpointService } from './endpoint.service';
+import { FilterService } from './search/filter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,15 +33,6 @@ export class UrlService {
     this.filters.enabled.pipe(skip(2)).subscribe((enabledFilters) => {
       void this.updateUrlToReflectFilters(enabledFilters);
     });
-
-    this.filters.onlyShowResultsWithImages
-      .pipe(skip(1))
-      .subscribe(async (onlyWithImages) => {
-        void this._updateUrlParam(
-          Config.onlyWithImages,
-          JSON.stringify(onlyWithImages),
-        );
-      });
   }
 
   private _initUpdateUrlOnEndpointChange() {
@@ -54,14 +44,13 @@ export class UrlService {
   }
 
   private async _updateUrlToReflectEndpoints(endpointIds: string[]) {
-
     let endpointsParam: string | null = null;
     if (endpointIds && endpointIds.length > 0) {
       endpointsParam = endpointIds.join(',');
     }
 
     setTimeout(async () => {
-      await this._updateUrlParam(Config.endpointsParam, endpointsParam);
+      await this._updateUrlParam(Settings.url.params.endpoints, endpointsParam);
     });
   }
 
@@ -76,7 +65,7 @@ export class UrlService {
       filters,
     );
 
-    void this._updateUrlParam(Config.filtersParam, enabledFiltersParam);
+    void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
   }
 
   private async _updateUrlParam(key: string, param: string | null) {
@@ -108,12 +97,13 @@ export class UrlService {
   }
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
-    if (url.includes(Settings.razu.sura.matchUrlsSubstring)) {
-      const suraUrl = await this.api.postData<SuraResponse>(
-        Settings.razu.sura.url + `?url=${url}`,
+    const urlProcessor = Settings.endpoints.urlProcessor;
+    if (urlProcessor && url.includes(urlProcessor.matchSubstring)) {
+      const processedResponse = await this.api.postData<SuraResponse>(
+        urlProcessor.url + `?url=${url}`,
         null,
       );
-      return suraUrl.url;
+      return processedResponse.url;
       // url = this.addParamToUrl(
       //   url,
       //   'token',
@@ -125,7 +115,6 @@ export class UrlService {
     if (linkToDetails) {
       return this.details.getLinkFromUrl(url);
     }
-
 
     url = url.replaceAll(
       'hetutrechtsarchief.nl/id',

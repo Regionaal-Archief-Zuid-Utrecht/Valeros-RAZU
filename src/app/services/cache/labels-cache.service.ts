@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SparqlService } from '../sparql.service';
-import { Config } from '../../config/config';
+import { Settings } from '../../config/settings';
 import { replacePrefixes } from '../../helpers/util.helper';
+import { SparqlService } from '../sparql.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class LabelsCacheService {
   async _scheduleBatchCacheRequests() {
     setInterval(
       () => this.cacheQueuedLabelsInBatch(),
-      Config.labelFetchIntervalMs,
+      Settings.ui.labelFetchIntervalMs,
     );
   }
 

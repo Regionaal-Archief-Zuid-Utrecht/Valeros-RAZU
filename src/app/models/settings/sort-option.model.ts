@@ -1,5 +1,5 @@
-import { SortOrder } from './sort-order.enum';
 import { SortBoostModel } from './sort-boost.model';
+import { SortOrder } from './sort-order.enum';
 
 export interface SortOptionModel {
   id?: string;

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
+import { FilterOptionsIdsModel } from '../models/filters/filter-option.model';
+import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { SparqlNodeParentModel } from '../models/sparql/sparql-node-parent.model';
-import { FilterOptionsIdsModel } from '../models/filter-option.model';
-import { FilterModel, FilterType } from '../models/filter.model';
+import { ThingWithLabelModel } from '../models/thing-with-label.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class DataService {
         let normalizedPred = pred.replaceAll(' ', '.');
         // Then clean up any potential double dots that might occur
         normalizedPred = normalizedPred.replaceAll('..', '.');
-        
+
         // Only update if we actually changed something
         if (normalizedPred !== pred) {
           node[normalizedPred] = obj;

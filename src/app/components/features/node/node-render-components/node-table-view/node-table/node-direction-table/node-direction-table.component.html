@@ -1,0 +1,61 @@
+<ng-container *ngIf="node">
+  <div
+    class="mt-6"
+    *ngIf="
+      direction === Direction.Incoming &&
+      hasPredsToShow(Direction.Incoming, visibility)
+    "
+  >
+    <span [ngClass]="[smallFontSize ? 'text-sm' : '']"
+      >{{ "records-interface.objects-that-point-to" | translate }}
+      <app-node-link [url]="nodes.getId(node)"
+    /></span>
+  </div>
+
+  <div class="break-all" [ngClass]="[smallFontSize ? 'text-xs' : '']">
+    <ng-container *ngFor="let predicateSection of predicateSections">
+      <ng-container *ngIf="sectionHasPredsToShow(predicateSection, direction)">
+        <!-- Pred section header -->
+        <div class="italic">
+          {{ predicateSection.label }}
+        </div>
+
+        <!-- Preds -->
+        <ng-container *ngFor="let pred of predicateSection.predicates">
+          <div
+            class="sm:flex sm:gap-4 sm:px-4 my-4 sm:my-2 hover:bg-gray-200 hover:shadow-sm transition-shadow duration-100 rounded-md"
+            *ngIf="
+              predicateVisibilities[pred] === visibility &&
+              getNumPredValues(pred, direction) > 0
+            "
+          >
+            <div class="w-full sm:w-1/3">
+              <app-node-table-cell
+                [node]="node"
+                [direction]="direction"
+                [pred]="pred"
+                [show]="
+                  direction === Direction.Incoming
+                    ? TableCellShowOptions.Obj
+                    : TableCellShowOptions.Pred
+                "
+              />
+            </div>
+            <td class="w-full sm:w-2/3">
+              <app-node-table-cell
+                [node]="node"
+                [direction]="direction"
+                [pred]="pred"
+                [show]="
+                  direction === Direction.Incoming
+                    ? TableCellShowOptions.Pred
+                    : TableCellShowOptions.Obj
+                "
+              />
+            </td>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>

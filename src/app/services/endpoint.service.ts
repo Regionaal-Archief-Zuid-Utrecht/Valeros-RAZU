@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, take } from 'rxjs';
+import { Settings } from '../config/settings';
 import {
   EndpointModel,
-  EndpointsModel,
   EndpointUrlsModel,
+  EndpointsModel,
 } from '../models/endpoint.model';
-import { Settings } from '../config/settings';
-import { BehaviorSubject, take } from 'rxjs';
 import { SettingsService } from './settings.service';
-import { Config } from '../config/config';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +22,20 @@ export class EndpointService {
     this._initUpdateEndpointsOnUrlChange();
   }
 
+  getEndpointUrls(endpointId: string): EndpointUrlsModel[] | null {
+    const endpoints: EndpointsModel = Settings.endpoints.data;
+    if (!(endpointId in endpoints)) {
+      console.warn(`${endpointId} endpoint not configured`);
+      return null;
+    }
+    const endpoint = endpoints[endpointId] as EndpointModel;
+    return endpoint.endpointUrls;
+  }
+
   private _initUpdateEndpointsOnUrlChange() {
     void this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
       const endpointsParam: string | undefined =
-        queryParams[Config.endpointsParam];
+        queryParams[Settings.url.params.endpoints];
       if (endpointsParam) {
         const endpointIds: string[] = endpointsParam.split(',');
         this.enabledIds.next(endpointIds);
@@ -35,12 +44,12 @@ export class EndpointService {
   }
 
   getById(endpointId: string): EndpointModel | undefined {
-    const endpoints = Settings.endpoints as EndpointsModel;
+    const endpoints: EndpointsModel = Settings.endpoints.data;
     return endpoints[endpointId] ?? undefined;
   }
 
   getIdBySparqlUrl(sparqlEndpointUrl: string): string {
-    const endpoints = Settings.endpoints as EndpointsModel;
+    const endpoints: EndpointsModel = Settings.endpoints.data;
 
     for (const [endpointId, endpoint] of Object.entries(endpoints)) {
       const endpointMatchesUrl = endpoint.endpointUrls.some(
@@ -84,7 +93,7 @@ export class EndpointService {
 
   getAllEnabled(): EndpointsModel {
     const all: [string, EndpointModel][] = Object.entries(
-      Settings.endpoints as EndpointsModel,
+      Settings.endpoints.data,
     ).filter(([endpointId, _]) => {
       const noFilterEnabled =
         !this.enabledIds.value || this.enabledIds.value.length === 0;
