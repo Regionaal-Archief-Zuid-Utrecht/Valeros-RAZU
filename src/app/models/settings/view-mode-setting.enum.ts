@@ -3,6 +3,11 @@ export enum ViewModeSetting {
   ShowParents,
   ShowTitle,
   ShowTypes,
-  ShowImageNextToTable,
+  ShowFileNextToTable,
   ShowOrganization,
+  /**
+   * Detail view always enriches with incoming relations, regardless of this setting
+   */
+  EnrichWithIncomingRelations,
+  ShowDetailsButton,
 }

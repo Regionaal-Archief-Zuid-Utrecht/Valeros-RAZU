@@ -1,21 +1,19 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NodeComponent } from '../../node/node.component';
-import { NodeService } from '../../../services/node.service';
-import { NodeModel } from '../../../models/node.model';
-import { JsonPipe, NgIf } from '@angular/common';
-import { SparqlService } from '../../../services/sparql.service';
 import { featherArrowLeft } from '@ng-icons/feather-icons';
-import { NgIcon } from '@ng-icons/core';
-import { RoutingService } from '../../../services/routing.service';
+import { NodeModel } from '../../../models/node.model';
 import { DetailsService } from '../../../services/details.service';
-import { ScrollService } from '../../../services/scroll.service';
-import { DetailsBackButtonComponent } from '../../details-back-button/details-back-button.component';
+import { NodeService } from '../../../services/node/node.service';
+import { RoutingService } from '../../../services/routing.service';
+import { SparqlService } from '../../../services/sparql.service';
+import { ScrollService } from '../../../services/ui/scroll.service';
+import { NodeComponent } from '../../features/node/node.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [NodeComponent, JsonPipe, NgIf, NgIcon, DetailsBackButtonComponent],
+  imports: [NodeComponent, NgIf],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })

@@ -1,0 +1,65 @@
+<div class="w-full flex">
+  <div
+    class="bg-neutral py-3 px-6 text-white inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-b-md"
+    [ngClass]="{
+      'ml-0 mr-auto': settings.position === HeaderPosition.Left,
+      'mx-auto': settings.position === HeaderPosition.Center,
+      'ml-auto mr-0': settings.position === HeaderPosition.Right,
+    }"
+    role="banner"
+    aria-labelledby="main-header"
+  >
+    <button
+      class="text-left inline-flex items-center"
+      [class.mr-3]="settings.showTitle || settings.showColofonButton"
+      (click)="onButtonClicked('')"
+      role="navigation"
+      aria-labelledby="header-home-button"
+    >
+      <img
+        *ngIf="settings.showLogo"
+        [src]="settings.logoPath"
+        alt="Logo"
+        [class.mr-3]="settings.showTitle"
+        class="h-8"
+      />
+      <div *ngIf="settings.showTitle">
+        <h1>
+          <div
+            class="font-semibold"
+            [innerHTML]="'general.title' | translate"
+          ></div>
+        </h1>
+      </div>
+    </button>
+
+    <div *ngIf="settings.showColofonButton">
+      <!--class="flex-grow"-->
+      <button
+        class="btn btn-primary btn-xs rounded-full text-center inline-block float-right p-0 w-9 sm:w-10 h-9 sm:h-10"
+        (click)="onButtonClicked(buttonUrl)"
+        [attr.aria-label]="
+          view === HeaderView.ShowingColofon
+            ? 'homescreen.go-to-search'
+            : ('homescreen.go-to-colofon' | translate)
+        "
+        role="navigation"
+        aria-labelledby="header-colofon-button"
+      >
+        <span class="text-lg sm:text-2xl font-light">
+          <ng-icon
+            [svg]="featherX"
+            *ngIf="view === HeaderView.ShowingColofon"
+            class="relative top-[0.1rem]"
+          />
+          <span
+            *ngIf="view === HeaderView.ShowingSearch"
+            class="relative bottom-[0.1rem]"
+          >
+            ?
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

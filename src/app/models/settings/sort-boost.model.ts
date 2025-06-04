@@ -1,4 +1,4 @@
-import { FilterOptionIdsModel } from '../filter-option.model';
+import { FilterOptionIdsModel } from '../filters/filter-option.model';
 
 export interface SortBoostModel {
   boost: number;

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Settings } from '../config/settings';
 import {
   SortOptionModel,
   SortOptionsModel,
 } from '../models/settings/sort-option.model';
-import { Settings } from '../config/settings';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

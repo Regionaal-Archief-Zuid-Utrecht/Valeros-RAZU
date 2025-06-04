@@ -1,0 +1,23 @@
+<!-- TODO: Check if this should be able to support showing multiple events -->
+<app-hop-link
+  [data]="{
+    value: data?.value ?? '',
+    hopLinkSettings: {
+      preds: ['https://data.razu.nl/def/ldto/eventType'],
+      showHops: false,
+    },
+  }"
+/>
+
+<span [ngClass]="[this.hasTime ? '' : 'hidden']">
+  (<app-hop-link
+    [data]="{
+      value: data?.value ?? '',
+      hopLinkSettings: {
+        preds: ['https://data.razu.nl/def/ldto/eventTijd'],
+        showHops: false,
+      },
+    }"
+    (hopObjIdsRetrieved)="this.hasTime = $event.length > 0"
+  />)</span
+>

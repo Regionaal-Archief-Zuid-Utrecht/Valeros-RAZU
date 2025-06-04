@@ -7,7 +7,9 @@ import { NavigationEnd, Router } from '@angular/router';
 export class RoutingService {
   private history: string[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  initHistoryTracking() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.history.push(event.url);
