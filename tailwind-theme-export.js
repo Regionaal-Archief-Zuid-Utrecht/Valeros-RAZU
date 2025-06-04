@@ -2,6 +2,7 @@ const {
   developmentTheme,
   acceptanceTheme,
   productionTheme,
+  testTheme
 } = require("./src/app/config/themes");
 
 const hasConfiguration = (args, configName) => {
