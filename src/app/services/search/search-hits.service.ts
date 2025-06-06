@@ -62,11 +62,19 @@ export class SearchHitsService {
         (hit._source as ElasticNodeModel)['endpointId'] =
           searchResponse.endpointId;
 
-        // Probeer eerst '@id' en dan '_id' als fallback
+        // Gebruik het _id veld van de hit zelf (niet van _source)
+        let hitId = hit._id;
+        console.log('Hit _id:', hitId);
+        
+        // Probeer eerst '@id' en dan '_id' als fallback uit _source
         let sourceId = hit._source['@id'] || hit._source['_id'];
-
-        // Zorg ervoor dat sourceId een string is
-        const id: string = Array.isArray(sourceId) ? sourceId[0] : String(sourceId);
+        console.log('Source ID uit _source:', sourceId);
+        console.log('Hit _source bevat @id:', !!hit._source['@id']);
+        console.log('Hit _source bevat _id:', !!hit._source['_id']);
+        
+        // Gebruik hitId als primaire ID, sourceId als fallback
+        const id: string = hitId || (Array.isArray(sourceId) ? sourceId[0] : String(sourceId || ''));
+        console.log('Uiteindelijke ID voor gebruik:', id);
 
         if (!id) {
           console.warn('Document zonder ID gevonden:', hit._source);
@@ -74,9 +82,12 @@ export class SearchHitsService {
         }
 
         // Zorg ervoor dat het document altijd een '@id' veld heeft voor interne verwerking
-        if (!hit._source['@id']) {
-          hit._source['@id'] = id;
-        }
+        hit._source['@id'] = id;
+        console.log('@id veld ingesteld op:', id);
+        
+        // Zorg ervoor dat het document ook een _id veld heeft
+        hit._source['_id'] = id;
+        console.log('_id veld ingesteld op:', id);
         
         // Voeg hit toe aan allHits zonder deduplicatie
         allHits.push(hit);
