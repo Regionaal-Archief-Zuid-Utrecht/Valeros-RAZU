@@ -13,15 +13,11 @@ import { UrlService } from './url.service';
 export class IIIFService {
   private _blobUrls: Set<string> = new Set();
 
-  public replaceIiifWithDevIiif(url: string): string {
-    return url.replace('iiif.razu', 'dev.iiif.razu');
-  }
-
   constructor(
     private sparql: SparqlService,
     private url: UrlService,
     private imageService: ImageService,
-  ) {}
+  ) { }
 
   private async _getCanvasesFromUrls(imgUrls: string[]): Promise<Canvas[]> {
     // imgUrls = [
@@ -156,12 +152,12 @@ export class IIIFService {
                 type: 'Annotation',
                 motivation: 'painting',
                 body: {
-                  id: `${this.replaceIiifWithDevIiif(item.iiifService)}/full/${item.width},/0/default.jpg`,
+                  id: `${item.iiifService}/full/${item.width},/0/default.jpg`,
                   type: 'Image',
                   format: 'image/jpeg',
                   service: [
                     {
-                      id: `${this.replaceIiifWithDevIiif(item.iiifService)}`,
+                      id: `${item.iiifService}`,
                       type: 'ImageService2',
                       profile: 'http://iiif.io/api/image/2/level2.json',
                     },
@@ -174,22 +170,22 @@ export class IIIFService {
         ],
         seeAlso: item.altoUrl
           ? [
-              {
-                '@id': item.altoUrl,
-                profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
-                format: 'text/xml+alto',
-                label: 'METS-ALTO XML',
-              } as any,
-            ]
+            {
+              '@id': item.altoUrl,
+              profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
+              format: 'text/xml+alto',
+              label: 'METS-ALTO XML',
+            } as any,
+          ]
           : [],
         thumbnail: [
           {
-            id: `${this.replaceIiifWithDevIiif(item.iiifService)}/full/200,/0/default.jpg`,
+            id: `${item.iiifService}/full/200,/0/default.jpg`,
             type: 'Image',
             format: 'image/jpeg',
             service: [
               {
-                id: `${this.replaceIiifWithDevIiif(item.iiifService)}`,
+                id: `${item.iiifService}`,
                 type: 'ImageService2',
                 profile: 'http://iiif.io/api/image/2/level2.json',
               },
