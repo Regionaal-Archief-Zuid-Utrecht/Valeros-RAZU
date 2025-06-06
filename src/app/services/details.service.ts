@@ -50,14 +50,27 @@ export class DetailsService {
       return url;
     }
 
+    // Controleer of de URL al geëncodeerd is
+    let decodedUrl = url;
+    try {
+      // Probeer de URL te decoderen om dubbele encoding te voorkomen
+      if (url.includes('%')) {
+        decodedUrl = decodeURIComponent(url);
+      }
+    } catch (e) {
+      // Als decoderen mislukt, gebruik de originele URL
+      console.warn('Fout bij decoderen URL:', e);
+    }
+    
     // Vervang &23 door # (als die aanwezig is)
-    let processedUrl = url.replace(/&23/g, '#');
+    let processedUrl = decodedUrl.replace(/&23/g, '#');
     
     // Splits de URL op het # teken om fragment apart te houden
     const [baseUrl, fragment] = processedUrl.split('#');
     
-    // Encodeer de basis URL, maar niet het fragment
-    let encodedUrl = encodeURIComponent(baseUrl);
+    // Encodeer de basis URL met één niveau van encoding
+    // Gebruik encodeURI in plaats van encodeURIComponent om de URL structuur te behouden
+    let encodedUrl = encodeURI(baseUrl).replace(/#/g, '%23');
     
     // Voeg het fragment weer toe als het bestaat
     if (fragment) {
@@ -65,6 +78,7 @@ export class DetailsService {
     }
     
     console.log('Original URL:', url);
+    console.log('Decoded URL:', decodedUrl);
     console.log('Processed URL:', processedUrl);
     console.log('Encoded URL:', encodedUrl);
     
