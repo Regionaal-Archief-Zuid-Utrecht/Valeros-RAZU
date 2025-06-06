@@ -55,7 +55,11 @@ export class SearchHitsService {
           searchResponse.endpointId;
 
         // Probeer eerst '@id' en dan '_id' als fallback
-        const id = hit._source['@id'] || hit._source['_id'];
+        let sourceId = hit._source['@id'] || hit._source['_id'];
+        
+        // Zorg ervoor dat sourceId een string is
+        const id: string = Array.isArray(sourceId) ? sourceId[0] : String(sourceId);
+        
         if (!id) {
           console.warn('Document zonder ID gevonden:', hit._source);
           return;
