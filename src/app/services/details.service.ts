@@ -50,6 +50,24 @@ export class DetailsService {
       return url;
     }
 
-    return `/${Settings.url.urls.details}/` + encodeURIComponent(url);
+    // Vervang &23 door # (als die aanwezig is)
+    let processedUrl = url.replace(/&23/g, '#');
+    
+    // Splits de URL op het # teken om fragment apart te houden
+    const [baseUrl, fragment] = processedUrl.split('#');
+    
+    // Encodeer de basis URL, maar niet het fragment
+    let encodedUrl = encodeURIComponent(baseUrl);
+    
+    // Voeg het fragment weer toe als het bestaat
+    if (fragment) {
+      encodedUrl += '#' + fragment;
+    }
+    
+    console.log('Original URL:', url);
+    console.log('Processed URL:', processedUrl);
+    console.log('Encoded URL:', encodedUrl);
+    
+    return `/${Settings.url.urls.details}/` + encodedUrl;
   }
 }

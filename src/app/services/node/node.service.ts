@@ -61,7 +61,21 @@ export class NodeService {
   }
 
   getId(node: NodeModel): string {
-    return this.getObjValues(node, ['@id'])[0];
+    // Probeer eerst @id en dan _id
+    const idFromAtId = this.getObjValues(node, ['@id'])[0];
+    if (idFromAtId) {
+      return idFromAtId;
+    }
+    
+    // Als @id niet bestaat, probeer _id
+    const idFromUnderscoreId = this.getObjValues(node, ['_id'])[0];
+    if (idFromUnderscoreId) {
+      return idFromUnderscoreId;
+    }
+    
+    // Log voor debugging
+    console.warn('Geen ID gevonden voor node:', node);
+    return '';
   }
 
   getEndpointId(node: NodeModel) {
