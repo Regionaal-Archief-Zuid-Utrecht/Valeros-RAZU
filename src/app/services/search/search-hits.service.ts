@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
   providedIn: 'root',
 })
 export class SearchHitsService {
-  constructor(private data: DataService) {}
+  constructor(private data: DataService) { }
 
   parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
@@ -40,11 +40,19 @@ export class SearchHitsService {
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
   ): SearchHit<ElasticNodeModel>[] {
-    // First create a map of hits by their ID to merge duplicates
-    const hitsMap = new Map<string, SearchHit<ElasticNodeModel>>();
-
+    // TIJDELIJK: Deduplicatie uitgeschakeld voor testen
+    // Verzamel alle hits zonder deduplicatie
+    const allHits: SearchHit<ElasticNodeModel>[] = [];
+    
+    // Debug logging
+    console.log('SearchResponses:', searchResponses);
+    let totalHits = 0;
+    
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
+      totalHits += hits.length;
+      console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
+      
       hits.forEach((hit) => {
         if (!hit._source) {
           return;
@@ -56,56 +64,34 @@ export class SearchHitsService {
 
         // Probeer eerst '@id' en dan '_id' als fallback
         let sourceId = hit._source['@id'] || hit._source['_id'];
-        
+
         // Zorg ervoor dat sourceId een string is
         const id: string = Array.isArray(sourceId) ? sourceId[0] : String(sourceId);
-        
+
         if (!id) {
           console.warn('Document zonder ID gevonden:', hit._source);
           return;
         }
-        
+
         // Zorg ervoor dat het document altijd een '@id' veld heeft voor interne verwerking
         if (!hit._source['@id']) {
           hit._source['@id'] = id;
         }
-
-        if (hitsMap.has(id)) {
-          // Merge the sources if we already have this ID
-          const existingHit = hitsMap.get(id)!;
-          if (!existingHit._source) {
-            return;
-          }
-
-          const mergedSource: ElasticNodeModel = {
-            ...existingHit._source,
-            ...hit._source,
-            // Keep track of all endpoints this record came from
-            endpointId: Array.isArray((existingHit._source as any).endpointId)
-              ? [
-                  ...(existingHit._source as any).endpointId,
-                  searchResponse.endpointId,
-                ]
-              : [
-                  (existingHit._source as any).endpointId,
-                  searchResponse.endpointId,
-                ],
-          };
-
-          existingHit._source = mergedSource;
-          // Use the highest score if available
-          existingHit._score = Math.max(
-            existingHit._score ?? 0,
-            hit._score ?? 0,
-          );
-        } else {
-          // New ID, just add it to the map
-          hitsMap.set(id, hit);
+        
+        // Voeg hit toe aan allHits zonder deduplicatie
+        allHits.push(hit);
+        
+        // Log de eerste paar hits voor debugging
+        if (allHits.length <= 3) {
+          console.log(`Hit ${allHits.length}:`, {
+            id: id,
+            source: hit._source
+          });
         }
       });
     });
 
-    // Convert map back to array
-    return Array.from(hitsMap.values());
+    console.log(`Totaal aantal hits ontvangen: ${totalHits}, Alle hits: ${allHits.length}`);
+    return allHits;
   }
 }
