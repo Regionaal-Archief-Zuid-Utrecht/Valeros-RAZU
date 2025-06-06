@@ -43,42 +43,61 @@ export class DetailsService {
   }
 
   getLinkFromUrl(url: string): string {
+    console.log('===== START URL PROCESSING =====');
+    console.log('Input URL:', url);
+    
     const isAlreadyDetailsUrl = decodeURIComponent(url).startsWith(
       `/${Settings.url.urls.details}`,
     );
     if (isAlreadyDetailsUrl || !isValidHttpUrl(url)) {
+      console.log('URL is already a details URL or not a valid HTTP URL, returning as-is');
       return url;
     }
 
-    // Controleer of de URL al geëncodeerd is
-    let decodedUrl = url;
+    // Controleer of de URL al geëncodeerd is en decodeer volledig
+    let fullyDecodedUrl = url;
     try {
-      // Probeer de URL te decoderen om dubbele encoding te voorkomen
-      if (url.includes('%')) {
-        decodedUrl = decodeURIComponent(url);
+      // Blijf decoderen totdat er geen % meer in de URL zit
+      while (fullyDecodedUrl.includes('%')) {
+        const previousUrl = fullyDecodedUrl;
+        fullyDecodedUrl = decodeURIComponent(fullyDecodedUrl);
+        
+        // Als decoderen geen verandering meer oplevert, stop dan
+        if (previousUrl === fullyDecodedUrl) {
+          break;
+        }
       }
+      console.log('Volledig gedecodeerde URL:', fullyDecodedUrl);
     } catch (e) {
-      // Als decoderen mislukt, gebruik de originele URL
-      console.warn('Fout bij decoderen URL:', e);
+      console.warn('Fout bij volledig decoderen URL:', e);
     }
     
     // Vervang &23 door # (als die aanwezig is)
-    let processedUrl = decodedUrl.replace(/&23/g, '#');
+    let processedUrl = fullyDecodedUrl.replace(/&23/g, '#');
+    console.log('URL na &23 vervanging:', processedUrl);
     
     // Splits de URL op het # teken om fragment apart te houden
     const [baseUrl, fragment] = processedUrl.split('#');
+    console.log('Base URL:', baseUrl);
+    console.log('Fragment:', fragment);
     
-    // Handmatige encoding voor het juiste formaat
-    // We willen alleen bepaalde tekens encoderen: /, :, etc.
+    // Gebruik een EXACTE handmatige encoding voor het gewenste formaat
+    // We willen precies het formaat: https:%2F%2Fdata.razu.nl%2Fid%2Fobject%2Fnl-wbdrazu-k50907905-620-1003
     let encodedUrl = baseUrl
-      .replace(/:/g, '%3A')
-      .replace(/\//g, '%2F')
-      .replace(/ /g, '%20')
-      .replace(/\?/g, '%3F')
-      .replace(/&/g, '%26')
-      .replace(/=/g, '%3D');
+      .replace(/:/g, '%3A')  // Vervang : door %3A
+      .replace(/\//g, '%2F'); // Vervang / door %2F
     
-    // Log het resultaat voor debugging
+    // Controleer of er dubbele encoding is en corrigeer
+    if (encodedUrl.includes('%253A') || encodedUrl.includes('%252F')) {
+      console.log('Dubbele encoding gedetecteerd, corrigeren...');
+      encodedUrl = encodedUrl
+        .replace(/%253A/g, '%3A')
+        .replace(/%252F/g, '%2F');
+    }
+    
+    // Vervang %3A door : voor het eerste voorkomen (https:%2F%2F in plaats van https%3A%2F%2F)
+    encodedUrl = encodedUrl.replace('%3A', ':');
+    
     console.log('Handmatig geëncodeerde URL:', encodedUrl);
     
     // Voeg het fragment weer toe als het bestaat
@@ -86,11 +105,10 @@ export class DetailsService {
       encodedUrl += '#' + fragment;
     }
     
-    console.log('Original URL:', url);
-    console.log('Decoded URL:', decodedUrl);
-    console.log('Processed URL:', processedUrl);
-    console.log('Encoded URL:', encodedUrl);
+    const finalUrl = `/${Settings.url.urls.details}/` + encodedUrl;
+    console.log('Final URL:', finalUrl);
+    console.log('===== END URL PROCESSING =====');
     
-    return `/${Settings.url.urls.details}/` + encodedUrl;
+    return finalUrl;
   }
 }
