@@ -54,9 +54,16 @@ export class SearchHitsService {
         (hit._source as ElasticNodeModel)['endpointId'] =
           searchResponse.endpointId;
 
-        const id = hit._source['@id'];
+        // Probeer eerst '@id' en dan '_id' als fallback
+        const id = hit._source['@id'] || hit._source['_id'];
         if (!id) {
+          console.warn('Document zonder ID gevonden:', hit._source);
           return;
+        }
+        
+        // Zorg ervoor dat het document altijd een '@id' veld heeft voor interne verwerking
+        if (!hit._source['@id']) {
+          hit._source['@id'] = id;
         }
 
         if (hitsMap.has(id)) {
