@@ -68,9 +68,18 @@ export class DetailsService {
     // Splits de URL op het # teken om fragment apart te houden
     const [baseUrl, fragment] = processedUrl.split('#');
     
-    // Encodeer de basis URL met één niveau van encoding
-    // Gebruik encodeURI in plaats van encodeURIComponent om de URL structuur te behouden
-    let encodedUrl = encodeURI(baseUrl).replace(/#/g, '%23');
+    // Handmatige encoding voor het juiste formaat
+    // We willen alleen bepaalde tekens encoderen: /, :, etc.
+    let encodedUrl = baseUrl
+      .replace(/:/g, '%3A')
+      .replace(/\//g, '%2F')
+      .replace(/ /g, '%20')
+      .replace(/\?/g, '%3F')
+      .replace(/&/g, '%26')
+      .replace(/=/g, '%3D');
+    
+    // Log het resultaat voor debugging
+    console.log('Handmatig geëncodeerde URL:', encodedUrl);
     
     // Voeg het fragment weer toe als het bestaat
     if (fragment) {
