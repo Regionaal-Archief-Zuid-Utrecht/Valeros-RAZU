@@ -5,6 +5,7 @@ import { HopLinkComponent } from '../../../features/node/node-render-components/
 import { LdtoDekkingInTijdComponent } from '../../../custom-render-components/by-predicate/ldto-dekking-in-tijd/ldto-dekking-in-tijd.component';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { TypeRenderComponentInput } from '../../../../models/type-render-component-input.model';
+import { SparqlService } from '../../../../services/sparql.service';
 
 @Component({
     selector: 'app-razu-aflevering',
@@ -18,7 +19,8 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     onderdeelVanIds: string[] = [];
     beperkingGebruikIds: string[] = [];
     dekkingInTijdIds: string[] = [];
-    dekkingInRuimteIds: string[] = [];
+    // Map to store dekkingInRuimteIds for each onderdeelVanId
+    dekkingInRuimteMap: Map<string, string[]> = new Map();
     hasBeginDate = false;
     hasEndDate = false;
     hasType = false;
@@ -80,11 +82,43 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
         showOriginalLink: false
     };
 
-    constructor() {
+    constructor(private sparqlService: SparqlService) {
         super();
     }
 
     ngOnInit(): void {
-        // No initialization needed as the hop-link components will handle data fetching
+        // Fetch onderdeelVanIds directly in the component
+        if (this.data?.node?.['@id']?.[0]?.value) {
+            this.loading = true;
+            this.sparqlService
+                .getObjIds(
+                    this.data.node['@id'][0].value,
+                    this.onderdeelVanSettings.preds
+                )
+                .then(ids => {
+                    this.onderdeelVanIds = ids;
+                    // Fetch dekkingInRuimteIds for each onderdeelVanId
+                    return Promise.all(
+                        ids.map(id =>
+                            this.sparqlService.getObjIds(id, this.dekkingInRuimteSettings.preds)
+                                .then(ruimteIds => {
+                                    this.dekkingInRuimteMap.set(id, ruimteIds);
+                                    return ruimteIds;
+                                })
+                        )
+                    );
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
+        }
+    }
+
+    // Helper method to get labels for dekkingInRuimteIds
+    getDekkingInRuimteIds(onderdeelVanId: string): string[] {
+        return this.dekkingInRuimteMap.get(onderdeelVanId) || [];
     }
 }
