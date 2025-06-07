@@ -1,0 +1,65 @@
+<div class="razu-aflevering-container">
+    <h3>Aflevering</h3>
+
+    <!-- Loading indicator -->
+    <div *ngIf="loading" class="loading">
+        Loading data...
+    </div>
+
+    <!-- isOnderdeelVan related data -->
+    <div *ngIf="!loading && relatedData.length > 0" class="node-data">
+        <h4>Onderdeel van</h4>
+        <div *ngFor="let item of relatedData" class="related-item">
+            <details open>
+                <summary *ngIf="item.naam">{{ item.naam }}</summary>
+                <summary *ngIf="!item.naam">{{ item.id }}</summary>
+
+                <!-- dekkingInRuimte -->
+                <details *ngIf="item.dekkingInRuimte">
+                    <summary>Dekking in ruimte</summary>
+                    <pre>{{ item.dekkingInRuimte }}</pre>
+                </details>
+
+                <!-- omschrijving -->
+                <details *ngIf="item.omschrijving">
+                    <summary>Omschrijving</summary>
+                    <div class="dekking-in-tijd">{{ item.omschrijving }}</div>
+                </details>
+            </details>
+        </div>
+    </div>
+
+    <!-- beperkingGebruik data -->
+    <div *ngIf="!loading && beperkingGebruikData.length > 0" class="node-data">
+        <h4>Beperking gebruik</h4>
+        <div *ngFor="let item of beperkingGebruikData" class="beperking-item">
+            <details>
+                <summary *ngIf="item.prefLabel">{{ item.prefLabel }}</summary>
+                <summary *ngIf="!item.prefLabel">{{ item.id }}</summary>
+
+                <!-- copyrightNotice -->
+                <details *ngIf="item.copyrightNotice">
+                    <summary>Copyright</summary>
+                    <pre>{{ item.copyrightNotice }}</pre>
+                </details>
+
+                <!-- note -->
+                <details *ngIf="item.note">
+                    <summary>Note</summary>
+                    <pre>{{ item.note }}</pre>
+                </details>
+            </details>
+        </div>
+    </div>
+
+    <!-- No data message -->
+    <div *ngIf="!loading && relatedData.length === 0 && beperkingGebruikData.length === 0" class="no-data">
+        No related data found for this node.
+    </div>
+
+    <!-- For debugging, you can show the raw data -->
+    <details>
+        <summary>Debug: Raw Node Data</summary>
+        <pre>{{ data?.node | json }}</pre>
+    </details>
+</div>

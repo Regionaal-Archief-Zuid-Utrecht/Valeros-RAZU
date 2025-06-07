@@ -9,9 +9,17 @@ import {
   RenderMode,
 } from '../../../models/settings/render-component-settings.type';
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
+import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
-  [RenderMode.ByType]: [],
+  [RenderMode.ByType]: [
+    {
+      component: RazuAfleveringComponent,
+      predicates: [
+        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
+      ],
+    },
+  ],
   [RenderMode.ByPredicate]: [
     ...renderComponentSettings[RenderMode.ByPredicate],
     {

@@ -1,0 +1,87 @@
+.razu-aflevering-container {
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.node-data {
+    margin-top: 10px;
+}
+
+h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+h4 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+details {
+    margin-top: 5px;
+    font-size: 0.9em;
+    border-left: 2px solid #eaeaea;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+details details {
+    margin-left: 15px;
+    margin-top: 8px;
+    border-left: 1px solid #f0f0f0;
+}
+
+summary {
+    cursor: pointer;
+    color: #0066cc;
+    font-weight: 500;
+    margin-bottom: 5px;
+    padding: 3px 0;
+}
+
+pre {
+    background-color: #f9f9f9;
+    padding: 8px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    font-size: 0.85em;
+    margin: 5px 0;
+}
+
+.dekking-in-tijd {
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    margin: 5px 0;
+}
+
+.loading {
+    color: #666;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.no-data {
+    color: #888;
+    font-style: italic;
+    margin: 15px 0;
+}
+
+.related-item,
+.beperking-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.related-item:last-child,
+.beperking-item:last-child {
+    border-bottom: none;
+}
