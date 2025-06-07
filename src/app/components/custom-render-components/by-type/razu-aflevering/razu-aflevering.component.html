@@ -7,53 +7,141 @@
     </div>
 
     <!-- isOnderdeelVan related data -->
-    <div *ngIf="!loading && relatedData.length > 0" class="node-data">
+    <div *ngIf="!loading && data?.node" class="node-data">
         <h4>Onderdeel van</h4>
-        <div *ngFor="let item of relatedData" class="related-item">
-            <details open>
-                <summary *ngIf="item.naam">{{ item.naam }}</summary>
-                <summary *ngIf="!item.naam">{{ item.id }}</summary>
 
+        <!-- Get isOnderdeelVan links -->
+        <app-hop-link [data]="{
+                value: data?.node?.['@id']?.[0]?.value ?? '',
+                hopLinkSettings: onderdeelVanSettings
+            }" (hopObjIdsRetrieved)="onderdeelVanIds = $event">
+        </app-hop-link>
+
+        <!-- For each isOnderdeelVan, show details -->
+        <div *ngFor="let onderdeelVanId of onderdeelVanIds" class="related-item">
+            <div>
                 <!-- dekkingInRuimte -->
-                <details *ngIf="item.dekkingInRuimte">
-                    <summary>Dekking in ruimte</summary>
-                    <pre>{{ item.dekkingInRuimte }}</pre>
+                <details>
+                    <summary>Gebied</summary>
+                    <div>
+                        <app-hop-link [data]="{
+                                value: onderdeelVanId ?? '',
+                                hopLinkSettings: dekkingInRuimteSettings
+                            }" (hopObjIdsRetrieved)="dekkingInRuimteIds = $event">
+                        </app-hop-link>
+                    </div>
+
+                    <!-- Display each retrieved value on a new line -->
+                    <div *ngIf="dekkingInRuimteIds && dekkingInRuimteIds.length > 0" class="mt-2">
+                        <div *ngFor="let ruimteId of dekkingInRuimteIds" class="mb-1">
+                            <app-hop-link [data]="{
+                                    value: ruimteId ?? '',
+                                    hopLinkSettings: {
+                                        preds: ['http://www.w3.org/2000/01/rdf-schema#label'],
+                                        showHops: false
+                                    }
+                                }"><br />
+                            </app-hop-link>
+                        </div>
+                    </div>
                 </details>
 
-                <!-- omschrijving -->
-                <details *ngIf="item.omschrijving">
-                    <summary>Omschrijving</summary>
-                    <div class="dekking-in-tijd">{{ item.omschrijving }}</div>
+                <!-- dekkingintijd -->
+                <details>
+                    <summary>Verschijningsperiode</summary>
+                    <app-hop-link [data]="{
+                            value: onderdeelVanId ?? '',
+                            hopLinkSettings: {
+                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
+                                showHops: false,
+                            },
+                        }" (hopObjIdsRetrieved)="this.hasBeginDate = $event.length > 0" />
+
+                    <div class="inline">
+                        <span *ngIf="hasBeginDate && hasEndDate"> - </span>
+                        <app-hop-link [data]="{
+                            value: onderdeelVanId ?? '',
+                            hopLinkSettings: {
+                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
+                                showHops: false,
+                            },
+                        }" (hopObjIdsRetrieved)="this.hasEndDate = $event.length > 0" />
+                    </div>
+
+                    <div class="inline">
+                        <span *ngIf="hasBeginDate || hasEndDate"> (</span>
+                        <app-hop-link [data]="{
+                            value: onderdeelVanId ?? '',
+                            hopLinkSettings: {
+                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdType'],
+                                showHops: false,
+                            },
+                        }" (hopObjIdsRetrieved)="this.hasType = $event.length > 0" />
+                        <span *ngIf="hasBeginDate || hasEndDate">)</span>
+                    </div>
+
+                    <!-- <app-hop-link [data]="{
+                        value: onderdeelVanId ?? '',
+                        hopLinkSettings: {
+                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
+                                showHops: false
+                            }
+                    }">
+                    </app-hop-link> -->
                 </details>
-            </details>
+            </div>
         </div>
     </div>
 
     <!-- beperkingGebruik data -->
-    <div *ngIf="!loading && beperkingGebruikData.length > 0" class="node-data">
-        <h4>Beperking gebruik</h4>
-        <div *ngFor="let item of beperkingGebruikData" class="beperking-item">
+    <div *ngIf="!loading && data?.node" class="node-data">
+        <h4>Auteursrecht en openbaarheid</h4>
+
+        <!-- Get beperkingGebruik links -->
+        <app-hop-link [data]="{
+                value: data?.node?.['@id']?.[0]?.value ?? '',
+                hopLinkSettings: beperkingGebruikSettings
+            }" (hopObjIdsRetrieved)="beperkingGebruikIds = $event">
+        </app-hop-link>
+
+        <!-- For each beperkingGebruik, show details -->
+        <div *ngFor="let beperkingId of beperkingGebruikIds" class="beperking-item">
             <details>
-                <summary *ngIf="item.prefLabel">{{ item.prefLabel }}</summary>
-                <summary *ngIf="!item.prefLabel">{{ item.id }}</summary>
+                <!-- Use prefLabel as summary -->
+                <summary>
+                    <app-hop-link [data]="{
+                            value: beperkingId ?? '',
+                            hopLinkSettings: prefLabelSettings
+                        }">
+                    </app-hop-link>
+                </summary>
 
                 <!-- copyrightNotice -->
-                <details *ngIf="item.copyrightNotice">
+                <details>
                     <summary>Copyright</summary>
-                    <pre>{{ item.copyrightNotice }}</pre>
+                    <app-hop-link [data]="{
+                            value: beperkingId ?? '',
+                            hopLinkSettings: copyrightNoticeSettings
+                        }">
+                    </app-hop-link>
                 </details>
 
                 <!-- note -->
-                <details *ngIf="item.note">
+                <details>
                     <summary>Note</summary>
-                    <pre>{{ item.note }}</pre>
+                    <app-hop-link [data]="{
+                            value: beperkingId ?? '',
+                            hopLinkSettings: noteSettings
+                        }">
+                    </app-hop-link>
                 </details>
             </details>
         </div>
     </div>
 
     <!-- No data message -->
-    <div *ngIf="!loading && relatedData.length === 0 && beperkingGebruikData.length === 0" class="no-data">
+    <div *ngIf="!loading && (!data?.node || !data?.node?.['@id']?.length || (onderdeelVanIds.length === 0 && beperkingGebruikIds.length === 0))"
+        class="no-data">
         No related data found for this node.
     </div>
 
