@@ -42,23 +42,13 @@
 
                     <!-- dekkingintijd -->
                     <h5>Verschijningsperiode</h5>
-                    Van <app-hop-link [data]="{
-                            value: onderdeelVanId ?? '',
-                            hopLinkSettings: {
-                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum'],
-                                showHops: false,
-                            },
-                        }" (hopObjIdsRetrieved)="this.hasBeginDate = $event.length > 0" />
-
-                    <div class="inline">
-                        <span *ngIf="hasBeginDate && hasEndDate"> tot </span>
-                        <app-hop-link [data]="{
-                            value: onderdeelVanId ?? '',
-                            hopLinkSettings: {
-                                preds: ['https://data.razu.nl/def/ldto/dekkingInTijd', 'https://data.razu.nl/def/ldto/dekkingInTijdEindDatum'],
-                                showHops: false,
-                            },
-                        }" (hopObjIdsRetrieved)="this.hasEndDate = $event.length > 0" />
+                    <div *ngIf="hasBeginDateForId(onderdeelVanId) || hasEndDateForId(onderdeelVanId)">
+                        <span *ngIf="hasBeginDateForId(onderdeelVanId)">Van {{ getBeginDate(onderdeelVanId) | date:'d MMMM y':'':'nl' }}</span>
+                        <span *ngIf="hasBeginDateForId(onderdeelVanId) && hasEndDateForId(onderdeelVanId)"> tot </span>
+                        <span *ngIf="hasEndDateForId(onderdeelVanId)">{{ getEndDate(onderdeelVanId) | date:'d MMMM y':'':'nl' }}</span>
+                    </div>
+                    <div *ngIf="!hasBeginDateForId(onderdeelVanId) && !hasEndDateForId(onderdeelVanId)" class="text-muted">
+                        Geen periode gespecificeerd
                     </div>
                 </div>
             </details>
