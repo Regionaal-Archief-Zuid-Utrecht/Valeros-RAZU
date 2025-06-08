@@ -1,10 +1,11 @@
-import { JsonPipe, NgFor, NgIf, DatePipe, registerLocaleData } from '@angular/common';
+import { JsonPipe, NgFor, NgIf, DatePipe } from '@angular/common';
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { TypeRenderComponent } from '../type-render-component.component';
 import { HopLinkComponent } from '../../../features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { TypeRenderComponentInput } from '../../../../models/type-render-component-input.model';
 import { SparqlService } from '../../../../services/sparql.service';
+import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 
 // Register Dutch locale
@@ -27,6 +28,12 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     // Maps to store begin and end dates for each onderdeelVanId
     beginDateMap: Map<string, string> = new Map();
     endDateMap: Map<string, string> = new Map();
+    copyrightNoticeMap: Map<string, string[]> = new Map();
+    noteMap: Map<string, string[]> = new Map();
+    beperkingGebruikTypeMap: Map<string, string[]> = new Map();
+    beperkingGebruikTermijnMap: Map<string, string[]> = new Map();
+    copyrightNoteMap: Map<string, string[]> = new Map();
+    termijnEinddatumMap: Map<string, string> = new Map();
     hasBeginDate = false;
     hasEndDate = false;
     hasType = false;
@@ -89,18 +96,18 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     };
 
     copyrightNoticeSettings: HopLinkSettings = {
-        preds: ['http://schema.org/copyrightNotice'],
+        preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType', 'http://schema.org/copyrightNotice'],
         showHops: false,
         showOriginalLink: false
     };
 
     noteSettings: HopLinkSettings = {
-        preds: ['http://www.w3.org/2004/02/skos/core#note'],
+        preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType', 'http://www.w3.org/2004/02/skos/core#note'],
         showHops: false,
         showOriginalLink: false
     };
 
-    constructor(private sparqlService: SparqlService, @Inject(LOCALE_ID) private locale: string) {
+    constructor(private sparqlService: SparqlService) {
         super();
     }
 
@@ -108,7 +115,12 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
         // Fetch onderdeelVanIds directly in the component
         if (this.data?.node?.['@id']?.[0]?.value) {
             this.loading = true;
-            this.sparqlService
+
+            // Create a Promise array for all data fetching
+            const allPromises: Promise<any>[] = [];
+
+            // Fetch onderdeelVanIds and related data
+            const onderdeelVanPromise = this.sparqlService
                 .getObjIds(
                     this.data.node['@id'][0].value,
                     this.onderdeelVanSettings.preds
@@ -151,12 +163,93 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
                     });
 
                     return Promise.all(promises);
-                })
+                });
+
+            allPromises.push(onderdeelVanPromise);
+
+            // Fetch beperkingGebruikIds and related data
+            const beperkingGebruikPromise = this.sparqlService
+                .getObjIds(
+                    this.data.node['@id'][0].value,
+                    this.beperkingGebruikSettings.preds
+                )
+                .then(ids => {
+                    this.beperkingGebruikIds = ids;
+                    console.log("Found beperkingGebruikIds:", ids);
+
+                    // Create an array of promises for all data fetching
+                    const promises: Promise<void>[] = [];
+
+                    // Fetch data for each beperkingGebruikId
+                    ids.forEach(id => {
+                        // get copyrightNotice
+                        const copyrightNoticePromise = this.sparqlService
+                            .getObjIds(id, this.copyrightNoticeSettings.preds)
+                            .then(copyrightNoticeIds => {
+                                if (copyrightNoticeIds.length > 0) {
+                                    console.log(`Found copyright notices for ${id}:`, copyrightNoticeIds);
+                                    this.copyrightNoticeMap.set(id, copyrightNoticeIds);
+                                }
+                            });
+                        promises.push(copyrightNoticePromise);
+
+                        const copyrightNotePromise = this.sparqlService
+                            .getObjIds(id, this.noteSettings.preds)
+                            .then(noteIds => {
+                                if (noteIds.length > 0) {
+                                    console.log(`Found notes for ${id}:`, noteIds);
+                                    this.copyrightNoteMap.set(id, noteIds);
+                                }
+                            });
+                        promises.push(copyrightNotePromise);
+
+                        const beperkingGebruikTypePromise = this.sparqlService
+                            .getObjIds(id, ["https://data.razu.nl/def/ldto/beperkingGebruikType"])
+                            .then(typeIds => {
+                                if (typeIds.length > 0) {
+                                    console.log(`Found types for ${id}:`, typeIds);
+                                    this.beperkingGebruikTypeMap.set(id, typeIds);
+                                }
+                            });
+                        promises.push(beperkingGebruikTypePromise);
+
+                        const beperkingGebruikTermijnPromise = this.sparqlService
+                            .getObjIds(id, ["https://data.razu.nl/def/ldto/beperkingGebruikTermijn"])
+                            .then(termijnIds => {
+                                if (termijnIds.length > 0) {
+                                    this.beperkingGebruikTermijnMap.set(id, termijnIds);
+                                    termijnIds.forEach(termijnId => {
+                                        const termijnEinddatumPromise = this.sparqlService
+                                            .getObjIds(termijnId, ["https://data.razu.nl/def/ldto/termijnEinddatum"])
+                                            .then(dateIds => {
+                                                if (dateIds.length > 0) {
+                                                    this.termijnEinddatumMap.set(termijnId, dateIds[0]);
+                                                }
+                                            });
+                                    });
+                                }
+                            });
+                        promises.push(beperkingGebruikTermijnPromise);
+                    });
+
+                    return Promise.all(promises);
+                });
+
+            allPromises.push(beperkingGebruikPromise);
+
+            // Wait for all promises to complete
+            Promise.all(allPromises)
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 })
                 .finally(() => {
                     this.loading = false;
+                    console.log("Final data:");
+                    console.log("beperkingGebruikIds", this.beperkingGebruikIds);
+                    console.log("copyrightNoticeMap", this.copyrightNoticeMap);
+                    console.log("copyrightNoteMap", this.copyrightNoteMap);
+                    console.log("beperkingGebruikTypeMap", this.beperkingGebruikTypeMap);
+                    console.log("beperkingGebruikTermijnMap", this.beperkingGebruikTermijnMap);
                 });
         }
     }
@@ -181,5 +274,9 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
 
     getEndDate(onderdeelVanId: string): string {
         return this.endDateMap.get(onderdeelVanId) || '';
+    }
+
+    getTermijnEinddatum(termijnId: string): string {
+        return this.termijnEinddatumMap.get(termijnId) || '';
     }
 }
