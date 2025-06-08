@@ -56,7 +56,19 @@
 
 <!-- beperkingGebruik data -->
 <div *ngIf="!loading && data?.node" class="node-data">
-    <h4>Auteursrecht en openbaarheid</h4>
+    <h4>
+        Auteursrecht en openbaarheid
+        <button type="button" class="info-button" title="Informatie over auteursrecht en openbaarheid" 
+                (click)="showCopyrightInfo = !showCopyrightInfo">
+            <ng-icon [svg]="featherHelpCircle"></ng-icon>
+        </button>
+    </h4>
+    
+    <div *ngIf="showCopyrightInfo" class="info-panel mb-3">
+        <p>Niet elk stuk dat u ziet op deze website is vrij beschikbaar en bruikbaar. Op basis van de Archiefwet, de Algemene Verordening Gegevensbescherming (AVG) en de Auteurswet is het mogelijk dat u sommige stukken niet kunt zien of kunt gebruiken.</p>
+        <p>Hieronder vindt u de beperkingen van het stuk dat u bekijkt. U kunt op de beperking klikken om meer informatie te krijgen.</p>
+       
+    </div>
 
     <!-- For each beperkingGebruik, show details -->
     <div *ngFor="let beperkingId of beperkingGebruikIds" class="beperking-item">

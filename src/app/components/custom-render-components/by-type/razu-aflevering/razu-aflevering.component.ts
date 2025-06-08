@@ -7,6 +7,8 @@ import { TypeRenderComponentInput } from '../../../../models/type-render-compone
 import { SparqlService } from '../../../../services/sparql.service';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
+import { featherHelpCircle } from '@ng-icons/feather-icons';
+import { NgIcon } from '@ng-icons/core';
 
 // Register Dutch locale
 registerLocaleData(localeNl);
@@ -14,7 +16,7 @@ registerLocaleData(localeNl);
 @Component({
     selector: 'app-razu-aflevering',
     standalone: true,
-    imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe],
+    imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon],
     templateUrl: './razu-aflevering.component.html',
     styleUrls: ['./razu-aflevering.component.scss'],
 })
@@ -40,6 +42,9 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
 
     // Loading state
     loading = false;
+
+    // UI state
+    showCopyrightInfo = false;
 
     // Explicitly declare data property from parent class for template access
     override data?: TypeRenderComponentInput;
@@ -279,4 +284,5 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     getTermijnEinddatum(termijnId: string): string {
         return this.termijnEinddatumMap.get(termijnId) || '';
     }
+    protected readonly featherHelpCircle = featherHelpCircle;
 }
