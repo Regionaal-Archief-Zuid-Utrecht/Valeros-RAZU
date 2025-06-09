@@ -37,7 +37,7 @@
   </a>
 
   <!-- Node info table on search page -->
-  <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value">
+  <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value" class="flex-grow relative"> <!-- added flex-grow to make sure the details button can go all the way to the right -->
     <div
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
       class="flex-grow relative"
@@ -66,7 +66,6 @@
       <div class="sm:pr-32">
         <app-node-renderer [node]="node" />
       </div>
-
       <div
         class="absolute"
         [ngClass]="[

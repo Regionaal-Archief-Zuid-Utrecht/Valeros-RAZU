@@ -19,6 +19,10 @@ export const razuLabelPredicates: string[] = [
   'https://data.razu.nl/def/ldto/verwijzingNaam',
   'https://data.razu.nl/def/ldto/identificatieKenmerk',
   'http://schema.org/copyrightNotice',
+  'https://schema.org/name',
+  'name', // temp fix, elastic index should be changed
+  'https://w3id.org/italia/onto/CLV/officialStreetName',
+  'https://w3id.org/italia/onto/CLV/fullAddress',
 ];
 
 export const razuParentPredicates: string[] = [
