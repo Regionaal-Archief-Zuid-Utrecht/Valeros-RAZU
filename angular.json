@@ -65,7 +65,8 @@
                   "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
                   "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.production.settings.ts"
                 }
-              ]
+              ],
+              "allowedCommonJsDependencies": [ "normalize-url" ]
             },
             "acceptance": {
               "externalDependencies": ["http", "https", "url", "util", "net"],
