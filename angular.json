@@ -115,7 +115,8 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "allowedCommonJsDependencies": [ "normalize-url" ]
             },
             "dev-build": {
               "externalDependencies": ["http", "https", "url", "util", "net"],
