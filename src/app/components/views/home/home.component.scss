@@ -1,20 +1,26 @@
 :host {
   display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Make sure the view container allows for absolute positioning */
 :host ::ng-deep app-view-container {
   position: relative;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
 }
 
+/* Map container - absolute positioning to fill the entire viewport */
 .map-container {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
   height: 100vh;
   z-index: 1;
   /* Lower z-index to stay behind content */
@@ -22,6 +28,7 @@
   /* Ensure map receives pointer events */
 }
 
+/* Content container - positioned above the map */
 .content-container {
   position: relative;
   z-index: 2;
@@ -29,7 +36,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Let events pass through to the map */
+  /* Let events pass through to the map by default */
 
   /* Make specific elements in the content container interactive */
   app-lang-switch,

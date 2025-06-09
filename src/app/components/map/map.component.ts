@@ -10,7 +10,7 @@ import config from '@arcgis/core/config';
     standalone: true,
     imports: [CommonModule],
     template: `
-        <div #mapViewNode style="height: 100%; width: 100%;"></div>
+        <div #mapViewNode style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
         <div *ngIf="loading" class="loading-overlay">
             <div class="loading-spinner"></div>
             <div class="loading-text">Kaart laden...</div>
