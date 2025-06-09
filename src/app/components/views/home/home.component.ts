@@ -14,6 +14,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
 import { HomeIntroComponent } from './home-intro/home-intro.component';
 import { MapComponent } from '../../map/map.component';
+import { AboutComponent } from "../../ui/about/about.component";
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ import { MapComponent } from '../../map/map.component';
     HomeIntroBelowSearchComponent,
     LangSwitchComponent,
     MapComponent,
+    AboutComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

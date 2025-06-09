@@ -30,6 +30,7 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
+import { AboutComponent } from "../../ui/about/about.component";
 
 @Component({
   selector: 'app-search',
@@ -52,6 +53,7 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
     LangSwitchComponent,
     ViewModeSelectComponent,
     ViewContainerComponent,
+    AboutComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -67,9 +69,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.scroll.initScrollContainer(this.scrollContainer);

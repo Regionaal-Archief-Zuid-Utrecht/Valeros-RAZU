@@ -1,4 +1,5 @@
 import { HeaderSettings } from './header-settings.model';
+import { AboutSettings } from './about-settings.model';
 
 export interface UiSettings {
   showLanguageToggle: boolean;
@@ -8,6 +9,7 @@ export interface UiSettings {
   /** Used to switch between list view, grid view, etc. */
   showViewModeSelect: boolean;
   header: HeaderSettings;
+  about: AboutSettings;
   /**
    * Minimum number of parents a node should have to allow tree expansion.
    * This is to prevent the tree from becoming too large and taking up too much space.

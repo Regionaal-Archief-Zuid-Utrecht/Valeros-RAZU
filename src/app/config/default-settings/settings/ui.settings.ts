@@ -1,3 +1,4 @@
+import { AboutPosition } from '../../../models/settings/about-settings.model';
 import { HeaderPosition } from '../../../models/settings/header-settings.model';
 import { UiSettings } from '../../../models/settings/ui-settings.model';
 
@@ -23,5 +24,12 @@ export const uiSettings: UiSettings = {
     showColofonButton: false,
     logoPath: '/assets/img/logo.svg',
     position: HeaderPosition.Center,
+  },
+  about: {
+    showLogo: true,
+    showTitle: true,
+    showColofonButton: false,
+    logoPath: '/assets/img/logo.svg',
+    position: AboutPosition.Center,
   },
 };

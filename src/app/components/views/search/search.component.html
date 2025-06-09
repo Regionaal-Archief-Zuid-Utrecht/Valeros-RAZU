@@ -1,79 +1,82 @@
 <app-view-container>
-  <app-lang-switch class="absolute top-1 right-4" />
+  <div class="content-width-constraint">
+    <app-lang-switch class="absolute top-1 right-4" />
 
-  <app-header />
+    <app-header />
+    <app-about />
 
-  <div class="flex-grow-0 p-4 pb-2">
-    <div class="flex flex-row items-center">
-      <app-search-input class="flex-grow" />
-      <app-view-mode-select
-        class="flex-grow-0 ml-8"
-        *ngIf="Settings.ui.showViewModeSelect"
-      />
+    <div class="flex-grow-0 p-4 pb-2">
+      <div class="flex flex-row items-center">
+        <app-search-input class="flex-grow" />
+        <app-view-mode-select
+          class="flex-grow-0 ml-8"
+          *ngIf="Settings.ui.showViewModeSelect"
+        />
+      </div>
+
+      <!--    <app-active-filters />-->
     </div>
 
-    <!--    <app-active-filters />-->
-  </div>
+    <app-details-back-button *ngIf="details.showing.value" class="px-4" />
 
-  <app-details-back-button *ngIf="details.showing.value" class="px-4" />
-
-  <div
-    class=""
-    [ngClass]="[
-      settings.showingFilterPanelOnSide()
-        ? 'flex flex-grow overflow-y-hidden flex-col'
-        : '',
-      Settings.filtering.filterPanelLocation == FilterPanelLocation.Left
-        ? 'lg:flex-row'
-        : '',
-      Settings.filtering.filterPanelLocation == FilterPanelLocation.Right
-        ? 'lg:flex-row-reverse'
-        : '',
-    ]"
-  >
     <div
-      class="px-4 pt-2"
-      *ngIf="Settings.filtering.showFilterPanel"
+      class=""
       [ngClass]="[
-        details.showing.value ? 'hidden' : '',
         settings.showingFilterPanelOnSide()
-          ? 'w-full lg:w-1/4 lg:overflow-y-auto'
+          ? 'flex flex-grow overflow-y-hidden flex-col'
+          : '',
+        Settings.filtering.filterPanelLocation == FilterPanelLocation.Left
+          ? 'lg:flex-row'
+          : '',
+        Settings.filtering.filterPanelLocation == FilterPanelLocation.Right
+          ? 'lg:flex-row-reverse'
           : '',
       ]"
     >
-      <app-filter-options />
-    </div>
-
-    <div
-      class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
-      [ngClass]="[settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '']"
-      #scrollContainer
-    >
-      <app-details *ngIf="details.showing.value" />
+      <div
+        class="px-4 pt-2"
+        *ngIf="Settings.filtering.showFilterPanel"
+        [ngClass]="[
+          details.showing.value ? 'hidden' : '',
+          settings.showingFilterPanelOnSide()
+            ? 'w-full lg:w-1/4 lg:overflow-y-auto'
+            : '',
+        ]"
+      >
+        <app-filter-options />
+      </div>
 
       <div
-        class="flex flex-row sticky -top-2 bg-background z-10 p-2"
-        *ngIf="!details.showing.value"
+        class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
+        [ngClass]="[settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '']"
+        #scrollContainer
       >
-        <app-search-hits-counter class="w-1/2 lg:w-3/4" />
-        <app-sort-select class="w-1/2 lg:w-1/4 mb-2" />
-      </div>
+        <app-details *ngIf="details.showing.value" />
 
-      <div *ngIf="!details.showing.value" class="overflow-hidden">
-        <app-nodes-grid
-          [nodes]="search.results.value.nodes"
-          *ngIf="viewModes.current.value === ViewMode.Grid"
-          class="w-full"
-        />
+        <div
+          class="flex flex-row sticky -top-2 bg-background z-10 p-2"
+          *ngIf="!details.showing.value"
+        >
+          <app-search-hits-counter class="w-1/2 lg:w-3/4" />
+          <app-sort-select class="w-1/2 lg:w-1/4 mb-2" />
+        </div>
 
-        <ng-container *ngIf="viewModes.current.value === ViewMode.List">
-          <ng-container *ngFor="let node of search.results.value?.nodes">
-            <app-node [node]="node"></app-node>
+        <div *ngIf="!details.showing.value" class="overflow-hidden">
+          <app-nodes-grid
+            [nodes]="search.results.value.nodes"
+            *ngIf="viewModes.current.value === ViewMode.Grid"
+            class="w-full"
+          />
+
+          <ng-container *ngIf="viewModes.current.value === ViewMode.List">
+            <ng-container *ngFor="let node of search.results.value?.nodes">
+              <app-node [node]="node"></app-node>
+            </ng-container>
           </ng-container>
-        </ng-container>
-      </div>
+        </div>
 
-      <app-load-more-search-results-button *ngIf="!details.showing.value" />
+        <app-load-more-search-results-button *ngIf="!details.showing.value" />
+      </div>
     </div>
   </div>
 </app-view-container>
