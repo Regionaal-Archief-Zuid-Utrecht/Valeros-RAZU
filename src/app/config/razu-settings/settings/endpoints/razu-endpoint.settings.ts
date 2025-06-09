@@ -8,9 +8,13 @@ export const razuEndpointSettings: EndpointSettings = {
     razu: {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
+        // {
+        //   elastic: 'https://ontwikkel.search.razu.nl/amerongsche-courant/_search',
+        //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        // },
         {
-          elastic: 'https://ontwikkel.search.razu.nl/amerongsche-courant/_search',
-          sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+          elastic: 'http://localhost:9200/picoext/_search',
+          sparql: 'https://api.data.razu.nl/datasets/WietseBakker/mehiw/sparql',
         },
       ],
     },

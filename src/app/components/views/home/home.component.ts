@@ -13,6 +13,7 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
 import { HomeIntroComponent } from './home-intro/home-intro.component';
+import { MapComponent } from '../../map/map.component';
 
 @Component({
   selector: 'app-home',
@@ -28,9 +29,10 @@ import { HomeIntroComponent } from './home-intro/home-intro.component';
     CommonModule,
     HomeIntroBelowSearchComponent,
     LangSwitchComponent,
+    MapComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   constructor(
@@ -41,9 +43,9 @@ export class HomeComponent implements OnInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 }

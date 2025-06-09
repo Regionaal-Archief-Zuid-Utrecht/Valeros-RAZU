@@ -3,8 +3,8 @@ import { ThemeSettings } from '../models/settings/theme-settings.model';
 
 export const developmentTheme: ThemeSettings = {
   ...daisyuiBase['light'],
-  primary: '#4a4a4a',
-  neutral: '#808080',
+  primary: '#0082c2',
+  neutral: '#0082c2',
   accent: '#b3b3b3',
   secondary: '#6d6d6d',
   background: '#f2f2f2',

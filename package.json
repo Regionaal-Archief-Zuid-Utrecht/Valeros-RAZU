@@ -28,6 +28,7 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@arcgis/core": "^4.32.10",
     "@elastic/elasticsearch": "^8.13.0",
     "@floating-ui/dom": "^1.6.4",
     "@ng-icons/core": "^27.2.0",

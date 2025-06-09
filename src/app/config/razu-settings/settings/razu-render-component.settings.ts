@@ -48,6 +48,30 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
     },
     {
       component: HopLinkComponent,
+      predicates: ['https://personsincontext.org/model#PersonObservation'],
+      hopLinkSettings: {
+        preds: ['https://schema.org/name'],
+        showHops: false,
+      },
+    },
+    {
+      component: HopLinkComponent,
+      predicates: ['https://schema.org/hasParent'],
+      hopLinkSettings: {
+        preds: ['https://schema.org/name'],
+        showHops: false,
+      },
+    },
+    {
+      component: HopLinkComponent,
+      predicates: ['https://schema.org/participant'],
+      hopLinkSettings: {
+        preds: ['https://schema.org/name'],
+        showHops: false,
+      },
+    },
+    {
+      component: HopLinkComponent,
       predicates: ['https://data.razu.nl/def/ldto/gerelateerdInformatieobject'],
       hopLinkSettings: {
         preds: [
