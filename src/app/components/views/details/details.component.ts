@@ -38,9 +38,31 @@ export class DetailsComponent {
       if (!nodeId) {
         return;
       }
+
+      
+      // TODO: de hash uit onderstaande moet wel gebruikt worden om naar de juiste pagina te springen
+      // TODO: de URLs zijn onwenselijk lelijk,
+      // Dit:  http://localhost:4200/details/https%253A%252F%252Fdata.razu.nl%252Fid%252Fobject%252Fnl-wbdrazu-k50907905-689-2454%232
+      // moet: http://localhost:4200/details/https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-2454#2  
+      // zijn.
+
+      // Controleer eerst op geëncodeerde fragmenten (%23) voordat we decoderen
+      let hashIndex = nodeId.indexOf('%23');
+      if (hashIndex !== -1) {
+        nodeId = nodeId.substring(0, hashIndex);
+        console.log('details.component: geëncodeerd fragment (%23) verwijderd uit URL, nieuwe nodeId:', nodeId);
+      }
+
+      // Decodeer de URL
       nodeId = decodeURIComponent(nodeId);
 
-      // TODO: Move to service itself, instead of calling from component
+      // Controleer op normale fragmenten (#) na decoderen
+      hashIndex = nodeId.indexOf('#');
+      if (hashIndex !== -1) {
+        nodeId = nodeId.substring(0, hashIndex);
+        console.log('details.component: fragment (#) verwijderd uit URL, nieuwe nodeId:', nodeId);
+      }
+
       this.scroll.onNavigateToDetails(nodeId);
       void this.initNodeById(nodeId);
     });

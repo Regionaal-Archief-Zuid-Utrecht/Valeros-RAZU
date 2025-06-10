@@ -50,12 +50,6 @@ export class DetailsService {
       return url;
     }
 
-    // return `/${Settings.url.urls.details}/` + encodeURIComponent(url);
-    // Eerst controleren of de URL een # teken bevat (mogelijk al geëncodeerd als %23)
-    let encodedUrl = encodeURIComponent(url);
-    // Vervang %2523 (dubbel geëncodeerde #) door # 
-    encodedUrl = encodedUrl.replace(/%2523/g, '#');
-
-    return `/${Settings.url.urls.details}/` + encodedUrl;
+    return `/${Settings.url.urls.details}/` + encodeURIComponent(url).replace(/%23/g, '#');
   }
 }
