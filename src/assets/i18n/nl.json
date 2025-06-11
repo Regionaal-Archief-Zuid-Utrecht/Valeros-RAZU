@@ -3,7 +3,7 @@
     "site-holder-full": "Regionaal Archief Zuid-Utrecht",
     "site-holder-short": "RAZU",
     "title": "Huizen & Mensen in Wijk",
-    "page-title": "RAZU - Digitaal archief van Zuid-Utrecht",
+    "page-title": "Huizen & Mensen in Wijk",
     "and": "en",
     "back": "Terug",
     "about": "Over"
@@ -20,7 +20,7 @@
   },
   "search-interface": {
     "search": "Zoek",
-    "search-placeholder": "Bijv. 'Beleidsstuk'",
+    "search-placeholder": "Bijv. 'Oeverstraat'",
     "no-results-found": "Geen resultaten gevonden",
     "results": "resultaten",
     "show-details": "Toon details",

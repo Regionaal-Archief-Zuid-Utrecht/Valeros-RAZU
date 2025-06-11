@@ -40,7 +40,8 @@
             "styles": [
               "src/styles.scss",
               "src/theme.scss",
-              "node_modules/ngx-float-ui/css/theme-white.css"
+              "node_modules/ngx-float-ui/css/theme-white.css",
+              "node_modules/@arcgis/core/assets/esri/themes/light/main.css"
             ],
             "scripts": []
           },
@@ -50,8 +51,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "3mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -123,8 +124,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "3mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -178,7 +179,8 @@
             "styles": [
               "src/styles.scss",
               "src/theme.scss",
-              "node_modules/ngx-float-ui/css/theme-white.css"
+              "node_modules/ngx-float-ui/css/theme-white.css",
+              "node_modules/@arcgis/core/assets/esri/themes/light/main.css"
             ],
             "scripts": []
           }

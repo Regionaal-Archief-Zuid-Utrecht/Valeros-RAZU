@@ -13,7 +13,7 @@ export const razuEndpointSettings: EndpointSettings = {
         //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         // },
         {
-          elastic: 'http://localhost:9200/picoext/_search',
+          elastic: 'https://hemiw.regionaalarchiefzuidutrecht.nl/elasticsearch/picoext/_search',
           sparql: 'https://api.data.razu.nl/datasets/WietseBakker/mehiw/sparql',
         },
       ],

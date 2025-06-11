@@ -1,9 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import WebMap from '@arcgis/core/WebMap';
 import MapView from '@arcgis/core/views/MapView';
-import './arcgis-styles';
 import config from '@arcgis/core/config';
+import LayerList from '@arcgis/core/widgets/LayerList';
+import Legend from '@arcgis/core/widgets/Legend';
+import Expand from '@arcgis/core/widgets/Expand';
+import esriConfig from '@arcgis/core/config';
 
 @Component({
     selector: 'app-map',
@@ -24,14 +27,27 @@ import config from '@arcgis/core/config';
     `,
     styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
     @ViewChild('mapViewNode', { static: true }) private mapViewEl!: ElementRef;
     loading = true;
     error = false;
     view: MapView | null = null;
 
     ngOnInit(): void {
+        // Load the ArcGIS CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://js.arcgis.com/4.28/esri/themes/light/main.css';
+        document.head.appendChild(link);
+
         this.initializeMap();
+    }
+
+    ngOnDestroy(): void {
+        if (this.view) {
+            // Destroy the map view when the component is destroyed
+            this.view.destroy();
+        }
     }
 
     initializeMap(): void {
@@ -40,12 +56,12 @@ export class MapComponent implements OnInit {
 
         try {
             // Configure ArcGIS to use assets from the correct path
-            config.assetsPath = '/assets/arcgis';
+            esriConfig.assetsPath = '/assets/arcgis';
 
             // Use the WebMap from the ArcGIS sidebar app
             const webmap = new WebMap({
                 portalItem: {
-                    id: 'f2e9b762544945f390ca4ac3671cfa72'
+                    id: 'e18c7c66b3da441199d5b3334890016a'
                 }
             });
 
@@ -63,6 +79,29 @@ export class MapComponent implements OnInit {
             this.view.when(() => {
                 this.loading = false;
                 console.log('Map loaded successfully');
+
+                // Make sure view is not null before adding widgets
+                if (this.view) {
+
+                    // Add Legend widget in an Expand container
+                    const legend = new Legend({
+                        view: this.view
+                    });
+
+                    const legendExpand = new Expand({
+                        view: this.view,
+                        content: legend,
+                        expanded: false,
+                        expandIcon: "legend-right",
+                        expandTooltip: "Legenda"
+                    });
+
+                    // Add the widgets to the bottom-right corner of the view
+                    this.view.ui.add(legendExpand, "bottom-right");
+
+                    // Move zoom buttons to bottom-right
+                    this.view.ui.move(["zoom"], "bottom-right");
+                }
             }, (error: any) => {
                 console.error('Error loading map:', error);
                 this.loading = false;

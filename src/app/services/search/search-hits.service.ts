@@ -43,16 +43,16 @@ export class SearchHitsService {
     // TIJDELIJK: Deduplicatie uitgeschakeld voor testen
     // Verzamel alle hits zonder deduplicatie
     const allHits: SearchHit<ElasticNodeModel>[] = [];
-    
+
     // Debug logging
-    console.log('SearchResponses:', searchResponses);
+    // console.log('SearchResponses:', searchResponses);
     let totalHits = 0;
-    
+
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
       totalHits += hits.length;
-      console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
-      
+      // console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
+
       hits.forEach((hit) => {
         if (!hit._source) {
           return;
@@ -64,45 +64,45 @@ export class SearchHitsService {
 
         // Gebruik het _id veld van de hit zelf (niet van _source)
         let hitId = hit._id;
-        console.log('Hit _id:', hitId);
-        
+        // console.log('Hit _id:', hitId);
+
         // Probeer eerst '@id' en dan '_id' als fallback uit _source
         let sourceId = hit._source['@id'] || hit._source['_id'];
-        console.log('Source ID uit _source:', sourceId);
-        console.log('Hit _source bevat @id:', !!hit._source['@id']);
-        console.log('Hit _source bevat _id:', !!hit._source['_id']);
-        
+        // console.log('Source ID uit _source:', sourceId);
+        // console.log('Hit _source bevat @id:', !!hit._source['@id']);
+        // console.log('Hit _source bevat _id:', !!hit._source['_id']);
+
         // Gebruik hitId als primaire ID, sourceId als fallback
         const id: string = hitId || (Array.isArray(sourceId) ? sourceId[0] : String(sourceId || ''));
-        console.log('Uiteindelijke ID voor gebruik:', id);
+        // console.log('Uiteindelijke ID voor gebruik:', id);
 
         if (!id) {
-          console.warn('Document zonder ID gevonden:', hit._source);
+          // console.warn('Document zonder ID gevonden:', hit._source);
           return;
         }
 
         // Zorg ervoor dat het document altijd een '@id' veld heeft voor interne verwerking
         hit._source['@id'] = id;
-        console.log('@id veld ingesteld op:', id);
-        
+        // console.log('@id veld ingesteld op:', id);
+
         // Zorg ervoor dat het document ook een _id veld heeft
         hit._source['_id'] = id;
-        console.log('_id veld ingesteld op:', id);
-        
+        // console.log('_id veld ingesteld op:', id);
+
         // Voeg hit toe aan allHits zonder deduplicatie
         allHits.push(hit);
-        
+
         // Log de eerste paar hits voor debugging
-        if (allHits.length <= 3) {
-          console.log(`Hit ${allHits.length}:`, {
-            id: id,
-            source: hit._source
-          });
-        }
+        //if (allHits.length <= 3) {
+        //console.log(`Hit ${allHits.length}:`, {
+        //  id: id,
+        //  source: hit._source
+        //});
+        //}
       });
     });
 
-    console.log(`Totaal aantal hits ontvangen: ${totalHits}, Alle hits: ${allHits.length}`);
+    // console.log(`Totaal aantal hits ontvangen: ${totalHits}, Alle hits: ${allHits.length}`);
     return allHits;
   }
 }

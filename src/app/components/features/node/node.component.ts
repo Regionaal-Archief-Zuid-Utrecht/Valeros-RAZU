@@ -112,7 +112,7 @@ export class NodeComponent implements OnInit, OnChanges {
     if (!this.node) {
       return;
     }
-
+    console.log(this.node);
     this.id = this.nodes.getId(this.node);
   }
 
@@ -128,11 +128,9 @@ export class NodeComponent implements OnInit, OnChanges {
       .map((title) => title.trim());
 
     if (!titles || titles.length === 0) {
-      console.log('No titles found');
-      console.log('this.node', this.node);
       return;
     }
-    console.log(titles);
+
     this.title = titles[0];
   }
 
