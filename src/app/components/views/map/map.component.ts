@@ -7,24 +7,14 @@ import LayerList from '@arcgis/core/widgets/LayerList';
 import Legend from '@arcgis/core/widgets/Legend';
 import Expand from '@arcgis/core/widgets/Expand';
 import esriConfig from '@arcgis/core/config';
+import { HeaderComponent } from '../../ui/header/header.component';
+import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
     selector: 'app-map',
     standalone: true,
-    imports: [CommonModule],
-    template: `
-        <div #mapViewNode style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
-        <div *ngIf="loading" class="loading-overlay">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Kaart laden...</div>
-        </div>
-        <div *ngIf="error" class="error-overlay">
-            <div class="error-message">
-                Er is een fout opgetreden bij het laden van de kaart.
-                <button (click)="initializeMap()">Opnieuw proberen</button>
-            </div>
-        </div>
-    `,
+    imports: [CommonModule, HeaderComponent, NavButtonsComponent],
+    templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, OnDestroy {

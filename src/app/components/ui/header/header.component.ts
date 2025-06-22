@@ -10,13 +10,10 @@ import {
   HeaderSettings,
 } from '../../../models/settings/header-settings.model';
 import { UrlService } from '../../../services/url.service';
-import { AboutSettings, AboutPosition } from '../../../models/settings/about-settings.model';
-
 
 export enum HeaderView {
   ShowingColofon,
   ShowingSearch,
-  ShowingAbout,
 }
 
 @Component({
@@ -29,7 +26,6 @@ export enum HeaderView {
 export class HeaderComponent {
   @Input() view: HeaderView = HeaderView.ShowingSearch;
   readonly settings: HeaderSettings = Settings.ui.header;
-  readonly aboutSettings: AboutSettings = Settings.ui.about;
 
   constructor(
     public router: Router,
@@ -39,9 +35,6 @@ export class HeaderComponent {
 
   get buttonUrl() {
     return this.view === HeaderView.ShowingSearch ? 'colofon' : '';
-  }
-  get aboutButtonUrl() {
-    return this.view === HeaderView.ShowingAbout ? 'about' : '';
   }
 
   async onButtonClicked(url: string) {
@@ -54,5 +47,4 @@ export class HeaderComponent {
   protected readonly featherX = featherX;
   protected readonly HeaderView = HeaderView;
   protected readonly HeaderPosition = HeaderPosition;
-  protected readonly AboutPosition = AboutPosition;
 }

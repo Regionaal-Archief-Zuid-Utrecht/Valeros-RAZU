@@ -20,7 +20,9 @@
             "outputPath": "dist/view-a-lod",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -47,7 +49,13 @@
           },
           "configurations": {
             "production": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -67,10 +75,18 @@
                   "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.production.settings.ts"
                 }
               ],
-              "allowedCommonJsDependencies": [ "normalize-url" ]
+              "allowedCommonJsDependencies": [
+                "normalize-url"
+              ]
             },
             "acceptance": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -92,7 +108,13 @@
               ]
             },
             "test": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -117,10 +139,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "allowedCommonJsDependencies": [ "normalize-url" ]
+              "allowedCommonJsDependencies": [
+                "normalize-url"
+              ]
             },
             "dev-build": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -159,7 +189,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

@@ -1,0 +1,14 @@
+<app-header class="fixed top-0 left-0 right-0 z-10"></app-header>
+
+<div #mapViewNode style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"></div>
+<div *ngIf="loading" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Kaart laden...</div>
+</div>
+<div *ngIf="error" class="error-overlay">
+    <div class="error-message">
+        Er is een fout opgetreden bij het laden van de kaart.
+        <button (click)="initializeMap()">Opnieuw proberen</button>
+    </div>
+</div>
+<razu-nav-buttons layout="bottom-tabs"></razu-nav-buttons>

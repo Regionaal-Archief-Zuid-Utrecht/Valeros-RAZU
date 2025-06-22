@@ -9,7 +9,7 @@ import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
-  selector: 'app-colofon',
+  selector: 'app-contact',
   standalone: true,
   imports: [
     HeaderComponent,
@@ -18,10 +18,10 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
     TranslatePipe,
     NgIcon,
   ],
-  templateUrl: './colofon.component.html',
-  styleUrl: './colofon.component.scss',
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.scss',
 })
-export class ColofonComponent {
+export class ContactComponent {
   protected readonly HeaderView = HeaderView;
   protected readonly featherX = featherX;
   constructor(

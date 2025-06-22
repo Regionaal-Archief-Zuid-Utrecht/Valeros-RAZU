@@ -37,9 +37,9 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
         { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
         { label: 'Alle panden', icon: featherHome, route: '/alle-panden' },
         { label: 'Alle straten', icon: featherNavigation, route: '/alle-straten' },
-        { label: 'Kaart', icon: featherMap, route: '/kaart' },
+        { label: 'Kaart', icon: featherMap, route: '/map' },
         { label: 'Verhalen', icon: featherBook, route: '/verhalen' },
-        { label: 'About', icon: featherInfo, route: '/about' },
+        { label: 'About', icon: featherInfo, route: '/colofon' },
         { label: 'Contact', icon: featherMail, route: '/contact' },
         { label: 'Referenties', icon: featherStar, route: '/referenties' },
     ];

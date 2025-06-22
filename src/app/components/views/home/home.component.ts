@@ -13,7 +13,7 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
 import { HomeIntroComponent } from './home-intro/home-intro.component';
-import { MapComponent } from '../../map/map.component';
+import { MapComponent } from '../map/map.component';
 import { AboutComponent } from "../../ui/about/about.component";
 import { NavButtonsComponent } from '../../ui/nav-buttons/nav-buttons.component';
 
