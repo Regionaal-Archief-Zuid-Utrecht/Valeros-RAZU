@@ -9,6 +9,7 @@ import { DataService } from '../data.service';
   providedIn: 'root',
 })
 export class SearchHitsService {
+  private _hits: SearchHit<ElasticNodeModel>[] = [];
   constructor(private data: DataService) { }
 
   parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
@@ -45,13 +46,13 @@ export class SearchHitsService {
     const allHits: SearchHit<ElasticNodeModel>[] = [];
 
     // Debug logging
-    // console.log('SearchResponses:', searchResponses);
+    console.log('SearchResponses:', searchResponses);
     let totalHits = 0;
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
       totalHits += hits.length;
-      // console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
+      console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
 
       hits.forEach((hit) => {
         if (!hit._source) {
@@ -103,6 +104,11 @@ export class SearchHitsService {
     });
 
     // console.log(`Totaal aantal hits ontvangen: ${totalHits}, Alle hits: ${allHits.length}`);
+    this._hits = allHits;
     return allHits;
+  }
+
+  getHits(): SearchHit<ElasticNodeModel>[] {
+    return this._hits;
   }
 }

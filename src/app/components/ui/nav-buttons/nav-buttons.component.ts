@@ -39,7 +39,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
         { label: 'Alle straten', icon: featherNavigation, route: '/alle-straten' },
         { label: 'Kaart', icon: featherMap, route: '/map' },
         { label: 'Verhalen', icon: featherBook, route: '/verhalen' },
-        { label: 'About', icon: featherInfo, route: '/colofon' },
+        { label: 'Over', icon: featherInfo, route: '/colofon' },
         { label: 'Contact', icon: featherMail, route: '/contact' },
         { label: 'Referenties', icon: featherStar, route: '/referenties' },
     ];

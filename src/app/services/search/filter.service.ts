@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { SparqlService } from '../sparql.service';
 import { Router } from '@angular/router';
 import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
 import { BehaviorSubject } from 'rxjs';
@@ -18,6 +19,7 @@ import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { ClusterService } from '../cluster.service';
 import { DataService } from '../data.service';
 import { ElasticService } from './elastic.service';
+import { SearchHitsService } from './search-hits.service';
 
 interface SearchTriggerModel {
   clearFilters: boolean;
@@ -27,6 +29,8 @@ interface SearchTriggerModel {
   providedIn: 'root',
 })
 export class FilterService {
+  // Set this to true to enable debug logs in updateFilterOptionValues
+  private static DEBUG = true;
   searchTrigger: EventEmitter<SearchTriggerModel> =
     new EventEmitter<SearchTriggerModel>();
 
@@ -42,6 +46,8 @@ export class FilterService {
     public data: DataService,
     public clusters: ClusterService,
     public router: Router,
+    public searchHitsService: SearchHitsService,
+    public sparql: SparqlService,
   ) {
     this._initRestorePreviousFiltersOnOptionsChange();
   }
@@ -241,63 +247,68 @@ export class FilterService {
   // }
 
   async updateFilterOptionValues(query: string) {
-    const allFilterFieldIds: string[] = Object.values(
-      this.options.value,
-    ).flatMap((filterOption) => filterOption.fieldIds);
+    if (FilterService.DEBUG) {
+      console.log('[FilterService] updateFilterOptionValues called with query:', query);
+      console.log('[FilterService] all filter options before update:', JSON.parse(JSON.stringify(this.options.value)));
+    }
 
-    const responses: SearchResponse<any>[] =
-      await this.elastic.getFilterOptions(
-        query,
-        allFilterFieldIds,
-        this.enabled.value,
-      );
-    const docCounts: FieldDocCountsModel =
-      this._getFieldDocCountsFromResponses(responses);
+    const filterOptions = { ...this.options.value };
+    const hits = this.searchHitsService.getHits ? this.searchHitsService.getHits() : [];
 
-    const filterOptions = this.options.value;
-    for (const [_, filter] of Object.entries(filterOptions)) {
-      const filterValuesMap = new Map<string, string[]>();
-
-      filter.fieldIds.forEach((fieldId) => {
-        const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
-        const docCountsForField: DocCountModel[] =
-          docCounts?.[elasticFieldId] ?? [];
-        const docCountsToShow: DocCountModel[] = docCountsForField.filter(
-          (d) => {
-            const valueId = d.key;
-            const shouldHideValueId = filter.hideValueIds?.includes(valueId);
-            if (!filter.showOnlyValueIds) {
-              return !shouldHideValueId;
+    for (const filterId in filterOptions) {
+      const filter = filterOptions[filterId];
+      const valueHitMap: Map<string, { hitIds: string[] }> = new Map();
+      const hideValueIds = filter.hideValueIds || [];
+      for (const hit of hits) {
+        for (const fieldId of filter.fieldIds) {
+          let value = hit._source ? hit._source[fieldId] : undefined;
+          if (Array.isArray(value)) {
+            (value as string[]).forEach((v: string) => {
+              if (v && !hideValueIds.includes(v)) {
+                if (!valueHitMap.has(v)) {
+                  valueHitMap.set(v, { hitIds: [] });
+                }
+                const entry = valueHitMap.get(v);
+                if (entry && hit._id && !entry.hitIds.includes(hit._id)) {
+                  entry.hitIds.push(hit._id);
+                }
+              }
+            });
+          } else if (typeof value === 'string' && value && !hideValueIds.includes(value)) {
+            if (!valueHitMap.has(value)) {
+              valueHitMap.set(value, { hitIds: [] });
             }
-
-            return filter.showOnlyValueIds.includes(valueId);
-          },
-        );
-        docCountsToShow.forEach((d) => {
-          const id = d.key;
-          const hitIds = d.hitIds;
-
-          if (filterValuesMap.has(id)) {
-            filterValuesMap.set(id, filterValuesMap.get(id)!.concat(hitIds));
-          } else {
-            filterValuesMap.set(id, hitIds);
+            const entry = valueHitMap.get(value);
+            if (entry && hit._id && !entry.hitIds.includes(hit._id)) {
+              entry.hitIds.push(hit._id);
+            }
           }
-        });
-      });
-      const filterValues: FilterOptionValueModel[] = Array.from(
-        filterValuesMap,
-      ).map(([id, filterHitIds]) => ({
-        ids: [id],
-        filterHitIds: filterHitIds,
+        }
+      }
+      const valueIds = Array.from(valueHitMap.keys());
+      let labelsMap: Map<string, string> = new Map();
+      if (valueIds.length > 0) {
+        try {
+          const labelResults = await this.sparql.getLabels(valueIds);
+          labelsMap = new Map(labelResults.map((l: { '@id': string, label: string }) => [l['@id'], l.label]));
+        } catch (e) {
+          console.warn('[FilterService] Failed to fetch labels via SPARQL:', e);
+        }
+      }
+      filter.values = Array.from(valueHitMap.entries()).map(([v, { hitIds }]) => ({
+        ids: [v],
+        label: labelsMap.get(v) || v,
+        filterHitIds: hitIds,
       }));
+    }
 
-      const clusteredFilterValues =
-        this.clusters.clusterFilterOptionValues(filterValues);
-      filter.values = clusteredFilterValues;
+    if (FilterService.DEBUG) {
+      console.log('[FilterService] filterOptions after update:', JSON.parse(JSON.stringify(filterOptions)));
     }
     this.options.next(filterOptions);
   }
 
+  // ... (rest of the code remains the same)
   toggleMultiple(filters: FilterModel[]) {
     const updatedEnabledFilters = this.enabled.value;
     for (const filter of filters) {
@@ -318,6 +329,7 @@ export class FilterService {
     console.log(
       'Toggled filter, triggering new search (where filters will be temporarily cleared)',
     );
+
     this.enabled.next(updatedEnabledFilters);
     this.searchTrigger.emit({ clearFilters: true });
   }
@@ -341,32 +353,44 @@ export class FilterService {
   }
 
   private _getOptionValueIds(filterId: string): string[] {
+
+
     // TODO: Reduce number of calls if necessary for performance reasons
-    return this.getOptionById(filterId).values.flatMap((v) => v.ids);
+    const option = this.getOptionById(filterId);
+    const valueIds = option?.values?.flatMap((v) => v.ids) || [];
+
+    return valueIds;
   }
 
   shouldShow(filterId: string): boolean {
-    const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
+
+
+    const optionValueIds = this._getOptionValueIds(filterId);
+    const hasOptionsToShow = optionValueIds.length > 0;
+
     const option: FilterOptionModel = this.getOptionById(filterId);
 
     if (!option.showOnlyForSelectedFilters) {
+
       return hasOptionsToShow;
     }
 
     const showOnlyForSelectedFilters: FilterOptionsIdsModel =
       option.showOnlyForSelectedFilters;
 
-    return (
-      hasOptionsToShow &&
-      this._shouldShowBasedOnFilters(showOnlyForSelectedFilters)
-    );
+    const shouldShowBasedOnFilters = this._shouldShowBasedOnFilters(showOnlyForSelectedFilters);
+    const result = hasOptionsToShow && shouldShowBasedOnFilters;
+
+    return result;
   }
 
   private _shouldShowBasedOnFilters(
     showOnlyForSelectedFilters: FilterOptionsIdsModel,
   ): boolean {
+
     const enabledFilters: FilterOptionsIdsModel =
       this.data.convertFiltersToIdsFormat(this.enabled.value);
+
     for (const enabledFilter of Object.values(enabledFilters)) {
       for (const showOnlyForSelectedFilter of Object.values(
         showOnlyForSelectedFilters,
@@ -427,6 +451,8 @@ export class FilterService {
   }
 
   clearEnabled() {
+
+
     this.prevEnabled = this.enabled.value;
     console.log(
       'Clearing enabled filters, saved current filters',

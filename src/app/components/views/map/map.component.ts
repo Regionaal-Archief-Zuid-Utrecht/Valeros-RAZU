@@ -87,10 +87,10 @@ export class MapComponent implements OnInit, OnDestroy {
                     });
 
                     // Add the widgets to the bottom-right corner of the view
-                    this.view.ui.add(legendExpand, "bottom-right");
+                    this.view.ui.add(legendExpand, "top-right");
 
                     // Move zoom buttons to bottom-right
-                    this.view.ui.move(["zoom"], "bottom-right");
+                    this.view.ui.move(["zoom"], "top-right");
                 }
             }, (error: any) => {
                 console.error('Error loading map:', error);

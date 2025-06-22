@@ -112,7 +112,7 @@ export class NodeComponent implements OnInit, OnChanges {
     if (!this.node) {
       return;
     }
-    console.log(this.node);
+    // console.log(this.node);
     this.id = this.nodes.getId(this.node);
   }
 

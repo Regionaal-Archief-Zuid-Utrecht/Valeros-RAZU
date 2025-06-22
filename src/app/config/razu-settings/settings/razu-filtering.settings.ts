@@ -24,39 +24,27 @@ const hideFilterOptionValueIds: string[] = [
 export const razuFilteringSettings: FilteringSettings = {
   ...filteringSettings,
   filterOptions: {
-    archiefVormer: {
-      label: 'Archiefvormer',
-      fieldIds: ['archiefvormer'],
+    type: {
+      label: 'Type',
+      fieldIds: ['type'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    archief: {
-      label: 'Archief',
-      fieldIds: ['archief'],
+    source: {
+      label: 'Bron',
+      fieldIds: ['source'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    aggregatieniveau: {
-      label: 'Aggregatieniveau',
-      fieldIds: ['aggregatieniveau'],
+    participants: {
+      label: 'Deelnemers',
+      fieldIds: ['participants'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    classificatie: {
-      label: 'Classificatie',
-      fieldIds: ['classificatie'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    licenties: {
-      label: 'Licenties',
-      fieldIds: ['licenties'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    wettelijke_beperkingen_openbaarheid: {
-      label: 'Wettelijke beperkingen openbaarheid',
-      fieldIds: ['wettelijke_beperkingen_openbaarheid'],
+    location: {
+      label: 'Locatie',
+      fieldIds: ['location'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
