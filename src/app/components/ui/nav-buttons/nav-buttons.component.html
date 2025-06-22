@@ -1,0 +1,20 @@
+<div [ngClass]="layout === 'center-grid' ? 'center-grid' : 'bottom-tabs'">
+  <ng-container *ngIf="layout === 'center-grid'; else tabs">
+    <div class="button-grid">
+      <button *ngFor="let btn of buttons"
+              class="nav-btn"
+              (click)="navigate(btn.route)">
+        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+        <span class="nav-label">{{ btn.label }}</span>
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #tabs>
+    <button *ngFor="let btn of buttons"
+            class="nav-btn"
+            (click)="navigate(btn.route)">
+      <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+      <span class="nav-label">{{ btn.label }}</span>
+    </button>
+  </ng-template>
+</div>

@@ -15,10 +15,9 @@ import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-sea
 import { HomeIntroComponent } from './home-intro/home-intro.component';
 import { MapComponent } from '../../map/map.component';
 import { AboutComponent } from "../../ui/about/about.component";
-import { NavButtonsComponent } from '../../ui/nav-buttons/nav-buttons.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-map-home',
   standalone: true,
   imports: [
     HomeIntroComponent,
@@ -32,13 +31,12 @@ import { NavButtonsComponent } from '../../ui/nav-buttons/nav-buttons.component'
     HomeIntroBelowSearchComponent,
     LangSwitchComponent,
     MapComponent,
-    AboutComponent,
-    NavButtonsComponent
+    AboutComponent
   ],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './map-home.component.html',
+  styleUrls: ['./map-home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class MapHomeComponent implements OnInit {
   constructor(
     public search: SearchService,
     public viewModes: ViewModeService,

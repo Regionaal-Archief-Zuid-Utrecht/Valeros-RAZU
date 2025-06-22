@@ -31,6 +31,7 @@ import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
 import { AboutComponent } from "../../ui/about/about.component";
+import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
   selector: 'app-search',
@@ -53,7 +54,8 @@ import { AboutComponent } from "../../ui/about/about.component";
     LangSwitchComponent,
     ViewModeSelectComponent,
     ViewContainerComponent,
-    AboutComponent
+    AboutComponent,
+    NavButtonsComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
