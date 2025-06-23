@@ -34,7 +34,13 @@ export class FilterOptionsComponent {
     public ui: UiService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Debug: log enabled filters and filter options after navigation
+    setTimeout(() => {
+      console.log('[FilterOptionsComponent] enabled filters:', this.filters.enabled.value);
+      console.log('[FilterOptionsComponent] filter options:', this.filters.options.value);
+    }, 500); // Delay to allow async filter updates
+  }
 
   protected readonly Object = Object;
   protected readonly FilterType = FilterType;

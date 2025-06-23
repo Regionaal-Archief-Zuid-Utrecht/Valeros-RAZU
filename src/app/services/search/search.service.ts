@@ -182,14 +182,20 @@ export class SearchService {
   private appliedPendingFilters = false;
 
   initSearchOnUrlChange() {
-    this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
+    this.route.queryParams.pipe(take(1)).subscribe(async (queryParams) => {
       if (SearchService.DEBUG) {
         console.log('INITIAL LOAD');
       }
       const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
       if (filtersParam) {
-        this.pendingFiltersParam = filtersParam;
-        this.appliedPendingFilters = false;
+        // 1. Set enabled filters from URL
+        this.filters.onUpdateFromURLParam(filtersParam);
+        // 2. Run a search to get hits for those filters
+        await this.execute(false, false);
+        // 3. Update filter options so UI can render enabled filters/values
+        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
+        this.pendingFiltersParam = null;
+        this.appliedPendingFilters = true;
       }
       setTimeout(() => this._searchOnUrlChange(queryParams));
     });
@@ -206,13 +212,17 @@ export class SearchService {
       }
     });
 
-    this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
+    this.route.queryParams.pipe(skip(1)).subscribe(async (queryParams: Params) => {
       const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
       if (filtersParam) {
         if (SearchService.DEBUG) {
           console.log('[SearchService] Applying filters from URL param:', filtersParam);
         }
         this.filters.onUpdateFromURLParam(filtersParam);
+        // 1. Run a search to get hits for those filters
+        await this.execute(false, false);
+        // 2. Update filter options so UI can render enabled filters/values
+        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
       }
       this._searchOnUrlChange(queryParams);
     });
@@ -262,7 +272,7 @@ export class SearchService {
     return { total, isCapped };
   }
 
-  async execute(clearResults = false, clearFilters = true) {
+  async execute(clearResults = false, clearFilters = false) {
     // if (this.queryStr === '') {
     //   return;
     // }

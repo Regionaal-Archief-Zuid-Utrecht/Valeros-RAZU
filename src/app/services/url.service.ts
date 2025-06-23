@@ -20,7 +20,7 @@ export class UrlService {
    * Ensure the ignoreQueryParamChange flag is always reset after navigation.
    * This prevents stuck state if navigation is triggered by the user (routerLink).
    */
-  private static DEBUG = false;
+  private static DEBUG = true;
   constructor(
     private details: DetailsService,
     private filters: FilterService,
@@ -80,11 +80,13 @@ export class UrlService {
       this.data.convertFiltersToIdsFormat(filters),
     );
 
-    console.log(
-      'Updating URL to reflect filters',
-      enabledFiltersParam.slice(0, 100) + '...',
-      filters,
-    );
+    if (UrlService.DEBUG) {
+      console.log(
+        'Updating URL to reflect filters',
+        enabledFiltersParam.slice(0, 100) + '...',
+        filters,
+      );
+    }
 
     void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
   }
@@ -92,7 +94,9 @@ export class UrlService {
   private async _updateUrlParam(key: string, param: string | null) {
     // Only set ignoreQueryParamChange for programmatic navigation, NOT for user navigation.
     this.ignoreQueryParamChange = true;
-    console.log('[UrlService] Setting ignoreQueryParamChange=true before programmatic navigation');
+    if (UrlService.DEBUG) {
+      console.log('[UrlService] Setting ignoreQueryParamChange=true before programmatic navigation');
+    }
     await this.router.navigate([], {
       queryParams: { [key]: param },
       queryParamsHandling: 'merge',
@@ -129,12 +133,7 @@ export class UrlService {
         null,
       );
       return processedResponse.url;
-      // url = this.addParamToUrl(
-      //   url,
-      //   'token',
-      //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTE3MDY0NjQsIm5iZiI6MTcxMTcwNjQ2NCwiZXhwIjoxNzQzMjQyNDY0fQ.ViNS0wWml0EwkF0z75G4cNZxKupYQMLiVB_PQ5kNQm8',
-      // );
-      // return url;
+
     }
 
     if (linkToDetails) {

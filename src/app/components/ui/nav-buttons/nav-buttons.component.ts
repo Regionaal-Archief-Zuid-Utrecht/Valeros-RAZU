@@ -129,12 +129,4 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
         }
     }
 
-    navigate(route: string) {
-        // Special case for Verhalen
-        if (route === '/verhalen') {
-            this.router.navigateByUrl('/search?filters=%7B%7D&q=');
-        } else {
-            this.router.navigate([route]);
-        }
-    }
 }
