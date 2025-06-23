@@ -20,6 +20,7 @@ export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
             'archief',
             'classificatie',
             'archiefvormer',
+            'locatie'
           ],
         },
       ],

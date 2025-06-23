@@ -28,17 +28,21 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
   styleUrl: './filter-options.component.scss',
 })
 export class FilterOptionsComponent {
+
+  private static DEBUG = false;
   constructor(
     public filters: FilterService,
     public settings: SettingsService,
     public ui: UiService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Debug: log enabled filters and filter options after navigation
     setTimeout(() => {
-      console.log('[FilterOptionsComponent] enabled filters:', this.filters.enabled.value);
-      console.log('[FilterOptionsComponent] filter options:', this.filters.options.value);
+      if (FilterOptionsComponent.DEBUG) {
+        console.log('[FilterOptionsComponent] enabled filters:', this.filters.enabled.value);
+        console.log('[FilterOptionsComponent] filter options:', this.filters.options.value);
+      }
     }, 500); // Delay to allow async filter updates
   }
 

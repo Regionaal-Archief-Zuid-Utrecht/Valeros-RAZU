@@ -63,6 +63,8 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
 export class SearchComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
+  private static DEBUG = false;
+
   constructor(
     public search: SearchService,
     public viewModes: ViewModeService,
@@ -76,7 +78,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        console.log('[Router] NavigationEnd:', event.urlAfterRedirects, window.location.search);
+        if (SearchComponent.DEBUG) {
+          console.log('[Router] NavigationEnd:', event.urlAfterRedirects, window.location.search);
+        }
       }
     });
   }

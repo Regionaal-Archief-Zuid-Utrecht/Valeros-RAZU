@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 export class SearchHitsService {
   private _hits: SearchHit<ElasticNodeModel>[] = [];
   constructor(private data: DataService) { }
-  private static DEBUG = false;
+  private static DEBUG = true;
 
   parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits

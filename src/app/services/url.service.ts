@@ -20,7 +20,7 @@ export class UrlService {
    * Ensure the ignoreQueryParamChange flag is always reset after navigation.
    * This prevents stuck state if navigation is triggered by the user (routerLink).
    */
-  private static DEBUG = true;
+  private static DEBUG = false;
   constructor(
     private details: DetailsService,
     private filters: FilterService,
