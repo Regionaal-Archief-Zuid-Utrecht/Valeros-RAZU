@@ -31,8 +31,11 @@ interface NavButton {
     styleUrls: ['./nav-buttons.component.scss']
 })
 export class NavButtonsComponent implements OnInit, OnDestroy {
+    private static DEBUG = false;
     constructor(private router: Router, private routing: RoutingService) {
-        console.log('[NavButtonsComponent] constructed');
+        if (NavButtonsComponent.DEBUG) {
+            console.log('[NavButtonsComponent] constructed');
+        }
     }
 
     @Input() layout: 'center-grid' | 'bottom-tabs' | undefined;
@@ -94,7 +97,9 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
     private routeSub?: Subscription;
 
     debugRoute(btn: NavButton) {
-        console.log('[NavButtonsComponent] Navigating with route:', btn.route);
+        if (NavButtonsComponent.DEBUG) {
+            console.log('[NavButtonsComponent] Navigating with route:', btn.route);
+        }
     }
 
     isRouteObject(route: any): route is { path: string, queryParams?: any } {
@@ -108,7 +113,9 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                 this.setLayout(event.urlAfterRedirects || event.url);
             }
         });
-        console.log('[NavButtonsComponent] button routes:', this.buttons.map(b => b.route));
+        if (NavButtonsComponent.DEBUG) {
+            console.log('[NavButtonsComponent] button routes:', this.buttons.map(b => b.route));
+        }
     }
 
     ngOnDestroy() {

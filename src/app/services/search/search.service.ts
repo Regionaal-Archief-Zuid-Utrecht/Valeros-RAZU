@@ -39,6 +39,8 @@ export class SearchService {
 
   private _searchQueryId = 0;
 
+  private static DEBUG = false;
+
   constructor(
     private url: UrlService,
     private elastic: ElasticService,
@@ -116,9 +118,13 @@ export class SearchService {
   initSearchOnFilterChange() {
     this.filters.searchTrigger.subscribe((s) => {
       if (s.clearFilters) {
-        console.log('-- Searching without filters to retrieve options');
+        if (SearchService.DEBUG) {
+          console.log('-- Searching without filters to retrieve options');
+        }
       } else {
-        console.log('-- Searching with re-applied filters');
+        if (SearchService.DEBUG) {
+          console.log('-- Searching with re-applied filters');
+        }
       }
       void this.execute(true, s.clearFilters);
     });
@@ -126,7 +132,9 @@ export class SearchService {
 
   initSearchOnEndpointChange() {
     this.endpoints.enabledIds.pipe(skip(1)).subscribe((_) => {
-      console.log('Searching because of updated endpoints...');
+      if (SearchService.DEBUG) {
+        console.log('Searching because of updated endpoints...');
+      }
       void this.execute(true);
     });
   }
@@ -135,16 +143,22 @@ export class SearchService {
     this.sort.current
       .pipe(skip(1))
       .subscribe((sortOption: SortOptionModel | undefined) => {
-        console.log('Searching because of sort update...', sortOption);
+        if (SearchService.DEBUG) {
+          console.log('Searching because of sort update...', sortOption);
+        }
         void this.execute(true);
       });
   }
 
   private _searchOnUrlChange(queryParams: Params) {
     if (this.url.ignoreQueryParamChange) {
-      console.warn('[SearchService] Ignoring query param change because ignoreQueryParamChange=true');
+      if (SearchService.DEBUG) {
+        console.warn('[SearchService] Ignoring query param change because ignoreQueryParamChange=true');
+      }
     } else {
-      console.log('[SearchService] Handling query param change, ignoreQueryParamChange=false');
+      if (SearchService.DEBUG) {
+        console.log('[SearchService] Handling query param change, ignoreQueryParamChange=false');
+      }
     }
 
     const navigatedToDetails = this.details.isShowing();
@@ -156,7 +170,9 @@ export class SearchService {
     const queryStrChanged = queryStr !== this.queryStr;
     if (queryStrChanged) {
       this.queryStr = queryStr;
-      console.log('Searching because of query string update');
+      if (SearchService.DEBUG) {
+        console.log('Searching because of query string update');
+      }
       void this.execute(true);
       return;
     }
@@ -167,7 +183,9 @@ export class SearchService {
 
   initSearchOnUrlChange() {
     this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
-      console.log('INITIAL LOAD');
+      if (SearchService.DEBUG) {
+        console.log('INITIAL LOAD');
+      }
       const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
       if (filtersParam) {
         this.pendingFiltersParam = filtersParam;
@@ -179,7 +197,9 @@ export class SearchService {
     // Listen for filter options becoming available, apply pending filters ONCE
     this.filters.options.subscribe((options) => {
       if (!this.appliedPendingFilters && this.pendingFiltersParam && options && Object.keys(options).length > 0) {
-        console.log('[SearchService] Applying pending filters from URL param:', this.pendingFiltersParam);
+        if (SearchService.DEBUG) {
+          console.log('[SearchService] Applying pending filters from URL param:', this.pendingFiltersParam);
+        }
         this.filters.onUpdateFromURLParam(this.pendingFiltersParam);
         this.pendingFiltersParam = null;
         this.appliedPendingFilters = true;
@@ -189,6 +209,9 @@ export class SearchService {
     this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
       const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
       if (filtersParam) {
+        if (SearchService.DEBUG) {
+          console.log('[SearchService] Applying filters from URL param:', filtersParam);
+        }
         this.filters.onUpdateFromURLParam(filtersParam);
       }
       this._searchOnUrlChange(queryParams);
@@ -248,9 +271,11 @@ export class SearchService {
 
     this._searchQueryId++;
 
-    console.log(
-      `Searching for: ${this.queryStr}. Clearing results: ${clearResults}, clearing filters: ${clearFilters}`,
-    );
+    if (SearchService.DEBUG) {
+      console.log(
+        `Searching for: ${this.queryStr}. Clearing results: ${clearResults}, clearing filters: ${clearFilters}`,
+      );
+    }
     if (clearResults) {
       this.clearResults();
     }

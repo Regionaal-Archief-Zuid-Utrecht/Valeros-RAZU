@@ -12,6 +12,8 @@ export class ScrollService {
 
   private _scrollIdToReturnTo: string | null = null;
 
+  private static DEBUG = false;
+
   constructor(
     public nodes: NodeService,
     public details: DetailsService,
@@ -56,11 +58,15 @@ export class ScrollService {
     //  Note that search results remain in the DOM when going to the details view (but invisible), therefore are not reloaded asynchronously anymore, drastically reducing the time we need to wait before initiating scroll
     setTimeout(() => {
       if (!this._scrollContainer) {
-        console.warn('Scroll container is undefined');
+        if (ScrollService.DEBUG) {
+          console.warn('Scroll container is undefined');
+        }
         return;
       }
       if (!idToScrollTo) {
-        console.log('No ID to scroll to');
+        if (ScrollService.DEBUG) {
+          console.log('No ID to scroll to');
+        }
         return;
       }
 
@@ -70,14 +76,18 @@ export class ScrollService {
 
       if (!searchResultElem) {
         // TODO: This seems to occur after having clicked from details page to details page for a while, and then returning all the way to the search page. Maybe because of slow page rendering?
-        console.warn('Could not find scroll ID', idToScrollTo);
+        if (ScrollService.DEBUG) {
+          console.warn('Could not find scroll ID', idToScrollTo);
+        }
         return;
       }
-      console.log(
-        'Scrolling back to search result',
-        idToScrollTo,
-        searchResultElem,
-      );
+      if (ScrollService.DEBUG) {
+        console.log(
+          'Scrolling back to search result',
+          idToScrollTo,
+          searchResultElem,
+        );
+      }
 
       const containerTop =
         this._scrollContainer.nativeElement.getBoundingClientRect().top;

@@ -11,6 +11,7 @@ import { DataService } from '../data.service';
 export class SearchHitsService {
   private _hits: SearchHit<ElasticNodeModel>[] = [];
   constructor(private data: DataService) { }
+  private static DEBUG = false;
 
   parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
@@ -46,13 +47,17 @@ export class SearchHitsService {
     const allHits: SearchHit<ElasticNodeModel>[] = [];
 
     // Debug logging
-    console.log('SearchResponses:', searchResponses);
+    if (SearchHitsService.DEBUG) {
+      console.log('SearchResponses:', searchResponses);
+    }
     let totalHits = 0;
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
       totalHits += hits.length;
-      console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
+      if (SearchHitsService.DEBUG) {
+        console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
+      }
 
       hits.forEach((hit) => {
         if (!hit._source) {
@@ -94,12 +99,12 @@ export class SearchHitsService {
         allHits.push(hit);
 
         // Log de eerste paar hits voor debugging
-        //if (allHits.length <= 3) {
-        //console.log(`Hit ${allHits.length}:`, {
-        //  id: id,
-        //  source: hit._source
-        //});
-        //}
+        if (SearchHitsService.DEBUG && allHits.length <= 3) {
+          console.log(`Hit ${allHits.length}:`, {
+            id: id,
+            source: hit._source
+          });
+        }
       });
     });
 

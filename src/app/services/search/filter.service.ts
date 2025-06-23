@@ -31,7 +31,7 @@ interface SearchTriggerModel {
 export class FilterService {
   public setFromUrlParam = false;
   // Set this to true to enable debug logs in updateFilterOptionValues
-  private static DEBUG = true;
+  private static DEBUG = false;
   searchTrigger: EventEmitter<SearchTriggerModel> =
     new EventEmitter<SearchTriggerModel>();
 
@@ -110,9 +110,11 @@ export class FilterService {
       filter.type !== FilterType.Value &&
       filter.type !== FilterType.FieldAndValue;
     if (isUnknownFilterType) {
-      console.warn(
-        'Unknown filter type, enabled filter not checked against current options',
-      );
+      if (FilterService.DEBUG) {
+        console.warn(
+          'Unknown filter type, enabled filter not checked against current options',
+        );
+      }
       return false;
     }
 
@@ -151,23 +153,27 @@ export class FilterService {
     const shouldUpdateEnabledFilters =
       JSON.stringify(restoredFilters) !== JSON.stringify(this.enabled.value);
     if (shouldUpdateEnabledFilters) {
-      console.log(
-        'Restoring previously applied filters and triggering new search with these filters:',
-        restoredFilters,
-        this.enabled.value,
-      );
+      if (FilterService.DEBUG) {
+        console.log(
+          'Restoring previously applied filters and triggering new search with these filters:',
+          restoredFilters,
+          this.enabled.value,
+        );
+      }
       this.enabled.next(restoredFilters);
       this.searchTrigger.emit({ clearFilters: false });
     }
   }
 
   onUpdateFromURLParam(filtersParam: string) {
-  this.setFromUrlParam = true;
-    console.log(
-      '[FilterService] Update filters based on URL param:',
-      filtersParam.slice(0, 100),
-      '...',
-    );
+    this.setFromUrlParam = true;
+    if (FilterService.DEBUG) {
+      console.log(
+        '[FilterService] Update filters based on URL param:',
+        filtersParam.slice(0, 100),
+        '...',
+      );
+    }
     const urlFilters: FilterOptionsIdsModel = JSON.parse(filtersParam);
     const filters: FilterModel[] =
       this.data.convertFiltersFromIdsFormat(urlFilters);
@@ -175,7 +181,9 @@ export class FilterService {
     this.skipRestoreOnce = true;
     this.enabled.next(filters);
 
-    console.log('[FilterService] Emitting searchTrigger after URL param update', filters);
+    if (FilterService.DEBUG) {
+      console.log('[FilterService] Emitting searchTrigger after URL param update', filters);
+    }
     this.searchTrigger.emit({ clearFilters: false });
   }
 
@@ -341,9 +349,11 @@ export class FilterService {
       }
     }
 
-    console.log(
-      'Toggled filter, triggering new search (where filters will be temporarily cleared)',
-    );
+    if (FilterService.DEBUG) {
+      console.log(
+        'Toggled filter, triggering new search (where filters will be temporarily cleared)',
+      );
+    }
 
     this.enabled.next(updatedEnabledFilters);
     this.searchTrigger.emit({ clearFilters: true });
@@ -469,10 +479,12 @@ export class FilterService {
 
 
     this.prevEnabled = this.enabled.value;
-    console.log(
-      'Clearing enabled filters, saved current filters',
-      this.prevEnabled,
-    );
+    if (FilterService.DEBUG) {
+      console.log(
+        'Clearing enabled filters, saved current filters',
+        this.prevEnabled,
+      );
+    }
     this.enabled.next([]);
   }
 }

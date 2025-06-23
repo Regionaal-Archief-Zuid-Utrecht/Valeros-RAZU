@@ -6,7 +6,8 @@ import { SparqlService } from '../sparql.service';
   providedIn: 'root',
 })
 export class NodeService {
-  constructor(private sparql: SparqlService) {}
+  private static DEBUG = false;
+  constructor(private sparql: SparqlService) { }
 
   getObjs(node: NodeModel | undefined, preds: string[]): NodeObj[] {
     if (!node) {
@@ -66,15 +67,17 @@ export class NodeService {
     if (idFromAtId) {
       return idFromAtId;
     }
-    
+
     // Als @id niet bestaat, probeer _id
     const idFromUnderscoreId = this.getObjValues(node, ['_id'])[0];
     if (idFromUnderscoreId) {
       return idFromUnderscoreId;
     }
-    
+
     // Log voor debugging
-    console.warn('Geen ID gevonden voor node:', node);
+    if (NodeService.DEBUG) {
+      console.warn('Geen ID gevonden voor node:', node);
+    }
     return '';
   }
 

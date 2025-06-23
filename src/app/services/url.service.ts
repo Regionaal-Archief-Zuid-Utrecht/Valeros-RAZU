@@ -20,6 +20,7 @@ export class UrlService {
    * Ensure the ignoreQueryParamChange flag is always reset after navigation.
    * This prevents stuck state if navigation is triggered by the user (routerLink).
    */
+  private static DEBUG = false;
   constructor(
     private details: DetailsService,
     private filters: FilterService,
@@ -70,7 +71,9 @@ export class UrlService {
   async updateUrlToReflectFilters(filters: FilterModel[]) {
     if ((this.filters as any).setFromUrlParam) {
       (this.filters as any).setFromUrlParam = false;
-      console.log('[UrlService] Skipping URL update because filters set from URL param');
+      if (UrlService.DEBUG) {
+        console.log('[UrlService] Skipping URL update because filters set from URL param');
+      }
       return;
     }
     const enabledFiltersParam = JSON.stringify(
