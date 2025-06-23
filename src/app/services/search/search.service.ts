@@ -142,8 +142,9 @@ export class SearchService {
 
   private _searchOnUrlChange(queryParams: Params) {
     if (this.url.ignoreQueryParamChange) {
-      console.log('Ignoring query param change');
-      return;
+      console.warn('[SearchService] Ignoring query param change because ignoreQueryParamChange=true');
+    } else {
+      console.log('[SearchService] Handling query param change, ignoreQueryParamChange=false');
     }
 
     const navigatedToDetails = this.details.isShowing();
@@ -161,19 +162,35 @@ export class SearchService {
     }
   }
 
+  private pendingFiltersParam: string | null = null;
+  private appliedPendingFilters = false;
+
   initSearchOnUrlChange() {
     this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
       console.log('INITIAL LOAD');
-      const filtersParam: string | undefined =
-        queryParams[Settings.url.params.filters];
+      const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
       if (filtersParam) {
-        this.filters.onUpdateFromURLParam(filtersParam);
+        this.pendingFiltersParam = filtersParam;
+        this.appliedPendingFilters = false;
       }
-
       setTimeout(() => this._searchOnUrlChange(queryParams));
     });
 
+    // Listen for filter options becoming available, apply pending filters ONCE
+    this.filters.options.subscribe((options) => {
+      if (!this.appliedPendingFilters && this.pendingFiltersParam && options && Object.keys(options).length > 0) {
+        console.log('[SearchService] Applying pending filters from URL param:', this.pendingFiltersParam);
+        this.filters.onUpdateFromURLParam(this.pendingFiltersParam);
+        this.pendingFiltersParam = null;
+        this.appliedPendingFilters = true;
+      }
+    });
+
     this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
+      const filtersParam: string | undefined = queryParams[Settings.url.params.filters];
+      if (filtersParam) {
+        this.filters.onUpdateFromURLParam(filtersParam);
+      }
       this._searchOnUrlChange(queryParams);
     });
   }

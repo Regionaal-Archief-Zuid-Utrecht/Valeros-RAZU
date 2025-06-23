@@ -16,6 +16,10 @@ import { FilterService } from './search/filter.service';
 export class UrlService {
   ignoreQueryParamChange = false;
 
+  /**
+   * Ensure the ignoreQueryParamChange flag is always reset after navigation.
+   * This prevents stuck state if navigation is triggered by the user (routerLink).
+   */
   constructor(
     private details: DetailsService,
     private filters: FilterService,
@@ -26,6 +30,15 @@ export class UrlService {
   ) {
     this._initUpdateUrlOnFilterChange();
     this._initUpdateUrlOnEndpointChange();
+    // Always reset ignoreQueryParamChange after navigation
+    this.router.events.subscribe((event) => {
+      if (event.constructor.name === 'NavigationStart') {
+        if (this.ignoreQueryParamChange) {
+          console.log('[UrlService] Resetting ignoreQueryParamChange=false on NavigationStart');
+        }
+        this.ignoreQueryParamChange = false;
+      }
+    });
   }
 
   private _initUpdateUrlOnFilterChange() {
@@ -55,6 +68,11 @@ export class UrlService {
   }
 
   async updateUrlToReflectFilters(filters: FilterModel[]) {
+    if ((this.filters as any).setFromUrlParam) {
+      (this.filters as any).setFromUrlParam = false;
+      console.log('[UrlService] Skipping URL update because filters set from URL param');
+      return;
+    }
     const enabledFiltersParam = JSON.stringify(
       this.data.convertFiltersToIdsFormat(filters),
     );
@@ -69,12 +87,16 @@ export class UrlService {
   }
 
   private async _updateUrlParam(key: string, param: string | null) {
+    // Only set ignoreQueryParamChange for programmatic navigation, NOT for user navigation.
     this.ignoreQueryParamChange = true;
+    console.log('[UrlService] Setting ignoreQueryParamChange=true before programmatic navigation');
     await this.router.navigate([], {
       queryParams: { [key]: param },
       queryParamsHandling: 'merge',
     });
-    this.ignoreQueryParamChange = false;
+    // Instead of resetting here, always reset on NavigationStart (before route activation)
+    // so that ignoreQueryParamChange is never true during route/component init.
+    // The router.events subscription in the constructor handles this.
   }
 
   addParamToUrl(url: string, paramName: string, paramValue: string): string {

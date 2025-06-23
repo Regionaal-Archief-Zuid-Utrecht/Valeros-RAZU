@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Settings } from '../../../config/settings';
 import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
@@ -73,7 +73,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public settings: SettingsService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        console.log('[Router] NavigationEnd:', event.urlAfterRedirects, window.location.search);
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.scroll.initScrollContainer(this.scrollContainer);

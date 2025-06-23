@@ -29,6 +29,7 @@ interface SearchTriggerModel {
   providedIn: 'root',
 })
 export class FilterService {
+  public setFromUrlParam = false;
   // Set this to true to enable debug logs in updateFilterOptionValues
   private static DEBUG = true;
   searchTrigger: EventEmitter<SearchTriggerModel> =
@@ -40,6 +41,8 @@ export class FilterService {
   );
   options: BehaviorSubject<FilterOptionsModel> =
     new BehaviorSubject<FilterOptionsModel>(Settings.filtering.filterOptions);
+
+  private skipRestoreOnce = false;
 
   constructor(
     public elastic: ElasticService,
@@ -84,6 +87,13 @@ export class FilterService {
 
   private _initRestorePreviousFiltersOnOptionsChange() {
     this.options.subscribe((newOptions) => {
+      if (this.skipRestoreOnce) {
+        if (FilterService.DEBUG) {
+          console.log('[FilterService] Skipping restore of previous filters due to navigation');
+        }
+        this.skipRestoreOnce = false;
+        return;
+      }
       this._restorePreviousFilters();
     });
   }
@@ -152,8 +162,9 @@ export class FilterService {
   }
 
   onUpdateFromURLParam(filtersParam: string) {
+  this.setFromUrlParam = true;
     console.log(
-      'Update filters based on URL param:',
+      '[FilterService] Update filters based on URL param:',
       filtersParam.slice(0, 100),
       '...',
     );
@@ -161,7 +172,11 @@ export class FilterService {
     const filters: FilterModel[] =
       this.data.convertFiltersFromIdsFormat(urlFilters);
 
+    this.skipRestoreOnce = true;
     this.enabled.next(filters);
+
+    console.log('[FilterService] Emitting searchTrigger after URL param update', filters);
+    this.searchTrigger.emit({ clearFilters: false });
   }
 
   // new helper function

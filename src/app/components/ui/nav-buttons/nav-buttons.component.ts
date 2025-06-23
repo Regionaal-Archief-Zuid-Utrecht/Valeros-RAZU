@@ -20,7 +20,7 @@ import {
 interface NavButton {
     label: string;
     icon: any; // feather icon reference
-    route: string;
+    route: string | { path: string, queryParams?: any };
 }
 
 @Component({
@@ -31,14 +31,61 @@ interface NavButton {
     styleUrls: ['./nav-buttons.component.scss']
 })
 export class NavButtonsComponent implements OnInit, OnDestroy {
+    constructor(private router: Router, private routing: RoutingService) {
+        console.log('[NavButtonsComponent] constructed');
+    }
+
     @Input() layout: 'center-grid' | 'bottom-tabs' | undefined;
 
     buttons: NavButton[] = [
         { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
-        { label: 'Alle panden', icon: featherHome, route: '/alle-panden' },
-        { label: 'Alle straten', icon: featherNavigation, route: '/alle-straten' },
+        {
+            label: 'Alle panden', icon: featherHome, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://w3id.org/italia/onto/CLV/Feature']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
+        {
+            label: 'Alle straten', icon: featherNavigation, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
+
         { label: 'Kaart', icon: featherMap, route: '/map' },
-        { label: 'Verhalen', icon: featherBook, route: '/verhalen' },
+        {
+            label: 'Verhalen', icon: featherBook, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://schema.org/CreativeWork']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
         { label: 'Over', icon: featherInfo, route: '/colofon' },
         { label: 'Contact', icon: featherMail, route: '/contact' },
         { label: 'Referenties', icon: featherStar, route: '/referenties' },
@@ -46,7 +93,13 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
 
     private routeSub?: Subscription;
 
-    constructor(private router: Router, private routing: RoutingService) { }
+    debugRoute(btn: NavButton) {
+        console.log('[NavButtonsComponent] Navigating with route:', btn.route);
+    }
+
+    isRouteObject(route: any): route is { path: string, queryParams?: any } {
+        return typeof route === 'object' && route !== null && 'path' in route;
+    }
 
     ngOnInit() {
         this.setLayout(this.router.url);
@@ -55,6 +108,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                 this.setLayout(event.urlAfterRedirects || event.url);
             }
         });
+        console.log('[NavButtonsComponent] button routes:', this.buttons.map(b => b.route));
     }
 
     ngOnDestroy() {
