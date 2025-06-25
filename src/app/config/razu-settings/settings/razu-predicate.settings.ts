@@ -32,7 +32,7 @@ export const razuParentPredicates: string[] = [
   'https://schema.org/hadPrimarySource',
 ];
 
-export const razuFilePredicates: string[] = [...filePredicates, 'bestand_url'];
+export const razuFilePredicates: string[] = [...filePredicates, 'url_bestand'];
 
 export const razuHopFilePredicates: string[][] = [
   [
