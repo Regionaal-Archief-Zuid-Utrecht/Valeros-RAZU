@@ -39,6 +39,10 @@ export const razuHopFilePredicates: string[][] = [
     'https://data.razu.nl/def/ldto/heeftRepresentatie',
     'https://data.razu.nl/def/ldto/URLBestand',
   ],
+  [
+    'https://schema.org/associatedMedia',
+    'https://schema.org/image'
+  ]
 ];
 
 export const razuPredicateSettings: PredicateSettings = {

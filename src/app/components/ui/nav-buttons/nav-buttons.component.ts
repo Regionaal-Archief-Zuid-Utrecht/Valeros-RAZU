@@ -50,7 +50,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                         type: {
                             type: 2,
                             fieldIds: ['type'],
-                            valueIds: ['https://w3id.org/italia/onto/CLV/Feature']
+                            valueIds: ['https://w3id.org/italia/onto/CLV/Address']
                         }
                     }),
                     q: ''
@@ -91,7 +91,21 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
         },
         { label: 'Over', icon: featherInfo, route: '/colofon' },
         { label: 'Contact', icon: featherMail, route: '/contact' },
-        { label: 'Referenties', icon: featherStar, route: '/referenties' },
+        {
+            label: 'Referenties', icon: featherStar, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://schema.org/ArchiveComponent']
+                        }
+                    }),
+                    q: ''
+                }
+            },
+        }
     ];
 
     private routeSub?: Subscription;
