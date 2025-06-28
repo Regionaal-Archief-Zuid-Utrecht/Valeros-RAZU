@@ -18,25 +18,24 @@ import { AboutComponent } from "../../ui/about/about.component";
 import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    HomeIntroComponent,
-    LangSwitchComponent,
-    HeaderComponent,
-    SearchInputComponent,
-    HeaderComponent,
-    ViewContainerComponent,
-    HomeIntroComponent,
-    CommonModule,
-    HomeIntroBelowSearchComponent,
-    LangSwitchComponent,
-    MapComponent,
-    AboutComponent,
-    NavButtonsComponent,
-  ],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    imports: [
+        HomeIntroComponent,
+        LangSwitchComponent,
+        HeaderComponent,
+        SearchInputComponent,
+        HeaderComponent,
+        ViewContainerComponent,
+        HomeIntroComponent,
+        CommonModule,
+        HomeIntroBelowSearchComponent,
+        LangSwitchComponent,
+        MapComponent,
+        AboutComponent,
+        NavButtonsComponent,
+    ],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   constructor(

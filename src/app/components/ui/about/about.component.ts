@@ -15,11 +15,10 @@ export enum AboutView {
 }
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [NgIcon, NgIf, TranslatePipe, NgClass],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss',
+    selector: 'app-about',
+    imports: [NgIcon, NgIf, TranslatePipe, NgClass],
+    templateUrl: './about.component.html',
+    styleUrl: './about.component.scss'
 })
 export class AboutComponent {
   @Input() view: AboutView = AboutView.ShowingSearch;

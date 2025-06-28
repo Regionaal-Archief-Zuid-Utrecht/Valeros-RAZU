@@ -12,7 +12,6 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
 
 @Component({
     selector: 'app-map',
-    standalone: true,
     imports: [CommonModule, HeaderComponent, NavButtonsComponent],
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss']

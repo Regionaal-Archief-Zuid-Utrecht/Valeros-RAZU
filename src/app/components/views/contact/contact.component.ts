@@ -9,17 +9,16 @@ import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [
-    HeaderComponent,
-    ViewContainerComponent,
-    NgClass,
-    TranslatePipe,
-    NgIcon,
-  ],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss',
+    selector: 'app-contact',
+    imports: [
+        HeaderComponent,
+        ViewContainerComponent,
+        NgClass,
+        TranslatePipe,
+        NgIcon,
+    ],
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
   protected readonly HeaderView = HeaderView;

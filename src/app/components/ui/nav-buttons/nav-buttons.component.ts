@@ -22,7 +22,6 @@ interface NavButton {
 
 @Component({
     selector: 'razu-nav-buttons',
-    standalone: true,
     imports: [CommonModule, RouterModule, NgIcon],
     templateUrl: './nav-buttons.component.html',
     styleUrls: ['./nav-buttons.component.scss']
