@@ -10,6 +10,7 @@ import {
 } from '../../../models/settings/render-component-settings.type';
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
 import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
+import { PicPersonobsComponent } from '../../../components/custom-render-components/by-type/pico-personobs/pic-personobs.component';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [
@@ -19,6 +20,12 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
         'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
       ],
     },
+    // {
+    //   component: PicPersonobsComponent,
+    //   predicates: [
+    //     'https://personsincontext.org/model#PersonObservation',
+    //   ],
+    // }
   ],
   [RenderMode.ByPredicate]: [
     ...renderComponentSettings[RenderMode.ByPredicate],

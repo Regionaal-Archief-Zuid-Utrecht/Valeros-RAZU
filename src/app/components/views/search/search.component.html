@@ -38,7 +38,7 @@
         <app-filter-options />
       </div>
 
-      <div class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
+      <div class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth content-scroll-container"
         [ngClass]="[settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '']" #scrollContainer>
         <app-details *ngIf="details.showing.value" />
 

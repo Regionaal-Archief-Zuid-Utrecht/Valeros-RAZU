@@ -66,12 +66,13 @@
       <div class="sm:pr-32">
         <app-node-renderer [node]="node" />
       </div>
-      <div
+      <!-- <div
         class="absolute"
         [ngClass]="[
           shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
         ]"
-      >
+      > -->
+      <div class="absolute right-6 bottom-6" s>
         <app-node-details-button [node]="node" *ngIf="showDetailsButton" />
       </div>
     </div>
