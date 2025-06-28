@@ -14,7 +14,7 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
     selector: 'app-map',
     imports: [CommonModule, HeaderComponent, NavButtonsComponent],
     templateUrl: './map.component.html',
-    styleUrls: ['./map.component.scss']
+    styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, OnDestroy {
     @ViewChild('mapViewNode', { static: true }) private mapViewEl!: ElementRef;

@@ -1,0 +1,89 @@
+@tailwind base;
+
+/* == See tailwind.config.js for remaining theme tweaks (e.g., changing primary color) == */
+
+
+@import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+
+@layer base {
+  .clickable {
+    @apply underline decoration-slate-300 cursor-pointer;
+  }
+}
+
+
+.float-ui-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border: none !important;
+  max-width: 300px !important;
+}
+
+
+.badge-md {
+  height: 1.5rem;
+}
+
+.badge {
+  @apply rounded-full;
+  @apply font-mono;
+}
+
+
+.collapse-title,
+:where(.collapse > input[type="checkbox"]),
+:where(.collapse > input[type="radio"]) {
+  padding: 0.25rem 1rem;
+  min-height: 0.5rem;
+}
+
+.collapse-arrow>.collapse-title::after {
+  top: 1rem;
+}
+
+
+tr {
+  border: none;
+}
+
+.table :where(th, td) {
+  padding: 0.25rem 0;
+}
+
+
+.checkbox {
+  @apply border-white;
+  --chkbg: white;
+  --chkfg: theme("colors.primary");
+}
+
+
+.border {
+  border: none;
+}
+
+
+*,
+::before,
+::after {
+
+  border-color: theme("colors.primary");
+}
+
+.font-mono {
+  font-variant-ligatures: none;
+}
+
+.input-bordered {
+
+  border: none;
+  outline: none !important;
+
+  &:focus-within {
+
+    border: none;
+  }
+}

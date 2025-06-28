@@ -34,7 +34,7 @@ import { AboutComponent } from "../../ui/about/about.component";
     AboutComponent
   ],
   templateUrl: './map-home.component.html',
-  styleUrls: ['./map-home.component.scss'],
+  styleUrls: ['./map-home.component.css'],
 })
 export class MapHomeComponent implements OnInit {
   constructor(

@@ -8,7 +8,7 @@ import { ViewModeService } from '../../../../../services/view-mode.service';
     selector: 'app-view-mode-select-option',
     imports: [NgIf, NgClass, NgIcon],
     templateUrl: './view-mode-select-option.component.html',
-    styleUrl: './view-mode-select-option.component.scss'
+    styleUrl: './view-mode-select-option.component.css'
 })
 export class ViewModeSelectOptionComponent {
   @Input() viewMode!: ViewMode;

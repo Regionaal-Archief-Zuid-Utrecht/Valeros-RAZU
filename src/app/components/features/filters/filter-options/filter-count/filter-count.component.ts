@@ -7,7 +7,7 @@ import { FilterType } from '../../../../../models/filters/filter.model';
     selector: 'app-filter-count',
     imports: [NgIf, TranslatePipe],
     templateUrl: './filter-count.component.html',
-    styleUrl: './filter-count.component.scss'
+    styleUrl: './filter-count.component.css'
 })
 export class FilterCountComponent {
   @Input() count?: string;

@@ -7,7 +7,7 @@ import { NodeLinkComponent } from '../node-link/node-link.component';
     selector: 'app-node-endpoint',
     imports: [NgIf, NodeLinkComponent],
     templateUrl: './node-endpoint.component.html',
-    styleUrl: './node-endpoint.component.scss'
+    styleUrl: './node-endpoint.component.css'
 })
 export class NodeEndpointComponent {
   @Input() endpointId?: string;

@@ -9,7 +9,7 @@ import { SearchService } from '../../../../services/search/search.service';
     selector: 'app-search-hits-counter',
     imports: [NgIf, TranslatePipe],
     templateUrl: './search-hits-counter.component.html',
-    styleUrl: './search-hits-counter.component.scss'
+    styleUrl: './search-hits-counter.component.css'
 })
 export class SearchHitsCounterComponent {
   constructor(

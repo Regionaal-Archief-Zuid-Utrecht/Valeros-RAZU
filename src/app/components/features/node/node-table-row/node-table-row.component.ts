@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'app-node-table-row',
     imports: [],
     templateUrl: './node-table-row.component.html',
-    styleUrl: './node-table-row.component.scss'
+    styleUrl: './node-table-row.component.css'
 })
 export class NodeTableRowComponent {
   @Input() label: string = '';

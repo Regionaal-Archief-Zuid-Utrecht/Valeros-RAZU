@@ -35,7 +35,7 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
         NavButtonsComponent,
     ],
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   constructor(

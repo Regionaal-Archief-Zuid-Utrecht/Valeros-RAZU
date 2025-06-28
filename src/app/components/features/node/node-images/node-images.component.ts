@@ -7,7 +7,7 @@ import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
     selector: 'app-node-images',
     imports: [NgIf, MiradorComponent],
     templateUrl: './node-images.component.html',
-    styleUrl: './node-images.component.scss'
+    styleUrl: './node-images.component.css'
 })
 export class NodeImagesComponent {
   @Input() imageUrls?: string[];

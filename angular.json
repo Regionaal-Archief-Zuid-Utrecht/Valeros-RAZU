@@ -40,8 +40,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "src/theme.scss",
+              "src/styles.css",
+              "src/theme.css",
               "node_modules/ngx-float-ui/css/theme-white.css",
               "node_modules/@arcgis/core/assets/esri/themes/light/main.css"
             ],
@@ -210,8 +210,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "src/theme.scss",
+              "src/styles.css",
+              "src/theme.css",
               "node_modules/ngx-float-ui/css/theme-white.css",
               "node_modules/@arcgis/core/assets/esri/themes/light/main.css"
             ],

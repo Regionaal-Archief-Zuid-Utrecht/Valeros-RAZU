@@ -10,7 +10,7 @@ import { UrlService } from '../../../../services/url.service';
     selector: 'app-node-permalink-button',
     imports: [NgIf, TranslatePipe],
     templateUrl: './node-permalink-button.component.html',
-    styleUrl: './node-permalink-button.component.scss'
+    styleUrl: './node-permalink-button.component.css'
 })
 export class NodePermalinkButtonComponent implements OnChanges {
   @Input() node: NodeModel | undefined;

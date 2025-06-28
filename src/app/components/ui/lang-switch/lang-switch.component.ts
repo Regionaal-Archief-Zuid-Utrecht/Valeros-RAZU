@@ -7,7 +7,7 @@ import { Settings } from '../../../config/settings';
     selector: 'app-lang-switch',
     imports: [NgClass, NgIf],
     templateUrl: './lang-switch.component.html',
-    styleUrl: './lang-switch.component.scss'
+    styleUrl: './lang-switch.component.css'
 })
 export class LangSwitchComponent {
   constructor(public translate: TranslateService) {}

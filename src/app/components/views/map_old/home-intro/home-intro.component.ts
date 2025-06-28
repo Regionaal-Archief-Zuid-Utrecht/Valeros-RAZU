@@ -7,7 +7,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslatePipe],
   templateUrl: './home-intro.component.html',
-  styleUrl: './home-intro.component.scss',
+  styleUrl: './home-intro.component.css',
 })
 export class HomeIntroComponent {
   constructor(

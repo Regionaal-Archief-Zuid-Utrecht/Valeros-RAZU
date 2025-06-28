@@ -32,7 +32,7 @@ export enum TableCellShowOptions {
         NgComponentOutlet,
     ],
     templateUrl: './node-table-cell.component.html',
-    styleUrl: './node-table-cell.component.scss'
+    styleUrl: './node-table-cell.component.css'
 })
 export class NodeTableCellComponent implements OnInit {
   @Input() pred?: string;

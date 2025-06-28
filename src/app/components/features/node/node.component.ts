@@ -60,7 +60,7 @@ import { NodeTypesComponent } from './node-types/node-types.component';
         MiradorComponent,
     ],
     templateUrl: './node.component.html',
-    styleUrl: './node.component.scss'
+    styleUrl: './node.component.css'
 })
 export class NodeComponent implements OnInit, OnChanges {
   @Input() node?: NodeModel;

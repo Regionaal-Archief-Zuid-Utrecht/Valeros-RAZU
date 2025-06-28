@@ -10,7 +10,7 @@ import { RoutingService } from './services/routing.service';
     selector: 'app-root',
     imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Valeros';

@@ -7,7 +7,7 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
     selector: 'app-ldto-dekking-in-tijd',
     imports: [HopLinkComponent, NgIf],
     templateUrl: './ldto-dekking-in-tijd.component.html',
-    styleUrl: './ldto-dekking-in-tijd.component.scss'
+    styleUrl: './ldto-dekking-in-tijd.component.css'
 })
 export class LdtoDekkingInTijdComponent extends PredicateRenderComponent {
   hasBeginDate = false;

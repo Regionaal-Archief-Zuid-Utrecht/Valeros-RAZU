@@ -21,7 +21,7 @@ import { NodeLinkComponent } from '../../node/node-link/node-link.component';
     TranslatePipe,
   ],
   templateUrl: './active-filters.component.html',
-  styleUrl: './active-filters.component.scss',
+  styleUrl: './active-filters.component.css',
 })
 export class ActiveFiltersComponent {
   isShown: boolean = false;

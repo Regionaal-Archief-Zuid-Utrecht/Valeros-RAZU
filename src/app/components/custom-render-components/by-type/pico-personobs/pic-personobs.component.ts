@@ -17,7 +17,7 @@ registerLocaleData(localeNl);
     selector: 'app-pic-personobs',
     imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon],
     templateUrl: './pic-personobs.component.html',
-    styleUrls: ['./pic-personobs.component.scss']
+    styleUrls: ['./pic-personobs.component.css']
 })
 export class PicPersonobsComponent extends TypeRenderComponent implements OnInit {
     // Arrays to store IDs retrieved from hop-link components

@@ -16,7 +16,7 @@ import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
     selector: 'app-filter-option',
     imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
     templateUrl: './filter-option.component.html',
-    styleUrl: './filter-option.component.scss'
+    styleUrl: './filter-option.component.css'
 })
 export class FilterOptionComponent implements OnInit {
   @Input() filterId?: string;

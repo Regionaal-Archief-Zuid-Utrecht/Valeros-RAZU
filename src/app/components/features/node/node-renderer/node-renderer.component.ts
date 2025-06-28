@@ -15,7 +15,7 @@ import { NodeTableViewComponent } from '../node-render-components/node-table-vie
     selector: 'app-node-renderer',
     imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
     templateUrl: './node-renderer.component.html',
-    styleUrl: './node-renderer.component.scss'
+    styleUrl: './node-renderer.component.css'
 })
 export class NodeRendererComponent implements OnInit {
   @Input() node?: NodeModel;

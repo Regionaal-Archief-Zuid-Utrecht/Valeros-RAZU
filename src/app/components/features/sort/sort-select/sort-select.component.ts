@@ -11,7 +11,7 @@ import { UiService } from '../../../../services/ui/ui.service';
     selector: 'app-sort-select',
     imports: [NgForOf, FormsModule],
     templateUrl: './sort-select.component.html',
-    styleUrl: './sort-select.component.scss'
+    styleUrl: './sort-select.component.css'
 })
 export class SortSelectComponent {
   constructor(

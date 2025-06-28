@@ -18,7 +18,7 @@ export enum AboutView {
     selector: 'app-about',
     imports: [NgIcon, NgIf, TranslatePipe, NgClass],
     templateUrl: './about.component.html',
-    styleUrl: './about.component.scss'
+    styleUrl: './about.component.css'
 })
 export class AboutComponent {
   @Input() view: AboutView = AboutView.ShowingSearch;

@@ -15,7 +15,7 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
     selector: 'app-ldto-url-bestand',
     imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
     templateUrl: './ldto-url-bestand.component.html',
-    styleUrl: './ldto-url-bestand.component.scss'
+    styleUrl: './ldto-url-bestand.component.css'
 })
 export class LdtoUrlBestandComponent
   extends PredicateRenderComponent

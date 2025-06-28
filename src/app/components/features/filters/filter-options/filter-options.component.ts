@@ -24,7 +24,7 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
         TranslatePipe,
     ],
     templateUrl: './filter-options.component.html',
-    styleUrl: './filter-options.component.scss'
+    styleUrl: './filter-options.component.css'
 })
 export class FilterOptionsComponent {
 

@@ -9,7 +9,7 @@ import { HopComponent } from '../hop.component';
     selector: 'app-hop-link',
     imports: [NgIf, NodeLinkComponent, NgForOf, NgIcon],
     templateUrl: './hop-link.component.html',
-    styleUrl: './hop-link.component.scss'
+    styleUrl: './hop-link.component.css'
 })
 export class HopLinkComponent extends HopComponent implements OnInit {
   protected readonly featherChevronRight = featherChevronRight;

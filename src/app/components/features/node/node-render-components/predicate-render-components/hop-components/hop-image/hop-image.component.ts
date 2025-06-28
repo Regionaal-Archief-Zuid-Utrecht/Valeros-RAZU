@@ -9,6 +9,6 @@ import { HopComponent } from '../hop.component';
   standalone: true,
   imports: [NgIf, NodeLinkComponent, NodeImagesComponent],
   templateUrl: './hop-image.component.html',
-  styleUrl: './hop-image.component.scss',
+  styleUrl: './hop-image.component.css',
 })
 export class HopImageComponent extends HopComponent {}

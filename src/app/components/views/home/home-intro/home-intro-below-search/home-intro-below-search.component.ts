@@ -6,7 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-home-intro-below-search',
     imports: [TranslatePipe],
     templateUrl: './home-intro-below-search.component.html',
-    styleUrl: './home-intro-below-search.component.scss'
+    styleUrl: './home-intro-below-search.component.css'
 })
 export class HomeIntroBelowSearchComponent {
   constructor(public router: Router) {}

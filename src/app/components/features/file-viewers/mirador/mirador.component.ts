@@ -17,7 +17,7 @@ import { IIIFService } from '../../../../services/iiif.service';
     selector: 'app-mirador',
     imports: [],
     templateUrl: './mirador.component.html',
-    styleUrl: './mirador.component.scss'
+    styleUrl: './mirador.component.css'
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;

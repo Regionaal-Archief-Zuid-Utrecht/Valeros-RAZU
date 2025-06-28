@@ -17,7 +17,7 @@ registerLocaleData(localeNl);
     selector: 'app-razu-aflevering',
     imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon],
     templateUrl: './razu-aflevering.component.html',
-    styleUrls: ['./razu-aflevering.component.scss']
+    styleUrls: ['./razu-aflevering.component.css']
 })
 export class RazuAfleveringComponent extends TypeRenderComponent implements OnInit {
     // Arrays to store IDs retrieved from hop-link components

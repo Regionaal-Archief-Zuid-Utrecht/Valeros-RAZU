@@ -24,7 +24,7 @@ interface NavButton {
     selector: 'razu-nav-buttons',
     imports: [CommonModule, RouterModule, NgIcon],
     templateUrl: './nav-buttons.component.html',
-    styleUrls: ['./nav-buttons.component.scss']
+    styleUrls: ['./nav-buttons.component.css']
 })
 export class NavButtonsComponent implements OnInit, OnDestroy {
     private static DEBUG = false;

@@ -12,7 +12,7 @@ import { ViewModeSelectOptionComponent } from './view-mode-select-option/view-mo
     selector: 'app-view-mode-select',
     imports: [ViewModeSelectOptionComponent],
     templateUrl: './view-mode-select.component.html',
-    styleUrl: './view-mode-select.component.scss'
+    styleUrl: './view-mode-select.component.css'
 })
 export class ViewModeSelectComponent {
   constructor(public viewMode: ViewModeService) {}

@@ -14,7 +14,7 @@ import { truncate } from '../../../../helpers/util.helper';
     selector: 'app-node-label',
     imports: [NgIf, NgClass],
     templateUrl: './node-label.component.html',
-    styleUrl: './node-label.component.scss'
+    styleUrl: './node-label.component.css'
 })
 export class NodeLabelComponent implements OnInit, OnChanges {
   @Input() label?: string;

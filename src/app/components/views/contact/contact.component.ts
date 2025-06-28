@@ -18,7 +18,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
         NgIcon,
     ],
     templateUrl: './contact.component.html',
-    styleUrl: './contact.component.scss'
+    styleUrl: './contact.component.css'
 })
 export class ContactComponent {
   protected readonly HeaderView = HeaderView;

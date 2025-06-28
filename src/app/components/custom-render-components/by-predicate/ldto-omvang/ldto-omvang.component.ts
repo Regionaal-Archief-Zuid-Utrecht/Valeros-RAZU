@@ -6,7 +6,7 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
     selector: 'app-ldto-omvang',
     imports: [],
     templateUrl: './ldto-omvang.component.html',
-    styleUrl: './ldto-omvang.component.scss'
+    styleUrl: './ldto-omvang.component.css'
 })
 export class LdtoOmvangComponent
   extends PredicateRenderComponent

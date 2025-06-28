@@ -1,0 +1,3 @@
+:host ::ng-deep app-node-link app-node-label button {
+  color: theme("colors.white") !important;
+}

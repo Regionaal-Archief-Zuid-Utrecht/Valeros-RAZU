@@ -7,7 +7,7 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
     selector: 'app-ldto-event',
     imports: [HopLinkComponent, NgClass],
     templateUrl: './ldto-event.component.html',
-    styleUrl: './ldto-event.component.scss'
+    styleUrl: './ldto-event.component.css'
 })
 export class LdtoEventComponent extends PredicateRenderComponent {
   hasTime = false;

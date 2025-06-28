@@ -28,7 +28,7 @@ import { SearchAutocompleteComponent } from '../search-autocomplete/search-autoc
         NgIcon,
     ],
     templateUrl: './search-input.component.html',
-    styleUrl: './search-input.component.scss'
+    styleUrl: './search-input.component.css'
 })
 export class SearchInputComponent implements OnInit, AfterViewInit {
   searchInput: string = this.search.queryStr ?? '';

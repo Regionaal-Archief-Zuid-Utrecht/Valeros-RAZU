@@ -20,12 +20,12 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
         'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
       ],
     },
-    // {
-    //   component: PicPersonobsComponent,
-    //   predicates: [
-    //     'https://personsincontext.org/model#PersonObservation',
-    //   ],
-    // }
+    {
+      component: PicPersonobsComponent,
+      predicates: [
+        'https://personsincontext.org/model#PersonObservation',
+      ],
+    }
   ],
   [RenderMode.ByPredicate]: [
     ...renderComponentSettings[RenderMode.ByPredicate],

@@ -18,7 +18,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
         NgIcon,
     ],
     templateUrl: './colofon.component.html',
-    styleUrl: './colofon.component.scss'
+    styleUrl: './colofon.component.css'
 })
 export class ColofonComponent {
   protected readonly HeaderView = HeaderView;

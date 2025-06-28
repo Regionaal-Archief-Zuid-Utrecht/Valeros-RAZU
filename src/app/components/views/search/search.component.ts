@@ -57,7 +57,7 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
         NavButtonsComponent,
     ],
     templateUrl: './search.component.html',
-    styleUrl: './search.component.scss'
+    styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;

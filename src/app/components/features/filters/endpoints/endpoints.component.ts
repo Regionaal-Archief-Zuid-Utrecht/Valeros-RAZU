@@ -13,7 +13,7 @@ import { FilterCountComponent } from '../filter-options/filter-count/filter-coun
     selector: 'app-endpoints',
     imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
     templateUrl: './endpoints.component.html',
-    styleUrl: './endpoints.component.scss'
+    styleUrl: './endpoints.component.css'
 })
 export class EndpointsComponent {
   constructor(
