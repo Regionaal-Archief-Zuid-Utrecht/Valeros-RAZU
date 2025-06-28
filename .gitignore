@@ -41,3 +41,4 @@ testem.log
 Thumbs.db
 src/app/config/settings_local.ts
 .vscode/settings.json
+package-lock.json
