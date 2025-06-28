@@ -6,13 +6,10 @@ import { RoutingService } from '../../../services/routing.service';
 import { Subscription } from 'rxjs';
 import { NgIcon } from '@ng-icons/core';
 import {
-    featherSearch,
     featherHome,
     featherMap,
     featherBook,
     featherInfo,
-    featherMail,
-    featherStar,
     featherNavigation,
     featherUsers
 } from '@ng-icons/feather-icons';
@@ -89,76 +86,92 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                 }
             }
         },
+        {
+            label: 'Alle Mensen', icon: featherUsers, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://personsincontext.org/model#PersonObservation']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
     ];
     bottomButtons: NavButton[] = [
         { label: 'Over & Contact', icon: featherInfo, route: '/colofon' },
     ];
+    // These are the single grid buttons
     buttons: NavButton[] = [
-        { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
-        {
-            label: 'Alle panden', icon: featherHome, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://w3id.org/italia/onto/CLV/Address']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-        {
-            label: 'Alle straten', icon: featherNavigation, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
+        // { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
+        // {
+        //     label: 'Alle panden', icon: featherHome, route: {
+        //         path: '/search',
+        //         queryParams: {
+        //             filters: JSON.stringify({
+        //                 type: {
+        //                     type: 2,
+        //                     fieldIds: ['type'],
+        //                     valueIds: ['https://w3id.org/italia/onto/CLV/Address']
+        //                 }
+        //             }),
+        //             q: ''
+        //         }
+        //     }
+        // },
+        // {
+        //     label: 'Alle straten', icon: featherNavigation, route: {
+        //         path: '/search',
+        //         queryParams: {
+        //             filters: JSON.stringify({
+        //                 type: {
+        //                     type: 2,
+        //                     fieldIds: ['type'],
+        //                     valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
+        //                 }
+        //             }),
+        //             q: ''
+        //         }
+        //     }
+        // },
 
-        { label: 'Kaart', icon: featherMap, route: '/map' },
-        {
-            label: 'Verhalen', icon: featherBook, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://schema.org/CreativeWork']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-        { label: 'Over', icon: featherInfo, route: '/colofon' },
-        { label: 'Contact', icon: featherMail, route: '/contact' },
-        {
-            label: 'Referenties', icon: featherStar, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://schema.org/ArchiveComponent']
-                        }
-                    }),
-                    q: ''
-                }
-            },
-        }
+        // { label: 'Kaart', icon: featherMap, route: '/map' },
+        // {
+        //     label: 'Verhalen', icon: featherBook, route: {
+        //         path: '/search',
+        //         queryParams: {
+        //             filters: JSON.stringify({
+        //                 type: {
+        //                     type: 2,
+        //                     fieldIds: ['type'],
+        //                     valueIds: ['https://schema.org/CreativeWork']
+        //                 }
+        //             }),
+        //             q: ''
+        //         }
+        //     }
+        // },
+        // { label: 'Over', icon: featherInfo, route: '/colofon' },
+        // { label: 'Contact', icon: featherMail, route: '/contact' },
+        // {
+        //     label: 'Referenties', icon: featherStar, route: {
+        //         path: '/search',
+        //         queryParams: {
+        //             filters: JSON.stringify({
+        //                 type: {
+        //                     type: 2,
+        //                     fieldIds: ['type'],
+        //                     valueIds: ['https://schema.org/ArchiveComponent']
+        //                 }
+        //             }),
+        //             q: ''
+        //         }
+        //     },
+        // }
     ];
 
     private routeSub?: Subscription;

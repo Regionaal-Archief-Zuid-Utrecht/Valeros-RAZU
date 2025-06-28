@@ -1,0 +1,24 @@
+<div [ngClass]="layout === 'center-grid' ? 'center-grid' : 'bottom-tabs'">
+  <ng-container *ngIf="layout === 'center-grid'; else tabs">
+    <div class="button-grid">
+      <a *ngFor="let btn of buttons"
+         class="nav-btn"
+         (click)="debugRoute(btn)"
+         [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+         [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+        <span class="nav-label">{{ btn.label }}</span>
+      </a>
+    </div>
+  </ng-container>
+  <ng-template #tabs>
+    <a *ngFor="let btn of buttons"
+       class="nav-btn"
+       (click)="debugRoute(btn)"
+       [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+       [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+      <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+      <span class="nav-label">{{ btn.label }}</span>
+    </a>
+  </ng-template>
+</div>

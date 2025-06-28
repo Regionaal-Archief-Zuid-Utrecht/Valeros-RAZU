@@ -6,14 +6,16 @@ import { RoutingService } from '../../../services/routing.service';
 import { Subscription } from 'rxjs';
 import { NgIcon } from '@ng-icons/core';
 import {
+    featherSearch,
     featherHome,
     featherMap,
     featherBook,
     featherInfo,
+    featherMail,
+    featherStar,
     featherNavigation,
     featherUsers
 } from '@ng-icons/feather-icons';
-import { NavButtonsComponent } from '../nav-buttons/nav-buttons.component';
 
 interface NavButton {
     label: string;
@@ -22,16 +24,16 @@ interface NavButton {
 }
 
 @Component({
-    selector: 'razu-nav-buttons-nw',
+    selector: 'razu-nav-buttons',
     standalone: true,
     imports: [CommonModule, RouterModule, NgIcon],
-    templateUrl: './nav-buttons_nw.component.html',
-    styleUrls: ['./nav-buttons_nw.component.scss']
+    templateUrl: './nav-buttons.component.html',
+    styleUrls: ['./nav-buttons.component.scss']
 })
-export class NwNavButtonsComponent implements OnInit, OnDestroy {
+export class NavButtonsComponent implements OnInit, OnDestroy {
     private static DEBUG = false;
     constructor(private router: Router, private routing: RoutingService) {
-        if (NwNavButtonsComponent.DEBUG) {
+        if (NavButtonsComponent.DEBUG) {
             console.log('[NavButtonsComponent] constructed');
         }
     }
@@ -87,97 +89,82 @@ export class NwNavButtonsComponent implements OnInit, OnDestroy {
                 }
             }
         },
+    ];
+    bottomButtons: NavButton[] = [
+        { label: 'Over & Contact', icon: featherInfo, route: '/colofon' },
+    ];
+    buttons: NavButton[] = [
+        { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
         {
-            label: 'Alle Mensen', icon: featherUsers, route: {
+            label: 'Alle panden', icon: featherHome, route: {
                 path: '/search',
                 queryParams: {
                     filters: JSON.stringify({
                         type: {
                             type: 2,
                             fieldIds: ['type'],
-                            valueIds: ['https://personsincontext.org/model#PersonObservation']
+                            valueIds: ['https://w3id.org/italia/onto/CLV/Address']
                         }
                     }),
                     q: ''
                 }
             }
         },
-    ];
-    bottomButtons: NavButton[] = [
-        { label: 'Over & Contact', icon: featherInfo, route: '/colofon' },
-    ];
-    buttons: NavButton[] = [
-        // { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
-        // {
-        //     label: 'Alle panden', icon: featherHome, route: {
-        //         path: '/search',
-        //         queryParams: {
-        //             filters: JSON.stringify({
-        //                 type: {
-        //                     type: 2,
-        //                     fieldIds: ['type'],
-        //                     valueIds: ['https://w3id.org/italia/onto/CLV/Address']
-        //                 }
-        //             }),
-        //             q: ''
-        //         }
-        //     }
-        // },
-        // {
-        //     label: 'Alle straten', icon: featherNavigation, route: {
-        //         path: '/search',
-        //         queryParams: {
-        //             filters: JSON.stringify({
-        //                 type: {
-        //                     type: 2,
-        //                     fieldIds: ['type'],
-        //                     valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
-        //                 }
-        //             }),
-        //             q: ''
-        //         }
-        //     }
-        // },
+        {
+            label: 'Alle straten', icon: featherNavigation, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
 
-        // { label: 'Kaart', icon: featherMap, route: '/map' },
-        // {
-        //     label: 'Verhalen', icon: featherBook, route: {
-        //         path: '/search',
-        //         queryParams: {
-        //             filters: JSON.stringify({
-        //                 type: {
-        //                     type: 2,
-        //                     fieldIds: ['type'],
-        //                     valueIds: ['https://schema.org/CreativeWork']
-        //                 }
-        //             }),
-        //             q: ''
-        //         }
-        //     }
-        // },
-        // { label: 'Over', icon: featherInfo, route: '/colofon' },
-        // { label: 'Contact', icon: featherMail, route: '/contact' },
-        // {
-        //     label: 'Referenties', icon: featherStar, route: {
-        //         path: '/search',
-        //         queryParams: {
-        //             filters: JSON.stringify({
-        //                 type: {
-        //                     type: 2,
-        //                     fieldIds: ['type'],
-        //                     valueIds: ['https://schema.org/ArchiveComponent']
-        //                 }
-        //             }),
-        //             q: ''
-        //         }
-        //     },
-        // }
+        { label: 'Kaart', icon: featherMap, route: '/map' },
+        {
+            label: 'Verhalen', icon: featherBook, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://schema.org/CreativeWork']
+                        }
+                    }),
+                    q: ''
+                }
+            }
+        },
+        { label: 'Over', icon: featherInfo, route: '/colofon' },
+        { label: 'Contact', icon: featherMail, route: '/contact' },
+        {
+            label: 'Referenties', icon: featherStar, route: {
+                path: '/search',
+                queryParams: {
+                    filters: JSON.stringify({
+                        type: {
+                            type: 2,
+                            fieldIds: ['type'],
+                            valueIds: ['https://schema.org/ArchiveComponent']
+                        }
+                    }),
+                    q: ''
+                }
+            },
+        }
     ];
 
     private routeSub?: Subscription;
 
     debugRoute(btn: NavButton) {
-        if (NwNavButtonsComponent.DEBUG) {
+        if (NavButtonsComponent.DEBUG) {
             console.log('[NavButtonsComponent] Navigating with route:', btn.route);
         }
     }
@@ -193,7 +180,7 @@ export class NwNavButtonsComponent implements OnInit, OnDestroy {
                 this.setLayout(event.urlAfterRedirects || event.url);
             }
         });
-        if (NwNavButtonsComponent.DEBUG) {
+        if (NavButtonsComponent.DEBUG) {
             console.log('[NavButtonsComponent] button routes:', this.buttons.map(b => b.route));
         }
     }

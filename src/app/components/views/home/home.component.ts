@@ -15,8 +15,7 @@ import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-sea
 import { HomeIntroComponent } from './home-intro/home-intro.component';
 import { MapComponent } from '../map/map.component';
 import { AboutComponent } from "../../ui/about/about.component";
-import { NavButtonsComponent } from '../../ui/nav-buttons/nav-buttons.component';
-import { NwNavButtonsComponent } from "../../ui/nav-buttons_nw/nav-buttons_nw.component";
+import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
   selector: 'app-home',
@@ -35,7 +34,6 @@ import { NwNavButtonsComponent } from "../../ui/nav-buttons_nw/nav-buttons_nw.co
     MapComponent,
     AboutComponent,
     NavButtonsComponent,
-    NwNavButtonsComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

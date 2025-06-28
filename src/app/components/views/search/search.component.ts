@@ -55,7 +55,7 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
     ViewModeSelectComponent,
     ViewContainerComponent,
     AboutComponent,
-    NavButtonsComponent
+    NavButtonsComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
