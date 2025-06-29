@@ -1,0 +1,31 @@
+    <!-- Loading indicator -->
+<div *ngIf="loading" class="loading">
+    Loading data...
+</div>
+
+<!-- isOnderdeelVan related data -->
+<div *ngIf="!loading && data?.node" class="node-data">
+    <!-- name of each tab group should be unique -->
+<div class="tabs tabs-lift">  
+    <label class="tab">
+      <input type="radio" name="my_tabs_4" checked="checked" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="size-4 me-2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
+      Document
+    </label>
+    <div class="tab-content bg-base-100 border-base-300 p-6 docviewer"><app-doc-viewer 
+        [url]="'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'"
+        [fileType]="
+        fileRenderService.getFileType('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf')
+      "
+      [style.height]="!shownInTableCell ? '42rem' : '42rem'"
+      (error)="hasViewer.emit(false)">
+    </app-doc-viewer></div>
+  
+    <label class="tab">
+      <input type="radio" name="my_tabs_4" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="size-4 me-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="30" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line><line x1="21" y1="17.5" x2="27" y2="13.5"></line></svg>
+      Metadata
+    </label>
+    <div class="tab-content bg-base-100 border-base-300 p-6 docviewer"><app-node-table-view [node]="data?.node"></app-node-table-view></div>
+  </div>
+    
