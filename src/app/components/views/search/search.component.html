@@ -6,7 +6,7 @@
 
     <div class="flex-grow-0 p-4 pb-2">
       <div class="flex flex-row items-center">
-        <app-search-input class="flex-grow" />
+        <app-search-input class="flex-grow" *ngIf="!details.showing.value" />
         <!-- <app-view-mode-select
           class="flex-grow-0 ml-8"
           *ngIf="Settings.ui.showViewModeSelect"
