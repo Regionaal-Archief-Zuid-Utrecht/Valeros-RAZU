@@ -1,3 +1,5 @@
+@reference '../../../../theme.css';
+
 a {
   @apply underline;
 }

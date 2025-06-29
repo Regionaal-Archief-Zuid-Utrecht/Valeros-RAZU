@@ -1,4 +1,4 @@
-@tailwind base;
+@import "tailwindcss/preflight";
 
 /* == See tailwind.config.js for remaining theme tweaks (e.g., changing primary color) == */
 
@@ -57,7 +57,7 @@ tr {
 .checkbox {
   @apply border-white;
   --chkbg: white;
-  --chkfg: theme("colors.primary");
+  --chkfg: var(--color-primary);
 }
 
 
@@ -70,7 +70,7 @@ tr {
 ::before,
 ::after {
 
-  border-color: theme("colors.primary");
+  border-color: var(--color-primary);
 }
 
 .font-mono {

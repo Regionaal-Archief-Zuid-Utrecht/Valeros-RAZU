@@ -3,7 +3,7 @@
     <div class="center-grid-content">
       <!-- Top Section -->
       <div class="nav-section nav-section-top">
-        <div class="nav-section-title">{{'hemiw-theme.discover_stories' | translate}}</div>
+        <div class="nav-section-title ">{{'hemiw-theme.discover_stories' | translate}}</div>
         <div class="button-grid">
         <a *ngFor="let btn of topButtons"
            class="nav-btn nav-btn-top"
@@ -18,7 +18,7 @@
 
       <!-- Middle Section -->
       <div class="nav-section nav-section-middle">
-        <div class="nav-section-title nav-text">{{"hemiw-theme.explore_data" | translate}}</div>
+        <div class="nav-section-title ">{{"hemiw-theme.explore_data" | translate}}</div>
         <div class="button-grid">
           <a *ngFor="let btn of middleButtons"
              class="nav-btn nav-btn-middle"
@@ -33,7 +33,6 @@
 
       <!-- Bottom Section -->
       <div class="nav-section nav-section-bottom">
-        <!-- <div class="nav-section-title">Meer</div> -->
         <a *ngFor="let btn of bottomButtons"
            class="nav-btn nav-btn-bottom"
            (click)="debugRoute(btn)"

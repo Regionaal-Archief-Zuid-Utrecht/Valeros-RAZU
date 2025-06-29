@@ -1,3 +1,5 @@
+@reference '../../../../theme.css';
+
 p {
   @apply text-lg mb-2;
 }

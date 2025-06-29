@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
 @plugin "daisyui";
 /* Themes - Define your themes here. For help with making a theme you can use the official daisyui theme generator: daisyui.com/theme-generator */
 
+@source not inline("decoration-slate-300");
 
 /* Hemiw Themes */
 @plugin "daisyui/theme" {

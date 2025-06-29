@@ -34,9 +34,9 @@
   letter-spacing: 0.04em;
 }
 
-.nav-text {
+/* .nav-text {
   color: var(--color-base-100);
-}
+} */
 
 /* Top Section: Centered and closer together */
 .nav-section-top .button-grid {
