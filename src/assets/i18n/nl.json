@@ -53,5 +53,15 @@
     "period": "Periode",
     "maker": "Maker",
     "title": "Titel"
+  },
+  "hemiw-theme": {
+    "map": "Kaart",
+    "stories": "Verhalen",
+    "all_buildings": "Alle panden",
+    "all_streets": "Alle straten",
+    "all_people": "Alle mensen",
+    "about_and_contact": "Over & Contact",
+    "discover_stories": "Ontdek de verhalen",
+    "explore_data": "Verken de data"
   }
 }

@@ -13,6 +13,7 @@ import {
     featherNavigation,
     featherUsers
 } from '@ng-icons/feather-icons';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 interface NavButton {
     label: string;
@@ -21,14 +22,15 @@ interface NavButton {
 }
 
 @Component({
-    selector: 'razu-nav-buttons',
-    imports: [CommonModule, RouterModule, NgIcon],
+    selector: 'app-nav-buttons',
+    imports: [CommonModule, RouterModule, NgIcon, TranslatePipe],
     templateUrl: './nav-buttons.component.html',
     styleUrls: ['./nav-buttons.component.css']
 })
 export class NavButtonsComponent implements OnInit, OnDestroy {
     private static DEBUG = false;
-    constructor(private router: Router, private routing: RoutingService) {
+
+    constructor(private router: Router, private routing: RoutingService, private translate: TranslateService) {
         if (NavButtonsComponent.DEBUG) {
             console.log('[NavButtonsComponent] constructed');
         }
@@ -36,74 +38,10 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
 
     @Input() layout: 'center-grid' | 'bottom-tabs' | undefined;
 
-    topButtons: NavButton[] = [
-        { label: 'Kaart', icon: featherMap, route: '/map' },
-        {
-            label: 'Verhalen', icon: featherBook, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://schema.org/CreativeWork']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-    ];
-    middleButtons: NavButton[] = [
-        {
-            label: 'Alle panden', icon: featherHome, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://w3id.org/italia/onto/CLV/Address']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-        {
-            label: 'Alle straten', icon: featherNavigation, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-        {
-            label: 'Alle Mensen', icon: featherUsers, route: {
-                path: '/search',
-                queryParams: {
-                    filters: JSON.stringify({
-                        type: {
-                            type: 2,
-                            fieldIds: ['type'],
-                            valueIds: ['https://personsincontext.org/model#PersonObservation']
-                        }
-                    }),
-                    q: ''
-                }
-            }
-        },
-    ];
-    bottomButtons: NavButton[] = [
-        { label: 'Over & Contact', icon: featherInfo, route: '/colofon' },
-    ];
+    topButtons: NavButton[] = [];
+    middleButtons: NavButton[] = [];
+    bottomButtons: NavButton[] = [];
+
     // These are the single grid buttons
     buttons: NavButton[] = [
         // { label: 'Onderzochte panden', icon: featherSearch, route: '/onderzochte-panden' },
@@ -192,6 +130,84 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                 this.setLayout(event.urlAfterRedirects || event.url);
             }
         });
+
+        this.translate.get([
+            'hemiw-theme.stories',
+            'hemiw-theme.all_buildings',
+            'hemiw-theme.all_streets',
+            'hemiw-theme.all_people',
+            'hemiw-theme.about_and_contact'
+        ]).subscribe(translations => {
+            this.topButtons = [
+                { label: 'Kaart', icon: featherMap, route: '/map' },
+                {
+                    label: translations['hemiw-theme.stories'], icon: featherBook, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                type: {
+                                    type: 2,
+                                    fieldIds: ['type'],
+                                    valueIds: ['https://schema.org/CreativeWork']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+            ];
+            this.middleButtons = [
+                {
+                    label: translations['hemiw-theme.all_buildings'], icon: featherHome, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                type: {
+                                    type: 2,
+                                    fieldIds: ['type'],
+                                    valueIds: ['https://w3id.org/italia/onto/CLV/Address']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+                {
+                    label: translations['hemiw-theme.all_streets'], icon: featherNavigation, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                type: {
+                                    type: 2,
+                                    fieldIds: ['type'],
+                                    valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+                {
+                    label: translations['hemiw-theme.all_people'], icon: featherUsers, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                type: {
+                                    type: 2,
+                                    fieldIds: ['type'],
+                                    valueIds: ['https://personsincontext.org/model#PersonObservation']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+            ];
+            this.bottomButtons = [
+                { label: translations['hemiw-theme.about_and_contact'], icon: featherInfo, route: '/colofon' },
+            ];
+        });
+
         if (NavButtonsComponent.DEBUG) {
             console.log('[NavButtonsComponent] button routes:', this.buttons.map(b => b.route));
         }
