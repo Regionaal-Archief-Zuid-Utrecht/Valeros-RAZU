@@ -11,31 +11,22 @@ import { SearchInputComponent } from '../../features/search/search-input/search-
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
-import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-search/home-intro-below-search.component';
-import { HomeIntroComponent } from './home-intro/home-intro.component';
-import { MapComponent } from '../map/map.component';
-import { AboutComponent } from "../../ui/about/about.component";
 import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
-    selector: 'app-home',
-    imports: [
-        HomeIntroComponent,
-        LangSwitchComponent,
-        HeaderComponent,
-        SearchInputComponent,
-        HeaderComponent,
-        ViewContainerComponent,
-        HomeIntroComponent,
-        CommonModule,
-        HomeIntroBelowSearchComponent,
-        LangSwitchComponent,
-        MapComponent,
-        AboutComponent,
-        NavButtonsComponent,
-    ],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+  selector: 'app-home',
+  imports: [
+    LangSwitchComponent,
+    HeaderComponent,
+    SearchInputComponent,
+    HeaderComponent,
+    ViewContainerComponent,
+    CommonModule,
+    LangSwitchComponent,
+    NavButtonsComponent,
+  ],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   constructor(

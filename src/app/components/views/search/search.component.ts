@@ -23,41 +23,37 @@ import { LoadMoreSearchResultsButtonComponent } from '../../features/search/load
 import { SearchHitsCounterComponent } from '../../features/search/search-hits-counter/search-hits-counter.component';
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { SortSelectComponent } from '../../features/sort/sort-select/sort-select.component';
-import { ViewModeSelectComponent } from '../../features/view-mode/view-mode-select/view-mode-select.component';
 import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { AboutComponent } from "../../ui/about/about.component";
 import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component";
 
 @Component({
-    selector: 'app-search',
-    imports: [
-        NodeComponent,
-        NgForOf,
-        SearchInputComponent,
-        NgClass,
-        NgIf,
-        NodesGridComponent,
-        FilterOptionsComponent,
-        HeaderComponent,
-        CommonModule,
-        DetailsComponent,
-        SortSelectComponent,
-        LoadMoreSearchResultsButtonComponent,
-        SearchHitsCounterComponent,
-        DetailsBackButtonComponent,
-        LangSwitchComponent,
-        ViewModeSelectComponent,
-        ViewContainerComponent,
-        AboutComponent,
-        NavButtonsComponent,
-    ],
-    templateUrl: './search.component.html',
-    styleUrl: './search.component.css'
+  selector: 'app-search',
+  imports: [
+    NodeComponent,
+    NgForOf,
+    SearchInputComponent,
+    NgClass,
+    NgIf,
+    NodesGridComponent,
+    FilterOptionsComponent,
+    HeaderComponent,
+    CommonModule,
+    DetailsComponent,
+    SortSelectComponent,
+    LoadMoreSearchResultsButtonComponent,
+    SearchHitsCounterComponent,
+    DetailsBackButtonComponent,
+    LangSwitchComponent,
+    ViewContainerComponent,
+    NavButtonsComponent,
+  ],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css'
 })
 export class SearchComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
