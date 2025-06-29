@@ -142,14 +142,14 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
   background: var(--color-primary);
   color: var(--color-primary-content);
-  border: 3px solid var(--color-secondary);
+  border: 3px solid var(--color-base-100);
 }
 
 .nav-btn-bottom:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
   background: var(--color-primary-content);
   color: var(--color-primary);
-  border: 3px solid var(--color-secondary);
+  border: 3px solid var(--color-primary);
 }
 
 .center-grid-nav {
@@ -197,7 +197,7 @@
   justify-content: center;
   padding: 0.75rem 0.5rem;
   background: var(--color-base-100);
-  border: 3px solid var(--color-secondary);
+  border: 3px solid var(--color-primary);
   border-radius: 0.75rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
   cursor: pointer;
@@ -217,7 +217,7 @@
   justify-content: center;
   padding: 0.5rem 0.5rem;
   background: var(--color-base-100);
-  border: 3px solid var(--color-secondary);
+  border: 3px solid var(--color-primary);
   border-radius: 0.75rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
   cursor: pointer;
@@ -237,7 +237,7 @@
   justify-content: center;
   padding: 0.75rem 0.5rem;
   background: var(--color-primary);
-  border: 3px solid var(--color-secondary);
+  border: 3px solid var(--color-base-100);
   color: var(--color-primary-content);
   border-radius: 0.75rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
@@ -268,7 +268,7 @@
   background: var(--color-base-100);
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.09);
   padding: 0.25rem 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .bottom-tabs .nav-btn {

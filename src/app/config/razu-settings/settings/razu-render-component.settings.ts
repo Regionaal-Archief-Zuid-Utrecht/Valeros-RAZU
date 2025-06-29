@@ -10,7 +10,7 @@ import {
 } from '../../../models/settings/render-component-settings.type';
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
 import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
-import { PicPersonobsComponent } from '../../../components/custom-render-components/by-type/pico-personobs/pic-personobs.component';
+import { RenderTabWithDocViewerComponent } from '../../../components/custom-render-components/by-type/render-tab-with-doc-viewer/render-tab-with-doc-viewer.component';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [
@@ -21,9 +21,9 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
       ],
     },
     {
-      component: PicPersonobsComponent,
+      component: RenderTabWithDocViewerComponent,
       predicates: [
-        'https://personsincontext.org/model#PersonObservation',
+        'https://schema.org/CreativeWork',
       ],
     }
   ],

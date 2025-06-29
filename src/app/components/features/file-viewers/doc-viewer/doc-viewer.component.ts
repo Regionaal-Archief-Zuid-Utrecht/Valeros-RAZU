@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -9,7 +8,6 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-  type OnInit,
 } from '@angular/core';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { finalize } from 'rxjs/operators';
@@ -17,25 +15,21 @@ import { Settings } from '../../../../config/settings';
 import { FileType } from '../../../../models/file-type.model';
 
 @Component({
-    selector: 'app-doc-viewer',
-    imports: [NgIf, PdfJsViewerModule],
-    templateUrl: './doc-viewer.component.html',
-    styleUrl: './doc-viewer.component.css'
+  selector: 'app-doc-viewer',
+  imports: [NgIf, PdfJsViewerModule],
+  templateUrl: './doc-viewer.component.html',
+  styleUrl: './doc-viewer.component.css'
 })
-export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
+export class DocViewerComponent implements OnChanges {
   @Input() url?: string;
   @Input() fileType?: FileType;
   @ViewChild('pdfViewer') pdfViewer: any;
   @Output() error = new EventEmitter<Error>();
   isConvertingPDF = false;
 
-  constructor(private http: HttpClient) {}
+  private static DEBUG = false;
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
-    // this.initPdfViewer();
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['url']) {
@@ -44,11 +38,12 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   initPdfViewer() {
-    console.log('Initializing PDF viewer...');
-
+    console.log(DocViewerComponent.DEBUG ? 'Initializing PDF viewer...' : '');
     const pdfUrl: string | null = this._getPdfUrl();
     if (!pdfUrl) {
-      this.error.emit(new Error('No PDF URL found'));
+      if (DocViewerComponent.DEBUG) {
+        this.error.emit(new Error('No PDF URL found'));
+      }
       return;
     }
 
@@ -68,7 +63,7 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
           this.pdfViewer.refresh();
         },
         error: (error) => {
-          console.error('Error loading PDF:', error);
+          console.error(DocViewerComponent.DEBUG ? 'Error loading PDF:' : '', error);
           this.error.emit(error);
         },
       });
@@ -86,11 +81,10 @@ export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     if (!Settings.endpoints.pdfConversionUrl) {
-      console.warn(
-        'No PDF conversion URL found, add one in the endpoint settings.',
-      );
+      console.warn(DocViewerComponent.DEBUG ? 'No PDF conversion URL found, add one in the endpoint settings.' : '');
       return null;
     }
+    console.log(DocViewerComponent.DEBUG ? 'PDF conversion URL:' : '', Settings.endpoints.pdfConversionUrl + encodeURIComponent(this.url));
     return Settings.endpoints.pdfConversionUrl + encodeURIComponent(this.url);
   }
 }
