@@ -11,11 +11,10 @@ import { ScrollService } from '../../../services/ui/scroll.service';
 import { NodeComponent } from '../../features/node/node.component';
 
 @Component({
-  selector: 'app-details',
-  standalone: true,
-  imports: [NodeComponent, NgIf],
-  templateUrl: './details.component.html',
-  styleUrl: './details.component.scss',
+    selector: 'app-details',
+    imports: [NodeComponent, NgIf],
+    templateUrl: './details.component.html',
+    styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
   nodeId: string | null = null;

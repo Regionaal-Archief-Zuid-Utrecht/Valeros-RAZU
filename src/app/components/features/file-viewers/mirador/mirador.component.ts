@@ -14,11 +14,10 @@ import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../../../services/iiif.service';
 
 @Component({
-  selector: 'app-mirador',
-  standalone: true,
-  imports: [],
-  templateUrl: './mirador.component.html',
-  styleUrl: './mirador.component.scss',
+    selector: 'app-mirador',
+    imports: [],
+    templateUrl: './mirador.component.html',
+    styleUrl: './mirador.component.scss'
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;

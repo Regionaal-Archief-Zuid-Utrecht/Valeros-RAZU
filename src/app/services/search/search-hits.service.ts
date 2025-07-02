@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { Direction, NodeModel } from '../../models/node.model';
@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 export class SearchHitsService {
   constructor(private data: DataService) {}
 
-  parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
+  parseToNodes(hits: estypes.SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
       .sort((a, b) => {
         return (a._source as any)?.['_score'] - (b._source as any)?.['_score'];
@@ -39,9 +39,9 @@ export class SearchHitsService {
 
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
-  ): SearchHit<ElasticNodeModel>[] {
+  ): estypes.SearchHit<ElasticNodeModel>[] {
     // First create a map of hits by their ID to merge duplicates
-    const hitsMap = new Map<string, SearchHit<ElasticNodeModel>>();
+    const hitsMap = new Map<string, estypes.SearchHit<ElasticNodeModel>>();
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];

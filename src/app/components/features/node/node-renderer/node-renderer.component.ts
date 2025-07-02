@@ -12,11 +12,10 @@ import { RenderComponentService } from '../../../../services/render-component.se
 import { NodeTableViewComponent } from '../node-render-components/node-table-view/node-table-view.component';
 
 @Component({
-  selector: 'app-node-renderer',
-  standalone: true,
-  imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
-  templateUrl: './node-renderer.component.html',
-  styleUrl: './node-renderer.component.scss',
+    selector: 'app-node-renderer',
+    imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
+    templateUrl: './node-renderer.component.html',
+    styleUrl: './node-renderer.component.scss'
 })
 export class NodeRendererComponent implements OnInit {
   @Input() node?: NodeModel;

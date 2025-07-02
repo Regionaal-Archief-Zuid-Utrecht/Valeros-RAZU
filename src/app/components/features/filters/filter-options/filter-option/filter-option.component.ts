@@ -13,11 +13,10 @@ import { SearchService } from '../../../../../services/search/search.service';
 import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
 
 @Component({
-  selector: 'app-filter-option',
-  standalone: true,
-  imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
-  templateUrl: './filter-option.component.html',
-  styleUrl: './filter-option.component.scss',
+    selector: 'app-filter-option',
+    imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
+    templateUrl: './filter-option.component.html',
+    styleUrl: './filter-option.component.scss'
 })
 export class FilterOptionComponent implements OnInit {
   @Input() filterId?: string;

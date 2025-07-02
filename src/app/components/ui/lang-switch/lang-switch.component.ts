@@ -4,11 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Settings } from '../../../config/settings';
 
 @Component({
-  selector: 'app-lang-switch',
-  standalone: true,
-  imports: [NgClass, NgIf],
-  templateUrl: './lang-switch.component.html',
-  styleUrl: './lang-switch.component.scss',
+    selector: 'app-lang-switch',
+    imports: [NgClass, NgIf],
+    templateUrl: './lang-switch.component.html',
+    styleUrl: './lang-switch.component.scss'
 })
 export class LangSwitchComponent {
   constructor(public translate: TranslateService) {}

@@ -10,11 +10,10 @@ import {
 import { AutocompleteService } from '../../../../services/search/autocomplete.service';
 
 @Component({
-  selector: 'app-search-autocomplete',
-  standalone: true,
-  imports: [NgForOf, NgIf, NgIcon, TranslatePipe],
-  templateUrl: './search-autocomplete.component.html',
-  styleUrl: './search-autocomplete.component.scss',
+    selector: 'app-search-autocomplete',
+    imports: [NgForOf, NgIf, NgIcon, TranslatePipe],
+    templateUrl: './search-autocomplete.component.html',
+    styleUrl: './search-autocomplete.component.scss'
 })
 export class SearchAutocompleteComponent {
   @Output() selected: EventEmitter<AutocompleteOptionModel> =

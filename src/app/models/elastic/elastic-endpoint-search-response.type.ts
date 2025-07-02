@@ -1,5 +1,5 @@
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 
-export type ElasticEndpointSearchResponse<T> = SearchResponse<T> & {
+export type ElasticEndpointSearchResponse<T> = estypes.SearchResponse<T> & {
   endpointId: string;
 };
