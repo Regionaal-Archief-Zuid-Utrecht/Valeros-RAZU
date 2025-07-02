@@ -12,11 +12,10 @@ import { NodeRenderComponent } from '../node-render.component';
 import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
-  selector: 'app-node-table-view',
-  standalone: true,
-  imports: [NgIf, NodeTableComponent],
-  templateUrl: './node-table-view.component.html',
-  styleUrl: './node-table-view.component.scss',
+    selector: 'app-node-table-view',
+    imports: [NgIf, NodeTableComponent],
+    templateUrl: './node-table-view.component.html',
+    styleUrl: './node-table-view.component.scss'
 })
 export class NodeTableViewComponent
   extends NodeRenderComponent

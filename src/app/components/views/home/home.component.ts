@@ -15,22 +15,21 @@ import { HomeIntroBelowSearchComponent } from './home-intro/home-intro-below-sea
 import { HomeIntroComponent } from './home-intro/home-intro.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    HomeIntroComponent,
-    LangSwitchComponent,
-    HeaderComponent,
-    SearchInputComponent,
-    HeaderComponent,
-    ViewContainerComponent,
-    HomeIntroComponent,
-    CommonModule,
-    HomeIntroBelowSearchComponent,
-    LangSwitchComponent,
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    imports: [
+        HomeIntroComponent,
+        LangSwitchComponent,
+        HeaderComponent,
+        SearchInputComponent,
+        HeaderComponent,
+        ViewContainerComponent,
+        HomeIntroComponent,
+        CommonModule,
+        HomeIntroBelowSearchComponent,
+        LangSwitchComponent,
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   constructor(
