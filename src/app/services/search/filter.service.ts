@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { BehaviorSubject } from 'rxjs';
 import { Settings } from '../../config/settings';
 import {
@@ -47,7 +47,7 @@ export class FilterService {
   }
 
   private _getFieldDocCountsFromResponses(
-    responses: SearchResponse<any>[],
+    responses: estypes.SearchResponse<any>[],
   ): FieldDocCountsModel {
     const docCountsByFieldId: FieldDocCountsModel = {};
 
@@ -245,7 +245,7 @@ export class FilterService {
       this.options.value,
     ).flatMap((filterOption) => filterOption.fieldIds);
 
-    const responses: SearchResponse<any>[] =
+    const responses: estypes.SearchResponse<any>[] =
       await this.elastic.getFilterOptions(
         query,
         allFilterFieldIds,

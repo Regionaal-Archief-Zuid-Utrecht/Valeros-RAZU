@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticFieldExistsQuery } from '../../models/elastic/elastic-field-exists-query.type';
@@ -118,7 +118,7 @@ export class ElasticService {
     query: string,
     filterFieldIds: string[],
     activeFilters: FilterModel[],
-  ): Promise<SearchResponse<any>[]> {
+  ): Promise<estypes.SearchResponse<any>[]> {
     const aggs = filterFieldIds.reduce((result: any, fieldId) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
 
@@ -209,7 +209,7 @@ export class ElasticService {
     queryData: any,
   ): Promise<ElasticEndpointSearchResponse<T>[]> {
     const searchPromisesAndEndpoints: {
-      promise: Promise<SearchResponse<T>>;
+      promise: Promise<estypes.SearchResponse<T>>;
       endpointId: string;
     }[] = [];
     for (const endpoint of this.endpoints.getAllEnabledUrls()) {
@@ -217,8 +217,8 @@ export class ElasticService {
         continue;
       }
 
-      const searchPromise: Promise<SearchResponse<T>> = this.api.postData<
-        SearchResponse<T>
+      const searchPromise: Promise<estypes.SearchResponse<T>> = this.api.postData<
+        estypes.SearchResponse<T>
       >(endpoint.elastic, queryData);
 
       searchPromisesAndEndpoints.push({
@@ -227,9 +227,9 @@ export class ElasticService {
       });
     }
 
-    const searchPromises: Promise<SearchResponse<T>>[] =
+    const searchPromises: Promise<estypes.SearchResponse<T>>[] =
       searchPromisesAndEndpoints.map((s) => s.promise);
-    const searchResults: SearchResponse<T>[] =
+    const searchResults: estypes.SearchResponse<T>[] =
       await Promise.all(searchPromises);
 
     const searchResultsWithEndpointIds: ElasticEndpointSearchResponse<T>[] =
