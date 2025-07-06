@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { Direction, NodeModel } from '../../models/node.model';
@@ -9,11 +9,11 @@ import { DataService } from '../data.service';
   providedIn: 'root',
 })
 export class SearchHitsService {
-  private _hits: SearchHit<ElasticNodeModel>[] = [];
+  private _hits: estypes.SearchHit<ElasticNodeModel>[] = [];
   constructor(private data: DataService) { }
   private static DEBUG = true;
 
-  parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
+  parseToNodes(hits: estypes.SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
       .sort((a, b) => {
         return (a._source as any)?.['_score'] - (b._source as any)?.['_score'];
@@ -41,10 +41,10 @@ export class SearchHitsService {
 
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
-  ): SearchHit<ElasticNodeModel>[] {
+  ): estypes.SearchHit<ElasticNodeModel>[] {
     // TIJDELIJK: Deduplicatie uitgeschakeld voor testen
     // Verzamel alle hits zonder deduplicatie
-    const allHits: SearchHit<ElasticNodeModel>[] = [];
+    const allHits: estypes.SearchHit<ElasticNodeModel>[] = [];
 
     // Debug logging
     if (SearchHitsService.DEBUG) {
@@ -113,7 +113,7 @@ export class SearchHitsService {
     return allHits;
   }
 
-  getHits(): SearchHit<ElasticNodeModel>[] {
+  getHits(): estypes.SearchHit<ElasticNodeModel>[] {
     return this._hits;
   }
 }

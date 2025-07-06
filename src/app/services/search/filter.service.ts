@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { SparqlService } from '../sparql.service';
 import { Router } from '@angular/router';
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { BehaviorSubject } from 'rxjs';
 import { Settings } from '../../config/settings';
 import {
@@ -56,7 +56,7 @@ export class FilterService {
   }
 
   private _getFieldDocCountsFromResponses(
-    responses: SearchResponse<any>[],
+    responses: estypes.SearchResponse<any>[],
   ): FieldDocCountsModel {
     const docCountsByFieldId: FieldDocCountsModel = {};
 
