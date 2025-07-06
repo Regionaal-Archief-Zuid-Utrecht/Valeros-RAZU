@@ -1,5 +1,5 @@
 <div
-  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200"
+  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200 relative"
   *ngIf="node"
   [ngClass]="[
     (shouldShowSectionNextToTable() | async)
@@ -72,11 +72,14 @@
           shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
         ]"
       > -->
-      <div class="absolute right-6 bottom-6" s>
-        <app-node-details-button [node]="node" *ngIf="showDetailsButton" />
-      </div>
+
     </div>
   </a>
+
+  <!-- Details button always in the same spot for each card -->
+  <div class="absolute right-2 bottom-2" *ngIf="!details.showing.value">
+    <app-node-details-button [node]="node" *ngIf="showDetailsButton" />
+  </div>
 
   <!-- Details page node table -->
   <div
