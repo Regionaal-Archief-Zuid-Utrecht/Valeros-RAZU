@@ -30,5 +30,15 @@ export const razuNodeVisibilitySettings: NodeVisibilitySettings = {
       ],
       type: FilterType.FieldAndValue,
     },
+    hideProfessions: {
+      type: FilterType.FieldAndValue,
+      fieldIds: ['type'],
+      valueIds: ['https://schema.org/Occupation'],
+    },
+    hideAuthor: {
+      type: FilterType.FieldAndValue,
+      fieldIds: ['type'],
+      valueIds: ['https://schema.org/Person'],
+    },
   },
 };

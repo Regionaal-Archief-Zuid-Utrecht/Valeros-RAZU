@@ -3,7 +3,7 @@ import { FilteringSettings } from '../../../models/settings/filtering-settings.m
 
 export const filteringSettings: FilteringSettings = {
   showFilterPanel: true,
-  showOrganizationsFilter: true,
+  showOrganizationsFilter: false,
   filterPanelLocation: FilterPanelLocation.Left,
   minNumOfValuesForFilterOptionToAppear: 1,
   filterOptions: {},
