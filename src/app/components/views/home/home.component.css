@@ -51,3 +51,17 @@
     /* These elements should receive pointer events */
   }
 }
+
+.full-screen-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* height: 100vh; */
+  /* background-image: url('/assets/img/full-screen-image.jpg');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat; */
+  z-index: -1;
+  pointer-events: none;
+}

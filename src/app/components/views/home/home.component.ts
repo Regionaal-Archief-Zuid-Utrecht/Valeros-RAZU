@@ -29,6 +29,8 @@ import { NavButtonsComponent } from "../../ui/nav-buttons/nav-buttons.component"
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  backgroundArray = ['assets/img/backgrounds/001.jpg', 'assets/img/backgrounds/002.jpg', 'assets/img/backgrounds/003.jpg', 'assets/img/backgrounds/004.jpg'];
+  backgroundImageUrl = "";
   constructor(
     public search: SearchService,
     public viewModes: ViewModeService,
@@ -39,7 +41,9 @@ export class HomeComponent implements OnInit {
     public settings: SettingsService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.backgroundImageUrl = this.backgroundArray[Math.floor(Math.random() * this.backgroundArray.length)];
+  }
 
   ngAfterViewInit() { }
 }
