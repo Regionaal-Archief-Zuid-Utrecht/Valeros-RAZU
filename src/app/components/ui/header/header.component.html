@@ -2,9 +2,9 @@
   <div
     class="bg-neutral py-3 px-6 text-white inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-b-md"
     [ngClass]="{
-      'ml-0 mr-auto': settings.position === HeaderPosition.Left,
+      'left-margin-header mr-auto': settings.position === HeaderPosition.Left,
       'mx-auto': settings.position === HeaderPosition.Center,
-      'ml-auto mr-0': settings.position === HeaderPosition.Right,
+      'ml-auto right-margin-header': settings.position === HeaderPosition.Right,
     }" role="banner" aria-labelledby="main-header">
     <button class="text-left inline-flex items-center" [class.mr-3]="settings.showTitle || settings.showColofonButton"
       (click)="onButtonClicked('')" role="navigation" aria-labelledby="header-home-button">

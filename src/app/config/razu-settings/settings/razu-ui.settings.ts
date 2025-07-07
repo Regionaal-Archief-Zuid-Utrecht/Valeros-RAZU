@@ -10,8 +10,8 @@ export const razuUiSettings: UiSettings = {
     showLogo: true,
     showTitle: true,
     showColofonButton: false,
-    logoPath: '/assets/img/hemiw_logo.png',
-    position: HeaderPosition.Center,
+    logoPath: '/assets/img/logos/Hemiw_logo_100pc.svg',
+    position: HeaderPosition.Left,
   },
   about: {
     ...uiSettings.about,
