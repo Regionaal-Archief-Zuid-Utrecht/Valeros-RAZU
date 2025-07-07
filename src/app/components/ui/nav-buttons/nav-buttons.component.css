@@ -32,6 +32,12 @@
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   letter-spacing: 0.04em;
+  color: var(--color-base-100) !important;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 /* .nav-text {
