@@ -10,5 +10,6 @@ export const razuSearchSettings: SearchSettings = {
     '.text',
     '.uri',
     '.label',
+    '.raw',
   ],
 };
