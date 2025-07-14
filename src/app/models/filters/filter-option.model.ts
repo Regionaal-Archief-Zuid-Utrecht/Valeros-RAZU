@@ -16,16 +16,11 @@ export interface FilterOptionsModel {
 
 export interface FilterOptionModel {
   label: string;
-  fields: FilterOptionFieldModel[];
+  fieldIds: string[];
   values: FilterOptionValueModel[];
   hideValueIds?: string[];
   showOnlyValueIds?: string[];
   showOnlyForSelectedFilters?: FilterOptionsIdsModel;
-}
-
-export interface FilterOptionFieldModel {
-  id: string;
-  elasticSuffix?: string;
 }
 
 export interface FilterOptionValueModel {

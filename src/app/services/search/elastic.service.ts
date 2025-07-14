@@ -10,10 +10,7 @@ import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { ElasticQuery } from '../../models/elastic/elastic-query.type';
 import { ElasticShouldQueries } from '../../models/elastic/elastic-should-queries.type';
 import { ElasticSortEntryModel } from '../../models/elastic/elastic-sort.model';
-import {
-  FilterOptionFieldModel,
-  FilterOptionsIdsModel,
-} from '../../models/filters/filter-option.model';
+import { FilterOptionsIdsModel } from '../../models/filters/filter-option.model';
 import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { SortOrder } from '../../models/settings/sort-order.enum';
 import { ApiService } from '../api.service';
@@ -119,15 +116,15 @@ export class ElasticService {
 
   async getFilterOptions(
     query: string,
-    filterFields: FilterOptionFieldModel[],
+    filterFieldIds: string[],
     activeFilters: FilterModel[],
   ): Promise<SearchResponse<any>[]> {
-    const aggs = filterFields.reduce((result: any, field) => {
-      const elasticFieldId = this.data.replacePeriodsWithSpaces(field.id);
+    const aggs = filterFieldIds.reduce((result: any, fieldId) => {
+      const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
 
       result[elasticFieldId] = {
         terms: {
-          field: elasticFieldId + (field.elasticSuffix || ''),
+          field: elasticFieldId + '.keyword',
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
           size: Settings.search.elasticTopHitsMax,

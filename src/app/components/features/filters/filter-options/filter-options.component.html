@@ -106,7 +106,7 @@
               <app-filter-option
                 [filterId]="filterId"
                 [values]="filters.getOptionById(filterId).values"
-                [fieldIds]="filters.getOptionFieldIdsById(filterId)"
+                [fieldIds]="filters.getOptionById(filterId).fieldIds"
               />
             </div>
           </div>
