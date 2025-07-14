@@ -60,5 +60,23 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
+    issueYear: {
+      label: 'Aflevering jaar',
+      fieldIds: ['issue_year'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
+    issueMonth: {
+      label: 'Aflevering maand',
+      fieldIds: ['issue_month'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
+    issueDay: {
+      label: 'Aflevering dag',
+      fieldIds: ['issue_day'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
   },
 };
