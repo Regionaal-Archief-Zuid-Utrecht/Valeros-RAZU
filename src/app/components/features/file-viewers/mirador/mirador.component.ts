@@ -13,6 +13,7 @@ import Mirador from 'mirador/dist/es/src/index';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { IIIFService } from '../../../../services/iiif.service';
+import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
 
 @Component({
   selector: 'app-mirador',
@@ -33,6 +34,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     private ngZone: NgZone,
     private iiifService: IIIFService,
     private router: Router,
+    private miradorHighlight: MiradorHighlightService,
   ) {}
 
   ngAfterViewInit() {
@@ -57,6 +59,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.destroyViewer();
+    this.miradorHighlight.stopCheckingForTextElementsInDOM();
   }
 
   private destroyViewer() {
@@ -141,5 +144,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
       return miradorInstance;
     });
+
+    this.miradorHighlight.init();
   }
 }
