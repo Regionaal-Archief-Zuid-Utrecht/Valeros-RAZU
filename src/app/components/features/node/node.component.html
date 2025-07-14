@@ -37,7 +37,11 @@
   </a>
 
   <!-- Node info table on search page -->
-  <a [routerLink]="details.getLink(node)" *ngIf="!details.showing.value">
+  <a
+    [routerLink]="details.getLink(node)"
+    *ngIf="!details.showing.value"
+    class="w-full"
+  >
     <div
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
       class="flex-grow relative"
