@@ -119,7 +119,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
           textOverlay: {
             enabled: true,
             selectable: false,
-            visible: false,
+            visible: true,
           },
         },
         windows: [
