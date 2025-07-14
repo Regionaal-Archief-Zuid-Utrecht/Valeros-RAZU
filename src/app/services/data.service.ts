@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Settings } from '../config/settings';
 import { ElasticNodeModel } from '../models/elastic/elastic-node.model';
 import { FilterOptionsIdsModel } from '../models/filters/filter-option.model';
 import { FilterModel, FilterType } from '../models/filters/filter.model';
@@ -26,9 +27,24 @@ export class DataService {
   }
 
   replacePeriodsWithSpaces(s: string): string {
-    const normalized = s.replaceAll('..', '.');
-    const withoutSpaces = normalized.replaceAll('.', ' ');
-    return withoutSpaces;
+    const normalizeAndReplacePeriodsWithSpaces = (str: string): string => {
+      const normalized = str.replaceAll('..', '.');
+      return normalized.replaceAll('.', ' ');
+    };
+
+    const suffixToPreserve =
+      Settings.search.preventReplacingPeriodWithSpaceForElasticSuffixes.find(
+        (suffix) => s.endsWith(suffix),
+      );
+
+    if (suffixToPreserve) {
+      const baseString = s.slice(0, s.length - suffixToPreserve.length);
+      return (
+        normalizeAndReplacePeriodsWithSpaces(baseString) + suffixToPreserve
+      );
+    }
+
+    return normalizeAndReplacePeriodsWithSpaces(s);
   }
 
   getOrderedParentsFromSparqlResults(

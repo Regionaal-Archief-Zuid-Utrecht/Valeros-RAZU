@@ -5,4 +5,5 @@ export const searchSettings: SearchSettings = {
   resultsPerPagePerEndpoint: 10,
   elasticTopHitsMax: 100,
   autocomplete: autocompleteSettings,
+  preventReplacingPeriodWithSpaceForElasticSuffixes: ['.keyword'],
 };

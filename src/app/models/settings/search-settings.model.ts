@@ -8,4 +8,8 @@ export interface SearchSettings {
    */
   elasticTopHitsMax: number;
   autocomplete: AutocompleteSettings;
+  /**
+   * By default, periods of predicates/fields are replaced by spaces. This setting allows to define elastic suffixes that should keep their periods. E.g., .keyword for elastic types, or .uri for accessing an object's URI.
+   */
+  preventReplacingPeriodWithSpaceForElasticSuffixes: string[];
 }

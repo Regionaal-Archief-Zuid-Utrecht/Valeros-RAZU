@@ -26,7 +26,7 @@ export const razuFilteringSettings: FilteringSettings = {
   filterOptions: {
     archiefVormer: {
       label: 'Archiefvormer',
-      fieldIds: ['archiefvormer'],
+      fieldIds: ['archiefvormer.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
@@ -38,25 +38,25 @@ export const razuFilteringSettings: FilteringSettings = {
     },
     aggregatieniveau: {
       label: 'Aggregatieniveau',
-      fieldIds: ['aggregatieniveau'],
+      fieldIds: ['aggregatieniveau.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     classificatie: {
       label: 'Classificatie',
-      fieldIds: ['classificatie'],
+      fieldIds: ['classificatie.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     auteursrecht: {
       label: 'Auteursrecht',
-      fieldIds: ['auteursrecht'],
+      fieldIds: ['auteursrecht.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     openbaarheid: {
       label: 'Openbaarheid',
-      fieldIds: ['openbaarheid'],
+      fieldIds: ['openbaarheid.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },

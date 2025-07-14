@@ -124,7 +124,7 @@ export class ElasticService {
 
       result[elasticFieldId] = {
         terms: {
-          field: elasticFieldId + '.keyword',
+          field: elasticFieldId,
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
           size: Settings.search.elasticTopHitsMax,
@@ -248,8 +248,7 @@ export class ElasticService {
 
     const elasticSortEntries: ElasticSortEntryModel[] = sort.fields.map(
       (field) => {
-        const elasticField =
-          this.data.replacePeriodsWithSpaces(field) + '.keyword';
+        const elasticField = this.data.replacePeriodsWithSpaces(field);
         return {
           [elasticField]: {
             order: sort.order === SortOrder.Ascending ? 'asc' : 'desc',

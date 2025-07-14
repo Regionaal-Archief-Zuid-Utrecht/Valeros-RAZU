@@ -8,12 +8,12 @@ export const razuSortingSettings: SortingSettings = {
   options: {
     ...sortingSettings.options,
     'title-a-z': {
-      fields: razuLabelPredicates,
+      fields: razuLabelPredicates.map((pred) => pred + '.keyword'),
       label: 'Titel (A-Z)',
       order: SortOrder.Ascending,
     },
     'title-z-a': {
-      fields: razuLabelPredicates,
+      fields: razuLabelPredicates.map((pred) => pred + '.keyword'),
       label: 'Titel (Z-A)',
       order: SortOrder.Descending,
     },
