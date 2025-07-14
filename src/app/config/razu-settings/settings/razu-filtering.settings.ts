@@ -48,15 +48,15 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    licenties: {
-      label: 'Licenties',
-      fieldIds: ['licenties'],
+    auteursrecht: {
+      label: 'Auteursrecht',
+      fieldIds: ['auteursrecht'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    wettelijke_beperkingen_openbaarheid: {
-      label: 'Wettelijke beperkingen openbaarheid',
-      fieldIds: ['wettelijke_beperkingen_openbaarheid'],
+    openbaarheid: {
+      label: 'Openbaarheid',
+      fieldIds: ['openbaarheid'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
