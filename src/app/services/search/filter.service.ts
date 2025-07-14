@@ -9,6 +9,7 @@ import {
 } from '../../models/elastic/elastic-aggregation.model';
 import { FieldDocCountsModel } from '../../models/elastic/field-doc-counts.model';
 import {
+  FilterOptionFieldModel,
   FilterOptionModel,
   FilterOptionValueModel,
   FilterOptionsIdsModel,
@@ -102,7 +103,8 @@ export class FilterService {
 
     let filterExistsInOptions = false;
     const fieldExistsInOptions = !!(
-      filter.fieldId && options[filterId].fieldIds.includes(filter.fieldId)
+      filter.fieldId &&
+      options[filterId].fields.some((f) => f.id === filter.fieldId)
     );
     const valueExistsInOptions = options[filterId].values.some(
       (a) => filter.valueId && a.ids.includes(filter.valueId),
@@ -168,7 +170,7 @@ export class FilterService {
     for (const node of nodes) {
       for (const [field, values] of Object.entries(node)) {
         const filterOption = Object.values(filterOptions).find((option) =>
-          option.fieldIds.includes(field),
+          option.fields.some((f) => f.id === field),
         );
 
         if (filterOption) {
@@ -241,14 +243,14 @@ export class FilterService {
   // }
 
   async updateFilterOptionValues(query: string) {
-    const allFilterFieldIds: string[] = Object.values(
+    const allFilterFields: FilterOptionFieldModel[] = Object.values(
       this.options.value,
-    ).flatMap((filterOption) => filterOption.fieldIds);
+    ).flatMap((filterOption) => filterOption.fields);
 
     const responses: SearchResponse<any>[] =
       await this.elastic.getFilterOptions(
         query,
-        allFilterFieldIds,
+        allFilterFields,
         this.enabled.value,
       );
     const docCounts: FieldDocCountsModel =
@@ -258,8 +260,8 @@ export class FilterService {
     for (const [_, filter] of Object.entries(filterOptions)) {
       const filterValuesMap = new Map<string, string[]>();
 
-      filter.fieldIds.forEach((fieldId) => {
-        const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+      filter.fields.forEach((field) => {
+        const elasticFieldId = this.data.replacePeriodsWithSpaces(field.id);
         const docCountsForField: DocCountModel[] =
           docCounts?.[elasticFieldId] ?? [];
         const docCountsToShow: DocCountModel[] = docCountsForField.filter(
@@ -338,6 +340,10 @@ export class FilterService {
 
   getOptionById(filterId: string): FilterOptionModel {
     return this.options.value?.[filterId];
+  }
+
+  getOptionFieldIdsById(filterId: string): string[] {
+    return this.getOptionById(filterId).fields.map((field) => field.id);
   }
 
   private _getOptionValueIds(filterId: string): string[] {
