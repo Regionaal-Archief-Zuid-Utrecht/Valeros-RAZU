@@ -7,6 +7,7 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
+import { Router } from '@angular/router';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
 // @ts-ignore
@@ -31,6 +32,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private iiifService: IIIFService,
+    private router: Router,
   ) {}
 
   ngAfterViewInit() {
@@ -67,8 +69,21 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
   }
 
+  private getPageFromUrl(): number | null {
+    const urlSplitByHashtag = this.router.url.split('%23');
+    const urlHasHashtag = urlSplitByHashtag.length > 1;
+    if (urlHasHashtag) {
+      const pageStr: string = urlSplitByHashtag[1];
+      const pageNum = Number(pageStr);
+      return !isNaN(pageNum) ? pageNum : null;
+    }
+    return null;
+  }
+
   private initViewer() {
     this.destroyViewer();
+
+    const pageNum = this.getPageFromUrl();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
       const manifestUrl: string | null =
@@ -107,6 +122,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         windows: [
           {
             manifestId: manifestUrl,
+            canvasIndex: pageNum ? pageNum - 1 : 0,
             allowWindowSideBar: true,
             sideBarOpenByDefault: false,
             allowMaximize: false,
