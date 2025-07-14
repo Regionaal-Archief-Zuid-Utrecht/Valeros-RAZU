@@ -15,24 +15,20 @@ export class DataService {
     Object.entries(node)
       .filter(([pred]) => pred.includes(' ') || pred.includes('.'))
       .forEach(([pred, obj]) => {
-        // First normalize any spaces to dots
-        let normalizedPred = pred.replaceAll(' ', '.');
-        // Then clean up any potential double dots that might occur
-        normalizedPred = normalizedPred.replaceAll('..', '.');
+        const predWithoutSpaces = pred.replaceAll(' ', '.');
+        const predNormalized = predWithoutSpaces.replaceAll('..', '.');
 
-        // Only update if we actually changed something
-        if (normalizedPred !== pred) {
-          node[normalizedPred] = obj;
+        if (predNormalized !== pred) {
+          node[predNormalized] = obj;
           delete node[pred];
         }
       });
   }
 
   replacePeriodsWithSpaces(s: string): string {
-    // First ensure we don't have any double dots
-    let normalized = s.replaceAll('..', '.');
-    // Then convert to spaces
-    return normalized.replaceAll('.', ' ');
+    const normalized = s.replaceAll('..', '.');
+    const withoutSpaces = normalized.replaceAll('.', ' ');
+    return withoutSpaces;
   }
 
   getOrderedParentsFromSparqlResults(
