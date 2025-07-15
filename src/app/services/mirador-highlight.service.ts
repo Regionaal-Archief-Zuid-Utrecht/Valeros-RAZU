@@ -12,7 +12,7 @@ export class MiradorHighlightService {
   init() {
     this.stopCheckingForTextElementsInDOM();
     this._mutationObserver = new MutationObserver((mutations, obs) => {
-      const textElements = document.querySelectorAll('text');
+      const textElements = document.querySelectorAll('text, tspan');
 
       if (textElements.length > 0) {
         this.stopCheckingForTextElementsInDOM();
@@ -52,7 +52,7 @@ export class MiradorHighlightService {
 
     console.log('Highlight words:', highlightWords);
 
-    const textElements = document.querySelectorAll('text');
+    const textElements = document.querySelectorAll('text, tspan');
     if (textElements.length === 0) {
       console.log('No text elements found');
       return;
