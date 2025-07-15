@@ -60,7 +60,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
   @ViewChild('linkElem') linkElem?: ElementRef;
 
   @Input() url?: string;
-  @Input() queryParams?: Record<string, string>;
   processedUrl?: string = this.url;
 
   @Input() label?: string;

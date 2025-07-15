@@ -71,7 +71,7 @@
         <a
           *ngIf="isInternalUrl"
           [routerLink]="processedUrl"
-          [queryParams]="queryParams"
+          queryParamsHandling="merge"
           class="clickable"
         >
           <app-node-label
