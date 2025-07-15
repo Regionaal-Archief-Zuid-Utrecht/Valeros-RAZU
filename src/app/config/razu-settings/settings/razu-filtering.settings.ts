@@ -24,6 +24,12 @@ const hideFilterOptionValueIds: string[] = [
 export const razuFilteringSettings: FilteringSettings = {
   ...filteringSettings,
   filterOptions: {
+    title: {
+      label: 'Titel',
+      fieldIds: ['serie'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
     archiefVormer: {
       label: 'Archiefvormer',
       fieldIds: ['archiefvormer.uri'],
@@ -75,12 +81,6 @@ export const razuFilteringSettings: FilteringSettings = {
     issueDay: {
       label: 'Dag',
       fieldIds: ['document_day'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    title: {
-      label: 'Titel',
-      fieldIds: ['serie'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
