@@ -73,7 +73,19 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   }
 
   private getPageFromUrl(): number | null {
-    const urlSplitByHashtag = this.router.url.split('%23');
+    const removeQueryParams = (url: string) => {
+      const queryParamIndex = url.indexOf('?');
+      if (queryParamIndex !== -1) {
+        return url.substring(0, queryParamIndex);
+      }
+      return url;
+    };
+
+    let url = removeQueryParams(this.router.url);
+
+    // Double encoded hashtag (%2523): Once by Angular router, once by encodeURIComponent (see Details service)
+    const doubleEncodedHashtag = '%2523';
+    const urlSplitByHashtag = url.split(doubleEncodedHashtag);
     const urlHasHashtag = urlSplitByHashtag.length > 1;
     if (urlHasHashtag) {
       const pageStr: string = urlSplitByHashtag[1];
