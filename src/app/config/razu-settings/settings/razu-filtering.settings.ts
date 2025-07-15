@@ -66,23 +66,35 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    issueYear: {
+    documentYear: {
       label: 'Jaar',
       fieldIds: ['document_year'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
     },
-    issueMonth: {
+    documentMonth: {
       label: 'Maand',
       fieldIds: ['document_month'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
     },
-    issueDay: {
+    documentDay: {
       label: 'Dag',
       fieldIds: ['document_day'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
     },
   },
 };

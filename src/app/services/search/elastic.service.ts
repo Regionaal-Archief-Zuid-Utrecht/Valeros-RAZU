@@ -10,7 +10,10 @@ import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { ElasticQuery } from '../../models/elastic/elastic-query.type';
 import { ElasticShouldQueries } from '../../models/elastic/elastic-should-queries.type';
 import { ElasticSortEntryModel } from '../../models/elastic/elastic-sort.model';
-import { FilterOptionsIdsModel } from '../../models/filters/filter-option.model';
+import {
+  FilterOptionModel,
+  FilterOptionsIdsModel,
+} from '../../models/filters/filter-option.model';
 import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { SortOrder } from '../../models/settings/sort-order.enum';
 import { ApiService } from '../api.service';
@@ -79,6 +82,7 @@ export class ElasticService {
     | ElasticQuery
     | ElasticFullTextMatchQuery
     | ElasticShouldQueries
+    | ElasticMatchAllQuery
   )[] {
     const fieldOrValueFilters = filters.filter(
       (filter) =>
@@ -116,11 +120,27 @@ export class ElasticService {
 
   async getFilterOptions(
     query: string,
-    filterFieldIds: string[],
+    filterOptions: FilterOptionModel[],
     activeFilters: FilterModel[],
   ): Promise<SearchResponse<any>[]> {
-    const aggs = filterFieldIds.reduce((result: any, fieldId) => {
+    const fieldIds: string[] = filterOptions.flatMap(
+      (filterOption) => filterOption.fieldIds,
+    );
+    const aggs = fieldIds.reduce((result: any, fieldId: string) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+
+      let order = undefined;
+
+      // TODO: Support multiple filter options for the same field, sorted differently
+      const filterOption = filterOptions.find((option) =>
+        option.fieldIds.includes(fieldId),
+      );
+
+      if (filterOption?.sort) {
+        order = {
+          [filterOption.sort.type]: filterOption.sort.order,
+        };
+      }
 
       result[elasticFieldId] = {
         terms: {
@@ -128,6 +148,7 @@ export class ElasticService {
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
           size: Settings.search.elasticTopHitsMax,
+          order: order,
         },
         aggs: {
           field_hits: {

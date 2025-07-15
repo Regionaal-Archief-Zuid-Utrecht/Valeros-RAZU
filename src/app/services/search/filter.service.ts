@@ -241,14 +241,14 @@ export class FilterService {
   // }
 
   async updateFilterOptionValues(query: string) {
-    const allFilterFieldIds: string[] = Object.values(
+    const filterOptionsList: FilterOptionModel[] = Object.values(
       this.options.value,
-    ).flatMap((filterOption) => filterOption.fieldIds);
+    );
 
     const responses: SearchResponse<any>[] =
       await this.elastic.getFilterOptions(
         query,
-        allFilterFieldIds,
+        filterOptionsList,
         this.enabled.value,
       );
     const docCounts: FieldDocCountsModel =
