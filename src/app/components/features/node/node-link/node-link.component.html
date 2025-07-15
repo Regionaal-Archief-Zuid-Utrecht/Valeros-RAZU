@@ -68,7 +68,12 @@
         </a>
 
         <!-- Internal URL -->
-        <a *ngIf="isInternalUrl" [routerLink]="processedUrl" class="clickable">
+        <a
+          *ngIf="isInternalUrl"
+          [routerLink]="processedUrl"
+          [queryParams]="queryParams"
+          class="clickable"
+        >
           <app-node-label
             [label]="cachedLabel ?? processedUrl"
             [shouldTruncate]="shouldTruncate"

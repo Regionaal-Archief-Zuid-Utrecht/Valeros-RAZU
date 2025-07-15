@@ -1,4 +1,4 @@
-import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe, Location, NgClass, NgIf } from '@angular/common';
 import {
   Component,
   Input,
@@ -27,6 +27,7 @@ import { NodeFileService } from '../../../services/node/node-file.service';
 import { NodeSectionService } from '../../../services/node/node-section.service';
 import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';
+import { SearchService } from '../../../services/search/search.service';
 import { SettingsService } from '../../../services/settings.service';
 import { SparqlService } from '../../../services/sparql.service';
 import { MiradorComponent } from '../file-viewers/mirador/mirador.component';
@@ -59,6 +60,7 @@ import { NodeTypesComponent } from './node-types/node-types.component';
     TranslatePipe,
     FileRendererComponent,
     MiradorComponent,
+    JsonPipe,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -100,6 +102,7 @@ export class NodeComponent implements OnInit, OnChanges {
     public labelsCache: LabelsCacheService,
     public nodeSection: NodeSectionService,
     public nodeFile: NodeFileService,
+    public search: SearchService,
   ) {}
 
   ngOnInit() {
@@ -227,6 +230,15 @@ export class NodeComponent implements OnInit, OnChanges {
     return this.details.showing.value
       ? Settings.ui.sectionNextToTableWidth.details
       : Settings.ui.sectionNextToTableWidth.search;
+  }
+
+  getQueryParams() {
+    const params: Record<string, string> = {};
+    if (!this.search.queryStr) {
+      return params;
+    }
+    params[Settings.url.params.search] = this.search.queryStr;
+    return params;
   }
 
   protected readonly Settings = Settings;
