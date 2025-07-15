@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-node-table-row',
-    imports: [],
-    templateUrl: './node-table-row.component.html',
-    styleUrl: './node-table-row.component.scss'
+  selector: 'app-node-table-row',
+  imports: [],
+  templateUrl: './node-table-row.component.html',
+  styleUrl: './node-table-row.component.scss',
 })
 export class NodeTableRowComponent {
   @Input() label: string = '';

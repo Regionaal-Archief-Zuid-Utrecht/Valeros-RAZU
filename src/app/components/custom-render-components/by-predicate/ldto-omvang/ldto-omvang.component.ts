@@ -3,10 +3,10 @@ import { humanFileSize } from '../../../../helpers/util.helper';
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
 @Component({
-    selector: 'app-ldto-omvang',
-    imports: [],
-    templateUrl: './ldto-omvang.component.html',
-    styleUrl: './ldto-omvang.component.scss'
+  selector: 'app-ldto-omvang',
+  imports: [],
+  templateUrl: './ldto-omvang.component.html',
+  styleUrl: './ldto-omvang.component.scss',
 })
 export class LdtoOmvangComponent
   extends PredicateRenderComponent

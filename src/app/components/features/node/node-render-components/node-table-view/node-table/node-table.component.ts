@@ -6,10 +6,10 @@ import { NodeService } from '../../../../../../services/node/node.service';
 import { NodeDirectionTableComponent } from './node-direction-table/node-direction-table.component';
 
 @Component({
-    selector: 'app-node-table',
-    imports: [NgIf, NodeDirectionTableComponent],
-    templateUrl: './node-table.component.html',
-    styleUrl: './node-table.component.scss'
+  selector: 'app-node-table',
+  imports: [NgIf, NodeDirectionTableComponent],
+  templateUrl: './node-table.component.html',
+  styleUrl: './node-table.component.scss',
 })
 export class NodeTableComponent implements OnInit {
   @Input() node?: NodeModel;

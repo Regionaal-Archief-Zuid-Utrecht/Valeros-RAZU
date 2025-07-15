@@ -10,10 +10,10 @@ import { UiService } from '../../../../services/ui/ui.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 
 @Component({
-    selector: 'app-endpoints',
-    imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
-    templateUrl: './endpoints.component.html',
-    styleUrl: './endpoints.component.scss'
+  selector: 'app-endpoints',
+  imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
+  templateUrl: './endpoints.component.html',
+  styleUrl: './endpoints.component.scss',
 })
 export class EndpointsComponent {
   constructor(

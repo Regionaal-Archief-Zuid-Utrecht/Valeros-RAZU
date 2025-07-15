@@ -42,18 +42,18 @@ import { UrlService } from '../../../../services/url.service';
 import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
-    selector: 'app-node-link',
-    imports: [
-        NgIf,
-        RouterLink,
-        NgIcon,
-        NgxFloatUiContentComponent,
-        NgxFloatUiModule,
-        NodeLabelComponent,
-        TranslatePipe,
-    ],
-    templateUrl: './node-link.component.html',
-    styleUrl: './node-link.component.scss'
+  selector: 'app-node-link',
+  imports: [
+    NgIf,
+    RouterLink,
+    NgIcon,
+    NgxFloatUiContentComponent,
+    NgxFloatUiModule,
+    NodeLabelComponent,
+    TranslatePipe,
+  ],
+  templateUrl: './node-link.component.html',
+  styleUrl: './node-link.component.scss',
 })
 export class NodeLinkComponent implements OnInit, OnChanges {
   @ViewChild('linkElem') linkElem?: ElementRef;

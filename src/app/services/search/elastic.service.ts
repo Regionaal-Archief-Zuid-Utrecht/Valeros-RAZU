@@ -238,9 +238,11 @@ export class ElasticService {
         continue;
       }
 
-      const searchPromise: Promise<estypes.SearchResponse<T>> = this.api.postData<
-        estypes.SearchResponse<T>
-      >(endpoint.elastic, queryData);
+      const searchPromise: Promise<estypes.SearchResponse<T>> =
+        this.api.postData<estypes.SearchResponse<T>>(
+          endpoint.elastic,
+          queryData,
+        );
 
       searchPromisesAndEndpoints.push({
         promise: searchPromise,

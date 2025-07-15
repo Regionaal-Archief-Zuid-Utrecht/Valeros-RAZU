@@ -4,9 +4,9 @@ import { SparqlService } from '../../../../../../services/sparql.service';
 import { PredicateRenderComponent } from '../../../../../custom-render-components/by-predicate/predicate-render-component.directive';
 
 @Component({
-    selector: 'app-hop-component',
-    imports: [],
-    template: ``
+  selector: 'app-hop-component',
+  imports: [],
+  template: ``,
 })
 export class HopComponent extends PredicateRenderComponent {
   id?: string;

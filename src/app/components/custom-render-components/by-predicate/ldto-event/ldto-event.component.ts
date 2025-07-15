@@ -4,10 +4,10 @@ import { HopLinkComponent } from '../../../features/node/node-render-components/
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
 @Component({
-    selector: 'app-ldto-event',
-    imports: [HopLinkComponent, NgClass],
-    templateUrl: './ldto-event.component.html',
-    styleUrl: './ldto-event.component.scss'
+  selector: 'app-ldto-event',
+  imports: [HopLinkComponent, NgClass],
+  templateUrl: './ldto-event.component.html',
+  styleUrl: './ldto-event.component.scss',
 })
 export class LdtoEventComponent extends PredicateRenderComponent {
   hasTime = false;

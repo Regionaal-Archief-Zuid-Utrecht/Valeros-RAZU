@@ -7,10 +7,10 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { RoutingService } from './services/routing.service';
 
 @Component({
-    selector: 'app-root',
-    imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Valeros';

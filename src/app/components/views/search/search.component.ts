@@ -32,28 +32,28 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
 
 @Component({
-    selector: 'app-search',
-    imports: [
-        NodeComponent,
-        NgForOf,
-        SearchInputComponent,
-        NgClass,
-        NgIf,
-        NodesGridComponent,
-        FilterOptionsComponent,
-        HeaderComponent,
-        CommonModule,
-        DetailsComponent,
-        SortSelectComponent,
-        LoadMoreSearchResultsButtonComponent,
-        SearchHitsCounterComponent,
-        DetailsBackButtonComponent,
-        LangSwitchComponent,
-        ViewModeSelectComponent,
-        ViewContainerComponent,
-    ],
-    templateUrl: './search.component.html',
-    styleUrl: './search.component.scss'
+  selector: 'app-search',
+  imports: [
+    NodeComponent,
+    NgForOf,
+    SearchInputComponent,
+    NgClass,
+    NgIf,
+    NodesGridComponent,
+    FilterOptionsComponent,
+    HeaderComponent,
+    CommonModule,
+    DetailsComponent,
+    SortSelectComponent,
+    LoadMoreSearchResultsButtonComponent,
+    SearchHitsCounterComponent,
+    DetailsBackButtonComponent,
+    LangSwitchComponent,
+    ViewModeSelectComponent,
+    ViewContainerComponent,
+  ],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;

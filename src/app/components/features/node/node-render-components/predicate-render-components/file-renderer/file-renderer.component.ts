@@ -20,17 +20,17 @@ import { NodeImagesComponent } from '../../../node-images/node-images.component'
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
-    selector: 'app-file-renderer',
-    imports: [
-        NgIf,
-        NgForOf,
-        NodeImagesComponent,
-        DocViewerComponent,
-        NodeLinkComponent,
-        NgIcon,
-    ],
-    templateUrl: './file-renderer.component.html',
-    styleUrl: './file-renderer.component.css'
+  selector: 'app-file-renderer',
+  imports: [
+    NgIf,
+    NgForOf,
+    NodeImagesComponent,
+    DocViewerComponent,
+    NodeLinkComponent,
+    NgIcon,
+  ],
+  templateUrl: './file-renderer.component.html',
+  styleUrl: './file-renderer.component.css',
 })
 export class FileRendererComponent implements OnInit, OnChanges {
   protected readonly FileType = FileType;

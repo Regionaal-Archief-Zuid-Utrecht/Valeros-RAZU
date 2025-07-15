@@ -11,10 +11,10 @@ import { SettingsService } from '../../../../services/settings.service';
 import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
-    selector: 'app-node-types',
-    imports: [NgForOf, NgIf, NodeTypeComponent],
-    templateUrl: './node-types.component.html',
-    styleUrl: './node-types.component.scss'
+  selector: 'app-node-types',
+  imports: [NgForOf, NgIf, NodeTypeComponent],
+  templateUrl: './node-types.component.html',
+  styleUrl: './node-types.component.scss',
 })
 export class NodeTypesComponent {
   @Input() types?: TypeModel[];

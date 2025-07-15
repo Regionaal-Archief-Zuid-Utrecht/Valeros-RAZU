@@ -8,10 +8,10 @@ import { SortService } from '../../../../services/sort.service';
 import { UiService } from '../../../../services/ui/ui.service';
 
 @Component({
-    selector: 'app-sort-select',
-    imports: [NgForOf, FormsModule],
-    templateUrl: './sort-select.component.html',
-    styleUrl: './sort-select.component.scss'
+  selector: 'app-sort-select',
+  imports: [NgForOf, FormsModule],
+  templateUrl: './sort-select.component.html',
+  styleUrl: './sort-select.component.scss',
 })
 export class SortSelectComponent {
   constructor(

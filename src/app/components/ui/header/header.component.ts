@@ -17,10 +17,10 @@ export enum HeaderView {
 }
 
 @Component({
-    selector: 'app-header',
-    imports: [NgIcon, NgIf, TranslatePipe, NgClass],
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.scss'
+  selector: 'app-header',
+  imports: [NgIcon, NgIf, TranslatePipe, NgClass],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   @Input() view: HeaderView = HeaderView.ShowingSearch;

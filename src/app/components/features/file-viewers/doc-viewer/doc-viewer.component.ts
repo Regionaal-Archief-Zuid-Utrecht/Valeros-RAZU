@@ -17,10 +17,10 @@ import { Settings } from '../../../../config/settings';
 import { FileType } from '../../../../models/file-type.model';
 
 @Component({
-    selector: 'app-doc-viewer',
-    imports: [NgIf, PdfJsViewerModule],
-    templateUrl: './doc-viewer.component.html',
-    styleUrl: './doc-viewer.component.css'
+  selector: 'app-doc-viewer',
+  imports: [NgIf, PdfJsViewerModule],
+  templateUrl: './doc-viewer.component.html',
+  styleUrl: './doc-viewer.component.css',
 })
 export class DocViewerComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() url?: string;

@@ -6,10 +6,10 @@ import { DetailsService } from '../../../../services/details.service';
 import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
-    selector: 'app-search-hits-counter',
-    imports: [NgIf, TranslatePipe],
-    templateUrl: './search-hits-counter.component.html',
-    styleUrl: './search-hits-counter.component.scss'
+  selector: 'app-search-hits-counter',
+  imports: [NgIf, TranslatePipe],
+  templateUrl: './search-hits-counter.component.html',
+  styleUrl: './search-hits-counter.component.scss',
 })
 export class SearchHitsCounterComponent {
   constructor(
