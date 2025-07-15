@@ -15,8 +15,6 @@ export class MiradorHighlightService {
       const textElements = document.querySelectorAll('text, tspan');
 
       if (textElements.length > 0) {
-        this.stopCheckingForTextElementsInDOM();
-
         this.addHighlights();
       }
     });
