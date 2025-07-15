@@ -26,4 +26,8 @@ export class RoutingService {
       void this.router.navigateByUrl(defaultUrl);
     }
   }
+
+  hasHistory(): boolean {
+    return this.history.length > 1;
+  }
 }

@@ -1,6 +1,6 @@
 <button
   (click)="routing.goBackOrDefault()"
-  *ngIf="details.showing.value"
+  *ngIf="details.showing.value && routing.hasHistory()"
   class="mt-2 mb-2 text-lg font-bold hover:underline"
 >
   <span
