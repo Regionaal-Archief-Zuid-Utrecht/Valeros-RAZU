@@ -146,12 +146,14 @@ export class SearchService {
       return;
     }
 
+    const queryStr = queryParams[Settings.url.params.search];
+
     const navigatedToDetails = this.details.isShowing();
     if (navigatedToDetails) {
+      this.queryStr = queryStr;
       return;
     }
 
-    const queryStr = queryParams[Settings.url.params.search];
     const queryStrChanged = queryStr !== this.queryStr;
     if (queryStrChanged) {
       this.queryStr = queryStr;
