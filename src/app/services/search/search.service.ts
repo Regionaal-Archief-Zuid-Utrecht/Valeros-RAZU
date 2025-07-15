@@ -276,9 +276,7 @@ export class SearchService {
       }
 
       // Update filter options
-      if (clearFilters) {
-        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
-      }
+      await this.filters.updateFilterOptionValues(this.queryStr ?? '');
     } catch (error) {
       console.error('Error searching:', error);
     } finally {
