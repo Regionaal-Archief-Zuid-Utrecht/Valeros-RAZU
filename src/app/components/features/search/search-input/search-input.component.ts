@@ -1,10 +1,11 @@
 import { NgIf } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { featherAlertTriangle } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Settings } from '../../../../config/settings';
 import {
   AutocompleteOptionModel,
@@ -31,12 +32,14 @@ import { SearchAutocompleteComponent } from '../search-autocomplete/search-autoc
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent implements OnInit, AfterViewInit {
+export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
   searchInput: string = this.search.queryStr ?? '';
+  private queryParamSubscription?: Subscription;
 
   constructor(
     public search: SearchService,
     public router: Router,
+    private route: ActivatedRoute,
     public elastic: ElasticService,
     public details: DetailsService,
     public autocomplete: AutocompleteService,
@@ -44,9 +47,26 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
     public settings: SettingsService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initUpdateSearchInputFromQueryParams();
+  }
 
   ngAfterViewInit() {}
+
+  ngOnDestroy() {
+    if (this.queryParamSubscription) {
+      this.queryParamSubscription.unsubscribe();
+    }
+  }
+
+  initUpdateSearchInputFromQueryParams() {
+    this.queryParamSubscription = this.route.queryParams.subscribe((params) => {
+      const searchParam = params[Settings.url.params.search];
+      if (searchParam !== undefined && searchParam !== this.searchInput) {
+        this.searchInput = searchParam;
+      }
+    });
+  }
 
   get hasAutocompleteOptions(): boolean {
     return this.autocomplete.options.value.length > 0;
