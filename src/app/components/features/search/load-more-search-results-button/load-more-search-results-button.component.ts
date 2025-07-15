@@ -4,11 +4,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
-  selector: 'app-load-more-search-results-button',
-  standalone: true,
-  imports: [NgIf, TranslatePipe],
-  templateUrl: './load-more-search-results-button.component.html',
-  styleUrl: './load-more-search-results-button.component.scss',
+    selector: 'app-load-more-search-results-button',
+    imports: [NgIf, TranslatePipe],
+    templateUrl: './load-more-search-results-button.component.html',
+    styleUrl: './load-more-search-results-button.component.scss'
 })
 export class LoadMoreSearchResultsButtonComponent {
   constructor(public search: SearchService) {}

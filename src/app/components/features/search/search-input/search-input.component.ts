@@ -20,17 +20,16 @@ import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
 
 @Component({
-  selector: 'app-search-input',
-  standalone: true,
-  imports: [
-    FormsModule,
-    NgIf,
-    SearchAutocompleteComponent,
-    TranslatePipe,
-    NgIcon,
-  ],
-  templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss',
+    selector: 'app-search-input',
+    imports: [
+        FormsModule,
+        NgIf,
+        SearchAutocompleteComponent,
+        TranslatePipe,
+        NgIcon,
+    ],
+    templateUrl: './search-input.component.html',
+    styleUrl: './search-input.component.scss'
 })
 export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
   searchInput: string = this.search.queryStr ?? '';

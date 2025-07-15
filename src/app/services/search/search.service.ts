@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { BehaviorSubject, skip, take } from 'rxjs';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
@@ -83,7 +83,7 @@ export class SearchService {
   private async _updateResultsFromSearchResponses(
     responses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
   ) {
-    const hits: SearchHit<ElasticNodeModel>[] =
+    const hits: estypes.SearchHit<ElasticNodeModel>[] =
       this.hits.getFromSearchResponses(responses);
 
     const hitNodes: NodeModel[] = this.hits.parseToNodes(hits);
@@ -189,7 +189,7 @@ export class SearchService {
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
       );
-    const hits: SearchHit<ElasticNodeModel>[] =
+    const hits: estypes.SearchHit<ElasticNodeModel>[] =
       this.hits.getFromSearchResponses(responses);
     this.hasMoreResultsToLoad = hits && hits.length > 0;
   }

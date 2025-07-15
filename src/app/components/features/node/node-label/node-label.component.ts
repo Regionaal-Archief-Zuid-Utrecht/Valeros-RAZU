@@ -11,11 +11,10 @@ import { Settings } from '../../../../config/settings';
 import { truncate } from '../../../../helpers/util.helper';
 
 @Component({
-  selector: 'app-node-label',
-  standalone: true,
-  imports: [NgIf, NgClass],
-  templateUrl: './node-label.component.html',
-  styleUrl: './node-label.component.scss',
+    selector: 'app-node-label',
+    imports: [NgIf, NgClass],
+    templateUrl: './node-label.component.html',
+    styleUrl: './node-label.component.scss'
 })
 export class NodeLabelComponent implements OnInit, OnChanges {
   @Input() label?: string;
