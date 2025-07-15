@@ -78,5 +78,11 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
+    title: {
+      label: 'Titel',
+      fieldIds: ['serie'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
   },
 };
