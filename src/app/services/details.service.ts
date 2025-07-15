@@ -50,6 +50,6 @@ export class DetailsService {
       return url;
     }
 
-    return `/${Settings.url.urls.details}/` + encodeURIComponent(url);
+    return `/${Settings.url.urls.details}/` + encodeURIComponent(url).replace(/%23/g, '#');
   }
 }
