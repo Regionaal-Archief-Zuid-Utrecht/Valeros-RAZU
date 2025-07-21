@@ -103,7 +103,7 @@
   cursor: pointer;
   transition: box-shadow 0.2s;
   pointer-events: auto;
-  z-index: 10;
+  z-index: 10000;
   min-width: 7rem;
 }
 
@@ -274,7 +274,7 @@
   background: var(--color-base-100);
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.09);
   padding: 0.25rem 0;
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .bottom-tabs .nav-btn {
