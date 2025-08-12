@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,11 +8,14 @@ import { NavigationEnd, Router } from '@angular/router';
 export class RoutingService {
   private history: string[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private url: UrlService,
+  ) {}
 
   initHistoryTracking() {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd && !this.url.ignoreQueryParamChange) {
         this.history.push(event.url);
       }
     });
