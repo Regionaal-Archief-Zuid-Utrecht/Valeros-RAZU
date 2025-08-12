@@ -26,7 +26,7 @@ export const razuFilteringSettings: FilteringSettings = {
   filterOptions: {
     title: {
       label: 'Titel',
-      fieldIds: ['serie'],
+      fieldIds: ['serie.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
