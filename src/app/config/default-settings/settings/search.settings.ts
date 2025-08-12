@@ -3,7 +3,7 @@ import { autocompleteSettings } from './autocomplete.settings';
 
 export const searchSettings: SearchSettings = {
   resultsPerPagePerEndpoint: 10,
-  elasticTopHitsMax: 100,
+  elasticTopHitsMax: 10000,
   autocomplete: autocompleteSettings,
   preventReplacingPeriodWithSpaceForElasticSuffixes: ['.keyword'],
 };
