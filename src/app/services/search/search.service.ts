@@ -210,7 +210,7 @@ export class SearchService {
           total +
           (hitTotal.relation === 'eq'
             ? hitTotal.value
-            : Math.min(hitTotal.value, Settings.search.elasticTopHitsMax))
+            : Math.min(hitTotal.value, Settings.search.elasticFilterTopHitsMax))
         );
       }
       return total;

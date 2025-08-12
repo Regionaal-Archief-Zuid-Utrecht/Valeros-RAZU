@@ -60,8 +60,8 @@ export class FilterOptionComponent implements OnInit {
   }
 
   getFilterOptionCountStr(count: number): string {
-    if (count >= Settings.search.elasticTopHitsMax) {
-      return ` (${Settings.search.elasticTopHitsMax}+)`;
+    if (count >= Settings.search.elasticFilterTopHitsMax) {
+      return ` (${Settings.search.elasticFilterTopHitsMax}+)`;
     }
 
     return ` (${count})`;

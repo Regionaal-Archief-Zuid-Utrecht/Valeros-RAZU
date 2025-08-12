@@ -147,13 +147,13 @@ export class ElasticService {
           field: elasticFieldId,
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
-          size: Settings.search.elasticTopHitsMax,
+          size: Settings.search.elasticFilterTopHitsMax,
           order: order,
         },
         aggs: {
           field_hits: {
             top_hits: {
-              size: Settings.search.elasticTopHitsMax,
+              size: Settings.search.elasticFilterTopHitsMax,
               _source: '',
             },
           },
@@ -166,7 +166,7 @@ export class ElasticService {
       query,
       activeFilters,
       0,
-      Settings.search.elasticTopHitsMax,
+      Settings.search.elasticFilterTopHitsMax,
     );
     queryData.aggs = { ...aggs };
 
