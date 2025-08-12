@@ -179,6 +179,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     const originalDispatch = store.dispatch;
 
     store.dispatch = (action: any) => {
+      // TODO: Only check for canvas change for setCanvas calls, now checks for canvas change for all actions
       const result = originalDispatch(action);
       const currentState = store.getState();
 
