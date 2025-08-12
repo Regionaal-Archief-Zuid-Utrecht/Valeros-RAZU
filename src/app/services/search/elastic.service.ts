@@ -399,18 +399,6 @@ export class ElasticService {
     return queryData;
   }
 
-  async searchNodesForCounting(
-    query: string,
-    filters: FilterModel[],
-  ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    return this.searchNodes(
-      query,
-      0,
-      Settings.search.elasticTopHitsMax,
-      filters,
-    );
-  }
-
   async searchNodes(
     query: string,
     from: number,
