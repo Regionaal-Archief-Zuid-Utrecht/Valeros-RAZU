@@ -9,7 +9,10 @@ module.exports = {
         mono: ["Familjen Grotesk", "sans-serif"],
       },
       screens: {
-        wide: "1600px",
+        "3xl": "1792px",
+        "4xl": "2048px",
+        "5xl": "2304px",
+        "6xl": "2560px",
       },
       colors: {
         background: "#E5E4E2",
