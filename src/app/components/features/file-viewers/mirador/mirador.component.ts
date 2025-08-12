@@ -10,8 +10,12 @@ import {
 import { Router } from '@angular/router';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
+// prettier-ignore
+// @ts-ignore
+import { getCanvasIndex,getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
+import { BehaviorSubject } from 'rxjs';
 import { IIIFService } from '../../../../services/iiif.service';
 import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
 
@@ -25,6 +29,10 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
   private _initializeDebounceTimer?: number;
 
+  private _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
+    number | null
+  >(null);
+
   @Input() nodeId?: string;
   @Input() nodeLabel?: string;
   @Input() imageUrls?: string[];
@@ -34,7 +42,11 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     private iiifService: IIIFService,
     private router: Router,
     private miradorHighlight: MiradorHighlightService,
-  ) {}
+  ) {
+    this._canvasIndex.subscribe((canvasIndex: number | null) => {
+      console.log('Canvas index:', canvasIndex);
+    });
+  }
 
   ngAfterViewInit() {
     this.initViewer();
@@ -154,9 +166,42 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       };
 
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
+      this.initCanvasIndexTracking(miradorInstance);
+
       return miradorInstance;
     });
 
     this.miradorHighlight.init();
+  }
+
+  initCanvasIndexTracking(miradorInstance: any) {
+    const store = miradorInstance.store;
+    const originalDispatch = store.dispatch;
+
+    store.dispatch = (action: any) => {
+      const result = originalDispatch(action);
+      const currentState = store.getState();
+
+      const windows = currentState.windows || {};
+      const windowId = Object.keys(windows)[0];
+
+      const currentCanvas = getCurrentCanvas(currentState, {
+        windowId,
+      });
+      const canvasId = currentCanvas?.id;
+      let canvasIndex = null;
+      if (canvasId) {
+        canvasIndex = getCanvasIndex(currentState, {
+          windowId,
+          canvasId,
+        });
+        const canvasIsUpdated = canvasIndex !== this._canvasIndex.value;
+        if (canvasIsUpdated) {
+          this._canvasIndex.next(canvasIndex);
+        }
+      }
+
+      return result;
+    };
   }
 }
