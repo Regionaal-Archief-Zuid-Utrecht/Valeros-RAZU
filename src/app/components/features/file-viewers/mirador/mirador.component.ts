@@ -190,9 +190,8 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         windowId,
       });
       const canvasId = currentCanvas?.id;
-      let canvasIndex = null;
       if (canvasId) {
-        canvasIndex = getCanvasIndex(currentState, {
+        const canvasIndex = getCanvasIndex(currentState, {
           windowId,
           canvasId,
         });
