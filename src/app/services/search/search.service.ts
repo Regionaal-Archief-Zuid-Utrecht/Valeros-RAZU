@@ -206,12 +206,7 @@ export class SearchService {
         if (hitTotal.relation !== 'eq') {
           isCapped = true;
         }
-        return (
-          total +
-          (hitTotal.relation === 'eq'
-            ? hitTotal.value
-            : Math.min(hitTotal.value, Settings.search.elasticFilterTopHitsMax))
-        );
+        return total + hitTotal.value;
       }
       return total;
     }, 0);
