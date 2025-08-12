@@ -108,9 +108,8 @@ export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.searchInput = option.labels[0];
       await this.onSearch();
     } else if (isNodeOption) {
-      await this.router.navigateByUrl(
-        this.details.getLinkFromUrl(option['@id']),
-      );
+      const url = option['@id'].replace('#', '%23');
+      await this.router.navigateByUrl(this.details.getLinkFromUrl(url));
     } else {
       console.warn('Unknown autocomplete option type');
     }
