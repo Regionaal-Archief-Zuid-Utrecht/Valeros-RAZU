@@ -32,11 +32,7 @@
                 "output": "/assets/pdfjs"
               }
             ],
-            "styles": [
-              "src/styles.scss",
-              "src/theme.scss",
-              "node_modules/ngx-float-ui/css/theme-white.css"
-            ],
+            "styles": ["src/styles.scss", "src/theme.scss"],
             "scripts": []
           },
           "configurations": {
@@ -163,11 +159,7 @@
                 "output": "/assets/pdfjs"
               }
             ],
-            "styles": [
-              "src/styles.scss",
-              "src/theme.scss",
-              "node_modules/ngx-float-ui/css/theme-white.css"
-            ],
+            "styles": ["src/styles.scss", "src/theme.scss"],
             "scripts": []
           }
         }

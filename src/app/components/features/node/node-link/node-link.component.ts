@@ -20,12 +20,7 @@ import {
   featherX,
 } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
-import {
-  NgxFloatUiContentComponent,
-  NgxFloatUiModule,
-  NgxFloatUiPlacements,
-  NgxFloatUiTriggers,
-} from 'ngx-float-ui';
+
 import {
   isValidHttpUrl,
   isValidUrl,
@@ -43,15 +38,7 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
   selector: 'app-node-link',
-  imports: [
-    NgIf,
-    RouterLink,
-    NgIcon,
-    NgxFloatUiContentComponent,
-    NgxFloatUiModule,
-    NodeLabelComponent,
-    TranslatePipe,
-  ],
+  imports: [NgIf, RouterLink, NgIcon, NodeLabelComponent, TranslatePipe],
   templateUrl: './node-link.component.html',
   styleUrl: './node-link.component.scss',
 })
@@ -159,8 +146,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
   }
 
   protected readonly featherFilter = featherFilter;
-  protected readonly NgxFloatUiPlacements = NgxFloatUiPlacements;
-  protected readonly NgxFloatUiTriggers = NgxFloatUiTriggers;
   protected readonly featherExternalLink = featherExternalLink;
   protected readonly featherX = featherX;
   protected readonly featherMaximize2 = featherMaximize2;
