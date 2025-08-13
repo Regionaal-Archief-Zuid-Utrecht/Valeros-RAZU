@@ -12,7 +12,7 @@
     "build:dev-build": "ng build --configuration dev-build",
     "build:test": "ng build --configuration test",
     "build:acceptance": "ng build --configuration acceptance",
-    "build:prod": "ng build --configuration production",
+    "build:prod": "npm run prebuild && npm run prebuild:mirador && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",

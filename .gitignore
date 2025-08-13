@@ -45,3 +45,5 @@ package-lock.json
 src/app/config/theme/*
 
 package-lock.json
+plan.md
+valeros.tar.gz
