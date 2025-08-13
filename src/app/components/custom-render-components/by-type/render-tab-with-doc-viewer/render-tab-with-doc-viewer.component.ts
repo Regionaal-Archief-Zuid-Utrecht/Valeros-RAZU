@@ -8,6 +8,8 @@ import { featherHelpCircle } from '@ng-icons/feather-icons';
 import { DocViewerComponent } from "../../../features/file-viewers/doc-viewer/doc-viewer.component";
 import { FileRenderService } from '../../../../services/file-render.service';
 import { NodeTableViewComponent } from "../../../features/node/node-render-components/node-table-view/node-table-view.component";
+import { UrlService } from '../../../../services/url.service';
+import { FileType } from '../../../../models/file-type.model';
 
 // Register Dutch locale
 registerLocaleData(localeNl);
@@ -20,11 +22,13 @@ registerLocaleData(localeNl);
 })
 export class RenderTabWithDocViewerComponent extends TypeRenderComponent implements OnInit {
     // Arrays to store IDs retrieved from hop-link components
-
+    public FileType = FileType;
     shownInTableCell = true;
     @Output() hasViewer = new EventEmitter<boolean>();
     // Loading state
     loading = false;
+    buildinghistoryPDF = '';
+    peoplehistoryPDF = '';
 
     // UI state
     showCopyrightInfo = false;
@@ -34,12 +38,34 @@ export class RenderTabWithDocViewerComponent extends TypeRenderComponent impleme
 
 
 
-    constructor(public fileRenderService: FileRenderService) {
+    constructor(public fileRenderService: FileRenderService, public urlService: UrlService) {
         super();
     }
-
+    //
     ngOnInit(): void {
+        this.loading = true;
+        console.log(this.data);
+        const bouwgeschiedenisIri = 'https://huizenenmenseninwijk.nl/def/hemiw/bouwgeschiedenis';
+        const rawUrlBuildingHistory = this.data?.node?.[bouwgeschiedenisIri]?.[0]?.value;
 
+        if (rawUrlBuildingHistory) {
+            this.urlService.proxyUrl(rawUrlBuildingHistory).then(url => {
+                this.buildinghistoryPDF = url;
+            });
+        } else {
+            console.warn('No bouwgeschiedenis URL on node:', this.data?.node);
+        }
+        const peoplehistoryIri = 'https://huizenenmenseninwijk.nl/def/hemiw/mensengeschiedenis';
+        const rawUrlPeopleHistory = this.data?.node?.[peoplehistoryIri]?.[0]?.value;
+
+        if (rawUrlPeopleHistory) {
+            this.urlService.proxyUrl(rawUrlPeopleHistory).then(url => {
+                this.peoplehistoryPDF = url;
+            });
+        } else {
+            console.warn('No peoplehistory URL on node:', this.data?.node);
+        }
+        this.loading = false;
     }
 
 
