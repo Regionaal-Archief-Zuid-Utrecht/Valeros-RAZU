@@ -48,5 +48,17 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
+    date: {
+      label: 'Datering',
+      fieldIds: ['startDate'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
+    researched: {
+      label: 'Onderzocht',
+      fieldIds: ['researched'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    }
   },
 };

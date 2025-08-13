@@ -23,7 +23,7 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
     {
       component: RenderTabWithDocViewerComponent,
       predicates: [
-        'https://schema.org/CreativeWork',
+        'https://huizenenmenseninwijk.nl/def/hemiw/onderzochtPand',
       ],
     }
   ],

@@ -16,7 +16,8 @@ export const razuEndpointSettings: EndpointSettings = {
   },
   pdfConversionUrl: 'https://ontwikkel.viewer.razu.nl/gotenberg/convert?url=',
   urlProcessor: {
-    url: 'https://ontwikkel.viewer.razu.nl/sura/process-url', // Used for token generation, see https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA
-    matchSubstring: 'opslag.razu.nl',
+    url: 'https://huizenenmenseninwijk.nl/process-url', // Used for token generation, see https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA
+    matchSubstring: 'opslag.huizenenmenseninwijk.nl',
   },
+  proxyUrl: 'https://huizenenmenseninwijk.nl/cors-proxy',
 };

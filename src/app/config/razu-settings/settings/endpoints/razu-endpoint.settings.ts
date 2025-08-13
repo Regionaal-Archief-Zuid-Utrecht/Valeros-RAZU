@@ -11,9 +11,13 @@ export const razuEndpointSettings: EndpointSettings = {
         // {
         //   elastic: 'https://ontwikkel.search.razu.nl/amerongsche-courant/_search',
         //   sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
+        // // },
+        // {
+        //   elastic: 'https://huizenenmenseninwijk.nl/elasticsearch/picoext/_search',
+        //   sparql: 'https://api.data.razu.nl/datasets/WietseBakker/mehiw/sparql',
         // },
         {
-          elastic: 'https://hemiw.regionaalarchiefzuidutrecht.nl/elasticsearch/picoext/_search',
+          elastic: 'https://huizenenmenseninwijk.nl/elasticsearch/picoext/_search',
           sparql: 'https://api.data.razu.nl/datasets/WietseBakker/mehiw/sparql',
         },
       ],
@@ -24,4 +28,5 @@ export const razuEndpointSettings: EndpointSettings = {
     url: 'https://ontwikkel.viewer.razu.nl/sura/process-url', // Used for token generation, see https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA
     matchSubstring: 'opslag.razu.nl',
   },
+  proxyUrl: 'https://huizenenmenseninwijk.nl/cors-proxy',
 };
