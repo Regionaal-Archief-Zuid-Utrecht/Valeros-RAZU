@@ -1,0 +1,21 @@
+.node-data {
+    margin-top: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.docviewer {
+    height: 100%;
+    min-height: 42rem;
+    min-width: 32rem;
+    width: 100%;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-style: italic;
+    color: #6c757d;
+    margin: 10px 0;
+}

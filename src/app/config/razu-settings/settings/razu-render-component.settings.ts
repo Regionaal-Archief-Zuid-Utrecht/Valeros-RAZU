@@ -11,6 +11,7 @@ import {
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
 import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
 import { RenderTabWithDocViewerComponent } from '../../../components/custom-render-components/by-type/render-tab-with-doc-viewer/render-tab-with-doc-viewer.component';
+import { HemiwStoryComponent } from '../../../components/custom-render-components/by-type/hemiw-story/hemiw-story.component';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
   [RenderMode.ByType]: [
@@ -25,7 +26,13 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
       predicates: [
         'https://huizenenmenseninwijk.nl/def/hemiw/onderzochtPand',
       ],
-    }
+    },
+    {
+      component: HemiwStoryComponent,
+      predicates: [
+        'https://huizenenmenseninwijk.nl/def/hemiw/verhaal',
+      ],
+    },
   ],
   [RenderMode.ByPredicate]: [
     ...renderComponentSettings[RenderMode.ByPredicate],
