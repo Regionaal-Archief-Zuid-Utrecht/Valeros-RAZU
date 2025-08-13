@@ -132,6 +132,7 @@ export class UrlService {
         urlProcessor.url + `?url=${url}`,
         null,
       );
+      console.log(processedResponse);
       return processedResponse.url;
 
     }
@@ -144,6 +145,14 @@ export class UrlService {
       'hetutrechtsarchief.nl/id',
       'hetutrechtsarchief.nl/collectie',
     );
+    return url;
+  }
+
+  async proxyUrl(url: string): Promise<string> {
+    const proxyUrl = Settings.endpoints.proxyUrl;
+    if (proxyUrl) {
+      return proxyUrl + `?url=${url}`;
+    }
     return url;
   }
 }
