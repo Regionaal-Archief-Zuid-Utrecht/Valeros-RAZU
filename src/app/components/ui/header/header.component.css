@@ -1,7 +1,19 @@
-.left-margin-header {
-    margin-left: -1rem;
+.header-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    /* Make sure it's above other content */
 }
 
-.right-margin-header {
-    margin-right: -1rem;
+.header-left {
+    left: 0;
+}
+
+.header-right {
+    right: 0;
+}
+
+.header-center {
+    left: 50%;
+    transform: translateX(-50%);
 }

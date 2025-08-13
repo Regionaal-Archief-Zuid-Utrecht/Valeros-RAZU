@@ -91,6 +91,93 @@
 }
 
 /* General nav-btn style for all */
+
+@media (max-width: 1024px) {
+  .mobile {
+    min-width: unset !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1rem !important;
+    margin: 0.25rem 0 !important;
+    border-radius: 0.5rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile .nav-icon {
+    display: none !important;
+  }
+
+  .mobile-stacked {
+    width: 100vw;
+    padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+    margin: 0;
+  }
+
+  .button-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.25rem;
+    align-items: stretch;
+  }
+
+  .mobile-menu-wrapper {
+    width: 100vw;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mobile-menu-toggle {
+    font-size: 1rem;
+    padding: 0.25rem 1.5rem;
+    background: var(--color-base-100);
+    border: 2px solid var(--color-secondary);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    width: auto;
+    align-self: flex-start;
+    min-height: unset;
+    height: 2rem;
+  }
+
+  .mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100vw;
+    background: var(--color-base-200, #fff);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem 0;
+    z-index: 1000;
+  }
+
+  .nav-section-title {
+    font-size: 1rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .center-grid-content {
+    margin-top: 1rem !important;
+    padding: 0 !important;
+  }
+
+  .nav-section {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .nav-btn {
+    box-shadow: none !important;
+    border-width: 2px !important;
+  }
+}
+
 .nav-btn {
   display: flex;
   flex-direction: column;
@@ -109,7 +196,7 @@
 
 .nav-btn .nav-label {
   margin-top: 0.25rem;
-  font-size: 1em;
+  font-size: .7em;
 }
 
 .button-grid {
@@ -161,8 +248,8 @@
 .center-grid-nav {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  justify-content: space-between;
+  height: 50vh;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 2rem 0;
 }
@@ -170,9 +257,9 @@
 .center-grid-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 50%;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   flex: 1 1 auto;
 }
@@ -254,8 +341,8 @@
 }
 
 .nav-section-bottom {
-  margin-top: auto;
-  margin-bottom: 4rem;
+  position: fixed;
+  bottom: -2rem;
 }
 
 .nav-icon {

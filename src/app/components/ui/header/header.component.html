@@ -1,11 +1,12 @@
 <div class="w-full flex">
   <div
-    class="bg-neutral py-3 px-6 text-white inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-b-md"
+    class="bg-neutral py-3 px-6 text-white inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-b-md header-fixed"
     [ngClass]="{
-      'left-margin-header mr-auto': settings.position === HeaderPosition.Left,
-      'mx-auto': settings.position === HeaderPosition.Center,
-      'ml-auto right-margin-header': settings.position === HeaderPosition.Right,
-    }" role="banner" aria-labelledby="main-header">
+    'header-left': settings.position === HeaderPosition.Left,
+    'header-center': settings.position === HeaderPosition.Center,
+    'header-right': settings.position === HeaderPosition.Right
+  }" role="banner" aria-labelledby="main-header">
+
     <button class="text-left inline-flex items-center" [class.mr-3]="settings.showTitle || settings.showColofonButton"
       (click)="onButtonClicked('')" role="navigation" aria-labelledby="header-home-button">
       <img *ngIf="settings.showLogo" [src]="settings.logoPath" alt="Logo" [class.mr-3]="settings.showTitle"

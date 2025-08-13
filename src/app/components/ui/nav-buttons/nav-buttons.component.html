@@ -1,11 +1,52 @@
 <div [ngClass]="layout === 'center-grid' ? 'center-grid-nav' : 'bottom-tabs'">
   <ng-container *ngIf="layout === 'center-grid'; else tabs">
-    <div class="center-grid-content">
-      <!-- Top Section -->
-      <div class="nav-section nav-section-top">
-        <div class="nav-section-title ">{{'hemiw-theme.discover_stories' | translate}}</div>
-        <div class="button-grid">
-          <a *ngFor="let btn of topButtons" class="nav-btn nav-btn-top shadow-sm hover:shadow transition-shadow"
+    <!-- Mobile stacked version -->
+    <div class="mobile-menu-list" *ngIf="isMobile(); else desktopGrid">
+      <a *ngFor="let btn of topButtons" class="nav-btn mobile" (click)="debugRoute(btn)"
+        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+        <span class="nav-label">{{ btn.label }}</span>
+      </a>
+      <a *ngFor="let btn of middleButtons" class="nav-btn mobile" (click)="debugRoute(btn)"
+        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+        <span class="nav-label">{{ btn.label }}</span>
+      </a>
+      <a *ngFor="let btn of bottomButtons" class="nav-btn mobile" (click)="debugRoute(btn)"
+        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+        <span class="nav-label">{{ btn.label }}</span>
+      </a>
+    </div>
+    <ng-template #desktopGrid>
+      <div class="center-grid-content">
+        <!-- Top Section -->
+        <div class="nav-section nav-section-top">
+          <div class="nav-section-title ">{{'hemiw-theme.discover_stories' | translate}}</div>
+          <div class="button-grid">
+            <a *ngFor="let btn of topButtons" class="nav-btn nav-btn-top shadow-sm hover:shadow transition-shadow"
+              (click)="debugRoute(btn)" [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+              [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+              <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+              <span class="nav-label">{{ btn.label }}</span>
+            </a>
+          </div>
+        </div>
+        <!-- Middle Section -->
+        <div class="nav-section nav-section-middle">
+          <div class="nav-section-title ">{{"hemiw-theme.explore_data" | translate}}</div>
+          <div class="button-grid">
+            <a *ngFor="let btn of middleButtons" class="nav-btn nav-btn-middle shadow-sm hover:shadow transition-shadow"
+              (click)="debugRoute(btn)" [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+              [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+              <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+              <span class="nav-label">{{ btn.label }}</span>
+            </a>
+          </div>
+        </div>
+        <!-- Bottom Section -->
+        <div class="nav-section nav-section-bottom">
+          <a *ngFor="let btn of bottomButtons" class="nav-btn nav-btn-bottom shadow-sm hover:shadow transition-shadow"
             (click)="debugRoute(btn)" [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
             [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
             <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
@@ -13,80 +54,57 @@
           </a>
         </div>
       </div>
-
-      <!-- Middle Section -->
-      <div class="nav-section nav-section-middle">
-        <div class="nav-section-title ">{{"hemiw-theme.explore_data" | translate}}</div>
-        <div class="button-grid">
-          <a *ngFor="let btn of middleButtons" class="nav-btn nav-btn-middle shadow-sm hover:shadow transition-shadow"
-            (click)="debugRoute(btn)" [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-            [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-            <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-            <span class="nav-label">{{ btn.label }}</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Bottom Section -->
-      <div class="nav-section nav-section-bottom">
-        <a *ngFor="let btn of bottomButtons" class="nav-btn nav-btn-bottom shadow-sm hover:shadow transition-shadow"
-          (click)="debugRoute(btn)" [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+    </ng-template>
+  </ng-container>
+  <ng-template #tabs>
+    <!-- Mobile menu version -->
+    <div *ngIf="isMobile(); else desktopTabs" class="mobile-menu-wrapper">
+      <button class="mobile-menu-toggle" (click)="toggleMenu()">
+        <span>{{ menuOpen ? '✖' : '☰' }}</span>
+      </button>
+      <div *ngIf="menuOpen" class="mobile-menu-list">
+        <a *ngFor="let btn of topButtons" class="nav-btn mobile" (click)="debugRoute(btn); closeMenu()"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
           [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-          <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+          <span class="nav-label">{{ btn.label }}</span>
+        </a>
+        <a *ngFor="let btn of middleButtons" class="nav-btn mobile" (click)="debugRoute(btn); closeMenu()"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+          [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+          <span class="nav-label">{{ btn.label }}</span>
+        </a>
+        <a *ngFor="let btn of bottomButtons" class="nav-btn mobile" (click)="debugRoute(btn); closeMenu()"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+          [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
           <span class="nav-label">{{ btn.label }}</span>
         </a>
       </div>
     </div>
-  </ng-container>
-  <ng-template #tabs>
-    <ng-container *ngFor="let btn of topButtons">
-      <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
-        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-        <span class="nav-label">{{ btn.label }}</span>
-      </a>
-    </ng-container>
-    <ng-container *ngFor="let btn of middleButtons">
-      <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
-        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-        <span class="nav-label">{{ btn.label }}</span>
-      </a>
-    </ng-container>
-    <ng-container *ngFor="let btn of bottomButtons">
-      <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
-        [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-        [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-        <span class="nav-label">{{ btn.label }}</span>
-      </a>
-    </ng-container>
+    <ng-template #desktopTabs>
+      <ng-container *ngFor="let btn of topButtons">
+        <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+          [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+          <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+          <span class="nav-label">{{ btn.label }}</span>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let btn of middleButtons">
+        <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+          [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+          <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+          <span class="nav-label">{{ btn.label }}</span>
+        </a>
+      </ng-container>
+      <ng-container *ngFor="let btn of bottomButtons">
+        <a class="nav-btn shadow-sm hover:shadow transition-shadow" (click)="debugRoute(btn)"
+          [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
+          [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
+          <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
+          <span class="nav-label">{{ btn.label }}</span>
+        </a>
+      </ng-container>
+    </ng-template>
   </ng-template>
 </div>
-<!-- Single grid buttons -->
-<!-- <div [ngClass]="layout === 'center-grid' ? 'center-grid' : 'bottom-tabs'">
-  <ng-container *ngIf="layout === 'center-grid'; else tabs">
-    <div class="button-grid">
-      <a *ngFor="let btn of buttons"
-         class="nav-btn"
-         (click)="debugRoute(btn)"
-         [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-         [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-        <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-        <span class="nav-label">{{ btn.label }}</span>
-      </a>
-    </div>
-  </ng-container>
-  <ng-template #tabs>
-    <a *ngFor="let btn of buttons"
-       class="nav-btn"
-       (click)="debugRoute(btn)"
-       [routerLink]="isRouteObject(btn.route) ? [btn.route.path] : [btn.route]"
-       [queryParams]="isRouteObject(btn.route) ? btn.route.queryParams : null">
-      <ng-icon [svg]="btn.icon" class="nav-icon" aria-hidden="true"></ng-icon>
-      <span class="nav-label">{{ btn.label }}</span>
-    </a>
-  </ng-template>
-</div> -->

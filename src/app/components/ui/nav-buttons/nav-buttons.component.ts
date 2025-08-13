@@ -11,7 +11,9 @@ import {
     featherBook,
     featherInfo,
     featherNavigation,
-    featherUsers
+    featherUsers,
+    featherBookmark,
+    featherImage
 } from '@ng-icons/feather-icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -28,6 +30,19 @@ interface NavButton {
     styleUrls: ['./nav-buttons.component.css']
 })
 export class NavButtonsComponent implements OnInit, OnDestroy {
+    menuOpen = false;
+
+    isMobile(): boolean {
+        return window.matchMedia('(max-width: 1024px)').matches;
+    }
+
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+    }
+
+    closeMenu() {
+        this.menuOpen = false;
+    }
     private static DEBUG = false;
 
     constructor(private router: Router, private routing: RoutingService, private translate: TranslateService) {
@@ -136,12 +151,46 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
             'hemiw-theme.all_buildings',
             'hemiw-theme.all_streets',
             'hemiw-theme.all_people',
-            'hemiw-theme.about_and_contact'
+            'hemiw-theme.about_and_contact',
+            'hemiw-theme.discover_stories',
+            'hemiw-theme.explore_data',
+            'hemiw-theme.researched_buildings',
+            'hemiw-theme.maps_and_profiles'
         ]).subscribe(translations => {
             this.topButtons = [
                 { label: 'Kaart', icon: featherMap, route: '/map' },
                 {
                     label: translations['hemiw-theme.stories'], icon: featherBook, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                type: {
+                                    type: 2,
+                                    fieldIds: ['type'],
+                                    valueIds: ['https://schema.org/CreativeWork']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+                {
+                    label: translations['hemiw-theme.researched_buildings'], icon: featherBookmark, route: {
+                        path: '/search',
+                        queryParams: {
+                            filters: JSON.stringify({
+                                researched: {
+                                    type: 2,
+                                    fieldIds: ['researched'],
+                                    valueIds: ['Ja']
+                                }
+                            }),
+                            q: ''
+                        }
+                    }
+                },
+                {
+                    label: translations['hemiw-theme.maps_and_profiles'], icon: featherImage, route: {
                         path: '/search',
                         queryParams: {
                             filters: JSON.stringify({
@@ -165,7 +214,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                                 type: {
                                     type: 2,
                                     fieldIds: ['type'],
-                                    valueIds: ['https://w3id.org/italia/onto/CLV/Address']
+                                    valueIds: ['https://w3id.org/italia/onto/CLV/Feature']
                                 }
                             }),
                             q: ''

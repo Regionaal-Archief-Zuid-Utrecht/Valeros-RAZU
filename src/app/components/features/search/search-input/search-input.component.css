@@ -1,0 +1,10 @@
+.fixed-search {
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    /* center */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1rem;
+    /* Make sure it's above other content */
+}
