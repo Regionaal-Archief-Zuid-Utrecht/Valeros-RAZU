@@ -122,7 +122,7 @@
     </div>
 
     <div class="mt-8 font-mono text-sm">
-      <app-node-permalink-button [node]="node" />
+      <app-node-permalink-button *ngIf="showPermalinkButton" [node]="node" />
     </div>
 
     <div

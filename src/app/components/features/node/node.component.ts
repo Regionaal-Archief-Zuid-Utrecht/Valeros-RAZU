@@ -82,6 +82,9 @@ export class NodeComponent implements OnInit, OnChanges {
   showDetailsButton = this.settings.hasViewModeSetting(
     ViewModeSetting.ShowDetailsButton,
   );
+  showPermalinkButton = this.settings.hasViewModeSetting(
+    ViewModeSetting.ShowPermalinkButton,
+  );
 
   private shouldShowIIIFSubject = new BehaviorSubject<boolean>(false);
   shouldShowIIIF$ = this.shouldShowIIIFSubject.asObservable();

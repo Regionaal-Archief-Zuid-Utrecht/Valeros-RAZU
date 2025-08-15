@@ -8,10 +8,14 @@ export const razuViewModeSettings: ViewModeSettings = {
     ...viewModeSettings[ViewMode.List],
     [ViewModeSetting.ShowParents]: false,
     [ViewModeSetting.ShowOrganization]: false,
+    [ViewModeSetting.ShowTypes]: false,
+    [ViewModeSetting.ShowPermalinkButton]: false,
   },
   [ViewMode.Grid]: {
     ...viewModeSettings[ViewMode.Grid],
     [ViewModeSetting.ShowParents]: false,
     [ViewModeSetting.ShowOrganization]: false,
+    [ViewModeSetting.ShowTypes]: false,
+    [ViewModeSetting.ShowPermalinkButton]: false,
   },
 };
