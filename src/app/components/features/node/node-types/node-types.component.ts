@@ -11,10 +11,10 @@ import { SettingsService } from '../../../../services/settings.service';
 import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
-    selector: 'app-node-types',
-    imports: [NgForOf, NgIf, NodeTypeComponent],
-    templateUrl: './node-types.component.html',
-    styleUrl: './node-types.component.css'
+  selector: 'app-node-types',
+  imports: [NgForOf, NgIf, NodeTypeComponent],
+  templateUrl: './node-types.component.html',
+  styleUrl: './node-types.component.css'
 })
 export class NodeTypesComponent {
   @Input() types?: TypeModel[];
@@ -25,7 +25,7 @@ export class NodeTypesComponent {
     public clusters: ClusterService,
     public settings: SettingsService,
     public predVisibility: PredicateVisibilityService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initTypesClusteredInFilters();

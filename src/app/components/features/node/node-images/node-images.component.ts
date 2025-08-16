@@ -4,10 +4,10 @@ import { Settings } from '../../../../config/settings';
 import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
 
 @Component({
-    selector: 'app-node-images',
-    imports: [NgIf, MiradorComponent],
-    templateUrl: './node-images.component.html',
-    styleUrl: './node-images.component.css'
+  selector: 'app-node-images',
+  imports: [NgIf, MiradorComponent],
+  templateUrl: './node-images.component.html',
+  styleUrl: './node-images.component.css'
 })
 export class NodeImagesComponent {
   @Input() imageUrls?: string[];

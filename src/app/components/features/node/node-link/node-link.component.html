@@ -1,53 +1,7 @@
 <ng-container>
-  <!-- class="inline" -->
-  <float-ui-content #popupContent class="hidden">
-    <a class="btn btn-sm mr-2 !font-sans" [href]="processedUrl" target="_blank">
-      <ng-icon [svg]="featherExternalLink" />
-      {{ "records-interface.open-link" | translate }} Open link
-    </a>
-
-    <a
-      class="btn btn-sm mr-2 !font-sans"
-      [routerLink]="['']"
-      [queryParams]="{ q: wrapWithDoubleQuotes(processedUrl) }"
-      target="_blank"
-    >
-      <ng-icon [svg]="featherSearch" />
-      {{ "records-interface.search" | translate }}
-    </a>
-
-    <!--    TODO: Depending on where this is presented, determine if the filter should be field or value-->
-    <!--    <button-->
-    <!--      class="btn btn-sm"-->
-    <!--      (click)="onToggleFilterClicked($event, FilterType.Value)"-->
-    <!--      [disabled]="true"-->
-    <!--      *ngIf="processedUrl"-->
-    <!--    >-->
-    <!--      <ng-icon-->
-    <!--        [svg]="filters.has([processedUrl], FilterType.Value) ? featherX : featherFilter"-->
-    <!--      />-->
-    <!--      {{-->
-    <!--        filters.has([processedUrl], FilterType.Value)-->
-    <!--          ? "[TODO] Remove filter"-->
-    <!--          : "[TODO] Add filter"-->
-    <!--      }}-->
-    <!--    </button>-->
-  </float-ui-content>
-
   <div class="inline" #linkElem>
     <ng-content></ng-content>
 
-    <!--    <div-->
-    <!--      class="inline"-->
-    <!--      [ngClass]="[isClickableUrl ? 'clickable' : '']"-->
-    <!--      [floatUi]="popupContent"-->
-    <!--      [disabled]="!isClickableUrl"-->
-    <!--      [hideOnClickOutside]="true"-->
-    <!--      [showOnStart]="false"-->
-    <!--      [showTrigger]="NgxFloatUiTriggers.click"-->
-    <!--      [placement]="NgxFloatUiPlacements.TOP"-->
-    <!--      [positionFixed]="true"-->
-    <!--    >-->
     <div class="inline">
       <!--  TODO: If clicked is observed (and perhaps the event is canceled), remove the href or use a button instead?  -->
       <ng-container *ngIf="clicked.observed || isClickableUrl">
@@ -68,7 +22,12 @@
         </a>
 
         <!-- Internal URL -->
-        <a *ngIf="isInternalUrl" [routerLink]="processedUrl" class="clickable">
+        <a
+          *ngIf="isInternalUrl"
+          [routerLink]="processedUrl"
+          queryParamsHandling="merge"
+          class="clickable"
+        >
           <app-node-label
             [label]="cachedLabel ?? processedUrl"
             [shouldTruncate]="shouldTruncate"

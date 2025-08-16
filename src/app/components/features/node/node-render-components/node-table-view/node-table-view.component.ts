@@ -12,15 +12,14 @@ import { NodeRenderComponent } from '../node-render.component';
 import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
-    selector: 'app-node-table-view',
-    imports: [NgIf, NodeTableComponent],
-    templateUrl: './node-table-view.component.html',
-    styleUrl: './node-table-view.component.css'
+  selector: 'app-node-table-view',
+  imports: [NgIf, NodeTableComponent],
+  templateUrl: './node-table-view.component.html',
+  styleUrl: './node-table-view.component.css'
 })
 export class NodeTableViewComponent
   extends NodeRenderComponent
-  implements OnInit
-{
+  implements OnInit {
   canShowDetails = false;
   numOfDetailsPreds = 0;
 

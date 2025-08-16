@@ -1,5 +1,5 @@
 import { JsonPipe, NgFor, NgIf, DatePipe } from '@angular/common';
-import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
+import { Component, OnInit, LOCALE_ID, Inject, Input } from '@angular/core';
 import { TypeRenderComponent } from '../type-render-component.component';
 import { HopLinkComponent } from '../../../features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
@@ -9,15 +9,18 @@ import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import { featherHelpCircle } from '@ng-icons/feather-icons';
 import { NgIcon } from '@ng-icons/core';
+import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
+import { Direction, NodeObj } from '../../../../models/node.model';
 
 // Register Dutch locale
 registerLocaleData(localeNl);
 
 @Component({
     selector: 'app-razu-aflevering',
+    standalone: true,
     imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon],
     templateUrl: './razu-aflevering.component.html',
-    styleUrls: ['./razu-aflevering.component.css']
+    styleUrls: ['./razu-aflevering.component.scss'],
 })
 export class RazuAfleveringComponent extends TypeRenderComponent implements OnInit {
     // Arrays to store IDs retrieved from hop-link components
@@ -35,9 +38,19 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     beperkingGebruikTermijnMap: Map<string, string[]> = new Map();
     copyrightNoteMap: Map<string, string[]> = new Map();
     termijnEinddatumMap: Map<string, string> = new Map();
+    representationMap: Map<string, string[]> = new Map();
+    // Map: representation node id -> list of image URLs (resolved via URLBestand)
+    imageRepUrlMap: Map<string, string[]> = new Map();
+    // Map: representation node id -> page number (schema.org/position)
+    imageRepPageMap: Map<string, string> = new Map();
+    // Map: representation node id -> file size in bytes (ldto/omvang)
+    imageRepSizeMap: Map<string, string> = new Map();
     hasBeginDate = false;
     hasEndDate = false;
     hasType = false;
+    repMetaLoaded = false;
+    repMetaFetching = false;
+    @Input() visibility!: PredicateVisibility;
 
     // Loading state
     loading = false;
@@ -47,6 +60,10 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
 
     // Explicitly declare data property from parent class for template access
     override data?: TypeRenderComponentInput;
+
+    trackByRep(index: number, rep: NodeObj): string {
+        return rep.value;
+    }
 
     // Hop settings for isOnderdeelVan
     onderdeelVanSettings: HopLinkSettings = {
@@ -107,6 +124,12 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
 
     noteSettings: HopLinkSettings = {
         preds: ['https://data.razu.nl/def/ldto/beperkingGebruikType', 'http://www.w3.org/2004/02/skos/core#note'],
+        showHops: false,
+        showOriginalLink: false
+    };
+
+    representationSettings: HopLinkSettings = {
+        preds: ['https://data.razu.nl/def/ldto/URLBestand'],
         showHops: false,
         showOriginalLink: false
     };
@@ -234,12 +257,36 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
                                 }
                             });
                         promises.push(beperkingGebruikTermijnPromise);
+
                     });
 
                     return Promise.all(promises);
                 });
 
             allPromises.push(beperkingGebruikPromise);
+
+            // // Preload representation URLs and keep only images
+            // const reps: NodeObj[] = (this.data.node['https://data.razu.nl/def/ldto/isRepresentatieVan'] || []);
+            // const representationPromises = reps.map(async (rep) => {
+            //     const urls = await this.sparqlService.getObjIds(rep.value, this.representationSettings.preds);
+            //     const imageUrls = urls.filter((u) => this.isImageUrl(u));
+            //     if (imageUrls.length > 0) {
+            //         this.imageRepUrlMap.set(rep.value, imageUrls);
+            //     }
+
+            //     // Fetch page number (position)
+            //     const positions = await this.sparqlService.getObjIds(rep.value, ['http://schema.org/position']);
+            //     if (positions.length > 0) {
+            //         this.imageRepPageMap.set(rep.value, positions[0]);
+            //     }
+
+            //     // Fetch file size (omvang)
+            //     const sizes = await this.sparqlService.getObjIds(rep.value, ['https://data.razu.nl/def/ldto/omvang']);
+            //     if (sizes.length > 0) {
+            //         this.imageRepSizeMap.set(rep.value, sizes[0]);
+            //     }
+            // });
+            // allPromises.push(Promise.all(representationPromises));
 
             // Wait for all promises to complete
             Promise.all(allPromises)
@@ -258,6 +305,43 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
         }
     }
 
+    private async loadRepresentationMetadataOnce(): Promise<void> {
+        if (this.repMetaLoaded || this.repMetaFetching) return;
+
+        const reps: NodeObj[] = (this.data?.node?.['https://data.razu.nl/def/ldto/isRepresentatieVan'] || []);
+        if (!reps.length) return;
+
+        this.repMetaFetching = true;
+        try {
+            await Promise.all(reps.map(async (rep) => {
+                // Single call to fetch all triples for the representation node
+                const node = await this.sparqlService.getNode(rep.value);
+
+                // Extract URLs via URLBestand
+                const urlObjs = node['https://data.razu.nl/def/ldto/URLBestand'] || [];
+                const urls = urlObjs.map(o => o.value);
+                const imageUrls = urls.filter(u => this.isImageUrl(u));
+                if (imageUrls.length > 0) {
+                    this.imageRepUrlMap.set(rep.value, imageUrls);
+                }
+
+                // Extract page number (schema.org/position)
+                const posObjs = node['http://schema.org/position'] || [];
+                if (posObjs.length > 0) {
+                    this.imageRepPageMap.set(rep.value, posObjs[0].value);
+                }
+
+                // Extract file size (ldto/omvang)
+                const sizeObjs = node['https://data.razu.nl/def/ldto/omvang'] || [];
+                if (sizeObjs.length > 0) {
+                    this.imageRepSizeMap.set(rep.value, sizeObjs[0].value);
+                }
+            }));
+            this.repMetaLoaded = true;
+        } finally {
+            this.repMetaFetching = false;
+        }
+    }
     // Helper method to get labels for dekkingInRuimteIds
     getDekkingInRuimteIds(onderdeelVanId: string): string[] {
         return this.dekkingInRuimteMap.get(onderdeelVanId) || [];
@@ -283,5 +367,64 @@ export class RazuAfleveringComponent extends TypeRenderComponent implements OnIn
     getTermijnEinddatum(termijnId: string): string {
         return this.termijnEinddatumMap.get(termijnId) || '';
     }
+
+    onDownloadToggle(event: Event): void {
+        const open = (event.target as HTMLDetailsElement)?.open;
+        if (open) {
+            void this.loadRepresentationMetadataOnce();
+        }
+    }
+    // Returns true if the URL points to an image file
+    isImageUrl(url?: string): boolean {
+        const u = url?.toLowerCase?.();
+        if (!u) return false;
+        return /(\.jpg|\.jpeg|\.png|\.gif|\.tif|\.tiff|\.webp|\.bmp)(\?.*)?$/.test(u);
+    }
+
+    // Get all image URLs resolved for a representation
+    getImageUrls(rep?: NodeObj): string[] {
+        if (!rep?.value) return [];
+        return this.imageRepUrlMap.get(rep.value) || [];
+    }
+
+    // Convenience: first image URL for a representation
+    getFirstImageUrl(rep?: NodeObj): string | '' {
+        return this.getImageUrls(rep)[0] || '';
+    }
+
+    // Page number (as number if parsable)
+    getPage(rep?: NodeObj): number | undefined {
+        if (!rep?.value) return undefined;
+        const p = this.imageRepPageMap.get(rep.value);
+        const n = p !== undefined ? Number(p) : NaN;
+        return Number.isFinite(n) ? n : undefined;
+    }
+
+    // File size in bytes (as number if parsable)
+    getSizeBytes(rep?: NodeObj): number | undefined {
+        if (!rep?.value) return undefined;
+        const s = this.imageRepSizeMap.get(rep.value);
+        const n = s !== undefined ? Number(s) : NaN;
+        return Number.isFinite(n) ? n : undefined;
+    }
+
+    // Human readable bytes (e.g., 22 MB)
+    formatBytes(bytes?: number): string {
+        if (bytes === undefined || bytes === null || !Number.isFinite(bytes)) return '';
+        const thresh = 1000;
+        if (Math.abs(bytes) < thresh) {
+            return bytes + ' B';
+        }
+        const units = ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        let u = -1;
+        let b = bytes;
+        do {
+            b /= thresh;
+            ++u;
+        } while (Math.abs(b) >= thresh && u < units.length - 1);
+        return b.toFixed(b >= 10 ? 0 : 1) + ' ' + units[u];
+    }
+
     protected readonly featherHelpCircle = featherHelpCircle;
+    protected readonly Direction = Direction;
 }

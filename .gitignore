@@ -44,6 +44,5 @@ src/app/config/settings_local.ts
 package-lock.json
 src/app/config/theme/*
 
-package-lock.json
 plan.md
 *.tar.gz

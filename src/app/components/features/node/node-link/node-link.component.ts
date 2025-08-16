@@ -20,12 +20,7 @@ import {
   featherX,
 } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
-import {
-  NgxFloatUiContentComponent,
-  NgxFloatUiModule,
-  NgxFloatUiPlacements,
-  NgxFloatUiTriggers,
-} from 'ngx-float-ui';
+
 import {
   isValidHttpUrl,
   isValidUrl,
@@ -42,18 +37,18 @@ import { UrlService } from '../../../../services/url.service';
 import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
-    selector: 'app-node-link',
-    imports: [
-        NgIf,
-        RouterLink,
-        NgIcon,
-        NgxFloatUiContentComponent,
-        NgxFloatUiModule,
-        NodeLabelComponent,
-        TranslatePipe,
-    ],
-    templateUrl: './node-link.component.html',
-    styleUrl: './node-link.component.css'
+  selector: 'app-node-link',
+  imports: [
+    NgIf,
+    RouterLink,
+    NgIcon,
+    NgxFloatUiContentComponent,
+    NgxFloatUiModule,
+    NodeLabelComponent,
+    TranslatePipe,
+  ],
+  templateUrl: './node-link.component.html',
+  styleUrl: './node-link.component.css'
 })
 export class NodeLinkComponent implements OnInit, OnChanges {
   @ViewChild('linkElem') linkElem?: ElementRef;
@@ -81,7 +76,7 @@ export class NodeLinkComponent implements OnInit, OnChanges {
     public urlService: UrlService,
     public scroll: ScrollService,
     public details: DetailsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (!this.labelUrl) {
@@ -159,8 +154,6 @@ export class NodeLinkComponent implements OnInit, OnChanges {
   }
 
   protected readonly featherFilter = featherFilter;
-  protected readonly NgxFloatUiPlacements = NgxFloatUiPlacements;
-  protected readonly NgxFloatUiTriggers = NgxFloatUiTriggers;
   protected readonly featherExternalLink = featherExternalLink;
   protected readonly featherX = featherX;
   protected readonly featherMaximize2 = featherMaximize2;

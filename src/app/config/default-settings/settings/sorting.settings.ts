@@ -12,12 +12,12 @@ export const sortingSettings: SortingSettings = {
       boost: {},
     },
     'title-a-z': {
-      fields: labelPredicates,
+      fields: labelPredicates.map((pred) => pred + '.keyword'),
       label: 'Titel (A-Z)',
       order: SortOrder.Ascending,
     },
     'title-z-a': {
-      fields: labelPredicates,
+      fields: labelPredicates.map((pred) => pred + '.keyword'),
       label: 'Titel (Z-A)',
       order: SortOrder.Descending,
     },

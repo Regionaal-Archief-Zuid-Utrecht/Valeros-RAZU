@@ -15,17 +15,17 @@ import {
 } from '../node-table-cell/node-table-cell.component';
 
 @Component({
-    selector: 'app-node-direction-table',
-    imports: [
-        NgForOf,
-        NgClass,
-        NodeTableCellComponent,
-        NgIf,
-        NodeLinkComponent,
-        TranslatePipe,
-    ],
-    templateUrl: './node-direction-table.component.html',
-    styleUrl: './node-direction-table.component.css'
+  selector: 'app-node-direction-table',
+  imports: [
+    NgForOf,
+    NgClass,
+    NodeTableCellComponent,
+    NgIf,
+    NodeLinkComponent,
+    TranslatePipe,
+  ],
+  templateUrl: './node-direction-table.component.html',
+  styleUrl: './node-direction-table.component.css'
 })
 export class NodeDirectionTableComponent {
   @Input() node?: NodeModel;
@@ -41,7 +41,7 @@ export class NodeDirectionTableComponent {
   constructor(
     public nodes: NodeService,
     private predVisibility: PredicateVisibilityService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initPredData();

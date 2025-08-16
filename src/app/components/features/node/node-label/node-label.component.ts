@@ -11,10 +11,10 @@ import { Settings } from '../../../../config/settings';
 import { truncate } from '../../../../helpers/util.helper';
 
 @Component({
-    selector: 'app-node-label',
-    imports: [NgIf, NgClass],
-    templateUrl: './node-label.component.html',
-    styleUrl: './node-label.component.css'
+  selector: 'app-node-label',
+  imports: [NgIf, NgClass],
+  templateUrl: './node-label.component.html',
+  styleUrl: './node-label.component.css'
 })
 export class NodeLabelComponent implements OnInit, OnChanges {
   @Input() label?: string;
@@ -25,7 +25,7 @@ export class NodeLabelComponent implements OnInit, OnChanges {
 
   renderedLabelHtml = '';
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.updateRenderedLabelHtml();

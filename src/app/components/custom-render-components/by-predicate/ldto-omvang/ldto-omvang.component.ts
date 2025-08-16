@@ -3,15 +3,14 @@ import { humanFileSize } from '../../../../helpers/util.helper';
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
 @Component({
-    selector: 'app-ldto-omvang',
-    imports: [],
-    templateUrl: './ldto-omvang.component.html',
-    styleUrl: './ldto-omvang.component.css'
+  selector: 'app-ldto-omvang',
+  imports: [],
+  templateUrl: './ldto-omvang.component.html',
+  styleUrl: './ldto-omvang.component.css'
 })
 export class LdtoOmvangComponent
   extends PredicateRenderComponent
-  implements OnInit
-{
+  implements OnInit {
   bytesStr?: string;
   humanReadableBytesStr: string = '';
 

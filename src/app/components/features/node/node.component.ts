@@ -41,26 +41,26 @@ import { NodeTableRowComponent } from './node-table-row/node-table-row.component
 import { NodeTypesComponent } from './node-types/node-types.component';
 
 @Component({
-    selector: 'app-node',
-    imports: [
-        NgIf,
-        NodeHierarchyComponent,
-        NodeTypesComponent,
-        AsyncPipe,
-        NodeLinkComponent,
-        NodeRendererComponent,
-        NodeEndpointComponent,
-        NodeTableRowComponent,
-        NgClass,
-        NodeDetailsButtonComponent,
-        NodePermalinkButtonComponent,
-        RouterLink,
-        TranslatePipe,
-        FileRendererComponent,
-        MiradorComponent,
-    ],
-    templateUrl: './node.component.html',
-    styleUrl: './node.component.css'
+  selector: 'app-node',
+  imports: [
+    NgIf,
+    NodeHierarchyComponent,
+    NodeTypesComponent,
+    AsyncPipe,
+    NodeLinkComponent,
+    NodeRendererComponent,
+    NodeEndpointComponent,
+    NodeTableRowComponent,
+    NgClass,
+    NodeDetailsButtonComponent,
+    NodePermalinkButtonComponent,
+    RouterLink,
+    TranslatePipe,
+    FileRendererComponent,
+    MiradorComponent,
+  ],
+  templateUrl: './node.component.html',
+  styleUrl: './node.component.css'
 })
 export class NodeComponent implements OnInit, OnChanges {
   @Input() node?: NodeModel;
@@ -81,6 +81,9 @@ export class NodeComponent implements OnInit, OnChanges {
   );
   showDetailsButton = this.settings.hasViewModeSetting(
     ViewModeSetting.ShowDetailsButton,
+  );
+  showPermalinkButton = this.settings.hasViewModeSetting(
+    ViewModeSetting.ShowPermalinkButton,
   );
 
   private shouldShowIIIFSubject = new BehaviorSubject<boolean>(false);

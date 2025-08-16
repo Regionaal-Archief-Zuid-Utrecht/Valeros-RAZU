@@ -21,18 +21,18 @@ export enum TableCellShowOptions {
 }
 
 @Component({
-    selector: 'app-node-table-cell',
-    imports: [
-        NgForOf,
-        NgIcon,
-        NgIf,
-        NodeLinkComponent,
-        NodeTypeComponent,
-        FileRendererComponent,
-        NgComponentOutlet,
-    ],
-    templateUrl: './node-table-cell.component.html',
-    styleUrl: './node-table-cell.component.css'
+  selector: 'app-node-table-cell',
+  imports: [
+    NgForOf,
+    NgIcon,
+    NgIf,
+    NodeLinkComponent,
+    NodeTypeComponent,
+    FileRendererComponent,
+    NgComponentOutlet,
+  ],
+  templateUrl: './node-table-cell.component.html',
+  styleUrl: './node-table-cell.component.css'
 })
 export class NodeTableCellComponent implements OnInit {
   @Input() pred?: string;
@@ -51,7 +51,7 @@ export class NodeTableCellComponent implements OnInit {
   constructor(
     public nodes: NodeService,
     public renderComponent: RenderComponentService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initRenderComponents();

@@ -4,13 +4,13 @@ import { EndpointService } from '../../../../services/endpoint.service';
 import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
-    selector: 'app-node-endpoint',
-    imports: [NgIf, NodeLinkComponent],
-    templateUrl: './node-endpoint.component.html',
-    styleUrl: './node-endpoint.component.css'
+  selector: 'app-node-endpoint',
+  imports: [NgIf, NodeLinkComponent],
+  templateUrl: './node-endpoint.component.html',
+  styleUrl: './node-endpoint.component.css'
 })
 export class NodeEndpointComponent {
   @Input() endpointId?: string;
 
-  constructor(public endpoints: EndpointService) {}
+  constructor(public endpoints: EndpointService) { }
 }

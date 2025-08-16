@@ -161,12 +161,8 @@ export class SearchService {
       }
     }
 
-    const navigatedToDetails = this.details.isShowing();
-    if (navigatedToDetails) {
-      return;
-    }
-
     const queryStr = queryParams[Settings.url.params.search];
+
     const queryStrChanged = queryStr !== this.queryStr;
     if (queryStrChanged) {
       this.queryStr = queryStr;
@@ -260,12 +256,7 @@ export class SearchService {
         if (hitTotal.relation !== 'eq') {
           isCapped = true;
         }
-        return (
-          total +
-          (hitTotal.relation === 'eq'
-            ? hitTotal.value
-            : Math.min(hitTotal.value, Settings.search.elasticTopHitsMax))
-        );
+        return total + hitTotal.value;
       }
       return total;
     }, 0);
@@ -328,9 +319,7 @@ export class SearchService {
       }
 
       // Update filter options
-      if (clearFilters) {
-        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
-      }
+      await this.filters.updateFilterOptionValues(this.queryStr ?? '');
     } catch (error) {
       console.error('Error searching:', error);
     } finally {

@@ -7,21 +7,31 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
+import { Router } from '@angular/router';
 // @ts-ignore
 import Mirador from 'mirador/dist/es/src/index';
+// prettier-ignore
+// @ts-ignore
+import { getCanvasIndex, getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
+import { BehaviorSubject } from 'rxjs';
 import { IIIFService } from '../../../../services/iiif.service';
+import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
 
 @Component({
-    selector: 'app-mirador',
-    imports: [],
-    templateUrl: './mirador.component.html',
-    styleUrl: './mirador.component.css'
+  selector: 'app-mirador',
+  imports: [],
+  templateUrl: './mirador.component.html',
+  styleUrl: './mirador.component.css'
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
   private _initializeDebounceTimer?: number;
+
+  private _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
+    number | null
+  >(null);
 
   @Input() nodeId?: string;
   @Input() nodeLabel?: string;
@@ -30,7 +40,13 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
     private ngZone: NgZone,
     private iiifService: IIIFService,
-  ) {}
+    private router: Router,
+    private miradorHighlight: MiradorHighlightService,
+  ) {
+    this._canvasIndex.subscribe((canvasIndex: number | null) => {
+      console.log('Canvas index:', canvasIndex);
+    });
+  }
 
   ngAfterViewInit() {
     this.initViewer();
@@ -54,6 +70,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.destroyViewer();
+    this.miradorHighlight.stopCheckingForTextElementsInDOM();
   }
 
   private destroyViewer() {
@@ -66,8 +83,33 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
   }
 
+  private getPageFromUrl(): number | null {
+    const removeQueryParams = (url: string) => {
+      const queryParamIndex = url.indexOf('?');
+      if (queryParamIndex !== -1) {
+        return url.substring(0, queryParamIndex);
+      }
+      return url;
+    };
+
+    let url = removeQueryParams(this.router.url);
+
+    // Double encoded hashtag (%2523): Once by Angular router, once by encodeURIComponent (see Details service)
+    const doubleEncodedHashtag = '%2523';
+    const urlSplitByHashtag = url.split(doubleEncodedHashtag);
+    const urlHasHashtag = urlSplitByHashtag.length > 1;
+    if (urlHasHashtag) {
+      const pageStr: string = urlSplitByHashtag[1];
+      const pageNum = Number(pageStr);
+      return !isNaN(pageNum) ? pageNum : null;
+    }
+    return null;
+  }
+
   private initViewer() {
     this.destroyViewer();
+
+    const pageNum = this.getPageFromUrl();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
       const manifestUrl: string | null =
@@ -99,13 +141,15 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         window: {
           textOverlay: {
             enabled: true,
-            selectable: false,
+            selectable: true,
             visible: false,
+            // opacity: 0,
           },
         },
         windows: [
           {
             manifestId: manifestUrl,
+            canvasIndex: pageNum ? pageNum - 1 : 0,
             allowWindowSideBar: true,
             sideBarOpenByDefault: false,
             allowMaximize: false,
@@ -113,16 +157,51 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
             allowClose: false,
             ...(window.innerWidth >= 640
               ? {
-                  thumbnailNavigationPosition: 'far-bottom',
-                  thumbnailNavigationVisible: true,
-                }
+                thumbnailNavigationPosition: 'far-bottom',
+                thumbnailNavigationVisible: true,
+              }
               : {}),
           },
         ],
       };
 
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
+      this.initCanvasIndexTracking(miradorInstance);
+
       return miradorInstance;
     });
+
+    this.miradorHighlight.init();
+  }
+
+  initCanvasIndexTracking(miradorInstance: any) {
+    const store = miradorInstance.store;
+    const originalDispatch = store.dispatch;
+
+    store.dispatch = (action: any) => {
+      // TODO: Only check for canvas change for setCanvas calls, now checks for canvas change for all actions
+      const result = originalDispatch(action);
+      const currentState = store.getState();
+
+      const windows = currentState.windows || {};
+      const windowId = Object.keys(windows)[0];
+
+      const currentCanvas = getCurrentCanvas(currentState, {
+        windowId,
+      });
+      const canvasId = currentCanvas?.id;
+      if (canvasId) {
+        const canvasIndex = getCanvasIndex(currentState, {
+          windowId,
+          canvasId,
+        });
+        const canvasIsUpdated = canvasIndex !== this._canvasIndex.value;
+        if (canvasIsUpdated) {
+          this._canvasIndex.next(canvasIndex);
+        }
+      }
+
+      return result;
+    };
   }
 }

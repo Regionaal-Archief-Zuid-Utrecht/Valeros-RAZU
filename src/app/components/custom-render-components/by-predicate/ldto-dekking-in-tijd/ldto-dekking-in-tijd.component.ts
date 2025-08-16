@@ -4,10 +4,10 @@ import { HopLinkComponent } from '../../../features/node/node-render-components/
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
 @Component({
-    selector: 'app-ldto-dekking-in-tijd',
-    imports: [HopLinkComponent, NgIf],
-    templateUrl: './ldto-dekking-in-tijd.component.html',
-    styleUrl: './ldto-dekking-in-tijd.component.css'
+  selector: 'app-ldto-dekking-in-tijd',
+  imports: [HopLinkComponent, NgIf],
+  templateUrl: './ldto-dekking-in-tijd.component.html',
+  styleUrl: './ldto-dekking-in-tijd.component.css'
 })
 export class LdtoDekkingInTijdComponent extends PredicateRenderComponent {
   hasBeginDate = false;

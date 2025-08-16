@@ -6,18 +6,18 @@ import { NodeService } from '../../../../../../services/node/node.service';
 import { NodeDirectionTableComponent } from './node-direction-table/node-direction-table.component';
 
 @Component({
-    selector: 'app-node-table',
-    imports: [NgIf, NodeDirectionTableComponent],
-    templateUrl: './node-table.component.html',
-    styleUrl: './node-table.component.css'
+  selector: 'app-node-table',
+  imports: [NgIf, NodeDirectionTableComponent],
+  templateUrl: './node-table.component.html',
+  styleUrl: './node-table.component.css'
 })
 export class NodeTableComponent implements OnInit {
   @Input() node?: NodeModel;
   @Input() visibility!: PredicateVisibility;
 
-  constructor(public nodes: NodeService) {}
+  constructor(public nodes: NodeService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   protected readonly Direction = Direction;
 }

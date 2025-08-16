@@ -30,9 +30,21 @@ export class SearchHitsService {
           if (!(pred in node)) {
             node[pred] = [];
           }
-          const objValuesAsArray = Array.isArray(obj) ? obj : [obj];
-          for (const objValue of objValuesAsArray) {
-            node[pred].push({ value: objValue, direction: Direction.Outgoing });
+
+          let objValue: string | string[] = obj;
+
+          // TODO: Allow configuration of which field to use as URI if the obj is an object instead of a string
+          const hasUriField =
+            typeof obj === 'object' && obj !== null && 'uri' in obj;
+          if (hasUriField) {
+            objValue = obj.uri as string;
+          }
+
+          const objValuesAsArray = Array.isArray(objValue)
+            ? objValue
+            : [objValue];
+          for (const value of objValuesAsArray) {
+            node[pred].push({ value: value, direction: Direction.Outgoing });
           }
         }
         return node;
@@ -42,15 +54,8 @@ export class SearchHitsService {
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
   ): estypes.SearchHit<ElasticNodeModel>[] {
-    // TIJDELIJK: Deduplicatie uitgeschakeld voor testen
-    // Verzamel alle hits zonder deduplicatie
-    const allHits: estypes.SearchHit<ElasticNodeModel>[] = [];
-
-    // Debug logging
-    if (SearchHitsService.DEBUG) {
-      console.log('SearchResponses:', searchResponses);
-    }
-    let totalHits = 0;
+    // First create a map of hits by their ID to merge duplicates
+    const hitsMap = new Map<string, estypes.SearchHit<ElasticNodeModel>>();
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];

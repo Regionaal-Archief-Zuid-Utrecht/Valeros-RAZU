@@ -17,7 +17,7 @@ export class IIIFService {
     private sparql: SparqlService,
     private url: UrlService,
     private imageService: ImageService,
-  ) { }
+  ) {}
 
   private async _getCanvasesFromUrls(imgUrls: string[]): Promise<Canvas[]> {
     // imgUrls = [
@@ -170,13 +170,13 @@ export class IIIFService {
         ],
         seeAlso: item.altoUrl
           ? [
-            {
-              '@id': item.altoUrl,
-              profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
-              format: 'text/xml+alto',
-              label: 'METS-ALTO XML',
-            } as any,
-          ]
+              {
+                '@id': item.altoUrl,
+                profile: 'http://www.loc.gov/standards/alto/v3/alto.xsd',
+                format: 'text/xml+alto',
+                label: 'METS-ALTO XML',
+              } as any,
+            ]
           : [],
         thumbnail: [
           {

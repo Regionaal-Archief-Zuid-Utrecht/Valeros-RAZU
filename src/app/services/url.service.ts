@@ -127,7 +127,7 @@ export class UrlService {
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
     const urlProcessor = Settings.endpoints.urlProcessor;
-    if (urlProcessor && url.includes(urlProcessor.matchSubstring)) {
+    if (urlProcessor && url && url.includes(urlProcessor.matchSubstring)) {
       const processedResponse = await this.api.postData<SuraResponse>(
         urlProcessor.url + `?url=${url}`,
         null,

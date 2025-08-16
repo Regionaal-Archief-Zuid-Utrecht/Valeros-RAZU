@@ -1,10 +1,11 @@
 import { NgIf } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { featherAlertTriangle } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { Settings } from '../../../../config/settings';
 import {
   AutocompleteOptionModel,
@@ -19,33 +20,52 @@ import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
 
 @Component({
-    selector: 'app-search-input',
-    imports: [
-        FormsModule,
-        NgIf,
-        SearchAutocompleteComponent,
-        TranslatePipe,
-        NgIcon,
-    ],
-    templateUrl: './search-input.component.html',
-    styleUrl: './search-input.component.css'
+  selector: 'app-search-input',
+  imports: [
+    FormsModule,
+    NgIf,
+    SearchAutocompleteComponent,
+    TranslatePipe,
+    NgIcon,
+  ],
+  templateUrl: './search-input.component.html',
+  styleUrl: './search-input.component.css'
 })
-export class SearchInputComponent implements OnInit, AfterViewInit {
+export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
   searchInput: string = this.search.queryStr ?? '';
+  private queryParamSubscription?: Subscription;
 
   constructor(
     public search: SearchService,
     public router: Router,
+    private route: ActivatedRoute,
     public elastic: ElasticService,
     public details: DetailsService,
     public autocomplete: AutocompleteService,
     public url: UrlService,
     public settings: SettingsService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initUpdateSearchInputFromQueryParams();
+  }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
+
+  ngOnDestroy() {
+    if (this.queryParamSubscription) {
+      this.queryParamSubscription.unsubscribe();
+    }
+  }
+
+  initUpdateSearchInputFromQueryParams() {
+    this.queryParamSubscription = this.route.queryParams.subscribe((params) => {
+      const searchParam = params[Settings.url.params.search];
+      if (searchParam !== undefined && searchParam !== this.searchInput) {
+        this.searchInput = searchParam;
+      }
+    });
+  }
 
   get hasAutocompleteOptions(): boolean {
     return this.autocomplete.options.value.length > 0;
@@ -88,9 +108,8 @@ export class SearchInputComponent implements OnInit, AfterViewInit {
       this.searchInput = option.labels[0];
       await this.onSearch();
     } else if (isNodeOption) {
-      await this.router.navigateByUrl(
-        this.details.getLinkFromUrl(option['@id']),
-      );
+      const url = option['@id'].replace('#', '%23');
+      await this.router.navigateByUrl(this.details.getLinkFromUrl(url));
     } else {
       console.warn('Unknown autocomplete option type');
     }

@@ -13,10 +13,10 @@ import { SearchService } from '../../../../../services/search/search.service';
 import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
 
 @Component({
-    selector: 'app-filter-option',
-    imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
-    templateUrl: './filter-option.component.html',
-    styleUrl: './filter-option.component.css'
+  selector: 'app-filter-option',
+  imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
+  templateUrl: './filter-option.component.html',
+  styleUrl: './filter-option.component.css'
 })
 export class FilterOptionComponent implements OnInit {
   @Input() filterId?: string;
@@ -28,7 +28,7 @@ export class FilterOptionComponent implements OnInit {
   constructor(
     public filterService: FilterService,
     public search: SearchService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initResetNumShowingOnSearchResultsUpdate();
@@ -60,8 +60,8 @@ export class FilterOptionComponent implements OnInit {
   }
 
   getFilterOptionCountStr(count: number): string {
-    if (count >= Settings.search.elasticTopHitsMax) {
-      return ` (${Settings.search.elasticTopHitsMax}+)`;
+    if (count >= Settings.search.elasticFilterTopHitsMax) {
+      return ` (${Settings.search.elasticFilterTopHitsMax}+)`;
     }
 
     return ` (${count})`;

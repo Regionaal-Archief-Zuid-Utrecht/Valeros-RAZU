@@ -2,6 +2,7 @@ import { LdtoDekkingInTijdComponent } from '../../../components/custom-render-co
 import { LdtoEventComponent } from '../../../components/custom-render-components/by-predicate/ldto-event/ldto-event.component';
 import { LdtoOmvangComponent } from '../../../components/custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
 import { LdtoUrlBestandComponent } from '../../../components/custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
+import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
 import { FileRendererComponent } from '../../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { HopLinkComponent } from '../../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 import {
@@ -9,7 +10,6 @@ import {
   RenderMode,
 } from '../../../models/settings/render-component-settings.type';
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
-import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
 import { RenderTabWithDocViewerComponent } from '../../../components/custom-render-components/by-type/render-tab-with-doc-viewer/render-tab-with-doc-viewer.component';
 import { HemiwStoryComponent } from '../../../components/custom-render-components/by-type/hemiw-story/hemiw-story.component';
 
@@ -18,8 +18,9 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
     {
       component: RazuAfleveringComponent,
       predicates: [
-        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
+        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260'
       ],
+      requiresExplicitRendering: true,
     },
     {
       component: RenderTabWithDocViewerComponent,

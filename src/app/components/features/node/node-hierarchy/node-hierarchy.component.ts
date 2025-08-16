@@ -10,17 +10,17 @@ import { SettingsService } from '../../../../services/settings.service';
 import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
-    selector: 'app-node-hierarchy',
-    imports: [
-        NgForOf,
-        NgIf,
-        NgClass,
-        NgIcon,
-        NodeLinkComponent,
-        AccessibleIconDirective,
-    ],
-    templateUrl: './node-hierarchy.component.html',
-    styleUrl: './node-hierarchy.component.css'
+  selector: 'app-node-hierarchy',
+  imports: [
+    NgForOf,
+    NgIf,
+    NgClass,
+    NgIcon,
+    NodeLinkComponent,
+    AccessibleIconDirective,
+  ],
+  templateUrl: './node-hierarchy.component.html',
+  styleUrl: './node-hierarchy.component.css'
 })
 export class NodeHierarchyComponent {
   @Input() nodes: ThingWithLabelModel[] = [];
@@ -29,7 +29,7 @@ export class NodeHierarchyComponent {
   constructor(
     public nodeService: NodeService,
     public settings: SettingsService,
-  ) {}
+  ) { }
 
   get hasLoadedNodes(): boolean {
     return this.nodes !== undefined;

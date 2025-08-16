@@ -10,10 +10,10 @@ import { UiService } from '../../../../services/ui/ui.service';
 import { FilterCountComponent } from '../filter-options/filter-count/filter-count.component';
 
 @Component({
-    selector: 'app-endpoints',
-    imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
-    templateUrl: './endpoints.component.html',
-    styleUrl: './endpoints.component.css'
+  selector: 'app-endpoints',
+  imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
+  templateUrl: './endpoints.component.html',
+  styleUrl: './endpoints.component.css'
 })
 export class EndpointsComponent {
   constructor(
@@ -21,7 +21,7 @@ export class EndpointsComponent {
     public filters: FilterService,
     public search: SearchService,
     public ui: UiService,
-  ) {}
+  ) { }
 
   protected readonly Settings = Settings;
   protected readonly Object = Object;

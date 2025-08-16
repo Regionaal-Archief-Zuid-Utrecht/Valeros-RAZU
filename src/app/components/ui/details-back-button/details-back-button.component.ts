@@ -7,15 +7,15 @@ import { DetailsService } from '../../../services/details.service';
 import { RoutingService } from '../../../services/routing.service';
 
 @Component({
-    selector: 'app-details-back-button',
-    imports: [NgIcon, NgIf, TranslatePipe],
-    templateUrl: './details-back-button.component.html',
-    styleUrl: './details-back-button.component.css'
+  selector: 'app-details-back-button',
+  imports: [NgIcon, NgIf, TranslatePipe],
+  templateUrl: './details-back-button.component.html',
+  styleUrl: './details-back-button.component.css'
 })
 export class DetailsBackButtonComponent {
   constructor(
     public details: DetailsService,
     public routing: RoutingService,
-  ) {}
+  ) { }
   protected readonly featherArrowLeft = featherArrowLeft;
 }

@@ -9,16 +9,16 @@ import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
-    selector: 'app-colofon',
-    imports: [
-        HeaderComponent,
-        ViewContainerComponent,
-        NgClass,
-        TranslatePipe,
-        NgIcon,
-    ],
-    templateUrl: './colofon.component.html',
-    styleUrl: './colofon.component.css'
+  selector: 'app-colofon',
+  imports: [
+    HeaderComponent,
+    ViewContainerComponent,
+    NgClass,
+    TranslatePipe,
+    NgIcon,
+  ],
+  templateUrl: './colofon.component.html',
+  styleUrl: './colofon.component.css'
 })
 export class ColofonComponent {
   protected readonly HeaderView = HeaderView;

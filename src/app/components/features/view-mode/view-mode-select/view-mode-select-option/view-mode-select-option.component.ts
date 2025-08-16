@@ -5,14 +5,14 @@ import { ViewMode } from '../../../../../models/view-mode.enum';
 import { ViewModeService } from '../../../../../services/view-mode.service';
 
 @Component({
-    selector: 'app-view-mode-select-option',
-    imports: [NgIf, NgClass, NgIcon],
-    templateUrl: './view-mode-select-option.component.html',
-    styleUrl: './view-mode-select-option.component.css'
+  selector: 'app-view-mode-select-option',
+  imports: [NgIf, NgClass, NgIcon],
+  templateUrl: './view-mode-select-option.component.html',
+  styleUrl: './view-mode-select-option.component.css'
 })
 export class ViewModeSelectOptionComponent {
   @Input() viewMode!: ViewMode;
   @Input() iconSvg?: string;
 
-  constructor(public viewModes: ViewModeService) {}
+  constructor(public viewModes: ViewModeService) { }
 }

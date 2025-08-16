@@ -4,10 +4,10 @@ import { TypeModel } from '../../../../../models/type.model';
 import { NodeLinkComponent } from '../../node-link/node-link.component';
 
 @Component({
-    selector: 'app-node-type',
-    imports: [NodeLinkComponent, NgClass],
-    templateUrl: './node-type.component.html',
-    styleUrl: './node-type.component.css'
+  selector: 'app-node-type',
+  imports: [NodeLinkComponent, NgClass],
+  templateUrl: './node-type.component.html',
+  styleUrl: './node-type.component.css'
 })
 export class NodeTypeComponent {
   @Input() showNeutralColors = false;

@@ -12,19 +12,19 @@ import { FilterCountComponent } from './filter-count/filter-count.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
 
 @Component({
-    selector: 'app-filter-options',
-    imports: [
-        NgIf,
-        NgForOf,
-        FilterOptionComponent,
-        EndpointsComponent,
-        FilterCountComponent,
-        NgClass,
-        FormsModule,
-        TranslatePipe,
-    ],
-    templateUrl: './filter-options.component.html',
-    styleUrl: './filter-options.component.css'
+  selector: 'app-filter-options',
+  imports: [
+    NgIf,
+    NgForOf,
+    FilterOptionComponent,
+    EndpointsComponent,
+    FilterCountComponent,
+    NgClass,
+    FormsModule,
+    TranslatePipe,
+  ],
+  templateUrl: './filter-options.component.html',
+  styleUrl: './filter-options.component.css'
 })
 export class FilterOptionsComponent {
 

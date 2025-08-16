@@ -270,13 +270,18 @@ export class FilterService {
   // }
 
   async updateFilterOptionValues(query: string) {
-    if (FilterService.DEBUG) {
-      console.log('[FilterService] updateFilterOptionValues called with query:', query);
-      console.log('[FilterService] all filter options before update:', JSON.parse(JSON.stringify(this.options.value)));
-    }
+    const filterOptionsList: FilterOptionModel[] = Object.values(
+      this.options.value,
+    );
 
-    const filterOptions = { ...this.options.value };
-    const hits = this.searchHitsService.getHits ? this.searchHitsService.getHits() : [];
+    const responses: estypes.SearchResponse<any>[] =
+      await this.elastic.getFilterOptions(
+        query,
+        filterOptionsList,
+        this.enabled.value,
+      );
+    const docCounts: FieldDocCountsModel =
+      this._getFieldDocCountsFromResponses(responses);
 
     for (const filterId in filterOptions) {
       const filter = filterOptions[filterId];

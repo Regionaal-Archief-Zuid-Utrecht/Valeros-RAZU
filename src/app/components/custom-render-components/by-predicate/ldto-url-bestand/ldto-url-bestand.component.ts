@@ -12,15 +12,14 @@ import { NodeLinkComponent } from '../../../features/node/node-link/node-link.co
 import { PredicateRenderComponent } from '../predicate-render-component.directive';
 
 @Component({
-    selector: 'app-ldto-url-bestand',
-    imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
-    templateUrl: './ldto-url-bestand.component.html',
-    styleUrl: './ldto-url-bestand.component.css'
+  selector: 'app-ldto-url-bestand',
+  imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
+  templateUrl: './ldto-url-bestand.component.html',
+  styleUrl: './ldto-url-bestand.component.css'
 })
 export class LdtoUrlBestandComponent
   extends PredicateRenderComponent
-  implements OnInit
-{
+  implements OnInit {
   fileUrl?: string;
   fileFormats?: string[];
 

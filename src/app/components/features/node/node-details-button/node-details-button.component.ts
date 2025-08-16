@@ -10,10 +10,10 @@ import { DetailsService } from '../../../../services/details.service';
 import { NodeService } from '../../../../services/node/node.service';
 
 @Component({
-    selector: 'app-node-details-button',
-    imports: [NgIcon, NgIf, RouterLink, TranslatePipe, AccessibleIconDirective],
-    templateUrl: './node-details-button.component.html',
-    styleUrl: './node-details-button.component.css'
+  selector: 'app-node-details-button',
+  imports: [NgIcon, NgIf, RouterLink, TranslatePipe, AccessibleIconDirective],
+  templateUrl: './node-details-button.component.html',
+  styleUrl: './node-details-button.component.css'
 })
 export class NodeDetailsButtonComponent {
   @Input() node: NodeModel | undefined;
@@ -21,7 +21,7 @@ export class NodeDetailsButtonComponent {
   constructor(
     public details: DetailsService,
     public nodes: NodeService,
-  ) {}
+  ) { }
   protected readonly featherArrowRight = featherArrowRight;
   protected readonly encodeURIComponent = encodeURIComponent;
 }
