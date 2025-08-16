@@ -166,7 +166,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 type: {
                                     type: 2,
-                                    fieldIds: ['type'],
+                                    fieldIds: ['type.keyword'],
                                     valueIds: ['https://huizenenmenseninwijk.nl/def/hemiw/verhaal']
                                 }
                             }),
@@ -181,7 +181,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 researched: {
                                     type: 2,
-                                    fieldIds: ['researched'],
+                                    fieldIds: ['researched.keyword'],
                                     valueIds: ['Ja']
                                 }
                             }),
@@ -196,7 +196,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 type: {
                                     type: 2,
-                                    fieldIds: ['type'],
+                                    fieldIds: ['type.keyword'],
                                     valueIds: ['https://schema.org/CreativeWork']
                                 }
                             }),
@@ -213,7 +213,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 type: {
                                     type: 2,
-                                    fieldIds: ['type'],
+                                    fieldIds: ['type.keyword'],
                                     valueIds: ['https://w3id.org/italia/onto/CLV/Feature']
                                 }
                             }),
@@ -228,7 +228,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 type: {
                                     type: 2,
-                                    fieldIds: ['type'],
+                                    fieldIds: ['type.keyword'],
                                     valueIds: ['https://w3id.org/italia/onto/CLV/StreetToponym']
                                 }
                             }),
@@ -243,7 +243,7 @@ export class NavButtonsComponent implements OnInit, OnDestroy {
                             filters: JSON.stringify({
                                 type: {
                                     type: 2,
-                                    fieldIds: ['type'],
+                                    fieldIds: ['type.keyword'],
                                     valueIds: ['https://personsincontext.org/model#PersonObservation']
                                 }
                             }),

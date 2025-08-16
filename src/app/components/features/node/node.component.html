@@ -1,5 +1,5 @@
 <div
-  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)]"
+  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)] relative"
   *ngIf="node" [ngClass]="[
     (shouldShowSectionNextToTable() | async)
       ? 'p-0 flex flex-col sm:flex-row'

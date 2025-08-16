@@ -9,14 +9,14 @@ import { DataService } from '../data.service';
   providedIn: 'root',
 })
 export class SearchHitsService {
-  private _hits: estypes.SearchHit<ElasticNodeModel>[] = [];
   constructor(private data: DataService) { }
-  private static DEBUG = true;
 
   parseToNodes(hits: estypes.SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
       .sort((a, b) => {
-        return (a._source as any)?.['_score'] - (b._source as any)?.['_score'];
+        const aScore = a._score ?? 0;
+        const bScore = b._score ?? 0;
+        return aScore - bScore;
       })
       .map((hit) => hit?._source)
       .filter((hitNode): hitNode is ElasticNodeModel => !!hitNode)
@@ -59,11 +59,6 @@ export class SearchHitsService {
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
-      totalHits += hits.length;
-      if (SearchHitsService.DEBUG) {
-        console.log(`Endpoint ${searchResponse.endpointId}: ${hits.length} hits`);
-      }
-
       hits.forEach((hit) => {
         if (!hit._source) {
           return;
@@ -73,52 +68,56 @@ export class SearchHitsService {
         (hit._source as ElasticNodeModel)['endpointId'] =
           searchResponse.endpointId;
 
-        // Gebruik het _id veld van de hit zelf (niet van _source)
-        let hitId = hit._id;
-        // console.log('Hit _id:', hitId);
-
-        // Probeer eerst '@id' en dan '_id' als fallback uit _source
-        let sourceId = hit._source['@id'] || hit._source['_id'];
-        // console.log('Source ID uit _source:', sourceId);
-        // console.log('Hit _source bevat @id:', !!hit._source['@id']);
-        // console.log('Hit _source bevat _id:', !!hit._source['_id']);
-
-        // Gebruik hitId als primaire ID, sourceId als fallback
-        const id: string = hitId || (Array.isArray(sourceId) ? sourceId[0] : String(sourceId || ''));
-        // console.log('Uiteindelijke ID voor gebruik:', id);
-
+        // Prefer '@id', but gracefully fall back to 'id' or ES document _id
+        const id =
+          (hit._source as any)['@id'] ??
+          (hit._source as any)['id'] ??
+          (hit as any)._id;
         if (!id) {
-          // console.warn('Document zonder ID gevonden:', hit._source);
           return;
         }
 
-        // Zorg ervoor dat het document altijd een '@id' veld heeft voor interne verwerking
-        hit._source['@id'] = id;
-        // console.log('@id veld ingesteld op:', id);
+        // Ensure '@id' exists in the source for downstream merging/rendering
+        if (!(hit._source as any)['@id']) {
+          (hit._source as any)['@id'] = id;
+        }
 
-        // Zorg ervoor dat het document ook een _id veld heeft
-        hit._source['_id'] = id;
-        // console.log('_id veld ingesteld op:', id);
+        if (hitsMap.has(id)) {
+          // Merge the sources if we already have this ID
+          const existingHit = hitsMap.get(id)!;
+          if (!existingHit._source) {
+            return;
+          }
 
-        // Voeg hit toe aan allHits zonder deduplicatie
-        allHits.push(hit);
+          const mergedSource: ElasticNodeModel = {
+            ...existingHit._source,
+            ...hit._source,
+            // Keep track of all endpoints this record came from
+            endpointId: Array.isArray((existingHit._source as any).endpointId)
+              ? [
+                ...(existingHit._source as any).endpointId,
+                searchResponse.endpointId,
+              ]
+              : [
+                (existingHit._source as any).endpointId,
+                searchResponse.endpointId,
+              ],
+          };
 
-        // Log de eerste paar hits voor debugging
-        if (SearchHitsService.DEBUG && allHits.length <= 3) {
-          console.log(`Hit ${allHits.length}:`, {
-            id: id,
-            source: hit._source
-          });
+          existingHit._source = mergedSource;
+          // Use the highest score if available
+          existingHit._score = Math.max(
+            existingHit._score ?? 0,
+            hit._score ?? 0,
+          );
+        } else {
+          // New ID, just add it to the map
+          hitsMap.set(id, hit);
         }
       });
     });
 
-    // console.log(`Totaal aantal hits ontvangen: ${totalHits}, Alle hits: ${allHits.length}`);
-    this._hits = allHits;
-    return allHits;
-  }
-
-  getHits(): estypes.SearchHit<ElasticNodeModel>[] {
-    return this._hits;
+    // Convert map back to array
+    return Array.from(hitsMap.values());
   }
 }

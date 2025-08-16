@@ -154,7 +154,7 @@ export class ElasticService {
           field_hits: {
             top_hits: {
               size: Settings.search.elasticFilterTopHitsMax,
-              _source: '',
+              _source: false,
             },
           },
         },
@@ -237,6 +237,11 @@ export class ElasticService {
       if (!endpoint.elastic) {
         continue;
       }
+
+      // Debug: log ES request per endpoint
+      // Note: large logs; remove when stable
+      // eslint-disable-next-line no-console
+      console.debug('[ElasticService] POST', endpoint.elastic, queryData);
 
       const searchPromise: Promise<estypes.SearchResponse<T>> =
         this.api.postData<estypes.SearchResponse<T>>(

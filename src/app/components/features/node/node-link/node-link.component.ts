@@ -42,8 +42,6 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
     NgIf,
     RouterLink,
     NgIcon,
-    NgxFloatUiContentComponent,
-    NgxFloatUiModule,
     NodeLabelComponent,
     TranslatePipe,
   ],

@@ -26,37 +26,37 @@ export const razuFilteringSettings: FilteringSettings = {
   filterOptions: {
     type: {
       label: 'Type',
-      fieldIds: ['type'],
+      fieldIds: ['type.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     source: {
       label: 'Bron',
-      fieldIds: ['source'],
+      fieldIds: ['source.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     participants: {
       label: 'Deelnemers',
-      fieldIds: ['participants'],
+      fieldIds: ['participants.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     location: {
       label: 'Locatie',
-      fieldIds: ['location'],
+      fieldIds: ['location.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     date: {
       label: 'Datering',
-      fieldIds: ['startDate'],
+      fieldIds: ['startDate.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     researched: {
       label: 'Onderzocht',
-      fieldIds: ['researched'],
+      fieldIds: ['researched.keyword'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     }

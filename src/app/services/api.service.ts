@@ -14,7 +14,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private postCache: PostCacheService,
-  ) {}
+  ) { }
 
   async postData<T>(url: string, data: any): Promise<T> {
     const dataStr = JSON.stringify(data);
@@ -28,13 +28,22 @@ export class ApiService {
     return new Promise<T>((resolve, reject) => {
       const request = async () => {
         try {
+          // Debug request payload
+          // eslint-disable-next-line no-console
+          console.debug('[ApiService] POST', url, data);
           const response = await lastValueFrom(
             this.http.post<T>(url, data).pipe(
               catchError((error) => {
-                console.error(
-                  'There was a problem with the API request:',
-                  error,
-                );
+                // Enhanced error logging to surface ES error details
+                // eslint-disable-next-line no-console
+                console.error('[ApiService] Request failed', {
+                  url,
+                  payload: data,
+                  status: error?.status,
+                  statusText: error?.statusText,
+                  message: error?.message,
+                  errorBody: error?.error,
+                });
                 reject(error);
                 return throwError(() => error);
               }),
