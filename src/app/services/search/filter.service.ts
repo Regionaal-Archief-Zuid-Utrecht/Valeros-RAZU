@@ -289,6 +289,7 @@ export class FilterService {
       ).map(([id, filterHitIds]) => ({
         ids: [id],
         filterHitIds: filterHitIds,
+        filterHitCount: 999, // TODO: Set from elastic data, ignore gte/eq for now, that comes later.
       }));
 
       const clusteredFilterValues =

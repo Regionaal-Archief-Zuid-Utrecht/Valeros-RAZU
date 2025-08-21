@@ -14,7 +14,7 @@
       [disabled]="true"
       [label]="value.label"
       [url]="!value.label ? value.ids[0] : undefined"
-      [suffixStr]="getFilterOptionCountStr(value.filterHitIds.length)"
+      [suffixStr]="getFilterOptionCountStr(value.filterHitCount)"
       [shouldHighlight]="false"
       *ngIf="value.ids"
     >

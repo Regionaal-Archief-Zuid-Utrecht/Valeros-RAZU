@@ -34,4 +34,5 @@ export interface FilterOptionValueModel {
   ids: string[];
   label?: string;
   filterHitIds: string[];
+  filterHitCount: number;
 }
