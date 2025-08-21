@@ -16,7 +16,7 @@ export const razuRenderComponentSettings: RenderComponentsSettings = {
     {
       component: RazuAfleveringComponent,
       predicates: [
-        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260'
+        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
       ],
       requiresExplicitRendering: true,
     },
