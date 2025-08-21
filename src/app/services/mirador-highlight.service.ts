@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import Bowser from 'bowser';
 import { SearchService } from './search/search.service';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -92,7 +92,17 @@ export class MiradorHighlightService {
     this._addFilterDefinition(svgParent);
 
     matchingElements.forEach((textElement) => {
-      textElement.setAttribute('filter', 'url(#highlight)');
+      const browser = Bowser.getParser(window.navigator.userAgent);
+      const browserName = browser.getBrowser()?.name;
+      const isFirefox = browserName == 'Firefox';
+      const supportsSpanHighlighting = isFirefox;
+
+      if (supportsSpanHighlighting) {
+        textElement.setAttribute('filter', 'url(#highlight)');
+      } else {
+        textElement.setAttribute('fill', 'yellow');
+        textElement.setAttribute('font-weight', 'bold');
+      }
     });
   }
 
