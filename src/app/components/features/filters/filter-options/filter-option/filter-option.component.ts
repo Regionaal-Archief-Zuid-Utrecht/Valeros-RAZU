@@ -65,7 +65,7 @@ export class FilterOptionComponent implements OnInit {
     //   return ` (${Settings.search.elasticFilterTopHitsMax}+)`;
     // }
 
-    return ` (${count})`;
+    return ` (${formatNumber(count)})`;
   }
 
   get hasMoreToShow(): boolean {
