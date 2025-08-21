@@ -1,5 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject, Input, type OnInit } from '@angular/core';
+import { Settings } from '../../../config/settings';
 import { NodeModel } from '../../../models/node.model';
 import { SearchService } from '../../../services/search/search.service';
 
@@ -21,13 +22,13 @@ export class SnippetComponent implements OnInit {
 
   async retrieveSnippet(): Promise<void> {
     const urlBestand = this.node?.['URL_bestand']?.[0]?.value;
-    if (!urlBestand) {
+    const snippetUrl = Settings.endpoints?.snippetServer;
+    if (!urlBestand || !snippetUrl) {
       return;
     }
 
     this.loading = true;
     try {
-      const snippetUrl = `https://ontwikkel.viewer.razu.nl/snippet`;
       const query = this.searchService.queryStr;
       const response = await fetch(snippetUrl, {
         method: 'POST',

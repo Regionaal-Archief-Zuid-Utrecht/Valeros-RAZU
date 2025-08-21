@@ -8,4 +8,5 @@ export interface EndpointSettings {
     url: string;
     matchSubstring: string;
   };
+  snippetServer?: string;
 }
