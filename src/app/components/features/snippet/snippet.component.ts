@@ -8,6 +8,7 @@ import { SearchService } from '../../../services/search/search.service';
   selector: 'app-snippet',
   imports: [JsonPipe],
   templateUrl: './snippet.component.html',
+  styleUrl: './snippet.component.scss',
 })
 export class SnippetComponent implements OnInit {
   @Input() node?: NodeModel;
