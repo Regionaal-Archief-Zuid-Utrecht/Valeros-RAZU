@@ -60,6 +60,7 @@ export class FilterOptionComponent implements OnInit {
   }
 
   getFilterOptionCountStr(count: number): string {
+    // TODO: When using clustering, the count here might be capped by Settings.search.elasticFilterTopHitsMax and not be accurate
     // if (count >= Settings.search.elasticFilterTopHitsMax) {
     //   return ` (${Settings.search.elasticFilterTopHitsMax}+)`;
     // }
