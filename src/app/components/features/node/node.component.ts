@@ -30,6 +30,7 @@ import { RoutingService } from '../../../services/routing.service';
 import { SettingsService } from '../../../services/settings.service';
 import { SparqlService } from '../../../services/sparql.service';
 import { MiradorComponent } from '../file-viewers/mirador/mirador.component';
+import { SnippetComponent } from '../snippet/snippet.component';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
 import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
@@ -58,6 +59,7 @@ import { NodeTypesComponent } from './node-types/node-types.component';
     TranslatePipe,
     FileRendererComponent,
     MiradorComponent,
+    SnippetComponent,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
@@ -85,6 +87,7 @@ export class NodeComponent implements OnInit, OnChanges {
   showPermalinkButton = this.settings.hasViewModeSetting(
     ViewModeSetting.ShowPermalinkButton,
   );
+  showSnippet = this.settings.hasViewModeSetting(ViewModeSetting.ShowSnippet);
 
   private shouldShowIIIFSubject = new BehaviorSubject<boolean>(false);
   shouldShowIIIF$ = this.shouldShowIIIFSubject.asObservable();

@@ -73,6 +73,12 @@
         <app-node-renderer [node]="node" />
       </div>
 
+      <app-snippet
+        *ngIf="showSnippet"
+        [node]="node"
+        class="text-sm pr-32"
+      ></app-snippet>
+
       <div
         class="absolute"
         [ngClass]="[

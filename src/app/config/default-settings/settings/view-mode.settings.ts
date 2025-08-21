@@ -13,6 +13,7 @@ export const viewModeSettings: ViewModeSettings = {
     [ViewModeSetting.EnrichWithIncomingRelations]: false,
     [ViewModeSetting.ShowDetailsButton]: true,
     [ViewModeSetting.ShowPermalinkButton]: true,
+    [ViewModeSetting.ShowSnippet]: true,
   },
   [ViewMode.Grid]: {
     [ViewModeSetting.ShowTitle]: true,
@@ -24,5 +25,6 @@ export const viewModeSettings: ViewModeSettings = {
     [ViewModeSetting.EnrichWithIncomingRelations]: false,
     [ViewModeSetting.ShowDetailsButton]: false,
     [ViewModeSetting.ShowPermalinkButton]: false,
+    [ViewModeSetting.ShowSnippet]: false,
   },
 };
