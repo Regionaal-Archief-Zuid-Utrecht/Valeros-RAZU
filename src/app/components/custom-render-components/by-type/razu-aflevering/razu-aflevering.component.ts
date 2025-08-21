@@ -6,15 +6,18 @@ import {
   registerLocaleData,
 } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherHelpCircle } from '@ng-icons/feather-icons';
 import { Direction, NodeObj } from '../../../../models/node.model';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
 import { TypeRenderComponentInput } from '../../../../models/type-render-component-input.model';
+import { NodeService } from '../../../../services/node/node.service';
 import { SparqlService } from '../../../../services/sparql.service';
+import { UrlService } from '../../../../services/url.service';
 import { HopLinkComponent } from '../../../features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
+import { SnippetComponent } from '../../../features/snippet/snippet.component';
 import { TypeRenderComponent } from '../type-render-component.component';
 
 // Register Dutch locale
@@ -23,7 +26,15 @@ registerLocaleData(localeNl);
 @Component({
   selector: 'app-razu-aflevering',
   standalone: true,
-  imports: [JsonPipe, NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon],
+  imports: [
+    JsonPipe,
+    NgIf,
+    NgFor,
+    HopLinkComponent,
+    DatePipe,
+    NgIcon,
+    SnippetComponent,
+  ],
   templateUrl: './razu-aflevering.component.html',
   styleUrls: ['./razu-aflevering.component.scss'],
 })
@@ -31,6 +42,11 @@ export class RazuAfleveringComponent
   extends TypeRenderComponent
   implements OnInit
 {
+  nodeService = inject(NodeService);
+  urlService = inject(UrlService);
+
+  altoUrl = '';
+
   // Arrays to store IDs retrieved from hop-link components
   onderdeelVanIds: string[] = [];
   beperkingGebruikIds: string[] = [];
@@ -159,6 +175,9 @@ export class RazuAfleveringComponent
   }
 
   ngOnInit(): void {
+    // TODO: Reload on node change/update
+    this.initAltoUrl();
+
     // Fetch onderdeelVanIds directly in the component
     if (this.data?.node?.['@id']?.[0]?.value) {
       this.loading = true;
@@ -462,6 +481,23 @@ export class RazuAfleveringComponent
       ++u;
     } while (Math.abs(b) >= thresh && u < units.length - 1);
     return b.toFixed(b >= 10 ? 0 : 1) + ' ' + units[u];
+  }
+
+  async initAltoUrl() {
+    const node = this.data?.node;
+    if (!node) {
+      return;
+    }
+    const id = this.nodeService.getId(node);
+    const pageNum: number | null = this.urlService.getPageNumberFromUrl();
+    if (pageNum == null) {
+      return;
+    }
+
+    const altoUrl = await this.sparqlService.getAltoUrl(id, pageNum);
+    if (altoUrl) {
+      this.altoUrl = altoUrl;
+    }
   }
 
   protected readonly featherHelpCircle = featherHelpCircle;
