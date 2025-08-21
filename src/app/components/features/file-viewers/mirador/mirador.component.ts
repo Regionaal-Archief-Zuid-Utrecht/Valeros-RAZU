@@ -157,7 +157,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
             allowClose: false,
             ...(window.innerWidth >= 640
               ? {
-                  thumbnailNavigationPosition: 'far-bottom',
+                  thumbnailNavigationPosition: 'far-right',
                   thumbnailNavigationVisible: true,
                 }
               : {}),
