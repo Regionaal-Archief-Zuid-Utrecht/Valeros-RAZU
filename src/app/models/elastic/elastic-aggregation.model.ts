@@ -10,6 +10,6 @@ export interface DocCountModel {
     };
   };
   hitIds: string[];
-  // doc_count: number;
+  doc_count: number;
   key: string;
 }
