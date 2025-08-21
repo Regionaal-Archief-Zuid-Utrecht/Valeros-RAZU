@@ -75,9 +75,9 @@
 
       <app-snippet
         *ngIf="showSnippet"
-        [node]="node"
+        [altoUrl]="node?.['URL_bestand']?.[0]?.value"
         class="text-sm pr-32"
-      ></app-snippet>
+      />
 
       <div
         class="absolute"

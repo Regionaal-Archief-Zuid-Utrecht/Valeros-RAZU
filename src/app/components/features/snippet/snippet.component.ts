@@ -1,7 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject, Input, type OnInit } from '@angular/core';
 import { Settings } from '../../../config/settings';
-import { NodeModel } from '../../../models/node.model';
 import { SearchService } from '../../../services/search/search.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { SearchService } from '../../../services/search/search.service';
   styleUrl: './snippet.component.scss',
 })
 export class SnippetComponent implements OnInit {
-  @Input() node?: NodeModel;
+  @Input() altoUrl?: string;
   loading = false;
   snippet?: string;
 
@@ -22,9 +21,8 @@ export class SnippetComponent implements OnInit {
   }
 
   async retrieveSnippet(): Promise<void> {
-    const urlBestand = this.node?.['URL_bestand']?.[0]?.value;
     const snippetUrl = Settings.endpoints?.snippetServer;
-    if (!urlBestand || !snippetUrl) {
+    if (!this.altoUrl || !snippetUrl) {
       return;
     }
 
@@ -36,7 +34,7 @@ export class SnippetComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url: urlBestand, q: `*${query}*` }),
+        body: JSON.stringify({ url: this.altoUrl, q: `*${query}*` }),
       });
 
       if (!response.ok) {
