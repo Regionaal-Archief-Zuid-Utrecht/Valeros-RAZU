@@ -22,7 +22,7 @@ export class SnippetComponent implements OnInit {
 
   async retrieveSnippet(): Promise<void> {
     const snippetUrl = Settings.endpoints?.snippetServer;
-    if (!this.altoUrl || !snippetUrl) {
+    if (!this.altoUrl || !snippetUrl || !this.searchService.queryStr?.trim()) {
       return;
     }
 
