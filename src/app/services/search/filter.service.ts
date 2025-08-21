@@ -169,7 +169,6 @@ export class FilterService {
         filterOptionsList,
         this.enabled.value,
       );
-    console.log('Response', responses);
     const docCounts: FieldDocCountsModel =
       this._getFieldDocCountsFromResponses(responses);
 
