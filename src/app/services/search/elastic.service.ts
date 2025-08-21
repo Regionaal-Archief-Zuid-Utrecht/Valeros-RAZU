@@ -176,6 +176,8 @@ export class ElasticService {
       Settings.search.elasticFilterTopHitsMax,
     );
     queryData.aggs = { ...aggs };
+    queryData.size = 0;
+    queryData['_source'] = '';
 
     return await this.searchEndpoints(queryData);
   }
