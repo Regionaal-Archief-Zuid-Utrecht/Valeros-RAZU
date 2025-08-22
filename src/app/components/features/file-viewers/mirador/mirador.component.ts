@@ -18,6 +18,7 @@ import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { BehaviorSubject } from 'rxjs';
 import { IIIFService } from '../../../../services/iiif.service';
 import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
+import { UrlService } from '../../../../services/url.service';
 
 @Component({
   selector: 'app-mirador',
@@ -41,6 +42,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     private ngZone: NgZone,
     private iiifService: IIIFService,
     private router: Router,
+    private urlService: UrlService,
     private miradorHighlight: MiradorHighlightService,
   ) {
     this._canvasIndex.subscribe((canvasIndex: number | null) => {
@@ -83,33 +85,10 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
   }
 
-  private getPageFromUrl(): number | null {
-    const removeQueryParams = (url: string) => {
-      const queryParamIndex = url.indexOf('?');
-      if (queryParamIndex !== -1) {
-        return url.substring(0, queryParamIndex);
-      }
-      return url;
-    };
-
-    let url = removeQueryParams(this.router.url);
-
-    // Double encoded hashtag (%2523): Once by Angular router, once by encodeURIComponent (see Details service)
-    const doubleEncodedHashtag = '%2523';
-    const urlSplitByHashtag = url.split(doubleEncodedHashtag);
-    const urlHasHashtag = urlSplitByHashtag.length > 1;
-    if (urlHasHashtag) {
-      const pageStr: string = urlSplitByHashtag[1];
-      const pageNum = Number(pageStr);
-      return !isNaN(pageNum) ? pageNum : null;
-    }
-    return null;
-  }
-
   private initViewer() {
     this.destroyViewer();
 
-    const pageNum = this.getPageFromUrl();
+    const pageNum = this.urlService.getPageNumberFromUrl();
 
     this._viewer = this.ngZone.runOutsideAngular(async () => {
       const manifestUrl: string | null =

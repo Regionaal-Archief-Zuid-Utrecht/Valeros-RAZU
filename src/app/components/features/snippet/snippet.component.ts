@@ -1,5 +1,11 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject, Input, type OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  SimpleChanges,
+  type OnInit,
+} from '@angular/core';
 import { Settings } from '../../../config/settings';
 import { SearchService } from '../../../services/search/search.service';
 
@@ -18,6 +24,12 @@ export class SnippetComponent implements OnInit {
 
   ngOnInit(): void {
     void this.retrieveSnippet();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['altoUrl'] || changes['searchService.queryStr']) {
+      void this.retrieveSnippet();
+    }
   }
 
   async retrieveSnippet(): Promise<void> {
