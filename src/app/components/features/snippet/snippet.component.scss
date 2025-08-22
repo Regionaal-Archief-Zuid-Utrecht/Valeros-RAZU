@@ -1,3 +1,11 @@
+/* Make the badge behave like normal inline text for snippet rendering */
+:host ::ng-deep span.badge.badge-ghost.badge-dash {
+  display: inline;
+  /* override DaisyUI's inline-flex */
+  white-space: normal;
+  /* allow wrapping */
+}
+
 :host ::ng-deep em {
   background: rgba(255, 255, 0, 0.5);
   padding: 0 0.15em; // add visual spacing so it doesn't look glued to adjacent text
