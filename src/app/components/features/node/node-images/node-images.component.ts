@@ -5,7 +5,6 @@ import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
 
 @Component({
   selector: 'app-node-images',
-  standalone: true,
   imports: [NgIf, MiradorComponent],
   templateUrl: './node-images.component.html',
   styleUrl: './node-images.component.scss',

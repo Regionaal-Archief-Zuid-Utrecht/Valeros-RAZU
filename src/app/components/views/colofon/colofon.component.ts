@@ -10,7 +10,6 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 
 @Component({
   selector: 'app-colofon',
-  standalone: true,
   imports: [
     HeaderComponent,
     ViewContainerComponent,

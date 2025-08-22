@@ -5,7 +5,6 @@ import { FilterType } from '../../../../../models/filters/filter.model';
 
 @Component({
   selector: 'app-filter-count',
-  standalone: true,
   imports: [NgIf, TranslatePipe],
   templateUrl: './filter-count.component.html',
   styleUrl: './filter-count.component.scss',

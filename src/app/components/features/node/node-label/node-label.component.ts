@@ -12,7 +12,6 @@ import { truncate } from '../../../../helpers/util.helper';
 
 @Component({
   selector: 'app-node-label',
-  standalone: true,
   imports: [NgIf, NgClass],
   templateUrl: './node-label.component.html',
   styleUrl: './node-label.component.scss',

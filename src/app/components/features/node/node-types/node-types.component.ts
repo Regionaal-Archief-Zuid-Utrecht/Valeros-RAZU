@@ -12,7 +12,6 @@ import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
   selector: 'app-node-types',
-  standalone: true,
   imports: [NgForOf, NgIf, NodeTypeComponent],
   templateUrl: './node-types.component.html',
   styleUrl: './node-types.component.scss',

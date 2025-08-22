@@ -8,7 +8,6 @@ import { UrlService } from '../../../../services/url.service';
 
 @Component({
   selector: 'app-node-permalink-button',
-  standalone: true,
   imports: [NgIf, TranslatePipe],
   templateUrl: './node-permalink-button.component.html',
   styleUrl: './node-permalink-button.component.scss',

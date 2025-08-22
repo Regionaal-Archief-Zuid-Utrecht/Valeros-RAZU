@@ -2,6 +2,7 @@ import { LdtoDekkingInTijdComponent } from '../../../components/custom-render-co
 import { LdtoEventComponent } from '../../../components/custom-render-components/by-predicate/ldto-event/ldto-event.component';
 import { LdtoOmvangComponent } from '../../../components/custom-render-components/by-predicate/ldto-omvang/ldto-omvang.component';
 import { LdtoUrlBestandComponent } from '../../../components/custom-render-components/by-predicate/ldto-url-bestand/ldto-url-bestand.component';
+import { RazuAfleveringComponent } from '../../../components/custom-render-components/by-type/razu-aflevering/razu-aflevering.component';
 import { FileRendererComponent } from '../../../components/features/node/node-render-components/predicate-render-components/file-renderer/file-renderer.component';
 import { HopLinkComponent } from '../../../components/features/node/node-render-components/predicate-render-components/hop-components/hop-link/hop-link.component';
 import {
@@ -11,7 +12,15 @@ import {
 import { renderComponentSettings } from '../../default-settings/settings/render-component.settings';
 
 export const razuRenderComponentSettings: RenderComponentsSettings = {
-  [RenderMode.ByType]: [],
+  [RenderMode.ByType]: [
+    {
+      component: RazuAfleveringComponent,
+      predicates: [
+        'https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260',
+      ],
+      requiresExplicitRendering: true,
+    },
+  ],
   [RenderMode.ByPredicate]: [
     ...renderComponentSettings[RenderMode.ByPredicate],
     {

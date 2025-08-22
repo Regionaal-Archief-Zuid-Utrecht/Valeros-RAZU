@@ -13,7 +13,6 @@ import { NodeTableViewComponent } from '../node-render-components/node-table-vie
 
 @Component({
   selector: 'app-node-renderer',
-  standalone: true,
   imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
   templateUrl: './node-renderer.component.html',
   styleUrl: './node-renderer.component.scss',

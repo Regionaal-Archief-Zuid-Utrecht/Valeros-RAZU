@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { Direction, NodeModel } from '../../models/node.model';
@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 export class SearchHitsService {
   constructor(private data: DataService) {}
 
-  parseToNodes(hits: SearchHit<ElasticNodeModel>[]): NodeModel[] {
+  parseToNodes(hits: estypes.SearchHit<ElasticNodeModel>[]): NodeModel[] {
     return hits
       .sort((a, b) => {
         return (a._source as any)?.['_score'] - (b._source as any)?.['_score'];
@@ -28,9 +28,21 @@ export class SearchHitsService {
           if (!(pred in node)) {
             node[pred] = [];
           }
-          const objValuesAsArray = Array.isArray(obj) ? obj : [obj];
-          for (const objValue of objValuesAsArray) {
-            node[pred].push({ value: objValue, direction: Direction.Outgoing });
+
+          let objValue: string | string[] = obj;
+
+          // TODO: Allow configuration of which field to use as URI if the obj is an object instead of a string
+          const hasUriField =
+            typeof obj === 'object' && obj !== null && 'uri' in obj;
+          if (hasUriField) {
+            objValue = obj.uri as string;
+          }
+
+          const objValuesAsArray = Array.isArray(objValue)
+            ? objValue
+            : [objValue];
+          for (const value of objValuesAsArray) {
+            node[pred].push({ value: value, direction: Direction.Outgoing });
           }
         }
         return node;
@@ -39,9 +51,9 @@ export class SearchHitsService {
 
   getFromSearchResponses(
     searchResponses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
-  ): SearchHit<ElasticNodeModel>[] {
+  ): estypes.SearchHit<ElasticNodeModel>[] {
     // First create a map of hits by their ID to merge duplicates
-    const hitsMap = new Map<string, SearchHit<ElasticNodeModel>>();
+    const hitsMap = new Map<string, estypes.SearchHit<ElasticNodeModel>>();
 
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];

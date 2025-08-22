@@ -38,6 +38,7 @@ export class ClusterService {
         ids: [],
         label: clusterSettings.label,
         filterHitIds: [],
+        filterHitCount: 0,
       };
       const existingClusterFilterOptionValue =
         clusteredFilterOptionValues[clusterId];
@@ -67,6 +68,7 @@ export class ClusterService {
             ),
           );
           clusterFilterOptionValue.filterHitIds = uniqueFilterHitIds;
+          clusterFilterOptionValue.filterHitCount = uniqueFilterHitIds.length;
 
           clusteredFilterOptionValues[clusterId] = clusterFilterOptionValue;
         }
@@ -78,7 +80,7 @@ export class ClusterService {
       ...nonClusteredFilterOptionValues,
     ];
     const sortedFilterOptionValues = allFilterOptionValues.sort(
-      (a, b) => b.filterHitIds.length - a.filterHitIds.length,
+      (a, b) => b.filterHitCount - a.filterHitCount,
     );
     return sortedFilterOptionValues;
   }

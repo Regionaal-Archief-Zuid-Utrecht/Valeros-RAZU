@@ -6,7 +6,6 @@ import { ViewModeService } from '../../../../../services/view-mode.service';
 
 @Component({
   selector: 'app-view-mode-select-option',
-  standalone: true,
   imports: [NgIf, NgClass, NgIcon],
   templateUrl: './view-mode-select-option.component.html',
   styleUrl: './view-mode-select-option.component.scss',

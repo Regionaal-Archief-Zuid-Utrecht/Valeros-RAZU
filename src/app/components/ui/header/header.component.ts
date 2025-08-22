@@ -18,7 +18,6 @@ export enum HeaderView {
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [NgIcon, NgIf, TranslatePipe, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

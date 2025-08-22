@@ -24,9 +24,15 @@ const hideFilterOptionValueIds: string[] = [
 export const razuFilteringSettings: FilteringSettings = {
   ...filteringSettings,
   filterOptions: {
+    title: {
+      label: 'Titel',
+      fieldIds: ['serie.keyword'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+    },
     archiefVormer: {
       label: 'Archiefvormer',
-      fieldIds: ['archiefvormer'],
+      fieldIds: ['archiefvormer.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
@@ -38,27 +44,57 @@ export const razuFilteringSettings: FilteringSettings = {
     },
     aggregatieniveau: {
       label: 'Aggregatieniveau',
-      fieldIds: ['aggregatieniveau'],
+      fieldIds: ['aggregatieniveau.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
     classificatie: {
       label: 'Classificatie',
-      fieldIds: ['classificatie'],
+      fieldIds: ['classificatie.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    licenties: {
-      label: 'Licenties',
-      fieldIds: ['licenties'],
+    auteursrecht: {
+      label: 'Auteursrecht',
+      fieldIds: ['auteursrecht.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    wettelijke_beperkingen_openbaarheid: {
-      label: 'Wettelijke beperkingen openbaarheid',
-      fieldIds: ['wettelijke_beperkingen_openbaarheid'],
+    openbaarheid: {
+      label: 'Openbaarheid',
+      fieldIds: ['openbaarheid.uri'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
+    },
+    documentYear: {
+      label: 'Jaar',
+      fieldIds: ['document_year'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
+    },
+    documentMonth: {
+      label: 'Maand',
+      fieldIds: ['document_month'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
+    },
+    documentDay: {
+      label: 'Dag',
+      fieldIds: ['document_day'],
+      values: [],
+      hideValueIds: [...hideFilterOptionValueIds],
+      sort: {
+        type: '_key',
+        order: 'asc',
+      },
     },
   },
 };

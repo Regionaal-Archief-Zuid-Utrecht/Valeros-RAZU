@@ -5,7 +5,6 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
 
 @Component({
   selector: 'app-ldto-dekking-in-tijd',
-  standalone: true,
   imports: [HopLinkComponent, NgIf],
   templateUrl: './ldto-dekking-in-tijd.component.html',
   styleUrl: './ldto-dekking-in-tijd.component.scss',

@@ -4,7 +4,6 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
 
 @Component({
   selector: 'app-ldto-omvang',
-  standalone: true,
   imports: [],
   templateUrl: './ldto-omvang.component.html',
   styleUrl: './ldto-omvang.component.scss',

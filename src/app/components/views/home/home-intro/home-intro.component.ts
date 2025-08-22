@@ -4,7 +4,6 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-intro',
-  standalone: true,
   imports: [TranslatePipe],
   templateUrl: './home-intro.component.html',
   styleUrl: './home-intro.component.scss',

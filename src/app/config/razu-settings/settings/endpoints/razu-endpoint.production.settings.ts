@@ -8,7 +8,7 @@ export const razuEndpointSettings: EndpointSettings = {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
         {
-          elastic: 'https://search.razu.nl/ldto-objects/_search',
+          elastic: 'https://search.razu.nl/ldto/_search',
           sparql: 'https://api.data.razu.nl/datasets/id/object/sparql',
         },
       ],
@@ -19,4 +19,5 @@ export const razuEndpointSettings: EndpointSettings = {
     url: 'https://viewer.razu.nl/sura/process-url', // Used for token generation, see https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA
     matchSubstring: 'opslag.razu.nl',
   },
+  snippetServer: 'https://viewer.razu.nl/snippet',
 };

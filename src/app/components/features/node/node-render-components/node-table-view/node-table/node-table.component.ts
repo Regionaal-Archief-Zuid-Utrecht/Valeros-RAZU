@@ -7,7 +7,6 @@ import { NodeDirectionTableComponent } from './node-direction-table/node-directi
 
 @Component({
   selector: 'app-node-table',
-  standalone: true,
   imports: [NgIf, NodeDirectionTableComponent],
   templateUrl: './node-table.component.html',
   styleUrl: './node-table.component.scss',

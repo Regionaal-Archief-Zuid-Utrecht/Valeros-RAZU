@@ -5,7 +5,6 @@ import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-endpoint',
-  standalone: true,
   imports: [NgIf, NodeLinkComponent],
   templateUrl: './node-endpoint.component.html',
   styleUrl: './node-endpoint.component.scss',

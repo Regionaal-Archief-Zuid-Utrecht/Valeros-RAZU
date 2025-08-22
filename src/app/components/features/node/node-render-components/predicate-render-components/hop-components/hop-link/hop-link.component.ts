@@ -7,7 +7,6 @@ import { HopComponent } from '../hop.component';
 
 @Component({
   selector: 'app-hop-link',
-  standalone: true,
   imports: [NgIf, NodeLinkComponent, NgForOf, NgIcon],
   templateUrl: './hop-link.component.html',
   styleUrl: './hop-link.component.scss',

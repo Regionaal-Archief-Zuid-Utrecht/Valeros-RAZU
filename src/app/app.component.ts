@@ -8,7 +8,6 @@ import { RoutingService } from './services/routing.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

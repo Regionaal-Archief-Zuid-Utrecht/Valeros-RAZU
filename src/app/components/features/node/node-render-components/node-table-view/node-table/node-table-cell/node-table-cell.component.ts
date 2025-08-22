@@ -22,7 +22,6 @@ export enum TableCellShowOptions {
 
 @Component({
   selector: 'app-node-table-cell',
-  standalone: true,
   imports: [
     NgForOf,
     NgIcon,

@@ -33,7 +33,6 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
 
 @Component({
   selector: 'app-search',
-  standalone: true,
   imports: [
     NodeComponent,
     NgForOf,

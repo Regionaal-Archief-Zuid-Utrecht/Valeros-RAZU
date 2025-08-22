@@ -10,7 +10,6 @@ import { ViewModeSelectOptionComponent } from './view-mode-select-option/view-mo
 
 @Component({
   selector: 'app-view-mode-select',
-  standalone: true,
   imports: [ViewModeSelectOptionComponent],
   templateUrl: './view-mode-select.component.html',
   styleUrl: './view-mode-select.component.scss',

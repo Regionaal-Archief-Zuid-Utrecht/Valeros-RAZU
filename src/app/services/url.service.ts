@@ -98,7 +98,7 @@ export class UrlService {
 
   async processUrl(url: string, linkToDetails = true): Promise<string> {
     const urlProcessor = Settings.endpoints.urlProcessor;
-    if (urlProcessor && url.includes(urlProcessor.matchSubstring)) {
+    if (urlProcessor && url && url.includes(urlProcessor.matchSubstring)) {
       const processedResponse = await this.api.postData<SuraResponse>(
         urlProcessor.url + `?url=${url}`,
         null,
@@ -121,5 +121,28 @@ export class UrlService {
       'hetutrechtsarchief.nl/collectie',
     );
     return url;
+  }
+
+  getPageNumberFromUrl(): number | null {
+    const removeQueryParams = (url: string) => {
+      const queryParamIndex = url.indexOf('?');
+      if (queryParamIndex !== -1) {
+        return url.substring(0, queryParamIndex);
+      }
+      return url;
+    };
+
+    let url = removeQueryParams(this.router.url);
+
+    // Double encoded hashtag (%2523): Once by Angular router, once by encodeURIComponent (see Details service)
+    const doubleEncodedHashtag = '%2523';
+    const urlSplitByHashtag = url.split(doubleEncodedHashtag);
+    const urlHasHashtag = urlSplitByHashtag.length > 1;
+    if (urlHasHashtag) {
+      const pageStr: string = urlSplitByHashtag[1];
+      const pageNum = Number(pageStr);
+      return !isNaN(pageNum) ? pageNum : null;
+    }
+    return null;
   }
 }

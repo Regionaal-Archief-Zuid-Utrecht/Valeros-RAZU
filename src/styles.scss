@@ -15,3 +15,8 @@
 .badge {
   border-radius: var(--rounded-badge, 0.375rem) !important;
 }
+
+text[filter="url(#highlight)"],
+tspan[filter="url(#highlight)"] {
+  fill: black !important;
+}

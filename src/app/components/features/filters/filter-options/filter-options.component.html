@@ -71,8 +71,10 @@
       </div>
     </div>
     <div
-      class="transition-all overflow-hidden"
-      [style.maxHeight]="uix.filterGroupExpanded ? '1000px' : '0px'"
+      class="transition-all overflow-hidden overflow-y-auto"
+      [ngClass]="
+        uix.filterGroupExpanded ? 'max-h-96 lg:max-h-[100vh]' : 'max-h-0'
+      "
     >
       <!-- Existing Filters Logic -->
       <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
@@ -100,13 +102,12 @@
                 "
               />
             </div>
-            <div
-              class="collapse-content max-h-64 overflow-y-scroll overflow-x-hidden"
-            >
+            <div class="collapse-content flex">
               <app-filter-option
                 [filterId]="filterId"
                 [values]="filters.getOptionById(filterId).values"
                 [fieldIds]="filters.getOptionById(filterId).fieldIds"
+                class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
               />
             </div>
           </div>

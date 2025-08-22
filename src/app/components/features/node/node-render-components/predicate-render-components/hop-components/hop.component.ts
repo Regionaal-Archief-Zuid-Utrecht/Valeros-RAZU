@@ -5,7 +5,6 @@ import { PredicateRenderComponent } from '../../../../../custom-render-component
 
 @Component({
   selector: 'app-hop-component',
-  standalone: true,
   imports: [],
   template: ``,
 })

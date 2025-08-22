@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchResponse } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticFieldExistsQuery } from '../../models/elastic/elastic-field-exists-query.type';
@@ -10,7 +10,10 @@ import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { ElasticQuery } from '../../models/elastic/elastic-query.type';
 import { ElasticShouldQueries } from '../../models/elastic/elastic-should-queries.type';
 import { ElasticSortEntryModel } from '../../models/elastic/elastic-sort.model';
-import { FilterOptionsIdsModel } from '../../models/filters/filter-option.model';
+import {
+  FilterOptionModel,
+  FilterOptionsIdsModel,
+} from '../../models/filters/filter-option.model';
 import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { SortOrder } from '../../models/settings/sort-order.enum';
 import { ApiService } from '../api.service';
@@ -79,6 +82,7 @@ export class ElasticService {
     | ElasticQuery
     | ElasticFullTextMatchQuery
     | ElasticShouldQueries
+    | ElasticMatchAllQuery
   )[] {
     const fieldOrValueFilters = filters.filter(
       (filter) =>
@@ -116,28 +120,52 @@ export class ElasticService {
 
   async getFilterOptions(
     query: string,
-    filterFieldIds: string[],
+    filterOptions: FilterOptionModel[],
     activeFilters: FilterModel[],
-  ): Promise<SearchResponse<any>[]> {
-    const aggs = filterFieldIds.reduce((result: any, fieldId) => {
+  ): Promise<estypes.SearchResponse<any>[]> {
+    const fieldIds: string[] = filterOptions.flatMap(
+      (filterOption) => filterOption.fieldIds,
+    );
+    const aggs = fieldIds.reduce((result: any, fieldId: string) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+
+      let order = undefined;
+
+      // TODO: Support multiple filter options for the same field, sorted differently
+      const filterOption = filterOptions.find((option) =>
+        option.fieldIds.includes(fieldId),
+      );
+
+      if (filterOption?.sort) {
+        order = {
+          [filterOption.sort.type]: filterOption.sort.order,
+        };
+      }
 
       result[elasticFieldId] = {
         terms: {
-          field: elasticFieldId + '.keyword',
+          field: elasticFieldId,
           min_doc_count:
             Settings.filtering.minNumOfValuesForFilterOptionToAppear,
-          size: Settings.search.elasticTopHitsMax,
+          size: Settings.search.elasticFilterTopHitsMax,
+          order: order,
         },
-        aggs: {
+      };
+
+      const clusteringIsEnabled =
+        Object.keys(Settings.clustering.filterOptionValues).length > 0;
+      if (clusteringIsEnabled) {
+        // Retrieve hit IDs for each filter option value (e.g. "public domain" for the "license" filter option). We need these so we can check if we need to cluster values.
+        // Note that this is quite a big performance hit, especially when working with many filter options/values.
+        result[elasticFieldId].aggs = {
           field_hits: {
             top_hits: {
-              size: Settings.search.elasticTopHitsMax,
+              size: Settings.search.elasticFilterTopHitsMax,
               _source: '',
             },
           },
-        },
-      };
+        };
+      }
       return result;
     }, {});
 
@@ -145,9 +173,11 @@ export class ElasticService {
       query,
       activeFilters,
       0,
-      Settings.search.elasticTopHitsMax,
+      Settings.search.elasticFilterTopHitsMax,
     );
     queryData.aggs = { ...aggs };
+    queryData.size = 0;
+    queryData['_source'] = '';
 
     return await this.searchEndpoints(queryData);
   }
@@ -209,7 +239,7 @@ export class ElasticService {
     queryData: any,
   ): Promise<ElasticEndpointSearchResponse<T>[]> {
     const searchPromisesAndEndpoints: {
-      promise: Promise<SearchResponse<T>>;
+      promise: Promise<estypes.SearchResponse<T>>;
       endpointId: string;
     }[] = [];
     for (const endpoint of this.endpoints.getAllEnabledUrls()) {
@@ -217,9 +247,11 @@ export class ElasticService {
         continue;
       }
 
-      const searchPromise: Promise<SearchResponse<T>> = this.api.postData<
-        SearchResponse<T>
-      >(endpoint.elastic, queryData);
+      const searchPromise: Promise<estypes.SearchResponse<T>> =
+        this.api.postData<estypes.SearchResponse<T>>(
+          endpoint.elastic,
+          queryData,
+        );
 
       searchPromisesAndEndpoints.push({
         promise: searchPromise,
@@ -227,9 +259,9 @@ export class ElasticService {
       });
     }
 
-    const searchPromises: Promise<SearchResponse<T>>[] =
+    const searchPromises: Promise<estypes.SearchResponse<T>>[] =
       searchPromisesAndEndpoints.map((s) => s.promise);
-    const searchResults: SearchResponse<T>[] =
+    const searchResults: estypes.SearchResponse<T>[] =
       await Promise.all(searchPromises);
 
     const searchResultsWithEndpointIds: ElasticEndpointSearchResponse<T>[] =
@@ -248,8 +280,7 @@ export class ElasticService {
 
     const elasticSortEntries: ElasticSortEntryModel[] = sort.fields.map(
       (field) => {
-        const elasticField =
-          this.data.replacePeriodsWithSpaces(field) + '.keyword';
+        const elasticField = this.data.replacePeriodsWithSpaces(field);
         return {
           [elasticField]: {
             order: sort.order === SortOrder.Ascending ? 'asc' : 'desc',
@@ -375,18 +406,6 @@ export class ElasticService {
     }
 
     return queryData;
-  }
-
-  async searchNodesForCounting(
-    query: string,
-    filters: FilterModel[],
-  ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    return this.searchNodes(
-      query,
-      0,
-      Settings.search.elasticTopHitsMax,
-      filters,
-    );
   }
 
   async searchNodes(

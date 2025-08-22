@@ -12,7 +12,6 @@ import { NodeComponent } from '../../features/node/node.component';
 
 @Component({
   selector: 'app-details',
-  standalone: true,
   imports: [NodeComponent, NgIf],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -38,12 +37,21 @@ export class DetailsComponent {
       if (!nodeId) {
         return;
       }
+
+      nodeId = this.removeHashFromNodeId(nodeId);
       nodeId = decodeURIComponent(nodeId);
 
-      // TODO: Move to service itself, instead of calling from component
       this.scroll.onNavigateToDetails(nodeId);
       void this.initNodeById(nodeId);
     });
+  }
+
+  private removeHashFromNodeId(nodeId: string) {
+    let hashIndex = nodeId.indexOf('%23');
+    if (hashIndex !== -1) {
+      nodeId = nodeId.substring(0, hashIndex);
+    }
+    return nodeId;
   }
 
   async initNodeById(id: string) {

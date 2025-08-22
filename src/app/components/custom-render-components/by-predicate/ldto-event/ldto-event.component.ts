@@ -5,7 +5,6 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
 
 @Component({
   selector: 'app-ldto-event',
-  standalone: true,
   imports: [HopLinkComponent, NgClass],
   templateUrl: './ldto-event.component.html',
   styleUrl: './ldto-event.component.scss',

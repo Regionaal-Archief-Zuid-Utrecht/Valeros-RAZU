@@ -11,7 +11,6 @@ import { AutocompleteService } from '../../../../services/search/autocomplete.se
 
 @Component({
   selector: 'app-search-autocomplete',
-  standalone: true,
   imports: [NgForOf, NgIf, NgIcon, TranslatePipe],
   templateUrl: './search-autocomplete.component.html',
   styleUrl: './search-autocomplete.component.scss',

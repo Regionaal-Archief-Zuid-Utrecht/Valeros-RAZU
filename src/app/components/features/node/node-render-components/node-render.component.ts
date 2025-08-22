@@ -4,7 +4,6 @@ import { NodeService } from '../../../../services/node/node.service';
 
 @Component({
   selector: 'app-node-render-components',
-  standalone: true,
   imports: [],
   template: ``,
 })

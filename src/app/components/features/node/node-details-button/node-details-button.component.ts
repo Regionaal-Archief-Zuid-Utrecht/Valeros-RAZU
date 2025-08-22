@@ -11,7 +11,6 @@ import { NodeService } from '../../../../services/node/node.service';
 
 @Component({
   selector: 'app-node-details-button',
-  standalone: true,
   imports: [NgIcon, NgIf, RouterLink, TranslatePipe, AccessibleIconDirective],
   templateUrl: './node-details-button.component.html',
   styleUrl: './node-details-button.component.scss',

@@ -5,7 +5,6 @@ import { NodeComponent } from '../../../features/node/node.component';
 
 @Component({
   selector: 'app-nodes-grid',
-  standalone: true,
   imports: [NgForOf, NodeComponent],
   templateUrl: './nodes-grid.component.html',
   styleUrl: './nodes-grid.component.scss',

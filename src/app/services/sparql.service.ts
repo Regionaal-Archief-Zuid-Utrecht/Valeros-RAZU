@@ -379,4 +379,32 @@ SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?positio
       return [];
     }
   }
+
+  async getAltoUrl(id: string, pageNum: number): Promise<string | null> {
+    const sparqlTemplate = `
+  ?bestand_uri ldto:isRepresentatieVan <${id}> .
+  ?bestand_uri a ldto:Bestand .
+  ?bestand_uri ldto:bestandsformaat <https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e> .
+  ?bestand_uri ldto:URLBestand ?altoUrl .
+  ?bestand_uri schema:position "${pageNum}"^^<http://www.w3.org/2001/XMLSchema#integer> .
+
+ `;
+    const query = `
+prefix ldto: <https://data.razu.nl/def/ldto/>
+prefix schema: <http://schema.org/>
+
+select ?altoUrl where {
+     ${this.getFederatedQuery(sparqlTemplate)}
+} limit 100`;
+
+    const results: { altoUrl: string }[] = await this.api.postData<
+      { altoUrl: string }[]
+    >(this.endpoints.getFirstUrls().sparql, {
+      query: query,
+    });
+    if (!results || results.length === 0) {
+      return null;
+    }
+    return results[0].altoUrl;
+  }
 }

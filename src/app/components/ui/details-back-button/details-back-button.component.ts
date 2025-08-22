@@ -8,7 +8,6 @@ import { RoutingService } from '../../../services/routing.service';
 
 @Component({
   selector: 'app-details-back-button',
-  standalone: true,
   imports: [NgIcon, NgIf, TranslatePipe],
   templateUrl: './details-back-button.component.html',
   styleUrl: './details-back-button.component.scss',

@@ -1,0 +1,5 @@
+@if (loading) {
+  <span class="loading loading-spinner loading-xs"></span>
+} @else if (snippet) {
+  <span [innerHTML]="snippet"></span>
+}

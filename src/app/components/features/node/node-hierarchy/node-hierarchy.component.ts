@@ -11,7 +11,6 @@ import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-hierarchy',
-  standalone: true,
   imports: [
     NgForOf,
     NgIf,

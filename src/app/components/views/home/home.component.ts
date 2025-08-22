@@ -16,7 +16,6 @@ import { HomeIntroComponent } from './home-intro/home-intro.component';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [
     HomeIntroComponent,
     LangSwitchComponent,

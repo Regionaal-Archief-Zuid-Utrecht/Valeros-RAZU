@@ -18,7 +18,6 @@ import { FileType } from '../../../../models/file-type.model';
 
 @Component({
   selector: 'app-doc-viewer',
-  standalone: true,
   imports: [NgIf, PdfJsViewerModule],
   templateUrl: './doc-viewer.component.html',
   styleUrl: './doc-viewer.component.css',

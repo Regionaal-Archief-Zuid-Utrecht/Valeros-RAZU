@@ -13,7 +13,6 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
 
 @Component({
   selector: 'app-filter-options',
-  standalone: true,
   imports: [
     NgIf,
     NgForOf,

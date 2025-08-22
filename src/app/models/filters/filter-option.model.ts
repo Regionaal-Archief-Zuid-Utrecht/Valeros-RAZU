@@ -1,3 +1,4 @@
+import { ElasticSortOrder } from '../elastic/elastic-sort.model';
 import { FilterType } from './filter.model';
 
 export interface FilterOptionsIdsModel {
@@ -14,6 +15,11 @@ export interface FilterOptionsModel {
   [filterId: string]: FilterOptionModel;
 }
 
+export interface FilterOptionSortModel {
+  type: '_count' | '_key';
+  order: ElasticSortOrder;
+}
+
 export interface FilterOptionModel {
   label: string;
   fieldIds: string[];
@@ -21,10 +27,12 @@ export interface FilterOptionModel {
   hideValueIds?: string[];
   showOnlyValueIds?: string[];
   showOnlyForSelectedFilters?: FilterOptionsIdsModel;
+  sort?: FilterOptionSortModel;
 }
 
 export interface FilterOptionValueModel {
   ids: string[];
   label?: string;
   filterHitIds: string[];
+  filterHitCount: number;
 }

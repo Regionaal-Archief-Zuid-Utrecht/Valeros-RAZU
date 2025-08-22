@@ -21,7 +21,6 @@ import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-file-renderer',
-  standalone: true,
   imports: [
     NgIf,
     NgForOf,
@@ -31,7 +30,7 @@ import { NodeLinkComponent } from '../../../node-link/node-link.component';
     NgIcon,
   ],
   templateUrl: './file-renderer.component.html',
-  styleUrl: './file-renderer.component.css',
+  styleUrl: './file-renderer.component.scss',
 })
 export class FileRendererComponent implements OnInit, OnChanges {
   protected readonly FileType = FileType;

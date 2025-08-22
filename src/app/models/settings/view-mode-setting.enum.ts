@@ -5,6 +5,8 @@ export enum ViewModeSetting {
   ShowTypes,
   ShowFileNextToTable,
   ShowOrganization,
+  ShowPermalinkButton,
+  ShowSnippet,
   /**
    * Detail view always enriches with incoming relations, regardless of this setting
    */

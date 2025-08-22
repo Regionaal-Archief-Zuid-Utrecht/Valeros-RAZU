@@ -14,7 +14,6 @@ import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
 
 @Component({
   selector: 'app-filter-option',
-  standalone: true,
   imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
   templateUrl: './filter-option.component.html',
   styleUrl: './filter-option.component.scss',
@@ -61,11 +60,12 @@ export class FilterOptionComponent implements OnInit {
   }
 
   getFilterOptionCountStr(count: number): string {
-    if (count >= Settings.search.elasticTopHitsMax) {
-      return ` (${Settings.search.elasticTopHitsMax}+)`;
-    }
+    // TODO: When using clustering, the count here might be capped by Settings.search.elasticFilterTopHitsMax and not be accurate
+    // if (count >= Settings.search.elasticFilterTopHitsMax) {
+    //   return ` (${Settings.search.elasticFilterTopHitsMax}+)`;
+    // }
 
-    return ` (${count})`;
+    return ` (${formatNumber(count)})`;
   }
 
   get hasMoreToShow(): boolean {

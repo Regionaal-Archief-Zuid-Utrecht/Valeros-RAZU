@@ -9,7 +9,6 @@ import { UiService } from '../../../../services/ui/ui.service';
 
 @Component({
   selector: 'app-sort-select',
-  standalone: true,
   imports: [NgForOf, FormsModule],
   templateUrl: './sort-select.component.html',
   styleUrl: './sort-select.component.scss',

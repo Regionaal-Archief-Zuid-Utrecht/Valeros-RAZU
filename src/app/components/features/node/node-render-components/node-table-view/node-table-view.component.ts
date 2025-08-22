@@ -13,7 +13,6 @@ import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
   selector: 'app-node-table-view',
-  standalone: true,
   imports: [NgIf, NodeTableComponent],
   templateUrl: './node-table-view.component.html',
   styleUrl: './node-table-view.component.scss',

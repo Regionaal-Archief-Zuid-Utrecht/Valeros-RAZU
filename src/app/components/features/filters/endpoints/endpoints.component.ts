@@ -11,7 +11,6 @@ import { FilterCountComponent } from '../filter-options/filter-count/filter-coun
 
 @Component({
   selector: 'app-endpoints',
-  standalone: true,
   imports: [NgForOf, FilterCountComponent, FormsModule, TranslatePipe],
   templateUrl: './endpoints.component.html',
   styleUrl: './endpoints.component.scss',

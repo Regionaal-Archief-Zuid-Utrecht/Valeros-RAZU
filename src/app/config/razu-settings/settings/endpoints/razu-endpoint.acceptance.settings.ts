@@ -19,4 +19,5 @@ export const razuEndpointSettings: EndpointSettings = {
     url: 'https://ontwikkel.viewer.razu.nl/sura/process-url', // Used for token generation, see https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA
     matchSubstring: 'opslag.razu.nl',
   },
+  snippetServer: 'https://ontwikkel.viewer.razu.nl/snippet',
 };

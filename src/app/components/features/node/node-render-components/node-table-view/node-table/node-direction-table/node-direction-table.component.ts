@@ -16,7 +16,6 @@ import {
 
 @Component({
   selector: 'app-node-direction-table',
-  standalone: true,
   imports: [
     NgForOf,
     NgClass,

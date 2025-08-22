@@ -16,10 +16,10 @@ export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
       [PredicateVisibility.Show]: [
         {
           predicates: [
-            'aggregatieniveau',
-            'archief',
-            'classificatie',
-            'archiefvormer',
+            // 'aggregatieniveau',
+            // 'archief',
+            // 'classificatie',
+            // 'archiefvormer',
           ],
         },
       ],
@@ -42,6 +42,7 @@ export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
           predicates: [
             ...typePredicates,
             ...parentPredicates,
+            'https://data.razu.nl/def/ldto/aggregatieniveau',
             'https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7',
             'https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd',
             'https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3',
@@ -61,6 +62,7 @@ export const razuPredicateVisibilitySettings: PredicateVisibilitySettings = {
   },
   alwaysHide: [
     ...predicateVisibilitySettings.alwaysHide,
+    'https://data.razu.nl/def/ldto/aggregatieniveau',
     'https://data.razu.nl/def/ldto/checksum',
     'https://data.razu.nl/def/ldto/waardering',
     'https://schema.org/breadcrumb',

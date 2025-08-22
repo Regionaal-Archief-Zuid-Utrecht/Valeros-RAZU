@@ -1,3 +1,10 @@
 span {
-  overflow-wrap: break-word;
+  /* Prefer hyphenation; requires correct lang on document or element (index.html has lang="nl-NL"). */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+
+  /* Keep normal word-breaking; allow wrapping long tokens if needed */
+  word-break: normal;
+  overflow-wrap: anywhere;
 }

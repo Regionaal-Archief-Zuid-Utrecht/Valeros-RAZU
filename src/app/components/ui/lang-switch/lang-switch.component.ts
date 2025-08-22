@@ -5,7 +5,6 @@ import { Settings } from '../../../config/settings';
 
 @Component({
   selector: 'app-lang-switch',
-  standalone: true,
   imports: [NgClass, NgIf],
   templateUrl: './lang-switch.component.html',
   styleUrl: './lang-switch.component.scss',

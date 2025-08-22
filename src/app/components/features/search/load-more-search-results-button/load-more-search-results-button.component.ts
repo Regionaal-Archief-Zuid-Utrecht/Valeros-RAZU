@@ -5,7 +5,6 @@ import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
   selector: 'app-load-more-search-results-button',
-  standalone: true,
   imports: [NgIf, TranslatePipe],
   templateUrl: './load-more-search-results-button.component.html',
   styleUrl: './load-more-search-results-button.component.scss',

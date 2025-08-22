@@ -3,7 +3,6 @@ import { TypeRenderComponentInput } from '../../../models/type-render-component-
 
 @Component({
   selector: 'app-type-render-component',
-  standalone: true,
   imports: [],
   template: '',
 })

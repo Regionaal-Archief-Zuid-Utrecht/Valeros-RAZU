@@ -13,7 +13,6 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
 
 @Component({
   selector: 'app-ldto-url-bestand',
-  standalone: true,
   imports: [NodeLinkComponent, NodeImagesComponent, NgIf],
   templateUrl: './ldto-url-bestand.component.html',
   styleUrl: './ldto-url-bestand.component.scss',

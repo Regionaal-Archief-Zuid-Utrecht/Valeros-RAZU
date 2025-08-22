@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SearchHit } from '@elastic/elasticsearch/lib/api/types';
+import type { estypes } from '@elastic/elasticsearch';
 import { BehaviorSubject, skip, take } from 'rxjs';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
@@ -83,7 +83,7 @@ export class SearchService {
   private async _updateResultsFromSearchResponses(
     responses: ElasticEndpointSearchResponse<ElasticNodeModel>[],
   ) {
-    const hits: SearchHit<ElasticNodeModel>[] =
+    const hits: estypes.SearchHit<ElasticNodeModel>[] =
       this.hits.getFromSearchResponses(responses);
 
     const hitNodes: NodeModel[] = this.hits.parseToNodes(hits);
@@ -146,12 +146,8 @@ export class SearchService {
       return;
     }
 
-    const navigatedToDetails = this.details.isShowing();
-    if (navigatedToDetails) {
-      return;
-    }
-
     const queryStr = queryParams[Settings.url.params.search];
+
     const queryStrChanged = queryStr !== this.queryStr;
     if (queryStrChanged) {
       this.queryStr = queryStr;
@@ -193,7 +189,7 @@ export class SearchService {
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
       );
-    const hits: SearchHit<ElasticNodeModel>[] =
+    const hits: estypes.SearchHit<ElasticNodeModel>[] =
       this.hits.getFromSearchResponses(responses);
     this.hasMoreResultsToLoad = hits && hits.length > 0;
   }
@@ -210,12 +206,7 @@ export class SearchService {
         if (hitTotal.relation !== 'eq') {
           isCapped = true;
         }
-        return (
-          total +
-          (hitTotal.relation === 'eq'
-            ? hitTotal.value
-            : Math.min(hitTotal.value, Settings.search.elasticTopHitsMax))
-        );
+        return total + hitTotal.value;
       }
       return total;
     }, 0);
@@ -276,9 +267,7 @@ export class SearchService {
       }
 
       // Update filter options
-      if (clearFilters) {
-        await this.filters.updateFilterOptionValues(this.queryStr ?? '');
-      }
+      await this.filters.updateFilterOptionValues(this.queryStr ?? '');
     } catch (error) {
       console.error('Error searching:', error);
     } finally {
