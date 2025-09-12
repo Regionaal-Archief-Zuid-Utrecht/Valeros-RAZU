@@ -46,7 +46,7 @@ export class SnippetComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url: this.altoUrl, q: `*${query}*` }),
+        body: JSON.stringify({ url: this.altoUrl, q: `${query}` }),
       });
 
       if (!response.ok) {
