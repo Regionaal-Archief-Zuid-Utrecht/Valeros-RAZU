@@ -16,14 +16,33 @@ export class RoutingService {
   initHistoryTracking() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const lastHistoryUrl = this.history.at(-1);
-        if (lastHistoryUrl === event.url) {
-          console.log('Same URL, skipping history update', event.url);
+        if (this.isLastUrlSameAsUrl(event.url)) {
+          console.log(
+            'Same URL (ignoring filters param), skipping history update',
+            event.url,
+          );
           return;
         }
         this.history.push(event.url);
+        console.log(event.url, this.history);
       }
     });
+  }
+
+  private isLastUrlSameAsUrl(url: string) {
+    const lastHistoryUrl = this.history.at(-1);
+    const stripFiltersParam = (url: string) => {
+      const [path, query] = url.split('?');
+      if (!query) return path;
+      const params = new URLSearchParams(query);
+      params.delete('filters');
+      const filteredQuery = params.toString();
+      return filteredQuery ? `${path}?${filteredQuery}` : path;
+    };
+    return (
+      lastHistoryUrl &&
+      stripFiltersParam(lastHistoryUrl) === stripFiltersParam(url)
+    );
   }
 
   goBackOrDefault(defaultUrl: string = '/') {
