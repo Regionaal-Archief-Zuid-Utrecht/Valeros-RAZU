@@ -241,7 +241,7 @@ export class RazuAfleveringComponent
         )
         .then((ids) => {
           this.beperkingGebruikIds = ids;
-          console.log('Found beperkingGebruikIds:', ids);
+          // console.log('Found beperkingGebruikIds:', ids);
 
           // Create an array of promises for all data fetching
           const promises: Promise<void>[] = [];
@@ -253,10 +253,10 @@ export class RazuAfleveringComponent
               .getObjIds(id, this.copyrightNoticeSettings.preds)
               .then((copyrightNoticeIds) => {
                 if (copyrightNoticeIds.length > 0) {
-                  console.log(
-                    `Found copyright notices for ${id}:`,
-                    copyrightNoticeIds,
-                  );
+                  // console.log(
+                  //   `Found copyright notices for ${id}:`,
+                  //   copyrightNoticeIds,
+                  // );
                   this.copyrightNoticeMap.set(id, copyrightNoticeIds);
                 }
               });
@@ -278,7 +278,7 @@ export class RazuAfleveringComponent
               ])
               .then((typeIds) => {
                 if (typeIds.length > 0) {
-                  console.log(`Found types for ${id}:`, typeIds);
+                  // console.log(`Found types for ${id}:`, typeIds);
                   this.beperkingGebruikTypeMap.set(id, typeIds);
                 }
               });
@@ -342,15 +342,15 @@ export class RazuAfleveringComponent
         })
         .finally(() => {
           this.loading = false;
-          console.log('Final data:');
-          console.log('beperkingGebruikIds', this.beperkingGebruikIds);
-          console.log('copyrightNoticeMap', this.copyrightNoticeMap);
-          console.log('copyrightNoteMap', this.copyrightNoteMap);
-          console.log('beperkingGebruikTypeMap', this.beperkingGebruikTypeMap);
-          console.log(
-            'beperkingGebruikTermijnMap',
-            this.beperkingGebruikTermijnMap,
-          );
+          // console.log('Final data:');
+          // console.log('beperkingGebruikIds', this.beperkingGebruikIds);
+          // console.log('copyrightNoticeMap', this.copyrightNoticeMap);
+          // console.log('copyrightNoteMap', this.copyrightNoteMap);
+          // console.log('beperkingGebruikTypeMap', this.beperkingGebruikTypeMap);
+          // console.log(
+          //   'beperkingGebruikTermijnMap',
+          //   this.beperkingGebruikTermijnMap,
+          // );
         });
     }
   }
