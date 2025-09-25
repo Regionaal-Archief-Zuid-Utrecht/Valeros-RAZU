@@ -15,7 +15,12 @@ export class RoutingService {
 
   initHistoryTracking() {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd && !this.url.skipHistoryTracking) {
+        const lastHistoryUrl = this.history.at(-1);
+        if (lastHistoryUrl === event.url) {
+          console.log('Same URL, skipping history update', event.url);
+          return;
+        }
         this.history.push(event.url);
       }
     });
