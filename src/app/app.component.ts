@@ -5,10 +5,11 @@ import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { RoutingService } from './services/routing.service';
+import { AriaLiveComponent } from "./components/accessibility/aria-live/aria-live.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule],
+  imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule, AriaLiveComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
