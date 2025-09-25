@@ -15,7 +15,7 @@ export class RoutingService {
 
   initHistoryTracking() {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && !this.url.ignoreQueryParamChange) {
+      if (event instanceof NavigationEnd) {
         this.history.push(event.url);
       }
     });
