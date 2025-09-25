@@ -1,8 +1,10 @@
 <li *ngIf="viewMode !== undefined">
-  <a
+  <button
+    type="button"
     [ngClass]="[viewModes.current.value === viewMode ? 'active' : '']"
     (click)="viewModes.current.next(viewMode)"
+    [attr.aria-pressed]="viewModes.current.value === viewMode"
   >
     <ng-icon [svg]="iconSvg" *ngIf="iconSvg" />
-  </a>
+  </button>
 </li>
