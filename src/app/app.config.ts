@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -14,7 +14,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
 ) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 const providers = [
-  provideRouter(routes),
+  provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' })),
   provideAnimationsAsync(),
   provideHttpClient(),
   importProvidersFrom([
