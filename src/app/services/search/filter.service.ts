@@ -128,9 +128,14 @@ export class FilterService {
   }
 
   private _restorePreviousFilters() {
-    const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) =>
-      this._filterExistsInOptions(prevEnabledFilter),
-    );
+    const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) => {
+      if (!prevEnabledFilter.filterId) {
+        return false;
+      }
+      const filterStillExists = this._filterExistsInOptions(prevEnabledFilter);
+      const shouldShowFilter = this.shouldShow(prevEnabledFilter.filterId);
+      return filterStillExists && shouldShowFilter;
+    });
 
     const shouldUpdateEnabledFilters =
       JSON.stringify(restoredFilters) !== JSON.stringify(this.enabled.value);
