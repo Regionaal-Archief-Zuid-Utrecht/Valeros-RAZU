@@ -15,7 +15,6 @@ import { FilterService } from './search/filter.service';
 })
 export class UrlService {
   ignoreQueryParamChange = false;
-  skipHistoryTracking = false;
 
   constructor(
     private details: DetailsService,
@@ -66,9 +65,7 @@ export class UrlService {
       filters,
     );
 
-    this.skipHistoryTracking = true;
     void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
-    this.skipHistoryTracking = false;
   }
 
   private async _updateUrlParam(key: string, param: string | null) {
