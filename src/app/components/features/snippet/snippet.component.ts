@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   Component,
   inject,
@@ -11,7 +10,7 @@ import { SearchService } from '../../../services/search/search.service';
 
 @Component({
   selector: 'app-snippet',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './snippet.component.html',
   styleUrl: './snippet.component.scss',
 })

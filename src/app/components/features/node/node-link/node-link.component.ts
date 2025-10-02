@@ -11,7 +11,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
 import {
   featherExternalLink,
   featherFilter,
@@ -19,7 +18,6 @@ import {
   featherSearch,
   featherX,
 } from '@ng-icons/feather-icons';
-import { TranslatePipe } from '@ngx-translate/core';
 
 import {
   isValidHttpUrl,
@@ -38,7 +36,7 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
   selector: 'app-node-link',
-  imports: [NgIf, RouterLink, NgIcon, NodeLabelComponent, TranslatePipe],
+  imports: [NgIf, RouterLink, NodeLabelComponent],
   templateUrl: './node-link.component.html',
   styleUrl: './node-link.component.scss',
 })
