@@ -170,7 +170,9 @@ export class SearchService {
     });
 
     this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
-      this._searchOnUrlChange(queryParams);
+      setTimeout(() => {
+        this._searchOnUrlChange(queryParams);
+      });
     });
   }
 
