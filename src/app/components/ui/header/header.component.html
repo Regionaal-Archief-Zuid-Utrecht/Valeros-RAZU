@@ -7,14 +7,13 @@
       'ml-auto mr-0': settings.position === HeaderPosition.Right,
     }"
     role="banner"
-    aria-labelledby="main-header"
+    [attr.aria-label]="'general.title' | translate"
   >
     <button
       class="text-left inline-flex items-center"
       [class.mr-3]="settings.showTitle || settings.showColofonButton"
       (click)="onButtonClicked('')"
-      role="navigation"
-      aria-labelledby="header-home-button"
+      [attr.aria-label]="'homescreen.go-to-homepage' | translate"
     >
       <img
         *ngIf="settings.showLogo"
@@ -44,7 +43,6 @@
             : ('homescreen.go-to-colofon' | translate)
         "
         role="navigation"
-        aria-labelledby="header-colofon-button"
       >
         <span class="text-lg sm:text-2xl font-light">
           <ng-icon
