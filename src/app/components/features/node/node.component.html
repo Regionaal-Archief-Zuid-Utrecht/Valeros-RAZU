@@ -48,7 +48,7 @@
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
       class="flex-grow relative"
     >
-      <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
+      <div class="text-lg mr-6 font-bold" *ngIf="showTitle" aria-hidden="true">
         <app-node-label [label]="title" />
         <!-- <app-node-link [url]="details.getLink(node)" [label]="title" [] /> -->
       </div>
