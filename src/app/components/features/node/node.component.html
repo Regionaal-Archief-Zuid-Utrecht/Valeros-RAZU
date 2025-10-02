@@ -49,7 +49,8 @@
       class="flex-grow relative"
     >
       <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
-        <app-node-link [url]="details.getLink(node)" [label]="title" />
+        <app-node-label [label]="title" />
+        <!-- <app-node-link [url]="details.getLink(node)" [label]="title" [] /> -->
       </div>
 
       <div class="w-full sm:px-4 sm:pr-32">

@@ -40,6 +40,7 @@ import { FileRendererComponent } from './node-render-components/predicate-render
 import { NodeRendererComponent } from './node-renderer/node-renderer.component';
 import { NodeTableRowComponent } from './node-table-row/node-table-row.component';
 import { NodeTypesComponent } from './node-types/node-types.component';
+import { NodeLabelComponent } from "./node-label/node-label.component";
 
 @Component({
   selector: 'app-node',
@@ -60,7 +61,8 @@ import { NodeTypesComponent } from './node-types/node-types.component';
     FileRendererComponent,
     MiradorComponent,
     SnippetComponent,
-  ],
+    NodeLabelComponent
+],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
 })
