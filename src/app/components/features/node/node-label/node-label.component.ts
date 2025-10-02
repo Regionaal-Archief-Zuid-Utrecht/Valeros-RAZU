@@ -1,4 +1,10 @@
-import { NgClass, NgIf } from '@angular/common';
+import {
+  NgClass,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+} from '@angular/common';
 import {
   Component,
   Input,
@@ -12,12 +18,13 @@ import { truncate } from '../../../../helpers/util.helper';
 
 @Component({
   selector: 'app-node-label',
-  imports: [NgIf, NgClass],
+  imports: [NgIf, NgClass, NgSwitch, NgSwitchCase, NgSwitchDefault],
   templateUrl: './node-label.component.html',
   styleUrl: './node-label.component.scss',
 })
 export class NodeLabelComponent implements OnInit, OnChanges {
   @Input() label?: string;
+  @Input() tag: 'h1' | 'h2' | 'h3' | 'span' = 'span';
   @Input() shouldTruncate = true;
   @Input() allowLabelExpand = true;
   @Input() highlightStr?: string;
