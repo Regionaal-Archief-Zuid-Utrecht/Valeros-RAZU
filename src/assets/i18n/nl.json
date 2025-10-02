@@ -20,6 +20,7 @@
   },
   "search-interface": {
     "search": "Zoek",
+    "searching": "Zoeken",
     "search-placeholder": "Bijv. 'Beleidsstuk'",
     "no-results-found": "Geen resultaten gevonden",
     "results": "resultaten",

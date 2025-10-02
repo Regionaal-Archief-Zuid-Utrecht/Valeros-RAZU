@@ -20,6 +20,7 @@
   },
   "search-interface": {
     "search": "Search",
+    "searching": "Searching",
     "search-placeholder": "Search",
     "no-results-found": "No results found",
     "results": "results",
