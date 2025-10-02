@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { SearchService } from '../../../services/search/search.service';
@@ -40,9 +42,15 @@ export class HomeComponent implements OnInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
+    public translate: TranslateService,
+    public titleService: Title,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.translate.get('general.page-title').subscribe((res: string) => {
+      this.titleService.setTitle(res);
+    });
+  }
 
   ngAfterViewInit() {}
 }
