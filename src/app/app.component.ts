@@ -4,12 +4,18 @@ import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { AriaLiveComponent } from './components/accessibility/aria-live/aria-live.component';
 import { RoutingService } from './services/routing.service';
-import { AriaLiveComponent } from "./components/accessibility/aria-live/aria-live.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, TranslateModule, PdfJsViewerModule, AriaLiveComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    TranslateModule,
+    PdfJsViewerModule,
+    AriaLiveComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -24,9 +30,6 @@ export class AppComponent {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
     this.translate.use('nl');
-    this.translate.get('general.page-title').subscribe((res: string) => {
-      this.titleService.setTitle(res);
-    });
     this.routing.initHistoryTracking();
   }
 }
