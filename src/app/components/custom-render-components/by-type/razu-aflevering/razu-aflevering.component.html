@@ -205,7 +205,7 @@
   <details (toggle)="onDownloadToggle($event)">
     <summary>Downloaden</summary>
     <div *ngIf="repMetaFetching">Downloadlinks aan het ophalen...</div>
-    <ul class="list-disc ml-6" *ngIf="repMetaLoaded">
+    <ol class="list-decimal ml-6" *ngIf="repMetaLoaded">
       <ng-container
         *ngFor="
           let rep of data?.node?.[
@@ -231,7 +231,7 @@
         </ng-container>
         <ng-template #skip></ng-template>
       </ng-container>
-    </ul>
+    </ol>
   </details>
 </ng-container>
 <!-- For debugging, you can show the raw data -->
