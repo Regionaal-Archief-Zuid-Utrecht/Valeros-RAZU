@@ -112,7 +112,7 @@ export class NodeLinkComponent implements OnInit, OnChanges {
 
     if (this?.labelUrl && isValidHttpUrl(this.labelUrl)) {
       void this.cache.cacheLabelForId(this.labelUrl);
-      return this.cache.labels?.[this.labelUrl];
+      return this.cache.labels.value?.[this.labelUrl];
     }
 
     return this.processedUrl ? replacePrefixes(this.processedUrl) : undefined;

@@ -1,10 +1,9 @@
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { featherX } from '@ng-icons/feather-icons';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { UrlService } from '../../../services/url.service';
 import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
@@ -27,15 +26,9 @@ export class ColofonComponent implements OnInit {
   constructor(
     public router: Router,
     public url: UrlService,
-    private titleService: Title,
-    private translate: TranslateService,
   ) {}
 
-  ngOnInit() {
-    this.translate.get('general.colofon-title').subscribe((res: string) => {
-      this.titleService.setTitle(res);
-    });
-  }
+  async ngOnInit() {}
 
   async onButtonClicked(url: string) {
     this.url.ignoreQueryParamChange = true;

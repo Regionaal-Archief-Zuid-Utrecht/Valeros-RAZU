@@ -43,14 +43,9 @@ export class HomeComponent implements OnInit {
     public details: DetailsService,
     public settings: SettingsService,
     public translate: TranslateService,
-    public titleService: Title,
   ) {}
 
-  ngOnInit() {
-    this.translate.get('general.page-title').subscribe((res: string) => {
-      this.titleService.setTitle(res);
-    });
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {}
 }

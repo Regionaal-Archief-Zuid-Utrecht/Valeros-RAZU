@@ -18,7 +18,6 @@ import { NodeComponent } from '../../features/node/node.component';
 })
 export class DetailsComponent {
   nodeId: string | null = null;
-  node?: NodeModel;
 
   loadingNodeData = false;
 
@@ -55,7 +54,7 @@ export class DetailsComponent {
   }
 
   async initNodeById(id: string) {
-    this.node = undefined;
+    this.details.node.next(undefined);
     this.nodeId = null;
 
     this.loadingNodeData = true;
@@ -66,7 +65,7 @@ export class DetailsComponent {
       const enrichedNodes = await this.nodes.enrichWithIncomingRelations([
         node,
       ]);
-      this.node = enrichedNodes[0] ?? node;
+      this.details.node.next(enrichedNodes[0] ?? node);
       this.loadingNodeData = false;
     });
   }

@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { Settings } from '../../../config/settings';
@@ -67,19 +66,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
-    public titleService: Title,
   ) {}
 
-  ngOnInit() {
-    this.titleService.setTitle(`RAZU - Zoekresultaten`);
-
-    // TODO: Update on query string change instead of on search results change
-    this.search.results.subscribe((results) => {
-      this.titleService.setTitle(
-        `RAZU - Zoekresultaten "${this.search.queryStr}"`,
-      );
-    });
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.scroll.initScrollContainer(this.scrollContainer);
