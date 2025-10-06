@@ -343,10 +343,7 @@ export class FilterService {
     return undefined;
   }
 
-  getOptionEnabledFiltersCount(
-    filterId: string,
-    type: FilterType,
-  ): string | undefined {
+  getOptionEnabledFiltersCount(filterId: string, type: FilterType): number {
     const optionValues: FilterOptionValueModel[] =
       this.getOptionById(filterId).values;
     const count = optionValues.reduce(
@@ -354,7 +351,15 @@ export class FilterService {
       0,
     );
 
-    return this.getEnabledFiltersCountStr(count);
+    return count;
+  }
+
+  getOptionEnabledFiltersCountStr(
+    filterId: string,
+    type: FilterType,
+  ): string | undefined {
+    const filtersCount = this.getOptionEnabledFiltersCount(filterId, type);
+    return this.getEnabledFiltersCountStr(filtersCount);
   }
 
   clearEnabled() {
