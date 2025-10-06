@@ -20,7 +20,9 @@
       <app-search-input class="flex-grow" />
     </div>
 
-    <app-search-buttons-toolbar />
+    @if (!details.showing.value) {
+      <app-search-buttons-toolbar />
+    }
 
     <!--    <app-active-filters />-->
   </div>
