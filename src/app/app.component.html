@@ -1,4 +1,7 @@
-<div class="drawer" [ngClass]="{ 'lg:drawer-open': ui.filterDrawerExpanded }">
+<div
+  class="drawer"
+  [ngClass]="{ 'lg:drawer-open': ui.filterDrawerExpanded && isSearchPage() }"
+>
   <input type="checkbox" class="drawer-toggle" id="filter-drawer-checkbox" />
 
   <div class="drawer-content">

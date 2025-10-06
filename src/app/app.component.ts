@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import {
   featherChevronLeft,
@@ -38,12 +38,18 @@ export class AppComponent {
     private routing: RoutingService,
     private pageTitle: PageTitleService,
     public ui: UiService,
+    private router: Router,
   ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
     this.translate.use('nl');
     this.routing.initHistoryTracking();
     this.pageTitle.initPageTitleUpdates();
+  }
+
+  // TODO: Reduce calls if necessary for performance reasons
+  isSearchPage() {
+    return this.router.url.startsWith('/search');
   }
 
   protected readonly featherChevronLeft = featherChevronLeft;
