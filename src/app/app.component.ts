@@ -6,6 +6,7 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { AriaLiveComponent } from './components/accessibility/aria-live/aria-live.component';
 import { PageTitleService } from './services/page-title.service';
 import { RoutingService } from './services/routing.service';
+import { FilterModalComponent } from "./components/features/filters/filter-modal/filter-modal.component";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { RoutingService } from './services/routing.service';
     TranslateModule,
     PdfJsViewerModule,
     AriaLiveComponent,
-  ],
+    FilterModalComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

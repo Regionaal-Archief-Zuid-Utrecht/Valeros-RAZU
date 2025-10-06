@@ -31,8 +31,7 @@ export class FilterButtonComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    // TODO: Open filter panel/modal
-    console.log('Filter button clicked');
+    (document.getElementById('filter-modal') as any).showModal();
   }
 
   protected readonly featherFilter = featherFilter;
