@@ -3,7 +3,9 @@ import { Component, HostListener, type OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherFilter } from '@ng-icons/feather-icons';
 import { FilterType } from '../../../../../models/filters/filter.model';
+import { BreakpointService } from '../../../../../services/breakpoint.service';
 import { FilterService } from '../../../../../services/search/filter.service';
+import { UiService } from '../../../../../services/ui/ui.service';
 
 @Component({
   selector: '[app-filter-button]',
@@ -11,7 +13,11 @@ import { FilterService } from '../../../../../services/search/filter.service';
   templateUrl: './filter-button.component.html',
 })
 export class FilterButtonComponent implements OnInit {
-  constructor(private filters: FilterService) {}
+  constructor(
+    private filters: FilterService,
+    public ui: UiService,
+    private breakpoint: BreakpointService,
+  ) {}
 
   ngOnInit() {}
 
@@ -31,7 +37,11 @@ export class FilterButtonComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    (document.getElementById('filter-modal') as any).showModal();
+    if (this.breakpoint.isBreakpointOrLarger('lg')) {
+      this.ui.filterDrawerExpanded = !this.ui.filterDrawerExpanded;
+    } else {
+      document.getElementById('filter-drawer-checkbox')?.click();
+    }
   }
 
   protected readonly featherFilter = featherFilter;
