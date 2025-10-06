@@ -26,13 +26,13 @@
       type="text"
       id="search-input"
       class="grow min-w-0"
-      [placeholder]="'search-interface.search-placeholder' | translate"
+      [placeholder]="'search-interface.search-placeholder-short' | translate"
       value="{{ search.queryStr }}"
       [(ngModel)]="searchInput"
       (keyup.enter)="onSearch()"
       (ngModelChange)="onSearchInputChange()"
       tabindex="0"
-      [attr.aria-label]="'search-interface.search-placeholder' | translate"
+      [attr.aria-label]="'search-interface.search-placeholder-full' | translate"
     />
 
     <button
