@@ -21,8 +21,9 @@
   },
   "search-interface": {
     "search": "Search",
+    "search-e-depot-razu": "Search in E-depot RAZU",
     "searching": "Searching",
-    "search-placeholder": "Search",
+    "search-placeholder": "Search in E-depot RAZU, e.g. 'Beleidsstuk'",
     "no-results-found": "No results found",
     "results": "results",
     "show-details": "Show details",
