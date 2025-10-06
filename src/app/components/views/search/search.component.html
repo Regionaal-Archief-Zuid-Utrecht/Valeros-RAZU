@@ -1,14 +1,14 @@
 <app-view-container>
   <app-lang-switch class="absolute top-1 right-4" />
 
-  <app-header />
+  <app-header class="hidden lg:block" />
 
   <div class="flex-grow-0 p-4 pb-2">
     <div class="flex items-center gap-4 w-full">
       <!-- TODO: Add ARIA label -->
       <button
         (click)="onHomeClicked()"
-        class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
+        class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md lg:hidden"
       >
         <img src="assets/img/logo.svg" alt="Logo" class="h-8" />
       </button>
