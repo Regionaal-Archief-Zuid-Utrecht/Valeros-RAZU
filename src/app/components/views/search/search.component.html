@@ -4,7 +4,21 @@
   <app-header />
 
   <div class="flex-grow-0 p-4 pb-2">
-    <app-search-input />
+    <div class="flex items-center gap-4 w-full">
+      <!-- TODO: Add ARIA label -->
+      <button
+        (click)="onHomeClicked()"
+        class="bg-neutral py-3 px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
+      >
+        <img src="assets/img/logo.svg" alt="Logo" class="h-8" />
+      </button>
+
+      <!-- <button (click)="onHomeClicked()">
+        <img src="assets/img/logo_black.svg" alt="Logo" class="h-8" />
+      </button> -->
+
+      <app-search-input class="flex-grow" />
+    </div>
 
     <app-search-buttons-toolbar />
 
