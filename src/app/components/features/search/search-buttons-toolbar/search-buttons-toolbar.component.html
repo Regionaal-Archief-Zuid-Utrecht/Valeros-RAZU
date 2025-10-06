@@ -1,0 +1,12 @@
+<div class="w-full">
+  <ul class="menu menu-horizontal gap-2 rounded-box mr-8">
+    <!-- TODO: Add ARIA labels  -->
+    <li>
+      <button type="button" (click)="onHomeClicked()">
+        <ng-icon [svg]="featherHome" />
+      </button>
+    </li>
+  </ul>
+
+  <app-view-mode-select *ngIf="Settings.ui.showViewModeSelect" />
+</div>

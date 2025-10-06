@@ -31,8 +31,6 @@ export class ColofonComponent implements OnInit {
   async ngOnInit() {}
 
   async onButtonClicked(url: string) {
-    this.url.ignoreQueryParamChange = true;
-    await this.router.navigateByUrl(url);
-    this.url.ignoreQueryParamChange = false;
+    await this.url.navigateByUrlIgnoringQueryParamChange(url);
   }
 }

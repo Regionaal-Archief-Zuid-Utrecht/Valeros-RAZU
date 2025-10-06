@@ -145,4 +145,10 @@ export class UrlService {
     }
     return null;
   }
+
+  async navigateByUrlIgnoringQueryParamChange(url: string) {
+    this.ignoreQueryParamChange = true;
+    await this.router.navigateByUrl(url);
+    this.ignoreQueryParamChange = false;
+  }
 }
