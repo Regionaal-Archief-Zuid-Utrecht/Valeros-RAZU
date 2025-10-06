@@ -8,7 +8,6 @@
   aria-labelledby="filter-group"
   aria-label="Filters"
 >
-  <!-- Collapsible Parent Section -->
   <div class="w-full">
     <div class="flex justify-between items-center px-4 py-2">
       <h2 class="text-xl font-bold">
@@ -42,39 +41,9 @@
             {{ "search-interface.clear_filters" | translate }}
           </span>
         </button>
-        <!-- Collapse Arrow -->
-        <button
-          (click)="uix.filterGroupExpanded = !uix.filterGroupExpanded"
-          aria-label="Toggle filter group"
-          role="region"
-          aria-labelledby="filter-group"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 transform transition-transform"
-            [ngClass]="{ 'rotate-180': uix.filterGroupExpanded }"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            role="region"
-            aria-labelledby="filter-group"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </button>
       </div>
     </div>
-    <div
-      class="transition-all overflow-hidden overflow-y-auto"
-      [ngClass]="
-        uix.filterGroupExpanded ? 'max-h-96 lg:max-h-[100vh]' : 'max-h-0'
-      "
-    >
+    <div class="transition-all overflow-hidden overflow-y-auto">
       <!-- Existing Filters Logic -->
       <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
         <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
