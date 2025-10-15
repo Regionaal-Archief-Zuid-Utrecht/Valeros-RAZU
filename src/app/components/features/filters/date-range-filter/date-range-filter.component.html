@@ -1,0 +1,27 @@
+<div class="flex flex-col gap-3 bg-white text-black" *ngIf="minDay() !== null && maxDay() !== null; else noData">
+  <div class="flex items-center justify-between text-sm text-gray-600">
+    <span>{{ fromLabel }}</span>
+    <span aria-live="polite">{{ fromDateStr() }}</span>
+  </div>
+  <input type="range" class="range range-xs" [min]="minDay()!" [max]="maxDay()!" [step]="1"
+    [value]="fromDay() ?? minDay()!" (input)="onFromSliderChange($any($event.target).value)"
+    aria-label="From date slider" />
+
+  <div class="flex items-center justify-between text-sm text-gray-600">
+    <span>{{ untilLabel }}</span>
+    <span aria-live="polite">{{ untilDateStr() }}</span>
+  </div>
+  <input type="range" class="range range-xs" [min]="(fromDay() ?? minDay()!)" [max]="maxDay()!" [step]="1"
+    [value]="untilDay() ?? maxDay()!" (input)="onUntilSliderChange($any($event.target).value)"
+    aria-label="Until date slider" />
+
+  <div class="flex items-center justify-between text-xs text-gray-500">
+    <span>{{ minDateStr() }}</span>
+    <button class="btn btn-xs" type="button" (click)="clear()">Reset</button>
+    <span>{{ maxDateStr() }}</span>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="text-sm text-gray-500">No date values available</div>
+</ng-template>

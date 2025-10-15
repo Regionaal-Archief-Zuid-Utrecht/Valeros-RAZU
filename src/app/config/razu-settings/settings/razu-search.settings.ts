@@ -5,6 +5,8 @@ import { razuAutocompleteSettings } from './razu-autocomplete.settings';
 export const razuSearchSettings: SearchSettings = {
   ...searchSettings,
   autocomplete: razuAutocompleteSettings,
+  // Increase to reduce truncation of filter option buckets (years, etc.)
+  elasticFilterTopHitsMax: 2000,
   preventReplacingPeriodWithSpaceForElasticSuffixes: [
     '.keyword',
     '.text',

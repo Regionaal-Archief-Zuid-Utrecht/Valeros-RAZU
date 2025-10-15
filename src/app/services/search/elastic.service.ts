@@ -182,6 +182,44 @@ export class ElasticService {
     return await this.searchEndpoints(queryData);
   }
 
+  // Retrieve min/max bounds for a date field (e.g., 'document_day')
+  async getDateRangeBounds(
+    query: string,
+    fieldId: string,
+    activeFilters: FilterModel[],
+  ): Promise<{ min?: string; max?: string }> {
+    const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+    const queryData = this._getNodeSearchQuery(
+      query,
+      activeFilters,
+      0,
+      0,
+    );
+    queryData.size = 0;
+    queryData['_source'] = '';
+    queryData.aggs = {
+      min_date: { min: { field: elasticFieldId, format: 'yyyy-MM-dd' } },
+      max_date: { max: { field: elasticFieldId, format: 'yyyy-MM-dd' } },
+    };
+
+    const responses = await this.searchEndpoints<any>(queryData);
+    // Merge across endpoints: take global min of mins and max of maxes
+    let min: string | undefined = undefined;
+    let max: string | undefined = undefined;
+    for (const res of responses) {
+      const aggs = res.aggregations as any;
+      const resMin = aggs?.min_date?.value_as_string as string | undefined;
+      const resMax = aggs?.max_date?.value_as_string as string | undefined;
+      if (resMin) {
+        if (!min || resMin < min) min = resMin;
+      }
+      if (resMax) {
+        if (!max || resMax > max) max = resMax;
+      }
+    }
+    return { min, max };
+  }
+
   getFieldAndValueFilterQueries(
     filters: FilterModel[],
     boost?: number,
@@ -357,6 +395,25 @@ export class ElasticService {
 
     if (mustQueries && mustQueries.length > 0) {
       queryData.query.bool.must = mustQueries;
+    }
+
+    // Add range filters (e.g., date range on document_day) into bool.filter
+    const rangeFilters = filters.filter(
+      (f) => f.type === FilterType.Range && !!f.fieldId,
+    );
+    const rangeClauses: any[] = [];
+    for (const rf of rangeFilters) {
+      const field = this.data.replacePeriodsWithSpaces(rf.fieldId!);
+      const rangeBody: any = {};
+      if (rf.gte !== undefined) rangeBody.gte = rf.gte;
+      if (rf.lte !== undefined) rangeBody.lte = rf.lte;
+      if (Object.keys(rangeBody).length > 0) {
+        rangeClauses.push({ range: { [field]: rangeBody } });
+      }
+    }
+    if (rangeClauses.length > 0) {
+      const existingFilter = queryData.query.bool.filter ?? [];
+      queryData.query.bool.filter = [...existingFilter, ...rangeClauses];
     }
 
     // Hiding filters (e.g., hiding terms)

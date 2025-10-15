@@ -37,6 +37,10 @@ export class FilterService {
   options: BehaviorSubject<FilterOptionsModel> =
     new BehaviorSubject<FilterOptionsModel>(Settings.filtering.filterOptions);
 
+  // Expose min/max bounds for date slider domains (document_day)
+  dateRangeBounds: BehaviorSubject<{ min?: string; max?: string }> =
+    new BehaviorSubject<{ min?: string; max?: string }>({});
+
   constructor(
     public elastic: ElasticService,
     public data: DataService,
@@ -92,7 +96,8 @@ export class FilterService {
     const isUnknownFilterType =
       filter.type !== FilterType.Field &&
       filter.type !== FilterType.Value &&
-      filter.type !== FilterType.FieldAndValue;
+      filter.type !== FilterType.FieldAndValue &&
+      filter.type !== FilterType.Range; // allow Range filters to persist
     if (isUnknownFilterType) {
       console.warn(
         'Unknown filter type, enabled filter not checked against current options',
@@ -116,10 +121,12 @@ export class FilterService {
       filter.type === FilterType.FieldAndValue &&
       fieldExistsInOptions &&
       valueExistsInOptions;
+    const rangeFilterAlwaysPersists = filter.type === FilterType.Range;
     if (
       fieldFilterExistsInOptions ||
       valueFilterExistsInOptions ||
-      fieldAndValueFilterExistsInOptions
+      fieldAndValueFilterExistsInOptions ||
+      rangeFilterAlwaysPersists
     ) {
       filterExistsInOptions = true;
     }
@@ -171,6 +178,19 @@ export class FilterService {
       );
     const docCounts: FieldDocCountsModel =
       this._getFieldDocCountsFromResponses(responses);
+
+    // Also fetch global min/max date bounds for document_day for slider domains
+    try {
+      const bounds = await this.elastic.getDateRangeBounds(
+        query,
+        'document_day',
+        this.enabled.value,
+      );
+      this.dateRangeBounds.next(bounds ?? {});
+    } catch (e) {
+      console.warn('Failed to fetch date range bounds', e);
+      this.dateRangeBounds.next({});
+    }
 
     const filterOptions = this.options.value;
     for (const [_, filter] of Object.entries(filterOptions)) {
@@ -250,6 +270,54 @@ export class FilterService {
 
   toggle(filter: FilterModel) {
     this.toggleMultiple([filter]);
+  }
+
+  // Apply or clear a date range filter on document_day
+  setDateRangeFilter(range: { from?: string; until?: string }) {
+    const fieldId = 'document_day';
+    const filterId = 'documentDay';
+
+    // Check existing range filter for this field
+    const existing = this.enabled.value.find(
+      (f) => f.type === FilterType.Range && f.fieldId === fieldId,
+    );
+    const incomingHas = !!(range?.from || range?.until);
+    const existingHas = !!existing;
+    if (!incomingHas && !existingHas) {
+      // Neither existing nor incoming => no change
+      return;
+    }
+    if (
+      incomingHas &&
+      existingHas &&
+      existing?.gte === range.from &&
+      existing?.lte === range.until
+    ) {
+      // Same bounds => no change
+      return;
+    }
+
+    // Remove existing range filter for this field
+    const updated = this.enabled.value.filter(
+      (f) => !(f.type === FilterType.Range && f.fieldId === fieldId),
+    );
+
+    // Add new one if bounds provided
+    const hasFrom = !!range?.from;
+    const hasUntil = !!range?.until;
+    if (hasFrom || hasUntil) {
+      updated.push({
+        type: FilterType.Range,
+        fieldId,
+        filterId,
+        gte: range.from,
+        lte: range.until,
+      });
+    }
+
+    this.enabled.next(updated);
+    // Trigger a search with filters (do not clear)
+    this.searchTrigger.emit({ clearFilters: false });
   }
 
   has(valueIds: string[], type: FilterType): boolean {
