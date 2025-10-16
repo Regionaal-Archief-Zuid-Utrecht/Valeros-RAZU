@@ -65,12 +65,14 @@
     </button>
   </label>
 
-  <ul class="menu menu-horizontal rounded-box p-0 my-auto">
-    <!-- TODO: Add ARIA labels  -->
-    <li>
-      <button type="button" app-filter-button class="ml-2 md:hidden"></button>
-    </li>
-  </ul>
+  @if (router.url.startsWith("/search")) {
+    <ul class="menu menu-horizontal rounded-box p-0 my-auto">
+      <!-- TODO: Add ARIA labels  -->
+      <li>
+        <button type="button" app-filter-button class="ml-2 md:hidden"></button>
+      </li>
+    </ul>
+  }
 
   <ul
     tabindex="0"
