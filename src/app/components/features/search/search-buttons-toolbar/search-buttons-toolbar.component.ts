@@ -2,6 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherHome } from '@ng-icons/feather-icons';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../config/settings';
 import { BreakpointService } from '../../../../services/breakpoint.service';
 import { UiService } from '../../../../services/ui/ui.service';
@@ -17,6 +18,7 @@ import { FilterButtonComponent } from './filter-button/filter-button.component';
     NgClass,
     NgIcon,
     FilterButtonComponent,
+    TranslatePipe,
   ],
   templateUrl: './search-buttons-toolbar.component.html',
 })

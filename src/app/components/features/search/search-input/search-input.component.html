@@ -67,9 +67,14 @@
 
   @if (router.url.startsWith("/search")) {
     <ul class="menu menu-horizontal rounded-box p-0 my-auto">
-      <!-- TODO: Add ARIA labels  -->
+      <!-- TODO: Add ARIA expanded state  -->
       <li>
-        <button type="button" app-filter-button class="ml-2 md:hidden"></button>
+        <button
+          type="button"
+          app-filter-button
+          class="ml-2 md:hidden"
+          [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+        ></button>
       </li>
     </ul>
   }

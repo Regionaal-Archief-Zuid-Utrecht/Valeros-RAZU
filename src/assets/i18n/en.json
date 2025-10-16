@@ -39,7 +39,8 @@
     "filters_title": "Filters",
     "filters_active_singular": "active",
     "filters_active_plural": "active",
-    "clear_filters": "Clear filters"
+    "clear_filters": "Clear filters",
+    "toggle-filter-panel": "Toggle filter panel"
   },
   "records-interface": {
     "pointer-to": "pointer to",
