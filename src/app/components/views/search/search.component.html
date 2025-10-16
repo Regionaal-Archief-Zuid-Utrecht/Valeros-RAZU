@@ -72,17 +72,15 @@
       </div>
 
       <div *ngIf="!details.showing.value" class="overflow-hidden">
-        <app-nodes-grid
-          [nodes]="search.results.value.nodes"
-          *ngIf="viewModes.current.value === ViewMode.Grid"
-          class="w-full"
-        />
+        @if (viewModes.current.value === ViewMode.Grid) {
+          <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
+        }
 
-        <ng-container *ngIf="viewModes.current.value === ViewMode.List">
-          <ng-container *ngFor="let node of search.results.value?.nodes">
+        @if (viewModes.current.value === ViewMode.List) {
+          @for (node of search.results.value.nodes; track $index) {
             <app-node [node]="node"></app-node>
-          </ng-container>
-        </ng-container>
+          }
+        }
       </div>
 
       <app-load-more-search-results-button *ngIf="!details.showing.value" />

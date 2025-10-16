@@ -32,6 +32,7 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
+import { BreakpointService } from '../../../services/breakpoint.service';
 
 @Component({
   selector: 'app-search',
@@ -70,6 +71,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public details: DetailsService,
     public settings: SettingsService,
     private url: UrlService,
+    public breakpoint: BreakpointService
   ) {}
 
   ngOnInit() {}

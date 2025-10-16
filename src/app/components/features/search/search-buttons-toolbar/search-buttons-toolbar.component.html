@@ -6,5 +6,9 @@
     </li>
   </ul>
 
-  <app-view-mode-select *ngIf="Settings.ui.showViewModeSelect" />
+  @if (
+    Settings.ui.showViewModeSelect && breakpoint.isBreakpointOrLarger("md")
+  ) {
+    <app-view-mode-select />
+  }
 </div>
