@@ -55,6 +55,7 @@
           >
             <input
               type="checkbox"
+              role="button"
               name="filter-accordion"
               [(ngModel)]="ui.accordionExpandedStates[filterId]"
               [id]="'Filter by ' + filters.getOptionById(filterId).label"
