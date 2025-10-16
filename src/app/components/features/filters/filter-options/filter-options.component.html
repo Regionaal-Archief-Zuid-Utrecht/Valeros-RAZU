@@ -18,7 +18,7 @@
           *ngIf="filters.enabled.value.length > 0"
           class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
           (click)="clearFilters()"
-          aria-label="Clear filters"
+          [attr.aria-label]="'search-interface.clear_filters' | translate"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +49,9 @@
         <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
           <div
             class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
+            [attr.aria-label]="
+              'Filter op: ' + filters.getOptionById(filterId).label
+            "
           >
             <input
               type="checkbox"
