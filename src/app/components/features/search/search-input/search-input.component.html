@@ -13,7 +13,7 @@
   aria-label="Zoeken"
 >
   <label
-    class="flex input input-bordered items-center gap-2 rounded-full w-full shadow hover:shadow-lg transition-shadow"
+    class="flex input input-bordered items-center gap-2 rounded-full w-full min-w-0 shadow hover:shadow-lg transition-shadow"
     for="search-input"
   >
     <!-- <img
@@ -64,6 +64,13 @@
       }}</span>
     </button>
   </label>
+
+  <ul class="menu menu-horizontal rounded-box p-0 my-auto">
+    <!-- TODO: Add ARIA labels  -->
+    <li>
+      <button type="button" app-filter-button class="ml-2 md:hidden"></button>
+    </li>
+  </ul>
 
   <ul
     tabindex="0"
