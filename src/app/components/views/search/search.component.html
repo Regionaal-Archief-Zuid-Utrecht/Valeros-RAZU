@@ -3,7 +3,7 @@
 
   <app-header class="hidden lg:block" />
 
-  <div class="flex-grow-0 p-4 pb-2">
+  <div class="flex-grow-0 p-2 sm:p-4 sm:pb-2">
     <div class="flex items-center gap-4 w-full">
       <!-- TODO: Add ARIA label -->
       <button
@@ -57,7 +57,7 @@
     </div>
 
     <div
-      class="p-4 pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
+      class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
       [ngClass]="[settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '']"
       #scrollContainer
     >
