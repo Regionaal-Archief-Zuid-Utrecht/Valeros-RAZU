@@ -9,8 +9,10 @@
       [checked]="filterService.has(value.ids, FilterType.FieldAndValue)"
       (click)="onFilterToggle(value.ids)"
       [id]="'filter-' + value.ids[0]"
+      [attr.aria-labelledby]="getFilterLabelId(value)"
     />
     <app-node-link
+      [id]="getFilterLabelId(value)"
       [disabled]="true"
       [label]="value.label"
       [url]="!value.label ? value.ids[0] : undefined"
