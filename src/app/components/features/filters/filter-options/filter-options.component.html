@@ -58,6 +58,7 @@
               name="filter-accordion"
               [(ngModel)]="ui.accordionExpandedStates[filterId]"
               [id]="'Filter by ' + filters.getOptionById(filterId).label"
+              [attr.aria-expanded]="ui.accordionExpandedStates[filterId]"
             />
             <div class="collapse-title">
               <label
