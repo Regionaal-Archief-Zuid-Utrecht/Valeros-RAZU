@@ -54,7 +54,7 @@ export class SearchHitsService {
   ): estypes.SearchHit<ElasticNodeModel>[] {
     // First create a map of hits by their ID to merge duplicates
     const hitsMap = new Map<string, estypes.SearchHit<ElasticNodeModel>>();
-
+    console.log(searchResponses);
     searchResponses.forEach((searchResponse) => {
       const hits = searchResponse?.hits?.hits ?? [];
       hits.forEach((hit) => {

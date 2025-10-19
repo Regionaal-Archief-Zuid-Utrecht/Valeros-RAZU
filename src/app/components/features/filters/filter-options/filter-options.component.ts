@@ -10,6 +10,7 @@ import { UiService } from '../../../../services/ui/ui.service';
 import { EndpointsComponent } from '../endpoints/endpoints.component';
 import { FilterCountComponent } from './filter-count/filter-count.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
+import { DateRangeFilterComponent } from '../date-range-filter/date-range-filter.component';
 
 @Component({
   selector: 'app-filter-options',
@@ -17,6 +18,7 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     NgIf,
     NgForOf,
     FilterOptionComponent,
+    DateRangeFilterComponent,
     EndpointsComponent,
     FilterCountComponent,
     NgClass,

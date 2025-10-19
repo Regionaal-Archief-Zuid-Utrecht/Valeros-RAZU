@@ -92,7 +92,8 @@ export class FilterService {
     const isUnknownFilterType =
       filter.type !== FilterType.Field &&
       filter.type !== FilterType.Value &&
-      filter.type !== FilterType.FieldAndValue;
+      filter.type !== FilterType.FieldAndValue &&
+      filter.type !== FilterType.DateRange;
     if (isUnknownFilterType) {
       console.warn(
         'Unknown filter type, enabled filter not checked against current options',
@@ -116,10 +117,13 @@ export class FilterService {
       filter.type === FilterType.FieldAndValue &&
       fieldExistsInOptions &&
       valueExistsInOptions;
+    const dateRangeFilterExistsInOptions =
+      filter.type === FilterType.DateRange && fieldExistsInOptions;
     if (
       fieldFilterExistsInOptions ||
       valueFilterExistsInOptions ||
-      fieldAndValueFilterExistsInOptions
+      fieldAndValueFilterExistsInOptions ||
+      dateRangeFilterExistsInOptions
     ) {
       filterExistsInOptions = true;
     }
@@ -128,6 +132,11 @@ export class FilterService {
   }
 
   private _restorePreviousFilters() {
+    // Only attempt restore if we actually cleared filters before
+    if (!this.prevEnabled || this.prevEnabled.length === 0) {
+      return;
+    }
+
     const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) => {
       if (!prevEnabledFilter.filterId) {
         return false;
@@ -147,6 +156,8 @@ export class FilterService {
       );
       this.enabled.next(restoredFilters);
       this.searchTrigger.emit({ clearFilters: false });
+      // Reset prevEnabled to avoid repeated wipes on subsequent options updates
+      this.prevEnabled = [];
     }
   }
 
@@ -156,9 +167,39 @@ export class FilterService {
       filtersParam.slice(0, 100),
       '...',
     );
-    const urlFilters: FilterOptionsIdsModel = JSON.parse(filtersParam);
-    const filters: FilterModel[] =
-      this.data.convertFiltersFromIdsFormat(urlFilters);
+    let parsed: any = {};
+    try {
+      parsed = JSON.parse(filtersParam);
+    } catch (e) {
+      console.warn('Failed to parse filters param');
+      return;
+    }
+
+    let filters: FilterModel[] = [];
+    // Backward compatibility: if old shape, treat as base
+    if (parsed && parsed.base) {
+      const base: FilterOptionsIdsModel = parsed.base;
+      const baseFilters: FilterModel[] =
+        this.data.convertFiltersFromIdsFormat(base);
+      filters = filters.concat(baseFilters);
+
+      const dateRanges: { filterId?: string; fieldId?: string; from?: string; to?: string }[] =
+        parsed.dateRanges || [];
+      dateRanges.forEach((dr) => {
+        if (dr.filterId && dr.fieldId && (dr.from || dr.to)) {
+          filters.push({
+            filterId: dr.filterId,
+            fieldId: dr.fieldId,
+            from: dr.from,
+            to: dr.to,
+            type: FilterType.DateRange,
+          });
+        }
+      });
+    } else {
+      const urlFilters: FilterOptionsIdsModel = parsed;
+      filters = this.data.convertFiltersFromIdsFormat(urlFilters);
+    }
 
     this.enabled.next(filters);
   }
@@ -257,6 +298,18 @@ export class FilterService {
     this.toggleMultiple([filter]);
   }
 
+  setDateRange(filterId: string, fieldId: string, from?: string, to?: string) {
+    const updated = this.enabled.value.filter(
+      (f) => !(f.type === FilterType.DateRange && f.filterId === filterId && f.fieldId === fieldId),
+    );
+    const hasAny = !!(from && from.length) || !!(to && to.length);
+    if (hasAny) {
+      updated.push({ filterId, fieldId, from, to, type: FilterType.DateRange });
+    }
+    this.enabled.next(updated);
+    this.searchTrigger.emit({ clearFilters: false });
+  }
+
   has(valueIds: string[], type: FilterType): boolean {
     // TODO: Reduce calls to this function if needed for performance reasons
     // TODO: Make sure this works with other filter types (e.g. filtering on only Field or only Value)
@@ -277,8 +330,11 @@ export class FilterService {
   }
 
   shouldShow(filterId: string): boolean {
-    const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
     const option: FilterOptionModel = this.getOptionById(filterId);
+    const isDateRange = option.uiType === 'date_range';
+    const hasOptionsToShow = isDateRange
+      ? true
+      : this._getOptionValueIds(filterId).length > 0;
 
     if (!option.showOnlyForSelectedFilters) {
       return hasOptionsToShow;

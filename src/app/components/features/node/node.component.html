@@ -1,40 +1,22 @@
 <div
-  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)]"
-  *ngIf="node"
-  [ngClass]="[
+  class="flex w-full bg-base-100 border mb-4 rounded-box shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)]"
+  *ngIf="node" [ngClass]="[
     (shouldShowSectionNextToTable() | async)
       ? 'p-0 flex flex-col sm:flex-row'
       : 'p-6',
-  ]"
-  [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
-  role="main"
-  aria-labelledby="search-results"
-  [attr.aria-label]="title"
->
+  ]" [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))" role="main" aria-labelledby="search-results"
+  [attr.aria-label]="title">
   <ng-template #fileContainer>
-    <app-file-renderer
-      [urls]="files.value"
-      [shownInTableCell]="false"
-      [isThumb]="!details.showing.value"
-      (hasViewer)="canShowUsingFileRenderer.next($event)"
-      [class.hidden]="!shouldShowFileNextToTable()"
-    />
-    <app-mirador
-      [nodeId]="nodes.getId(node)"
-      [nodeLabel]="labelsCache.labels.value[nodes.getId(node)]"
-      *ngIf="shouldShowIIIF$ | async"
-    ></app-mirador>
+    <app-file-renderer [urls]="files.value" [shownInTableCell]="false" [isThumb]="!details.showing.value"
+      (hasViewer)="canShowUsingFileRenderer.next($event)" [class.hidden]="!shouldShowFileNextToTable()" />
+    <app-mirador [nodeId]="nodes.getId(node)" [nodeLabel]="labelsCache.labels.value[nodes.getId(node)]"
+      *ngIf="shouldShowIIIF$ | async"></app-mirador>
   </ng-template>
 
-  <div
-    class="h-72 sm:h-auto"
-    [ngClass]="[
+  <div class="h-72 sm:h-auto" [ngClass]="[
       'cursor-default',
       (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden',
-    ]"
-    [style.width]="sectionNextToTableWidth"
-    [style.min-width]="sectionNextToTableWidth"
-  >
+    ]" [style.width]="sectionNextToTableWidth" [style.min-width]="sectionNextToTableWidth">
     <!-- Thumb on search page (left side of node) -->
     <ng-container *ngIf="!details.showing.value; else justContent">
       <a [routerLink]="details.getLink(node)" queryParamsHandling="merge">
@@ -49,34 +31,20 @@
   </div>
 
   <!-- Node info table on search page -->
-  <a
-    [routerLink]="details.getLink(node)"
-    queryParamsHandling="merge"
-    *ngIf="!details.showing.value"
-    class="w-full"
-  >
-    <div
-      [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
-      class="flex-grow relative"
-    >
+  <a [routerLink]="details.getLink(node)" queryParamsHandling="merge" *ngIf="!details.showing.value" class="w-full">
+    <div [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'" class="flex-grow relative">
       <div class="text-lg mr-6 font-bold" *ngIf="showTitle" aria-hidden="true">
         <app-node-label [label]="title" [tag]="'h3'" />
         <!-- <app-node-link [url]="details.getLink(node)" [label]="title" [] /> -->
       </div>
 
       <div class="w-full sm:px-4 sm:pr-32">
-        <app-node-table-row
-          [label]="'records-interface.part-of' | translate"
-          *ngIf="showParents && parents.length > 0"
-        >
+        <app-node-table-row [label]="'records-interface.part-of' | translate" *ngIf="showParents && parents.length > 0">
           <app-node-hierarchy [nodes]="parents" />
         </app-node-table-row>
 
         <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
-        <app-node-table-row
-          [label]="'records-interface.type' | translate"
-          *ngIf="showTypes && types.length > 0"
-        >
+        <app-node-table-row [label]="'records-interface.type' | translate" *ngIf="showTypes && types.length > 0">
           <app-node-types [types]="types" />
         </app-node-table-row>
       </div>
@@ -85,56 +53,33 @@
         <app-node-renderer [node]="node" />
       </div>
 
-      <app-snippet
-        *ngIf="showSnippet"
-        [altoUrl]="node?.['URL_bestand']?.[0]?.value"
-        class="text-sm sm:pr-32"
-      />
+      <app-snippet *ngIf="showSnippet" [altoUrl]="node?.['URL_bestand']?.[0]?.value" class="text-sm sm:pr-32" />
 
-      <div
-        class="absolute"
-        [ngClass]="[
+      <div class="absolute" [ngClass]="[
           shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
-        ]"
-      >
+        ]">
         <app-node-details-button [node]="node" *ngIf="showDetailsButton" />
       </div>
     </div>
   </a>
 
   <!-- Details page node table -->
-  <div
-    [ngClass]="(shouldShowSectionNextToTable() | async) ? 'p-6' : 'p-0'"
-    class="flex-grow relative"
-    *ngIf="details.showing.value"
-  >
+  <div [ngClass]="(shouldShowSectionNextToTable() | async) ? 'p-6' : 'p-0'" class="flex-grow relative"
+    *ngIf="details.showing.value">
     <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
-      <app-node-link
-        [url]="details.getLink(node)"
-        [label]="title"
-        [tag]="'h1'"
-      />
+      <app-node-link [url]="details.getLink(node)" [label]="title" [tag]="'h1'" />
     </div>
 
     <div class="w-full sm:px-4 sm:pr-32">
-      <app-node-table-row
-        [label]="'records-interface.part-of' | translate"
-        *ngIf="showParents && parents.length > 0"
-      >
+      <app-node-table-row [label]="'records-interface.part-of' | translate" *ngIf="showParents && parents.length > 0">
         <app-node-hierarchy [nodes]="parents" />
       </app-node-table-row>
 
       <!-- TODO: Check if there any clustered types to show here (especially if only showing clustered types) -->
-      <app-node-table-row
-        [label]="'records-interface.type' | translate"
-        *ngIf="showTypes && types.length > 0"
-      >
+      <app-node-table-row [label]="'records-interface.type' | translate" *ngIf="showTypes && types.length > 0">
         <app-node-types [types]="types" />
       </app-node-table-row>
-      <app-node-table-row
-        [label]="'records-interface.organization' | translate"
-        *ngIf="showOrganization"
-      >
+      <app-node-table-row [label]="'records-interface.organization' | translate" *ngIf="showOrganization">
         <app-node-endpoint [endpointId]="nodes.getEndpointId(node)" />
       </app-node-table-row>
     </div>
@@ -147,11 +92,8 @@
       <app-node-permalink-button *ngIf="showPermalinkButton" [node]="node" />
     </div>
 
-    <div
-      class="absolute"
-      [ngClass]="[
+    <div class="absolute" [ngClass]="[
         shouldShowFileNextToTable() ? 'right-6 bottom-6' : 'right-0 bottom-0',
-      ]"
-    ></div>
+      ]"></div>
   </div>
 </div>

@@ -28,6 +28,7 @@ export interface FilterOptionModel {
   showOnlyValueIds?: string[];
   showOnlyForSelectedFilters?: FilterOptionsIdsModel;
   sort?: FilterOptionSortModel;
+  uiType?: 'checkbox' | 'date_range';
 }
 
 export interface FilterOptionValueModel {

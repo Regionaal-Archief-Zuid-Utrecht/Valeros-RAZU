@@ -1,7 +1,4 @@
-<div
-  class="drawer"
-  [ngClass]="{ 'lg:drawer-open': ui.filterDrawerExpanded && isSearchPage() }"
->
+<div class="drawer" [ngClass]="{ 'lg:drawer-open': ui.filterDrawerExpanded && isSearchPage() }">
   <input type="checkbox" class="drawer-toggle" id="filter-drawer-checkbox" />
 
   <div class="drawer-content">
@@ -9,15 +6,9 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div class="drawer-side z-[99999]">
-    <label
-      for="filter-drawer-checkbox"
-      aria-label="Sluit filter menu"
-      class="drawer-overlay"
-    ></label>
-    <div
-      class="menu bg-base-200 text-base-content min-h-full w-80 p-4 max-w-[90%]"
-    >
+  <div class="drawer-side z-[99999] shadow-lg transition-shadow duration-200">
+    <label for="filter-drawer-checkbox" aria-label="Sluit filter menu" class="drawer-overlay"></label>
+    <div class="menu bg-base-200 text-base-content min-h-full w-80 p-4 max-w-[90%]">
       <app-filter-options />
     </div>
   </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
 import { Settings } from '../config/settings';
-import { FilterModel } from '../models/filters/filter.model';
+import { FilterModel, FilterType } from '../models/filters/filter.model';
 import { SuraResponse } from '../models/sura-response.model';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
@@ -55,9 +55,21 @@ export class UrlService {
   }
 
   async updateUrlToReflectFilters(filters: FilterModel[]) {
-    const enabledFiltersParam = JSON.stringify(
-      this.data.convertFiltersToIdsFormat(filters),
-    );
+    const baseFilters = this.data.convertFiltersToIdsFormat(filters);
+    const dateRanges = filters
+      .filter((f) => f.type === FilterType.DateRange && f.fieldId)
+      .map((f) => ({
+        filterId: f.filterId,
+        fieldId: f.fieldId,
+        from: f.from,
+        to: f.to,
+      }));
+
+    const combined = {
+      base: baseFilters,
+      dateRanges: dateRanges,
+    };
+    const enabledFiltersParam = JSON.stringify(combined);
 
     console.log(
       'Updating URL to reflect filters',
