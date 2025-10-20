@@ -1,9 +1,9 @@
 <a
-  class="leading-none"
+  class="leading-none hidden sm:inline-block"
   [routerLink]="details.getLink(node)"
   *ngIf="node && !details.showing.value"
 >
-  <span class="mr-1 hidden sm:inline-block hover:underline"
+  <span class="mr-1 hover:underline"
     >{{ "records-interface.show-details" | translate }}
     <ng-icon
       [svg]="featherArrowRight"

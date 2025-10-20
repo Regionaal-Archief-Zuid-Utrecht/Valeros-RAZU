@@ -17,12 +17,15 @@
     "go-to-search": "Go to search",
     "go-to-colofon": "Go to colofon",
     "go-to-homepage": "Go to homepage",
-    "more-info": "More info"
+    "more-info": "More info",
+    "sitemap": "Sitemap"
   },
   "search-interface": {
     "search": "Search",
+    "search-e-depot-razu": "Search in E-depot RAZU",
     "searching": "Searching",
-    "search-placeholder": "Search",
+    "search-placeholder-full": "Search in E-depot RAZU, e.g. 'Beleidsstuk'",
+    "search-placeholder-short": "E.g. 'Beleidsstuk'",
     "no-results-found": "No results found",
     "results": "results",
     "show-details": "Show details",
@@ -36,7 +39,8 @@
     "filters_title": "Filters",
     "filters_active_singular": "active",
     "filters_active_plural": "active",
-    "clear_filters": "Clear filters"
+    "clear_filters": "Clear filters",
+    "toggle-filter-panel": "Toggle filter panel"
   },
   "records-interface": {
     "pointer-to": "pointer to",

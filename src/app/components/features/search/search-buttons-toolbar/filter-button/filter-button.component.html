@@ -1,0 +1,14 @@
+<ng-icon [svg]="featherFilter" />
+<div class="hidden lg:block">
+  @if (!ui.filterDrawerExpanded) {
+    <span>Toon filters</span>
+  } @else {
+    <span>Verberg filters</span>
+  }
+</div>
+<span
+  class="badge badge-warning badge-sm absolute -top-1 -right-1"
+  *ngIf="getNumberOfEnabledFilterOptions() > 0"
+>
+  {{ getNumberOfEnabledFilterOptions() }}
+</span>

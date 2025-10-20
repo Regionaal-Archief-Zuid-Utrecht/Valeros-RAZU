@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -16,7 +16,8 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
     NgClass,
     TranslatePipe,
     NgIcon,
-  ],
+    RouterLink
+],
   templateUrl: './colofon.component.html',
   styleUrl: './colofon.component.scss',
 })
@@ -31,8 +32,6 @@ export class ColofonComponent implements OnInit {
   async ngOnInit() {}
 
   async onButtonClicked(url: string) {
-    this.url.ignoreQueryParamChange = true;
-    await this.router.navigateByUrl(url);
-    this.url.ignoreQueryParamChange = false;
+    await this.url.navigateByUrlIgnoringQueryParamChange(url);
   }
 }

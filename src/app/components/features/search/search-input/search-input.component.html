@@ -13,20 +13,26 @@
   aria-label="Zoeken"
 >
   <label
-    class="flex input input-bordered items-center gap-2 rounded-full w-full shadow hover:shadow-lg transition-shadow"
+    class="flex input input-bordered items-center gap-2 rounded-full w-full min-w-0 shadow hover:shadow-lg transition-shadow"
     for="search-input"
   >
+    <!-- <img
+      alt="Logo"
+      class="h-full py-3 mr-0 opacity-40 fill-black"
+      src="/assets/img/logo_black.svg"
+    /> -->
+
     <input
       type="text"
       id="search-input"
-      class="grow"
-      [placeholder]="'search-interface.search-placeholder' | translate"
+      class="grow min-w-0"
+      [placeholder]="'search-interface.search-placeholder-short' | translate"
       value="{{ search.queryStr }}"
       [(ngModel)]="searchInput"
       (keyup.enter)="onSearch()"
       (ngModelChange)="onSearchInputChange()"
       tabindex="0"
-      [attr.aria-label]="'search-interface.search-placeholder' | translate"
+      [attr.aria-label]="'search-interface.search-placeholder-full' | translate"
     />
 
     <button
@@ -36,7 +42,7 @@
       [attr.aria-label]="
         search.isLoading.value
           ? ('search-interface.searching' | translate)
-          : ('search-interface.search' | translate)
+          : ('search-interface.search-e-depot-razu' | translate)
       "
     >
       <span
@@ -58,6 +64,20 @@
       }}</span>
     </button>
   </label>
+
+  @if (router.url.startsWith("/search")) {
+    <ul class="menu menu-horizontal rounded-box p-0 my-auto">
+      <!-- TODO: Add ARIA expanded state  -->
+      <li>
+        <button
+          type="button"
+          app-filter-button
+          class="ml-2 md:hidden"
+          [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+        ></button>
+      </li>
+    </ul>
+  }
 
   <ul
     tabindex="0"

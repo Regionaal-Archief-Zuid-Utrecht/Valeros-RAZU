@@ -16,10 +16,12 @@ import { NodeService } from '../../../services/node/node.service';
 import { SearchService } from '../../../services/search/search.service';
 import { SettingsService } from '../../../services/settings.service';
 import { ScrollService } from '../../../services/ui/scroll.service';
+import { UrlService } from '../../../services/url.service';
 import { ViewModeService } from '../../../services/view-mode.service';
 import { FilterOptionsComponent } from '../../features/filters/filter-options/filter-options.component';
 import { NodeComponent } from '../../features/node/node.component';
 import { LoadMoreSearchResultsButtonComponent } from '../../features/search/load-more-search-results-button/load-more-search-results-button.component';
+import { SearchButtonsToolbarComponent } from '../../features/search/search-buttons-toolbar/search-buttons-toolbar.component';
 import { SearchHitsCounterComponent } from '../../features/search/search-hits-counter/search-hits-counter.component';
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { SortSelectComponent } from '../../features/sort/sort-select/sort-select.component';
@@ -30,6 +32,7 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
+import { BreakpointService } from '../../../services/breakpoint.service';
 
 @Component({
   selector: 'app-search',
@@ -51,6 +54,7 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
     LangSwitchComponent,
     ViewModeSelectComponent,
     ViewContainerComponent,
+    SearchButtonsToolbarComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -66,12 +70,18 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
+    private url: UrlService,
+    public breakpoint: BreakpointService
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
     this.scroll.initScrollContainer(this.scrollContainer);
+  }
+
+  async onHomeClicked() {
+    await this.url.navigateByUrlIgnoringQueryParamChange('');
   }
 
   protected readonly ViewMode = ViewMode;

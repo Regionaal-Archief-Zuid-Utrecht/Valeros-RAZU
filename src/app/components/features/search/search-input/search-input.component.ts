@@ -18,6 +18,7 @@ import { SearchService } from '../../../../services/search/search.service';
 import { SettingsService } from '../../../../services/settings.service';
 import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
+import { FilterButtonComponent } from '../search-buttons-toolbar/filter-button/filter-button.component';
 
 @Component({
   selector: 'app-search-input',
@@ -27,6 +28,7 @@ import { SearchAutocompleteComponent } from '../search-autocomplete/search-autoc
     SearchAutocompleteComponent,
     TranslatePipe,
     NgIcon,
+    FilterButtonComponent,
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',

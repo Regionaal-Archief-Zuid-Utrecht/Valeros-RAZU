@@ -17,12 +17,15 @@
     "go-to-search": "Ga naar zoeken",
     "go-to-colofon": "Ga naar colofon",
     "go-to-homepage": "Ga naar startpagina",
-    "more-info": "Meer info"
+    "more-info": "Meer info",
+    "sitemap": "Sitemap"
   },
   "search-interface": {
     "search": "Zoek",
+    "search-e-depot-razu": "Zoek in E-depot RAZU",
     "searching": "Zoeken",
-    "search-placeholder": "Bijv. 'Beleidsstuk'",
+    "search-placeholder-full": "Zoek in E-depot RAZU, bijv. 'Beleidsstuk'",
+    "search-placeholder-short": "Bijv. 'Beleidsstuk'",
     "no-results-found": "Geen resultaten gevonden",
     "results": "resultaten",
     "show-details": "Toon details",
@@ -36,7 +39,8 @@
     "filters_title": "Filters",
     "filters_active_singular": "actieve filter",
     "filters_active_plural": "actieve filters",
-    "clear_filters": "Filters wissen"
+    "clear_filters": "Filters wissen",
+    "toggle-filter-panel": "Filterpaneel openen/sluiten"
   },
   "records-interface": {
     "pointer-to": "Verwijzing naar",

@@ -8,13 +8,24 @@
   <span [innerHTML]="'homescreen.flavour-text-part-3' | translate"></span>
 </p>
 
-<div class="mx-auto text-center my-6">
-  <div
-    class="rounded-full bg-black h-6 w-6 text-lg text-white text-center mx-auto"
-  >
-    <span class="relative bottom-[0.15rem]">?</span>
+<div class="flex flex-row gap-6 my-6 justify-center">
+  <div class="flex flex-row items-center gap-2">
+    <div class="rounded-full bg-black h-6 w-6 text-lg text-white text-center">
+      <span class="relative bottom-[0.2rem]">?</span>
+    </div>
+    <button class="underline" (click)="router.navigateByUrl('colofon')">
+      {{ "homescreen.more-info" | translate }}
+    </button>
   </div>
-  <button class="underline" (click)="router.navigateByUrl('colofon')">
-    {{ "homescreen.more-info" | translate }}
-  </button>
+
+  <!-- <div class="flex flex-row items-center gap-2">
+    <div class="rounded-full bg-black h-6 w-6 text-lg text-white text-center">
+      <span class="relative bottom-[0.2rem]">
+        <ng-icon [svg]="faSolidSitemap" [size]="'14px'" class="block"></ng-icon>
+      </span>
+    </div>
+    <button class="underline" (click)="router.navigateByUrl('sitemap')">
+      {{ "homescreen.sitemap" | translate }}
+    </button>
+  </div> -->
 </div>
