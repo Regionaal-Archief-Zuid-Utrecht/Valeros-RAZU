@@ -5,10 +5,10 @@
 
   <div class="flex-grow-0 p-2 sm:p-4 sm:pb-2">
     <div class="flex items-center gap-4 w-full">
-      <!-- TODO: Add ARIA label -->
       <button
         (click)="onHomeClicked()"
         class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md lg:hidden"
+        [attr.aria-label]="'homescreen.go-to-homepage' | translate"
       >
         <img src="assets/img/logo.svg" alt="Logo" class="h-8" />
       </button>

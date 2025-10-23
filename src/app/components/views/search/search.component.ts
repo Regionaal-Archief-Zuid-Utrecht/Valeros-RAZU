@@ -7,10 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { Settings } from '../../../config/settings';
 import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
 import { ViewMode } from '../../../models/view-mode.enum';
+import { BreakpointService } from '../../../services/breakpoint.service';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { SearchService } from '../../../services/search/search.service';
@@ -32,7 +34,6 @@ import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component'
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { BreakpointService } from '../../../services/breakpoint.service';
 
 @Component({
   selector: 'app-search',
@@ -55,6 +56,7 @@ import { BreakpointService } from '../../../services/breakpoint.service';
     ViewModeSelectComponent,
     ViewContainerComponent,
     SearchButtonsToolbarComponent,
+    TranslatePipe,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -71,7 +73,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public details: DetailsService,
     public settings: SettingsService,
     private url: UrlService,
-    public breakpoint: BreakpointService
+    public breakpoint: BreakpointService,
   ) {}
 
   ngOnInit() {}
