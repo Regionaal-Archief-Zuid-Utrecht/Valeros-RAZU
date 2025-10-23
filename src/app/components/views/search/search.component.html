@@ -34,66 +34,37 @@
   <app-details-back-button *ngIf="details.showing.value" class="px-4" />
 
   <div
-    class=""
-    [ngClass]="[
-      settings.showingFilterPanelOnSide()
-        ? 'flex flex-grow overflow-y-hidden flex-col'
-        : '',
-      Settings.filtering.filterPanelLocation == FilterPanelLocation.Left
-        ? 'lg:flex-row'
-        : '',
-      Settings.filtering.filterPanelLocation == FilterPanelLocation.Right
-        ? 'lg:flex-row-reverse'
-        : '',
-    ]"
+    class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth w-full"
+    #scrollContainer
   >
+    <app-details *ngIf="details.showing.value" />
+
     <div
-      class="px-4 pt-2 hidden"
-      *ngIf="Settings.filtering.showFilterPanel"
-      [ngClass]="[
-        details.showing.value ? 'hidden' : '',
-        settings.showingFilterPanelOnSide()
-          ? 'w-full lg:w-1/4 lg:overflow-y-auto'
-          : '',
-      ]"
+      class="flex flex-row -top-2 bg-background z-10 p-2"
+      *ngIf="!details.showing.value"
     >
-      <app-filter-options />
+      <app-search-hits-counter class="w-1/2 lg:w-3/4" />
+      <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
     </div>
 
     <div
-      class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth"
-      [ngClass]="[settings.showingFilterPanelOnSide() ? 'w-full lg:w-3/4' : '']"
-      #scrollContainer
+      *ngIf="!details.showing.value"
+      class="overflow-hidden"
+      role="list"
+      [attr.aria-label]="'accessibility.results-list' | translate"
+      id="search-results"
     >
-      <app-details *ngIf="details.showing.value" />
+      @if (viewModes.current.value === ViewMode.Grid) {
+        <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
+      }
 
-      <div
-        class="flex flex-row -top-2 bg-background z-10 p-2"
-        *ngIf="!details.showing.value"
-      >
-        <app-search-hits-counter class="w-1/2 lg:w-3/4" />
-        <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
-      </div>
-
-      <div
-        *ngIf="!details.showing.value"
-        class="overflow-hidden"
-        role="list"
-        [attr.aria-label]="'accessibility.results-list' | translate"
-        id="search-results"
-      >
-        @if (viewModes.current.value === ViewMode.Grid) {
-          <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
+      @if (viewModes.current.value === ViewMode.List) {
+        @for (node of search.results.value.nodes; track $index) {
+          <app-node [node]="node"></app-node>
         }
-
-        @if (viewModes.current.value === ViewMode.List) {
-          @for (node of search.results.value.nodes; track $index) {
-            <app-node [node]="node"></app-node>
-          }
-        }
-      </div>
-
-      <app-load-more-search-results-button *ngIf="!details.showing.value" />
+      }
     </div>
+
+    <app-load-more-search-results-button *ngIf="!details.showing.value" />
   </div>
 </app-view-container>
