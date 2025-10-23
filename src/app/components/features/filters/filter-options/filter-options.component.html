@@ -44,8 +44,10 @@
       <!-- Existing Filters Logic -->
       <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
         <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
+          <!-- <div class="divider max-w-32 mt-0 mb-0"></div> -->
+          <!--shadow hover:shadow-lg transition-shadow duration-200 border -->
           <div
-            class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
+            class="collapse collapse-arrow bg-base-200 text-black"
             [attr.aria-label]="
               'Filter op: ' + filters.getOptionById(filterId).label
             "
@@ -61,6 +63,7 @@
             <div class="collapse-title">
               <label
                 [for]="'Filter by ' + filters.getOptionById(filterId).label"
+                class="font-bold underline"
                 >{{ filters.getOptionById(filterId).label }}
               </label>
               <app-filter-count
@@ -73,12 +76,20 @@
               />
             </div>
             <div class="collapse-content flex">
-              <app-filter-option
-                [filterId]="filterId"
-                [values]="filters.getOptionById(filterId).values"
-                [fieldIds]="filters.getOptionById(filterId).fieldIds"
-                class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
-              />
+              @if (filters.getOptionById(filterId).uiType === "date_range") {
+                <app-date-range-filter
+                  [filterId]="filterId"
+                  [fieldId]="filters.getOptionById(filterId).fieldIds[0]"
+                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                />
+              } @else {
+                <app-filter-option
+                  [filterId]="filterId"
+                  [values]="filters.getOptionById(filterId).values"
+                  [fieldIds]="filters.getOptionById(filterId).fieldIds"
+                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                />
+              }
             </div>
           </div>
         </div>

@@ -120,6 +120,8 @@ export class SearchService {
       } else {
         console.log('-- Searching with re-applied filters');
       }
+      // Ensure URL reflects the current enabled filters whenever a filter-triggered search occurs
+      void this.url.updateUrlToReflectFilters(this.filters.enabled.value);
       void this.execute(true, s.clearFilters);
     });
   }

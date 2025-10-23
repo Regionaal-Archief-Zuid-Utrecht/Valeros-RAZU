@@ -123,9 +123,9 @@ export class ElasticService {
     filterOptions: FilterOptionModel[],
     activeFilters: FilterModel[],
   ): Promise<estypes.SearchResponse<any>[]> {
-    const fieldIds: string[] = filterOptions.flatMap(
-      (filterOption) => filterOption.fieldIds,
-    );
+    const fieldIds: string[] = filterOptions
+      .filter((filterOption) => filterOption.uiType !== 'date_range')
+      .flatMap((filterOption) => filterOption.fieldIds);
     const aggs = fieldIds.reduce((result: any, fieldId: string) => {
       const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
 
@@ -340,7 +340,34 @@ export class ElasticService {
     const fieldAndValueFilterQueries =
       this.getFieldAndValueFilterQueries(searchFilters);
 
-    const mustQueries: ElasticShouldQueries[] = [...fieldAndValueFilterQueries];
+    // Date range filters (document_day is keyword/text => use query_string range syntax)
+    const dateRangeFilters = filters.filter(
+      (f) => f.type === FilterType.DateRange && f.fieldId,
+    );
+    const dateRangeMustQueries: any[] = [];
+    dateRangeFilters.forEach((f) => {
+      const fromVal = f.from && f.from.trim().length > 0 ? f.from : '*';
+      const toVal = f.to && f.to.trim().length > 0 ? f.to : '*';
+      const fieldWithDots = f.fieldId as string;
+      const fieldWithSpaces = this.data.replacePeriodsWithSpaces(fieldWithDots);
+      const escapedSpacesField = fieldWithSpaces.replace(/ /g, '\\ ');
+      const qDots = {
+        query_string: {
+          query: `${fieldWithDots}:[${fromVal} TO ${toVal}]`,
+        },
+      };
+      const qSpaces = {
+        query_string: {
+          query: `${escapedSpacesField}:[${fromVal} TO ${toVal}]`,
+        },
+      };
+      dateRangeMustQueries.push({ bool: { should: [qDots, qSpaces] } });
+    });
+
+    const mustQueries: ElasticShouldQueries[] = [
+      ...fieldAndValueFilterQueries,
+      ...(dateRangeMustQueries as any),
+    ];
     if (fieldOrValueFilterQueries && fieldOrValueFilterQueries.length > 0) {
       mustQueries.push({ bool: { should: fieldOrValueFilterQueries } });
     }
@@ -417,5 +444,49 @@ export class ElasticService {
     const queryData = this._getNodeSearchQuery(query, filters, from, size);
 
     return await this.searchEndpoints(queryData);
+  }
+
+  async getKeywordDateMinMax(
+    fieldId: string,
+    query: string,
+    filters: FilterModel[],
+  ): Promise<{ min?: string; max?: string }> {
+    const elasticField = this.data.replacePeriodsWithSpaces(fieldId);
+
+    const baseQuery = this._getNodeSearchQuery(query, filters, 0, 0);
+    baseQuery.size = 0;
+    baseQuery['_source'] = '';
+    baseQuery.aggs = {
+      min_date: {
+        terms: {
+          field: elasticField,
+          size: 1,
+          order: { _key: 'asc' },
+        },
+      },
+      max_date: {
+        terms: {
+          field: elasticField,
+          size: 1,
+          order: { _key: 'desc' },
+        },
+      },
+    };
+
+    const responses = await this.searchEndpoints<any>(baseQuery);
+    // Merge across endpoints: pick global min and max keys lexicographically
+    let min: string | undefined;
+    let max: string | undefined;
+    responses.forEach((res) => {
+      const md = (res.aggregations as any)?.min_date?.buckets?.[0]?.key as
+        | string
+        | undefined;
+      const xd = (res.aggregations as any)?.max_date?.buckets?.[0]?.key as
+        | string
+        | undefined;
+      if (md && (min === undefined || md < min)) min = md;
+      if (xd && (max === undefined || xd > max)) max = xd;
+    });
+    return { min, max };
   }
 }
