@@ -58,14 +58,7 @@
         >
           <span *ngIf="hasBeginDateForId(onderdeelVanId)"
             >Van
-            {{
-              getBeginDate(onderdeelVanId)
-                | date
-                  : "d MMMM
-                        y"
-                  : ""
-                  : "nl"
-            }}
+            {{ getBeginDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl" }}
           </span>
           <span
             *ngIf="
@@ -76,12 +69,7 @@
             tot
           </span>
           <span *ngIf="hasEndDateForId(onderdeelVanId)">{{
-            getEndDate(onderdeelVanId)
-              | date
-                : "d MMMM
-                        y"
-                : ""
-                : "nl"
+            getEndDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl"
           }}</span>
         </div>
         <div
