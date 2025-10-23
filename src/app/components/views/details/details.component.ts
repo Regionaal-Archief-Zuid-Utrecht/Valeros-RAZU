@@ -2,7 +2,6 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { featherArrowLeft } from '@ng-icons/feather-icons';
-import { NodeModel } from '../../../models/node.model';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { RoutingService } from '../../../services/routing.service';

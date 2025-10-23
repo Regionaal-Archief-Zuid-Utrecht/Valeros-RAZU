@@ -16,8 +16,8 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
     NgClass,
     TranslatePipe,
     NgIcon,
-    RouterLink
-],
+    RouterLink,
+  ],
   templateUrl: './colofon.component.html',
   styleUrl: './colofon.component.scss',
 })

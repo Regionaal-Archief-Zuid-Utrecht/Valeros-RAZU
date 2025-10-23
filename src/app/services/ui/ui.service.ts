@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class UiService {
   accordionExpandedStates: { [id: string]: boolean } = {};
-  filterDrawerExpanded = false;
 
   constructor() {}
 

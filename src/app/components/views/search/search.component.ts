@@ -7,10 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { Settings } from '../../../config/settings';
 import { FilterPanelLocation } from '../../../models/settings/filter-panel-location.enum';
 import { ViewMode } from '../../../models/view-mode.enum';
+import { BreakpointService } from '../../../services/breakpoint.service';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { SearchService } from '../../../services/search/search.service';
@@ -26,13 +28,13 @@ import { SearchHitsCounterComponent } from '../../features/search/search-hits-co
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { SortSelectComponent } from '../../features/sort/sort-select/sort-select.component';
 import { ViewModeSelectComponent } from '../../features/view-mode/view-mode-select/view-mode-select.component';
+import { SkipLinksComponent } from '../../accessibility/skip-links/skip-links.component';
 import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
 import { DetailsComponent } from '../details/details.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
-import { BreakpointService } from '../../../services/breakpoint.service';
 
 @Component({
   selector: 'app-search',
@@ -55,6 +57,8 @@ import { BreakpointService } from '../../../services/breakpoint.service';
     ViewModeSelectComponent,
     ViewContainerComponent,
     SearchButtonsToolbarComponent,
+    TranslatePipe,
+    SkipLinksComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -71,7 +75,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     public details: DetailsService,
     public settings: SettingsService,
     private url: UrlService,
-    public breakpoint: BreakpointService
+    public breakpoint: BreakpointService,
   ) {}
 
   ngOnInit() {}

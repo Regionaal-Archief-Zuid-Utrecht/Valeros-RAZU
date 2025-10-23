@@ -5,6 +5,7 @@ import { featherHome } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../config/settings';
 import { BreakpointService } from '../../../../services/breakpoint.service';
+import { FilterDrawerService } from '../../../../services/ui/filter-drawer.service';
 import { UiService } from '../../../../services/ui/ui.service';
 import { UrlService } from '../../../../services/url.service';
 import { ViewModeSelectComponent } from '../../view-mode/view-mode-select/view-mode-select.component';
@@ -27,6 +28,7 @@ export class SearchButtonsToolbarComponent implements OnInit {
     private url: UrlService,
     public ui: UiService,
     public breakpoint: BreakpointService,
+    public filterDrawer: FilterDrawerService,
   ) {}
 
   ngOnInit() {}

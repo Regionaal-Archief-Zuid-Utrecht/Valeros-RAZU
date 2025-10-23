@@ -59,5 +59,18 @@
     "period": "Period",
     "maker": "Maker",
     "title": "Title"
+  },
+  "accessibility": {
+    "skip-to-search": "Skip to search",
+    "skip-to-filters": "Skip to filters",
+    "skip-to-results": "Skip to search results",
+    "search-results-region": "Search results",
+    "results-list": "Results list",
+    "filter-panel": "Filter options",
+    "loading": "Loading..."
+  },
+  "view-mode": {
+    "list-view": "List view",
+    "grid-view": "Grid view"
   }
 }

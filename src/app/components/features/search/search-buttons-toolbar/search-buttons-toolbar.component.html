@@ -1,12 +1,12 @@
 <div class="w-full flex justify-between items-center">
   <ul class="menu menu-horizontal gap-2 rounded-box">
-    <!-- TODO: Add ARIA expanded state  -->
     <li>
       <button
         type="button"
         app-filter-button
         class="relative"
         [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+        [attr.aria-expanded]="filterDrawer.isOpen()"
       ></button>
     </li>
   </ul>

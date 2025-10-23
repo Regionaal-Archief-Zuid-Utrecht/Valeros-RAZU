@@ -486,6 +486,14 @@ export class RazuAfleveringComponent
     }
   }
 
+  onDetailsToggle(event: Event) {
+    const details = event.target as HTMLDetailsElement;
+    const summary = details.querySelector('summary');
+    if (summary) {
+      summary.setAttribute('aria-expanded', details.open.toString());
+    }
+  }
+
   protected readonly featherHelpCircle = featherHelpCircle;
   protected readonly Direction = Direction;
 }
