@@ -19,7 +19,7 @@
   </div>
 
   <!-- Filter drawer -->
-  <div class="drawer-side z-[99999]">
+  <div class="drawer-side z-[99999]" [class.hidden]="!isSearchPage()">
     <label
       for="filter-drawer-checkbox"
       aria-label="Sluit filter menu"
@@ -27,6 +27,7 @@
     ></label>
     <div
       class="menu bg-base-200 text-base-content min-h-full w-80 p-4 max-w-[90%]"
+      [class.hidden]="!isSearchPage()"
       role="complementary"
       [attr.aria-label]="'accessibility.filter-panel' | translate"
       id="filter-panel"
