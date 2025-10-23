@@ -1,7 +1,7 @@
 <div
   class="drawer"
   [ngClass]="{
-    'lg:drawer-open': filterDrawer.desktopExpanded,
+    'lg:drawer-open': filterDrawer.desktopExpanded$.value,
   }"
 >
   <!-- Filter drawer toggle -->

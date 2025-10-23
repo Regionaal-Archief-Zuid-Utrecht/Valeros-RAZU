@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { BreakpointService } from '../breakpoint.service';
 
 @Injectable({
@@ -7,25 +7,25 @@ import { BreakpointService } from '../breakpoint.service';
 })
 export class FilterDrawerService implements OnDestroy {
   // Desktop drawer state (keeps being shown or hidden)
-  desktopExpanded = true;
+  desktopExpanded$ = new BehaviorSubject<boolean>(true);
 
   // Mobile drawer state (overlay drawer controlled by checkbox)
-  mobileIsOpen = false;
+  mobileIsOpen$ = new BehaviorSubject<boolean>(false);
 
-  private breakpointSubscription?: Subscription;
+  private _breakpointSubscription?: Subscription;
 
   constructor(private breakpoint: BreakpointService) {
     this.initBreakpointSync();
   }
 
   ngOnDestroy() {
-    if (this.breakpointSubscription) {
-      this.breakpointSubscription.unsubscribe();
+    if (this._breakpointSubscription) {
+      this._breakpointSubscription.unsubscribe();
     }
   }
 
   private initBreakpointSync() {
-    this.breakpointSubscription = this.breakpoint.breakpoint$.subscribe(() => {
+    this._breakpointSubscription = this.breakpoint.breakpoint$.subscribe(() => {
       if (this.breakpoint.isBreakpointOrLarger('lg')) {
         this.closeFilterDrawerMobile();
       }
@@ -33,11 +33,15 @@ export class FilterDrawerService implements OnDestroy {
   }
 
   toggleFilterDrawerDesktop() {
-    this.desktopExpanded = !this.desktopExpanded;
+    const shouldExpand = !this.desktopExpanded$.value;
+    this.desktopExpanded$.next(shouldExpand);
+    if (shouldExpand) {
+      this.focusFilterPanel();
+    }
   }
 
   toggleFilterDrawerMobile() {
-    this._setFilterDrawerMobileState(!this.mobileIsOpen);
+    this._setFilterDrawerMobileState(!this.mobileIsOpen$.value);
   }
 
   closeFilterDrawerMobile() {
@@ -48,25 +52,47 @@ export class FilterDrawerService implements OnDestroy {
     this._setFilterDrawerMobileState(true);
   }
 
+  open() {
+    if (this.breakpoint.isBreakpointOrLarger('lg')) {
+      this.desktopExpanded$.next(true);
+      this.focusFilterPanel();
+    } else {
+      this._setFilterDrawerMobileState(true);
+    }
+  }
+
   isOpen(): boolean {
     if (this.breakpoint.isBreakpointOrLarger('lg')) {
-      return this.desktopExpanded;
+      return this.desktopExpanded$.value;
     } else {
-      return this.mobileIsOpen;
+      return this.mobileIsOpen$.value;
     }
   }
 
   updateFromCheckbox(checked: boolean) {
-    this.mobileIsOpen = checked;
+    this.mobileIsOpen$.next(checked);
   }
 
   private _setFilterDrawerMobileState(isOpen: boolean) {
-    this.mobileIsOpen = isOpen;
+    this.mobileIsOpen$.next(isOpen);
     const checkbox = document.getElementById(
       'filter-drawer-checkbox',
     ) as HTMLInputElement;
     if (checkbox) {
       checkbox.checked = isOpen;
     }
+    if (isOpen) {
+      this.focusFilterPanel();
+    }
+  }
+
+  focusFilterPanel() {
+    setTimeout(() => {
+      const element = document.getElementById('filter-panel');
+      if (element) {
+        element.setAttribute('tabindex', '-1');
+        element.focus();
+      }
+    }, 100);
   }
 }

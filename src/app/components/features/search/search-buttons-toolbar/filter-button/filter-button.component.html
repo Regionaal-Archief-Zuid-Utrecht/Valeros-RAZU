@@ -1,6 +1,6 @@
 <ng-icon [svg]="featherFilter" />
 <div class="hidden lg:block">
-  @if (!filterDrawer.desktopExpanded) {
+  @if (!filterDrawer.desktopExpanded$.value) {
     <span>Toon filters</span>
   } @else {
     <span>Verberg filters</span>

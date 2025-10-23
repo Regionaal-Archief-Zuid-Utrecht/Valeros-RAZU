@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FilterDrawerService } from '../../../services/ui/filter-drawer.service';
 
 @Component({
   selector: 'app-skip-links',
@@ -8,6 +9,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './skip-links.component.scss',
 })
 export class SkipLinksComponent {
+  private filterDrawer = inject(FilterDrawerService);
+
   skipToSearch() {
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
@@ -17,7 +20,7 @@ export class SkipLinksComponent {
   }
 
   skipToFilters() {
-    this.focusElement('filter-panel');
+    this.filterDrawer.open();
   }
 
   skipToResults() {
