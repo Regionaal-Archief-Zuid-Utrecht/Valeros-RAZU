@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FilterService } from '../../../../services/search/filter.service';
-import { FilterModel, FilterType } from '../../../../models/filters/filter.model';
+import {
+  FilterModel,
+  FilterType,
+} from '../../../../models/filters/filter.model';
 import { ElasticService } from '../../../../services/search/elastic.service';
+import { FilterService } from '../../../../services/search/filter.service';
 import { SearchService } from '../../../../services/search/search.service';
 import { UrlService } from '../../../../services/url.service';
 
@@ -41,7 +44,12 @@ export class DateRangeFilterComponent {
     // Compute min/max for current query and filters (excluding this date-range itself if present)
     const query = this.search.queryStr ?? '';
     const otherFilters: FilterModel[] = this.filters.enabled.value.filter(
-      (f) => !(f.type === FilterType.DateRange && f.filterId === this.filterId && f.fieldId === this.fieldId),
+      (f) =>
+        !(
+          f.type === FilterType.DateRange &&
+          f.filterId === this.filterId &&
+          f.fieldId === this.fieldId
+        ),
     );
     try {
       const { min, max } = await this.elastic.getKeywordDateMinMax(
@@ -74,7 +82,12 @@ export class DateRangeFilterComponent {
   }
 
   clear() {
-    this.filters.setDateRange(this.filterId, this.fieldId, this.frombase, this.tobase);
+    this.filters.setDateRange(
+      this.filterId,
+      this.fieldId,
+      this.frombase,
+      this.tobase,
+    );
     this.from = this.frombase;
     this.to = this.tobase;
   }

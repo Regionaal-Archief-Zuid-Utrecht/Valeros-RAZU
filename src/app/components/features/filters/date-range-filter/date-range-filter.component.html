@@ -1,20 +1,30 @@
 <!-- <div class="flex flex-col gap-2 w-full">
   <div class="flex gap-2 items-end"> -->
 <div class="form-control">
-    <label class="label" for="from-date">
-        <span class="label-text">Van</span>
-    </label>
-    <input id="from-date" class="input input-bordered input-sm" type="date" [(ngModel)]="from" />
+  <label class="label" for="from-date">
+    <span class="label-text">Van</span>
+  </label>
+  <input
+    id="from-date"
+    class="input input-bordered input-sm"
+    type="date"
+    [(ngModel)]="from"
+  />
 </div>
 <div class="form-control">
-    <label class="label" for="to-date">
-        <span class="label-text">Tot</span>
-    </label>
-    <input id="to-date" class="input input-bordered input-sm" type="date" [(ngModel)]="to" />
+  <label class="label" for="to-date">
+    <span class="label-text">Tot</span>
+  </label>
+  <input
+    id="to-date"
+    class="input input-bordered input-sm"
+    type="date"
+    [(ngModel)]="to"
+  />
 </div>
 <div class="flex gap-2 pb-1 mt-2">
-    <button class="btn btn-sm btn-primary" (click)="apply()">Toepassen</button>
-    <button class="btn btn-sm btn-ghost" (click)="clear()">Wissen</button>
+  <button class="btn btn-sm btn-primary" (click)="apply()">Toepassen</button>
+  <button class="btn btn-sm btn-ghost" (click)="clear()">Wissen</button>
 </div>
 <!-- </div>
 </div> -->
