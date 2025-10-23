@@ -4,6 +4,7 @@
     'lg:drawer-open': filterDrawer.desktopExpanded,
   }"
 >
+  <!-- Filter drawer toggle -->
   <input
     type="checkbox"
     class="drawer-toggle"
@@ -11,11 +12,13 @@
     (change)="onFilterDrawerCheckboxChange($event)"
   />
 
+  <!-- Main site content -->
   <div class="drawer-content">
     <app-aria-live />
     <router-outlet></router-outlet>
   </div>
 
+  <!-- Filter drawer -->
   <div class="drawer-side z-[99999]">
     <label
       for="filter-drawer-checkbox"
