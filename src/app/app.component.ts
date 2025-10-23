@@ -54,7 +54,7 @@ export class AppComponent {
 
   onFilterDrawerCheckboxChange(event: Event) {
     const checkbox = event.target as HTMLInputElement;
-    this.filterDrawer.mobileIsOpen = checkbox.checked;
+    this.filterDrawer.updateFromCheckbox(checkbox.checked);
   }
 
   protected readonly featherChevronLeft = featherChevronLeft;
