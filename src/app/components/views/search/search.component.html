@@ -5,13 +5,13 @@
 
   <app-lang-switch class="absolute top-1 right-4" />
 
-  <app-header class="hidden lg:block" />
+  <!-- <app-header class="hidden lg:block" /> -->
 
   <div class="flex-grow-0 p-2 sm:p-4 sm:pb-2">
     <div class="flex items-center gap-4 w-full">
       <button
         (click)="onHomeClicked()"
-        class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md lg:hidden"
+        class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
         [attr.aria-label]="'homescreen.go-to-homepage' | translate"
       >
         <img src="assets/img/logo.svg" alt="Logo" class="h-8" />

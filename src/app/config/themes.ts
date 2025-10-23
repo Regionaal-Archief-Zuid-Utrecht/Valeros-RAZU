@@ -9,9 +9,9 @@ export const developmentTheme: ThemeSettings = {
   secondary: '#6d6d6d',
   background: '#f2f2f2',
   search_background: '#f2f2f2',
-  '--rounded-box': '1rem',
-  '--rounded-btn': '1rem',
-  '--rounded-badge': '1rem',
+  '--rounded-box': '.1rem',
+  '--rounded-btn': '.1rem',
+  '--rounded-badge': '.1rem',
   'primary-content': 'white',
 };
 

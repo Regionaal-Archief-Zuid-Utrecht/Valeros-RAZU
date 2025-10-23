@@ -1,6 +1,10 @@
 <h2
   class="text-xl mb-4 font-bold"
-  [attr.aria-label]="!search.isLoading.value ? numberOfHitsStr : ('accessibility.loading' | translate)"
+  [attr.aria-label]="
+    !search.isLoading.value
+      ? numberOfHitsStr
+      : ('accessibility.loading' | translate)
+  "
 >
   <span *ngIf="search.isLoading.value" class="loading loading-spinner"> </span>
 

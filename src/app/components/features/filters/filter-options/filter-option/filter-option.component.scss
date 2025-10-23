@@ -2,3 +2,7 @@
 :host ::ng-deep app-node-link app-node-label button {
   color: theme("colors.white") !important; // TODO: Set to theme color instead
 }
+
+input[type="checkbox"] {
+  border: 1px solid theme("colors.primary") !important;
+}
