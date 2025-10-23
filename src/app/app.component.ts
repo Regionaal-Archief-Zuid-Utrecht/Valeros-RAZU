@@ -14,7 +14,7 @@ import { AriaLiveComponent } from './components/accessibility/aria-live/aria-liv
 import { FilterOptionsComponent } from './components/features/filters/filter-options/filter-options.component';
 import { PageTitleService } from './services/page-title.service';
 import { RoutingService } from './services/routing.service';
-import { UiService } from './services/ui/ui.service';
+import { FilterDrawerService } from './services/ui/filter-drawer.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +37,7 @@ export class AppComponent {
     private translate: TranslateService,
     private routing: RoutingService,
     private pageTitle: PageTitleService,
-    public ui: UiService,
+    public filterDrawer: FilterDrawerService,
     private router: Router,
   ) {
     this.translate.addLangs(['nl', 'en']);
@@ -50,6 +50,11 @@ export class AppComponent {
   // TODO: Reduce calls if necessary for performance reasons
   isSearchPage() {
     return this.router.url.startsWith('/search');
+  }
+
+  onFilterDrawerCheckboxChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    this.filterDrawer.mobileIsOpen = checkbox.checked;
   }
 
   protected readonly featherChevronLeft = featherChevronLeft;

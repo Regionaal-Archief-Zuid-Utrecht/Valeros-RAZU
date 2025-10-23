@@ -1,8 +1,15 @@
 <div
   class="drawer"
-  [ngClass]="{ 'lg:drawer-open': ui.filterDrawerExpanded && isSearchPage() }"
+  [ngClass]="{
+    'lg:drawer-open': filterDrawer.desktopExpanded,
+  }"
 >
-  <input type="checkbox" class="drawer-toggle" id="filter-drawer-checkbox" />
+  <input
+    type="checkbox"
+    class="drawer-toggle"
+    id="filter-drawer-checkbox"
+    (change)="onFilterDrawerCheckboxChange($event)"
+  />
 
   <div class="drawer-content">
     <app-aria-live />
