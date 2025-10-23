@@ -4,6 +4,7 @@
     [ngClass]="[viewModes.current.value === viewMode ? 'active' : '']"
     (click)="viewModes.current.next(viewMode)"
     [attr.aria-pressed]="viewModes.current.value === viewMode"
+    [attr.aria-label]="getAriaLabel() | translate"
   >
     <ng-icon [svg]="iconSvg" *ngIf="iconSvg" />
   </button>
