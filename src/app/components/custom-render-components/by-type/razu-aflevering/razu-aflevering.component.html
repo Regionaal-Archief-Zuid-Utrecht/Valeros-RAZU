@@ -9,8 +9,8 @@
 
   <!-- For each isOnderdeelVan, show details -->
   <div *ngFor="let onderdeelVanId of onderdeelVanIds" class="related-item">
-    <details>
-      <summary>
+    <details role="group" (toggle)="onDetailsToggle($event)">
+      <summary role="button" tabindex="0">
         <app-hop-link
           [data]="{
             value: onderdeelVanId ?? '',
@@ -22,7 +22,7 @@
         >
         </app-hop-link>
       </summary>
-      <div>
+      <div role="region">
         <!-- dekkingInRuimte -->
         <h5>Uitgebracht in</h5>
         <div>
@@ -127,9 +127,9 @@
 
   <!-- For each beperkingGebruik, show details -->
   <div *ngFor="let beperkingId of beperkingGebruikIds" class="beperking-item">
-    <details>
+    <details role="group" (toggle)="onDetailsToggle($event)">
       <!-- Use prefLabel as summary -->
-      <summary>
+      <summary role="button" tabindex="0">
         <app-hop-link
           [data]="{
             value: beperkingId ?? '',
@@ -145,7 +145,7 @@
         </app-hop-link>
       </summary>
       <!-- Termijn -->
-      <div>
+      <div role="region">
         <div *ngIf="beperkingGebruikTermijnMap.get(beperkingId)?.length">
           <h5>Vervaldatum</h5>
 
