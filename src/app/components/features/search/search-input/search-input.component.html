@@ -36,7 +36,7 @@
     />
 
     <button
-      class="btn btn-primary btn-sm rounded-full text-white shadow-sm hover:shadow transition-shadow"
+      class="btn btn-primary btn-sm rounded-full text-white shadow-sm hover:shadow transition-shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
       [disabled]="search.isLoading.value"
       (click)="onSearch()"
       [attr.aria-label]="
