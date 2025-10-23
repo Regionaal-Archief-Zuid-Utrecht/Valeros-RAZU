@@ -1,5 +1,7 @@
 <app-view-container>
-  <app-skip-links />
+  @if (!details.isShowing()) {
+    <app-skip-links />
+  }
 
   <app-lang-switch class="absolute top-1 right-4" />
 
