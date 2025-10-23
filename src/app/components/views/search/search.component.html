@@ -1,4 +1,6 @@
 <app-view-container>
+  <app-skip-links />
+
   <app-lang-switch class="absolute top-1 right-4" />
 
   <app-header class="hidden lg:block" />
@@ -17,7 +19,7 @@
         <img src="assets/img/logo_black.svg" alt="Logo" class="h-8" />
       </button> -->
 
-      <app-search-input class="flex-grow min-w-0" />
+      <app-search-input class="flex-grow min-w-0" id="search-input" />
     </div>
 
     @if (!details.showing.value) {
@@ -71,7 +73,13 @@
         <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
       </div>
 
-      <div *ngIf="!details.showing.value" class="overflow-hidden">
+      <div
+        *ngIf="!details.showing.value"
+        class="overflow-hidden"
+        role="list"
+        [attr.aria-label]="'accessibility.results-list' | translate"
+        id="search-results"
+      >
         @if (viewModes.current.value === ViewMode.Grid) {
           <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
         }

@@ -7,9 +7,6 @@
       : 'p-6',
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
-  role="main"
-  aria-labelledby="search-results"
-  [attr.aria-label]="title"
 >
   <ng-template #fileContainer>
     <app-file-renderer
@@ -37,7 +34,12 @@
   >
     <!-- Thumb on search page (left side of node) -->
     <ng-container *ngIf="!details.showing.value; else justContent">
-      <a [routerLink]="details.getLink(node)" queryParamsHandling="merge">
+      <a
+        [routerLink]="details.getLink(node)"
+        queryParamsHandling="merge"
+        aria-hidden="true"
+        tabindex="-1"
+      >
         <ng-container *ngTemplateOutlet="fileContainer"></ng-container>
       </a>
     </ng-container>
@@ -54,6 +56,8 @@
     queryParamsHandling="merge"
     *ngIf="!details.showing.value"
     class="w-full"
+    role="listitem"
+    [attr.aria-label]="title"
   >
     <div
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"

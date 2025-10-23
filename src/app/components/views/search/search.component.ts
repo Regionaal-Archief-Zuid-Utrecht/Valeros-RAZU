@@ -28,6 +28,7 @@ import { SearchHitsCounterComponent } from '../../features/search/search-hits-co
 import { SearchInputComponent } from '../../features/search/search-input/search-input.component';
 import { SortSelectComponent } from '../../features/sort/sort-select/sort-select.component';
 import { ViewModeSelectComponent } from '../../features/view-mode/view-mode-select/view-mode-select.component';
+import { SkipLinksComponent } from '../../accessibility/skip-links/skip-links.component';
 import { DetailsBackButtonComponent } from '../../ui/details-back-button/details-back-button.component';
 import { HeaderComponent } from '../../ui/header/header.component';
 import { LangSwitchComponent } from '../../ui/lang-switch/lang-switch.component';
@@ -57,6 +58,7 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
     ViewContainerComponent,
     SearchButtonsToolbarComponent,
     TranslatePipe,
+    SkipLinksComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

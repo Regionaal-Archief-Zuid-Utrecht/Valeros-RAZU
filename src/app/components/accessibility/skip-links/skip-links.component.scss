@@ -1,0 +1,9 @@
+.skip-link {
+  @apply fixed -top-24 left-0;
+  @apply bg-primary text-primary-content;
+  @apply px-4 py-2;
+  @apply border-2 border-primary-content rounded-br;
+  @apply font-semibold whitespace-nowrap cursor-pointer;
+  @apply transition-[top] duration-200;
+  @apply focus:outline focus:outline-2 focus:outline-primary-content focus:outline-offset-2;
+}

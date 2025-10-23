@@ -24,6 +24,9 @@
     ></label>
     <div
       class="menu bg-base-200 text-base-content min-h-full w-80 p-4 max-w-[90%]"
+      role="complementary"
+      [attr.aria-label]="'accessibility.filter-panel' | translate"
+      id="filter-panel"
     >
       <app-filter-options />
     </div>
