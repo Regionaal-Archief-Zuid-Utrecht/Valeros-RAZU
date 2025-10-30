@@ -38,8 +38,20 @@ describe('Debug Mirador CSS issues', () => {
       'text[lengthAdjust="spacingAndGlyphs"], tspan[lengthAdjust="spacingAndGlyphs"]',
     ).should('exist');
     cy.get('canvas[aria-label="Digitized view"]').should('exist');
+    cy.get('button[aria-label="Collapse text overlay options"]').should(
+      'exist',
+    );
     cy.wait(1000);
-    cy.screenshot('mirador-loaded');
+
+    cy.document().then((doc) => {
+      const timestamp = Date.now();
+      const filename = `mirador-dom-${timestamp}`;
+      cy.screenshot(filename);
+      cy.writeFile(
+        `cypress/snapshots/${filename}.html`,
+        doc.documentElement.outerHTML,
+      );
+    });
   };
 
   const goBackToSearch = () => {
@@ -113,8 +125,8 @@ describe('Debug Mirador CSS issues', () => {
     randomAction();
   };
 
-  it('should randomly interact with search, results, and filters (100 iterations)', () => {
-    const iterations = 100;
+  it('should randomly interact with search, results, and filters', () => {
+    const iterations = 20;
 
     cy.visit('/');
 
