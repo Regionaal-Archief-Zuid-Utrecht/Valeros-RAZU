@@ -62,11 +62,11 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         window.clearTimeout(this._initializeDebounceTimer);
       }
 
-      // this._initializeDebounceTimer = window.setTimeout(() => {
-      //   console.log('Initializing viewer after changes', changes);
-      //   this.initViewer();
-      //   this._initializeDebounceTimer = undefined;
-      // }, 100);
+      this._initializeDebounceTimer = window.setTimeout(() => {
+        console.log('Initializing viewer after changes', changes);
+        this.initViewer();
+        this._initializeDebounceTimer = undefined;
+      }, 100);
     }
   }
 
