@@ -8,5 +8,7 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: true,
     defaultCommandTimeout: 15000,
+    viewportWidth: 1920,
+    viewportHeight: 1080,
   },
 });
