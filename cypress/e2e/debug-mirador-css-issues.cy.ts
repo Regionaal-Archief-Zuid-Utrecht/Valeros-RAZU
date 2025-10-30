@@ -51,6 +51,7 @@ describe('Debug Mirador CSS issues', () => {
         `cypress/snapshots/${filename}.html`,
         doc.documentElement.outerHTML,
       );
+      cy.saveConsoleLogs(`cypress/snapshots/${filename}-console.log`);
     });
   };
 
