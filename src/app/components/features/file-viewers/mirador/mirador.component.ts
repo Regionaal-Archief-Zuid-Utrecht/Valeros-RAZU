@@ -15,6 +15,8 @@ import Mirador from 'mirador/dist/es/src/index';
 import { getCanvasIndex,getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
+// @ts-ignore
+import ReactDOM from 'react-dom';
 import { BehaviorSubject } from 'rxjs';
 import { IIIFService } from '../../../../services/iiif.service';
 import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
@@ -29,7 +31,7 @@ import { UrlService } from '../../../../services/url.service';
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
   private _initializeDebounceTimer?: number;
-  containerId: string = `mirador-${Math.random().toString(36).substr(2, 9)}`;
+  containerId: string = '';
 
   private _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
     number | null
@@ -64,10 +66,10 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       }
 
       this._initializeDebounceTimer = window.setTimeout(() => {
-        console.log('Initializing viewer after changes', changes);
+        console.log('Initializing Mirador after changes', changes);
         this.initViewer();
         this._initializeDebounceTimer = undefined;
-      }, 100);
+      }, 500);
     }
   }
 
@@ -82,18 +84,26 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       this._initializeDebounceTimer = undefined;
     }
 
-    if (this._viewer) {
-      this._viewer = undefined;
-    }
-
     const containerElem = document.getElementById(this.containerId);
     if (containerElem) {
+      // Unmount Mirador React component before clearing container
+      try {
+        ReactDOM.unmountComponentAtNode(containerElem);
+      } catch (e) {
+        console.warn('Error unmounting Mirador:', e);
+      }
       containerElem.innerHTML = '';
+    }
+
+    if (this._viewer) {
+      this._viewer = undefined;
     }
   }
 
   private initViewer() {
     this.destroyViewer();
+
+    this.containerId = `mirador-${Math.random().toString(36).substr(2, 9)}`;
 
     const pageNum = this.urlService.getPageNumberFromUrl();
 
