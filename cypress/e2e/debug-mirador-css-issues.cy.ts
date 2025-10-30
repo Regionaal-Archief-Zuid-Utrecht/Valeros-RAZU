@@ -31,7 +31,7 @@ describe('Debug Mirador CSS issues', () => {
   };
 
   const verifyMiradorExists = () => {
-    cy.get('#mirador').should('exist');
+    cy.get('[id^="mirador-"]').should('exist');
     cy.get('.mirador-primary-window').should('exist');
     cy.get('button[aria-label="Full screen"]').should('exist');
     cy.get(

@@ -29,6 +29,7 @@ import { UrlService } from '../../../../services/url.service';
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   private _viewer?: any;
   private _initializeDebounceTimer?: number;
+  containerId: string = `mirador-${Math.random().toString(36).substr(2, 9)}`;
 
   private _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
     number | null
@@ -80,8 +81,14 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       window.clearTimeout(this._initializeDebounceTimer);
       this._initializeDebounceTimer = undefined;
     }
+
     if (this._viewer) {
       this._viewer = undefined;
+    }
+
+    const containerElem = document.getElementById(this.containerId);
+    if (containerElem) {
+      containerElem.innerHTML = '';
     }
   }
 
@@ -101,15 +108,14 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         console.warn('Failed to create manifest, not initializing viewer');
         return;
       }
-      const containerId = 'mirador';
-      const containerElem = document.getElementById(containerId);
+      const containerElem = document.getElementById(this.containerId);
       if (!containerElem) {
-        console.warn('Container element not found', containerId);
+        console.warn('Container element not found', this.containerId);
         return;
       }
 
       const config = {
-        id: 'mirador',
+        id: this.containerId,
         workspace: {
           type: 'single',
           showZoomControls: true,
@@ -144,6 +150,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
         ],
       };
 
+      console.log('Mirador init', this.containerId);
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
       this.initCanvasIndexTracking(miradorInstance);
 
