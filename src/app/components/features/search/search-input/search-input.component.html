@@ -13,7 +13,7 @@
   aria-label="Zoeken"
 >
   <label
-    class="flex input input-bordered items-center gap-2 rounded-box w-full max-w-2xl mx-auto min-w-0 shadow hover:shadow-lg transition-shadow"
+    class="flex input input-bordered items-center gap-2 sm:gap-2 rounded-box w-full max-w-2xl mx-auto min-w-0 shadow hover:shadow-lg transition-shadow"
     for="search-input"
   >
     <!-- <img
@@ -36,7 +36,7 @@
     />
 
     <button
-      class="btn btn-primary btn-sm rounded-full text-white shadow-sm hover:shadow transition-shadow focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+      class="search-input-button btn-primary"
       [disabled]="search.isLoading.value"
       (click)="onSearch()"
       [attr.aria-label]="
@@ -63,6 +63,14 @@
         "search-interface.search" | translate
       }}</span>
     </button>
+
+    <button
+      type="button"
+      class="px-1 sm:px-3 btn btn-sm btn-ghost rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+      [attr.aria-label]="'search-interface.search-tips' | translate"
+    >
+      <ng-icon [svg]="featherInfo" aria-hidden="true" />
+    </button>
   </label>
 
   @if (router.url.startsWith("/search")) {
@@ -71,7 +79,7 @@
         <button
           type="button"
           app-filter-button
-          class="ml-2 md:hidden"
+          class="ml-1 px-2 sm:px-3 md:hidden"
           [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
           [attr.aria-expanded]="filterDrawer.isOpen()"
           aria-controls="filter-drawer-checkbox"

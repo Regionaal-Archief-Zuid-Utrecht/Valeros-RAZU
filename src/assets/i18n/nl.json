@@ -40,7 +40,9 @@
     "filters_active_singular": "actieve filter",
     "filters_active_plural": "actieve filters",
     "clear_filters": "Filters wissen",
-    "toggle-filter-panel": "Filterpaneel openen/sluiten"
+    "toggle-filter-panel": "Filterpaneel openen/sluiten",
+    "search-tips": "Zoektips"
+    
   },
   "records-interface": {
     "pointer-to": "Verwijzing naar",

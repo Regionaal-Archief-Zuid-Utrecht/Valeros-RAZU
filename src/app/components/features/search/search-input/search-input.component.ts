@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
-import { featherAlertTriangle } from '@ng-icons/feather-icons';
+import { featherAlertTriangle, featherInfo } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Settings } from '../../../../config/settings';
@@ -121,4 +121,5 @@ export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected readonly Settings = Settings;
   protected readonly featherAlertTriangle = featherAlertTriangle;
+  protected readonly featherInfo = featherInfo;
 }

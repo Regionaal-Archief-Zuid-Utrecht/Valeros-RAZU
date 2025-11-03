@@ -40,7 +40,8 @@
     "filters_active_singular": "active",
     "filters_active_plural": "active",
     "clear_filters": "Clear filters",
-    "toggle-filter-panel": "Toggle filter panel"
+    "toggle-filter-panel": "Toggle filter panel",
+    "search-tips": "Search tips"
   },
   "records-interface": {
     "pointer-to": "pointer to",
