@@ -161,6 +161,8 @@ export class FilterService {
       this.data.convertFiltersFromIdsFormat(urlFilters);
 
     this.enabled.next(filters);
+
+    this.searchTrigger.emit({ clearFilters: false });
   }
 
   async updateFilterOptionValues(query: string) {
