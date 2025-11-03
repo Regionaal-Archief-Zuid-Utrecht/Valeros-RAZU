@@ -44,6 +44,7 @@
     "clear_filters": "Filters wissen",
     "toggle-filter-panel": "Filterpaneel openen/sluiten",
     "search-tips": "Zoektips",
+    "learn-more": "Meer informatie",
     "tips": {
       "exact-match": {
         "title": "Exacte zoekopdracht",
@@ -59,7 +60,15 @@
       },
       "filters": {
         "title": "Filters gebruiken",
-        "description": "Gebruik de filters aan de zijkant om je resultaten te verfijnen op datum, type, organisatie en meer."
+        "description": "Gebruik de filters aan de zijkant om je resultaten te verfijnen."
+      },
+      "relevance": {
+        "title": "Relevantie sortering",
+        "description": "Zoekresultaten worden automatisch gesorteerd op relevantie met behulp van Elasticsearch. De meest relevante resultaten worden bovenaan getoond."
+      },
+      "ocr": {
+        "title": "OCR tekstherkenning",
+        "description": "Krantentekst is verwerkt met OCR (Optical Character Recognition). Dit stelde ons in staat om een grote collectie doorzoekbaar te maken, maar de tekst kan soms herkenningsfouten bevatten."
       }
     }
     

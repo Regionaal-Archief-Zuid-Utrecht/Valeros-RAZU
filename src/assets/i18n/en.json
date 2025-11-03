@@ -44,6 +44,7 @@
     "clear_filters": "Clear filters",
     "toggle-filter-panel": "Toggle filter panel",
     "search-tips": "Search tips",
+    "learn-more": "Learn more",
     "tips": {
       "exact-match": {
         "title": "Exact Match",
@@ -59,7 +60,15 @@
       },
       "filters": {
         "title": "Using Filters",
-        "description": "Use the filters on the side to refine your results by date, type, organization and more."
+        "description": "Use the filters on the side to refine your results."
+      },
+      "relevance": {
+        "title": "Relevance Sorting",
+        "description": "Search results are automatically sorted by relevance using Elasticsearch. The most relevant results are shown at the top."
+      },
+      "ocr": {
+        "title": "OCR Text Recognition",
+        "description": "Newspaper text was processed with OCR (optical character recognition). This allowed us to make a large collection searchable, but the text may at times contain recognition errors."
       }
     }
   },
