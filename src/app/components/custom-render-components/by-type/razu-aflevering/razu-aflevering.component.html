@@ -10,7 +10,7 @@
   <!-- For each isOnderdeelVan, show details -->
   <div *ngFor="let onderdeelVanId of onderdeelVanIds" class="related-item">
     <details role="group" (toggle)="onDetailsToggle($event)">
-      <summary role="button" tabindex="0">
+      <summary role="heading" aria-level="2" tabindex="0">
         <app-hop-link
           [data]="{
             value: onderdeelVanId ?? '',
@@ -124,7 +124,7 @@
   <div *ngFor="let beperkingId of beperkingGebruikIds" class="beperking-item">
     <details role="group" (toggle)="onDetailsToggle($event)">
       <!-- Use prefLabel as summary -->
-      <summary role="button" tabindex="0">
+      <summary role="heading" aria-level="2" tabindex="0">
         <app-hop-link
           [data]="{
             value: beperkingId ?? '',
@@ -198,7 +198,7 @@
   "
 >
   <details (toggle)="onDownloadToggle($event)">
-    <summary>Downloaden</summary>
+    <summary role="heading" aria-level="2">Downloaden</summary>
     <div *ngIf="repMetaFetching">Downloadlinks aan het ophalen...</div>
     <ol class="list-decimal ml-6" *ngIf="repMetaLoaded">
       <ng-container
