@@ -6,7 +6,9 @@
     "page-title": "RAZU - Digitaal archief van Zuid-Utrecht",
     "colofon-title": "RAZU - Colofon",
     "and": "en",
-    "back": "Terug"
+    "back": "Terug",
+    "close": "Sluiten",
+    "example": "Voorbeeld"
   },
   "homescreen": {
     "flavour-text-part-1": "Hier kunt u zoeken in de gecombineerde archieven van de gemeenten van",
@@ -41,7 +43,25 @@
     "filters_active_plural": "actieve filters",
     "clear_filters": "Filters wissen",
     "toggle-filter-panel": "Filterpaneel openen/sluiten",
-    "search-tips": "Zoektips"
+    "search-tips": "Zoektips",
+    "tips": {
+      "exact-match": {
+        "title": "Exacte zoekopdracht",
+        "description": "Gebruik aanhalingstekens om een exacte zin of woordcombinatie te zoeken."
+      },
+      "wildcard": {
+        "title": "Wildcard zoeken",
+        "description": "Gebruik een asterisk (*) om meerdere karakters te vervangen in een woord."
+      },
+      "boolean": {
+        "title": "Boolean operatoren",
+        "description": "Gebruik AND, OR en NOT om je zoekopdracht te verfijnen."
+      },
+      "filters": {
+        "title": "Filters gebruiken",
+        "description": "Gebruik de filters aan de zijkant om je resultaten te verfijnen op datum, type, organisatie en meer."
+      }
+    }
     
   },
   "records-interface": {

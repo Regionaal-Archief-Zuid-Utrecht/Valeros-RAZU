@@ -64,13 +64,7 @@
       }}</span>
     </button>
 
-    <button
-      type="button"
-      class="px-1 sm:px-3 btn btn-sm btn-ghost rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-      [attr.aria-label]="'search-interface.search-tips' | translate"
-    >
-      <ng-icon [svg]="featherInfo" aria-hidden="true" />
-    </button>
+    <app-search-tips />
   </label>
 
   @if (router.url.startsWith("/search")) {

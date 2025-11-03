@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
-import { featherAlertTriangle, featherInfo } from '@ng-icons/feather-icons';
+import { featherAlertTriangle } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Settings } from '../../../../config/settings';
@@ -20,6 +20,7 @@ import { FilterDrawerService } from '../../../../services/ui/filter-drawer.servi
 import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
 import { FilterButtonComponent } from '../search-buttons-toolbar/filter-button/filter-button.component';
+import { SearchTipsComponent } from '../search-tips/search-tips.component';
 
 @Component({
   selector: 'app-search-input',
@@ -30,6 +31,7 @@ import { FilterButtonComponent } from '../search-buttons-toolbar/filter-button/f
     TranslatePipe,
     NgIcon,
     FilterButtonComponent,
+    SearchTipsComponent,
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
@@ -121,5 +123,4 @@ export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected readonly Settings = Settings;
   protected readonly featherAlertTriangle = featherAlertTriangle;
-  protected readonly featherInfo = featherInfo;
 }

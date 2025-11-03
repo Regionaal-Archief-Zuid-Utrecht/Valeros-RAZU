@@ -6,7 +6,9 @@
     "page-title": "RAZU - Digital archive of South-Utrecht",
     "colofon-title": "RAZU - Colofon",
     "and": "and",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close",
+    "example": "Example"
   },
   "homescreen": {
     "flavour-text-part-1": "Here you can search trough the combined archives of the municipalities of",
@@ -41,7 +43,25 @@
     "filters_active_plural": "active",
     "clear_filters": "Clear filters",
     "toggle-filter-panel": "Toggle filter panel",
-    "search-tips": "Search tips"
+    "search-tips": "Search tips",
+    "tips": {
+      "exact-match": {
+        "title": "Exact Match",
+        "description": "Use quotation marks to search for an exact phrase or word combination."
+      },
+      "wildcard": {
+        "title": "Wildcard Search",
+        "description": "Use an asterisk (*) to replace multiple characters within a word."
+      },
+      "boolean": {
+        "title": "Boolean Operators",
+        "description": "Use AND, OR and NOT to refine your search query."
+      },
+      "filters": {
+        "title": "Using Filters",
+        "description": "Use the filters on the side to refine your results by date, type, organization and more."
+      }
+    }
   },
   "records-interface": {
     "pointer-to": "pointer to",
