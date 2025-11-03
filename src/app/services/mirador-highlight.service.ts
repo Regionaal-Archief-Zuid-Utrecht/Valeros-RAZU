@@ -103,6 +103,10 @@ export class MiradorHighlightService {
         textElement.setAttribute('font-style', 'italic');
       } else {
         textElement.setAttribute('fill', 'yellow');
+        textElement.setAttribute(
+          'style',
+          'filter: drop-shadow(5px 0px 0px black) drop-shadow(-5px 0px 0px black) drop-shadow(0px 5px 0px black) drop-shadow(0px -5px 0px black);',
+        );
         textElement.setAttribute('font-weight', 'bold');
         textElement.setAttribute('font-style', 'italic');
       }
