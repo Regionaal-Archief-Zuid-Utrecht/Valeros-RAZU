@@ -6,6 +6,7 @@ export const uiSettings: UiSettings = {
   labelMaxChars: 100,
   sectionNextToTableWidth: { search: '30%', details: '40%' },
   imageForWhenLoadingFails: '/assets/img/image-load-fail.png',
+  imageForWhenImageIsInaccessible: '/assets/img/image-inaccessible.png',
   showViewModeSelect: true,
   minNumParentsToAllowTreeExpand: 3,
   objValues: {

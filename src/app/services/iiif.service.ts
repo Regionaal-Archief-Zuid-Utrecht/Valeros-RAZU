@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Canvas, Manifest } from '@iiif/presentation-3';
 import mime from 'mime';
 import { Settings } from '../config/settings';
+import { intersects } from '../helpers/util.helper';
+import { CopyrightData } from '../models/IIIF/copyright-data.model';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
 import { ImageService } from './image.service';
 import { SparqlService } from './sparql.service';
@@ -202,9 +204,22 @@ export class IIIFService {
     id: string,
     label: string,
     canvases: Canvas[],
-  ): Promise<Manifest> {
-    const copyrightNotice: string | null =
-      await this.sparql.getCopyrightNotice(id);
+  ): Promise<Manifest | null> {
+    const copyrightData: CopyrightData[] | null =
+      await this.sparql.getCopyrightData(id);
+    const copyrightNotice: string | undefined = copyrightData
+      ?.map((data) => data.copyrightNotice)
+      .join(', ');
+    const beperkingGebruikTypes: string[] | undefined = copyrightData?.map(
+      (data) => data.beperkingGebruikType,
+    );
+
+    const imagesAreAccessible = await this.imagesAreCopyrightAccessible(id);
+
+    if (!imagesAreAccessible) {
+      await this._replaceCanvasesWithPlaceholders(canvases);
+      console.log('Canvases', canvases);
+    }
 
     const manifest: Manifest = {
       '@context': 'http://iiif.io/api/presentation/3/context.json',
@@ -245,11 +260,14 @@ export class IIIFService {
       return null;
     }
 
-    const manifest: Manifest = await this.generateCanvasesManifest(
+    const manifest: Manifest | null = await this.generateCanvasesManifest(
       nodeId ?? '',
       nodeLabel ?? '',
       canvases,
     );
+    if (!manifest) {
+      return null;
+    }
     console.log('Created manifest:', manifest);
 
     const manifestFile = new File([JSON.stringify(manifest)], 'manifest.json', {
@@ -266,5 +284,80 @@ export class IIIFService {
   private _cleanup() {
     this._blobUrls.forEach((url) => URL.revokeObjectURL(url));
     this._blobUrls.clear();
+  }
+
+  private async _replaceCanvasesWithPlaceholders(
+    canvases: Canvas[],
+  ): Promise<void> {
+    const imageUrl = Settings.ui.imageForWhenImageIsInaccessible;
+    let placeholderDimensions: { width: number; height: number } = {
+      width: 1920,
+      height: 1080,
+    };
+
+    try {
+      placeholderDimensions =
+        await this.imageService.getImageDimensions(imageUrl);
+    } catch (error) {
+      console.error('Failed to get image dimensions:', imageUrl, error);
+    }
+
+    canvases.forEach((canvas) => {
+      if (canvas.thumbnail && canvas.thumbnail.length > 0) {
+        canvas.thumbnail[0].id = imageUrl;
+        if ('service' in canvas.thumbnail[0]) {
+          delete (canvas.thumbnail[0] as any).service;
+        }
+      }
+
+      if (canvas.height) {
+        canvas.height = placeholderDimensions.height;
+      }
+      if (canvas.width) {
+        canvas.width = placeholderDimensions.width;
+      }
+
+      if (canvas.items && canvas.items.length > 0) {
+        canvas.items.forEach((annotationPage) => {
+          if (annotationPage.items && annotationPage.items.length > 0) {
+            annotationPage.items.forEach((annotation) => {
+              if (annotation.body) {
+                const bodies = Array.isArray(annotation.body)
+                  ? annotation.body
+                  : [annotation.body];
+                bodies.forEach((bodyItem) => {
+                  if (typeof bodyItem === 'object' && bodyItem.id) {
+                    bodyItem.id = Settings.ui.imageForWhenImageIsInaccessible;
+                  }
+                  if (typeof bodyItem === 'object' && 'service' in bodyItem) {
+                    delete (bodyItem as any).service;
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+
+      if (canvas.service) {
+        delete canvas.service;
+      }
+    });
+  }
+
+  // TODO: Make non-RAZU specific
+  async imagesAreCopyrightAccessible(id: string): Promise<boolean> {
+    const copyrightData: CopyrightData[] | null =
+      await this.sparql.getCopyrightData(id);
+    const beperkingGebruikTypes: string[] | undefined = copyrightData?.map(
+      (data) => data.beperkingGebruikType,
+    );
+
+    return copyrightData
+      ? !intersects(
+          beperkingGebruikTypes ?? [],
+          Settings.iiif.showPlaceholdersForCopyrightType || [],
+        )
+      : true;
   }
 }

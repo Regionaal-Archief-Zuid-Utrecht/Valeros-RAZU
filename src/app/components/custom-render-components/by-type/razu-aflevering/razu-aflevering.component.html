@@ -193,6 +193,7 @@
 <ng-container
   *ngIf="
     !loading &&
+    !hideDownloads &&
     (data?.node?.['https://data.razu.nl/def/ldto/isRepresentatieVan']?.length ||
       0) > 0
   "

@@ -4,6 +4,11 @@
     <div class="flex justify-between items-center px-4 py-2">
       <h2 class="text-xl font-bold">
         {{ "search-interface.filters_title" | translate }}
+        @if (filters.loading.value) {
+          <span
+            class="loading loading-spinner loading-sm ml-1 relative top-[0.2rem]"
+          ></span>
+        }
       </h2>
       <div class="flex items-center gap-2">
         <button *ngIf="filters.enabled.value.length > 0"
