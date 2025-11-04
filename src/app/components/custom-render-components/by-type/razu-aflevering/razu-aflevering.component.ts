@@ -7,6 +7,7 @@ import { Direction, NodeObj } from '../../../../models/node.model';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
 import { TypeRenderComponentInput } from '../../../../models/type-render-component-input.model';
+import { IIIFService } from '../../../../services/iiif.service';
 import { NodeService } from '../../../../services/node/node.service';
 import { SparqlService } from '../../../../services/sparql.service';
 import { UrlService } from '../../../../services/url.service';
@@ -30,6 +31,7 @@ export class RazuAfleveringComponent
 {
   nodeService = inject(NodeService);
   urlService = inject(UrlService);
+  iiifService = inject(IIIFService);
 
   altoUrl = '';
 
@@ -67,6 +69,7 @@ export class RazuAfleveringComponent
 
   // UI state
   showCopyrightInfo = false;
+  hideDownloads = false;
 
   // Explicitly declare data property from parent class for template access
   override data?: TypeRenderComponentInput;
@@ -338,6 +341,20 @@ export class RazuAfleveringComponent
           //   this.beperkingGebruikTermijnMap,
           // );
         });
+
+      // Check if downloads should be hidden due to copyright restrictions
+      const nodeId = this.nodeService.getId(this.data?.node);
+      if (nodeId) {
+        this.iiifService
+          .imagesAreCopyrightAccessible(nodeId)
+          .then((imagesAreAccessible) => {
+            this.hideDownloads = !imagesAreAccessible;
+          })
+          .catch((error) => {
+            console.error('Error checking copyright restrictions:', error);
+            this.hideDownloads = false;
+          });
+      }
     }
   }
 

@@ -214,15 +214,9 @@ export class IIIFService {
       (data) => data.beperkingGebruikType,
     );
 
-    // TODO: Make non-RAZU specific
-    const showPlaceholders = copyrightData
-      ? intersects(
-          beperkingGebruikTypes ?? [],
-          Settings.iiif.showPlaceholdersForCopyrightType || [],
-        )
-      : false;
+    const imagesAreAccessible = await this.imagesAreCopyrightAccessible(id);
 
-    if (showPlaceholders) {
+    if (!imagesAreAccessible) {
       await this._replaceCanvasesWithPlaceholders(canvases);
       console.log('Canvases', canvases);
     }
@@ -349,5 +343,21 @@ export class IIIFService {
         delete canvas.service;
       }
     });
+  }
+
+  // TODO: Make non-RAZU specific
+  async imagesAreCopyrightAccessible(id: string): Promise<boolean> {
+    const copyrightData: CopyrightData[] | null =
+      await this.sparql.getCopyrightData(id);
+    const beperkingGebruikTypes: string[] | undefined = copyrightData?.map(
+      (data) => data.beperkingGebruikType,
+    );
+
+    return copyrightData
+      ? !intersects(
+          beperkingGebruikTypes ?? [],
+          Settings.iiif.showPlaceholdersForCopyrightType || [],
+        )
+      : true;
   }
 }
