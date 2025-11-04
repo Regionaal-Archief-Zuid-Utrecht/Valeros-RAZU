@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AccessibilityEvaluationComponent } from './components/views/accessibility-evaluation/accessibility-evaluation.component';
 import { ColofonComponent } from './components/views/colofon/colofon.component';
 import { HomeComponent } from './components/views/home/home.component';
 import { SearchComponent } from './components/views/search/search.component';
@@ -24,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'sitemap',
     component: SitemapComponent,
+  },
+  {
+    path: 'toegankelijkheidsverklaring',
+    component: AccessibilityEvaluationComponent,
   },
   {
     path: '**',

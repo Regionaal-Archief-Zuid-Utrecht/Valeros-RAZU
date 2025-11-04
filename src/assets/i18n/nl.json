@@ -59,5 +59,18 @@
     "period": "Periode",
     "maker": "Maker",
     "title": "Titel"
+  },
+  "accessibility": {
+    "skip-to-search": "Spring naar zoekveld",
+    "skip-to-filters": "Spring naar filters",
+    "skip-to-results": "Spring naar zoekresultaten",
+    "search-results-region": "Zoekresultaten",
+    "results-list": "Lijst met zoekresultaten",
+    "filter-panel": "Filter opties",
+    "loading": "Laden..."
+  },
+  "view-mode": {
+    "list-view": "Lijstweergave",
+    "grid-view": "Rasterweergave"
   }
 }

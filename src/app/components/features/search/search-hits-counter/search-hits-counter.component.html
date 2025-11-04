@@ -1,11 +1,16 @@
-<h2 class="text-xl mb-4 font-bold">
+<h2
+  class="text-xl mb-4 font-bold"
+  [attr.aria-label]="
+    !search.isLoading.value
+      ? numberOfHitsStr
+      : ('accessibility.loading' | translate)
+  "
+>
   <span *ngIf="search.isLoading.value" class="loading loading-spinner"> </span>
 
   <span
     *ngIf="!search.isLoading.value && !details.showing.value"
-    role="search"
-    aria-label="Search results count"
-    aria-labelledby="search-results-count"
+    aria-hidden="true"
     >{{ numberOfHitsStr }}</span
   >
 </h2>

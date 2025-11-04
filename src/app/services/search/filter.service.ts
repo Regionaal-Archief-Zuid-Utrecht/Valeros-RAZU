@@ -183,8 +183,12 @@ export class FilterService {
         this.data.convertFiltersFromIdsFormat(base);
       filters = filters.concat(baseFilters);
 
-      const dateRanges: { filterId?: string; fieldId?: string; from?: string; to?: string }[] =
-        parsed.dateRanges || [];
+      const dateRanges: {
+        filterId?: string;
+        fieldId?: string;
+        from?: string;
+        to?: string;
+      }[] = parsed.dateRanges || [];
       dateRanges.forEach((dr) => {
         if (dr.filterId && dr.fieldId && (dr.from || dr.to)) {
           filters.push({
@@ -300,7 +304,12 @@ export class FilterService {
 
   setDateRange(filterId: string, fieldId: string, from?: string, to?: string) {
     const updated = this.enabled.value.filter(
-      (f) => !(f.type === FilterType.DateRange && f.filterId === filterId && f.fieldId === fieldId),
+      (f) =>
+        !(
+          f.type === FilterType.DateRange &&
+          f.filterId === filterId &&
+          f.fieldId === fieldId
+        ),
     );
     const hasAny = !!(from && from.length) || !!(to && to.length);
     if (hasAny) {

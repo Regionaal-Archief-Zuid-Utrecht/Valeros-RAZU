@@ -1,4 +1,3 @@
-import { FilterType } from '../../../models/filters/filter.model';
 import { FilteringSettings } from '../../../models/settings/filtering-settings.model';
 import { filteringSettings } from '../../default-settings/settings/filtering.settings';
 

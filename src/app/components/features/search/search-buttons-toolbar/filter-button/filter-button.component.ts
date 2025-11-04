@@ -5,7 +5,7 @@ import { featherFilter } from '@ng-icons/feather-icons';
 import { FilterType } from '../../../../../models/filters/filter.model';
 import { BreakpointService } from '../../../../../services/breakpoint.service';
 import { FilterService } from '../../../../../services/search/filter.service';
-import { UiService } from '../../../../../services/ui/ui.service';
+import { FilterDrawerService } from '../../../../../services/ui/filter-drawer.service';
 
 @Component({
   selector: '[app-filter-button]',
@@ -15,7 +15,7 @@ import { UiService } from '../../../../../services/ui/ui.service';
 export class FilterButtonComponent implements OnInit {
   constructor(
     private filters: FilterService,
-    public ui: UiService,
+    public filterDrawer: FilterDrawerService,
     private breakpoint: BreakpointService,
   ) {}
 
@@ -38,9 +38,9 @@ export class FilterButtonComponent implements OnInit {
   @HostListener('click')
   onClick() {
     if (this.breakpoint.isBreakpointOrLarger('lg')) {
-      this.ui.filterDrawerExpanded = !this.ui.filterDrawerExpanded;
+      this.filterDrawer.toggleFilterDrawerDesktop();
     } else {
-      document.getElementById('filter-drawer-checkbox')?.click();
+      this.filterDrawer.toggleFilterDrawerMobile();
     }
   }
 

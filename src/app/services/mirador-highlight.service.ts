@@ -99,9 +99,12 @@ export class MiradorHighlightService {
 
       if (supportsSpanHighlighting) {
         textElement.setAttribute('filter', 'url(#highlight)');
+        textElement.setAttribute('font-weight', 'bold');
+        textElement.setAttribute('font-style', 'italic');
       } else {
         textElement.setAttribute('fill', 'yellow');
         textElement.setAttribute('font-weight', 'bold');
+        textElement.setAttribute('font-style', 'italic');
       }
     });
   }
