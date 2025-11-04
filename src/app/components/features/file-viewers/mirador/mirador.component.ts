@@ -161,22 +161,13 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       console.log('Mirador init', this.containerId);
       const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
       this.initCanvasIndexTracking(miradorInstance);
+      this._setupAutoResetZoomOnLoaded(miradorInstance);
 
       return miradorInstance;
     });
 
     console.log('Mirador viewer', this.viewer);
     this.miradorHighlight.init();
-
-    // TODO: Wait for Mirador loaded event
-    setTimeout(() => {
-      const resetZoomButton: HTMLButtonElement | null = document.querySelector(
-        'button[aria-label="Reset zoom"]',
-      );
-      if (resetZoomButton) {
-        resetZoomButton.click();
-      }
-    }, 500);
   }
 
   initCanvasIndexTracking(miradorInstance: any) {
@@ -208,5 +199,23 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
       return result;
     };
+  }
+
+  private _setupAutoResetZoomOnLoaded(miradorInstance: any): void {
+    const unsubscribe = miradorInstance.store.subscribe(() => {
+      const state = miradorInstance.store.getState();
+
+      if (state.windows && Object.keys(state.windows).length > 0) {
+        console.log('Mirador loaded');
+        setTimeout(() => {
+          const resetZoomButton: HTMLButtonElement | null =
+            document.querySelector('button[aria-label="Reset zoom"]');
+          if (resetZoomButton) {
+            resetZoomButton.click();
+          }
+        }, 1);
+        unsubscribe();
+      }
+    });
   }
 }
