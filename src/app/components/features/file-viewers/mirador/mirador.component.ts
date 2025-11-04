@@ -2,23 +2,13 @@ import {
   AfterViewInit,
   Component,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
 import { Router } from '@angular/router';
-// @ts-ignore
-import Mirador from 'mirador/dist/es/src/index';
-// prettier-ignore
-// @ts-ignore
-import { getCanvasIndex,getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
-// @ts-ignore
-import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { BehaviorSubject } from 'rxjs';
-import { IIIFService } from '../../../../services/iiif.service';
-import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
-import { UrlService } from '../../../../services/url.service';
+import { MiradorService } from '../../../../services/mirador.service';
 
 @Component({
   selector: 'app-mirador',
@@ -30,8 +20,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   viewer?: any;
   private _initializeDebounceTimer?: number;
   containerId: string = '';
-
-  private _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
+  _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
     number | null
   >(null);
 
@@ -40,16 +29,9 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() imageUrls?: string[];
 
   constructor(
-    private ngZone: NgZone,
-    private iiifService: IIIFService,
+    private miradorService: MiradorService,
     private router: Router,
-    private urlService: UrlService,
-    private miradorHighlight: MiradorHighlightService,
-  ) {
-    this._canvasIndex.subscribe((canvasIndex: number | null) => {
-      console.log('Canvas index:', canvasIndex);
-    });
-  }
+  ) {}
 
   ngAfterViewInit() {
     // this.initViewer();
@@ -73,7 +55,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.destroyViewer();
-    this.miradorHighlight.stopCheckingForTextElementsInDOM();
+    this.miradorService['miradorHighlight'].stopCheckingForTextElementsInDOM();
   }
 
   private destroyViewer() {
@@ -83,139 +65,43 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
     }
 
     if (this.viewer) {
-      this.viewer.unmount();
+      this.miradorService.destroyViewer(this.viewer, this.containerId);
       this.viewer = undefined;
-    }
-
-    const styleElements = document.querySelectorAll('style[data-jss]');
-    styleElements.forEach((styleElement) => {
-      styleElement.remove();
-    });
-
-    const containerElem = document.getElementById(this.containerId);
-    if (containerElem) {
-      containerElem.innerHTML = '';
     }
   }
 
   private async initViewer() {
     this.destroyViewer();
+    this.containerId = this.miradorService.generateContainerId();
 
-    this.containerId = `mirador-${Math.random().toString(36).substr(2, 9)}`;
+    const manifestUrl: string | null = await this.miradorService[
+      'iiifService'
+    ].createManifestBlob(this.nodeId, this.nodeLabel, this.imageUrls);
 
-    const pageNum = this.urlService.getPageNumberFromUrl();
+    if (!manifestUrl) {
+      console.warn('Failed to create manifest, not initializing viewer');
+      return;
+    }
 
-    this.viewer = await this.ngZone.runOutsideAngular(async () => {
-      const manifestUrl: string | null =
-        await this.iiifService.createManifestBlob(
-          this.nodeId,
-          this.nodeLabel,
-          this.imageUrls,
-        );
-      if (!manifestUrl) {
-        console.warn('Failed to create manifest, not initializing viewer');
-        return;
-      }
-      const containerElem = document.getElementById(this.containerId);
-      if (!containerElem) {
-        console.warn('Container element not found', this.containerId);
-        return;
-      }
+    const containerElem = document.getElementById(this.containerId);
+    if (!containerElem) {
+      console.warn('Container element not found', this.containerId);
+      return;
+    }
 
-      const config = {
-        id: this.containerId,
-        workspace: {
-          type: 'single',
-          showZoomControls: true,
-        },
-        workspaceControlPanel: {
-          enabled: false,
-        },
-        window: {
-          textOverlay: {
-            enabled: true,
-            selectable: true,
-            visible: false,
-            // opacity: 0,
-          },
-        },
-        windows: [
-          {
-            manifestId: manifestUrl,
-            canvasIndex: pageNum ? pageNum - 1 : 0,
-            allowWindowSideBar: true,
-            sideBarOpenByDefault: false,
-            allowMaximize: false,
-            allowFullscreen: true,
-            allowClose: false,
-            ...(window.innerWidth >= 640
-              ? {
-                  thumbnailNavigationPosition: 'far-right',
-                  thumbnailNavigationVisible: true,
-                }
-              : {}),
-          },
-        ],
-      };
-
-      console.log('Mirador init', this.containerId);
-      const miradorInstance = Mirador.viewer(config, [...textOverlayPlugin]);
-      this.initCanvasIndexTracking(miradorInstance);
-      this._setupAutoResetZoomOnLoaded(miradorInstance);
-
-      return miradorInstance;
+    this.viewer = await this.miradorService.createViewer({
+      id: this.containerId,
+      manifestId: manifestUrl,
+      thumbnailNavigation: window.innerWidth >= 640,
     });
+
+    if (this.viewer) {
+      this._canvasIndex = this.miradorService.setupCanvasIndexTracking(
+        this.viewer,
+      );
+      this.miradorService['miradorHighlight'].init();
+    }
 
     console.log('Mirador viewer', this.viewer);
-    this.miradorHighlight.init();
-  }
-
-  initCanvasIndexTracking(miradorInstance: any) {
-    const store = miradorInstance.store;
-    const originalDispatch = store.dispatch;
-
-    store.dispatch = (action: any) => {
-      // TODO: Only check for canvas change for setCanvas calls, now checks for canvas change for all actions
-      const result = originalDispatch(action);
-      const currentState = store.getState();
-
-      const windows = currentState.windows || {};
-      const windowId = Object.keys(windows)[0];
-
-      const currentCanvas = getCurrentCanvas(currentState, {
-        windowId,
-      });
-      const canvasId = currentCanvas?.id;
-      if (canvasId) {
-        const canvasIndex = getCanvasIndex(currentState, {
-          windowId,
-          canvasId,
-        });
-        const canvasIsUpdated = canvasIndex !== this._canvasIndex.value;
-        if (canvasIsUpdated) {
-          this._canvasIndex.next(canvasIndex);
-        }
-      }
-
-      return result;
-    };
-  }
-
-  private _setupAutoResetZoomOnLoaded(miradorInstance: any): void {
-    const unsubscribe = miradorInstance.store.subscribe(() => {
-      const state = miradorInstance.store.getState();
-
-      if (state.windows && Object.keys(state.windows).length > 0) {
-        console.log('Mirador loaded');
-        setTimeout(() => {
-          const resetZoomButton: HTMLButtonElement | null =
-            document.querySelector('button[aria-label="Reset zoom"]');
-          if (resetZoomButton) {
-            resetZoomButton.click();
-          }
-        }, 1);
-        unsubscribe();
-      }
-    });
   }
 }
