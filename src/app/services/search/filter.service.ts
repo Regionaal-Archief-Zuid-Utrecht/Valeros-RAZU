@@ -37,6 +37,8 @@ export class FilterService {
   options: BehaviorSubject<FilterOptionsModel> =
     new BehaviorSubject<FilterOptionsModel>(Settings.filtering.filterOptions);
 
+  loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
     public elastic: ElasticService,
     public data: DataService,
@@ -166,82 +168,90 @@ export class FilterService {
   }
 
   async updateFilterOptionValues(query: string) {
-    const filterOptionsList: FilterOptionModel[] = Object.values(
-      this.options.value,
-    );
+    this.loading.next(true);
 
-    const filterGroups = Object.keys(this.options.value);
-    const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
-      const filtersWithoutThisGroup = this.enabled.value.filter(
-        (filter) => filter.filterId !== filterGroupId,
+    try {
+      const filterOptionsList: FilterOptionModel[] = Object.values(
+        this.options.value,
       );
 
-      const groupFilterOptions = [this.options.value[filterGroupId]];
-      return await this.elastic.getFilterOptions(
-        query,
-        groupFilterOptions,
-        filtersWithoutThisGroup,
-      );
-    });
-
-    const additionalResponses: estypes.SearchResponse<any>[] = 
-      await Promise.all(filterGroupPromises).then(responses => responses.flat());
-
-    const additionalDocCounts: FieldDocCountsModel =
-      this._getFieldDocCountsFromResponses(additionalResponses);
-
-    const filterOptions = this.options.value;
-    for (const [filterId, filter] of Object.entries(filterOptions)) {
-      const filterValuesMap = new Map<
-        string,
-        { hitIds: string[]; doc_count: number }
-      >();
-
-      const relevantDocCounts = additionalDocCounts;
-
-      filter.fieldIds.forEach((fieldId) => {
-        const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
-        const docCountsForField: DocCountModel[] =
-          relevantDocCounts?.[elasticFieldId] ?? [];
-        const docCountsToShow: DocCountModel[] = docCountsForField.filter(
-          (d) => {
-            const valueId = d.key;
-            const shouldHideValueId = filter.hideValueIds?.includes(valueId);
-            if (!filter.showOnlyValueIds) {
-              return !shouldHideValueId;
-            }
-
-            return filter.showOnlyValueIds.includes(valueId);
-          },
+      const filterGroups = Object.keys(this.options.value);
+      const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
+        const filtersWithoutThisGroup = this.enabled.value.filter(
+          (filter) => filter.filterId !== filterGroupId,
         );
-        docCountsToShow.forEach((d) => {
-          const id = d.key;
-          const hitIds = d.hitIds;
-          const doc_count = d.doc_count;
 
-          if (filterValuesMap.has(id)) {
-            const existing = filterValuesMap.get(id)!;
-            existing.hitIds = existing.hitIds.concat(hitIds);
-            existing.doc_count += doc_count;
-            filterValuesMap.set(id, existing);
-          } else {
-            filterValuesMap.set(id, { hitIds: hitIds, doc_count: doc_count });
-          }
-        });
+        const groupFilterOptions = [this.options.value[filterGroupId]];
+        return await this.elastic.getFilterOptions(
+          query,
+          groupFilterOptions,
+          filtersWithoutThisGroup,
+        );
       });
-      const filterValues: FilterOptionValueModel[] = Array.from(
-        filterValuesMap,
-      ).map(([id, data]) => ({
-        ids: [id],
-        filterHitIds: data.hitIds,
-        filterHitCount: data.doc_count,
-      }));
 
-      const clusteredFilterValues =
-        this.clusters.clusterFilterOptionValues(filterValues);
-      filter.values = clusteredFilterValues;
+      const additionalResponses: estypes.SearchResponse<any>[] =
+        await Promise.all(filterGroupPromises).then((responses) =>
+          responses.flat(),
+        );
+
+      const additionalDocCounts: FieldDocCountsModel =
+        this._getFieldDocCountsFromResponses(additionalResponses);
+
+      const filterOptions = this.options.value;
+      for (const [filterId, filter] of Object.entries(filterOptions)) {
+        const filterValuesMap = new Map<
+          string,
+          { hitIds: string[]; doc_count: number }
+        >();
+
+        const relevantDocCounts = additionalDocCounts;
+
+        filter.fieldIds.forEach((fieldId) => {
+          const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
+          const docCountsForField: DocCountModel[] =
+            relevantDocCounts?.[elasticFieldId] ?? [];
+          const docCountsToShow: DocCountModel[] = docCountsForField.filter(
+            (d) => {
+              const valueId = d.key;
+              const shouldHideValueId = filter.hideValueIds?.includes(valueId);
+              if (!filter.showOnlyValueIds) {
+                return !shouldHideValueId;
+              }
+
+              return filter.showOnlyValueIds.includes(valueId);
+            },
+          );
+          docCountsToShow.forEach((d) => {
+            const id = d.key;
+            const hitIds = d.hitIds;
+            const doc_count = d.doc_count;
+
+            if (filterValuesMap.has(id)) {
+              const existing = filterValuesMap.get(id)!;
+              existing.hitIds = existing.hitIds.concat(hitIds);
+              existing.doc_count += doc_count;
+              filterValuesMap.set(id, existing);
+            } else {
+              filterValuesMap.set(id, { hitIds: hitIds, doc_count: doc_count });
+            }
+          });
+        });
+        const filterValues: FilterOptionValueModel[] = Array.from(
+          filterValuesMap,
+        ).map(([id, data]) => ({
+          ids: [id],
+          filterHitIds: data.hitIds,
+          filterHitCount: data.doc_count,
+        }));
+
+        const clusteredFilterValues =
+          this.clusters.clusterFilterOptionValues(filterValues);
+        filter.values = clusteredFilterValues;
+      }
+      this.options.next(filterOptions);
+    } finally {
+      this.loading.next(false);
     }
-    this.options.next(filterOptions);
   }
 
   toggleMultiple(filters: FilterModel[]) {
