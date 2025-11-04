@@ -10,4 +10,6 @@ export interface IIIFSettings {
    * This allows specifying a preference hierarchy (e.g., JPG over TIF) when multiple formats exist.
    */
   preferredImageFormats: string[];
+
+  showPlaceholdersForCopyrightType?: string[];
 }

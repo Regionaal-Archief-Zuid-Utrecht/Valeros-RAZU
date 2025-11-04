@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Settings } from '../config/settings';
 import { wrapWithAngleBrackets } from '../helpers/util.helper';
+import { CopyrightData } from '../models/IIIF/copyright-data.model';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
 import { EndpointUrlsModel } from '../models/endpoint.model';
 import { Direction, NodeModel, NodeObj } from '../models/node.model';
@@ -290,28 +291,30 @@ LIMIT 10000`;
     };
   }
 
-  async getCopyrightNotice(id: string): Promise<string | null> {
+  // TODO: Make this more generic (not RAZU specific)
+  async getCopyrightData(id: string): Promise<CopyrightData[] | null> {
     const copyrightQueryTemplate = `
 <${id}> ldto:beperkingGebruik ?beperkingGebruik .
 ?beperkingGebruik ldto:beperkingGebruikType ?beperkingGebruikType .
-?beperkingGebruikType schema:copyrightNotice ?copyrightNotice .`;
+OPTIONAL { ?beperkingGebruikType <http://www.w3.org/2004/02/skos/core#prefLabel> ?copyrightNotice . }`;
 
     const query = `
     PREFIX ldto: <https://data.razu.nl/def/ldto/>
     PREFIX schema: <http://schema.org/>
-    SELECT distinct ?copyrightNotice WHERE {
+    SELECT distinct ?copyrightNotice ?beperkingGebruikType WHERE {
         ${this.getFederatedQuery(copyrightQueryTemplate)}
     }`;
 
-    const results: { copyrightNotice: string }[] = await this.api.postData<
-      { copyrightNotice: string }[]
-    >(this.endpoints.getFirstUrls().sparql, {
-      query: query,
-    });
+    const results: { copyrightNotice: string; beperkingGebruikType: string }[] =
+      await this.api.postData<
+        { copyrightNotice: string; beperkingGebruikType: string }[]
+      >(this.endpoints.getFirstUrls().sparql, {
+        query: query,
+      });
     if (!results || results.length === 0) {
       return null;
     }
-    return results[0].copyrightNotice;
+    return results;
   }
 
   async shouldShowIIIF(id: string): Promise<boolean> {

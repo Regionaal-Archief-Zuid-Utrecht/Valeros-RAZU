@@ -22,4 +22,7 @@ export const razuIIIFSettings: IIIFSettings = {
     alto: altoFileFormats,
   },
   preferredImageFormats: [...jpgFileFormats, ...tifFileFormats],
+  showPlaceholdersForCopyrightType: [
+    'https://data.razu.nl/id/beperkinggebruiktype/d62b6d3ea088ceab27217c05307c9c56',
+  ],
 };
