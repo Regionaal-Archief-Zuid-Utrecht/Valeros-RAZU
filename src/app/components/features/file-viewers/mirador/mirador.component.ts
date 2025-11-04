@@ -167,6 +167,16 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     console.log('Mirador viewer', this.viewer);
     this.miradorHighlight.init();
+
+    // TODO: Wait for Mirador loaded event
+    setTimeout(() => {
+      const resetZoomButton: HTMLButtonElement | null = document.querySelector(
+        'button[aria-label="Reset zoom"]',
+      );
+      if (resetZoomButton) {
+        resetZoomButton.click();
+      }
+    }, 500);
   }
 
   initCanvasIndexTracking(miradorInstance: any) {
