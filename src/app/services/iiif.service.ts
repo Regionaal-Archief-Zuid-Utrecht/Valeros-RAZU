@@ -301,7 +301,7 @@ export class IIIFService {
     canvases.forEach((canvas) => {
       if (canvas.thumbnail && canvas.thumbnail.length > 0) {
         canvas.thumbnail[0].id =
-          'https://placehold.co/100x100/DDD/AAA?text=' + placeholderText;
+          'https://placehold.co/100x100/DDD/AAA.jpg?text=' + placeholderText;
         if ('service' in canvas.thumbnail[0]) {
           delete (canvas.thumbnail[0] as any).service;
         }
@@ -324,7 +324,8 @@ export class IIIFService {
                   : [annotation.body];
                 bodies.forEach((bodyItem) => {
                   if (typeof bodyItem === 'object' && bodyItem.id) {
-                    bodyItem.id = `https://placehold.co/${placeholderDimensions.width}x${placeholderDimensions.height}/DDD/AAA?text=${placeholderText}`;
+                    bodyItem.id = `https://placehold.co/${placeholderDimensions.width}x${placeholderDimensions.height}/DDD/AAA.jpg?text=${placeholderText}`;
+                    console.log('AA', bodyItem.id);
                   }
                   if (typeof bodyItem === 'object' && 'service' in bodyItem) {
                     delete (bodyItem as any).service;
