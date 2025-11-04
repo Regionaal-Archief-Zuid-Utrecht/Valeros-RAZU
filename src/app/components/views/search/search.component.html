@@ -59,7 +59,7 @@
       }
 
       @if (viewModes.current.value === ViewMode.List) {
-        @for (node of search.results.value.nodes; track $index) {
+        @for (node of search.results.value.nodes; track node?.["@id"]) {
           <app-node [node]="node"></app-node>
         }
       }
