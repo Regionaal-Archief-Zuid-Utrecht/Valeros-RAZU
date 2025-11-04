@@ -58,6 +58,9 @@ export class SnippetComponent implements OnInit {
       this.snippet = data.html ?? undefined;
     } catch (error) {
       console.error('An error occurred while retrieving the snippet:', error);
+      console.log('Snippet', this.snippet);
+      console.log('Query', this.searchService.queryStr);
+      console.log('Alto URL', this.altoUrl);
       this.snippet = undefined;
     } finally {
       this.loading = false;

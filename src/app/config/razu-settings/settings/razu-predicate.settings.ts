@@ -18,7 +18,7 @@ export const razuLabelPredicates: string[] = [
   'https://data.razu.nl/def/ldto/begripLabel',
   'https://data.razu.nl/def/ldto/verwijzingNaam',
   'https://data.razu.nl/def/ldto/identificatieKenmerk',
-  'http://schema.org/copyrightNotice',
+  'http://www.w3.org/2004/02/skos/core#prefLabel',
 ];
 
 export const razuParentPredicates: string[] = [

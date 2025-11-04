@@ -31,30 +31,31 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    archiefVormer: {
-      label: 'Archiefvormer',
-      fieldIds: ['archiefvormer.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    archief: {
-      label: 'Archief',
-      fieldIds: ['archief'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    aggregatieniveau: {
-      label: 'Aggregatieniveau',
-      fieldIds: ['aggregatieniveau.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
-    classificatie: {
-      label: 'Classificatie',
-      fieldIds: ['classificatie.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
+    // Below are hidden for now, since they are all the same in the current newspaper-dataset
+    // archiefVormer: {
+    //   label: 'Archiefvormer',
+    //   fieldIds: ['archiefvormer.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
+    // archief: {
+    //   label: 'Archief',
+    //   fieldIds: ['archief'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
+    // aggregatieniveau: {
+    //   label: 'Aggregatieniveau',
+    //   fieldIds: ['aggregatieniveau.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
+    // classificatie: {
+    //   label: 'Classificatie',
+    //   fieldIds: ['classificatie.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
     auteursrecht: {
       label: 'Auteursrecht',
       fieldIds: ['auteursrecht.uri'],
