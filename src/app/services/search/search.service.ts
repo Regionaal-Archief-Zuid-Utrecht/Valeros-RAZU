@@ -224,7 +224,7 @@ export class SearchService {
     //   return;
     // }
 
-    this.ui.collapseAllAccordions();
+    // this.ui.collapseAllAccordions();
 
     this._searchQueryId++;
 
