@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
 import { MiradorService } from '../../../../services/mirador.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   constructor(
     private miradorService: MiradorService,
     private router: Router,
+    private miradorHighlight: MiradorHighlightService,
   ) {}
 
   ngAfterViewInit() {
@@ -55,7 +57,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.destroyViewer();
-    this.miradorService['miradorHighlight'].stopCheckingForTextElementsInDOM();
+    this.miradorHighlight.stopCheckingForTextElementsInDOM();
   }
 
   private destroyViewer() {
@@ -83,25 +85,27 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       return;
     }
 
-    const containerElem = document.getElementById(this.containerId);
-    if (!containerElem) {
-      console.warn('Container element not found', this.containerId);
-      return;
-    }
+    setTimeout(async () => {
+      const containerElem = document.getElementById(this.containerId);
+      if (!containerElem) {
+        console.warn('Container element not found', this.containerId);
+        return;
+      }
 
-    this.viewer = await this.miradorService.createViewer({
-      id: this.containerId,
-      manifestId: manifestUrl,
-      thumbnailNavigation: window.innerWidth >= 640,
-    });
+      this.viewer = await this.miradorService.createViewer({
+        id: this.containerId,
+        manifestId: manifestUrl,
+        thumbnailNavigation: window.innerWidth >= 640,
+      });
 
-    if (this.viewer) {
-      this._canvasIndex = this.miradorService.setupCanvasIndexTracking(
-        this.viewer,
-      );
-      this.miradorService['miradorHighlight'].init();
-    }
+      if (this.viewer) {
+        this._canvasIndex = this.miradorService.setupCanvasIndexTracking(
+          this.viewer,
+        );
+        this.miradorHighlight.init();
+      }
 
-    console.log('Mirador viewer', this.viewer);
+      console.log('Mirador viewer', this.viewer);
+    }, 1);
   }
 }
