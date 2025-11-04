@@ -1,6 +1,6 @@
 <app-view-container>
   @if (!details.isShowing()) {
-    <app-skip-links />
+  <app-skip-links />
   }
 
   <app-lang-switch class="absolute top-1 right-4" />
@@ -9,11 +9,9 @@
 
   <div class="flex-grow-0 p-2 sm:p-4 sm:pb-2">
     <div class="flex items-center gap-2 sm:gap-4 w-full">
-      <button
-        (click)="onHomeClicked()"
-        class="bg-neutral py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
-        [attr.aria-label]="'homescreen.go-to-homepage' | translate"
-      >
+      <button (click)="onHomeClicked()"
+        class="bg-primary py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
+        [attr.aria-label]="'homescreen.go-to-homepage' | translate">
         <img src="assets/img/logo.svg" alt="Logo" class="h-8" />
       </button>
 
@@ -25,7 +23,7 @@
     </div>
 
     @if (!details.showing.value) {
-      <app-search-buttons-toolbar class="hidden md:block" />
+    <app-search-buttons-toolbar class="hidden md:block" />
     }
 
     <!--    <app-active-filters />-->
@@ -33,35 +31,24 @@
 
   <app-details-back-button *ngIf="details.showing.value" class="px-4" />
 
-  <div
-    class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth w-full"
-    #scrollContainer
-  >
+  <div class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth w-full" #scrollContainer>
     <app-details *ngIf="details.showing.value" />
 
-    <div
-      class="flex flex-row -top-2 bg-background z-10 p-2"
-      *ngIf="!details.showing.value"
-    >
+    <div class="flex flex-row -top-2 bg-background z-10 p-2" *ngIf="!details.showing.value">
       <app-search-hits-counter class="w-1/2 lg:w-3/4" />
       <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
     </div>
 
-    <div
-      *ngIf="!details.showing.value"
-      class="overflow-hidden"
-      role="list"
-      [attr.aria-label]="'accessibility.results-list' | translate"
-      id="search-results"
-    >
+    <div *ngIf="!details.showing.value" class="overflow-hidden" role="list"
+      [attr.aria-label]="'accessibility.results-list' | translate" id="search-results">
       @if (viewModes.current.value === ViewMode.Grid) {
-        <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
+      <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
       }
 
       @if (viewModes.current.value === ViewMode.List) {
-        @for (node of search.results.value.nodes; track $index) {
-          <app-node [node]="node"></app-node>
-        }
+      @for (node of search.results.value.nodes; track $index) {
+      <app-node [node]="node"></app-node>
+      }
       }
     </div>
 

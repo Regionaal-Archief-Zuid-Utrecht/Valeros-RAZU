@@ -1,19 +1,15 @@
 <div class="w-full flex justify-between items-center">
   <ul class="menu menu-horizontal gap-2 rounded-box">
     <li>
-      <button
-        type="button"
-        app-filter-button
-        class="relative"
+      <button type="button" app-filter-button class="relative active:!bg-primary active:!text-primary-content"
         [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
-        [attr.aria-expanded]="filterDrawer.isOpen()"
-      ></button>
+        [attr.aria-expanded]="filterDrawer.isOpen()"></button>
     </li>
   </ul>
 
   @if (
-    Settings.ui.showViewModeSelect && breakpoint.isBreakpointOrLarger("md")
+  Settings.ui.showViewModeSelect && breakpoint.isBreakpointOrLarger("md")
   ) {
-    <app-view-mode-select />
+  <app-view-mode-select />
   }
 </div>
