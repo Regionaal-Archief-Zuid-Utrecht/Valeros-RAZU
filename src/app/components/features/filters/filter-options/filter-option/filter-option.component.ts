@@ -68,6 +68,30 @@ export class FilterOptionComponent implements OnInit {
     return ` (${formatNumber(count)})`;
   }
 
+  // TODO: Reduce calls if necessary for performance reasons
+  get sortedValues(): FilterOptionValueModel[] {
+    if (!this.values) {
+      return [];
+    }
+
+    return [...this.values].sort((a, b) => {
+      const aIsSelected = this.filterService.has(
+        a.ids,
+        FilterType.FieldAndValue,
+      );
+      const bIsSelected = this.filterService.has(
+        b.ids,
+        FilterType.FieldAndValue,
+      );
+
+      if (aIsSelected !== bIsSelected) {
+        return bIsSelected ? 1 : -1;
+      }
+
+      return 0;
+    });
+  }
+
   get hasMoreToShow(): boolean {
     if (!this.values) {
       return false;

@@ -5,7 +5,7 @@
   </legend>
   <div
     class="form-control flex-row"
-    *ngFor="let value of values?.slice(0, numShowing)"
+    *ngFor="let value of sortedValues?.slice(0, numShowing)"
   >
     <label class="label text" for="filter-{{ value.ids[0] }}">
       <input
