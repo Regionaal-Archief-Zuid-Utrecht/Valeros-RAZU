@@ -27,7 +27,7 @@ import { UrlService } from '../../../../services/url.service';
   styleUrl: './mirador.component.scss',
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
-  private _viewer?: any;
+  viewer?: any;
   private _initializeDebounceTimer?: number;
   containerId: string = '';
 
@@ -82,9 +82,9 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       this._initializeDebounceTimer = undefined;
     }
 
-    if (this._viewer) {
-      this._viewer.unmount();
-      this._viewer = undefined;
+    if (this.viewer) {
+      this.viewer.unmount();
+      this.viewer = undefined;
     }
 
     const styleElements = document.querySelectorAll('style[data-jss]');
@@ -105,7 +105,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
 
     const pageNum = this.urlService.getPageNumberFromUrl();
 
-    this._viewer = await this.ngZone.runOutsideAngular(async () => {
+    this.viewer = await this.ngZone.runOutsideAngular(async () => {
       const manifestUrl: string | null =
         await this.iiifService.createManifestBlob(
           this.nodeId,
@@ -165,7 +165,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       return miradorInstance;
     });
 
-    console.log('Mirador viewer', this._viewer);
+    console.log('Mirador viewer', this.viewer);
     this.miradorHighlight.init();
   }
 
