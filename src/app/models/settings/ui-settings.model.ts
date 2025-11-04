@@ -5,6 +5,7 @@ export interface UiSettings {
   labelMaxChars: number;
   sectionNextToTableWidth: { search: string; details: string };
   imageForWhenLoadingFails: string;
+  imageForWhenImageIsInaccessible: string;
   /** Used to switch between list view, grid view, etc. */
   showViewModeSelect: boolean;
   header: HeaderSettings;

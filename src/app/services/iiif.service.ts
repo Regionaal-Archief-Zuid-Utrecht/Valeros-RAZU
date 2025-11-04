@@ -223,7 +223,7 @@ export class IIIFService {
       : false;
 
     if (showPlaceholders) {
-      this._replaceCanvasesWithPlaceholders(canvases);
+      await this._replaceCanvasesWithPlaceholders(canvases);
       console.log('Canvases', canvases);
     }
 
@@ -292,16 +292,25 @@ export class IIIFService {
     this._blobUrls.clear();
   }
 
-  private _replaceCanvasesWithPlaceholders(canvases: Canvas[]): void {
-    const placeholderText = 'Afbeelding+niet+beschikbaar';
-    const placeholderDimensions: { width: number; height: number } = {
-      width: 600,
-      height: 400,
+  private async _replaceCanvasesWithPlaceholders(
+    canvases: Canvas[],
+  ): Promise<void> {
+    const imageUrl = Settings.ui.imageForWhenImageIsInaccessible;
+    let placeholderDimensions: { width: number; height: number } = {
+      width: 1920,
+      height: 1080,
     };
+
+    try {
+      placeholderDimensions =
+        await this.imageService.getImageDimensions(imageUrl);
+    } catch (error) {
+      console.error('Failed to get image dimensions:', imageUrl, error);
+    }
+
     canvases.forEach((canvas) => {
       if (canvas.thumbnail && canvas.thumbnail.length > 0) {
-        canvas.thumbnail[0].id =
-          'https://placehold.co/100x100/DDD/AAA.jpg?text=' + placeholderText;
+        canvas.thumbnail[0].id = imageUrl;
         if ('service' in canvas.thumbnail[0]) {
           delete (canvas.thumbnail[0] as any).service;
         }
@@ -324,8 +333,7 @@ export class IIIFService {
                   : [annotation.body];
                 bodies.forEach((bodyItem) => {
                   if (typeof bodyItem === 'object' && bodyItem.id) {
-                    bodyItem.id = `https://placehold.co/${placeholderDimensions.width}x${placeholderDimensions.height}/DDD/AAA.jpg?text=${placeholderText}`;
-                    console.log('AA', bodyItem.id);
+                    bodyItem.id = Settings.ui.imageForWhenImageIsInaccessible;
                   }
                   if (typeof bodyItem === 'object' && 'service' in bodyItem) {
                     delete (bodyItem as any).service;
