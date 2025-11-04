@@ -5,8 +5,7 @@
     [disabled]="search.isLoading.value"
     *ngIf="search.hasMoreResultsToLoad"
     role="form"
-    aria-label="Load more results"
-    aria-labelledby="load-more-results-main-search"
+    [attr.aria-label]="'search-interface.load-more-results' | translate"
   >
     <span
       class="loading loading-spinner loading-xs"

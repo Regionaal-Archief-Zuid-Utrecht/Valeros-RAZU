@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import type { estypes } from '@elastic/elasticsearch';
-import { BehaviorSubject, skip, take } from 'rxjs';
+import { BehaviorSubject, filter, skip, take } from 'rxjs';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
@@ -158,19 +158,25 @@ export class SearchService {
   }
 
   initSearchOnUrlChange() {
-    this.route.queryParams.pipe(take(1)).subscribe((queryParams) => {
-      console.log('INITIAL LOAD');
-      const filtersParam: string | undefined =
-        queryParams[Settings.url.params.filters];
-      if (filtersParam) {
-        this.filters.onUpdateFromURLParam(filtersParam);
-      }
+    this.route.queryParams
+      .pipe(
+        filter((params) => Object.keys(params).length > 0),
+        take(1),
+      )
+      .subscribe((queryParams) => {
+        const filtersParam: string | undefined =
+          queryParams[Settings.url.params.filters];
+        if (filtersParam) {
+          this.filters.onUpdateFromURLParam(filtersParam);
+        }
 
-      setTimeout(() => this._searchOnUrlChange(queryParams));
-    });
+        setTimeout(() => this._searchOnUrlChange(queryParams));
+      });
 
     this.route.queryParams.pipe(skip(1)).subscribe((queryParams: Params) => {
-      this._searchOnUrlChange(queryParams);
+      setTimeout(() => {
+        this._searchOnUrlChange(queryParams);
+      });
     });
   }
 

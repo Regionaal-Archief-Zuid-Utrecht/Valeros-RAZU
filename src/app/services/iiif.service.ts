@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Canvas, Manifest } from '@iiif/presentation-3';
 import mime from 'mime';
 import { Settings } from '../config/settings';
+import { intersects } from '../helpers/util.helper';
+import { CopyrightData } from '../models/IIIF/copyright-data.model';
 import { IIIFItem } from '../models/IIIF/iiif-item.model';
 import { ImageService } from './image.service';
 import { SparqlService } from './sparql.service';
@@ -202,9 +204,28 @@ export class IIIFService {
     id: string,
     label: string,
     canvases: Canvas[],
-  ): Promise<Manifest> {
-    const copyrightNotice: string | null =
-      await this.sparql.getCopyrightNotice(id);
+  ): Promise<Manifest | null> {
+    const copyrightData: CopyrightData[] | null =
+      await this.sparql.getCopyrightData(id);
+    const copyrightNotice: string | undefined = copyrightData
+      ?.map((data) => data.copyrightNotice)
+      .join(', ');
+    const beperkingGebruikTypes: string[] | undefined = copyrightData?.map(
+      (data) => data.beperkingGebruikType,
+    );
+
+    // TODO: Make non-RAZU specific
+    const showPlaceholders = copyrightData
+      ? intersects(
+          beperkingGebruikTypes ?? [],
+          Settings.iiif.showPlaceholdersForCopyrightType || [],
+        )
+      : false;
+
+    if (showPlaceholders) {
+      this._replaceCanvasesWithPlaceholders(canvases);
+      console.log('Canvases', canvases);
+    }
 
     const manifest: Manifest = {
       '@context': 'http://iiif.io/api/presentation/3/context.json',
@@ -245,11 +266,14 @@ export class IIIFService {
       return null;
     }
 
-    const manifest: Manifest = await this.generateCanvasesManifest(
+    const manifest: Manifest | null = await this.generateCanvasesManifest(
       nodeId ?? '',
       nodeLabel ?? '',
       canvases,
     );
+    if (!manifest) {
+      return null;
+    }
     console.log('Created manifest:', manifest);
 
     const manifestFile = new File([JSON.stringify(manifest)], 'manifest.json', {
@@ -266,5 +290,56 @@ export class IIIFService {
   private _cleanup() {
     this._blobUrls.forEach((url) => URL.revokeObjectURL(url));
     this._blobUrls.clear();
+  }
+
+  private _replaceCanvasesWithPlaceholders(canvases: Canvas[]): void {
+    const placeholderText = 'Afbeelding+niet+beschikbaar';
+    const placeholderDimensions: { width: number; height: number } = {
+      width: 600,
+      height: 400,
+    };
+    canvases.forEach((canvas) => {
+      if (canvas.thumbnail && canvas.thumbnail.length > 0) {
+        canvas.thumbnail[0].id =
+          'https://placehold.co/100x100/DDD/AAA.jpg?text=' + placeholderText;
+        if ('service' in canvas.thumbnail[0]) {
+          delete (canvas.thumbnail[0] as any).service;
+        }
+      }
+
+      if (canvas.height) {
+        canvas.height = placeholderDimensions.height;
+      }
+      if (canvas.width) {
+        canvas.width = placeholderDimensions.width;
+      }
+
+      if (canvas.items && canvas.items.length > 0) {
+        canvas.items.forEach((annotationPage) => {
+          if (annotationPage.items && annotationPage.items.length > 0) {
+            annotationPage.items.forEach((annotation) => {
+              if (annotation.body) {
+                const bodies = Array.isArray(annotation.body)
+                  ? annotation.body
+                  : [annotation.body];
+                bodies.forEach((bodyItem) => {
+                  if (typeof bodyItem === 'object' && bodyItem.id) {
+                    bodyItem.id = `https://placehold.co/${placeholderDimensions.width}x${placeholderDimensions.height}/DDD/AAA.jpg?text=${placeholderText}`;
+                    console.log('AA', bodyItem.id);
+                  }
+                  if (typeof bodyItem === 'object' && 'service' in bodyItem) {
+                    delete (bodyItem as any).service;
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+
+      if (canvas.service) {
+        delete canvas.service;
+      }
+    });
   }
 }

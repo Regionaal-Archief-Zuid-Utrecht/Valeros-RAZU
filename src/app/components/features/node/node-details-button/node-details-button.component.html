@@ -1,16 +1,12 @@
 <a
-  class="leading-none"
+  class="leading-none hidden sm:inline-block"
   [routerLink]="details.getLink(node)"
   *ngIf="node && !details.showing.value"
+  aria-hidden="true"
+  tabindex="-1"
 >
-  <span class="mr-1 hidden sm:inline-block hover:underline"
+  <span class="mr-1 hover:underline"
     >{{ "records-interface.show-details" | translate }}
-    <ng-icon
-      [svg]="featherArrowRight"
-      class="text-xl relative top-[0.3rem]"
-      accessible
-      role="region"
-      accessibleLabelledBy="details-back-button"
-      [accessibilityLabel]="'See details for ' + node['@id'][0]['value']"
+    <ng-icon [svg]="featherArrowRight" class="text-xl relative top-[0.3rem]"
   /></span>
 </a>

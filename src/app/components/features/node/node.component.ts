@@ -1,4 +1,10 @@
-import { AsyncPipe, Location, NgClass, NgIf } from '@angular/common';
+import {
+  AsyncPipe,
+  Location,
+  NgClass,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
 import {
   Component,
   Input,
@@ -34,6 +40,7 @@ import { SnippetComponent } from '../snippet/snippet.component';
 import { NodeDetailsButtonComponent } from './node-details-button/node-details-button.component';
 import { NodeEndpointComponent } from './node-endpoint/node-endpoint.component';
 import { NodeHierarchyComponent } from './node-hierarchy/node-hierarchy.component';
+import { NodeLabelComponent } from './node-label/node-label.component';
 import { NodeLinkComponent } from './node-link/node-link.component';
 import { NodePermalinkButtonComponent } from './node-permalink-button/node-permalink-button.component';
 import { FileRendererComponent } from './node-render-components/predicate-render-components/file-renderer/file-renderer.component';
@@ -60,6 +67,8 @@ import { NodeTypesComponent } from './node-types/node-types.component';
     FileRendererComponent,
     MiradorComponent,
     SnippetComponent,
+    NodeLabelComponent,
+    NgTemplateOutlet,
   ],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',

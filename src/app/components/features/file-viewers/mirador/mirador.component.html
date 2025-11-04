@@ -1,3 +1,9 @@
 <div class="w-full h-full relative">
-  <div id="mirador"></div>
+  <div [id]="containerId"></div>
+
+  @if (!viewer) {
+    <div class="absolute inset-0 flex items-center justify-center">
+      <span class="loading loading-spinner"></span>
+    </div>
+  }
 </div>

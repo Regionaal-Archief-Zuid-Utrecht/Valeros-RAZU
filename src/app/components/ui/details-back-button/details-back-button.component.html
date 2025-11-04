@@ -1,12 +1,12 @@
 <button
   (click)="routing.goBackOrDefault()"
   *ngIf="details.showing.value && routing.hasHistory()"
-  class="mt-2 mb-2 text-lg font-bold hover:underline"
+  class="mt-0 mb-1 sm:my-2 text-base sm:text-lg font-bold hover:underline"
 >
   <span
     role="navigation"
     aria-labelledby="details-back-button"
-    aria-label="Go back"
+    [attr.aria-label]="'general.back' | translate"
     ><ng-icon [svg]="featherArrowLeft" class="relative top-[0.15rem] mr-2" />
 
     {{ "general.back" | translate }}</span

@@ -1,0 +1,13 @@
+<div
+  class="flex items-center gap-2 px-4 py-1 rounded-full outline outline-1 outline-base-300"
+  [attr.aria-label]="ariaLabel"
+  role="presentation"
+>
+  <span class="flex-1" [innerHTML]="formattedContent" aria-hidden="true"></span>
+  <img
+    src="assets/icons/search-black.svg"
+    alt="Search icon"
+    class="h-4 w-4 opacity-70 select-none"
+    aria-hidden="true"
+  />
+</div>

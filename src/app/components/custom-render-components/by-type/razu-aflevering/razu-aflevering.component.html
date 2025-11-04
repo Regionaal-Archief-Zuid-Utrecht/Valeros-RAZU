@@ -9,8 +9,8 @@
 
   <!-- For each isOnderdeelVan, show details -->
   <div *ngFor="let onderdeelVanId of onderdeelVanIds" class="related-item">
-    <details>
-      <summary>
+    <details role="group" (toggle)="onDetailsToggle($event)">
+      <summary role="heading" aria-level="2" tabindex="0">
         <app-hop-link
           [data]="{
             value: onderdeelVanId ?? '',
@@ -22,7 +22,7 @@
         >
         </app-hop-link>
       </summary>
-      <div>
+      <div role="region">
         <!-- dekkingInRuimte -->
         <h5>Uitgebracht in</h5>
         <div>
@@ -58,14 +58,7 @@
         >
           <span *ngIf="hasBeginDateForId(onderdeelVanId)"
             >Van
-            {{
-              getBeginDate(onderdeelVanId)
-                | date
-                  : "d MMMM
-                        y"
-                  : ""
-                  : "nl"
-            }}
+            {{ getBeginDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl" }}
           </span>
           <span
             *ngIf="
@@ -76,12 +69,7 @@
             tot
           </span>
           <span *ngIf="hasEndDateForId(onderdeelVanId)">{{
-            getEndDate(onderdeelVanId)
-              | date
-                : "d MMMM
-                        y"
-                : ""
-                : "nl"
+            getEndDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl"
           }}</span>
         </div>
         <div
@@ -100,19 +88,26 @@
 
 <!-- beperkingGebruik data -->
 <div *ngIf="!loading && data?.node" class="node-data">
-  <h4>
-    Auteursrecht en openbaarheid
+  <div class="flex items-center gap-2 mb-2">
+    <h4 class="inline-block mb-0">Auteursrecht en openbaarheid</h4>
     <button
       type="button"
-      class="info-button"
-      title="Informatie over auteursrecht en openbaarheid"
+      class="info-button relative bottom-[0.15rem]"
+      [attr.aria-label]="'Informatie over auteursrecht en openbaarheid'"
+      [attr.aria-expanded]="showCopyrightInfo"
+      aria-controls="copyright-info-panel"
       (click)="showCopyrightInfo = !showCopyrightInfo"
     >
-      <ng-icon [svg]="featherHelpCircle"></ng-icon>
+      <ng-icon [svg]="featherHelpCircle" aria-hidden="true"></ng-icon>
     </button>
-  </h4>
+  </div>
 
-  <div *ngIf="showCopyrightInfo" class="info-panel mb-3">
+  <div
+    *ngIf="showCopyrightInfo"
+    class="info-panel mb-3"
+    id="copyright-info-panel"
+    role="region"
+  >
     <p>
       Niet elk stuk dat u ziet op deze website is vrij beschikbaar en bruikbaar.
       Op basis van de Archiefwet, de Algemene Verordening Gegevensbescherming
@@ -127,9 +122,9 @@
 
   <!-- For each beperkingGebruik, show details -->
   <div *ngFor="let beperkingId of beperkingGebruikIds" class="beperking-item">
-    <details>
+    <details role="group" (toggle)="onDetailsToggle($event)">
       <!-- Use prefLabel as summary -->
-      <summary>
+      <summary role="heading" aria-level="2" tabindex="0">
         <app-hop-link
           [data]="{
             value: beperkingId ?? '',
@@ -145,7 +140,7 @@
         </app-hop-link>
       </summary>
       <!-- Termijn -->
-      <div>
+      <div role="region">
         <div *ngIf="beperkingGebruikTermijnMap.get(beperkingId)?.length">
           <h5>Vervaldatum</h5>
 
@@ -203,9 +198,9 @@
   "
 >
   <details (toggle)="onDownloadToggle($event)">
-    <summary>Downloaden</summary>
+    <summary role="heading" aria-level="2">Downloaden</summary>
     <div *ngIf="repMetaFetching">Downloadlinks aan het ophalen...</div>
-    <ul class="list-disc ml-6" *ngIf="repMetaLoaded">
+    <ol class="list-decimal ml-6" *ngIf="repMetaLoaded">
       <ng-container
         *ngFor="
           let rep of data?.node?.[
@@ -231,7 +226,7 @@
         </ng-container>
         <ng-template #skip></ng-template>
       </ng-container>
-    </ul>
+    </ol>
   </details>
 </ng-container>
 <!-- For debugging, you can show the raw data -->

@@ -1,25 +1,21 @@
 <div
   class="flex flex-col gap-1 mb-4"
-  [ngClass]="[
-    settings.showingFilterPanelOnSide() ? 'lg:gap-1' : 'lg:flex-row lg:gap-2',
-  ]"
   *ngIf="filters.options.value"
   role="search"
   aria-labelledby="filter-group"
   aria-label="Filters"
 >
-  <!-- Collapsible Parent Section -->
-  <div class="bg-background w-full">
+  <div class="w-full">
     <div class="flex justify-between items-center px-4 py-2">
-      <p class="text-xl font-bold">
+      <h2 class="text-xl font-bold">
         {{ "search-interface.filters_title" | translate }}
-      </p>
+      </h2>
       <div class="flex items-center gap-2">
         <button
           *ngIf="filters.enabled.value.length > 0"
           class="btn btn-xs btn-secondary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
           (click)="clearFilters()"
-          aria-label="Clear filters"
+          [attr.aria-label]="'search-interface.clear_filters' | translate"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +24,7 @@
             viewBox="0 0 24 24"
             stroke="currentColor"
             role="region"
-            aria-labelledby="clear-filters"
-            aria-label="Clear filters cross icon"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -42,66 +37,41 @@
             {{ "search-interface.clear_filters" | translate }}
           </span>
         </button>
-        <!-- Collapse Arrow -->
-        <button
-          class="focus:outline-none"
-          (click)="uix.filterGroupExpanded = !uix.filterGroupExpanded"
-          aria-label="Toggle filter group"
-          role="region"
-          aria-labelledby="filter-group"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 transform transition-transform"
-            [ngClass]="{ 'rotate-180': uix.filterGroupExpanded }"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            role="region"
-            aria-labelledby="filter-group"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </button>
       </div>
     </div>
-    <div
-      class="transition-all overflow-hidden overflow-y-auto"
-      [ngClass]="
-        uix.filterGroupExpanded ? 'max-h-96 lg:max-h-[100vh]' : 'max-h-0'
-      "
-    >
+    <div class="transition-all overflow-hidden overflow-y-auto">
       <!-- Existing Filters Logic -->
       <ng-container *ngFor="let filterId of Object.keys(filters.options.value)">
         <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
           <div
-            class="collapse collapse-arrow bg-primary text-white border shadow hover:shadow-lg transition-shadow duration-200"
+            class="collapse collapse-arrow bg-base-200 text-black"
+            [attr.aria-label]="
+              'Filter op: ' + filters.getOptionById(filterId).label
+            "
           >
             <input
               type="checkbox"
+              role="button"
               name="filter-accordion"
               [(ngModel)]="ui.accordionExpandedStates[filterId]"
               [id]="'Filter by ' + filters.getOptionById(filterId).label"
+              [attr.aria-expanded]="ui.accordionExpandedStates[filterId]"
             />
-            <div class="collapse-title">
+            <h3 class="collapse-title">
               <label
                 [for]="'Filter by ' + filters.getOptionById(filterId).label"
+                class="font-bold underline"
                 >{{ filters.getOptionById(filterId).label }}
               </label>
               <app-filter-count
                 [count]="
-                  filters.getOptionEnabledFiltersCount(
+                  filters.getOptionEnabledFiltersCountStr(
                     filterId,
                     FilterType.FieldAndValue
                   )
                 "
               />
-            </div>
+            </h3>
             <div class="collapse-content flex">
               <app-filter-option
                 [filterId]="filterId"

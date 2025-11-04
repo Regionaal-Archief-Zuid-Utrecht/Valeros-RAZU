@@ -11,6 +11,9 @@ import { NodeService } from './node/node.service';
 })
 export class DetailsService {
   showing: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  node: BehaviorSubject<NodeModel | undefined> = new BehaviorSubject<
+    NodeModel | undefined
+  >(undefined);
 
   constructor(
     private nodes: NodeService,

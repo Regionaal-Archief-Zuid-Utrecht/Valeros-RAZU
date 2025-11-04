@@ -79,6 +79,10 @@ export class FilterOptionComponent implements OnInit {
     this.numShowing += Settings.ui.filterOptions.additionalNumToShowOnClick;
   }
 
+  getFilterLabelId(value: FilterOptionValueModel) {
+    return 'filter-label-' + value.ids[0]?.replaceAll(' ', '-');
+  }
+
   protected readonly FilterType = FilterType;
   protected readonly formatNumber = formatNumber;
 }

@@ -16,8 +16,11 @@ import { AutocompleteService } from '../../../../services/search/autocomplete.se
 import { ElasticService } from '../../../../services/search/elastic.service';
 import { SearchService } from '../../../../services/search/search.service';
 import { SettingsService } from '../../../../services/settings.service';
+import { FilterDrawerService } from '../../../../services/ui/filter-drawer.service';
 import { UrlService } from '../../../../services/url.service';
 import { SearchAutocompleteComponent } from '../search-autocomplete/search-autocomplete.component';
+import { FilterButtonComponent } from '../search-buttons-toolbar/filter-button/filter-button.component';
+import { SearchTipsComponent } from '../search-tips/search-tips.component';
 
 @Component({
   selector: 'app-search-input',
@@ -27,6 +30,8 @@ import { SearchAutocompleteComponent } from '../search-autocomplete/search-autoc
     SearchAutocompleteComponent,
     TranslatePipe,
     NgIcon,
+    FilterButtonComponent,
+    SearchTipsComponent,
   ],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
@@ -44,6 +49,7 @@ export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
     public autocomplete: AutocompleteService,
     public url: UrlService,
     public settings: SettingsService,
+    public filterDrawer: FilterDrawerService,
   ) {}
 
   ngOnInit() {

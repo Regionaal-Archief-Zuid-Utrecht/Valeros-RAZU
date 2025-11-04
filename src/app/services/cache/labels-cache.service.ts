@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Settings } from '../../config/settings';
 import { replacePrefixes } from '../../helpers/util.helper';
 import { SparqlService } from '../sparql.service';
@@ -9,7 +10,7 @@ import { SparqlService } from '../sparql.service';
 export class LabelsCacheService {
   private _idsToCacheLabelFor: Set<string> = new Set();
   private _labelsBeingCachedForIds: Set<string> = new Set();
-  labels: { [id: string]: string } = {};
+  labels: BehaviorSubject<{ [id: string]: string }> = new BehaviorSubject({});
 
   constructor(public sparql: SparqlService) {
     void this._scheduleBatchCacheRequests();
@@ -39,9 +40,9 @@ export class LabelsCacheService {
       this._labelsBeingCachedForIds.add(id);
 
       // While loading, set label based on ID as a fallback (also in case no label is retrieved)
-      const labelAlreadyDefined = id in this.labels;
+      const labelAlreadyDefined = id in this.labels.value;
       if (!labelAlreadyDefined) {
-        this.labels[id] = replacePrefixes(id);
+        this.labels.next({ ...this.labels.value, [id]: replacePrefixes(id) });
       }
     });
 
@@ -49,7 +50,8 @@ export class LabelsCacheService {
 
     for (const idAndLabel of idsAndLabels) {
       const id = idAndLabel['@id'];
-      this.labels[id] = idAndLabel.label;
+      this.labels.next({ ...this.labels.value, [id]: idAndLabel.label });
+
       this._labelsBeingCachedForIds.delete(id);
     }
   }
@@ -60,6 +62,6 @@ export class LabelsCacheService {
     }
     this._idsToCacheLabelFor.add(id);
 
-    return this.labels?.[id] ?? replacePrefixes(id);
+    return this.labels.value?.[id] ?? replacePrefixes(id);
   }
 }

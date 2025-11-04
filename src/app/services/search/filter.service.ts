@@ -128,9 +128,14 @@ export class FilterService {
   }
 
   private _restorePreviousFilters() {
-    const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) =>
-      this._filterExistsInOptions(prevEnabledFilter),
-    );
+    const restoredFilters = this.prevEnabled.filter((prevEnabledFilter) => {
+      if (!prevEnabledFilter.filterId) {
+        return false;
+      }
+      const filterStillExists = this._filterExistsInOptions(prevEnabledFilter);
+      const shouldShowFilter = this.shouldShow(prevEnabledFilter.filterId);
+      return filterStillExists && shouldShowFilter;
+    });
 
     const shouldUpdateEnabledFilters =
       JSON.stringify(restoredFilters) !== JSON.stringify(this.enabled.value);
@@ -156,6 +161,8 @@ export class FilterService {
       this.data.convertFiltersFromIdsFormat(urlFilters);
 
     this.enabled.next(filters);
+
+    this.searchTrigger.emit({ clearFilters: false });
   }
 
   async updateFilterOptionValues(query: string) {
@@ -338,10 +345,7 @@ export class FilterService {
     return undefined;
   }
 
-  getOptionEnabledFiltersCount(
-    filterId: string,
-    type: FilterType,
-  ): string | undefined {
+  getOptionEnabledFiltersCount(filterId: string, type: FilterType): number {
     const optionValues: FilterOptionValueModel[] =
       this.getOptionById(filterId).values;
     const count = optionValues.reduce(
@@ -349,7 +353,15 @@ export class FilterService {
       0,
     );
 
-    return this.getEnabledFiltersCountStr(count);
+    return count;
+  }
+
+  getOptionEnabledFiltersCountStr(
+    filterId: string,
+    type: FilterType,
+  ): string | undefined {
+    const filtersCount = this.getOptionEnabledFiltersCount(filterId, type);
+    return this.getEnabledFiltersCountStr(filtersCount);
   }
 
   clearEnabled() {

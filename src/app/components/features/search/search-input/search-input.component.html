@@ -3,40 +3,52 @@
   class="alert alert-soft mb-4"
   *ngIf="!settings.hasEndpoints()"
 >
-  <ng-icon [svg]="featherAlertTriangle" />
+  <ng-icon [svg]="featherAlertTriangle" aria-hidden="true" />
   <span>Let op: Geen endpoints gevonden</span>
 </div>
 
 <div
-  class="dropdown dropdown-bottom z-[9999] flex"
+  class="dropdown dropdown-bottom z-[9999] flex w-full justify-center relative"
   role="search"
-  aria-labelledby="main-search"
-  aria-label="search"
+  aria-label="Zoeken"
 >
   <label
-    class="flex input input-bordered items-center gap-2 rounded-full w-full shadow hover:shadow-lg transition-shadow"
+    class="flex input input-bordered items-center gap-2 sm:gap-2 rounded-box w-full max-w-2xl mx-auto min-w-0 shadow hover:shadow-lg transition-shadow"
     for="search-input"
   >
+    <!-- <img
+      alt="Logo"
+      class="h-full py-3 mr-0 opacity-40 fill-black"
+      src="/assets/img/logo_black.svg"
+    /> -->
+
     <input
       type="text"
       id="search-input"
-      class="grow"
-      [placeholder]="'search-interface.search-placeholder' | translate"
+      class="grow min-w-0"
+      [placeholder]="'search-interface.search-placeholder-short' | translate"
       value="{{ search.queryStr }}"
       [(ngModel)]="searchInput"
       (keyup.enter)="onSearch()"
       (ngModelChange)="onSearchInputChange()"
       tabindex="0"
+      [attr.aria-label]="'search-interface.search-placeholder-full' | translate"
     />
 
     <button
-      class="btn btn-primary btn-sm rounded-full text-white shadow-sm hover:shadow transition-shadow"
+      class="search-input-button btn-primary"
       [disabled]="search.isLoading.value"
       (click)="onSearch()"
+      [attr.aria-label]="
+        search.isLoading.value
+          ? ('search-interface.searching' | translate)
+          : ('search-interface.search-e-depot-razu' | translate)
+      "
     >
       <span
         class="loading loading-spinner loading-xs opacity-70"
         *ngIf="search.isLoading.value"
+        aria-hidden="true"
       ></span>
 
       <img
@@ -44,11 +56,31 @@
         alt="Zoek icoon"
         class="h-4"
         *ngIf="!search.isLoading.value"
+        aria-hidden="true"
       />
       <!--    <ng-icon [svg]="featherSearch" />-->
-      <span>{{ "search-interface.search" | translate }}</span>
+      <span aria-hidden="true">{{
+        "search-interface.search" | translate
+      }}</span>
     </button>
+
+    <app-search-tips />
   </label>
+
+  @if (router.url.startsWith("/search")) {
+    <ul class="menu menu-horizontal rounded-box p-0 my-auto">
+      <li>
+        <button
+          type="button"
+          app-filter-button
+          class="ml-1 px-2 sm:px-3 md:hidden"
+          [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+          [attr.aria-expanded]="filterDrawer.isOpen()"
+          aria-controls="filter-drawer-checkbox"
+        ></button>
+      </li>
+    </ul>
+  }
 
   <ul
     tabindex="0"

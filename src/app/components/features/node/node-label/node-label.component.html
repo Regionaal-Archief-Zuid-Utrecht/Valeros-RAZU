@@ -1,4 +1,9 @@
-<span [innerHTML]="renderedLabelHtml" class="w-full"></span>
+<ng-container [ngSwitch]="tag">
+  <h1 *ngSwitchCase="'h1'" [innerHTML]="renderedLabelHtml"></h1>
+  <h2 *ngSwitchCase="'h2'" [innerHTML]="renderedLabelHtml"></h2>
+  <h3 *ngSwitchCase="'h3'" [innerHTML]="renderedLabelHtml"></h3>
+  <span *ngSwitchDefault [innerHTML]="renderedLabelHtml"></span>
+</ng-container>
 <button
   [ngClass]="allowLabelExpand ? 'text-primary clickable' : ''"
   (click)="onEllipsisClick($event)"

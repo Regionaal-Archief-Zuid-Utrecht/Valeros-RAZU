@@ -7,12 +7,12 @@ export const razuSortingSettings: SortingSettings = {
   options: {
     ...sortingSettings.options,
     'title-a-z': {
-      fields: ['naam.raw'],
+      fields: ['naam.keyword'],
       label: 'Titel (A-Z)',
       order: SortOrder.Ascending,
     },
     'title-z-a': {
-      fields: ['naam.raw'],
+      fields: ['naam.keyword'],
       label: 'Titel (Z-A)',
       order: SortOrder.Descending,
     },

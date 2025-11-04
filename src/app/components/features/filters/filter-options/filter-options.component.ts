@@ -40,13 +40,7 @@ export class FilterOptionsComponent {
   protected readonly Settings = Settings;
 
   clearFilters(): void {
-    // First toggle off all enabled filters
     this.filters.toggleMultiple([...this.filters.enabled.value]);
-    // Then trigger a search
     this.filters.searchTrigger.emit({ clearFilters: true });
   }
-  uix = {
-    filterGroupExpanded: true, // Default to expanded
-    accordionExpandedStates: {}, // Maintain individual filter states
-  };
 }

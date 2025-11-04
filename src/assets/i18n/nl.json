@@ -4,8 +4,11 @@
     "site-holder-short": "RAZU",
     "title": "E-depot RAZU",
     "page-title": "RAZU - Digitaal archief van Zuid-Utrecht",
+    "colofon-title": "RAZU - Colofon",
     "and": "en",
-    "back": "Terug"
+    "back": "Terug",
+    "close": "Sluiten",
+    "example": "Voorbeeld"
   },
   "homescreen": {
     "flavour-text-part-1": "Hier kunt u zoeken in de gecombineerde archieven van de gemeenten van",
@@ -15,11 +18,16 @@
     "hero-text-part-2-emphasis": "Zuid-Utrecht",
     "go-to-search": "Ga naar zoeken",
     "go-to-colofon": "Ga naar colofon",
-    "more-info": "Meer info"
+    "go-to-homepage": "Ga naar startpagina",
+    "more-info": "Meer info",
+    "sitemap": "Sitemap"
   },
   "search-interface": {
     "search": "Zoek",
-    "search-placeholder": "Bijv. 'Beleidsstuk'",
+    "search-e-depot-razu": "Zoek in E-depot RAZU",
+    "searching": "Zoeken",
+    "search-placeholder-full": "Zoek in E-depot RAZU, bijv. 'Beleidsstuk'",
+    "search-placeholder-short": "Bijv. 'Beleidsstuk'",
     "no-results-found": "Geen resultaten gevonden",
     "results": "resultaten",
     "show-details": "Toon details",
@@ -33,7 +41,37 @@
     "filters_title": "Filters",
     "filters_active_singular": "actieve filter",
     "filters_active_plural": "actieve filters",
-    "clear_filters": "Filters wissen"
+    "clear_filters": "Filters wissen",
+    "toggle-filter-panel": "Filterpaneel openen/sluiten",
+    "search-tips": "Zoektips",
+    "learn-more": "Meer informatie",
+    "tips": {
+      "exact-match": {
+        "title": "Exacte zoekopdracht",
+        "description": "Gebruik aanhalingstekens om een exacte zin of woordcombinatie te zoeken."
+      },
+      "wildcard": {
+        "title": "Wildcard zoeken",
+        "description": "Gebruik een asterisk (*) om meerdere karakters te vervangen in een woord."
+      },
+      "boolean": {
+        "title": "Boolean operatoren",
+        "description": "Gebruik AND, OR en NOT om je zoekopdracht te verfijnen."
+      },
+      "filters": {
+        "title": "Filters gebruiken",
+        "description": "Gebruik de filters aan de zijkant om je resultaten te verfijnen."
+      },
+      "relevance": {
+        "title": "Relevantie sortering",
+        "description": "Zoekresultaten worden automatisch gesorteerd op relevantie met behulp van Elasticsearch. De meest relevante resultaten worden bovenaan getoond."
+      },
+      "ocr": {
+        "title": "OCR tekstherkenning",
+        "description": "Krantentekst is verwerkt met OCR (Optical Character Recognition). Dit stelde ons in staat om een grote collectie doorzoekbaar te maken, maar de tekst kan soms herkenningsfouten bevatten."
+      }
+    }
+    
   },
   "records-interface": {
     "pointer-to": "Verwijzing naar",
@@ -52,5 +90,18 @@
     "period": "Periode",
     "maker": "Maker",
     "title": "Titel"
+  },
+  "accessibility": {
+    "skip-to-search": "Spring naar zoekveld",
+    "skip-to-filters": "Spring naar filters",
+    "skip-to-results": "Spring naar zoekresultaten",
+    "search-results-region": "Zoekresultaten",
+    "results-list": "Lijst met zoekresultaten",
+    "filter-panel": "Filter opties",
+    "loading": "Laden..."
+  },
+  "view-mode": {
+    "list-view": "Lijstweergave",
+    "grid-view": "Rasterweergave"
   }
 }

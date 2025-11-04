@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DetailsService } from '../../../services/details.service';
 import { NodeService } from '../../../services/node/node.service';
 import { SearchService } from '../../../services/search/search.service';
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit {
     public scroll: ScrollService,
     public details: DetailsService,
     public settings: SettingsService,
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {}

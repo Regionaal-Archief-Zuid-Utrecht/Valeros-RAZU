@@ -1,5 +1,5 @@
 <div
-  class="flex w-full bg-base-100 border mb-4 shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)]"
+  class="flex w-full bg-base-100 border mb-4 rounded-box shadow hover:shadow-lg transition-shadow duration-200 min-h-[calc(100%-1rem)]"
   *ngIf="node"
   [ngClass]="[
     (shouldShowSectionNextToTable() | async)
@@ -7,22 +7,8 @@
       : 'p-6',
   ]"
   [attr.data-scroll-id]="encodeURIComponent(nodes.getId(node))"
-  role="main"
-  aria-labelledby="search-results"
-  [attr.aria-label]="title"
 >
-  <!-- File renderer in details view, thumb on search page (left side of node) -->
-  <a
-    [routerLink]="details.showing.value ? null : details.getLink(node)"
-    queryParamsHandling="merge"
-    class="h-72 sm:h-auto"
-    [ngClass]="[
-      details.showing.value ? 'cursor-default' : '',
-      (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden',
-    ]"
-    [style.width]="sectionNextToTableWidth"
-    [style.min-width]="sectionNextToTableWidth"
-  >
+  <ng-template #fileContainer>
     <app-file-renderer
       [urls]="files.value"
       [shownInTableCell]="false"
@@ -32,10 +18,37 @@
     />
     <app-mirador
       [nodeId]="nodes.getId(node)"
-      [nodeLabel]="labelsCache.labels[nodes.getId(node)]"
+      [nodeLabel]="labelsCache.labels.value[nodes.getId(node)]"
       *ngIf="shouldShowIIIF$ | async"
     ></app-mirador>
-  </a>
+  </ng-template>
+
+  <div
+    class="h-72 sm:h-auto"
+    [ngClass]="[
+      'cursor-default',
+      (shouldShowSectionNextToTable() | async) ? 'inline-block' : 'hidden',
+    ]"
+    [style.width]="sectionNextToTableWidth"
+    [style.min-width]="sectionNextToTableWidth"
+  >
+    <!-- Thumb on search page (left side of node) -->
+    <ng-container *ngIf="!details.showing.value; else justContent">
+      <a
+        [routerLink]="details.getLink(node)"
+        queryParamsHandling="merge"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <ng-container *ngTemplateOutlet="fileContainer"></ng-container>
+      </a>
+    </ng-container>
+
+    <!-- File renderer in details view -->
+    <ng-template #justContent>
+      <ng-container *ngTemplateOutlet="fileContainer"></ng-container>
+    </ng-template>
+  </div>
 
   <!-- Node info table on search page -->
   <a
@@ -43,13 +56,16 @@
     queryParamsHandling="merge"
     *ngIf="!details.showing.value"
     class="w-full"
+    role="listitem"
+    [attr.aria-label]="title"
   >
     <div
       [ngClass]="shouldShowFileNextToTable() ? 'p-6' : 'p-0'"
       class="flex-grow relative"
     >
-      <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
-        <app-node-link [url]="details.getLink(node)" [label]="title" />
+      <div class="text-lg mr-6 font-bold" *ngIf="showTitle" aria-hidden="true">
+        <app-node-label [label]="title" [tag]="'h3'" />
+        <!-- <app-node-link [url]="details.getLink(node)" [label]="title" [] /> -->
       </div>
 
       <div class="w-full sm:px-4 sm:pr-32">
@@ -76,7 +92,7 @@
       <app-snippet
         *ngIf="showSnippet"
         [altoUrl]="node?.['URL_bestand']?.[0]?.value"
-        class="text-sm pr-32"
+        class="text-sm sm:pr-32"
       />
 
       <div
@@ -97,7 +113,11 @@
     *ngIf="details.showing.value"
   >
     <div class="text-lg mr-6 font-bold" *ngIf="showTitle">
-      <app-node-link [url]="details.getLink(node)" [label]="title" />
+      <app-node-link
+        [url]="details.getLink(node)"
+        [label]="title"
+        [tag]="'h1'"
+      />
     </div>
 
     <div class="w-full sm:px-4 sm:pr-32">

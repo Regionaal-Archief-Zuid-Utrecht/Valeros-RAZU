@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   Component,
   inject,
@@ -11,7 +10,7 @@ import { SearchService } from '../../../services/search/search.service';
 
 @Component({
   selector: 'app-snippet',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './snippet.component.html',
   styleUrl: './snippet.component.scss',
 })
@@ -46,7 +45,7 @@ export class SnippetComponent implements OnInit {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url: this.altoUrl, q: `*${query}*` }),
+        body: JSON.stringify({ url: this.altoUrl, q: `${query}` }),
       });
 
       if (!response.ok) {
