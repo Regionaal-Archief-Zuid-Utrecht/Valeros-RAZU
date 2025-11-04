@@ -36,7 +36,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    // this.initViewer();
+    this.initViewer();
   }
 
   ngOnChanges(changes: SimpleChanges) {
