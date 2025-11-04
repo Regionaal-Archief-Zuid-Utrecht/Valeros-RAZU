@@ -170,26 +170,39 @@ export class FilterService {
       this.options.value,
     );
 
-    const responses: estypes.SearchResponse<any>[] =
-      await this.elastic.getFilterOptions(
-        query,
-        filterOptionsList,
-        this.enabled.value,
+    const filterGroups = Object.keys(this.options.value);
+    const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
+      const filtersWithoutThisGroup = this.enabled.value.filter(
+        (filter) => filter.filterId !== filterGroupId,
       );
-    const docCounts: FieldDocCountsModel =
-      this._getFieldDocCountsFromResponses(responses);
+
+      const groupFilterOptions = [this.options.value[filterGroupId]];
+      return await this.elastic.getFilterOptions(
+        query,
+        groupFilterOptions,
+        filtersWithoutThisGroup,
+      );
+    });
+
+    const additionalResponses: estypes.SearchResponse<any>[] = 
+      await Promise.all(filterGroupPromises).then(responses => responses.flat());
+
+    const additionalDocCounts: FieldDocCountsModel =
+      this._getFieldDocCountsFromResponses(additionalResponses);
 
     const filterOptions = this.options.value;
-    for (const [_, filter] of Object.entries(filterOptions)) {
+    for (const [filterId, filter] of Object.entries(filterOptions)) {
       const filterValuesMap = new Map<
         string,
         { hitIds: string[]; doc_count: number }
       >();
 
+      const relevantDocCounts = additionalDocCounts;
+
       filter.fieldIds.forEach((fieldId) => {
         const elasticFieldId = this.data.replacePeriodsWithSpaces(fieldId);
         const docCountsForField: DocCountModel[] =
-          docCounts?.[elasticFieldId] ?? [];
+          relevantDocCounts?.[elasticFieldId] ?? [];
         const docCountsToShow: DocCountModel[] = docCountsForField.filter(
           (d) => {
             const valueId = d.key;
