@@ -31,7 +31,7 @@
 </fieldset>
 
 <button
-  class="btn btn-primary mt-2"
+  class="btn btn-primary mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
   (click)="onShowMoreClicked()"
   *ngIf="hasMoreToShow"
   [disabled]="filterService.loading.value"
