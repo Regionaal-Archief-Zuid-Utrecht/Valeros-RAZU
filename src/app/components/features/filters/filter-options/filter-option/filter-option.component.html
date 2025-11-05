@@ -36,7 +36,7 @@
   *ngIf="hasMoreToShow"
   [disabled]="filterService.loading.value"
   role="region"
-  aria-label="Load more results"
+  [attr.aria-label]="'search-interface.load-more-results' | translate"
 >
   {{ "search-interface.load-more-results" | translate }}
 </button>
