@@ -41,7 +41,7 @@ export class NodeService {
     preds: string[],
     direction: Direction | undefined = undefined,
     returnUniqueValues = false,
-  ) {
+  ): string[] {
     let objs = this.getObjs(node, preds);
     if (direction !== undefined) {
       objs = objs.filter((obj) => obj.direction === direction);
