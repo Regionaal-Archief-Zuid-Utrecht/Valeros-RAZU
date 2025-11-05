@@ -1,27 +1,45 @@
-<button #triggerButton
+<button
+  #triggerButton
   class="btn btn-md rounded-box btn-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 shadow hover:shadow-lg transition-shadow hover:bg-primary hover:text-primary-content"
-  (click)="openModal()" [attr.aria-label]="'search-interface.search-tips' | translate" aria-controls="searchmodal"
-  aria-haspopup="dialog" aria-expanded="false">
+  (click)="openModal()"
+  [attr.aria-label]="'search-interface.search-tips' | translate"
+  aria-controls="searchmodal"
+  aria-haspopup="dialog"
+  aria-expanded="false"
+>
   <ng-icon [svg]="featherInfo" aria-hidden="true" />
   <!-- <span class="hidden md:inline-block relative bottom-[0.05rem]">{{
     "search-interface.search-tips" | translate
   }}</span> -->
 </button>
 
-<dialog #modal class="modal" id="searchmodal" role="dialog" aria-modal="true" aria-labelledby="search-tips-title" inert>
+<dialog
+  #modal
+  class="modal"
+  id="searchmodal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="search-tips-title"
+  inert
+>
   <div class="modal-box max-w-2xl">
     <h3 id="search-tips-title" class="text-lg font-bold mb-4" tabindex="-1">
       {{ "search-interface.search-tips" | translate }}
     </h3>
 
-    <app-search-tip [title]="'search-interface.tips.exact-match.title' | translate" [description]="
+    <app-search-tip
+      [title]="'search-interface.tips.exact-match.title' | translate"
+      [description]="
         'search-interface.tips.exact-match.description' | translate
-      ">
+      "
+    >
       <app-search-tip-input content='"exact voorbeeld"' />
     </app-search-tip>
 
-    <app-search-tip [title]="'search-interface.tips.wildcard.title' | translate"
-      [description]="'search-interface.tips.wildcard.description' | translate">
+    <app-search-tip
+      [title]="'search-interface.tips.wildcard.title' | translate"
+      [description]="'search-interface.tips.wildcard.description' | translate"
+    >
       <div class="gap-2 flex flex-col">
         <app-search-tip-input content="archief*" />
         <app-search-tip-input content="*archief" />
@@ -29,8 +47,10 @@
       </div>
     </app-search-tip>
 
-    <app-search-tip [title]="'search-interface.tips.boolean.title' | translate"
-      [description]="'search-interface.tips.boolean.description' | translate">
+    <app-search-tip
+      [title]="'search-interface.tips.boolean.title' | translate"
+      [description]="'search-interface.tips.boolean.description' | translate"
+    >
       <div class="gap-2 flex flex-col">
         <app-search-tip-input content="term1 AND term2" />
         <app-search-tip-input content="term1 OR term2" />
@@ -38,26 +58,38 @@
       </div>
     </app-search-tip>
 
-    <app-search-tip [title]="'search-interface.tips.relevance.title' | translate"
-      [description]="'search-interface.tips.relevance.description' | translate">
+    <app-search-tip
+      [title]="'search-interface.tips.relevance.title' | translate"
+      [description]="'search-interface.tips.relevance.description' | translate"
+    >
       <p class="text-sm">
-        <a href="https://www.elastic.co/docs/get-started/" target="_blank" rel="noopener noreferrer"
-          class="link link-primary">
+        <a
+          href="https://www.elastic.co/docs/get-started/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link link-primary"
+        >
           {{ "search-interface.learn-more" | translate }}
         </a>
       </p>
     </app-search-tip>
 
-    <app-search-tip [title]="'search-interface.tips.ocr.title' | translate"
-      [description]="'search-interface.tips.ocr.description' | translate" />
+    <app-search-tip
+      [title]="'search-interface.tips.ocr.title' | translate"
+      [description]="'search-interface.tips.ocr.description' | translate"
+    />
 
-    <app-search-tip [title]="'search-interface.tips.filters.title' | translate"
-      [description]="'search-interface.tips.filters.description' | translate" />
+    <app-search-tip
+      [title]="'search-interface.tips.filters.title' | translate"
+      [description]="'search-interface.tips.filters.description' | translate"
+    />
 
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn btn-primary shadow hover:shadow-lg transition-shadow"
-          [attr.aria-label]="'general.close' | translate">
+        <button
+          class="btn btn-primary shadow hover:shadow-lg transition-shadow"
+          [attr.aria-label]="'general.close' | translate"
+        >
           {{ "general.close" | translate }}
         </button>
       </form>
