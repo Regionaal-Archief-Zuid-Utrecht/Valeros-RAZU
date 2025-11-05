@@ -55,6 +55,10 @@
                 {
                   "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
                   "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.production.settings.ts"
+                },
+                {
+                  "replace": "src/app/config/razu-settings/settings/matomo/razu-matomo.settings.ts",
+                  "with": "src/app/config/razu-settings/settings/matomo/razu-matomo.production.settings.ts"
                 }
               ]
             },

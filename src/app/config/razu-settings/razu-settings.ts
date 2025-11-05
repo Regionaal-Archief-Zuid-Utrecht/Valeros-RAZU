@@ -1,10 +1,10 @@
 import { SettingsModel } from '../../models/settings/settings.model';
 import { razuEndpointSettings } from './settings/endpoints/razu-endpoint.settings';
+import { razuMatomoSettings } from './settings/matomo/razu-matomo.settings';
 import { razuClusteringSettings } from './settings/razu-clustering.settings';
 import { razuFileRenderingSettings } from './settings/razu-file-rendering.settings';
 import { razuFilteringSettings } from './settings/razu-filtering.settings';
 import { razuIIIFSettings } from './settings/razu-iiif.settings';
-import { razuMatomoSettings } from './settings/razu-matomo.settings';
 import { razuNamespacePrefixes } from './settings/razu-namespace-prefixes.settings';
 import { razuNodeVisibilitySettings } from './settings/razu-node-visibility.settings';
 import { razuPredicateVisibilitySettings } from './settings/razu-predicate-visibility.settings';
