@@ -69,6 +69,11 @@ export class FilterOptionComponent implements OnInit {
   }
 
   // TODO: Reduce calls if necessary for performance reasons
+  get shownValues(): FilterOptionValueModel[] {
+    return this.sortedValues.slice(0, this.numShowing);
+  }
+
+  // TODO: Reduce calls if necessary for performance reasons
   get sortedValues(): FilterOptionValueModel[] {
     if (!this.values) {
       return [];
@@ -100,11 +105,31 @@ export class FilterOptionComponent implements OnInit {
   }
 
   onShowMoreClicked() {
+    const oldNumShowing = this.shownValues.length;
     this.numShowing += Settings.ui.filterOptions.additionalNumToShowOnClick;
+    const newNumShowing = this.shownValues.length;
+
+    if (newNumShowing > oldNumShowing) {
+      const focusOnNewFilter = () => {
+        const filterId: string = this.getFilterId(
+          this.shownValues[oldNumShowing],
+        );
+        const filterLabel: HTMLElement | null = document.querySelector(
+          `label[for="${filterId}"]`,
+        );
+        filterLabel?.focus();
+      };
+
+      setTimeout(() => focusOnNewFilter(), 1);
+    }
+  }
+
+  getFilterId(value: FilterOptionValueModel) {
+    return 'filter-' + value.ids[0]?.replaceAll(' ', '-');
   }
 
   getFilterLabelId(value: FilterOptionValueModel) {
-    return 'filter-label-' + value.ids[0]?.replaceAll(' ', '-');
+    return 'label-' + this.getFilterId(value);
   }
 
   protected readonly FilterType = FilterType;
