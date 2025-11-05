@@ -190,46 +190,17 @@
 >
   No related data found for this node.
 </div>
-<ng-container
-  *ngIf="
-    !loading &&
-    !hideDownloads &&
-    (data?.node?.['https://data.razu.nl/def/ldto/isRepresentatieVan']?.length ||
-      0) > 0
-  "
->
-  <details (toggle)="onDownloadToggle($event)">
-    <summary role="heading" aria-level="2">Downloaden</summary>
-    <div *ngIf="repMetaFetching">Downloadlinks aan het ophalen...</div>
-    <ol class="list-decimal ml-6" *ngIf="repMetaLoaded">
-      <ng-container
-        *ngFor="
-          let rep of data?.node?.[
-            'https://data.razu.nl/def/ldto/isRepresentatieVan'
-          ] || [];
-          trackBy: trackByRep
-        "
-      >
-        <ng-container *ngIf="getFirstImageUrl(rep) as imgUrl; else skip">
-          <li>
-            <a
-              [href]="imgUrl"
-              class="text-blue-600 underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Download pagina {{ getPage(rep) || "?" }}
-              <ng-container *ngIf="formatBytes(getSizeBytes(rep)) as size">
-                ({{ size }})
-              </ng-container>
-            </a>
-          </li>
-        </ng-container>
-        <ng-template #skip></ng-template>
-      </ng-container>
-    </ol>
-  </details>
-</ng-container>
+
+<!-- Download -->
+@if (
+  !loading &&
+  !hideDownloads &&
+  (data?.node?.["https://data.razu.nl/def/ldto/isRepresentatieVan"]?.length ||
+    0) > 0
+) {
+  <app-razu-aflevering-download [data]="data" />
+}
+
 <!-- For debugging, you can show the raw data -->
 <!-- <details>
     <summary>Debug: Raw Node Data</summary>

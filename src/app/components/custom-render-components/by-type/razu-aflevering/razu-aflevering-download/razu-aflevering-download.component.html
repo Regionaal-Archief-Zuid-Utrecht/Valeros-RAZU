@@ -1,0 +1,35 @@
+<details (toggle)="onDownloadSectionToggle($event)">
+  <summary role="heading" aria-level="2">Downloaden</summary>
+
+  @if (!isLoaded) {
+    <div aria-live="polite">Downloadlinks aan het ophalen...</div>
+  } @else {
+    <ol class="list-decimal ml-6">
+      @for (
+        representationId of getRepresentationIds();
+        track representationId
+      ) {
+        @if (getFirstImageUrl(representationId); as imageUrl) {
+          <li>
+            <a
+              [href]="imageUrl"
+              class="text-blue-600 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="
+                'Download pagina ' +
+                (getPageNumber(representationId) || 'onbekend')
+              "
+            >
+              Download pagina {{ getPageNumber(representationId) || "?" }}
+
+              @if (getFileSize(representationId); as fileSize) {
+                ({{ fileSize }})
+              }
+            </a>
+          </li>
+        }
+      }
+    </ol>
+  }
+</details>
