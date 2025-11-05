@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DetailsService } from '../../../services/details.service';
 import { FilterDrawerService } from '../../../services/ui/filter-drawer.service';
 
 @Component({
@@ -10,13 +11,10 @@ import { FilterDrawerService } from '../../../services/ui/filter-drawer.service'
 })
 export class SkipLinksComponent {
   private filterDrawer = inject(FilterDrawerService);
+  details = inject(DetailsService);
 
   skipToSearch() {
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      const input = searchInput.querySelector('input');
-      input?.focus();
-    }
+    this.focusElement('#search-input input', true);
   }
 
   skipToFilters() {
@@ -24,16 +22,27 @@ export class SkipLinksComponent {
   }
 
   skipToResults() {
-    this.focusElement('search-results', true);
+    this.focusElement('#search-results', true);
   }
 
-  private focusElement(elementId: string, scrollIntoView = false) {
-    const element = document.getElementById(elementId);
+  skipToNodeDetails() {
+    this.focusElement('#node-details', true);
+  }
+
+  skipToImageViewer() {
+    this.focusElement('app-mirador', true);
+  }
+
+  private focusElement(selector: string, scrollIntoView = false) {
+    const element: HTMLElement | null = document.querySelector(selector);
     if (element) {
       element.setAttribute('tabindex', '-1');
       element.focus();
       if (scrollIntoView) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
       }
     }
   }

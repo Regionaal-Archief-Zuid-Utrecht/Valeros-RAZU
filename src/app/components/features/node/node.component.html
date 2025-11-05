@@ -110,6 +110,7 @@
   <div
     [ngClass]="(shouldShowSectionNextToTable() | async) ? 'p-6' : 'p-0'"
     class="flex-grow relative"
+    id="node-details"
     *ngIf="details.showing.value"
   >
     <div class="text-lg mr-6 font-bold" *ngIf="showTitle">

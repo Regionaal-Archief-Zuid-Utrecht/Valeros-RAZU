@@ -2,10 +2,23 @@
   <button (click)="skipToSearch()" class="skip-link focus:!top-0">
     {{ "accessibility.skip-to-search" | translate }}
   </button>
-  <button (click)="skipToFilters()" class="skip-link focus:!top-[2.75rem]">
-    {{ "accessibility.skip-to-filters" | translate }}
-  </button>
-  <button (click)="skipToResults()" class="skip-link focus:!top-[5.5rem]">
-    {{ "accessibility.skip-to-results" | translate }}
-  </button>
+
+  @if (!details.isShowing()) {
+    <button (click)="skipToFilters()" class="skip-link focus:!top-[2.75rem]">
+      {{ "accessibility.skip-to-filters" | translate }}
+    </button>
+    <button (click)="skipToResults()" class="skip-link focus:!top-[5.5rem]">
+      {{ "accessibility.skip-to-results" | translate }}
+    </button>
+  } @else {
+    <button
+      (click)="skipToNodeDetails()"
+      class="skip-link focus:!top-[2.75rem]"
+    >
+      {{ "accessibility.skip-to-result" | translate }}
+    </button>
+    <button (click)="skipToImageViewer()" class="skip-link focus:!top-[5.5rem]">
+      {{ "accessibility.skip-to-image-viewer" | translate }}
+    </button>
+  }
 </div>
