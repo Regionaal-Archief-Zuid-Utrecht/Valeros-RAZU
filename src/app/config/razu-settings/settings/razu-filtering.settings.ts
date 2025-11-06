@@ -31,24 +31,24 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    archiefVormer: {
-      label: 'Archiefvormer',
-      fieldIds: ['archiefvormer.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
+    // archiefVormer: {
+    //   label: 'Archiefvormer',
+    //   fieldIds: ['archiefvormer.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
     archief: {
       label: 'Archief',
       fieldIds: ['archief'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    aggregatieniveau: {
-      label: 'Aggregatieniveau',
-      fieldIds: ['aggregatieniveau.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
+    // aggregatieniveau: {
+    //   label: 'Aggregatieniveau',
+    //   fieldIds: ['aggregatieniveau.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
     classificatie: {
       label: 'Classificatie',
       fieldIds: ['classificatie.uri'],
@@ -61,12 +61,12 @@ export const razuFilteringSettings: FilteringSettings = {
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
     },
-    openbaarheid: {
-      label: 'Openbaarheid',
-      fieldIds: ['openbaarheid.uri'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-    },
+    // openbaarheid: {
+    //   label: 'Openbaarheid',
+    //   fieldIds: ['openbaarheid.uri'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    // },
     documentYear: {
       label: 'Jaar',
       fieldIds: ['document_year'],
