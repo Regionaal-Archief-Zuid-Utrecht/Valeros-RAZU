@@ -28,7 +28,7 @@
     "searching": "Zoeken",
     "search-placeholder-full": "Zoek in E-depot RAZU, bijv. 'Beleidsstuk'",
     "search-placeholder-short": "Bijv. 'Beleidsstuk'",
-    "no-results-found": "Geen resultaten gevonden",
+    "no-results-found": "Geen resultaten",
     "results": "resultaten",
     "show-details": "Toon details",
     "load-more-results": "Toon meer resultaten",
@@ -48,14 +48,14 @@
     "tips": {
       "exact-match": {
         "title": "Exacte zoekopdracht",
-        "description": "Gebruik aanhalingstekens om een exacte zin of woordcombinatie te zoeken."
+        "description": "Gebruik aanhalingstekens (\")om een exacte zin of woordcombinatie te zoeken."
       },
       "wildcard": {
-        "title": "Wildcard zoeken",
-        "description": "Gebruik een asterisk (*) om meerdere karakters te vervangen in een woord."
+        "title": "Zoeken met jokertekens",
+        "description": "Gebruik een sterretje (*) als jokerteken om één of meer willekeurige tekens in een woord te vervangen."
       },
       "boolean": {
-        "title": "Boolean operatoren",
+        "title": "Booleaanse operatoren",
         "description": "Gebruik AND, OR en NOT om je zoekopdracht te verfijnen."
       },
       "filters": {
@@ -68,7 +68,7 @@
       },
       "ocr": {
         "title": "OCR tekstherkenning",
-        "description": "Krantentekst is verwerkt met OCR (Optical Character Recognition). Dit stelde ons in staat om een grote collectie doorzoekbaar te maken, maar de tekst kan soms herkenningsfouten bevatten."
+        "description": "De krantentekst is verwerkt met OCR (Optical Character Recognition). Dit stelde ons in staat om een grote collectie doorzoekbaar te maken, maar de tekst kan soms herkenningsfouten bevatten."
       }
     }
     
