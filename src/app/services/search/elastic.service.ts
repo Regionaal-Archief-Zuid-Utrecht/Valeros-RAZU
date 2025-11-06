@@ -112,7 +112,7 @@ export class ElasticService {
       bool: {
         should: [
           this._getSearchQuery(query),
-          // this._getFullTextMatchQuery(query),
+          this._getFullTextMatchQuery(query),
         ],
       },
     };
