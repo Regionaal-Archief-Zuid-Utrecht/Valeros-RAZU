@@ -48,7 +48,7 @@
     "tips": {
       "exact-match": {
         "title": "Exacte zoekopdracht",
-        "description": "Gebruik aanhalingstekens (\")om een exacte zin of woordcombinatie te zoeken."
+        "description": "Gebruik aanhalingstekens (\") om een exacte zin of woordcombinatie te zoeken."
       },
       "wildcard": {
         "title": "Zoeken met jokertekens",
