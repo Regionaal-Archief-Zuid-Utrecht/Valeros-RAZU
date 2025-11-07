@@ -56,7 +56,7 @@
       },
       "boolean": {
         "title": "Zoekvraag inperken",
-        "description": "Toevoegen van zoektermen geeft meer resultaten (als "OR"). Plaats \"AND\" tussen twee termen voor resultaten waarin beiden moeten voorkomen. Sluit een term uit door er \"NOT\" voor te zetten."
+        "description": "Toevoegen van zoektermen geeft meer resultaten (als \"OR\"). Plaats \"AND\" tussen twee termen voor resultaten waarin beiden moeten voorkomen. Sluit een term uit door er \"NOT\" voor te zetten."
       },
       "filters": {
         "title": "Filters gebruiken",
