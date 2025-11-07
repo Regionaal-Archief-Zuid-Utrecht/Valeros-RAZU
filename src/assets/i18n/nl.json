@@ -55,8 +55,8 @@
         "description": "Gebruik een sterretje (*) als jokerteken om één of meer willekeurige tekens in een woord te vervangen."
       },
       "boolean": {
-        "title": "Booleaanse operatoren",
-        "description": "Gebruik AND, OR en NOT om je zoekopdracht te verfijnen."
+        "title": "Zoekvraag inperken",
+        "description": "Toevoegen van zoektermen geeft meer resultaten (als "OR"). Plaats \"AND\" tussen twee termen voor resultaten waarin beiden moeten voorkomen. Sluit een term uit door er \"NOT\" voor te zetten."
       },
       "filters": {
         "title": "Filters gebruiken",
