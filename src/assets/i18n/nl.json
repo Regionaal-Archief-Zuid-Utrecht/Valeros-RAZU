@@ -19,15 +19,15 @@
     "go-to-search": "Ga naar zoeken",
     "go-to-colofon": "Ga naar colofon",
     "go-to-homepage": "Ga naar startpagina",
-    "more-info": "Meer info",
+    "more-info": "Meer informatie",
     "sitemap": "Sitemap"
   },
   "search-interface": {
     "search": "Zoek",
     "search-e-depot-razu": "Zoek in E-depot RAZU",
     "searching": "Zoeken",
-    "search-placeholder-full": "Zoek in E-depot RAZU, bijv. 'Beleidsstuk'",
-    "search-placeholder-short": "Bijv. 'Beleidsstuk'",
+    "search-placeholder-full": "Zoek in E-depot RAZU, bijv. 'weekmarkt'",
+    "search-placeholder-short": "Bijv. 'weekmarkt'",
     "no-results-found": "Geen resultaten",
     "results": "resultaten",
     "show-details": "Toon details",

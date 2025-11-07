@@ -19,15 +19,15 @@
     "go-to-search": "Go to search",
     "go-to-colofon": "Go to colofon",
     "go-to-homepage": "Go to homepage",
-    "more-info": "More info",
+    "more-info": "More information",
     "sitemap": "Sitemap"
   },
   "search-interface": {
     "search": "Search",
     "search-e-depot-razu": "Search in E-depot RAZU",
     "searching": "Searching",
-    "search-placeholder-full": "Search in E-depot RAZU, e.g. 'Beleidsstuk'",
-    "search-placeholder-short": "E.g. 'Beleidsstuk'",
+    "search-placeholder-full": "Search in E-depot RAZU, e.g. 'weekmarkt'",
+    "search-placeholder-short": "E.g. 'weekmarkt'",
     "no-results-found": "No results found",
     "results": "results",
     "show-details": "Show details",
