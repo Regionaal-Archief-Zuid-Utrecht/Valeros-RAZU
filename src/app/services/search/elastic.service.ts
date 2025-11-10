@@ -169,7 +169,7 @@ export class ElasticService {
       return result;
     }, {});
 
-    const queryData = this._getNodeSearchQuery(
+    const queryData = this.getNodeSearchQuery(
       query,
       activeFilters,
       0,
@@ -236,7 +236,7 @@ export class ElasticService {
   }
 
   async searchEndpoints<T>(
-    queryData: any,
+    queryData: estypes.SearchRequest,
   ): Promise<ElasticEndpointSearchResponse<T>[]> {
     const searchPromisesAndEndpoints: {
       promise: Promise<estypes.SearchResponse<T>>;
@@ -293,12 +293,12 @@ export class ElasticService {
     return elasticSortEntries;
   }
 
-  private _getNodeSearchQuery(
+  getNodeSearchQuery(
     query: string,
     filters: FilterModel[],
     from?: number,
     size?: number,
-  ): any {
+  ): estypes.SearchRequest {
     if (query === undefined) {
       return {};
     }
@@ -414,7 +414,7 @@ export class ElasticService {
     size: number,
     filters: FilterModel[],
   ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    const queryData = this._getNodeSearchQuery(query, filters, from, size);
+    const queryData = this.getNodeSearchQuery(query, filters, from, size);
 
     return await this.searchEndpoints(queryData);
   }

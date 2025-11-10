@@ -1,9 +1,7 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ElasticService } from '../../../../../services/search/elastic.service';
+import { DateRangeFilterService } from '../../../../../services/search/custom-filters/razu/date-range-filter.service';
 import { FilterService } from '../../../../../services/search/filter.service';
-import { SearchService } from '../../../../../services/search/search.service';
-import { UrlService } from '../../../../../services/url.service';
 import { CustomFilterComponent } from '../custom-filter.directive';
 
 @Component({
@@ -16,21 +14,50 @@ export class DateRangeFilterComponent
   extends CustomFilterComponent
   implements OnInit
 {
-  // from?: string;
-  // to?: string;
-  // frombase?: string;
-  // tobase?: string;
+  earliestDate?: string;
+  latestDate?: string;
+  fromDate?: string;
+  toDate?: string;
 
   constructor(
     public filters: FilterService,
-    private elastic: ElasticService,
-    private search: SearchService,
-    private url: UrlService,
+    public dateRange: DateRangeFilterService,
   ) {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.filters.enabled.subscribe(() => {
+      this.initEarliestLatestDates();
+    });
+  }
+
+  async initEarliestLatestDates() {
+    try {
+      // TODO: Support multiple date fields
+      const dateField = this.fieldIds?.[0] ?? '';
+      const { earliest, latest } =
+        await this.dateRange.getEarliestLatestDates(dateField);
+      this.earliestDate = earliest;
+      this.latestDate = latest;
+      this.fromDate = earliest;
+      this.toDate = latest;
+
+      // const fromDateIsEarlierThanEarliestDate =
+      //   this.fromDate && this.earliestDate && this.fromDate < this.earliestDate;
+      // if (!this.fromDate || fromDateIsEarlierThanEarliestDate) {
+      //   this.fromDate = this.earliestDate;
+      // }
+
+      // const toDateIsLaterThanLatestDate =
+      //   this.toDate && this.latestDate && this.toDate > this.latestDate;
+      // if (!this.toDate || toDateIsLaterThanLatestDate) {
+      //   this.toDate = this.latestDate;
+      // }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   // async ngOnInit() {
   //   const existing = this.getExisting();

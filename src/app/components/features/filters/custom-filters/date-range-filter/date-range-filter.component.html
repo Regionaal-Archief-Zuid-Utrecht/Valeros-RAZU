@@ -2,23 +2,27 @@
   <label class="label" for="from-date">
     <span class="label-text">Van</span>
   </label>
-  <!-- <input
+  <input
     id="from-date"
     class="input input-bordered input-sm"
     type="date"
-    [(ngModel)]="from"
-  /> -->
+    [(ngModel)]="fromDate"
+    [min]="earliestDate"
+    [max]="latestDate"
+  />
 </div>
 <div class="form-control">
   <label class="label" for="to-date">
     <span class="label-text">Tot</span>
   </label>
-  <!-- <input
+  <input
     id="to-date"
     class="input input-bordered input-sm"
     type="date"
-    [(ngModel)]="to"
-  /> -->
+    [(ngModel)]="toDate"
+    [min]="earliestDate"
+    [max]="latestDate"
+  />
 </div>
 <div class="flex gap-2 pb-1 mt-2">
   <button class="btn btn-sm btn-primary">Toepassen</button>
