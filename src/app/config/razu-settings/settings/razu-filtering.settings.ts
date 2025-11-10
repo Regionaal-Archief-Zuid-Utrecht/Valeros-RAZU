@@ -70,11 +70,11 @@ export const razuFilteringSettings: FilteringSettings = {
       label: 'Datum',
       fieldIds: ['document_day'],
       values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
       sort: {
         type: '_key',
         order: 'asc',
       },
+      isCustomFilter: true,
     },
     // documentYear: {
     //   label: 'Jaar',

@@ -28,6 +28,7 @@ export interface FilterOptionModel {
   showOnlyValueIds?: string[];
   showOnlyForSelectedFilters?: FilterOptionsIdsModel;
   sort?: FilterOptionSortModel;
+  isCustomFilter?: boolean;
 }
 
 export interface FilterOptionValueModel {
