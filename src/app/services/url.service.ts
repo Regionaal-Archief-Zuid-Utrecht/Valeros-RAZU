@@ -70,14 +70,8 @@ export class UrlService {
     }
 
     // Custom filters
-    const customFilterServices = this.customFiltersRegistry.getAll();
-    const customFiltersObject: { [filterId: string]: any } = {};
-    customFilterServices.forEach((service, filterId: string) => {
-      const queryParamValues = service.getQueryParamValues();
-      if (Object.keys(queryParamValues).length > 0) {
-        customFiltersObject[filterId] = queryParamValues;
-      }
-    });
+    const customFiltersObject =
+      this.customFiltersRegistry.getAllQueryParamValues();
 
     if (Object.keys(customFiltersObject).length > 0) {
       combinedFiltersObject.custom = customFiltersObject;

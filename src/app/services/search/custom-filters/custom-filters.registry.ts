@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ElasticShouldQueries } from '../../../models/elastic/elastic-should-queries.type';
 import { CustomFilterService } from './custom-filter.service';
 
 @Injectable({
@@ -12,6 +13,50 @@ export class CustomFiltersRegistry {
 
   getAll() {
     return this._all.value;
+  }
+
+  getAllElasticQueries(): ElasticShouldQueries[] {
+    const allQueries: ElasticShouldQueries[] = [];
+
+    this._all.value.forEach(
+      (service: CustomFilterService, filterId: string) => {
+        try {
+          const queries = service.getElasticQueries();
+          if (queries && queries.length > 0) {
+            allQueries.push(...queries);
+          }
+        } catch (error) {
+          console.warn(
+            `Error getting queries for custom filter ${filterId}:`,
+            error,
+          );
+        }
+      },
+    );
+
+    return allQueries;
+  }
+
+  getAllQueryParamValues(): { [filterId: string]: any } {
+    const allParams: { [filterId: string]: any } = {};
+
+    this._all.value.forEach(
+      (service: CustomFilterService, filterId: string) => {
+        try {
+          const paramValues = service.getQueryParamValues();
+          if (paramValues && Object.keys(paramValues).length > 0) {
+            allParams[filterId] = paramValues;
+          }
+        } catch (error) {
+          console.warn(
+            `Error getting query param values for custom filter ${filterId}:`,
+            error,
+          );
+        }
+      },
+    );
+
+    return allParams;
   }
 
   register(filterId: string, service: CustomFilterService) {

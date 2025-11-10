@@ -21,7 +21,6 @@ import { DataService } from '../data.service';
 import { EndpointService } from '../endpoint.service';
 import { SettingsService } from '../settings.service';
 import { SortService } from '../sort.service';
-import { CustomFilterService } from './custom-filters/custom-filter.service';
 import { CustomFiltersRegistry } from './custom-filters/custom-filters.registry';
 
 @Injectable({
@@ -349,20 +348,10 @@ export class ElasticService {
     }
 
     // Add custom filter queries
-    const customFilters = this.customFiltersRegistry.getAll();
-    customFilters.forEach((service: CustomFilterService, filterId: string) => {
-      try {
-        const customQueries = service.getElasticQueries();
-        if (customQueries && customQueries.length > 0) {
-          mustQueries.push(...customQueries);
-        }
-      } catch (error) {
-        console.warn(
-          `Error getting queries for custom filter ${filterId}:`,
-          error,
-        );
-      }
-    });
+    const customQueries = this.customFiltersRegistry.getAllElasticQueries();
+    if (customQueries && customQueries.length > 0) {
+      mustQueries.push(...customQueries);
+    }
 
     // Only show filters (e.g., only show "InformatieObject")
     const onlyShowFilters = this.data.convertFiltersFromIdsFormat(
