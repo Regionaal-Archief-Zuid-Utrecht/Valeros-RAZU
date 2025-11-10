@@ -86,10 +86,10 @@
                 <div
                   *ngComponentOutlet="
                     filters.getOptionById(filterId).customFilterComponent!;
-                    injector: customFilterService.getOrCreateInjector(
-                      filterId,
-                      filters.getOptionById(filterId).fieldIds
-                    )
+                    inputs: {
+                      filterId: filterId,
+                      fieldIds: filters.getOptionById(filterId).fieldIds,
+                    }
                   "
                   class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
                 ></div>
