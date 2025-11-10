@@ -40,20 +40,20 @@ export class DateRangeFilterComponent
         await this.dateRange.getEarliestLatestDates(dateField);
       this.earliestDate = earliest;
       this.latestDate = latest;
-      this.fromDate = earliest;
-      this.toDate = latest;
+      // this.fromDate = earliest;
+      // this.toDate = latest;
 
-      // const fromDateIsEarlierThanEarliestDate =
-      //   this.fromDate && this.earliestDate && this.fromDate < this.earliestDate;
-      // if (!this.fromDate || fromDateIsEarlierThanEarliestDate) {
-      //   this.fromDate = this.earliestDate;
-      // }
+      const fromDateIsEarlierThanEarliestDate =
+        this.fromDate && this.earliestDate && this.fromDate < this.earliestDate;
+      if (fromDateIsEarlierThanEarliestDate) {
+        this.fromDate = this.earliestDate;
+      }
 
-      // const toDateIsLaterThanLatestDate =
-      //   this.toDate && this.latestDate && this.toDate > this.latestDate;
-      // if (!this.toDate || toDateIsLaterThanLatestDate) {
-      //   this.toDate = this.latestDate;
-      // }
+      const toDateIsLaterThanLatestDate =
+        this.toDate && this.latestDate && this.toDate > this.latestDate;
+      if (toDateIsLaterThanLatestDate) {
+        this.toDate = this.latestDate;
+      }
     } catch (e) {
       console.error(e);
     }
