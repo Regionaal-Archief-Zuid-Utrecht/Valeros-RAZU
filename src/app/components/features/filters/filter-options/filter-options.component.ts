@@ -1,4 +1,4 @@
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -19,7 +19,6 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     FilterOptionComponent,
     EndpointsComponent,
     FilterCountComponent,
-    NgClass,
     FormsModule,
     TranslatePipe,
   ],

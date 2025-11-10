@@ -1,7 +1,5 @@
-import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
 import { featherX } from '@ng-icons/feather-icons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { UrlService } from '../../../services/url.service';
@@ -10,14 +8,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
 
 @Component({
   selector: 'app-colofon',
-  imports: [
-    HeaderComponent,
-    ViewContainerComponent,
-    NgClass,
-    TranslatePipe,
-    NgIcon,
-    RouterLink,
-  ],
+  imports: [HeaderComponent, ViewContainerComponent, TranslatePipe, RouterLink],
   templateUrl: './colofon.component.html',
   styleUrl: './colofon.component.scss',
 })

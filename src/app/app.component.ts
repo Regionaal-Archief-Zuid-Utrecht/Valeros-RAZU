@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
 import {
   featherChevronLeft,
   featherChevronRight,
@@ -25,7 +24,6 @@ import { FilterDrawerService } from './services/ui/filter-drawer.service';
     PdfJsViewerModule,
     AriaLiveComponent,
     FilterOptionsComponent,
-    NgIcon,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

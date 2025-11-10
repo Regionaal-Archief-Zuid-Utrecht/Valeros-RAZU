@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgIconComponent } from '@ng-icons/core';
 import { faSolidSitemap } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home-intro-below-search',
-  imports: [TranslatePipe, NgIconComponent],
+  imports: [TranslatePipe],
   templateUrl: './home-intro-below-search.component.html',
   styleUrl: './home-intro-below-search.component.scss',
 })

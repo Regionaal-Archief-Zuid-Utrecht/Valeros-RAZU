@@ -1,4 +1,4 @@
-import { NgForOf, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../../config/settings';
@@ -14,7 +14,7 @@ import { NodeLinkComponent } from '../../../node/node-link/node-link.component';
 
 @Component({
   selector: 'app-filter-option',
-  imports: [NgForOf, NodeLinkComponent, NgIf, TranslatePipe],
+  imports: [NodeLinkComponent, NgIf, TranslatePipe],
   templateUrl: './filter-option.component.html',
   styleUrl: './filter-option.component.scss',
 })
