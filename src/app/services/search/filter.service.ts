@@ -318,7 +318,7 @@ export class FilterService {
   }
 
   isCustomFilter(filterId: string): boolean {
-    return !!this.getOptionById(filterId).customFilter?.component;
+    return !!this.getOptionById(filterId).customFilter;
   }
 
   getOptionById(filterId: string): FilterOptionModel {
