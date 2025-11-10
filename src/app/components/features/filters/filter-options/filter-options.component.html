@@ -16,7 +16,10 @@
       </h2>
       <div class="flex items-center gap-2">
         <button
-          *ngIf="filters.enabled.value.length > 0"
+          *ngIf="
+            filters.enabled.value.length > 0 ||
+            customFiltersRegistry.getTotalNumEnabled() > 0
+          "
           class="btn btn-xs btn-primary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
           (click)="clearFilters()"
           [attr.aria-label]="'search-interface.clear_filters' | translate"

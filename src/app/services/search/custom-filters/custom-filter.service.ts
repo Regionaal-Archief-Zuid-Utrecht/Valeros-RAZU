@@ -9,4 +9,5 @@ export abstract class CustomFilterService<TParams = any> {
   abstract getQueryParamValues(): TParams;
   abstract updateFromQueryParamValues(queryParamValues: TParams): void;
   abstract getEnabledFilterCount(): number;
+  abstract clear(): void;
 }

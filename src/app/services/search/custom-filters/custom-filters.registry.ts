@@ -15,6 +15,14 @@ export class CustomFiltersRegistry {
     return this._all.value;
   }
 
+  getTotalNumEnabled(): number {
+    let count = 0;
+    this._all.value.forEach((service: CustomFilterService) => {
+      count += service.getEnabledFilterCount();
+    });
+    return count;
+  }
+
   getAllElasticQueries(): ElasticShouldQueries[] {
     const allQueries: ElasticShouldQueries[] = [];
 
@@ -57,6 +65,14 @@ export class CustomFiltersRegistry {
     );
 
     return allParams;
+  }
+
+  clearAll() {
+    this._all.value.forEach(
+      (service: CustomFilterService, filterId: string) => {
+        service.clear();
+      },
+    );
   }
 
   register(filterId: string, service: CustomFilterService) {

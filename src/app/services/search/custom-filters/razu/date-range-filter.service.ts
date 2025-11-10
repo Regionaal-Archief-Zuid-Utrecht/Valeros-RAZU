@@ -173,4 +173,14 @@ export class DateRangeFilterService extends CustomFilterService<DateRangeQueryPa
     queries.push({ bool: { should: [queryWithDots, queryWithSpaces] } });
     return queries;
   }
+
+  override clear() {
+    this.fromDate = undefined;
+    this.toDate = undefined;
+    this.onUpdate();
+  }
+
+  onUpdate() {
+    this.search.execute(true);
+  }
 }
