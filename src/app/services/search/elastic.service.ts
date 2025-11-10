@@ -349,22 +349,20 @@ export class ElasticService {
     }
 
     // Add custom filter queries
-    const customFilterServices = this.customFiltersRegistry.all.value;
-    customFilterServices.forEach(
-      (service: CustomFilterService, filterId: string) => {
-        try {
-          const customQueries = service.getElasticQueries();
-          if (customQueries && customQueries.length > 0) {
-            mustQueries.push(...customQueries);
-          }
-        } catch (error) {
-          console.warn(
-            `Error getting queries for custom filter ${filterId}:`,
-            error,
-          );
+    const customFilters = this.customFiltersRegistry.getAll();
+    customFilters.forEach((service: CustomFilterService, filterId: string) => {
+      try {
+        const customQueries = service.getElasticQueries();
+        if (customQueries && customQueries.length > 0) {
+          mustQueries.push(...customQueries);
         }
-      },
-    );
+      } catch (error) {
+        console.warn(
+          `Error getting queries for custom filter ${filterId}:`,
+          error,
+        );
+      }
+    });
 
     // Only show filters (e.g., only show "InformatieObject")
     const onlyShowFilters = this.data.convertFiltersFromIdsFormat(

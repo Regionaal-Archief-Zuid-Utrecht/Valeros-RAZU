@@ -6,4 +6,5 @@ import { ElasticShouldQueries } from '../../../models/elastic/elastic-should-que
 })
 export abstract class CustomFilterService {
   abstract getElasticQueries(): ElasticShouldQueries[];
+  abstract getQueryParamValues(): any;
 }

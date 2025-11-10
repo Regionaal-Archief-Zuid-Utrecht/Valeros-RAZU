@@ -7,6 +7,7 @@ export const urlSettings: UrlSettings = {
   params: {
     search: 'q',
     filters: 'filters',
+    customFilters: 'customFilters',
     endpoints: 'endpoints',
   },
 };

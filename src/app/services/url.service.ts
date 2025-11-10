@@ -8,6 +8,8 @@ import { ApiService } from './api.service';
 import { DataService } from './data.service';
 import { DetailsService } from './details.service';
 import { EndpointService } from './endpoint.service';
+import { CustomFilterService } from './search/custom-filters/custom-filter.service';
+import { CustomFiltersRegistry } from './search/custom-filters/custom-filters.registry';
 import { FilterService } from './search/filter.service';
 
 @Injectable({
@@ -23,6 +25,7 @@ export class UrlService {
     private data: DataService,
     private endpoints: EndpointService,
     private api: ApiService,
+    private customFiltersRegistry: CustomFiltersRegistry,
   ) {
     this._initUpdateUrlOnFilterChange();
     this._initUpdateUrlOnEndpointChange();
@@ -55,6 +58,7 @@ export class UrlService {
   }
 
   async updateUrlToReflectFilters(filters: FilterModel[]) {
+    // Base filters
     const enabledFiltersParam = JSON.stringify(
       this.data.convertFiltersToIdsFormat(filters),
     );
@@ -66,6 +70,25 @@ export class UrlService {
     );
 
     void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
+
+    // Custom filters
+    const allCustomFilters = this.customFiltersRegistry.getAll();
+    const customFiltersParamObject: { [filterId: string]: any } = {};
+    allCustomFilters.forEach(
+      (service: CustomFilterService, filterId: string) => {
+        customFiltersParamObject[filterId] = service.getQueryParamValues();
+      },
+    );
+
+    const customFiltersParam =
+      Object.keys(customFiltersParamObject).length > 0
+        ? JSON.stringify(customFiltersParamObject)
+        : null;
+
+    void this._updateUrlParam(
+      Settings.url.params.customFilters,
+      customFiltersParam,
+    );
   }
 
   private async _updateUrlParam(key: string, param: string | null) {

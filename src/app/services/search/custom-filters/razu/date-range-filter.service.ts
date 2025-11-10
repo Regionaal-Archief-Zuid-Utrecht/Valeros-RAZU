@@ -3,6 +3,7 @@ import type { estypes } from '@elastic/elasticsearch';
 import { ElasticAggregationModel } from '../../../../models/elastic/elastic-aggregation.model';
 import { ElasticEndpointSearchResponse } from '../../../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticShouldQueries } from '../../../../models/elastic/elastic-should-queries.type';
+import { DateRangeQueryParams } from '../../../../models/filters/custom-filters/date-range-query-params.model';
 import { FilterModel } from '../../../../models/filters/filter.model';
 import { DataService } from '../../../data.service';
 import { ElasticService } from '../../elastic.service';
@@ -110,6 +111,17 @@ export class DateRangeFilterService extends CustomFilterService {
       earliest: earliestDateAcrossEndpoints,
       latest: latestDateAcrossEndpoints,
     };
+  }
+
+  override getQueryParamValues(): DateRangeQueryParams {
+    const values: DateRangeQueryParams = {};
+    if (this.fromDate) {
+      values.from = this.fromDate;
+    }
+    if (this.toDate) {
+      values.to = this.toDate;
+    }
+    return values;
   }
 
   override getElasticQueries(): ElasticShouldQueries[] {
