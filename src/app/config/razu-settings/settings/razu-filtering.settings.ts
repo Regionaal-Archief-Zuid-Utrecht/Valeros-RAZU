@@ -77,49 +77,5 @@ export const razuFilteringSettings: FilteringSettings = {
         service: DateRangeFilterService,
       },
     },
-    // documentYear: {
-    //   label: 'Jaar',
-    //   fieldIds: ['document_year'],
-    //   values: [],
-    //   hideValueIds: [...hideFilterOptionValueIds],
-    //   sort: {
-    //     type: '_key',
-    //     order: 'asc',
-    //   },
-    // },
-    // documentMonth: {
-    //   label: 'Maand',
-    //   fieldIds: ['document_month'],
-    //   values: [],
-    //   hideValueIds: [...hideFilterOptionValueIds],
-    //   showOnlyForSelectedFilters: {
-    //     documentYear: {
-    //       fieldIds: ['document_year'],
-    //       valueIds: [],
-    //       type: FilterType.Field,
-    //     },
-    //   },
-    //   sort: {
-    //     type: '_key',
-    //     order: 'asc',
-    //   },
-    // },
-    // documentDay: {
-    //   label: 'Dag',
-    //   fieldIds: ['document_day'],
-    //   values: [],
-    //   hideValueIds: [...hideFilterOptionValueIds],
-    //   showOnlyForSelectedFilters: {
-    //     documentMonth: {
-    //       fieldIds: ['document_month'],
-    //       valueIds: [],
-    //       type: FilterType.Field,
-    //     },
-    //   },
-    //   sort: {
-    //     type: '_key',
-    //     order: 'asc',
-    //   },
-    // },
   },
 };
