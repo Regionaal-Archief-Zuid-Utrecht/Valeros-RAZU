@@ -26,7 +26,9 @@ export class DateRangeFilterComponent
     super();
   }
 
-  ngOnInit() {
+  override ngOnInit() {
+    super.ngOnInit();
+
     this.filters.enabled.subscribe(() => {
       this.initEarliestLatestDates();
     });
