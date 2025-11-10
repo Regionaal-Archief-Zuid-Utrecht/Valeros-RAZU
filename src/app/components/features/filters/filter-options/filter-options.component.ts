@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Settings } from '../../../../config/settings';
 import { FilterType } from '../../../../models/filters/filter.model';
-import { CustomFilterService } from '../../../../services/search/custom-filter.service';
+import { CustomFilterService } from '../../../../services/search/custom-filters/custom-filter.service';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SettingsService } from '../../../../services/settings.service';
 import { UiService } from '../../../../services/ui/ui.service';

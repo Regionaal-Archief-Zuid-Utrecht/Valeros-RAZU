@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import {
   FIELD_IDS_TOKEN,
   FILTER_ID_TOKEN,
-} from '../../components/features/filters/custom-filters/custom-filter.directive';
+} from '../../../components/features/filters/custom-filters/custom-filter.directive';
 
 @Injectable({
   providedIn: 'root',
