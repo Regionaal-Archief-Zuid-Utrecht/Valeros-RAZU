@@ -2,6 +2,7 @@ import { Component, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateRangeFilterService } from '../../../../../services/search/custom-filters/razu/date-range-filter.service';
 import { FilterService } from '../../../../../services/search/filter.service';
+import { SearchService } from '../../../../../services/search/search.service';
 import { CustomFilterComponent } from '../custom-filter.directive';
 
 @Component({
@@ -16,12 +17,11 @@ export class DateRangeFilterComponent
 {
   earliestDate?: string;
   latestDate?: string;
-  fromDate?: string;
-  toDate?: string;
 
   constructor(
     public filters: FilterService,
     public dateRange: DateRangeFilterService,
+    public search: SearchService,
   ) {
     super();
   }
@@ -48,15 +48,19 @@ export class DateRangeFilterComponent
       // this.toDate = latest;
 
       const fromDateIsEarlierThanEarliestDate =
-        this.fromDate && this.earliestDate && this.fromDate < this.earliestDate;
+        this.dateRange.fromDate &&
+        this.earliestDate &&
+        this.dateRange.fromDate < this.earliestDate;
       if (fromDateIsEarlierThanEarliestDate) {
-        this.fromDate = this.earliestDate;
+        this.dateRange.fromDate = this.earliestDate;
       }
 
       const toDateIsLaterThanLatestDate =
-        this.toDate && this.latestDate && this.toDate > this.latestDate;
+        this.dateRange.toDate &&
+        this.latestDate &&
+        this.dateRange.toDate > this.latestDate;
       if (toDateIsLaterThanLatestDate) {
-        this.toDate = this.latestDate;
+        this.dateRange.toDate = this.latestDate;
       }
     } catch (e) {
       console.error(e);
@@ -111,8 +115,12 @@ export class DateRangeFilterComponent
   //   void this.url.updateUrlToReflectFilters(this.filters.enabled.value);
   // }
 
+  apply() {
+    this.search.execute(true);
+  }
+
   clear() {
-    this.fromDate = undefined;
-    this.toDate = undefined;
+    this.dateRange.fromDate = undefined;
+    this.dateRange.toDate = undefined;
   }
 }

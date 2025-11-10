@@ -118,6 +118,7 @@ export class DateRangeFilterService extends CustomFilterService {
       return [];
     }
 
+    // TODO: Refactor
     const dateRangeMustQueries: ElasticShouldQueries[] = [];
     const fromVal =
       this.fromDate && this.fromDate.trim().length > 0 ? this.fromDate : '*';

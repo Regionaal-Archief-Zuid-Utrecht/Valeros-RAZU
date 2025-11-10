@@ -6,7 +6,7 @@
     id="from-date"
     class="input input-bordered input-sm"
     type="date"
-    [(ngModel)]="fromDate"
+    [(ngModel)]="dateRange.fromDate"
     [min]="earliestDate"
     [max]="latestDate"
   />
@@ -19,12 +19,12 @@
     id="to-date"
     class="input input-bordered input-sm"
     type="date"
-    [(ngModel)]="toDate"
+    [(ngModel)]="dateRange.toDate"
     [min]="earliestDate"
     [max]="latestDate"
   />
 </div>
 <div class="flex gap-2 pb-1 mt-2">
-  <button class="btn btn-sm btn-primary">Toepassen</button>
+  <button class="btn btn-sm btn-primary" (click)="apply()">Toepassen</button>
   <button class="btn btn-sm btn-ghost" (click)="clear()">Wissen</button>
 </div>
