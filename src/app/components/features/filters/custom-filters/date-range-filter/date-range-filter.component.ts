@@ -67,12 +67,13 @@ export class DateRangeFilterComponent
     }
   }
 
-  apply() {
+  onDateChange() {
     this.search.execute(true);
   }
 
   clear() {
     this.dateRange.fromDate = undefined;
     this.dateRange.toDate = undefined;
+    this.onDateChange();
   }
 }

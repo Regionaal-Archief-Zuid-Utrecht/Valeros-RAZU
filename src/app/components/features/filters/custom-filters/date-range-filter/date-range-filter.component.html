@@ -9,6 +9,7 @@
     [(ngModel)]="dateRange.fromDate"
     [min]="earliestDate"
     [max]="latestDate"
+    (ngModelChange)="onDateChange()"
   />
 </div>
 <div class="form-control">
@@ -22,9 +23,9 @@
     [(ngModel)]="dateRange.toDate"
     [min]="earliestDate"
     [max]="latestDate"
+    (ngModelChange)="onDateChange()"
   />
 </div>
 <div class="flex gap-2 pb-1 mt-2">
-  <button class="btn btn-sm btn-primary" (click)="apply()">Toepassen</button>
-  <button class="btn btn-sm btn-ghost" (click)="clear()">Wissen</button>
+  <button class="btn btn-sm btn-primary" (click)="clear()">Wissen</button>
 </div>
