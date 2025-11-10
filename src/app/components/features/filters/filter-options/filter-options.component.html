@@ -78,13 +78,17 @@
               />
             </h3>
             <div class="collapse-content flex">
-              @if (filters.getOptionById(filterId).isCustomFilter) {
-                <!-- TODO: Define component to render here in the settings -->
-                <app-date-range-filter
-                  [filterId]="filterId"
-                  [fieldIds]="filters.getOptionById(filterId).fieldIds"
+              @if (filters.isCustomFilter(filterId)) {
+                <div
+                  *ngComponentOutlet="
+                    filters.getOptionById(filterId).customFilterComponent!;
+                    injector: customFilterService.getOrCreateInjector(
+                      filterId,
+                      filters.getOptionById(filterId).fieldIds
+                    )
+                  "
                   class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
-                />
+                ></div>
               } @else {
                 <app-filter-option
                   [filterId]="filterId"

@@ -1,3 +1,4 @@
+import { DateRangeFilterComponent } from '../../../components/features/filters/custom-filters/date-range-filter/date-range-filter.component';
 import { FilteringSettings } from '../../../models/settings/filtering-settings.model';
 import { filteringSettings } from '../../default-settings/settings/filtering.settings';
 
@@ -74,7 +75,7 @@ export const razuFilteringSettings: FilteringSettings = {
         type: '_key',
         order: 'asc',
       },
-      isCustomFilter: true,
+      customFilterComponent: DateRangeFilterComponent,
     },
     // documentYear: {
     //   label: 'Jaar',

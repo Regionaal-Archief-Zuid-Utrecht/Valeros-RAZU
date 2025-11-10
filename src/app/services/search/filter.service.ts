@@ -176,10 +176,7 @@ export class FilterService {
       );
 
       const filterGroups = Object.keys(this.options.value).filter(
-        (filterId) => {
-          const isCustomFilter = this.options.value[filterId].isCustomFilter;
-          return !isCustomFilter;
-        },
+        (filterId) => !this.isCustomFilter(filterId),
       );
       const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
         const filtersWithoutThisGroup = this.enabled.value.filter(
@@ -297,6 +294,10 @@ export class FilterService {
     );
   }
 
+  isCustomFilter(filterId: string): boolean {
+    return !!this.getOptionById(filterId).customFilterComponent;
+  }
+
   getOptionById(filterId: string): FilterOptionModel {
     return this.options.value?.[filterId];
   }
@@ -310,7 +311,7 @@ export class FilterService {
     const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
     const option: FilterOptionModel = this.getOptionById(filterId);
 
-    if (option.isCustomFilter) {
+    if (this.isCustomFilter(filterId)) {
       return true;
     }
 

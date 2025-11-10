@@ -1,3 +1,5 @@
+import { Type } from '@angular/core';
+import { CustomFilterComponent } from '../../components/features/filters/custom-filters/custom-filter.directive';
 import { ElasticSortOrder } from '../elastic/elastic-sort.model';
 import { FilterType } from './filter.model';
 
@@ -28,7 +30,7 @@ export interface FilterOptionModel {
   showOnlyValueIds?: string[];
   showOnlyForSelectedFilters?: FilterOptionsIdsModel;
   sort?: FilterOptionSortModel;
-  isCustomFilter?: boolean;
+  customFilterComponent?: Type<CustomFilterComponent>;
 }
 
 export interface FilterOptionValueModel {
