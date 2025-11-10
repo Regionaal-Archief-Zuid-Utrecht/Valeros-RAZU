@@ -1,12 +1,14 @@
 import { Directive, inject, Input, OnInit } from '@angular/core';
+import { CustomFiltersRegistry } from '../../../../services/search/custom-filters/custom-filter-services.registry';
 import { CustomFilterService } from '../../../../services/search/custom-filters/custom-filter.service';
 
 @Directive()
 export abstract class CustomFilterComponent implements OnInit {
   @Input() filterId?: string;
   @Input() fieldIds?: string[];
+  @Input() service?: CustomFilterService;
 
-  customFilterService = inject(CustomFilterService);
+  customFiltersRegistry = inject(CustomFiltersRegistry);
 
   constructor() {}
 
@@ -19,6 +21,10 @@ export abstract class CustomFilterComponent implements OnInit {
       console.warn('No filterId provided for custom filter');
       return;
     }
-    this.customFilterService.register(this.filterId);
+    if (!this.service) {
+      console.warn('No service provided for custom filter');
+      return;
+    }
+    this.customFiltersRegistry.register(this.filterId, this.service);
   }
 }

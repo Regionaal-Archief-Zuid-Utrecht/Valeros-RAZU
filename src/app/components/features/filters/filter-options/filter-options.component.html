@@ -85,10 +85,13 @@
               @if (filters.isCustomFilter(filterId)) {
                 <div
                   *ngComponentOutlet="
-                    filters.getOptionById(filterId).customFilterComponent!;
+                    filters.getOptionById(filterId).customFilter!.component!;
                     inputs: {
                       filterId: filterId,
                       fieldIds: filters.getOptionById(filterId).fieldIds,
+                      service: getCustomFilterService(
+                        filters.getOptionById(filterId).customFilter!.service!
+                      ),
                     }
                   "
                   class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"

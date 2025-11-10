@@ -1,5 +1,6 @@
 import { DateRangeFilterComponent } from '../../../components/features/filters/custom-filters/date-range-filter/date-range-filter.component';
 import { FilteringSettings } from '../../../models/settings/filtering-settings.model';
+import { DateRangeFilterService } from '../../../services/search/custom-filters/razu/date-range-filter.service';
 import { filteringSettings } from '../../default-settings/settings/filtering.settings';
 
 const hideFilterOptionValueIds: string[] = [
@@ -71,11 +72,10 @@ export const razuFilteringSettings: FilteringSettings = {
       label: 'Datum',
       fieldIds: ['document_day'],
       values: [],
-      sort: {
-        type: '_key',
-        order: 'asc',
+      customFilter: {
+        component: DateRangeFilterComponent,
+        service: DateRangeFilterService,
       },
-      customFilterComponent: DateRangeFilterComponent,
     },
     // documentYear: {
     //   label: 'Jaar',

@@ -295,7 +295,7 @@ export class FilterService {
   }
 
   isCustomFilter(filterId: string): boolean {
-    return !!this.getOptionById(filterId).customFilterComponent;
+    return !!this.getOptionById(filterId).customFilter?.component;
   }
 
   getOptionById(filterId: string): FilterOptionModel {

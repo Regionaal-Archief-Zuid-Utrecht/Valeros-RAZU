@@ -29,6 +29,10 @@ export class DateRangeFilterComponent
   override ngOnInit() {
     super.ngOnInit();
 
+    // TODO: Support multiple date fields
+    const dateField = this.fieldIds?.[0] ?? '';
+    this.dateRange.setFieldId(dateField);
+
     this.filters.enabled.subscribe(() => {
       this.initEarliestLatestDates();
     });
@@ -36,10 +40,8 @@ export class DateRangeFilterComponent
 
   async initEarliestLatestDates() {
     try {
-      // TODO: Support multiple date fields
-      const dateField = this.fieldIds?.[0] ?? '';
       const { earliest, latest } =
-        await this.dateRange.getEarliestLatestDates(dateField);
+        await this.dateRange.getEarliestLatestDates();
       this.earliestDate = earliest;
       this.latestDate = latest;
       // this.fromDate = earliest;
