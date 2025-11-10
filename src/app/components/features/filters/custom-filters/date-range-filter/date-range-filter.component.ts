@@ -107,14 +107,8 @@ export class DateRangeFilterComponent
   //   void this.url.updateUrlToReflectFilters(this.filters.enabled.value);
   // }
 
-  // clear() {
-  //   this.filters.setDateRange(
-  //     this.filterId,
-  //     this.fieldId,
-  //     this.frombase,
-  //     this.tobase,
-  //   );
-  //   this.from = this.frombase;
-  //   this.to = this.tobase;
-  // }
+  clear() {
+    this.fromDate = '';
+    this.toDate = '';
+  }
 }
