@@ -67,54 +67,6 @@ export class DateRangeFilterComponent
     }
   }
 
-  // async ngOnInit() {
-  //   const existing = this.getExisting();
-  //   if (existing) {
-  //     this.from = existing.from;
-  //     this.to = existing.to;
-  //     return;
-  //   }
-
-  //   // Compute min/max for current query and filters (excluding this date-range itself if present)
-  //   const query = this.search.queryStr ?? '';
-  //   const otherFilters: FilterModel[] = this.filters.enabled.value.filter(
-  //     (f) =>
-  //       !(
-  //         f.type === FilterType.DateRange &&
-  //         f.filterId === this.filterId &&
-  //         f.fieldId === this.fieldId
-  //       ),
-  //   );
-  //   try {
-  //     const { min, max } = await this.elastic.getKeywordDateMinMax(
-  //       this.fieldId,
-  //       query,
-  //       otherFilters,
-  //     );
-  //     if (!this.from && min) this.from = min;
-  //     if (!this.to && max) this.to = max;
-  //     if (!this.frombase && min) this.frombase = min;
-  //     if (!this.tobase && max) this.tobase = max;
-  //   } catch (e) {
-  //     // ignore errors; leave inputs empty
-  //   }
-  // }
-
-  // getExisting(): FilterModel | undefined {
-  //   return this.filters.enabled.value.find(
-  //     (f) =>
-  //       f.type === FilterType.DateRange &&
-  //       f.filterId === this.filterId &&
-  //       f.fieldId === this.fieldId,
-  //   );
-  // }
-
-  // apply() {
-  //   this.filters.setDateRange(this.filterId, this.fieldId, this.from, this.to);
-  //   // Immediately reflect in URL to avoid timing issues with async subscribers
-  //   void this.url.updateUrlToReflectFilters(this.filters.enabled.value);
-  // }
-
   apply() {
     this.search.execute(true);
   }
