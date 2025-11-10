@@ -108,7 +108,7 @@ export class DateRangeFilterComponent
   // }
 
   clear() {
-    this.fromDate = '';
-    this.toDate = '';
+    this.fromDate = undefined;
+    this.toDate = undefined;
   }
 }
