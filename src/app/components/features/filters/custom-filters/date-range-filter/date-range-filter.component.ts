@@ -47,21 +47,21 @@ export class DateRangeFilterComponent
       // this.fromDate = earliest;
       // this.toDate = latest;
 
-      const fromDateIsEarlierThanEarliestDate =
-        this.dateRange.fromDate &&
-        this.earliestDate &&
-        this.dateRange.fromDate < this.earliestDate;
-      if (fromDateIsEarlierThanEarliestDate) {
-        this.dateRange.fromDate = this.earliestDate;
-      }
+      // const fromDateIsEarlierThanEarliestDate =
+      //   this.dateRange.fromDate &&
+      //   this.earliestDate &&
+      //   this.dateRange.fromDate < this.earliestDate;
+      // if (fromDateIsEarlierThanEarliestDate) {
+      //   this.dateRange.fromDate = this.earliestDate;
+      // }
 
-      const toDateIsLaterThanLatestDate =
-        this.dateRange.toDate &&
-        this.latestDate &&
-        this.dateRange.toDate > this.latestDate;
-      if (toDateIsLaterThanLatestDate) {
-        this.dateRange.toDate = this.latestDate;
-      }
+      // const toDateIsLaterThanLatestDate =
+      //   this.dateRange.toDate &&
+      //   this.latestDate &&
+      //   this.dateRange.toDate > this.latestDate;
+      // if (toDateIsLaterThanLatestDate) {
+      //   this.dateRange.toDate = this.latestDate;
+      // }
     } catch (e) {
       console.error(e);
     }
