@@ -27,7 +27,7 @@ export class DateRangeFilterService extends CustomFilterService {
     super();
   }
 
-  setFieldId(fieldId: string) {
+  initFieldId(fieldId: string) {
     this.fieldId = fieldId;
   }
 
