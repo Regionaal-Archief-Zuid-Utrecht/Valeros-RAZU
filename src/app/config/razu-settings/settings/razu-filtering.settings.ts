@@ -1,4 +1,3 @@
-import { FilterType } from '../../../models/filters/filter.model';
 import { FilteringSettings } from '../../../models/settings/filtering-settings.model';
 import { filteringSettings } from '../../default-settings/settings/filtering.settings';
 
@@ -67,49 +66,59 @@ export const razuFilteringSettings: FilteringSettings = {
     //   values: [],
     //   hideValueIds: [...hideFilterOptionValueIds],
     // },
-    documentYear: {
-      label: 'Jaar',
-      fieldIds: ['document_year'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-      sort: {
-        type: '_key',
-        order: 'asc',
-      },
-    },
-    documentMonth: {
-      label: 'Maand',
-      fieldIds: ['document_month'],
-      values: [],
-      hideValueIds: [...hideFilterOptionValueIds],
-      showOnlyForSelectedFilters: {
-        documentYear: {
-          fieldIds: ['document_year'],
-          valueIds: [],
-          type: FilterType.Field,
-        },
-      },
-      sort: {
-        type: '_key',
-        order: 'asc',
-      },
-    },
-    documentDay: {
-      label: 'Dag',
+    documentDate: {
+      label: 'Datum',
       fieldIds: ['document_day'],
       values: [],
       hideValueIds: [...hideFilterOptionValueIds],
-      showOnlyForSelectedFilters: {
-        documentMonth: {
-          fieldIds: ['document_month'],
-          valueIds: [],
-          type: FilterType.Field,
-        },
-      },
       sort: {
         type: '_key',
         order: 'asc',
       },
     },
+    // documentYear: {
+    //   label: 'Jaar',
+    //   fieldIds: ['document_year'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    //   sort: {
+    //     type: '_key',
+    //     order: 'asc',
+    //   },
+    // },
+    // documentMonth: {
+    //   label: 'Maand',
+    //   fieldIds: ['document_month'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    //   showOnlyForSelectedFilters: {
+    //     documentYear: {
+    //       fieldIds: ['document_year'],
+    //       valueIds: [],
+    //       type: FilterType.Field,
+    //     },
+    //   },
+    //   sort: {
+    //     type: '_key',
+    //     order: 'asc',
+    //   },
+    // },
+    // documentDay: {
+    //   label: 'Dag',
+    //   fieldIds: ['document_day'],
+    //   values: [],
+    //   hideValueIds: [...hideFilterOptionValueIds],
+    //   showOnlyForSelectedFilters: {
+    //     documentMonth: {
+    //       fieldIds: ['document_month'],
+    //       valueIds: [],
+    //       type: FilterType.Field,
+    //     },
+    //   },
+    //   sort: {
+    //     type: '_key',
+    //     order: 'asc',
+    //   },
+    // },
   },
 };
