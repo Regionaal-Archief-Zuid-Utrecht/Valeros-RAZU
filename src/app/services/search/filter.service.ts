@@ -310,6 +310,10 @@ export class FilterService {
     const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
     const option: FilterOptionModel = this.getOptionById(filterId);
 
+    if (option.isCustomFilter) {
+      return true;
+    }
+
     if (!option.showOnlyForSelectedFilters) {
       return hasOptionsToShow;
     }

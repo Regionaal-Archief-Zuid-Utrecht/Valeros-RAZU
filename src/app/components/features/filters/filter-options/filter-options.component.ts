@@ -7,6 +7,7 @@ import { FilterType } from '../../../../models/filters/filter.model';
 import { FilterService } from '../../../../services/search/filter.service';
 import { SettingsService } from '../../../../services/settings.service';
 import { UiService } from '../../../../services/ui/ui.service';
+import { DateRangeFilterComponent } from '../custom-filters/date-range-filter/date-range-filter.component';
 import { EndpointsComponent } from '../endpoints/endpoints.component';
 import { FilterCountComponent } from './filter-count/filter-count.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
@@ -21,6 +22,7 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     FilterCountComponent,
     FormsModule,
     TranslatePipe,
+    DateRangeFilterComponent,
   ],
   templateUrl: './filter-options.component.html',
   styleUrl: './filter-options.component.scss',

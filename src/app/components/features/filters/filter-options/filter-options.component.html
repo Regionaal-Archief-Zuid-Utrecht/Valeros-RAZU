@@ -67,6 +67,7 @@
                 class="font-bold underline"
                 >{{ filters.getOptionById(filterId).label }}
               </label>
+              <!-- TODO: Support count for custom filters -->
               <app-filter-count
                 [count]="
                   filters.getOptionEnabledFiltersCountStr(
@@ -77,12 +78,21 @@
               />
             </h3>
             <div class="collapse-content flex">
-              <app-filter-option
-                [filterId]="filterId"
-                [values]="filters.getOptionById(filterId).values"
-                [fieldIds]="filters.getOptionById(filterId).fieldIds"
-                class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
-              />
+              @if (filters.getOptionById(filterId).isCustomFilter) {
+                <!-- TODO: Define component to render here in the settings -->
+                <app-date-range-filter
+                  [filterId]="filterId"
+                  [fieldIds]="filters.getOptionById(filterId).fieldIds"
+                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                />
+              } @else {
+                <app-filter-option
+                  [filterId]="filterId"
+                  [values]="filters.getOptionById(filterId).values"
+                  [fieldIds]="filters.getOptionById(filterId).fieldIds"
+                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                />
+              }
             </div>
           </div>
         </div>
