@@ -9,7 +9,7 @@ import { FilterService } from '../../../../services/search/filter.service';
 import { SettingsService } from '../../../../services/settings.service';
 import { UiService } from '../../../../services/ui/ui.service';
 import { EndpointsComponent } from '../endpoints/endpoints.component';
-import { FilterCountComponent } from './filter-count/filter-count.component';
+import { FilterEnabledCountComponent } from './filter-enabled-count/filter-enabled-count.component';
 import { FilterOptionComponent } from './filter-option/filter-option.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     NgComponentOutlet,
     FilterOptionComponent,
     EndpointsComponent,
-    FilterCountComponent,
+    FilterEnabledCountComponent,
     FormsModule,
     TranslatePipe,
     JsonPipe,

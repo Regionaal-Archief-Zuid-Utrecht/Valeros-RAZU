@@ -4,12 +4,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { FilterType } from '../../../../../models/filters/filter.model';
 
 @Component({
-  selector: 'app-filter-count',
+  selector: 'app-filter-enabled-count',
   imports: [NgIf, TranslatePipe],
-  templateUrl: './filter-count.component.html',
-  styleUrl: './filter-count.component.scss',
+  templateUrl: './filter-enabled-count.component.html',
+  styleUrl: './filter-enabled-count.component.scss',
 })
-export class FilterCountComponent {
-  @Input() count?: string;
+export class FilterEnabledCountComponent {
+  @Input() count?: number;
   protected readonly FilterType = FilterType;
 }

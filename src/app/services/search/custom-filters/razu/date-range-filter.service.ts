@@ -113,6 +113,17 @@ export class DateRangeFilterService extends CustomFilterService<DateRangeQueryPa
     };
   }
 
+  override getEnabledFilterCount(): number {
+    let count = 0;
+    if (this.fromDate) {
+      count++;
+    }
+    if (this.toDate) {
+      count++;
+    }
+    return count;
+  }
+
   override getQueryParamValues(): DateRangeQueryParams {
     const values: DateRangeQueryParams = {};
     if (this.fromDate) {

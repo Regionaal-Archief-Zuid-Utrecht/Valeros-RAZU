@@ -8,4 +8,5 @@ export abstract class CustomFilterService<TParams = any> {
   abstract getElasticQueries(): ElasticShouldQueries[];
   abstract getQueryParamValues(): TParams;
   abstract updateFromQueryParamValues(queryParamValues: TParams): void;
+  abstract getEnabledFilterCount(): number;
 }

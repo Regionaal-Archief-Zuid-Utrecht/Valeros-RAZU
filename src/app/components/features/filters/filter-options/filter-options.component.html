@@ -67,18 +67,25 @@
                 class="font-bold underline"
                 >{{ filters.getOptionById(filterId).label }}
               </label>
-              @if (!filters.isCustomFilter(filterId)) {
-                <app-filter-count
+              @if (filters.isCustomFilter(filterId)) {
+                <app-filter-enabled-count
                   [count]="
-                    filters.getOptionEnabledFiltersCountStr(
-                      filterId,
-                      FilterType.FieldAndValue
-                    )
+                    getCustomFilterService(
+                      filters.getOptionById(filterId).customFilter!.service!
+                    )?.getEnabledFilterCount()
                   "
                 />
               } @else {
-                <!-- TODO: Support count for custom filters -->
-                <app-filter-count [count]="'TODO'" />
+                <app-filter-enabled-count
+                  [count]="
+                    +(
+                      filters.getOptionEnabledFiltersCountStr(
+                        filterId,
+                        FilterType.FieldAndValue
+                      ) || 0
+                    )
+                  "
+                />
               }
             </h3>
             <div class="collapse-content flex">

@@ -7,9 +7,13 @@
   />
   <div class="collapse-title">
     <span>{{ "search-interface.organizations" | translate }}</span>
-    <app-filter-count
+    <app-filter-enabled-count
       [count]="
-        filters.getEnabledFiltersCountStr(endpoints.enabledIds.value.length)
+        +(
+          filters.getEnabledFiltersCountStr(
+            endpoints.enabledIds.value.length
+          ) || 0
+        )
       "
     />
   </div>
