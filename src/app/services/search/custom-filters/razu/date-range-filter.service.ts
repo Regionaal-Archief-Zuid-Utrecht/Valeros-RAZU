@@ -14,7 +14,7 @@ import { CustomFilterService } from '../custom-filter.service';
 @Injectable({
   providedIn: 'root',
 })
-export class DateRangeFilterService extends CustomFilterService {
+export class DateRangeFilterService extends CustomFilterService<DateRangeQueryParams> {
   fromDate?: string;
   toDate?: string;
   fieldId?: string;
@@ -122,6 +122,13 @@ export class DateRangeFilterService extends CustomFilterService {
       values.to = this.toDate;
     }
     return values;
+  }
+
+  override updateFromQueryParamValues(
+    queryParamValues: DateRangeQueryParams,
+  ): void {
+    this.fromDate = queryParamValues.from;
+    this.toDate = queryParamValues.to;
   }
 
   override getElasticQueries(): ElasticShouldQueries[] {

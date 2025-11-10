@@ -5,7 +5,6 @@ export interface UrlSettings {
   params: {
     search: string;
     filters: string;
-    customFilters: string;
     endpoints: string;
   };
 }

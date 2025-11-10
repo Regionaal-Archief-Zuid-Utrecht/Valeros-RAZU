@@ -4,7 +4,8 @@ import { ElasticShouldQueries } from '../../../models/elastic/elastic-should-que
 @Injectable({
   providedIn: 'root',
 })
-export abstract class CustomFilterService {
+export abstract class CustomFilterService<TParams = any> {
   abstract getElasticQueries(): ElasticShouldQueries[];
-  abstract getQueryParamValues(): any;
+  abstract getQueryParamValues(): TParams;
+  abstract updateFromQueryParamValues(queryParamValues: TParams): void;
 }

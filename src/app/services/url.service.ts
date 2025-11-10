@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
 import { Settings } from '../config/settings';
+import { FilterOptionsIdsModel } from '../models/filters/filter-option.model';
+import { FilterQueryParams } from '../models/filters/filter-query-params.model';
 import { FilterModel } from '../models/filters/filter.model';
 import { SuraResponse } from '../models/sura-response.model';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
 import { DetailsService } from './details.service';
 import { EndpointService } from './endpoint.service';
-import { CustomFilterService } from './search/custom-filters/custom-filter.service';
 import { CustomFiltersRegistry } from './search/custom-filters/custom-filters.registry';
 import { FilterService } from './search/filter.service';
 
@@ -58,36 +59,41 @@ export class UrlService {
   }
 
   async updateUrlToReflectFilters(filters: FilterModel[]) {
+    const combinedFiltersObject: FilterQueryParams = {};
+
     // Base filters
-    const enabledFiltersParam = JSON.stringify(
-      this.data.convertFiltersToIdsFormat(filters),
-    );
+    const baseFiltersObject: FilterOptionsIdsModel =
+      this.data.convertFiltersToIdsFormat(filters);
+
+    if (Object.keys(baseFiltersObject).length > 0) {
+      combinedFiltersObject.base = baseFiltersObject;
+    }
+
+    // Custom filters
+    const customFilterServices = this.customFiltersRegistry.getAll();
+    const customFiltersObject: { [filterId: string]: any } = {};
+    customFilterServices.forEach((service, filterId: string) => {
+      const queryParamValues = service.getQueryParamValues();
+      if (Object.keys(queryParamValues).length > 0) {
+        customFiltersObject[filterId] = queryParamValues;
+      }
+    });
+
+    if (Object.keys(customFiltersObject).length > 0) {
+      combinedFiltersObject.custom = customFiltersObject;
+    }
+
+    const combinedFiltersParam = JSON.stringify(combinedFiltersObject);
 
     console.log(
       'Updating URL to reflect filters',
-      enabledFiltersParam.slice(0, 100) + '...',
+      combinedFiltersParam.slice(0, 100) + '...',
       filters,
     );
 
-    void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
-
-    // Custom filters
-    const allCustomFilters = this.customFiltersRegistry.getAll();
-    const customFiltersParamObject: { [filterId: string]: any } = {};
-    allCustomFilters.forEach(
-      (service: CustomFilterService, filterId: string) => {
-        customFiltersParamObject[filterId] = service.getQueryParamValues();
-      },
-    );
-
-    const customFiltersParam =
-      Object.keys(customFiltersParamObject).length > 0
-        ? JSON.stringify(customFiltersParamObject)
-        : null;
-
     void this._updateUrlParam(
-      Settings.url.params.customFilters,
-      customFiltersParam,
+      Settings.url.params.filters,
+      combinedFiltersParam,
     );
   }
 
