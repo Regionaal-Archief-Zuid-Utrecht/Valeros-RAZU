@@ -1,5 +1,6 @@
 import { Component, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { DateRangeFilterService } from '../../../../../services/search/custom-filters/razu/date-range-filter.service';
 import { FilterService } from '../../../../../services/search/filter.service';
 import { SearchService } from '../../../../../services/search/search.service';
@@ -7,7 +8,7 @@ import { CustomFilterComponent } from '../custom-filter.directive';
 
 @Component({
   selector: 'app-date-range-filter',
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: './date-range-filter.component.html',
   standalone: true,
 })

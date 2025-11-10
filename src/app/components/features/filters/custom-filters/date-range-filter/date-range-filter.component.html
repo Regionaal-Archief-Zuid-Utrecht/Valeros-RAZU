@@ -1,6 +1,8 @@
 <div class="form-control">
   <label class="label" for="from-date">
-    <span class="label-text">Van</span>
+    <span class="label-text">{{
+      "search-interface.date_range.from" | translate
+    }}</span>
   </label>
   <input
     id="from-date"
@@ -10,11 +12,14 @@
     [min]="earliestDate"
     [max]="latestDate"
     (ngModelChange)="dateRange.onUpdate()"
+    [attr.aria-label]="'search-interface.date_range.from-sr-label' | translate"
   />
 </div>
 <div class="form-control">
   <label class="label" for="to-date">
-    <span class="label-text">Tot</span>
+    <span class="label-text">{{
+      "search-interface.date_range.to" | translate
+    }}</span>
   </label>
   <input
     id="to-date"
@@ -24,10 +29,15 @@
     [min]="earliestDate"
     [max]="latestDate"
     (ngModelChange)="dateRange.onUpdate()"
+    [attr.aria-label]="'search-interface.date_range.to-sr-label' | translate"
   />
 </div>
-<div class="flex gap-2 pb-1 mt-2">
-  <button class="btn btn-sm btn-primary" (click)="dateRange.clear()">
-    Wissen
+<div class="flex gap-2 pb-1 mt-2" role="group">
+  <button
+    class="btn btn-sm btn-primary"
+    (click)="dateRange.clear()"
+    [attr.aria-label]="'search-interface.date_range.clear' | translate"
+  >
+    {{ "search-interface.date_range.clear" | translate }}
   </button>
 </div>

@@ -70,6 +70,13 @@
         "title": "OCR Text Recognition",
         "description": "Newspaper text was processed with OCR (optical character recognition). This allowed us to make a large collection searchable, but the text may at times contain recognition errors."
       }
+    },
+  "date_range": {
+      "from": "From",
+      "from-sr-label": "Van (vroegste datum)",
+      "to": "To",
+      "to-sr-label": "To (late datum)",
+      "clear": "Clear dates filter"
     }
   },
   "records-interface": {

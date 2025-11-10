@@ -95,11 +95,13 @@
     </p>
 
     <div class="flex justify-center w-full">
-      <button class="btn btn-primary btn-md rounded-box text-center inline-block mx-auto hover:shadow-lg transition-shadow" 
-      (click)="onButtonClicked('')"
-        [attr.aria-label]="'homescreen.go-to-search' | translate">
-      {{ "general.close" | translate }}
-    </button>
+      <button
+        class="btn btn-primary btn-md rounded-box text-center inline-block mx-auto hover:shadow-lg transition-shadow"
+        (click)="onButtonClicked('')"
+        [attr.aria-label]="'homescreen.go-to-search' | translate"
+      >
+        {{ "general.close" | translate }}
+      </button>
     </div>
   </div>
 </app-view-container>

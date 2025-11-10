@@ -70,8 +70,14 @@
         "title": "OCR tekstherkenning",
         "description": "De krantentekst is verwerkt met OCR (Optical Character Recognition). Dit stelde ons in staat om een grote collectie doorzoekbaar te maken, maar de tekst kan soms herkenningsfouten bevatten."
       }
+    },
+    "date_range": {
+      "from": "Van",
+      "from-sr-label": "Van (vroegste datum)",
+      "to": "Tot",
+      "to-sr-label": "Tot (laatste datum)",
+      "clear": "Datum filter wissen"
     }
-    
   },
   "records-interface": {
     "pointer-to": "Verwijzing naar",
