@@ -118,26 +118,29 @@ export class DateRangeFilterService extends CustomFilterService {
       return [];
     }
 
-    // TODO: Refactor
-    const dateRangeMustQueries: ElasticShouldQueries[] = [];
-    const fromVal =
-      this.fromDate && this.fromDate.trim().length > 0 ? this.fromDate : '*';
-    const toVal =
-      this.toDate && this.toDate.trim().length > 0 ? this.toDate : '*';
+    const queries: ElasticShouldQueries[] = [];
+    let from = '*';
+    if (this.fromDate && this.fromDate.trim().length > 0) {
+      from = this.fromDate;
+    }
+    let to = '*';
+    if (this.toDate && this.toDate.trim().length > 0) {
+      to = this.toDate;
+    }
     const fieldWithDots = this.fieldId as string;
     const fieldWithSpaces = this.data.replacePeriodsWithSpaces(fieldWithDots);
-    const escapedSpacesField = fieldWithSpaces.replace(/ /g, '\\ ');
-    const qDots = {
-      query_string: {
-        query: `${fieldWithDots}:[${fromVal} TO ${toVal}]`,
-      },
+    const fieldWithEscapedSpaces = fieldWithSpaces.replace(/ /g, '\\ ');
+
+    const getQuery = (field: string) => {
+      return {
+        query_string: {
+          query: `${field}:[${from} TO ${to}]`,
+        },
+      };
     };
-    const qSpaces = {
-      query_string: {
-        query: `${escapedSpacesField}:[${fromVal} TO ${toVal}]`,
-      },
-    };
-    dateRangeMustQueries.push({ bool: { should: [qDots, qSpaces] } });
-    return dateRangeMustQueries;
+    const queryWithDots = getQuery(fieldWithDots);
+    const queryWithSpaces = getQuery(fieldWithEscapedSpaces);
+    queries.push({ bool: { should: [queryWithDots, queryWithSpaces] } });
+    return queries;
   }
 }
