@@ -175,7 +175,12 @@ export class FilterService {
         this.options.value,
       );
 
-      const filterGroups = Object.keys(this.options.value);
+      const filterGroups = Object.keys(this.options.value).filter(
+        (filterId) => {
+          const isCustomFilter = this.options.value[filterId].isCustomFilter;
+          return !isCustomFilter;
+        },
+      );
       const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
         const filtersWithoutThisGroup = this.enabled.value.filter(
           (filter) => filter.filterId !== filterGroupId,
