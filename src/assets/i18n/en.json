@@ -73,9 +73,9 @@
     },
   "date_range": {
       "from": "From",
-      "from-sr-label": "Van (vroegste datum)",
+      "from-sr-label": "From (earliest date)",
       "to": "To",
-      "to-sr-label": "To (late datum)",
+      "to-sr-label": "To (latest date)",
       "clear": "Clear dates filter"
     }
   },
