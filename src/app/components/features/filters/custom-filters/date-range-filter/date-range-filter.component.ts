@@ -33,10 +33,9 @@ export class DateRangeFilterComponent
     // TODO: Support multiple date fields
     const dateField = this.fieldIds?.[0] ?? '';
     this.dateRange.initFieldId(dateField);
+    this.initEarliestLatestDates();
 
-    this.filters.enabled.subscribe(() => {
-      this.initEarliestLatestDates();
-    });
+    // this.filters.enabled.subscribe(() => {});
   }
 
   async initEarliestLatestDates() {
