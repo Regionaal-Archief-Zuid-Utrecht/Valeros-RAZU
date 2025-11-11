@@ -72,18 +72,14 @@
     <app-search-tips />
   </div>
   @if (router.url.startsWith("/search")) {
-    <ul class="menu menu-horizontal rounded-box p-0 my-auto">
-      <li>
-        <button
-          type="button"
-          app-filter-button
-          class="ml-1 px-2 sm:px-3 md:hidden"
-          [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
-          [attr.aria-expanded]="filterDrawer.isOpen()"
-          aria-controls="filter-drawer-checkbox"
-        ></button>
-      </li>
-    </ul>
+    <button
+      type="button"
+      app-filter-button
+      class="ml-1 px-2 sm:px-3 md:hidden btn btn-md rounded-box btn-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 shadow hover:shadow-lg transition-shadow hover:bg-primary hover:text-primary-content"
+      [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+      [attr.aria-expanded]="filterDrawer.isOpen()"
+      aria-controls="filter-drawer-checkbox"
+    ></button>
   }
 
   <ul
