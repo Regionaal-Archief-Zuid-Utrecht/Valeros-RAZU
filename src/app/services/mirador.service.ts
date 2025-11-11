@@ -41,13 +41,15 @@ export class MiradorService {
     });
   }
 
-  setupCanvasIndexTracking(
-    miradorInstance: any,
-  ): BehaviorSubject<number | null> {
+  setupCanvasIndexTrackingInUrl(miradorInstance: any): void {
     const canvasIndex = new BehaviorSubject<number | null>(null);
 
     canvasIndex.subscribe((index: number | null) => {
       console.log('Canvas index:', index);
+      if (index !== null) {
+        const pageNumber = index + 1;
+        void this.urlService.updatePageInUrl(pageNumber);
+      }
     });
 
     const store = miradorInstance.store;
@@ -77,8 +79,6 @@ export class MiradorService {
 
       return result;
     };
-
-    return canvasIndex;
   }
 
   destroyViewer(viewer: any, containerId: string): void {

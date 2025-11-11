@@ -147,6 +147,16 @@ export class UrlService {
   }
 
   getPageNumberFromUrl(): number | null {
+    // Get page number from query param
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get(Settings.url.params.page);
+
+    if (pageParam) {
+      const pageNum = Number(pageParam);
+      return !isNaN(pageNum) && pageNum > 0 ? pageNum : null;
+    }
+
+    // Get page number from hashtag in URL
     const removeQueryParams = (url: string) => {
       const queryParamIndex = url.indexOf('?');
       if (queryParamIndex !== -1) {
@@ -167,6 +177,11 @@ export class UrlService {
       return !isNaN(pageNum) ? pageNum : null;
     }
     return null;
+  }
+
+  async updatePageInUrl(pageNumber: number | null) {
+    const pageParam = pageNumber ? pageNumber.toString() : null;
+    await this._updateUrlParam(Settings.url.params.page, pageParam);
   }
 
   async navigateByUrlIgnoringQueryParamChange(url: string) {

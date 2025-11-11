@@ -6,5 +6,6 @@ export interface UrlSettings {
     search: string;
     filters: string;
     endpoints: string;
+    page: string;
   };
 }
