@@ -1,65 +1,61 @@
-<div class="w-full h-full" *ngIf="!loading && fileUrls.length > 0">
-  <ng-container *ngIf="shownInTableCell">
-    <a
-      [href]="url"
-      download
-      class="btn btn-xs btn-primary h-full py-1"
-      *ngFor="let url of fileUrls"
-    >
-      <ng-icon [svg]="featherDownload" class="mr-1" />
-
-      {{ getFileNameFromUrl(url) }}
-    </a>
-  </ng-container>
-
-  <ng-container *ngIf="!shownInTableCell">
-    <!-- Thumbnail view - show first item only with appropriate icon -->
-    <ng-container *ngIf="isThumb">
-      <app-node-images
-        [imageUrls]="[
-          fileRenderService.getThumbImageUrl(
-            displayUrls[0],
-            fileRenderService.getFileType(displayUrls[0])
-          ),
-        ]"
-        [useViewer]="false"
-        class="mb-4 h-full"
-      ></app-node-images>
-    </ng-container>
-
-    <!-- Full view - show items with appropriate viewer -->
-    <ng-container *ngIf="!isThumb">
-      <div class="mb-4 h-full">
-        <!-- Only show images -->
-        <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Image">
-          <app-node-images
-            [imageUrls]="preferredViewerData.urls"
-            [shownInTableCell]="shownInTableCell"
-            [useViewer]="true"
-          ></app-node-images>
-        </ng-container>
-
-        <!-- Only show docs -->
-        <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Doc">
-          <!-- NOTE: Only shows first doc -->
-          <app-doc-viewer
-            [url]="preferredViewerData.urls[0]"
-            [fileType]="
-              fileRenderService.getFileType(preferredViewerData.urls[0])
-            "
-            [style.height]="!shownInTableCell ? '100%' : '16rem'"
-            (error)="hasViewer.emit(false)"
-          ></app-doc-viewer>
-        </ng-container>
-
-        <!-- Only show links -->
-        <ng-container *ngIf="preferredViewerData.viewer === FileViewer.Link">
-          <ng-container *ngFor="let url of preferredViewerData.urls">
-            <app-node-link [url]="url"></app-node-link>
-          </ng-container>
-        </ng-container>
-      </div>
-    </ng-container>
-    <span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
-  </ng-container>
-</div>
+@if (!loading && fileUrls.length > 0) {
+  <div class="w-full h-full">
+    @if (shownInTableCell) {
+      @for (url of fileUrls; track url) {
+        <a [href]="url" download class="btn btn-xs btn-primary h-full py-1">
+          <ng-icon [svg]="featherDownload" class="mr-1" />
+          {{ getFileNameFromUrl(url) }}
+        </a>
+      }
+    }
+    @if (!shownInTableCell) {
+      <!-- Thumbnail view - show first item only with appropriate icon -->
+      @if (isThumb) {
+        <app-node-images
+          [imageUrls]="[
+            fileRenderService.getThumbImageUrl(
+              displayUrls[0],
+              fileRenderService.getFileType(displayUrls[0])
+            ),
+          ]"
+          [useViewer]="false"
+          class="mb-4 h-full"
+        ></app-node-images>
+      }
+      <!-- Full view - show items with appropriate viewer -->
+      @if (!isThumb) {
+        <div class="mb-4 h-full">
+          <!-- Only show images -->
+          @if (preferredViewerData.viewer === FileViewer.Image) {
+            <app-node-images
+              [imageUrls]="preferredViewerData.urls"
+              [shownInTableCell]="shownInTableCell"
+              [useViewer]="true"
+            ></app-node-images>
+          }
+          <!-- Only show docs -->
+          @if (preferredViewerData.viewer === FileViewer.Doc) {
+            <!-- NOTE: Only shows first doc -->
+            <app-doc-viewer
+              [url]="preferredViewerData.urls[0]"
+              [fileType]="
+                fileRenderService.getFileType(preferredViewerData.urls[0])
+              "
+              [style.height]="!shownInTableCell ? '100%' : '16rem'"
+              (error)="hasViewer.emit(false)"
+            ></app-doc-viewer>
+          }
+          <!-- Only show links -->
+          @if (preferredViewerData.viewer === FileViewer.Link) {
+            @for (url of preferredViewerData.urls; track url) {
+              <app-node-link [url]="url"></app-node-link>
+            }
+          }
+        </div>
+      }
+      @if (loading) {
+        <span class="loading loading-spinner loading-xs"></span>
+      }
+    }
+  </div>
+}

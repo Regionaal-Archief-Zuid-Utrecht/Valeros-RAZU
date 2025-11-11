@@ -1,4 +1,10 @@
-<span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
+@if (loading) {
+  <span class="loading loading-spinner loading-xs"></span>
+}
 
-<app-node-images [imageUrls]="hopObjIds" *ngIf="hasHopHits" />
-<app-node-link [url]="id" *ngIf="!hasHopHits || settings?.showOriginalLink" />
+@if (hasHopHits) {
+  <app-node-images [imageUrls]="hopObjIds" />
+}
+@if (!hasHopHits || settings?.showOriginalLink) {
+  <app-node-link [url]="id" />
+}

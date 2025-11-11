@@ -1,13 +1,14 @@
-<ng-container *ngIf="node">
-  <app-node-table-view [node]="node" *ngIf="!hasComponents" />
-
+@if (node) {
+  @if (!hasComponents) {
+    <app-node-table-view [node]="node" />
+  }
   <!-- Dynamically render components based on their type -->
-  <ng-container *ngFor="let component of componentsToShow">
+  @for (component of componentsToShow; track component) {
     <ng-container
       *ngComponentOutlet="
         component;
         inputs: { data: getTypeRenderComponentInput() }
       "
     ></ng-container>
-  </ng-container>
-</ng-container>
+  }
+}

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
@@ -10,7 +9,7 @@ import { NodeService } from '../../../../services/node/node.service';
 
 @Component({
   selector: 'app-node-details-button',
-  imports: [NgIcon, NgIf, RouterLink, TranslatePipe],
+  imports: [NgIcon, RouterLink, TranslatePipe],
   templateUrl: './node-details-button.component.html',
   styleUrl: './node-details-button.component.scss',
 })

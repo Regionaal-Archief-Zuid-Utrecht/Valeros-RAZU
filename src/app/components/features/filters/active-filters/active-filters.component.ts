@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { featherFilter, featherX } from '@ng-icons/feather-icons';
@@ -10,7 +9,7 @@ import { NodeLinkComponent } from '../../node/node-link/node-link.component';
 @Component({
   selector: 'app-active-filters',
   standalone: true,
-  imports: [NgForOf, NodeLinkComponent, NgIf, FormsModule, TranslatePipe],
+  imports: [NodeLinkComponent, FormsModule, TranslatePipe],
   templateUrl: './active-filters.component.html',
   styleUrl: './active-filters.component.scss',
 })

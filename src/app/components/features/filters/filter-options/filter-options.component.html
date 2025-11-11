@@ -1,129 +1,130 @@
-<div
-  class="flex flex-col gap-1 mb-4"
-  *ngIf="filters.options.value"
-  role="search"
-  aria-label="Filters"
->
-  <div class="w-full">
-    <div class="flex justify-between items-center px-4 py-2">
-      <h2 class="text-xl font-bold">
-        {{ "search-interface.filters_title" | translate }}
-        @if (filters.loading.value) {
-          <span
-            class="loading loading-spinner loading-sm ml-1 relative top-[0.2rem]"
-          ></span>
-        }
-      </h2>
-      <div class="flex items-center gap-2">
-        <button
-          *ngIf="
+@if (filters.options.value) {
+  <div class="flex flex-col gap-1 mb-4" role="search" aria-label="Filters">
+    <div class="w-full">
+      <div class="flex justify-between items-center px-4 py-2">
+        <h2 class="text-xl font-bold">
+          {{ "search-interface.filters_title" | translate }}
+          @if (filters.loading.value) {
+            <span
+              class="loading loading-spinner loading-sm ml-1 relative top-[0.2rem]"
+            ></span>
+          }
+        </h2>
+        <div class="flex items-center gap-2">
+          @if (
             filters.enabled.value.length > 0 ||
             customFiltersRegistry.getTotalNumEnabled() > 0
-          "
-          class="btn btn-xs btn-primary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
-          (click)="clearFilters()"
-          [attr.aria-label]="'search-interface.clear_filters' | translate"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            role="region"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          <span style="padding-bottom: 0.1rem">
-            {{ "search-interface.clear_filters" | translate }}
-          </span>
-        </button>
-      </div>
-    </div>
-    <div class="transition-all overflow-hidden overflow-y-auto">
-      <!-- Existing Filters Logic -->
-      @for (filterId of Object.keys(filters.options.value); track filterId) {
-        <div class="w-full sm:flex-1 mb-1" *ngIf="filters.shouldShow(filterId)">
-          <div
-            class="collapse collapse-arrow bg-base-200 text-black"
-            [attr.aria-label]="
-              'Filter op: ' + filters.getOptionById(filterId).label
-            "
-          >
-            <input
-              type="checkbox"
-              role="button"
-              name="filter-accordion"
-              [(ngModel)]="ui.accordionExpandedStates[filterId]"
-              [id]="'Filter by ' + filters.getOptionById(filterId).label"
-              [attr.aria-expanded]="ui.accordionExpandedStates[filterId]"
-            />
-            <h3 class="collapse-title">
-              <label
-                [for]="'Filter by ' + filters.getOptionById(filterId).label"
-                class="font-bold underline"
-                >{{ filters.getOptionById(filterId).label }}
-              </label>
-              @if (filters.isCustomFilter(filterId)) {
-                <app-filter-enabled-count
-                  [count]="
-                    getCustomFilterService(
-                      filters.getOptionById(filterId).customFilter!.service!
-                    )?.getEnabledFilterCount()
-                  "
+          ) {
+            <button
+              class="btn btn-xs btn-primary flex items-center shadow hover:shadow-lg transition-shadow duration-200"
+              (click)="clearFilters()"
+              [attr.aria-label]="'search-interface.clear_filters' | translate"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                role="region"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
                 />
-              } @else {
-                <app-filter-enabled-count
-                  [count]="
-                    +(
-                      filters.getOptionEnabledFiltersCountStr(
-                        filterId,
-                        FilterType.FieldAndValue
-                      ) || 0
-                    )
-                  "
-                />
-              }
-            </h3>
-            <div class="collapse-content flex">
-              @if (filters.isCustomFilter(filterId)) {
-                <div
-                  *ngComponentOutlet="
-                    filters.getOptionById(filterId).customFilter!.component!;
-                    inputs: {
-                      filterId: filterId,
-                      fieldIds: filters.getOptionById(filterId).fieldIds,
-                      service: getCustomFilterService(
-                        filters.getOptionById(filterId).customFilter!.service!
-                      ),
-                    }
-                  "
-                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
-                ></div>
-              } @else {
-                <app-filter-option
-                  [filterId]="filterId"
-                  [values]="filters.getOptionById(filterId).values"
-                  [fieldIds]="filters.getOptionById(filterId).fieldIds"
-                  class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
-                />
-              }
-            </div>
-          </div>
+              </svg>
+              <span style="padding-bottom: 0.1rem">
+                {{ "search-interface.clear_filters" | translate }}
+              </span>
+            </button>
+          }
         </div>
-      }
-      <div
-        class="w-full lg:w-auto"
-        *ngIf="Settings.filtering.showOrganizationsFilter"
-      >
-        <app-endpoints />
+      </div>
+      <div class="transition-all overflow-hidden overflow-y-auto">
+        <!-- Existing Filters Logic -->
+        @for (filterId of Object.keys(filters.options.value); track filterId) {
+          @if (filters.shouldShow(filterId)) {
+            <div class="w-full sm:flex-1 mb-1">
+              <div
+                class="collapse collapse-arrow bg-base-200 text-black"
+                [attr.aria-label]="
+                  'Filter op: ' + filters.getOptionById(filterId).label
+                "
+              >
+                <input
+                  type="checkbox"
+                  role="button"
+                  name="filter-accordion"
+                  [(ngModel)]="ui.accordionExpandedStates[filterId]"
+                  [id]="'Filter by ' + filters.getOptionById(filterId).label"
+                  [attr.aria-expanded]="ui.accordionExpandedStates[filterId]"
+                />
+                <h3 class="collapse-title">
+                  <label
+                    [for]="'Filter by ' + filters.getOptionById(filterId).label"
+                    class="font-bold underline"
+                    >{{ filters.getOptionById(filterId).label }}
+                  </label>
+                  @if (filters.isCustomFilter(filterId)) {
+                    <app-filter-enabled-count
+                      [count]="
+                        getCustomFilterService(
+                          filters.getOptionById(filterId).customFilter!.service!
+                        )?.getEnabledFilterCount()
+                      "
+                    />
+                  } @else {
+                    <app-filter-enabled-count
+                      [count]="
+                        +(
+                          filters.getOptionEnabledFiltersCountStr(
+                            filterId,
+                            FilterType.FieldAndValue
+                          ) || 0
+                        )
+                      "
+                    />
+                  }
+                </h3>
+                <div class="collapse-content flex">
+                  @if (filters.isCustomFilter(filterId)) {
+                    <div
+                      *ngComponentOutlet="
+                        filters.getOptionById(filterId).customFilter!
+                          .component!;
+                        inputs: {
+                          filterId: filterId,
+                          fieldIds: filters.getOptionById(filterId).fieldIds,
+                          service: getCustomFilterService(
+                            filters.getOptionById(filterId).customFilter!
+                              .service!
+                          ),
+                        }
+                      "
+                      class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                    ></div>
+                  } @else {
+                    <app-filter-option
+                      [filterId]="filterId"
+                      [values]="filters.getOptionById(filterId).values"
+                      [fieldIds]="filters.getOptionById(filterId).fieldIds"
+                      class="max-h-64 h-full overflow-y-scroll overflow-x-hidden w-full"
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        }
+        @if (Settings.filtering.showOrganizationsFilter) {
+          <div class="w-full lg:w-auto">
+            <app-endpoints />
+          </div>
+        }
       </div>
     </div>
   </div>
-</div>
+}

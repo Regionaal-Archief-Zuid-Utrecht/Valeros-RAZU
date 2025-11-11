@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Settings } from '../../../../config/settings';
 import { intersects } from '../../../../helpers/util.helper';
@@ -12,7 +11,7 @@ import { NodeTypeComponent } from './node-type/node-type.component';
 
 @Component({
   selector: 'app-node-types',
-  imports: [NgForOf, NgIf, NodeTypeComponent],
+  imports: [NodeTypeComponent],
   templateUrl: './node-types.component.html',
   styleUrl: './node-types.component.scss',
 })

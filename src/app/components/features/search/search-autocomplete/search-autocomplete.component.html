@@ -1,41 +1,48 @@
-<li *ngIf="autocomplete.isLoading">
-  <p class="loading loading-sm loading-spinner p-0"></p>
-</li>
+@if (autocomplete.isLoading) {
+  <li>
+    <p class="loading loading-sm loading-spinner p-0"></p>
+  </li>
+}
 
-<ng-container *ngIf="!autocomplete.isLoading">
-  <div *ngIf="autocomplete.hasOptionsOfType(AutocompleteOptionType.SearchTerm)">
-    <div class="divider">
-      <span> {{ "search-interface.search-terms" | translate }}</span>
-    </div>
-    <li
-      *ngFor="
-        let autocompleteResult of autocomplete.getOptionsByType(
+@if (!autocomplete.isLoading) {
+  @if (autocomplete.hasOptionsOfType(AutocompleteOptionType.SearchTerm)) {
+    <div>
+      <div class="divider">
+        <span> {{ "search-interface.search-terms" | translate }}</span>
+      </div>
+      @for (
+        autocompleteResult of autocomplete.getOptionsByType(
           AutoCompleteOptionType.SearchTerm
-        )
-      "
-    >
-      <button (click)="selected.emit(autocompleteResult)">
-        <ng-icon [svg]="featherSearch" class="mr-2" />
-        {{ autocompleteResult.labels[0] }}
-      </button>
-    </li>
-  </div>
-
-  <div *ngIf="autocomplete.hasOptionsOfType(AutocompleteOptionType.Node)">
-    <div class="divider">
-      <span> {{ "search-interface.search-results" | translate }}</span>
+        );
+        track autocompleteResult
+      ) {
+        <li>
+          <button (click)="selected.emit(autocompleteResult)">
+            <ng-icon [svg]="featherSearch" class="mr-2" />
+            {{ autocompleteResult.labels[0] }}
+          </button>
+        </li>
+      }
     </div>
-    <li
-      *ngFor="
-        let autocompleteResult of autocomplete.getOptionsByType(
+  }
+  @if (autocomplete.hasOptionsOfType(AutocompleteOptionType.Node)) {
+    <div>
+      <div class="divider">
+        <span> {{ "search-interface.search-results" | translate }}</span>
+      </div>
+      @for (
+        autocompleteResult of autocomplete.getOptionsByType(
           AutoCompleteOptionType.Node
-        )
-      "
-    >
-      <button (click)="selected.emit(autocompleteResult)">
-        <ng-icon [svg]="featherArrowRight" class="mr-2" />
-        {{ autocompleteResult.labels[0] }}
-      </button>
-    </li>
-  </div>
-</ng-container>
+        );
+        track autocompleteResult
+      ) {
+        <li>
+          <button (click)="selected.emit(autocompleteResult)">
+            <ng-icon [svg]="featherArrowRight" class="mr-2" />
+            {{ autocompleteResult.labels[0] }}
+          </button>
+        </li>
+      }
+    </div>
+  }
+}

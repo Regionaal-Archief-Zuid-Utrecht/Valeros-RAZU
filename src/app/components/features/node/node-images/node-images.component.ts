@@ -1,11 +1,10 @@
-import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Settings } from '../../../../config/settings';
 import { MiradorComponent } from '../../file-viewers/mirador/mirador.component';
 
 @Component({
   selector: 'app-node-images',
-  imports: [NgIf, MiradorComponent],
+  imports: [MiradorComponent],
   templateUrl: './node-images.component.html',
   styleUrl: './node-images.component.scss',
 })

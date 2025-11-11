@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -18,7 +17,7 @@ import { FileType } from '../../../../models/file-type.model';
 
 @Component({
   selector: 'app-doc-viewer',
-  imports: [NgIf, PdfJsViewerModule],
+  imports: [PdfJsViewerModule],
   templateUrl: './doc-viewer.component.html',
   styleUrl: './doc-viewer.component.css',
 })

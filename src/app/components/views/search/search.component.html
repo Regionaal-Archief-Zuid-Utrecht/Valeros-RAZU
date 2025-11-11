@@ -16,8 +16,8 @@
       </button>
 
       <!-- <button (click)="onHomeClicked()">
-        <img src="assets/img/logo_black.svg" alt="Logo" class="h-8" />
-      </button> -->
+      <img src="assets/img/logo_black.svg" alt="Logo" class="h-8" />
+    </button> -->
 
       <app-search-input class="flex-grow min-w-0" id="search-input" />
     </div>
@@ -29,40 +29,45 @@
     <!--    <app-active-filters />-->
   </div>
 
-  <app-details-back-button *ngIf="details.showing.value" class="px-4" />
+  @if (details.showing.value) {
+    <app-details-back-button class="px-4" />
+  }
 
   <div
     class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth w-full"
     #scrollContainer
   >
-    <app-details *ngIf="details.showing.value" />
+    @if (details.showing.value) {
+      <app-details />
+    }
 
-    <div
-      class="flex flex-row -top-2 bg-background z-10 p-2"
-      *ngIf="!details.showing.value"
-    >
-      <app-search-hits-counter class="w-1/2 lg:w-3/4" />
-      <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
-    </div>
+    @if (!details.showing.value) {
+      <div class="flex flex-row -top-2 bg-background z-10 p-2">
+        <app-search-hits-counter class="w-1/2 lg:w-3/4" />
+        <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
+      </div>
+    }
 
-    <div
-      *ngIf="!details.showing.value"
-      class="overflow-hidden"
-      role="list"
-      [attr.aria-label]="'accessibility.results-list' | translate"
-      id="search-results"
-    >
-      @if (viewModes.current.value === ViewMode.Grid) {
-        <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
-      }
-
-      @if (viewModes.current.value === ViewMode.List) {
-        @for (node of search.results.value.nodes; track node?.["@id"]) {
-          <app-node [node]="node"></app-node>
+    @if (!details.showing.value) {
+      <div
+        class="overflow-hidden"
+        role="list"
+        [attr.aria-label]="'accessibility.results-list' | translate"
+        id="search-results"
+      >
+        @if (viewModes.current.value === ViewMode.Grid) {
+          <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
         }
-      }
-    </div>
+        @if (viewModes.current.value === ViewMode.List) {
+          @for (node of search.results.value.nodes; track node?.["@id"]) {
+            <app-node [node]="node"></app-node>
+          }
+        }
+      </div>
+    }
 
-    <app-load-more-search-results-button *ngIf="!details.showing.value" />
+    @if (!details.showing.value) {
+      <app-load-more-search-results-button />
+    }
   </div>
 </app-view-container>

@@ -1,4 +1,3 @@
-import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { featherChevronDown } from '@ng-icons/feather-icons';
@@ -9,7 +8,7 @@ import { UiService } from '../../../../services/ui/ui.service';
 
 @Component({
   selector: 'app-sort-select',
-  imports: [NgForOf, FormsModule],
+  imports: [FormsModule],
   templateUrl: './sort-select.component.html',
   styleUrl: './sort-select.component.scss',
 })

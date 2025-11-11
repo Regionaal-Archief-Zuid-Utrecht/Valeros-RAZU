@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
@@ -18,7 +18,7 @@ export enum HeaderView {
 
 @Component({
   selector: 'app-header',
-  imports: [NgIcon, NgIf, TranslatePipe, NgClass],
+  imports: [NgIcon, TranslatePipe, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

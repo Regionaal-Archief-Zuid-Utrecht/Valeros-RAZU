@@ -1,51 +1,54 @@
-<ng-container *ngIf="node && pred">
-  <app-node-link [url]="pred" *ngIf="show === TableCellShowOptions.Pred" />
-
-  <ng-container *ngIf="show === TableCellShowOptions.Obj">
+@if (node && pred) {
+  @if (show === TableCellShowOptions.Pred) {
+    <app-node-link [url]="pred" />
+  }
+  @if (show === TableCellShowOptions.Obj) {
     <ng-container>
-      <div *ngFor="let objValue of objValuesToShow">
-        <!-- Explicitly rendered components that need special handling -->
-        <ng-container *ngFor="let component of explicitlyRenderedComponents">
-          <div class="mt-1" *ngIf="component === NodeTypeComponent">
-            <app-node-type [type]="{ id: objValue }"> </app-node-type>
-          </div>
-
-          <app-file-renderer
-            *ngIf="component === FileRendererComponent"
-            [urls]="objValue"
-            [shownInTableCell]="true"
-            [hopSettings]="getSettingByKey('hopLinkSettings')"
-          />
-        </ng-container>
-
-        <!-- Dynamically rendered components -->
-        <ng-container *ngFor="let component of dynamicallyRenderedComponents">
-          <ng-container
-            *ngComponentOutlet="
-              component;
-              inputs: { data: getPredicateRenderComponentInput(objValue) }
-            "
-          >
-          </ng-container>
-        </ng-container>
-
-        <!-- Default rendering if no components are available -->
-        <app-node-link [url]="objValue" *ngIf="!hasRenderComponents">
-          <ng-icon
-            [svg]="featherArrowUpLeft"
-            class="opacity-40"
-            *ngIf="isIncoming"
-          />
-        </app-node-link>
-      </div>
-
-      <button
-        class="btn btn-xs btn-primary mt-2"
-        (click)="loadMoreObjValues()"
-        *ngIf="numObjValuesNotShown > 0"
-      >
-        {{ showMoreLabel }}
-      </button>
+      @for (objValue of objValuesToShow; track objValue) {
+        <div>
+          <!-- Explicitly rendered components that need special handling -->
+          @for (component of explicitlyRenderedComponents; track component) {
+            @if (component === NodeTypeComponent) {
+              <div class="mt-1">
+                <app-node-type [type]="{ id: objValue }"> </app-node-type>
+              </div>
+            }
+            @if (component === FileRendererComponent) {
+              <app-file-renderer
+                [urls]="objValue"
+                [shownInTableCell]="true"
+                [hopSettings]="getSettingByKey('hopLinkSettings')"
+              />
+            }
+          }
+          <!-- Dynamically rendered components -->
+          @for (component of dynamicallyRenderedComponents; track component) {
+            <ng-container
+              *ngComponentOutlet="
+                component;
+                inputs: { data: getPredicateRenderComponentInput(objValue) }
+              "
+            >
+            </ng-container>
+          }
+          <!-- Default rendering if no components are available -->
+          @if (!hasRenderComponents) {
+            <app-node-link [url]="objValue">
+              @if (isIncoming) {
+                <ng-icon [svg]="featherArrowUpLeft" class="opacity-40" />
+              }
+            </app-node-link>
+          }
+        </div>
+      }
+      @if (numObjValuesNotShown > 0) {
+        <button
+          class="btn btn-xs btn-primary mt-2"
+          (click)="loadMoreObjValues()"
+        >
+          {{ showMoreLabel }}
+        </button>
+      }
     </ng-container>
-  </ng-container>
-</ng-container>
+  }
+}

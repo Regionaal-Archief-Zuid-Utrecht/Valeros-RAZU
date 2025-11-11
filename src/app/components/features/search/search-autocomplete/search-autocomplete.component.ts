@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowRight, featherSearch } from '@ng-icons/feather-icons';
@@ -11,7 +10,7 @@ import { AutocompleteService } from '../../../../services/search/autocomplete.se
 
 @Component({
   selector: 'app-search-autocomplete',
-  imports: [NgForOf, NgIf, NgIcon, TranslatePipe],
+  imports: [NgIcon, TranslatePipe],
   templateUrl: './search-autocomplete.component.html',
   styleUrl: './search-autocomplete.component.scss',
 })

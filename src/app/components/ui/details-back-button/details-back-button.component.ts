@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowLeft } from '@ng-icons/feather-icons';
@@ -8,7 +7,7 @@ import { RoutingService } from '../../../services/routing.service';
 
 @Component({
   selector: 'app-details-back-button',
-  imports: [NgIcon, NgIf, TranslatePipe],
+  imports: [NgIcon, TranslatePipe],
   templateUrl: './details-back-button.component.html',
   styleUrl: './details-back-button.component.scss',
 })

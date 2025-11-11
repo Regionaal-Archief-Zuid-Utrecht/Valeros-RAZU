@@ -1,4 +1,3 @@
-import { CommonModule, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -38,9 +37,7 @@ import { NodesGridComponent } from './nodes-grid/nodes-grid.component';
   imports: [
     NodeComponent,
     SearchInputComponent,
-    NgIf,
     NodesGridComponent,
-    CommonModule,
     DetailsComponent,
     SortSelectComponent,
     LoadMoreSearchResultsButtonComponent,

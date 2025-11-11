@@ -1,4 +1,3 @@
-import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -11,7 +10,7 @@ import { FilterEnabledCountComponent } from '../filter-options/filter-enabled-co
 
 @Component({
   selector: 'app-endpoints',
-  imports: [NgForOf, FilterEnabledCountComponent, FormsModule, TranslatePipe],
+  imports: [FilterEnabledCountComponent, FormsModule, TranslatePipe],
   templateUrl: './endpoints.component.html',
   styleUrl: './endpoints.component.scss',
 })

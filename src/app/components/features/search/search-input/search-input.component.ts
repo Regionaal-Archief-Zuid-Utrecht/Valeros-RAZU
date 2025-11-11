@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +25,6 @@ import { SearchTipsComponent } from '../search-tips/search-tips.component';
   selector: 'app-search-input',
   imports: [
     FormsModule,
-    NgIf,
     SearchAutocompleteComponent,
     TranslatePipe,
     NgIcon,

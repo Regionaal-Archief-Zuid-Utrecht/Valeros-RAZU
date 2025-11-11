@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { featherArrowLeft } from '@ng-icons/feather-icons';
@@ -11,7 +10,7 @@ import { NodeComponent } from '../../features/node/node.component';
 
 @Component({
   selector: 'app-details',
-  imports: [NodeComponent, NgIf],
+  imports: [NodeComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })

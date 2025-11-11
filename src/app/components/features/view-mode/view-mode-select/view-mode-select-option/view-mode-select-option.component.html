@@ -1,15 +1,19 @@
-<li *ngIf="viewMode !== undefined">
-  <button
-    type="button"
-    [ngClass]="[
-      viewModes.current.value === viewMode
-        ? 'btn-primary bg-primary hover:bg-base-100 hover:text-primary hover:drop-shadow-lg active:!bg-primary active:!text-primary-content'
-        : 'active:!bg-primary active:!text-primary-content',
-    ]"
-    (click)="viewModes.current.next(viewMode)"
-    [attr.aria-pressed]="viewModes.current.value === viewMode"
-    [attr.aria-label]="getAriaLabel() | translate"
-  >
-    <ng-icon [svg]="iconSvg" *ngIf="iconSvg" />
-  </button>
-</li>
+@if (viewMode !== undefined) {
+  <li>
+    <button
+      type="button"
+      [ngClass]="[
+        viewModes.current.value === viewMode
+          ? 'btn-primary bg-primary hover:bg-base-100 hover:text-primary hover:drop-shadow-lg active:!bg-primary active:!text-primary-content'
+          : 'active:!bg-primary active:!text-primary-content',
+      ]"
+      (click)="viewModes.current.next(viewMode)"
+      [attr.aria-pressed]="viewModes.current.value === viewMode"
+      [attr.aria-label]="getAriaLabel() | translate"
+    >
+      @if (iconSvg) {
+        <ng-icon [svg]="iconSvg" />
+      }
+    </button>
+  </li>
+}

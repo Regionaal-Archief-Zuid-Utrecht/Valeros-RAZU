@@ -19,19 +19,21 @@
   </div>
 
   <div class="collapse-content max-h-48 overflow-y-scroll overflow-x-hidden">
-    <div
-      class="form-control flex-row"
-      *ngFor="let endpointId of Object.keys(Settings.endpoints.data)"
-    >
-      <label class="label text">
-        <input
-          type="checkbox"
-          class="checkbox checkbox-sm mr-4"
-          [checked]="endpoints.isEnabled(endpointId)"
-          (click)="endpoints.toggle(endpointId)"
-        />
-        {{ endpoints.getById(endpointId)?.label }}
-      </label>
-    </div>
+    @for (
+      endpointId of Object.keys(Settings.endpoints.data);
+      track endpointId
+    ) {
+      <div class="form-control flex-row">
+        <label class="label text">
+          <input
+            type="checkbox"
+            class="checkbox checkbox-sm mr-4"
+            [checked]="endpoints.isEnabled(endpointId)"
+            (click)="endpoints.toggle(endpointId)"
+          />
+          {{ endpoints.getById(endpointId)?.label }}
+        </label>
+      </div>
+    }
   </div>
 </div>

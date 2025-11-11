@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherChevronRight } from '@ng-icons/feather-icons';
@@ -7,7 +6,7 @@ import { HopComponent } from '../hop.component';
 
 @Component({
   selector: 'app-hop-link',
-  imports: [NgIf, NodeLinkComponent, NgForOf, NgIcon],
+  imports: [NodeLinkComponent, NgIcon],
   templateUrl: './hop-link.component.html',
   styleUrl: './hop-link.component.scss',
 })

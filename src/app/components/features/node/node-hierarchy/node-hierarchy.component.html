@@ -1,48 +1,49 @@
-<div class="skeleton h-3 w-1/2" *ngIf="!hasLoadedNodes"></div>
+@if (!hasLoadedNodes) {
+  <div class="skeleton h-3 w-1/2"></div>
+}
 
-<div
-  class="flex"
-  [ngClass]="[collapsed ? 'items-center' : '']"
-  *ngIf="showNodes"
->
-  <!--  <button-->
-  <!--    class="btn btn-primary btn-outline inline-block btn-xs mr-4"-->
-  <!--    (click)="collapsed = !collapsed"-->
-  <!--    *ngIf="allowExpand"-->
-  <!--  >-->
-  <!--    {{ collapsed ? "+" : "-" }}-->
-  <!--  </button>-->
-
-  <div
-    class="inline-block scrollbar-hide"
-    [ngClass]="[collapsed ? 'breadcrumbs' : '']"
-  >
-    <ul>
-      <li
-        *ngFor="
-          let nodeInfo of nodes;
-          index as i;
-          first as isFirst;
-          last as isLast
-        "
-      >
-        <app-node-link
-          [url]="nodeInfo['@id']"
-          [shouldTruncate]="collapsed"
-          class="block"
-          [style.margin-left]="collapsed ? '0' : i + 'rem'"
-        >
-          <ng-icon
-            [svg]="featherChevronRight"
-            *ngIf="!collapsed && !isFirst"
-            class="opacity-40"
-            accessible
-            role="region"
-            accessibilityLabelledBy="node-hierarchy"
-            [accessibilityLabel]="'Navigate to ' + nodeInfo['@id']"
-          />
-        </app-node-link>
-      </li>
-    </ul>
+@if (showNodes) {
+  <div class="flex" [ngClass]="[collapsed ? 'items-center' : '']">
+    <!--  <button-->
+    <!--    class="btn btn-primary btn-outline inline-block btn-xs mr-4"-->
+    <!--    (click)="collapsed = !collapsed"-->
+    <!--    *ngIf="allowExpand"-->
+    <!--  >-->
+    <!--    {{ collapsed ? "+" : "-" }}-->
+    <!--  </button>-->
+    <div
+      class="inline-block scrollbar-hide"
+      [ngClass]="[collapsed ? 'breadcrumbs' : '']"
+    >
+      <ul>
+        @for (
+          nodeInfo of nodes;
+          track nodeInfo;
+          let i = $index;
+          let isFirst = $first;
+          let isLast = $last
+        ) {
+          <li>
+            <app-node-link
+              [url]="nodeInfo['@id']"
+              [shouldTruncate]="collapsed"
+              class="block"
+              [style.margin-left]="collapsed ? '0' : i + 'rem'"
+            >
+              @if (!collapsed && !isFirst) {
+                <ng-icon
+                  [svg]="featherChevronRight"
+                  class="opacity-40"
+                  accessible
+                  role="region"
+                  accessibilityLabelledBy="node-hierarchy"
+                  [accessibilityLabel]="'Navigate to ' + nodeInfo['@id']"
+                />
+              }
+            </app-node-link>
+          </li>
+        }
+      </ul>
+    </div>
   </div>
-</div>
+}

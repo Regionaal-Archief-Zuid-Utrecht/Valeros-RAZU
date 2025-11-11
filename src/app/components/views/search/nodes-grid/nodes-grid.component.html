@@ -1,3 +1,5 @@
 <div class="grid grid-cols-2 gap-4">
-  <app-node *ngFor="let node of nodes" [node]="node"></app-node>
+  @for (node of nodes; track node) {
+    <app-node [node]="node"></app-node>
+  }
 </div>

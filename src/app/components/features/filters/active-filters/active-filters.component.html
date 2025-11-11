@@ -13,35 +13,36 @@
 <!--  </label>-->
 <!--</div>-->
 
-<div class="mt-2 max-h-16 overflow-y-scroll fade-bottom pb-2" *ngIf="isShown">
-  <div
-    *ngFor="let filter of filters.enabled.value"
-    class="badge badge-primary gap-1 mr-1"
-  >
-    <app-node-link
-      [url]="filter?.fieldId"
-      [allowLabelExpand]="false"
-      *ngIf="
-        filter.type === FilterType.Field ||
-        filter.type === FilterType.FieldAndValue
-      "
-    >
-      <!--      <span class="opacity-70">Veld </span>-->
-    </app-node-link>
-    <app-node-link
-      [url]="filter.valueId"
-      [allowLabelExpand]="false"
-      *ngIf="
-        filter.type === FilterType.Value ||
-        filter.type === FilterType.FieldAndValue
-      "
-    >
-      <span class="opacity-70" *ngIf="filter.type === FilterType.Value"
-        >{{ "records-interface.pointer-to" | translate }}
-      </span>
-      <span class="opacity-70" *ngIf="filter.type === FilterType.FieldAndValue"
-        >{{ "records-interface.points-to" | translate }}
-      </span>
-    </app-node-link>
+@if (isShown) {
+  <div class="mt-2 max-h-16 overflow-y-scroll fade-bottom pb-2">
+    @for (filter of filters.enabled.value; track filter) {
+      <div class="badge badge-primary gap-1 mr-1">
+        @if (
+          filter.type === FilterType.Field ||
+          filter.type === FilterType.FieldAndValue
+        ) {
+          <app-node-link [url]="filter?.fieldId" [allowLabelExpand]="false">
+            <!--      <span class="opacity-70">Veld </span>-->
+          </app-node-link>
+        }
+        @if (
+          filter.type === FilterType.Value ||
+          filter.type === FilterType.FieldAndValue
+        ) {
+          <app-node-link [url]="filter.valueId" [allowLabelExpand]="false">
+            @if (filter.type === FilterType.Value) {
+              <span class="opacity-70"
+                >{{ "records-interface.pointer-to" | translate }}
+              </span>
+            }
+            @if (filter.type === FilterType.FieldAndValue) {
+              <span class="opacity-70"
+                >{{ "records-interface.points-to" | translate }}
+              </span>
+            }
+          </app-node-link>
+        }
+      </div>
+    }
   </div>
-</div>
+}

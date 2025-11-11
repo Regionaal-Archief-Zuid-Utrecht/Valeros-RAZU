@@ -10,7 +10,9 @@
 />
 
 <div class="inline">
-  <span *ngIf="hasBeginDate && hasEndDate"> - </span>
+  @if (hasBeginDate && hasEndDate) {
+    <span> - </span>
+  }
   <app-hop-link
     [data]="{
       value: data?.value ?? '',
@@ -24,7 +26,9 @@
 </div>
 
 <div class="inline">
-  <span *ngIf="hasBeginDate || hasEndDate"> (</span>
+  @if (hasBeginDate || hasEndDate) {
+    <span> (</span>
+  }
   <app-hop-link
     [data]="{
       value: data?.value ?? '',
@@ -35,5 +39,7 @@
     }"
     (hopObjIdsRetrieved)="this.hasType = $event.length > 0"
   />
-  <span *ngIf="hasBeginDate || hasEndDate">)</span>
+  @if (hasBeginDate || hasEndDate) {
+    <span>)</span>
+  }
 </div>

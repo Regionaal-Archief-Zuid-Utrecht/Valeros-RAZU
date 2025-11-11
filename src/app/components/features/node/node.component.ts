@@ -2,7 +2,6 @@ import {
   AsyncPipe,
   Location,
   NgClass,
-  NgIf,
   NgTemplateOutlet,
 } from '@angular/common';
 import {
@@ -51,7 +50,6 @@ import { NodeTypesComponent } from './node-types/node-types.component';
 @Component({
   selector: 'app-node',
   imports: [
-    NgIf,
     NodeHierarchyComponent,
     NodeTypesComponent,
     AsyncPipe,

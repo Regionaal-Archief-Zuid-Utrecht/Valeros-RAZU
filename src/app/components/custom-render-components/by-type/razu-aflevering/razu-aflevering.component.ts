@@ -1,4 +1,4 @@
-import { DatePipe, NgFor, NgIf, registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
@@ -21,7 +21,7 @@ registerLocaleData(localeNl);
 @Component({
   selector: 'app-razu-aflevering',
   standalone: true,
-  imports: [NgIf, NgFor, HopLinkComponent, DatePipe, NgIcon, SnippetComponent],
+  imports: [HopLinkComponent, DatePipe, NgIcon, SnippetComponent],
   templateUrl: './razu-aflevering.component.html',
   styleUrls: ['./razu-aflevering.component.scss'],
 })

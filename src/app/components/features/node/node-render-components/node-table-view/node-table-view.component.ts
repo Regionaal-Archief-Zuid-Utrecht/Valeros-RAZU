@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { featherChevronDown, featherChevronUp } from '@ng-icons/feather-icons';
 import { PredicateVisibility } from '../../../../../models/settings/predicate-visibility-settings.model';
@@ -13,7 +12,7 @@ import { NodeTableComponent } from './node-table/node-table.component';
 
 @Component({
   selector: 'app-node-table-view',
-  imports: [NgIf, NodeTableComponent],
+  imports: [NodeTableComponent],
   templateUrl: './node-table-view.component.html',
   styleUrl: './node-table-view.component.scss',
 })

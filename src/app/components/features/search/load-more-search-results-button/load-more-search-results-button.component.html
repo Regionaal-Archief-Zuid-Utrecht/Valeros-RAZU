@@ -1,16 +1,16 @@
 <div class="flex justify-center">
-  <button
-    class="btn btn-primary shadow hover:shadow-lg transition-shadow duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-    (click)="loadMore()"
-    [disabled]="search.isLoading.value"
-    *ngIf="search.hasMoreResultsToLoad"
-    role="form"
-    [attr.aria-label]="'search-interface.load-more-results' | translate"
-  >
-    <span
-      class="loading loading-spinner loading-xs"
-      *ngIf="search.isLoading.value"
-    ></span>
-    {{ "search-interface.load-more-results" | translate }}
-  </button>
+  @if (search.hasMoreResultsToLoad) {
+    <button
+      class="btn btn-primary shadow hover:shadow-lg transition-shadow duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+      (click)="loadMore()"
+      [disabled]="search.isLoading.value"
+      role="form"
+      [attr.aria-label]="'search-interface.load-more-results' | translate"
+    >
+      @if (search.isLoading.value) {
+        <span class="loading loading-spinner loading-xs"></span>
+      }
+      {{ "search-interface.load-more-results" | translate }}
+    </button>
+  }
 </div>
