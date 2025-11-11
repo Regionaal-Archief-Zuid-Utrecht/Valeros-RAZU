@@ -2,5 +2,5 @@ import { MatomoSettings } from '../../../../models/settings/matomo-settings.mode
 
 export const razuMatomoSettings: MatomoSettings = {
   siteId: '1',
-  trackerUrl: 'https://matomo-razu.linkeddataviewer.nl',
+  trackerUrl: 'https://statistics.razu.nl',
 };

@@ -1,10 +1,4 @@
-import {
-  NgClass,
-  NgIf,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   Input,
@@ -19,7 +13,7 @@ import { NodeLabelTag } from '../../../../models/node-label-tag.type';
 
 @Component({
   selector: 'app-node-label',
-  imports: [NgIf, NgClass, NgSwitch, NgSwitchCase, NgSwitchDefault],
+  imports: [NgClass],
   templateUrl: './node-label.component.html',
   styleUrl: './node-label.component.scss',
 })

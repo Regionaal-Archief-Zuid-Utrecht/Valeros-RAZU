@@ -1,11 +1,9 @@
-<div
-  role="alert"
-  class="alert alert-soft mb-4"
-  *ngIf="!settings.hasEndpoints()"
->
-  <ng-icon [svg]="featherAlertTriangle" aria-hidden="true" />
-  <span>Let op: Geen endpoints gevonden</span>
-</div>
+@if (!settings.hasEndpoints()) {
+  <div role="alert" class="alert alert-soft mb-4">
+    <ng-icon [svg]="featherAlertTriangle" aria-hidden="true" />
+    <span>Let op: Geen endpoints gevonden</span>
+  </div>
+}
 
 <div
   class="dropdown dropdown-bottom z-[9999] flex w-full justify-center relative"
@@ -23,7 +21,7 @@
       alt="Logo"
       class="h-full py-3 mr-0 opacity-40 fill-black"
       src="/assets/img/logo_black.svg"
-    /> -->
+      /> -->
 
       <input
         type="text"
@@ -50,19 +48,21 @@
             : ('search-interface.search-e-depot-razu' | translate)
         "
       >
-        <span
-          class="loading loading-spinner loading-xs opacity-70"
-          *ngIf="search.isLoading.value"
-          aria-hidden="true"
-        ></span>
+        @if (search.isLoading.value) {
+          <span
+            class="loading loading-spinner loading-xs opacity-70"
+            aria-hidden="true"
+          ></span>
+        }
 
-        <img
-          src="assets/icons/search.svg"
-          alt="Zoek icoon"
-          class="h-4"
-          *ngIf="!search.isLoading.value"
-          aria-hidden="true"
-        />
+        @if (!search.isLoading.value) {
+          <img
+            src="assets/icons/search.svg"
+            alt="Zoek icoon"
+            class="h-4"
+            aria-hidden="true"
+          />
+        }
         <!--    <ng-icon [svg]="featherSearch" />-->
         <span aria-hidden="true">{{
           "search-interface.search" | translate
@@ -72,25 +72,24 @@
     <app-search-tips />
   </div>
   @if (router.url.startsWith("/search")) {
-    <ul class="menu menu-horizontal rounded-box p-0 my-auto">
-      <li>
-        <button
-          type="button"
-          app-filter-button
-          class="ml-1 px-2 sm:px-3 md:hidden"
-          [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
-          [attr.aria-expanded]="filterDrawer.isOpen()"
-          aria-controls="filter-drawer-checkbox"
-        ></button>
-      </li>
-    </ul>
+    <button
+      type="button"
+      app-filter-button
+      class="ml-1 px-2 sm:px-3 md:hidden btn btn-md rounded-box btn-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 shadow hover:shadow-lg transition-shadow hover:bg-primary hover:text-primary-content"
+      [attr.aria-label]="'search-interface.toggle-filter-panel' | translate"
+      [attr.aria-expanded]="filterDrawer.isOpen()"
+      aria-controls="filter-drawer-checkbox"
+    ></button>
   }
 
-  <ul
-    tabindex="0"
-    class="dropdown-content menu bg-base-100 rounded-xl z-[1] max-h-52 overflow-y-auto p-2 block text-base shadow mt-2 max-w-2xl"
-    *ngIf="hasAutocompleteOptions || autocomplete.isLoading"
-  >
-    <app-search-autocomplete (selected)="onAutocompleteOptionSelect($event)" />
-  </ul>
+  @if (hasAutocompleteOptions || autocomplete.isLoading) {
+    <ul
+      tabindex="0"
+      class="dropdown-content menu bg-base-100 rounded-xl z-[1] max-h-52 overflow-y-auto p-2 block text-base shadow mt-2 max-w-2xl"
+    >
+      <app-search-autocomplete
+        (selected)="onAutocompleteOptionSelect($event)"
+      />
+    </ul>
+  }
 </div>

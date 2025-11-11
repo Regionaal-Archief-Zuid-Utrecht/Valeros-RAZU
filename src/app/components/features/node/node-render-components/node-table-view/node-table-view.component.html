@@ -12,8 +12,6 @@
 <!--  {{ shouldShowDetails ? "Verberg details" : "Toon details" }}-->
 <!--</button>-->
 
-<app-node-table
-  [node]="node"
-  [visibility]="PredicateVisibility.Details"
-  *ngIf="details.showing.value && numOfDetailsPreds > 0 && canShowDetails"
-/>
+@if (details.showing.value && numOfDetailsPreds > 0 && canShowDetails) {
+  <app-node-table [node]="node" [visibility]="PredicateVisibility.Details" />
+}

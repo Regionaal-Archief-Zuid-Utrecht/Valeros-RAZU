@@ -8,5 +8,6 @@ export const urlSettings: UrlSettings = {
     search: 'q',
     filters: 'filters',
     endpoints: 'endpoints',
+    page: 'page',
   },
 };

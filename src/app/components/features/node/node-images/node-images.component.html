@@ -1,14 +1,17 @@
-<ng-container *ngIf="imageUrls && imageUrls.length > 0">
+@if (imageUrls && imageUrls.length > 0) {
   <!-- MIRADOR VIEWER -->
-  <app-mirador *ngIf="useViewer" [imageUrls]="imageUrls"></app-mirador>
-
+  @if (useViewer) {
+    <app-mirador [imageUrls]="imageUrls"></app-mirador>
+  }
   <!-- THUMB -->
-  <div class="w-full h-full overflow-y-scroll" *ngIf="!useViewer">
-    <img
-      [src]="imageUrls[0]"
-      [alt]="imageLabel ?? 'Unknown image'"
-      class="w-full h-full object-cover"
-      (error)="onImageLoadError($event)"
-    />
-  </div>
-</ng-container>
+  @if (!useViewer) {
+    <div class="w-full h-full overflow-y-scroll">
+      <img
+        [src]="imageUrls[0]"
+        [alt]="imageLabel ?? 'Unknown image'"
+        class="w-full h-full object-cover"
+        (error)="onImageLoadError($event)"
+      />
+    </div>
+  }
+}

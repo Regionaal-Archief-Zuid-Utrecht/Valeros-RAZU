@@ -14,9 +14,11 @@ import {
   FilterOptionsIdsModel,
   FilterOptionsModel,
 } from '../../models/filters/filter-option.model';
+import { FilterQueryParams } from '../../models/filters/filter-query-params.model';
 import { FilterModel, FilterType } from '../../models/filters/filter.model';
 import { ClusterService } from '../cluster.service';
 import { DataService } from '../data.service';
+import { CustomFiltersRegistry } from './custom-filters/custom-filters.registry';
 import { ElasticService } from './elastic.service';
 
 interface SearchTriggerModel {
@@ -40,6 +42,7 @@ export class FilterService {
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
+    public customFiltersRegistry: CustomFiltersRegistry,
     public elastic: ElasticService,
     public data: DataService,
     public clusters: ClusterService,
@@ -158,11 +161,31 @@ export class FilterService {
       filtersParam.slice(0, 100),
       '...',
     );
-    const urlFilters: FilterOptionsIdsModel = JSON.parse(filtersParam);
-    const filters: FilterModel[] =
-      this.data.convertFiltersFromIdsFormat(urlFilters);
 
-    this.enabled.next(filters);
+    const urlFilters: FilterQueryParams = JSON.parse(filtersParam);
+
+    // Base filters
+    let baseFilters: FilterModel[] = [];
+    if (urlFilters.base) {
+      baseFilters = this.data.convertFiltersFromIdsFormat(urlFilters.base);
+    }
+    this.enabled.next(baseFilters);
+
+    // Custom filters
+    if (urlFilters.custom) {
+      Object.entries(urlFilters.custom).forEach(
+        ([filterId, paramValues]: [string, any]) => {
+          const service = this.customFiltersRegistry.getService(filterId);
+          if (service) {
+            service.updateFromQueryParamValues(paramValues);
+          } else {
+            console.warn(
+              `No custom filter service found for filterId: ${filterId}`,
+            );
+          }
+        },
+      );
+    }
 
     this.searchTrigger.emit({ clearFilters: false });
   }
@@ -175,7 +198,9 @@ export class FilterService {
         this.options.value,
       );
 
-      const filterGroups = Object.keys(this.options.value);
+      const filterGroups = Object.keys(this.options.value).filter(
+        (filterId) => !this.isCustomFilter(filterId),
+      );
       const filterGroupPromises = filterGroups.map(async (filterGroupId) => {
         const filtersWithoutThisGroup = this.enabled.value.filter(
           (filter) => filter.filterId !== filterGroupId,
@@ -292,6 +317,10 @@ export class FilterService {
     );
   }
 
+  isCustomFilter(filterId: string): boolean {
+    return !!this.getOptionById(filterId).customFilter;
+  }
+
   getOptionById(filterId: string): FilterOptionModel {
     return this.options.value?.[filterId];
   }
@@ -304,6 +333,10 @@ export class FilterService {
   shouldShow(filterId: string): boolean {
     const hasOptionsToShow = this._getOptionValueIds(filterId).length > 0;
     const option: FilterOptionModel = this.getOptionById(filterId);
+
+    if (this.isCustomFilter(filterId)) {
+      return true;
+    }
 
     if (!option.showOnlyForSelectedFilters) {
       return hasOptionsToShow;

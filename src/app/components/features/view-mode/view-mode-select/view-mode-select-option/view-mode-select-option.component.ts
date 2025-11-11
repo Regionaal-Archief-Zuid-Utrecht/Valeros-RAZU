@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { ViewModeService } from '../../../../../services/view-mode.service';
 
 @Component({
   selector: 'app-view-mode-select-option',
-  imports: [NgIf, NgClass, NgIcon, TranslatePipe],
+  imports: [NgClass, NgIcon, TranslatePipe],
   templateUrl: './view-mode-select-option.component.html',
   styleUrl: './view-mode-select-option.component.scss',
 })

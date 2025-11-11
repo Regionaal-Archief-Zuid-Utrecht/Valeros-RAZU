@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -21,14 +20,7 @@ import { NodeLinkComponent } from '../../../node-link/node-link.component';
 
 @Component({
   selector: 'app-file-renderer',
-  imports: [
-    NgIf,
-    NgForOf,
-    NodeImagesComponent,
-    DocViewerComponent,
-    NodeLinkComponent,
-    NgIcon,
-  ],
+  imports: [NodeImagesComponent, DocViewerComponent, NodeLinkComponent, NgIcon],
   templateUrl: './file-renderer.component.html',
   styleUrl: './file-renderer.component.scss',
 })

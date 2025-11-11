@@ -7,7 +7,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { MiradorHighlightService } from '../../../../services/mirador-highlight.service';
 import { MiradorService } from '../../../../services/mirador.service';
 
@@ -21,9 +20,6 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   viewer?: any;
   private _initializeDebounceTimer?: number;
   containerId: string = '';
-  _canvasIndex: BehaviorSubject<number | null> = new BehaviorSubject<
-    number | null
-  >(null);
 
   @Input() nodeId?: string;
   @Input() nodeLabel?: string;
@@ -99,9 +95,7 @@ export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
       });
 
       if (this.viewer) {
-        this._canvasIndex = this.miradorService.setupCanvasIndexTracking(
-          this.viewer,
-        );
+        this.miradorService.setupCanvasIndexTrackingInUrl(this.viewer);
         this.miradorHighlight.init();
       }
 

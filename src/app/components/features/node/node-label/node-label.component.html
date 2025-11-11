@@ -1,13 +1,22 @@
-<ng-container [ngSwitch]="tag">
-  <h1 *ngSwitchCase="'h1'" [innerHTML]="renderedLabelHtml"></h1>
-  <h2 *ngSwitchCase="'h2'" [innerHTML]="renderedLabelHtml"></h2>
-  <h3 *ngSwitchCase="'h3'" [innerHTML]="renderedLabelHtml"></h3>
-  <span *ngSwitchDefault [innerHTML]="renderedLabelHtml"></span>
-</ng-container>
-<button
-  [ngClass]="allowLabelExpand ? 'text-primary clickable' : ''"
-  (click)="onEllipsisClick($event)"
-  *ngIf="shouldTruncate && showingTruncatedLabel && labelIsTruncated"
->
-  &nbsp;[...]
-</button>
+@switch (tag) {
+  @case ("h1") {
+    <h1 [innerHTML]="renderedLabelHtml"></h1>
+  }
+  @case ("h2") {
+    <h2 [innerHTML]="renderedLabelHtml"></h2>
+  }
+  @case ("h3") {
+    <h3 [innerHTML]="renderedLabelHtml"></h3>
+  }
+  @default {
+    <span [innerHTML]="renderedLabelHtml"></span>
+  }
+}
+@if (shouldTruncate && showingTruncatedLabel && labelIsTruncated) {
+  <button
+    [ngClass]="allowLabelExpand ? 'text-primary clickable' : ''"
+    (click)="onEllipsisClick($event)"
+  >
+    &nbsp;[...]
+  </button>
+}

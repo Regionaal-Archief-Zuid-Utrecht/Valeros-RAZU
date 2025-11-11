@@ -1,4 +1,4 @@
-import { NgComponentOutlet, NgForOf, NgIf } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Settings } from '../../../../config/settings';
 import { NodeModel } from '../../../../models/node.model';
@@ -13,7 +13,7 @@ import { NodeTableViewComponent } from '../node-render-components/node-table-vie
 
 @Component({
   selector: 'app-node-renderer',
-  imports: [NodeTableViewComponent, NgIf, NgForOf, NgComponentOutlet],
+  imports: [NodeTableViewComponent, NgComponentOutlet],
   templateUrl: './node-renderer.component.html',
   styleUrl: './node-renderer.component.scss',
 })

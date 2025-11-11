@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, HostListener, type OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherFilter } from '@ng-icons/feather-icons';
@@ -9,7 +8,7 @@ import { FilterDrawerService } from '../../../../../services/ui/filter-drawer.se
 
 @Component({
   selector: '[app-filter-button]',
-  imports: [NgIcon, NgIf],
+  imports: [NgIcon],
   templateUrl: './filter-button.component.html',
 })
 export class FilterButtonComponent implements OnInit {

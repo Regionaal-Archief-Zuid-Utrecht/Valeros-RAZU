@@ -15,28 +15,30 @@
           [attr.aria-labelledby]="getFilterLabelId(value)"
           [disabled]="filterService.loading.value"
         />
-        <app-node-link
-          [id]="getFilterLabelId(value)"
-          [disabled]="true"
-          [label]="value.label"
-          [url]="!value.label ? value.ids[0] : undefined"
-          [suffixStr]="getFilterOptionCountStr(value.filterHitCount)"
-          [shouldHighlight]="false"
-          *ngIf="value.ids"
-        >
-        </app-node-link>
+        @if (value.ids) {
+          <app-node-link
+            [id]="getFilterLabelId(value)"
+            [disabled]="true"
+            [label]="value.label"
+            [url]="!value.label ? value.ids[0] : undefined"
+            [suffixStr]="getFilterOptionCountStr(value.filterHitCount)"
+            [shouldHighlight]="false"
+          >
+          </app-node-link>
+        }
       </label>
     </div>
   }
 </fieldset>
 
-<button
-  class="btn btn-primary mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-  (click)="onShowMoreClicked()"
-  *ngIf="hasMoreToShow"
-  [disabled]="filterService.loading.value"
-  role="region"
-  [attr.aria-label]="'search-interface.load-more-results' | translate"
->
-  {{ "search-interface.load-more-results" | translate }}
-</button>
+@if (hasMoreToShow) {
+  <button
+    class="btn btn-sm btn-primary mt-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+    (click)="onShowMoreClicked()"
+    [disabled]="filterService.loading.value"
+    role="region"
+    [attr.aria-label]="'search-interface.load-more-results' | translate"
+  >
+    {{ "search-interface.load-more-results" | translate }}
+  </button>
+}

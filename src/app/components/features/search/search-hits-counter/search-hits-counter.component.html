@@ -6,11 +6,11 @@
       : ('accessibility.loading' | translate)
   "
 >
-  <span *ngIf="search.isLoading.value" class="loading loading-spinner"> </span>
+  @if (search.isLoading.value) {
+    <span class="loading loading-spinner"> </span>
+  }
 
-  <span
-    *ngIf="!search.isLoading.value && !details.showing.value"
-    aria-hidden="true"
-    >{{ numberOfHitsStr }}</span
-  >
+  @if (!search.isLoading.value && !details.showing.value) {
+    <span aria-hidden="true">{{ numberOfHitsStr }}</span>
+  }
 </h2>

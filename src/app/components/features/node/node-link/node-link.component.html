@@ -4,53 +4,58 @@
 
     <div class="inline">
       <!--  TODO: If clicked is observed (and perhaps the event is canceled), remove the href or use a button instead?  -->
-      <ng-container *ngIf="clicked.observed || isClickableUrl">
+      @if (clicked.observed || isClickableUrl) {
         <!-- External URL -->
-        <a
-          *ngIf="!isInternalUrl"
-          [href]="processedUrl"
-          target="_blank"
-          (click)="onUrlClicked($event)"
-          class="clickable"
-        >
-          <app-node-label
-            [label]="cachedLabel ?? processedUrl"
-            [shouldTruncate]="shouldTruncate"
-            [allowLabelExpand]="allowLabelExpand"
-            [highlightStr]="shouldHighlight ? search.queryStr : undefined"
-            [tag]="tag"
-          />
-        </a>
-
+        @if (!isInternalUrl) {
+          <a
+            [href]="processedUrl"
+            target="_blank"
+            (click)="onUrlClicked($event)"
+            class="clickable"
+          >
+            <app-node-label
+              [label]="cachedLabel ?? processedUrl"
+              [shouldTruncate]="shouldTruncate"
+              [allowLabelExpand]="allowLabelExpand"
+              [highlightStr]="shouldHighlight ? search.queryStr : undefined"
+              [tag]="tag"
+            />
+          </a>
+        }
         <!-- Internal URL -->
-        <a
-          *ngIf="isInternalUrl"
-          [routerLink]="processedUrl"
-          queryParamsHandling="merge"
-          class="clickable"
-        >
+        @if (isInternalUrl) {
+          <a
+            [routerLink]="processedUrl"
+            queryParamsHandling="merge"
+            class="clickable"
+          >
+            <app-node-label
+              [label]="cachedLabel ?? processedUrl"
+              [shouldTruncate]="shouldTruncate"
+              [allowLabelExpand]="allowLabelExpand"
+              [highlightStr]="shouldHighlight ? search.queryStr : undefined"
+              (click)="onUrlClicked($event); onInternalUrlClicked()"
+              [tag]="tag"
+            />
+          </a>
+        }
+      }
+
+      @if (!clicked.observed && !isClickableUrl) {
+        <span>
           <app-node-label
             [label]="cachedLabel ?? processedUrl"
             [shouldTruncate]="shouldTruncate"
             [allowLabelExpand]="allowLabelExpand"
             [highlightStr]="shouldHighlight ? search.queryStr : undefined"
-            (click)="onUrlClicked($event); onInternalUrlClicked()"
             [tag]="tag"
           />
-        </a>
-      </ng-container>
-
-      <span *ngIf="!clicked.observed && !isClickableUrl">
-        <app-node-label
-          [label]="cachedLabel ?? processedUrl"
-          [shouldTruncate]="shouldTruncate"
-          [allowLabelExpand]="allowLabelExpand"
-          [highlightStr]="shouldHighlight ? search.queryStr : undefined"
-          [tag]="tag"
-        />
-      </span>
+        </span>
+      }
     </div>
 
-    <span *ngIf="suffixStr">{{ suffixStr }}</span>
+    @if (suffixStr) {
+      <span>{{ suffixStr }}</span>
+    }
   </div>
 </ng-container>

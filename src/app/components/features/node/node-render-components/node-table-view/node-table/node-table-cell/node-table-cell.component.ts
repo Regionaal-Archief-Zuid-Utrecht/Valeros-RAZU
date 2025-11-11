@@ -1,4 +1,4 @@
-import { NgComponentOutlet, NgForOf, NgIf } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherArrowUpLeft } from '@ng-icons/feather-icons';
@@ -23,9 +23,7 @@ export enum TableCellShowOptions {
 @Component({
   selector: 'app-node-table-cell',
   imports: [
-    NgForOf,
     NgIcon,
-    NgIf,
     NodeLinkComponent,
     NodeTypeComponent,
     FileRendererComponent,

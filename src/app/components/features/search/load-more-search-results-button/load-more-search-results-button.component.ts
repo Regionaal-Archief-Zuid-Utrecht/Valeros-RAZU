@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NodeModel } from '../../../../models/node.model';
@@ -7,7 +6,7 @@ import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
   selector: 'app-load-more-search-results-button',
-  imports: [NgIf, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './load-more-search-results-button.component.html',
   styleUrl: './load-more-search-results-button.component.scss',
 })

@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { skip } from 'rxjs';
 import { Settings } from '../config/settings';
+import { FilterOptionsIdsModel } from '../models/filters/filter-option.model';
+import { FilterQueryParams } from '../models/filters/filter-query-params.model';
 import { FilterModel } from '../models/filters/filter.model';
 import { SuraResponse } from '../models/sura-response.model';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
 import { DetailsService } from './details.service';
 import { EndpointService } from './endpoint.service';
+import { CustomFiltersRegistry } from './search/custom-filters/custom-filters.registry';
 import { FilterService } from './search/filter.service';
 
 @Injectable({
@@ -23,6 +26,7 @@ export class UrlService {
     private data: DataService,
     private endpoints: EndpointService,
     private api: ApiService,
+    private customFiltersRegistry: CustomFiltersRegistry,
   ) {
     this._initUpdateUrlOnFilterChange();
     this._initUpdateUrlOnEndpointChange();
@@ -55,17 +59,36 @@ export class UrlService {
   }
 
   async updateUrlToReflectFilters(filters: FilterModel[]) {
-    const enabledFiltersParam = JSON.stringify(
-      this.data.convertFiltersToIdsFormat(filters),
-    );
+    const combinedFiltersObject: FilterQueryParams = {};
+
+    // Base filters
+    const baseFiltersObject: FilterOptionsIdsModel =
+      this.data.convertFiltersToIdsFormat(filters);
+
+    if (Object.keys(baseFiltersObject).length > 0) {
+      combinedFiltersObject.base = baseFiltersObject;
+    }
+
+    // Custom filters
+    const customFiltersObject =
+      this.customFiltersRegistry.getAllQueryParamValues();
+
+    if (Object.keys(customFiltersObject).length > 0) {
+      combinedFiltersObject.custom = customFiltersObject;
+    }
+
+    const combinedFiltersParam = JSON.stringify(combinedFiltersObject);
 
     console.log(
       'Updating URL to reflect filters',
-      enabledFiltersParam.slice(0, 100) + '...',
+      combinedFiltersParam.slice(0, 100) + '...',
       filters,
     );
 
-    void this._updateUrlParam(Settings.url.params.filters, enabledFiltersParam);
+    void this._updateUrlParam(
+      Settings.url.params.filters,
+      combinedFiltersParam,
+    );
   }
 
   private async _updateUrlParam(key: string, param: string | null) {
@@ -124,6 +147,16 @@ export class UrlService {
   }
 
   getPageNumberFromUrl(): number | null {
+    // Get page number from query param
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get(Settings.url.params.page);
+
+    if (pageParam) {
+      const pageNum = Number(pageParam);
+      return !isNaN(pageNum) && pageNum > 0 ? pageNum : null;
+    }
+
+    // Get page number from hashtag in URL
     const removeQueryParams = (url: string) => {
       const queryParamIndex = url.indexOf('?');
       if (queryParamIndex !== -1) {
@@ -144,6 +177,11 @@ export class UrlService {
       return !isNaN(pageNum) ? pageNum : null;
     }
     return null;
+  }
+
+  async updatePageInUrl(pageNumber: number | null) {
+    const pageParam = pageNumber ? pageNumber.toString() : null;
+    await this._updateUrlParam(Settings.url.params.page, pageParam);
   }
 
   async navigateByUrlIgnoringQueryParamChange(url: string) {

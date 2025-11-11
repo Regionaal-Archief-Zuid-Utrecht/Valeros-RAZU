@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -37,7 +36,7 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
 
 @Component({
   selector: 'app-node-link',
-  imports: [NgIf, RouterLink, NodeLabelComponent],
+  imports: [RouterLink, NodeLabelComponent],
   templateUrl: './node-link.component.html',
   styleUrl: './node-link.component.scss',
 })

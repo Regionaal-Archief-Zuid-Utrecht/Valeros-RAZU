@@ -16,5 +16,15 @@ export const razuSortingSettings: SortingSettings = {
       label: 'Titel (Z-A)',
       order: SortOrder.Descending,
     },
+    'date-asc': {
+      fields: ['document_day'],
+      label: 'Datum (oudste eerst)',
+      order: SortOrder.Ascending,
+    },
+    'date-desc': {
+      fields: ['document_day'],
+      label: 'Datum (nieuwste eerst)',
+      order: SortOrder.Descending,
+    },
   },
 };

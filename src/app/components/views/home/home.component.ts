@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,7 +24,6 @@ import { HomeIntroComponent } from './home-intro/home-intro.component';
     HeaderComponent,
     ViewContainerComponent,
     HomeIntroComponent,
-    CommonModule,
     HomeIntroBelowSearchComponent,
     LangSwitchComponent,
   ],

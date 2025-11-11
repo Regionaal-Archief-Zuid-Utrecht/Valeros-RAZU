@@ -1,18 +1,12 @@
 import { Component, type OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { NgIconComponent } from '@ng-icons/core';
 import { featherArrowLeft } from '@ng-icons/feather-icons';
 import { HeaderComponent, HeaderView } from '../../ui/header/header.component';
 import { ViewContainerComponent } from '../view-container/view-container.component';
 
 @Component({
   selector: 'app-sitemap',
-  imports: [
-    ViewContainerComponent,
-    RouterLink,
-    NgIconComponent,
-    HeaderComponent,
-  ],
+  imports: [ViewContainerComponent, RouterLink, HeaderComponent],
   templateUrl: './sitemap.component.html',
   styleUrl: './sitemap.component.scss',
 })

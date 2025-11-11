@@ -1,4 +1,4 @@
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Direction, NodeModel } from '../../../../../../../models/node.model';
@@ -16,14 +16,7 @@ import {
 
 @Component({
   selector: 'app-node-direction-table',
-  imports: [
-    NgForOf,
-    NgClass,
-    NodeTableCellComponent,
-    NgIf,
-    NodeLinkComponent,
-    TranslatePipe,
-  ],
+  imports: [NgClass, NodeTableCellComponent, NodeLinkComponent, TranslatePipe],
   templateUrl: './node-direction-table.component.html',
   styleUrl: './node-direction-table.component.scss',
 })

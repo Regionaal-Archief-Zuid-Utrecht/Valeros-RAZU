@@ -1,3 +1,7 @@
-<p class="loading loading-spinner block" *ngIf="loadingNodeData"></p>
+@if (loadingNodeData) {
+  <p class="loading loading-spinner block"></p>
+}
 
-<app-node [node]="details.node.value" *ngIf="details.node.value" />
+@if (details.node.value) {
+  <app-node [node]="details.node.value" />
+}

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { formatNumber } from '../../../../helpers/util.helper';
@@ -7,7 +6,7 @@ import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
   selector: 'app-search-hits-counter',
-  imports: [NgIf, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './search-hits-counter.component.html',
   styleUrl: './search-hits-counter.component.scss',
 })

@@ -1,13 +1,12 @@
-<ng-container *ngIf="node">
+@if (node) {
   <app-node-direction-table
     [direction]="Direction.Outgoing"
     [node]="node"
     [visibility]="visibility"
   />
-
   <app-node-direction-table
     [direction]="Direction.Incoming"
     [node]="node"
     [visibility]="visibility"
   />
-</ng-container>
+}

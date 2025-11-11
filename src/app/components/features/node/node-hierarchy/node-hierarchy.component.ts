@@ -1,4 +1,4 @@
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherChevronRight } from '@ng-icons/feather-icons';
@@ -11,14 +11,7 @@ import { NodeLinkComponent } from '../node-link/node-link.component';
 
 @Component({
   selector: 'app-node-hierarchy',
-  imports: [
-    NgForOf,
-    NgIf,
-    NgClass,
-    NgIcon,
-    NodeLinkComponent,
-    AccessibleIconDirective,
-  ],
+  imports: [NgClass, NgIcon, NodeLinkComponent, AccessibleIconDirective],
   templateUrl: './node-hierarchy.component.html',
   styleUrl: './node-hierarchy.component.scss',
 })

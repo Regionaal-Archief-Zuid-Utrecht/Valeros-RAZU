@@ -1,20 +1,30 @@
-<span class="loading loading-spinner loading-xs" *ngIf="loading"></span>
+@if (loading) {
+  <span class="loading loading-spinner loading-xs"></span>
+}
 
-<app-node-link [url]="hopObjId" *ngFor="let hopObjId of hopObjIds">
-  <div class="inline text-xs opacity-70" *ngIf="showHops">
-    <div *ngFor="let hopPred of settings?.preds" class="inline-block">
-      <app-node-link
-        [url]="hopPred"
-        [disabled]="true"
-        [shouldTruncate]="false"
-        [allowLabelExpand]="false"
-      ></app-node-link>
-      <ng-icon
-        [svg]="featherChevronRight"
-        class="relative top-[0.1rem] mx-1 opacity-70"
-      />
-    </div>
-  </div>
-</app-node-link>
+@for (hopObjId of hopObjIds; track hopObjId) {
+  <app-node-link [url]="hopObjId">
+    @if (showHops) {
+      <div class="inline text-xs opacity-70">
+        @for (hopPred of settings?.preds; track hopPred) {
+          <div class="inline-block">
+            <app-node-link
+              [url]="hopPred"
+              [disabled]="true"
+              [shouldTruncate]="false"
+              [allowLabelExpand]="false"
+            ></app-node-link>
+            <ng-icon
+              [svg]="featherChevronRight"
+              class="relative top-[0.1rem] mx-1 opacity-70"
+            />
+          </div>
+        }
+      </div>
+    }
+  </app-node-link>
+}
 
-<app-node-link [url]="id" *ngIf="settings?.showOriginalLink" />
+@if (settings?.showOriginalLink) {
+  <app-node-link [url]="id" />
+}

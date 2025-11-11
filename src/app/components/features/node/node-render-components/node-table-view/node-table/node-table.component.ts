@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Direction, NodeModel } from '../../../../../../models/node.model';
 import { PredicateVisibility } from '../../../../../../models/settings/predicate-visibility-settings.model';
@@ -7,7 +6,7 @@ import { NodeDirectionTableComponent } from './node-direction-table/node-directi
 
 @Component({
   selector: 'app-node-table',
-  imports: [NgIf, NodeDirectionTableComponent],
+  imports: [NodeDirectionTableComponent],
   templateUrl: './node-table.component.html',
   styleUrl: './node-table.component.scss',
 })

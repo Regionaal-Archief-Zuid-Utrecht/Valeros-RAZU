@@ -15,49 +15,49 @@
       (click)="onButtonClicked('')"
       [attr.aria-label]="'homescreen.go-to-homepage' | translate"
     >
-      <img
-        *ngIf="settings.showLogo"
-        [src]="settings.logoPath"
-        alt="Logo"
-        [class.mr-3]="settings.showTitle"
-        class="h-8"
-      />
-      <div *ngIf="settings.showTitle">
-        <h2>
-          <div
-            class="font-semibold"
-            [innerHTML]="'general.title' | translate"
-          ></div>
-        </h2>
-      </div>
+      @if (settings.showLogo) {
+        <img
+          [src]="settings.logoPath"
+          alt="Logo"
+          [class.mr-3]="settings.showTitle"
+          class="h-8"
+        />
+      }
+      @if (settings.showTitle) {
+        <div>
+          <h2>
+            <div
+              class="font-semibold"
+              [innerHTML]="'general.title' | translate"
+            ></div>
+          </h2>
+        </div>
+      }
     </button>
 
-    <div *ngIf="settings.showColofonButton">
-      <!--class="flex-grow"-->
-      <button
-        class="btn btn-primary btn-xs rounded-full text-center inline-block float-right p-0 w-9 sm:w-10 h-9 sm:h-10"
-        (click)="onButtonClicked(buttonUrl)"
-        [attr.aria-label]="
-          view === HeaderView.ShowingColofon
-            ? 'homescreen.go-to-search'
-            : ('homescreen.go-to-colofon' | translate)
-        "
-        role="navigation"
-      >
-        <span class="text-lg sm:text-2xl font-light">
-          <ng-icon
-            [svg]="featherX"
-            *ngIf="view === HeaderView.ShowingColofon"
-            class="relative top-[0.1rem]"
-          />
-          <span
-            *ngIf="view === HeaderView.ShowingSearch"
-            class="relative bottom-[0.1rem]"
-          >
-            ?
+    @if (settings.showColofonButton) {
+      <div>
+        <!--class="flex-grow"-->
+        <button
+          class="btn btn-primary btn-xs rounded-full text-center inline-block float-right p-0 w-9 sm:w-10 h-9 sm:h-10"
+          (click)="onButtonClicked(buttonUrl)"
+          [attr.aria-label]="
+            view === HeaderView.ShowingColofon
+              ? 'homescreen.go-to-search'
+              : ('homescreen.go-to-colofon' | translate)
+          "
+          role="navigation"
+        >
+          <span class="text-lg sm:text-2xl font-light">
+            @if (view === HeaderView.ShowingColofon) {
+              <ng-icon [svg]="featherX" class="relative top-[0.1rem]" />
+            }
+            @if (view === HeaderView.ShowingSearch) {
+              <span class="relative bottom-[0.1rem]"> ? </span>
+            }
           </span>
-        </span>
-      </button>
-    </div>
+        </button>
+      </div>
+    }
   </div>
 </div>

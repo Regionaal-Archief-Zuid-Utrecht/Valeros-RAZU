@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NodeModel } from '../../../../models/node.model';
@@ -8,7 +7,7 @@ import { UrlService } from '../../../../services/url.service';
 
 @Component({
   selector: 'app-node-permalink-button',
-  imports: [NgIf, TranslatePipe],
+  imports: [TranslatePipe],
   templateUrl: './node-permalink-button.component.html',
   styleUrl: './node-permalink-button.component.scss',
 })

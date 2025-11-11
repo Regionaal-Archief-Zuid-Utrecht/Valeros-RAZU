@@ -21,6 +21,7 @@ import { DataService } from '../data.service';
 import { EndpointService } from '../endpoint.service';
 import { SettingsService } from '../settings.service';
 import { SortService } from '../sort.service';
+import { CustomFiltersRegistry } from './custom-filters/custom-filters.registry';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class ElasticService {
     private settings: SettingsService,
     private endpoints: EndpointService,
     private sort: SortService,
+    private customFiltersRegistry: CustomFiltersRegistry,
   ) {}
 
   private _getSearchQuery(query: string): ElasticQuery {
@@ -169,7 +171,7 @@ export class ElasticService {
       return result;
     }, {});
 
-    const queryData = this._getNodeSearchQuery(
+    const queryData = this.getNodeSearchQuery(
       query,
       activeFilters,
       0,
@@ -236,7 +238,7 @@ export class ElasticService {
   }
 
   async searchEndpoints<T>(
-    queryData: any,
+    queryData: estypes.SearchRequest,
   ): Promise<ElasticEndpointSearchResponse<T>[]> {
     const searchPromisesAndEndpoints: {
       promise: Promise<estypes.SearchResponse<T>>;
@@ -293,12 +295,12 @@ export class ElasticService {
     return elasticSortEntries;
   }
 
-  private _getNodeSearchQuery(
+  getNodeSearchQuery(
     query: string,
     filters: FilterModel[],
     from?: number,
     size?: number,
-  ): any {
+  ): estypes.SearchRequest {
     if (query === undefined) {
       return {};
     }
@@ -343,6 +345,12 @@ export class ElasticService {
     const mustQueries: ElasticShouldQueries[] = [...fieldAndValueFilterQueries];
     if (fieldOrValueFilterQueries && fieldOrValueFilterQueries.length > 0) {
       mustQueries.push({ bool: { should: fieldOrValueFilterQueries } });
+    }
+
+    // Add custom filter queries
+    const customQueries = this.customFiltersRegistry.getAllElasticQueries();
+    if (customQueries && customQueries.length > 0) {
+      mustQueries.push(...customQueries);
     }
 
     // Only show filters (e.g., only show "InformatieObject")
@@ -414,7 +422,7 @@ export class ElasticService {
     size: number,
     filters: FilterModel[],
   ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    const queryData = this._getNodeSearchQuery(query, filters, from, size);
+    const queryData = this.getNodeSearchQuery(query, filters, from, size);
 
     return await this.searchEndpoints(queryData);
   }
