@@ -8,7 +8,13 @@ export const triplyFilteringSettings: FilteringSettings = {
       label: 'Type',
       fieldIds: ['http://www.w3.org/1999/02/22-rdf-syntax-ns#type.keyword'],
       values: [],
-      hideValueIds: [],
+      hideValueIds: [
+        'http://www.w3.org/2002/07/owl#DatatypeProperty',
+        'http://www.w3.org/2000/01/rdf-schema#Class',
+        'http://www.w3.org/2002/07/owl#ObjectProperty',
+        'http://rdfs.org/ns/void#Dataset',
+        'http://www.w3.org/2002/07/owl#Ontology',
+      ],
     },
   },
 };
