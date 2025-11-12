@@ -248,6 +248,8 @@ LIMIT 10000`;
   }
 
   private _buildLanguageFilter(variableName: string = '?obj'): string {
+    return '';
+
     // TODO: Make language priority configurable
     return `FILTER(LANG(${variableName}) = 'en' || LANG(${variableName}) = 'en-us' || !isLiteral(${variableName}) || !LANG(${variableName}))`;
   }
