@@ -250,7 +250,8 @@ LIMIT 10000`;
   async getNode(id: string): Promise<NodeModel> {
     this._ensureEndpointsExist();
 
-    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj .`;
+    // TODO: Make language priority configurable
+    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . FILTER(LANG(?obj) = 'en' || LANG(?obj) = 'en-us' || !LANG(?obj))`;
 
     const query = `SELECT DISTINCT ?pred ?obj ?endpointUrl WHERE {
         ${this.getFederatedQuery(queryTemplate)}
