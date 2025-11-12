@@ -17,4 +17,5 @@ export const triplyFilteringSettings: FilteringSettings = {
       ],
     },
   },
+  minNumOfValuesForFilterOptionToAppear: 2,
 };
