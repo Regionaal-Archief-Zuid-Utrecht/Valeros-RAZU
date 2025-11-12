@@ -188,7 +188,7 @@ limit 500`;
 VALUES ?s {
   ${idIrisStr}
 }
-?s ${labelIrisStr} ?label .`;
+?s ${labelIrisStr} ?label . ${this._buildLanguageFilter('?label')}`;
 
     const query = `
 SELECT DISTINCT ?s ?label WHERE {
@@ -247,11 +247,15 @@ LIMIT 10000`;
     }
   }
 
+  private _buildLanguageFilter(variableName: string = '?obj'): string {
+    // TODO: Make language priority configurable
+    return `FILTER(LANG(${variableName}) = 'en' || LANG(${variableName}) = 'en-us' || !isLiteral(${variableName}) || !LANG(${variableName}))`;
+  }
+
   async getNode(id: string): Promise<NodeModel> {
     this._ensureEndpointsExist();
 
-    // TODO: Make language priority configurable
-    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . FILTER(LANG(?obj) = 'en' || LANG(?obj) = 'en-us' || !isLiteral(?obj) || !LANG(?obj))`;
+    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . ${this._buildLanguageFilter('?obj')}`;
 
     const query = `SELECT DISTINCT ?pred ?obj ?endpointUrl WHERE {
         ${this.getFederatedQuery(queryTemplate)}
