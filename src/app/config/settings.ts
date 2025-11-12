@@ -1,4 +1,4 @@
 import { SettingsModel } from '../models/settings/settings.model';
-import { razuSettings } from './razu-settings/razu-settings';
+import { defaultSettings } from './default-settings/default-settings';
 
-export const Settings: SettingsModel = razuSettings;
+export const Settings: SettingsModel = defaultSettings;
