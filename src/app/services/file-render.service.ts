@@ -55,7 +55,10 @@ export class FileRenderService {
     // If no extension found or not recognized, try again with query parameters
     const fileExtensionWithParams = getFileExtensionFromUrl(url);
     if (fileExtensionWithParams) {
-      return this._getFileTypeFromExtension(fileExtensionWithParams);
+      const fileType = this._getFileTypeFromExtension(fileExtensionWithParams);
+      if (fileType !== FileType.UNKNOWN) {
+        return fileType;
+      }
     }
 
     // TODO: Finally, support MIME type-based file type detection as a fallback when no extension is found from the URL itself
