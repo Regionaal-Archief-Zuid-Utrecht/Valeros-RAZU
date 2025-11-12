@@ -24,15 +24,7 @@ export class FileRenderService {
     return fileIconUrl ?? unknownIconUrl;
   }
 
-  getFileType(url: string): FileType {
-    if (!url) return FileType.UNKNOWN;
-
-    // TODO: Support MIME type-based file type detection as a fallback when no extension is found from the URL itself
-    const urlWithoutParams = url.split('?')[0];
-    const fileExtension = urlWithoutParams.split('.').pop()?.toLowerCase();
-
-    if (!fileExtension) return FileType.UNKNOWN;
-
+  private _getFileTypeFromExtension(fileExtension: string): FileType {
     for (const [fileType, config] of Object.entries(
       Settings.fileRendering.fileTypes,
     )) {
@@ -40,6 +32,33 @@ export class FileRenderService {
         return fileType as FileType;
       }
     }
+    return FileType.UNKNOWN;
+  }
+
+  getFileType(url: string): FileType {
+    if (!url) return FileType.UNKNOWN;
+
+    const getFileExtensionFromUrl = (url: string) =>
+      url.split('.').pop()?.toLowerCase();
+
+    // First try without query parameters
+    const urlWithoutParams = url.split('?')[0];
+    const fileExtension = getFileExtensionFromUrl(urlWithoutParams);
+
+    if (fileExtension) {
+      const fileType = this._getFileTypeFromExtension(fileExtension);
+      if (fileType !== FileType.UNKNOWN) {
+        return fileType;
+      }
+    }
+
+    // If no extension found or not recognized, try again with query parameters
+    const fileExtensionWithParams = getFileExtensionFromUrl(url);
+    if (fileExtensionWithParams) {
+      return this._getFileTypeFromExtension(fileExtensionWithParams);
+    }
+
+    // TODO: Finally, support MIME type-based file type detection as a fallback when no extension is found from the URL itself
 
     return FileType.UNKNOWN;
   }
