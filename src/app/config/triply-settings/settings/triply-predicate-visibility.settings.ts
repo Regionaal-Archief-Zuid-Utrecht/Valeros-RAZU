@@ -12,8 +12,6 @@ export const triplyPredicateVisibilitySettings: PredicateVisibilitySettings = {
       [PredicateVisibility.Show]: [
         {
           predicates: [
-            'https://triplydb.com/academy/pokemon/vocab/description',
-            'https://triplydb.com/academy/pokemon/vocab/name',
             'https://triplydb.com/academy/pokemon/vocab/type',
             'https://triplydb.com/academy/pokemon/vocab/species',
           ],
