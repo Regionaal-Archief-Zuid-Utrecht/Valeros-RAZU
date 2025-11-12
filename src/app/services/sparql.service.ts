@@ -325,6 +325,7 @@ OPTIONAL { ?beperkingGebruikType <http://www.w3.org/2004/02/skos/core#prefLabel>
     return iiifData.length > 0;
   }
 
+  // TODO: Make non-RAZU specific
   async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
     const altoFormats = Settings.iiif.fileFormats.alto
       .map((f: string) => `<${f}>`)
