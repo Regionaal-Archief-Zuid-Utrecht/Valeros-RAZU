@@ -251,7 +251,7 @@ LIMIT 10000`;
     this._ensureEndpointsExist();
 
     // TODO: Make language priority configurable
-    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . FILTER(LANG(?obj) = 'en' || LANG(?obj) = 'en-us' || !LANG(?obj))`;
+    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . FILTER(LANG(?obj) = 'en' || LANG(?obj) = 'en-us' || !isLiteral(?obj) || !LANG(?obj))`;
 
     const query = `SELECT DISTINCT ?pred ?obj ?endpointUrl WHERE {
         ${this.getFederatedQuery(queryTemplate)}
