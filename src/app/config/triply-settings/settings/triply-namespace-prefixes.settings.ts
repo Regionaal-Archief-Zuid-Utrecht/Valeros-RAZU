@@ -3,5 +3,6 @@ import { namespacePrefixes } from '../../default-settings/settings/namespace-pre
 export const triplyNamespacePrefixes: Record<string, string> = {
   ...namespacePrefixes,
   'https://triplydb.com/academy/pokemon/vocab/': 'pokemon:',
+  'https://triplydb.com/academy/pokemon/id/pokemon/': 'pokemon-id:',
   'http://rdfs.org/ns/void#': 'void:',
 };
