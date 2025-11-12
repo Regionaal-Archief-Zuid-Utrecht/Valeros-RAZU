@@ -1,4 +1,4 @@
 import { SettingsModel } from '../models/settings/settings.model';
-import { defaultSettings } from './default-settings/default-settings';
+import { triplySettings } from './triply-settings/triply-settings';
 
-export const Settings: SettingsModel = defaultSettings;
+export const Settings: SettingsModel = triplySettings;
