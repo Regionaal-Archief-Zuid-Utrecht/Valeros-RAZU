@@ -13,10 +13,17 @@ export const triplyRenderComponentSettings: RenderComponentsSettings = {
       component: FileRendererComponent,
       predicates: [
         'http://xmlns.com/foaf/0.1/depiction',
-        'http://schema.org/audio',
         'https://triplydb.com/academy/pokemon/vocab/cry',
         'http://schema.org/contentUrl',
       ],
+      requiresExplicitRendering: true,
+    },
+    {
+      component: FileRendererComponent,
+      predicates: ['http://schema.org/audio'],
+      hopLinkSettings: {
+        preds: ['http://schema.org/contentUrl'],
+      },
       requiresExplicitRendering: true,
     },
   ],
