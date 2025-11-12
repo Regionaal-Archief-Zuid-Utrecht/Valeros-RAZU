@@ -4,6 +4,7 @@ import {
 } from '../../../models/settings/predicate-visibility-settings.model';
 import { ViewMode } from '../../../models/view-mode.enum';
 import { predicateVisibilitySettings } from '../../default-settings/settings/predicate-visibility.settings';
+import { labelPredicates } from '../../default-settings/settings/predicate.settings';
 
 export const triplyPredicateVisibilitySettings: PredicateVisibilitySettings = {
   ...predicateVisibilitySettings,
@@ -28,4 +29,5 @@ export const triplyPredicateVisibilitySettings: PredicateVisibilitySettings = {
       ...predicateVisibilitySettings.byViewMode[ViewMode.Grid],
     },
   },
+  alwaysHide: [...predicateVisibilitySettings.alwaysHide, ...labelPredicates],
 };
