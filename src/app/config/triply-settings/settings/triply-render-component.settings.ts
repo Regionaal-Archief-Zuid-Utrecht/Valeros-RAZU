@@ -14,6 +14,7 @@ export const triplyRenderComponentSettings: RenderComponentsSettings = {
       predicates: [
         'http://xmlns.com/foaf/0.1/depiction',
         'http://schema.org/audio',
+        'https://triplydb.com/academy/pokemon/vocab/cry',
       ],
       requiresExplicitRendering: true,
     },
