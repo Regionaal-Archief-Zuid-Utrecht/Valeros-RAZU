@@ -27,6 +27,7 @@ export class FileRenderService {
   getFileType(url: string): FileType {
     if (!url) return FileType.UNKNOWN;
 
+    // TODO: Support MIME type-based file type detection as a fallback when no extension is found from the URL itself
     const urlWithoutParams = url.split('?')[0];
     const fileExtension = urlWithoutParams.split('.').pop()?.toLowerCase();
 
