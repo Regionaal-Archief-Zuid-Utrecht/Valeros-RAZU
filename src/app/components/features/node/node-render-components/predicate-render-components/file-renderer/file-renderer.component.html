@@ -1,4 +1,6 @@
 @if (!loading && fileUrls.length > 0) {
+  <app-hop-trail [settings]="hopSettings" />
+
   <div class="w-full h-full">
     @if (shownInTableCell) {
       @for (url of fileUrls; track url) {

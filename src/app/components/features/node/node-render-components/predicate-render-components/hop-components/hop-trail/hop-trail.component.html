@@ -1,0 +1,18 @@
+@if (settings?.showHops && settings?.preds) {
+  <div class="inline text-xs opacity-70">
+    @for (hopPred of settings?.preds || []; track hopPred) {
+      <div class="inline-block">
+        <app-node-link
+          [url]="hopPred"
+          [disabled]="true"
+          [shouldTruncate]="false"
+          [allowLabelExpand]="false"
+        ></app-node-link>
+        <ng-icon
+          [svg]="featherChevronRight"
+          class="relative top-[0.1rem] mx-1 opacity-70"
+        />
+      </div>
+    }
+  </div>
+}

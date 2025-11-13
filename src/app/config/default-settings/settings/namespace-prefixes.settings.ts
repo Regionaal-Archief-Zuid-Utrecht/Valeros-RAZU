@@ -24,4 +24,5 @@ export const namespacePrefixes: Record<string, string> = {
   'https://www.ica.org/standards/RiC/ontology#': 'rico:',
   'https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#': 'ric-rst:',
   'https://data.cbg.nl/pico-terms#': 'picot:',
+  'http://open.vocab.org/terms/': 'ov:',
 };

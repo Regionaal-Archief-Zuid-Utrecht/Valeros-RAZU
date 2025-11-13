@@ -92,7 +92,7 @@ export class FilterOptionComponent implements OnInit {
         return bIsSelected ? 1 : -1;
       }
 
-      return 0;
+      return (b.filterHitCount || 0) - (a.filterHitCount || 0);
     });
   }
 

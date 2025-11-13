@@ -17,10 +17,17 @@ import { FileRenderService } from '../../../../../../services/file-render.servic
 import { DocViewerComponent } from '../../../../file-viewers/doc-viewer/doc-viewer.component';
 import { NodeImagesComponent } from '../../../node-images/node-images.component';
 import { NodeLinkComponent } from '../../../node-link/node-link.component';
+import { HopTrailComponent } from '../hop-components/hop-trail/hop-trail.component';
 
 @Component({
   selector: 'app-file-renderer',
-  imports: [NodeImagesComponent, DocViewerComponent, NodeLinkComponent, NgIcon],
+  imports: [
+    NodeImagesComponent,
+    DocViewerComponent,
+    NodeLinkComponent,
+    HopTrailComponent,
+    NgIcon,
+  ],
   templateUrl: './file-renderer.component.html',
   styleUrl: './file-renderer.component.scss',
 })

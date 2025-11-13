@@ -188,7 +188,7 @@ limit 500`;
 VALUES ?s {
   ${idIrisStr}
 }
-?s ${labelIrisStr} ?label .`;
+?s ${labelIrisStr} ?label . ${this._buildLanguageFilter('?label')}`;
 
     const query = `
 SELECT DISTINCT ?s ?label WHERE {
@@ -247,10 +247,17 @@ LIMIT 10000`;
     }
   }
 
+  private _buildLanguageFilter(variableName: string = '?obj'): string {
+    return '';
+
+    // TODO: Make language priority configurable
+    return `FILTER(LANG(${variableName}) = 'en' || LANG(${variableName}) = 'en-us' || !isLiteral(${variableName}) || !LANG(${variableName}))`;
+  }
+
   async getNode(id: string): Promise<NodeModel> {
     this._ensureEndpointsExist();
 
-    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj .`;
+    const queryTemplate = `${wrapWithAngleBrackets(id)} ?pred ?obj . ${this._buildLanguageFilter('?obj')}`;
 
     const query = `SELECT DISTINCT ?pred ?obj ?endpointUrl WHERE {
         ${this.getFederatedQuery(queryTemplate)}
@@ -325,6 +332,7 @@ OPTIONAL { ?beperkingGebruikType <http://www.w3.org/2004/02/skos/core#prefLabel>
     return iiifData.length > 0;
   }
 
+  // TODO: Make non-RAZU specific
   async getIIIFItemsData(id: string): Promise<IIIFItem[]> {
     const altoFormats = Settings.iiif.fileFormats.alto
       .map((f: string) => `<${f}>`)

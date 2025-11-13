@@ -180,8 +180,16 @@ export class UrlService {
   }
 
   async updatePageInUrl(pageNumber: number | null) {
-    const pageParam = pageNumber ? pageNumber.toString() : null;
-    await this._updateUrlParam(Settings.url.params.page, pageParam);
+    const url = new URL(window.location.href);
+
+    if (pageNumber) {
+      url.searchParams.set(Settings.url.params.page, pageNumber.toString());
+    } else {
+      url.searchParams.delete(Settings.url.params.page);
+    }
+
+    // Use replaceState directly to avoid creating browser history entries
+    window.history.replaceState({}, '', url.toString());
   }
 
   async navigateByUrlIgnoringQueryParamChange(url: string) {
