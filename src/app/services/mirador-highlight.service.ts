@@ -7,7 +7,16 @@ import { SearchService } from './search/search.service';
 export class MiradorHighlightService {
   private _mutationObserver?: MutationObserver;
 
-  constructor(private search: SearchService) {}
+  private readonly STOP_WORDS = new Set([
+    'and',
+    'or',
+  ]);
+
+  private stripEdgePunctuation(word: string): string {
+    return word.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+  }
+
+  constructor(private search: SearchService) { }
 
   init() {
     this.stopCheckingForTextElementsInDOM();
@@ -46,7 +55,13 @@ export class MiradorHighlightService {
       .trim()
       .toLowerCase()
       .split(/\s+/)
-      .filter((word) => word.length > 0);
+      .filter((word) => word.length > 0)
+      .map((word) => this.stripEdgePunctuation(word))
+      .filter(
+        (word) =>
+          word.length > 0 &&
+          !this.STOP_WORDS.has(word),
+      );
 
     console.log('Highlight words:', highlightWords);
 
@@ -60,7 +75,9 @@ export class MiradorHighlightService {
     textElements.forEach((textElement) => {
       const textContent = textElement.textContent;
       if (textContent) {
-        const normalizedText = textContent.trim().toLowerCase();
+        const normalizedText = this.stripEdgePunctuation(
+          textContent.trim().toLowerCase(),
+        );
 
         const shouldHighlight = highlightWords.some(
           (highlightWord) => normalizedText === highlightWord,
