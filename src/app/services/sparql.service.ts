@@ -12,6 +12,7 @@ import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { ApiService } from './api.service';
 import { EndpointService } from './endpoint.service';
 import { SettingsService } from './settings.service';
+import { identity } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class SparqlService {
     private api: ApiService,
     private settings: SettingsService,
     private endpoints: EndpointService,
-  ) {}
+  ) { }
 
   getFederatedQuery(
     queryTemplate: string,
@@ -296,6 +297,22 @@ LIMIT 10000`;
       endpointId: endpointIdsObjs,
       ...nodeData,
     };
+  }
+
+  async getRepresentationRdf(id: string): Promise<string> {
+    this._ensureEndpointsExist();
+    const query = `
+                PREFIX ldto: <https://data.razu.nl/def/ldto/>
+                CONSTRUCT {
+                  <${id}> ?pred ?obj .
+                }
+                WHERE {
+                  <${id}> ?pred ?obj .
+                }`;
+    return await this.api.postText(
+      this.endpoints.getFirstUrls().sparql,
+      { query }, 'text/turtle',
+    );
   }
 
   // TODO: Make this more generic (not RAZU specific)

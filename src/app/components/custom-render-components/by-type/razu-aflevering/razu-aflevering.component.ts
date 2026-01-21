@@ -15,6 +15,7 @@ import { HopLinkComponent } from '../../../features/node/node-render-components/
 import { SnippetComponent } from '../../../features/snippet/snippet.component';
 import { TypeRenderComponent } from '../type-render-component.component';
 
+
 // Register Dutch locale
 registerLocaleData(localeNl);
 
@@ -27,8 +28,7 @@ registerLocaleData(localeNl);
 })
 export class RazuAfleveringComponent
   extends TypeRenderComponent
-  implements OnInit
-{
+  implements OnInit {
   nodeService = inject(NodeService);
   urlService = inject(UrlService);
   iiifService = inject(IIIFService);
@@ -57,6 +57,8 @@ export class RazuAfleveringComponent
   imageRepPageMap: Map<string, string> = new Map();
   // Map: representation node id -> file size in bytes (ldto/omvang)
   imageRepSizeMap: Map<string, string> = new Map();
+  // Map: representation node id -> list of rdf urls
+  repRdfMap: Map<string, boolean> = new Map();
   hasBeginDate = false;
   hasEndDate = false;
   hasType = false;
@@ -358,6 +360,19 @@ export class RazuAfleveringComponent
     }
   }
 
+  private _downloadTextAsFile(filename: string, content: string, mime: string) {
+    const blob = new Blob([content], { type: mime });
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(blobUrl);
+  }
+
   private async loadRepresentationMetadataOnce(): Promise<void> {
     if (this.repMetaLoaded || this.repMetaFetching) return;
 
@@ -400,6 +415,7 @@ export class RazuAfleveringComponent
       this.repMetaFetching = false;
     }
   }
+
   // Helper method to get labels for dekkingInRuimteIds
   getDekkingInRuimteIds(onderdeelVanId: string): string[] {
     return this.dekkingInRuimteMap.get(onderdeelVanId) || [];
@@ -432,6 +448,24 @@ export class RazuAfleveringComponent
       void this.loadRepresentationMetadataOnce();
     }
   }
+
+  async downloadRepTurtle(rep: NodeObj): Promise<void> {
+    if (!rep?.value) return;
+    if (this.repRdfMap.get(rep.value)) return;
+    this.repRdfMap.set(rep.value, true);
+    try {
+      const turtle = await this.sparqlService.getRepresentationRdf(rep.value);
+      const page = this.getPage(rep);
+      const pageLabel = page ?? 'unknown';
+      const filename = `pagina-${pageLabel}.ttl`;
+      this._downloadTextAsFile(filename, turtle, 'text/turtle');
+    } catch (e) {
+      console.error('Failed to download turtle for rep', rep.value, e);
+    } finally {
+      this.repRdfMap.set(rep.value, false);
+    }
+  }
+
   // Returns true if the URL points to an image file
   isImageUrl(url?: string): boolean {
     const u = url?.toLowerCase?.();

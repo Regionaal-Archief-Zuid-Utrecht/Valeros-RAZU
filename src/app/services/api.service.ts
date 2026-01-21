@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, lastValueFrom, throwError } from 'rxjs';
 import { Settings } from '../config/settings';
@@ -14,7 +14,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private postCache: PostCacheService,
-  ) {}
+  ) { }
 
   async postData<T>(url: string, data: any): Promise<T> {
     const dataStr = JSON.stringify(data);
@@ -54,6 +54,53 @@ export class ApiService {
       this._processQueue();
     });
   }
+
+
+  async postText(
+    url: string,
+    data: any,
+    accept: string = 'text/turtle',
+  ): Promise<string> {
+    const dataStr = JSON.stringify(data);
+    const requestKey = `${url}|||${accept}|||${dataStr}`;
+    const requestIsCached = requestKey in this.postCache.cache;
+    if (requestIsCached) {
+      return this.postCache.cache[requestKey];
+    }
+    return new Promise<string>((resolve, reject) => {
+      const request = async () => {
+        try {
+          const headers = new HttpHeaders({
+            Accept: accept,
+          });
+          const response = await lastValueFrom(
+            this.http
+              .post(url, data, {
+                headers,
+                responseType: 'text',
+              })
+              .pipe(
+                catchError((error) => {
+                  console.error('There was a problem with the API request:', error);
+                  reject(error);
+                  return throwError(() => error);
+                }),
+              ),
+          );
+          this.postCache.cache[requestKey] = response;
+          resolve(response);
+        } catch (error) {
+          reject(error);
+        } finally {
+          this.activeRequests--;
+          this._processQueue();
+        }
+      };
+      this.requestQueue.push(request);
+      this._processQueue();
+    });
+  }
+
 
   private _processQueue() {
     while (
