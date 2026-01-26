@@ -2,123 +2,134 @@
 
 <!-- Loading indicator -->
 @if (loading) {
-<div class="loading">Loading data...</div>
+  <div class="loading">Loading data...</div>
 }
 
 <!-- isOnderdeelVan related data -->
 @if (!loading && data?.node) {
-<div class="node-data">
-  <h4>Onderdeel van</h4>
-  <!-- For each isOnderdeelVan, show details -->
-  @for (onderdeelVanId of onderdeelVanIds; track onderdeelVanId) {
-  <div class="related-item">
-    <details role="group" (toggle)="onDetailsToggle($event)">
-      <summary role="heading" aria-level="2" tabindex="0">
-        <app-hop-link [data]="{
+  <div class="node-data">
+    <h4>Onderdeel van</h4>
+    <!-- For each isOnderdeelVan, show details -->
+    @for (onderdeelVanId of onderdeelVanIds; track onderdeelVanId) {
+      <div class="related-item">
+        <details role="group" (toggle)="onDetailsToggle($event)">
+          <summary role="heading" aria-level="2" tabindex="0">
+            <app-hop-link
+              [data]="{
                 value: onderdeelVanId ?? '',
                 hopLinkSettings: {
                   preds: ['https://data.razu.nl/def/ldto/naam'],
                   showHops: false,
                 },
-              }">
-        </app-hop-link>
-      </summary>
-      <div role="region">
-        <!-- dekkingInRuimte -->
-        <h5>Uitgebracht in</h5>
-        <div>
-          @for (
-          ruimteId of getDekkingInRuimteIds(onderdeelVanId);
-          track ruimteId
-          ) {
-          <div class="mb-1">
-            <app-hop-link [data]="{
+              }"
+            >
+            </app-hop-link>
+          </summary>
+          <div role="region">
+            <!-- dekkingInRuimte -->
+            <h5>Uitgebracht in</h5>
+            <div>
+              @for (
+                ruimteId of getDekkingInRuimteIds(onderdeelVanId);
+                track ruimteId
+              ) {
+                <div class="mb-1">
+                  <app-hop-link
+                    [data]="{
                       value: ruimteId ?? '',
                       hopLinkSettings: {
                         preds: ['http://schema.org/name'],
                         showHops: false,
                       },
-                    }">
-            </app-hop-link>
+                    }"
+                  >
+                  </app-hop-link>
+                </div>
+              }
+              @if (getDekkingInRuimteIds(onderdeelVanId).length === 0) {
+                <div class="text-muted">Geen gebied gespecificeerd</div>
+              }
+            </div>
+            <!-- dekkingintijd -->
+            <h5>Digitaal beschikbaar bij het RAZU</h5>
+            @if (
+              hasBeginDateForId(onderdeelVanId) ||
+              hasEndDateForId(onderdeelVanId)
+            ) {
+              <div>
+                @if (hasBeginDateForId(onderdeelVanId)) {
+                  <span
+                    >Van
+                    {{
+                      getBeginDate(onderdeelVanId)
+                        | date: "d MMMM y" : "" : "nl"
+                    }}
+                  </span>
+                }
+                @if (
+                  hasBeginDateForId(onderdeelVanId) &&
+                  hasEndDateForId(onderdeelVanId)
+                ) {
+                  <span> tot </span>
+                }
+                @if (hasEndDateForId(onderdeelVanId)) {
+                  <span>{{
+                    getEndDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl"
+                  }}</span>
+                }
+              </div>
+            }
+            @if (
+              !hasBeginDateForId(onderdeelVanId) &&
+              !hasEndDateForId(onderdeelVanId)
+            ) {
+              <div class="text-muted">Geen periode gespecificeerd</div>
+            }
           </div>
-          }
-          @if (getDekkingInRuimteIds(onderdeelVanId).length === 0) {
-          <div class="text-muted">Geen gebied gespecificeerd</div>
-          }
-        </div>
-        <!-- dekkingintijd -->
-        <h5>Digitaal beschikbaar bij het RAZU</h5>
-        @if (
-        hasBeginDateForId(onderdeelVanId) ||
-        hasEndDateForId(onderdeelVanId)
-        ) {
-        <div>
-          @if (hasBeginDateForId(onderdeelVanId)) {
-          <span>Van
-            {{
-            getBeginDate(onderdeelVanId)
-            | date: "d MMMM y" : "" : "nl"
-            }}
-          </span>
-          }
-          @if (
-          hasBeginDateForId(onderdeelVanId) &&
-          hasEndDateForId(onderdeelVanId)
-          ) {
-          <span> tot </span>
-          }
-          @if (hasEndDateForId(onderdeelVanId)) {
-          <span>{{
-            getEndDate(onderdeelVanId) | date: "d MMMM y" : "" : "nl"
-            }}</span>
-          }
-        </div>
-        }
-        @if (
-        !hasBeginDateForId(onderdeelVanId) &&
-        !hasEndDateForId(onderdeelVanId)
-        ) {
-        <div class="text-muted">Geen periode gespecificeerd</div>
-        }
+        </details>
       </div>
-    </details>
+    }
   </div>
-  }
-</div>
 }
 
 <!-- beperkingGebruik data -->
 @if (!loading && data?.node) {
-<div class="node-data">
-  <div class="flex items-center gap-2 mb-2">
-    <h4 class="inline-block mb-0">Auteursrecht en openbaarheid</h4>
-    <button type="button" class="info-button relative bottom-[0.15rem]"
-      [attr.aria-label]="'Informatie over auteursrecht en openbaarheid'" [attr.aria-expanded]="showCopyrightInfo"
-      aria-controls="copyright-info-panel" (click)="showCopyrightInfo = !showCopyrightInfo">
-      <ng-icon [svg]="featherHelpCircle" aria-hidden="true"></ng-icon>
-    </button>
-  </div>
-  @if (showCopyrightInfo) {
-  <div class="info-panel mb-3" id="copyright-info-panel" role="region">
-    <p>
-      Niet elk stuk dat u ziet op deze website is vrij beschikbaar en
-      bruikbaar. Op basis van de Archiefwet, de Algemene Verordening
-      Gegevensbescherming (AVG) en de Auteurswet is het mogelijk dat u
-      sommige stukken niet kunt zien of kunt gebruiken.
-    </p>
-    <p>
-      Hieronder vindt u de beperkingen van het stuk dat u bekijkt. U kunt op
-      de beperking klikken om meer informatie te krijgen.
-    </p>
-  </div>
-  }
-  <!-- For each beperkingGebruik, show details -->
-  @for (beperkingId of beperkingGebruikIds; track beperkingId) {
-  <div class="beperking-item">
-    <details role="group" (toggle)="onDetailsToggle($event)">
-      <!-- Use prefLabel as summary -->
-      <summary role="heading" aria-level="2" tabindex="0">
-        <app-hop-link [data]="{
+  <div class="node-data">
+    <div class="flex items-center gap-2 mb-2">
+      <h4 class="inline-block mb-0">Auteursrecht en openbaarheid</h4>
+      <button
+        type="button"
+        class="info-button relative bottom-[0.15rem]"
+        [attr.aria-label]="'Informatie over auteursrecht en openbaarheid'"
+        [attr.aria-expanded]="showCopyrightInfo"
+        aria-controls="copyright-info-panel"
+        (click)="showCopyrightInfo = !showCopyrightInfo"
+      >
+        <ng-icon [svg]="featherHelpCircle" aria-hidden="true"></ng-icon>
+      </button>
+    </div>
+    @if (showCopyrightInfo) {
+      <div class="info-panel mb-3" id="copyright-info-panel" role="region">
+        <p>
+          Niet elk stuk dat u ziet op deze website is vrij beschikbaar en
+          bruikbaar. Op basis van de Archiefwet, de Algemene Verordening
+          Gegevensbescherming (AVG) en de Auteurswet is het mogelijk dat u
+          sommige stukken niet kunt zien of kunt gebruiken.
+        </p>
+        <p>
+          Hieronder vindt u de beperkingen van het stuk dat u bekijkt. U kunt op
+          de beperking klikken om meer informatie te krijgen.
+        </p>
+      </div>
+    }
+    <!-- For each beperkingGebruik, show details -->
+    @for (beperkingId of beperkingGebruikIds; track beperkingId) {
+      <div class="beperking-item">
+        <details role="group" (toggle)="onDetailsToggle($event)">
+          <!-- Use prefLabel as summary -->
+          <summary role="heading" aria-level="2" tabindex="0">
+            <app-hop-link
+              [data]="{
                 value: beperkingId ?? '',
                 hopLinkSettings: {
                   preds: [
@@ -127,126 +138,138 @@
                   ],
                   showHops: false,
                 },
-              }">
-        </app-hop-link>
-      </summary>
-      <!-- Termijn -->
-      <div role="region">
-        @if (beperkingGebruikTermijnMap.get(beperkingId)?.length) {
-        <div>
-          <h5>Vervaldatum</h5>
-          @for (
-          termijnId of beperkingGebruikTermijnMap.get(beperkingId) ||
-          [];
-          track termijnId
-          ) {
-          <div class="mb-1">
-            @if (termijnEinddatumMap.has(termijnId)) {
-            <div>
-              {{
-              termijnEinddatumMap.get(termijnId)
-              | date: "d MMMM y" : "" : "nl"
-              }}
-            </div>
+              }"
+            >
+            </app-hop-link>
+          </summary>
+          <!-- Termijn -->
+          <div role="region">
+            @if (beperkingGebruikTermijnMap.get(beperkingId)?.length) {
+              <div>
+                <h5>Vervaldatum</h5>
+                @for (
+                  termijnId of beperkingGebruikTermijnMap.get(beperkingId) ||
+                    [];
+                  track termijnId
+                ) {
+                  <div class="mb-1">
+                    @if (termijnEinddatumMap.has(termijnId)) {
+                      <div>
+                        {{
+                          termijnEinddatumMap.get(termijnId)
+                            | date: "d MMMM y" : "" : "nl"
+                        }}
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
             }
           </div>
-          }
-        </div>
-        }
+          <!-- Copyright Notice -->
+          <div>
+            @if (copyrightNoticeMap.get(beperkingId)?.length) {
+              <div>
+                <h5>Copyright</h5>
+                {{ copyrightNoticeMap.get(beperkingId) }}
+              </div>
+            }
+          </div>
+          <!-- Note -->
+          <div>
+            @if (copyrightNoteMap.get(beperkingId)?.length) {
+              <div>
+                <h5>Toelichting</h5>
+                {{ copyrightNoteMap.get(beperkingId) }}
+              </div>
+            }
+          </div>
+        </details>
       </div>
-      <!-- Copyright Notice -->
-      <div>
-        @if (copyrightNoticeMap.get(beperkingId)?.length) {
-        <div>
-          <h5>Copyright</h5>
-          {{ copyrightNoticeMap.get(beperkingId) }}
-        </div>
-        }
-      </div>
-      <!-- Note -->
-      <div>
-        @if (copyrightNoteMap.get(beperkingId)?.length) {
-        <div>
-          <h5>Toelichting</h5>
-          {{ copyrightNoteMap.get(beperkingId) }}
-        </div>
-        }
-      </div>
-    </details>
+    }
   </div>
-  }
-</div>
 }
 
 <!-- No data message -->
 @if (
-!loading &&
-(!data?.node ||
-!data?.node?.["@id"]?.length ||
-(onderdeelVanIds.length === 0 && beperkingGebruikIds.length === 0))
+  !loading &&
+  (!data?.node ||
+    !data?.node?.["@id"]?.length ||
+    (onderdeelVanIds.length === 0 && beperkingGebruikIds.length === 0))
 ) {
-<div class="no-data">No related data found for this node.</div>
+  <div class="no-data">No related data found for this node.</div>
 }
 @if (
-!loading &&
-!hideDownloads &&
-(data?.node?.["https://data.razu.nl/def/ldto/isRepresentatieVan"]?.length ||
-0) > 0
+  !loading &&
+  !hideDownloads &&
+  (data?.node?.["https://data.razu.nl/def/ldto/isRepresentatieVan"]?.length ||
+    0) > 0
 ) {
-<details (toggle)="onDownloadToggle($event)">
-  <summary role="heading" aria-level="2">Downloaden</summary>
-  @if (repMetaFetching) {
-  <div>Downloadlinks aan het ophalen...</div>
-  }
-  @if (repMetaLoaded) {
-  <div class="download-grid grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
-    <section id="file-download">
-      <h3 class="font-semibold mb-2">Download Bestanden</h3>
-      <ol class="list-decimal ml-6">
-        @for (
-        rep of data?.node?.[
-        "https://data.razu.nl/def/ldto/isRepresentatieVan"
-        ] || [];
-        track trackByRep($index, rep)
-        ) {
-        @if (getFirstImageUrl(rep); as imgUrl) {
-        <li>
-          <a [href]="imgUrl" class="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
-            Download pagina {{ getPage(rep) || "?" }}
-            @if (formatBytes(getSizeBytes(rep)); as size) {
-            ({{ size }})
+  <details (toggle)="onDownloadToggle($event)">
+    <summary role="heading" aria-level="2">Downloaden</summary>
+    @if (repMetaFetching) {
+      <div>Downloadlinks aan het ophalen...</div>
+    }
+    @if (repMetaLoaded) {
+      <div class="download-grid grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+        <section id="file-download">
+          <h3 class="font-semibold mb-2">Download Bestanden</h3>
+          <ol class="list-decimal ml-6">
+            @for (
+              rep of data?.node?.[
+                "https://data.razu.nl/def/ldto/isRepresentatieVan"
+              ] || [];
+              track trackByRep($index, rep)
+            ) {
+              @if (getFirstImageUrl(rep); as imgUrl) {
+                <li>
+                  <a
+                    [href]="imgUrl"
+                    class="text-blue-600 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download pagina {{ getPage(rep) || "?" }}
+                    @if (formatBytes(getSizeBytes(rep)); as size) {
+                      ({{ size }})
+                    }
+                  </a>
+                </li>
+              } @else {}
             }
-          </a>
-        </li>
-        } @else {}
-        }
-      </ol>
-    </section>
-    <section id="rdf-download">
-      <h3 class="font-semibold mb-2">Download RDF Metadata</h3>
-      <ol class="list-decimal ml-6">
-        @for (
-        rep of data?.node?.["https://data.razu.nl/def/ldto/isRepresentatieVan"] || [];
-        track trackByRep($index, rep)
-        ) {
-        @if (getFirstImageUrl(rep); as imgUrl) {
-        <li>
-          <button type="button" class="text-blue-600 underline" [disabled]="repRdfMap.get(rep.value) === true"
-            (click)="downloadRepTurtle(rep)">
-            @if (repRdfMap.get(rep.value) === true) {
-            Turtle ophalen...
-            } @else {
-            Download RDF (Turtle) pagina {{ getPage(rep) || "?" }}
+          </ol>
+        </section>
+        <section id="rdf-download">
+          <h3 class="font-semibold mb-2">Download RDF Metadata</h3>
+          <ol class="list-decimal ml-6">
+            @for (
+              rep of data?.node?.[
+                "https://data.razu.nl/def/ldto/isRepresentatieVan"
+              ] || [];
+              track trackByRep($index, rep)
+            ) {
+              @if (getFirstImageUrl(rep); as imgUrl) {
+                <li>
+                  <button
+                    type="button"
+                    class="text-blue-600 underline"
+                    [disabled]="repRdfMap.get(rep.value) === true"
+                    (click)="downloadRepTurtle(rep)"
+                  >
+                    @if (repRdfMap.get(rep.value) === true) {
+                      Turtle ophalen...
+                    } @else {
+                      Download RDF (Turtle) pagina {{ getPage(rep) || "?" }}
+                    }
+                  </button>
+                </li>
+              } @else {}
             }
-          </button>
-        </li>
-        } @else {}
-        }
-      </ol>
-    </section>
-  </div>
-  }
-</details>
+          </ol>
+        </section>
+      </div>
+    }
+  </details>
 }
 <!-- For debugging, you can show the raw data -->
 <!-- <details>

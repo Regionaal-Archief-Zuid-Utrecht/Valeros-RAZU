@@ -12,7 +12,6 @@ import { ThingWithLabelModel } from '../models/thing-with-label.model';
 import { ApiService } from './api.service';
 import { EndpointService } from './endpoint.service';
 import { SettingsService } from './settings.service';
-import { identity } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,7 @@ export class SparqlService {
     private api: ApiService,
     private settings: SettingsService,
     private endpoints: EndpointService,
-  ) { }
+  ) {}
 
   getFederatedQuery(
     queryTemplate: string,
@@ -311,7 +310,8 @@ LIMIT 10000`;
                 }`;
     return await this.api.postText(
       this.endpoints.getFirstUrls().sparql,
-      { query }, 'text/turtle',
+      { query },
+      'text/turtle',
     );
   }
 

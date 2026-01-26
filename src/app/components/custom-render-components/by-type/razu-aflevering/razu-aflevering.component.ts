@@ -15,7 +15,6 @@ import { HopLinkComponent } from '../../../features/node/node-render-components/
 import { SnippetComponent } from '../../../features/snippet/snippet.component';
 import { TypeRenderComponent } from '../type-render-component.component';
 
-
 // Register Dutch locale
 registerLocaleData(localeNl);
 
@@ -28,7 +27,8 @@ registerLocaleData(localeNl);
 })
 export class RazuAfleveringComponent
   extends TypeRenderComponent
-  implements OnInit {
+  implements OnInit
+{
   nodeService = inject(NodeService);
   urlService = inject(UrlService);
   iiifService = inject(IIIFService);

@@ -14,7 +14,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private postCache: PostCacheService,
-  ) { }
+  ) {}
 
   async postData<T>(url: string, data: any): Promise<T> {
     const dataStr = JSON.stringify(data);
@@ -55,7 +55,6 @@ export class ApiService {
     });
   }
 
-
   async postText(
     url: string,
     data: any,
@@ -81,7 +80,10 @@ export class ApiService {
               })
               .pipe(
                 catchError((error) => {
-                  console.error('There was a problem with the API request:', error);
+                  console.error(
+                    'There was a problem with the API request:',
+                    error,
+                  );
                   reject(error);
                   return throwError(() => error);
                 }),
@@ -100,7 +102,6 @@ export class ApiService {
       this._processQueue();
     });
   }
-
 
   private _processQueue() {
     while (
