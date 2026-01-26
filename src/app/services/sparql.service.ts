@@ -308,10 +308,13 @@ LIMIT 10000`;
                 WHERE {
                   <${id}> ?pred ?obj .
                 }`;
-    return await this.api.postText(
+    return await this.api.postData<string>(
       this.endpoints.getFirstUrls().sparql,
       { query },
-      'text/turtle',
+      {
+        accept: 'text/turtle',
+        responseType: 'text',
+      },
     );
   }
 
