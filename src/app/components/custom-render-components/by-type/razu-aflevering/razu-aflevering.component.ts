@@ -3,6 +3,7 @@ import localeNl from '@angular/common/locales/nl';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherHelpCircle } from '@ng-icons/feather-icons';
+import { downloadTextAsFile } from '../../../../helpers/util.helper';
 import { Direction, NodeObj } from '../../../../models/node.model';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
@@ -360,19 +361,6 @@ export class RazuAfleveringComponent
     }
   }
 
-  private _downloadTextAsFile(filename: string, content: string, mime: string) {
-    const blob = new Blob([content], { type: mime });
-    const blobUrl = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = blobUrl;
-    a.download = filename;
-    a.rel = 'noopener';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(blobUrl);
-  }
-
   private async loadRepresentationMetadataOnce(): Promise<void> {
     if (this.repMetaLoaded || this.repMetaFetching) return;
 
@@ -458,7 +446,7 @@ export class RazuAfleveringComponent
       const page = this.getPage(rep);
       const pageLabel = page ?? 'unknown';
       const filename = `pagina-${pageLabel}.ttl`;
-      this._downloadTextAsFile(filename, turtle, 'text/turtle');
+      downloadTextAsFile(filename, turtle, 'text/turtle');
     } catch (e) {
       console.error('Failed to download turtle for rep', rep.value, e);
     } finally {

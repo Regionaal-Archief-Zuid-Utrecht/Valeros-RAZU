@@ -123,3 +123,20 @@ export const sortByArrayOrder = (
     return indexA - indexB;
   });
 };
+
+export const downloadTextAsFile = (
+  filename: string,
+  content: string,
+  mime: string,
+) => {
+  const blob = new Blob([content], { type: mime });
+  const blobUrl = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = blobUrl;
+  a.download = filename;
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(blobUrl);
+};
