@@ -3,6 +3,7 @@ import localeNl from '@angular/common/locales/nl';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { featherHelpCircle } from '@ng-icons/feather-icons';
+import { downloadTextAsFile } from '../../../../helpers/util.helper';
 import { Direction, NodeObj } from '../../../../models/node.model';
 import { HopLinkSettings } from '../../../../models/settings/hop-link-settings.model';
 import { PredicateVisibility } from '../../../../models/settings/predicate-visibility-settings.model';
@@ -57,6 +58,8 @@ export class RazuAfleveringComponent
   imageRepPageMap: Map<string, string> = new Map();
   // Map: representation node id -> file size in bytes (ldto/omvang)
   imageRepSizeMap: Map<string, string> = new Map();
+  // Map: representation node id -> list of rdf urls
+  repRdfMap: Map<string, boolean> = new Map();
   hasBeginDate = false;
   hasEndDate = false;
   hasType = false;
@@ -400,6 +403,7 @@ export class RazuAfleveringComponent
       this.repMetaFetching = false;
     }
   }
+
   // Helper method to get labels for dekkingInRuimteIds
   getDekkingInRuimteIds(onderdeelVanId: string): string[] {
     return this.dekkingInRuimteMap.get(onderdeelVanId) || [];
@@ -432,6 +436,24 @@ export class RazuAfleveringComponent
       void this.loadRepresentationMetadataOnce();
     }
   }
+
+  async downloadRepTurtle(rep: NodeObj): Promise<void> {
+    if (!rep?.value) return;
+    if (this.repRdfMap.get(rep.value)) return;
+    this.repRdfMap.set(rep.value, true);
+    try {
+      const turtle = await this.sparqlService.getRepresentationRdf(rep.value);
+      const page = this.getPage(rep);
+      const pageLabel = page ?? 'unknown';
+      const filename = `pagina-${pageLabel}.ttl`;
+      downloadTextAsFile(filename, turtle, 'text/turtle');
+    } catch (e) {
+      console.error('Failed to download turtle for rep', rep.value, e);
+    } finally {
+      this.repRdfMap.set(rep.value, false);
+    }
+  }
+
   // Returns true if the URL points to an image file
   isImageUrl(url?: string): boolean {
     const u = url?.toLowerCase?.();

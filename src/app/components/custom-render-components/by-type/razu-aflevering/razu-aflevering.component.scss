@@ -60,6 +60,16 @@ summary {
   padding: 3px 0;
 }
 
+.download-grid {
+  justify-content: start; // keep the whole grid aligned left
+}
+
+@media (min-width: 768px) {
+  .download-grid {
+    grid-template-columns: fit-content(420px) fit-content(420px);
+  }
+}
+
 pre {
   background-color: #f9f9f9;
   padding: 8px;

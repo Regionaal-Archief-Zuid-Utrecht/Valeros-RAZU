@@ -211,30 +211,63 @@
       <div>Downloadlinks aan het ophalen...</div>
     }
     @if (repMetaLoaded) {
-      <ol class="list-decimal ml-6">
-        @for (
-          rep of data?.node?.[
-            "https://data.razu.nl/def/ldto/isRepresentatieVan"
-          ] || [];
-          track trackByRep($index, rep)
-        ) {
-          @if (getFirstImageUrl(rep); as imgUrl) {
-            <li>
-              <a
-                [href]="imgUrl"
-                class="text-blue-600 underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download pagina {{ getPage(rep) || "?" }}
-                @if (formatBytes(getSizeBytes(rep)); as size) {
-                  ({{ size }})
-                }
-              </a>
-            </li>
-          } @else {}
-        }
-      </ol>
+      <div class="download-grid grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+        <section id="file-download">
+          <h3 class="font-semibold mb-2">Download Bestanden</h3>
+          <ol class="list-decimal ml-6">
+            @for (
+              rep of data?.node?.[
+                "https://data.razu.nl/def/ldto/isRepresentatieVan"
+              ] || [];
+              track trackByRep($index, rep)
+            ) {
+              @if (getFirstImageUrl(rep); as imgUrl) {
+                <li>
+                  <a
+                    [href]="imgUrl"
+                    class="text-blue-600 underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download pagina {{ getPage(rep) || "?" }}
+                    @if (formatBytes(getSizeBytes(rep)); as size) {
+                      ({{ size }})
+                    }
+                  </a>
+                </li>
+              } @else {}
+            }
+          </ol>
+        </section>
+        <section id="rdf-download">
+          <h3 class="font-semibold mb-2">Download RDF Metadata</h3>
+          <ol class="list-decimal ml-6">
+            @for (
+              rep of data?.node?.[
+                "https://data.razu.nl/def/ldto/isRepresentatieVan"
+              ] || [];
+              track trackByRep($index, rep)
+            ) {
+              @if (getFirstImageUrl(rep); as imgUrl) {
+                <li>
+                  <button
+                    type="button"
+                    class="text-blue-600 underline"
+                    [disabled]="repRdfMap.get(rep.value) === true"
+                    (click)="downloadRepTurtle(rep)"
+                  >
+                    @if (repRdfMap.get(rep.value) === true) {
+                      Turtle ophalen...
+                    } @else {
+                      Download RDF (Turtle) pagina {{ getPage(rep) || "?" }}
+                    }
+                  </button>
+                </li>
+              } @else {}
+            }
+          </ol>
+        </section>
+      </div>
     }
   </details>
 }

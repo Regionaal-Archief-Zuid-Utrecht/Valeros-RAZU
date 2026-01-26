@@ -7,6 +7,117 @@ import { SearchService } from './search/search.service';
 export class MiradorHighlightService {
   private _mutationObserver?: MutationObserver;
 
+  private readonly STOP_WORDS = new Set([
+    'and',
+    'or',
+    'not',
+    'de',
+    'en',
+    'van',
+    'ik',
+    'te',
+    'dat',
+    'die',
+    'in',
+    'een',
+    'hij',
+    'het',
+    'niet',
+    'zijn',
+    'is',
+    'was',
+    'op',
+    'aan',
+    'met',
+    'als',
+    'voor',
+    'had',
+    'er',
+    'maar',
+    'om',
+    'hem',
+    'dan',
+    'zou',
+    'of',
+    'wat',
+    'mijn',
+    'men',
+    'dit',
+    'zo',
+    'door',
+    'over',
+    'ze',
+    'zich',
+    'bij',
+    'ook',
+    'tot',
+    'je',
+    'mij',
+    'uit',
+    'der',
+    'daar',
+    'haar',
+    'naar',
+    'heb',
+    'hoe',
+    'heeft',
+    'hebben',
+    'deze',
+    'u',
+    'want',
+    'nog',
+    'zal',
+    'me',
+    'zij',
+    'nu',
+    'ge',
+    'geen',
+    'omdat',
+    'iets',
+    'worden',
+    'toch',
+    'al',
+    'waren',
+    'veel',
+    'meer',
+    'doen',
+    'toen',
+    'moet',
+    'ben',
+    'zonder',
+    'kan',
+    'hun',
+    'dus',
+    'alles',
+    'onder',
+    'ja',
+    'eens',
+    'hier',
+    'wie',
+    'werd',
+    'altijd',
+    'doch',
+    'wordt',
+    'wezen',
+    'kunnen',
+    'ons',
+    'zelf',
+    'tegen',
+    'na',
+    'reeds',
+    'wil',
+    'kon',
+    'niets',
+    'uw',
+    'iemand',
+    'geweest',
+    'andere',
+  ]);
+
+  private stripEdgePunctuation(word: string): string {
+    return word.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+  }
+
   constructor(private search: SearchService) {}
 
   init() {
@@ -46,7 +157,9 @@ export class MiradorHighlightService {
       .trim()
       .toLowerCase()
       .split(/\s+/)
-      .filter((word) => word.length > 0);
+      .filter((word) => word.length > 0)
+      .map((word) => this.stripEdgePunctuation(word))
+      .filter((word) => word.length > 0 && !this.STOP_WORDS.has(word));
 
     console.log('Highlight words:', highlightWords);
 
@@ -60,7 +173,9 @@ export class MiradorHighlightService {
     textElements.forEach((textElement) => {
       const textContent = textElement.textContent;
       if (textContent) {
-        const normalizedText = textContent.trim().toLowerCase();
+        const normalizedText = this.stripEdgePunctuation(
+          textContent.trim().toLowerCase(),
+        );
 
         const shouldHighlight = highlightWords.some(
           (highlightWord) => normalizedText === highlightWord,

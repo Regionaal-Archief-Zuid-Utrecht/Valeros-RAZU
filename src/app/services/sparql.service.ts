@@ -298,6 +298,26 @@ LIMIT 10000`;
     };
   }
 
+  async getRepresentationRdf(id: string): Promise<string> {
+    this._ensureEndpointsExist();
+    const query = `
+                PREFIX ldto: <https://data.razu.nl/def/ldto/>
+                CONSTRUCT {
+                  <${id}> ?pred ?obj .
+                }
+                WHERE {
+                  <${id}> ?pred ?obj .
+                }`;
+    return await this.api.postData<string>(
+      this.endpoints.getFirstUrls().sparql,
+      { query },
+      {
+        accept: 'text/turtle',
+        responseType: 'text',
+      },
+    );
+  }
+
   // TODO: Make this more generic (not RAZU specific)
   async getCopyrightData(id: string): Promise<CopyrightData[] | null> {
     const copyrightQueryTemplate = `
