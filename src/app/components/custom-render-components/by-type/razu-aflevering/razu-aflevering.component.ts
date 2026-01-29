@@ -437,26 +437,26 @@ export class RazuAfleveringComponent
   }
 
   async downloadAfleveringTurtle(): Promise<void> {
-  if (this.afleveringRdfDownloading) return;
- 
-  const node = this.data?.node;
-  if (!node) return;
- 
-  const nodeId = this.nodeService.getId(node);
-  if (!nodeId) return;
- 
-  this.afleveringRdfDownloading = true;
-  try {
-    const turtle = await this.sparqlService.getAfleveringRdf(nodeId);
- 
-    const filename = `aflevering-${nodeId}.ttl`;
-    downloadTextAsFile(filename, turtle, 'text/turtle');
-  } catch (e) {
-    console.error('Failed to download turtle for aflevering', e);
-  } finally {
-    this.afleveringRdfDownloading = false;
+    if (this.afleveringRdfDownloading) return;
+
+    const node = this.data?.node;
+    if (!node) return;
+
+    const nodeId = this.nodeService.getId(node);
+    if (!nodeId) return;
+
+    this.afleveringRdfDownloading = true;
+    try {
+      const turtle = await this.sparqlService.getAfleveringRdf(nodeId);
+
+      const filename = `aflevering-${nodeId}.ttl`;
+      downloadTextAsFile(filename, turtle, 'text/turtle');
+    } catch (e) {
+      console.error('Failed to download turtle for aflevering', e);
+    } finally {
+      this.afleveringRdfDownloading = false;
+    }
   }
-}
 
   // Returns true if the URL points to an image file
   isImageUrl(url?: string): boolean {
