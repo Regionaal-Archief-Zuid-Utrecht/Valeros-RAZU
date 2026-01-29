@@ -298,16 +298,52 @@ LIMIT 10000`;
     };
   }
 
-  async getRepresentationRdf(id: string): Promise<string> {
+  async getAfleveringRdf(id: string): Promise<string> {
     this._ensureEndpointsExist();
     const query = `
-                PREFIX ldto: <https://data.razu.nl/def/ldto/>
-                CONSTRUCT {
-                  <${id}> ?pred ?obj .
-                }
-                WHERE {
-                  <${id}> ?pred ?obj .
-                }`;
+          PREFIX ldto: <https://data.razu.nl/def/ldto/>
+          PREFIX schema: <http://schema.org/> 
+          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+          CONSTRUCT {
+
+          
+          ?aflevering a ldto:Informatieobject ;
+            ldto:isOnderdeelVan ?krant ;
+            schema:mainEntity ?mainentity .
+          
+          ?mainentity a ?type ;
+            ?mep ?meo .
+
+          ?krant a ldto:Informatieobject ;
+            schema:mainEntity ?mainentitykrant .
+
+          ?mainentitykrant a ?typekrant ;
+            ?mepkrant ?meokrant .
+          
+          ?bestand a ldto:Bestand ;
+          ldto:isRepresentatieVan ?aflevering ;
+                  ?bp ?po .          
+          }
+          
+          WHERE {       
+              VALUES ?aflevering { <${id}> }
+
+          ?aflevering a ldto:Informatieobject ;
+            ldto:isOnderdeelVan ?krant ;
+            schema:mainEntity ?mainentity .
+          ?mainentity a ?type ;
+            ?mep ?meo .
+
+          ?krant a ldto:Informatieobject ;
+              schema:mainEntity ?mainentitykrant .
+          ?mainentitykrant a ?typekrant ;
+            ?mepkrant ?meokrant .
+
+          ?bestand a ldto:Bestand ;
+          ldto:isRepresentatieVan ?aflevering ;
+                  ?bp ?po . 
+          }`;
     return await this.api.postData<string>(
       this.endpoints.getFirstUrls().sparql,
       { query },
