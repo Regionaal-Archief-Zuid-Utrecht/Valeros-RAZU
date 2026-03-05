@@ -58,8 +58,7 @@ export class RazuAfleveringComponent
   imageRepPageMap: Map<string, string> = new Map();
   // Map: representation node id -> file size in bytes (ldto/omvang)
   imageRepSizeMap: Map<string, string> = new Map();
-  // Map: representation node id -> list of rdf urls
-  repRdfMap: Map<string, boolean> = new Map();
+  afleveringRdfDownloading = false;
   hasBeginDate = false;
   hasEndDate = false;
   hasType = false;
@@ -437,20 +436,25 @@ export class RazuAfleveringComponent
     }
   }
 
-  async downloadRepTurtle(rep: NodeObj): Promise<void> {
-    if (!rep?.value) return;
-    if (this.repRdfMap.get(rep.value)) return;
-    this.repRdfMap.set(rep.value, true);
+  async downloadAfleveringTurtle(): Promise<void> {
+    if (this.afleveringRdfDownloading) return;
+
+    const node = this.data?.node;
+    if (!node) return;
+
+    const nodeId = this.nodeService.getId(node);
+    if (!nodeId) return;
+
+    this.afleveringRdfDownloading = true;
     try {
-      const turtle = await this.sparqlService.getRepresentationRdf(rep.value);
-      const page = this.getPage(rep);
-      const pageLabel = page ?? 'unknown';
-      const filename = `pagina-${pageLabel}.ttl`;
+      const turtle = await this.sparqlService.getAfleveringRdf(nodeId);
+
+      const filename = `aflevering-${nodeId}.ttl`;
       downloadTextAsFile(filename, turtle, 'text/turtle');
     } catch (e) {
-      console.error('Failed to download turtle for rep', rep.value, e);
+      console.error('Failed to download turtle for aflevering', e);
     } finally {
-      this.repRdfMap.set(rep.value, false);
+      this.afleveringRdfDownloading = false;
     }
   }
 

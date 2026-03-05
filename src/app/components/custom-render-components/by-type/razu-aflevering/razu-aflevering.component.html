@@ -241,31 +241,23 @@
         </section>
         <section id="rdf-download">
           <h3 class="font-semibold mb-2">Download RDF Metadata</h3>
-          <ol class="list-decimal ml-6">
-            @for (
-              rep of data?.node?.[
-                "https://data.razu.nl/def/ldto/isRepresentatieVan"
-              ] || [];
-              track trackByRep($index, rep)
-            ) {
-              @if (getFirstImageUrl(rep); as imgUrl) {
-                <li>
-                  <button
-                    type="button"
-                    class="text-blue-600 underline"
-                    [disabled]="repRdfMap.get(rep.value) === true"
-                    (click)="downloadRepTurtle(rep)"
-                  >
-                    @if (repRdfMap.get(rep.value) === true) {
-                      Turtle ophalen...
-                    } @else {
-                      Download RDF (Turtle) pagina {{ getPage(rep) || "?" }}
-                    }
-                  </button>
-                </li>
-              } @else {}
+          <div>
+            Deze link biedt een deel van de metadata van deze krant. Volg de
+            links in het downloadbestand voor toegang tot alle metadata van de
+            RAZU-kranten.
+          </div>
+          <button
+            type="button"
+            class="text-blue-600 underline"
+            [disabled]="afleveringRdfDownloading"
+            (click)="downloadAfleveringTurtle()"
+          >
+            @if (afleveringRdfDownloading) {
+              Turtle ophalen...
+            } @else {
+              Download RDF (Turtle) voor deze aflevering
             }
-          </ol>
+          </button>
         </section>
       </div>
     }
