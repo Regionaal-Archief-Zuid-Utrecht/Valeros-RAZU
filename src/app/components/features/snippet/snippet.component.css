@@ -1,9 +1,11 @@
 /* Make the badge behave like normal inline text for snippet rendering */
-:host ::ng-deep span.badge.badge-ghost.badge-dash {
+:host ::ng-deep span.badge.badge-ghost {
   display: inline;
   /* override DaisyUI's inline-flex */
   white-space: normal;
+  border: 0px;
   /* allow wrapping */
+  font-family: 'Familjen Grotesk', sans-serif;
 }
 
 :host ::ng-deep em {
