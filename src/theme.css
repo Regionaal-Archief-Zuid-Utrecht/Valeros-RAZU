@@ -41,11 +41,11 @@ tr {
 
 /* Style checkbox */
 .checkbox {
-  @apply border-white;
+  border-color: var(--color-neutral);
   --chkbg: white;
   --chkfg: var(--color-primary);
   /*&.checked {
-    @apply border-white;
+    border-color: var(--color-primary);
   }*/
 }
 
