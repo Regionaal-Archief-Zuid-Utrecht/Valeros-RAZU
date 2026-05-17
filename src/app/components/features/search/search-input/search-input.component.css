@@ -1,8 +1,14 @@
 .search-input-button {
   border-radius: 9999px;
   color: white;
+  background-color: var(--color-primary);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   transition: box-shadow 0.2s;
+  padding: 0.25rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
 }
 
 .search-input-button:hover {
