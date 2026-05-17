@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Theme definitions using CSS variables */
+@theme {
+  /* Default theme (development) */
+  --color-primary: #4a4a4a;
+  --color-neutral: #808080;
+  --color-accent: #b3b3b3;
+  --color-secondary: #6d6d6d;
+  --color-background: #f2f2f2;
+  --color-search-background: #f2f2f2;
+  --rounded-box: 0.1rem;
+  --rounded-btn: 0.1rem;
+  --rounded-badge: 0.1rem;
+  --color-primary-content: white;
+}
+
+/* Acceptance theme */
+.theme-acceptance {
+  --color-primary: #2e7d32;
+  --color-neutral: #66bb6a;
+  --color-accent: #a5d6a7;
+  --color-secondary: #388e3c;
+  --color-background: #e8f5e9;
+  --color-search-background: #e8f5e9;
+  --rounded-box: 1rem;
+  --rounded-btn: 1rem;
+  --rounded-badge: 1rem;
+  --color-primary-content: white;
+}
+
+/* Production theme */
+.theme-production {
+  --color-primary: #6c5a82;
+  --color-neutral: #a999bd;
+  --color-accent: #9ad199;
+  --color-secondary: #c2b280;
+  --color-background: #E5E4E2;
+  --color-search-background: #E5E4E2;
+  --rounded-box: 0.375rem;
+  --rounded-btn: 0.375rem;
+  --rounded-badge: 0.375rem;
+  --color-primary-content: white;
+}
+
+/* Test theme */
+.theme-test {
+  --color-primary: #1565c0;
+  --color-neutral: #42a5f5;
+  --color-accent: #90caf9;
+  --color-secondary: #1976d2;
+  --color-background: #e3f2fd;
+  --color-search-background: #e3f2fd;
+  --rounded-box: 0.375rem;
+  --rounded-btn: 0.375rem;
+  --rounded-badge: 0.375rem;
+  --color-primary-content: white;
+}
+
+/* Apply CSS variables to daisyUI theme */
+@theme {
+  --p: var(--color-primary);
+  --n: var(--color-neutral);
+  --a: var(--color-accent);
+  --s: var(--color-secondary);
+  --b1: var(--color-background);
+  --bc: var(--color-primary-content);
+  --rounded-box: var(--rounded-box);
+  --rounded-btn: var(--rounded-btn);
+  --rounded-badge: var(--rounded-badge);
+}
+
+/* Hide scrollbar (e.g., in horizontally scrolling collapsed tree view) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.badge {
+  border-radius: var(--rounded-badge, 0.375rem) !important;
+}
+
+text[filter="url(#highlight)"],
+tspan[filter="url(#highlight)"] {
+  fill: black !important;
+}

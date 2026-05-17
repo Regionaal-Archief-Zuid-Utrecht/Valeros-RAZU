@@ -14,6 +14,7 @@ import { FilterOptionsComponent } from './components/features/filters/filter-opt
 import { PageTitleService } from './services/page-title.service';
 import { RoutingService } from './services/routing.service';
 import { FilterDrawerService } from './services/ui/filter-drawer.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,7 @@ export class AppComponent {
     private pageTitle: PageTitleService,
     public filterDrawer: FilterDrawerService,
     private router: Router,
+    private themeService: ThemeService,
   ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');

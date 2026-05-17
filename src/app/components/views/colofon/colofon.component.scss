@@ -1,11 +1,13 @@
 a {
-  @apply underline;
+  text-decoration: underline;
 }
 
 h2 {
-  @apply text-2xl mt-6 mb-1;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
 }
 
 p {
-  @apply mb-2;
+  margin-bottom: 0.5rem;
 }
