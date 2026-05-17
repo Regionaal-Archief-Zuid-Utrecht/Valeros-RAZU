@@ -13,7 +13,7 @@ import { NodeTypeComponent } from './node-type/node-type.component';
   selector: 'app-node-types',
   imports: [NodeTypeComponent],
   templateUrl: './node-types.component.html',
-  styleUrl: './node-types.component.scss',
+  styleUrl: './node-types.component.css',
 })
 export class NodeTypesComponent {
   @Input() types?: TypeModel[];

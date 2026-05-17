@@ -12,7 +12,7 @@ import { SearchService } from '../../../services/search/search.service';
   selector: 'app-snippet',
   imports: [],
   templateUrl: './snippet.component.html',
-  styleUrl: './snippet.component.scss',
+  styleUrl: './snippet.component.css',
 })
 export class SnippetComponent implements OnInit {
   @Input() altoUrl?: string;

@@ -24,7 +24,7 @@ registerLocaleData(localeNl);
   standalone: true,
   imports: [HopLinkComponent, DatePipe, NgIcon, SnippetComponent],
   templateUrl: './razu-aflevering.component.html',
-  styleUrls: ['./razu-aflevering.component.scss'],
+  styleUrls: ['./razu-aflevering.component.css'],
 })
 export class RazuAfleveringComponent
   extends TypeRenderComponent

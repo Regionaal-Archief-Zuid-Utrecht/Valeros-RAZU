@@ -10,7 +10,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
   selector: 'app-colofon',
   imports: [HeaderComponent, ViewContainerComponent, TranslatePipe, RouterLink],
   templateUrl: './colofon.component.html',
-  styleUrl: './colofon.component.scss',
+  styleUrl: './colofon.component.css',
 })
 export class ColofonComponent implements OnInit {
   protected readonly HeaderView = HeaderView;

@@ -1,4 +1,4 @@
-import { JsonPipe, NgComponentOutlet } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -22,10 +22,9 @@ import { FilterOptionComponent } from './filter-option/filter-option.component';
     FilterEnabledCountComponent,
     FormsModule,
     TranslatePipe,
-    JsonPipe,
   ],
   templateUrl: './filter-options.component.html',
-  styleUrl: './filter-options.component.scss',
+  styleUrl: './filter-options.component.css',
 })
 export class FilterOptionsComponent {
   constructor(

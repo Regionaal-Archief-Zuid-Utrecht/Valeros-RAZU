@@ -6,7 +6,7 @@ import { FilterType } from '../../../../../models/filters/filter.model';
   selector: 'app-filter-enabled-count',
   imports: [TranslatePipe],
   templateUrl: './filter-enabled-count.component.html',
-  styleUrl: './filter-enabled-count.component.scss',
+  styleUrl: './filter-enabled-count.component.css',
 })
 export class FilterEnabledCountComponent {
   @Input() count?: number;

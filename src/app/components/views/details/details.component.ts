@@ -12,7 +12,7 @@ import { NodeComponent } from '../../features/node/node.component';
   selector: 'app-details',
   imports: [NodeComponent],
   templateUrl: './details.component.html',
-  styleUrl: './details.component.scss',
+  styleUrl: './details.component.css',
 })
 export class DetailsComponent {
   nodeId: string | null = null;

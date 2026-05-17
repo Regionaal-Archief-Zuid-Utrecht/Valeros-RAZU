@@ -11,7 +11,7 @@ import { NodeService } from '../../../../services/node/node.service';
   selector: 'app-node-details-button',
   imports: [NgIcon, RouterLink, TranslatePipe],
   templateUrl: './node-details-button.component.html',
-  styleUrl: './node-details-button.component.scss',
+  styleUrl: './node-details-button.component.css',
 })
 export class NodeDetailsButtonComponent {
   @Input() node: NodeModel | undefined;

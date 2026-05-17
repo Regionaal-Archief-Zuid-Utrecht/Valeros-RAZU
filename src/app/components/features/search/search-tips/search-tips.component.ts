@@ -10,7 +10,7 @@ import { SearchTipComponent } from './search-tip/search-tip.component';
   standalone: true,
   imports: [TranslatePipe, NgIcon, SearchTipInputComponent, SearchTipComponent],
   templateUrl: './search-tips.component.html',
-  styleUrls: ['./search-tips.component.scss'],
+  styleUrls: ['./search-tips.component.css'],
 })
 export class SearchTipsComponent {
   @ViewChild('modal') modal: ElementRef<HTMLDialogElement> | undefined;

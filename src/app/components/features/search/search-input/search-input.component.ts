@@ -32,7 +32,7 @@ import { SearchTipsComponent } from '../search-tips/search-tips.component';
     SearchTipsComponent,
   ],
   templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss',
+  styleUrl: './search-input.component.css',
 })
 export class SearchInputComponent implements OnInit, AfterViewInit, OnDestroy {
   searchInput: string = this.search.queryStr ?? '';

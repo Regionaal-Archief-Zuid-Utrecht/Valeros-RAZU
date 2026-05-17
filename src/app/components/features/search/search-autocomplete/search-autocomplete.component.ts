@@ -12,7 +12,7 @@ import { AutocompleteService } from '../../../../services/search/autocomplete.se
   selector: 'app-search-autocomplete',
   imports: [NgIcon, TranslatePipe],
   templateUrl: './search-autocomplete.component.html',
-  styleUrl: './search-autocomplete.component.scss',
+  styleUrl: './search-autocomplete.component.css',
 })
 export class SearchAutocompleteComponent {
   @Output() selected: EventEmitter<AutocompleteOptionModel> =

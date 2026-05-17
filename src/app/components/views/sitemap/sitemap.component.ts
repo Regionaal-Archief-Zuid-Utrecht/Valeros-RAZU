@@ -8,7 +8,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
   selector: 'app-sitemap',
   imports: [ViewContainerComponent, RouterLink, HeaderComponent],
   templateUrl: './sitemap.component.html',
-  styleUrl: './sitemap.component.scss',
+  styleUrl: './sitemap.component.css',
 })
 export class SitemapComponent implements OnInit {
   constructor(public router: Router) {}

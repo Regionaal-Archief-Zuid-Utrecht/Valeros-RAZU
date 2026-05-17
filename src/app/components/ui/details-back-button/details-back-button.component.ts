@@ -9,7 +9,7 @@ import { RoutingService } from '../../../services/routing.service';
   selector: 'app-details-back-button',
   imports: [NgIcon, TranslatePipe],
   templateUrl: './details-back-button.component.html',
-  styleUrl: './details-back-button.component.scss',
+  styleUrl: './details-back-button.component.css',
 })
 export class DetailsBackButtonComponent {
   constructor(

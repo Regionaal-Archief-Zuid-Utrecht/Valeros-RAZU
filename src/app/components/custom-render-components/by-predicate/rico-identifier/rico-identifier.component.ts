@@ -12,7 +12,7 @@ import { PredicateRenderComponent } from '../predicate-render-component.directiv
   standalone: true,
   imports: [NodeLinkComponent],
   templateUrl: './rico-identifier.component.html',
-  styleUrl: './rico-identifier.component.scss',
+  styleUrl: './rico-identifier.component.css',
 })
 export class RicoIdentifierComponent
   extends PredicateRenderComponent

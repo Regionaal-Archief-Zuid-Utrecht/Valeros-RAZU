@@ -38,7 +38,7 @@ import { NodeLabelComponent } from '../node-label/node-label.component';
   selector: 'app-node-link',
   imports: [RouterLink, NodeLabelComponent],
   templateUrl: './node-link.component.html',
-  styleUrl: './node-link.component.scss',
+  styleUrl: './node-link.component.css',
 })
 export class NodeLinkComponent implements OnInit, OnChanges {
   @ViewChild('linkElem') linkElem?: ElementRef;

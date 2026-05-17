@@ -13,7 +13,7 @@ import { NodeLinkComponent } from '../node-link/node-link.component';
   selector: 'app-node-hierarchy',
   imports: [NgClass, NgIcon, NodeLinkComponent, AccessibleIconDirective],
   templateUrl: './node-hierarchy.component.html',
-  styleUrl: './node-hierarchy.component.scss',
+  styleUrl: './node-hierarchy.component.css',
 })
 export class NodeHierarchyComponent {
   @Input() nodes: ThingWithLabelModel[] = [];

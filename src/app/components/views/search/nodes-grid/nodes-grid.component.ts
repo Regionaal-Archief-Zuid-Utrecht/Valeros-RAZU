@@ -6,7 +6,7 @@ import { NodeComponent } from '../../../features/node/node.component';
   selector: 'app-nodes-grid',
   imports: [NodeComponent],
   templateUrl: './nodes-grid.component.html',
-  styleUrl: './nodes-grid.component.scss',
+  styleUrl: './nodes-grid.component.css',
 })
 export class NodesGridComponent {
   @Input() nodes?: NodeModel[];
