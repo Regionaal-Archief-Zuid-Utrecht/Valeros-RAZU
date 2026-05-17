@@ -8,7 +8,7 @@ import { NodeLinkComponent } from '../../../../node-link/node-link.component';
   selector: 'app-hop-trail',
   imports: [NodeLinkComponent, NgIcon],
   templateUrl: './hop-trail.component.html',
-  styleUrl: './hop-trail.component.scss',
+  styleUrl: './hop-trail.component.css',
 })
 export class HopTrailComponent {
   @Input() settings?: HopLinkSettings;

@@ -8,7 +8,7 @@ import { NodeDirectionTableComponent } from './node-direction-table/node-directi
   selector: 'app-node-table',
   imports: [NodeDirectionTableComponent],
   templateUrl: './node-table.component.html',
-  styleUrl: './node-table.component.scss',
+  styleUrl: './node-table.component.css',
 })
 export class NodeTableComponent implements OnInit {
   @Input() node?: NodeModel;

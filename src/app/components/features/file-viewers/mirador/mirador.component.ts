@@ -14,7 +14,7 @@ import { MiradorService } from '../../../../services/mirador.service';
   selector: 'app-mirador',
   imports: [],
   templateUrl: './mirador.component.html',
-  styleUrl: './mirador.component.scss',
+  styleUrl: './mirador.component.css',
 })
 export class MiradorComponent implements OnChanges, OnDestroy, AfterViewInit {
   viewer?: any;

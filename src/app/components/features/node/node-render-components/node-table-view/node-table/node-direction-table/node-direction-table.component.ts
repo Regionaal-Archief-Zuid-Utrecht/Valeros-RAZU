@@ -18,7 +18,7 @@ import {
   selector: 'app-node-direction-table',
   imports: [NgClass, NodeTableCellComponent, NodeLinkComponent, TranslatePipe],
   templateUrl: './node-direction-table.component.html',
-  styleUrl: './node-direction-table.component.scss',
+  styleUrl: './node-direction-table.component.css',
 })
 export class NodeDirectionTableComponent {
   @Input() node?: NodeModel;

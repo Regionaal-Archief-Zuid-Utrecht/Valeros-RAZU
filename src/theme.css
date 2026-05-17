@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* == Dynamic theming using CSS variables == */
+
+/* Add underlines to clickable items */
+@layer base {
+  .clickable {
+    @apply underline decoration-slate-300 cursor-pointer;
+  }
+}
+
+/* Style badge */
+.badge-md {
+  height: 1.5rem;
+}
+.badge {
+  @apply rounded-full;
+  @apply font-mono;
+}
+
+/* Tweak filter box heights */
+.collapse-title,
+:where(.collapse > input[type="checkbox"]),
+:where(.collapse > input[type="radio"]) {
+  padding: 0.25rem 1rem;
+  min-height: 0.5rem;
+}
+.collapse-arrow > .collapse-title::after {
+  top: 1rem;
+}
+
+/* Style table */
+tr {
+  border: none;
+}
+.table :where(th, td) {
+  padding: 0.25rem 0;
+}
+
+/* Style checkbox */
+.checkbox {
+  border-color: var(--color-neutral);
+  --chkbg: white;
+  --chkfg: var(--color-primary);
+  /*&.checked {
+    border-color: var(--color-primary);
+  }*/
+}
+
+/* Apply CSS variables to body */
+html {
+  font-family: 'Familjen Grotesk', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+body {
+  --primary: var(--color-primary);
+  --neutral: var(--color-neutral);
+  --accent: var(--color-accent);
+  --secondary: var(--color-secondary);
+  background-color: var(--color-background);
+  font-family: 'Familjen Grotesk', ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* Remove borders */
+.border {
+  border: none;
+}
+
+/* Update colors based on tailwind.config.js configuration */
+*,
+::before,
+::after {
+  /*border: none;*/
+  border-color: var(--color-primary);
+}
+
+.font-mono {
+  font-variant-ligatures: none;
+}
+
+.input-bordered {
+  border: none;
+  outline: none !important;
+
+  &:focus-within {
+    border: none;
+  }
+}

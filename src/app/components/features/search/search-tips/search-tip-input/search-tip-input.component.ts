@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
   standalone: true,
   imports: [],
   templateUrl: './search-tip-input.component.html',
-  styleUrls: ['./search-tip-input.component.scss'],
+  styleUrls: ['./search-tip-input.component.css'],
 })
 export class SearchTipInputComponent {
   @Input() content: string = '';

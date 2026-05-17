@@ -6,7 +6,7 @@ import { ViewContainerComponent } from '../view-container/view-container.compone
   selector: 'app-accessibility-evaluation',
   imports: [ViewContainerComponent, HeaderComponent],
   templateUrl: './accessibility-evaluation.component.html',
-  styleUrl: './acccessibility-evaluation.component.scss',
+  styleUrl: './acccessibility-evaluation.component.css',
 
   standalone: true,
 })

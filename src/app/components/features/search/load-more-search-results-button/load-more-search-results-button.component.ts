@@ -8,7 +8,7 @@ import { SearchService } from '../../../../services/search/search.service';
   selector: 'app-load-more-search-results-button',
   imports: [TranslatePipe],
   templateUrl: './load-more-search-results-button.component.html',
-  styleUrl: './load-more-search-results-button.component.scss',
+  styleUrl: './load-more-search-results-button.component.css',
 })
 export class LoadMoreSearchResultsButtonComponent {
   constructor(

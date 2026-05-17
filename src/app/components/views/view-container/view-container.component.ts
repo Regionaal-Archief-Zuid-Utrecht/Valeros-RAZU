@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-view-container',
   imports: [],
   templateUrl: './view-container.component.html',
-  styleUrl: './view-container.component.scss',
+  styleUrl: './view-container.component.css',
 })
 export class ViewContainerComponent {}

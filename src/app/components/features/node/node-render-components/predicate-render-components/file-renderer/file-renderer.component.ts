@@ -29,7 +29,7 @@ import { HopTrailComponent } from '../hop-components/hop-trail/hop-trail.compone
     NgIcon,
   ],
   templateUrl: './file-renderer.component.html',
-  styleUrl: './file-renderer.component.scss',
+  styleUrl: './file-renderer.component.css',
 })
 export class FileRendererComponent implements OnInit, OnChanges {
   protected readonly FileType = FileType;

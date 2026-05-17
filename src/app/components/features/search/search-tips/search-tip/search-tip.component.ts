@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-search-tip',
   standalone: true,
   templateUrl: './search-tip.component.html',
-  styleUrls: ['./search-tip.component.scss'],
+  styleUrls: ['./search-tip.component.css'],
 })
 export class SearchTipComponent {
   @Input() title: string = '';

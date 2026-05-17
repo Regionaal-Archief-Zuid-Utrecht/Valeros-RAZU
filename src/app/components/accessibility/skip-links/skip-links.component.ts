@@ -7,7 +7,7 @@ import { FilterDrawerService } from '../../../services/ui/filter-drawer.service'
   selector: 'app-skip-links',
   imports: [TranslatePipe],
   templateUrl: './skip-links.component.html',
-  styleUrl: './skip-links.component.scss',
+  styleUrl: './skip-links.component.css',
 })
 export class SkipLinksComponent {
   private filterDrawer = inject(FilterDrawerService);

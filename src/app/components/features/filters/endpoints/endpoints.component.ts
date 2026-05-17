@@ -12,7 +12,7 @@ import { FilterEnabledCountComponent } from '../filter-options/filter-enabled-co
   selector: 'app-endpoints',
   imports: [FilterEnabledCountComponent, FormsModule, TranslatePipe],
   templateUrl: './endpoints.component.html',
-  styleUrl: './endpoints.component.scss',
+  styleUrl: './endpoints.component.css',
 })
 export class EndpointsComponent {
   constructor(

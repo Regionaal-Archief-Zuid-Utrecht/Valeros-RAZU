@@ -1,0 +1,12 @@
+
+:host ::ng-deep app-node-link app-node-label button {
+   color: var(--color-secondary) !important;
+ }
+
+:host ::ng-deep .checkbox {
+  border: 2px solid var(--color-neutral) !important;
+}
+
+:host ::ng-deep input[type="checkbox"].checkbox {
+  border: 2px solid var(--color-neutral) !important;
+}

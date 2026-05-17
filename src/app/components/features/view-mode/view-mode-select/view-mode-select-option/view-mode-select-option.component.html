@@ -12,7 +12,14 @@
       [attr.aria-label]="getAriaLabel() | translate"
     >
       @if (iconSvg) {
-        <ng-icon [svg]="iconSvg" />
+        <ng-icon
+          [svg]="iconSvg"
+          [ngClass]="[
+            viewModes.current.value === viewMode
+              ? 'text-primary-content'
+              : 'text-base-content',
+          ]"
+        />
       }
     </button>
   </li>
