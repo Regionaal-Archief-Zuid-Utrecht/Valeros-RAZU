@@ -146,13 +146,13 @@ export class UrlService {
     return url;
   }
 
-  getPageNumberFromUrl(): number | null {
-    // Get page number from query param
+  getIiifPageNumberFromUrl(): number | null {
+    // Get IIIF page number from query param
     const urlParams = new URLSearchParams(window.location.search);
-    const pageParam = urlParams.get(Settings.url.params.page);
+    const iiifPageParam = urlParams.get(Settings.url.params.iiifPage);
 
-    if (pageParam) {
-      const pageNum = Number(pageParam);
+    if (iiifPageParam) {
+      const pageNum = Number(iiifPageParam);
       return !isNaN(pageNum) && pageNum > 0 ? pageNum : null;
     }
 
@@ -179,13 +179,21 @@ export class UrlService {
     return null;
   }
 
-  async updatePageInUrl(pageNumber: number | null) {
+  updateSearchPageInUrl(pageNumber: number | null) {
+    this._updatePageNumberInUrl(Settings.url.params.page, pageNumber);
+  }
+
+  updateIiifPageInUrl(pageNumber: number | null) {
+    this._updatePageNumberInUrl(Settings.url.params.iiifPage, pageNumber);
+  }
+
+  private _updatePageNumberInUrl(paramName: string, pageNumber: number | null) {
     const url = new URL(window.location.href);
 
     if (pageNumber) {
-      url.searchParams.set(Settings.url.params.page, pageNumber.toString());
+      url.searchParams.set(paramName, pageNumber.toString());
     } else {
-      url.searchParams.delete(Settings.url.params.page);
+      url.searchParams.delete(paramName);
     }
 
     // Use replaceState directly to avoid creating browser history entries

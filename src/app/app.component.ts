@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import {
   featherChevronLeft,
   featherChevronRight,
@@ -33,10 +33,9 @@ export class AppComponent {
 
   constructor(
     private translate: TranslateService,
-    private routing: RoutingService,
+    public routing: RoutingService,
     private pageTitle: PageTitleService,
     public filterDrawer: FilterDrawerService,
-    private router: Router,
   ) {
     this.translate.addLangs(['nl', 'en']);
     this.translate.setDefaultLang('nl');
@@ -47,7 +46,7 @@ export class AppComponent {
 
   // TODO: Reduce calls if necessary for performance reasons
   isSearchPage() {
-    return this.router.url.startsWith('/search');
+    return this.routing.isOnSearchPage();
   }
 
   onFilterDrawerCheckboxChange(event: Event) {

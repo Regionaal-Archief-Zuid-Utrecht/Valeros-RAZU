@@ -1,0 +1,81 @@
+@if (totalPages() > 1) {
+  <ng-template #prevContent>
+    <ng-icon [svg]="featherChevronLeft" size="20" />
+    <span class="hidden xs:block">{{
+      "search-interface.pagination.previous" | translate
+    }}</span>
+  </ng-template>
+
+  <ng-template #nextContent>
+    <span class="hidden xs:block">{{
+      "search-interface.pagination.next" | translate
+    }}</span>
+    <ng-icon [svg]="featherChevronRight" size="20" />
+  </ng-template>
+
+  <nav
+    class="flex justify-center items-center gap-2 mt-8"
+    role="navigation"
+    [attr.aria-label]="'search-interface.pagination.label' | translate"
+  >
+    @if (hasPrevious()) {
+      <a
+        class="btn btn-xs xxs:btn-sm"
+        [routerLink]="[]"
+        [queryParams]="getPreviousPageQueryParams()"
+        queryParamsHandling="merge"
+        [attr.aria-label]="'search-interface.pagination.previous' | translate"
+      >
+        <ng-container *ngTemplateOutlet="prevContent" />
+      </a>
+    } @else {
+      <span
+        class="btn btn-xs xxs:btn-sm btn-disabled"
+        [attr.aria-label]="'search-interface.pagination.previous' | translate"
+      >
+        <ng-container *ngTemplateOutlet="prevContent" />
+      </span>
+    }
+
+    <div class="join">
+      @for (page of pages(); track $index) {
+        @if (page === "...") {
+          <span class="join-item btn btn-xs xxs:btn-sm btn-disabled">...</span>
+        } @else {
+          <a
+            class="join-item btn btn-xs xxs:btn-sm"
+            [class.btn-active]="page === currentPage()"
+            [routerLink]="[]"
+            [queryParams]="getPageQueryParams($any(page))"
+            queryParamsHandling="merge"
+            [attr.aria-current]="page === currentPage() ? 'page' : null"
+            [attr.aria-label]="
+              ('search-interface.pagination.page' | translate) + ' ' + page
+            "
+          >
+            {{ page }}
+          </a>
+        }
+      }
+    </div>
+
+    @if (hasNext()) {
+      <a
+        class="btn btn-xs xxs:btn-sm"
+        [routerLink]="[]"
+        [queryParams]="getNextPageQueryParams()"
+        queryParamsHandling="merge"
+        [attr.aria-label]="'search-interface.pagination.next' | translate"
+      >
+        <ng-container *ngTemplateOutlet="nextContent" />
+      </a>
+    } @else {
+      <span
+        class="btn btn-xs xxs:btn-sm btn-disabled"
+        [attr.aria-label]="'search-interface.pagination.next' | translate"
+      >
+        <ng-container *ngTemplateOutlet="nextContent" />
+      </span>
+    }
+  </nav>
+}

@@ -67,7 +67,11 @@
     }
 
     @if (!details.showing.value) {
-      <app-load-more-search-results-button />
+      <app-pagination
+        [currentPage]="search.currentPage"
+        [totalItems]="search.numberOfHits"
+        [pageSize]="Settings.search.resultsPerPagePerEndpoint"
+      />
     }
   </div>
 </app-view-container>

@@ -82,6 +82,12 @@
       "to": "To",
       "to-sr-label": "To (latest date)",
       "clear": "Clear dates filter"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page"
     }
   },
   "records-interface": {

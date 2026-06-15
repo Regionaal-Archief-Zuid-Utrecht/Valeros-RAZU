@@ -48,7 +48,7 @@ export class MiradorService {
       console.log('Canvas index:', index);
       if (index !== null) {
         const pageNumber = index + 1;
-        void this.urlService.updatePageInUrl(pageNumber);
+        void this.urlService.updateIiifPageInUrl(pageNumber);
       }
     });
 
@@ -104,7 +104,7 @@ export class MiradorService {
   }
 
   private _buildMiradorConfig(config: MiradorConfig): any {
-    const pageNum: number | null = this.urlService.getPageNumberFromUrl();
+    const pageNum: number | null = this.urlService.getIiifPageNumberFromUrl();
 
     return {
       id: config.id,

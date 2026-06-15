@@ -1,5 +1,6 @@
 export interface UrlSettings {
   urls: {
+    search: string;
     details: string;
   };
   params: {
@@ -7,5 +8,6 @@ export interface UrlSettings {
     filters: string;
     endpoints: string;
     page: string;
+    iiifPage: string;
   };
 }

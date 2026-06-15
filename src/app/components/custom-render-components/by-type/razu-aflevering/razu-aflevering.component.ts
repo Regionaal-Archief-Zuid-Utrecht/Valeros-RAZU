@@ -518,7 +518,7 @@ export class RazuAfleveringComponent
       return;
     }
     const id = this.nodeService.getId(node);
-    const pageNum: number | null = this.urlService.getPageNumberFromUrl();
+    const pageNum: number | null = this.urlService.getIiifPageNumberFromUrl();
     if (pageNum == null) {
       return;
     }

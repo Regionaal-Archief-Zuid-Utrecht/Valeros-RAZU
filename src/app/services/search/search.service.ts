@@ -16,6 +16,7 @@ import { EndpointService } from '../endpoint.service';
 import { NodeService } from '../node/node.service';
 import { SettingsService } from '../settings.service';
 import { SortService } from '../sort.service';
+import { ScrollService } from '../ui/scroll.service';
 import { UiService } from '../ui/ui.service';
 import { UrlService } from '../url.service';
 import { ElasticService } from './elastic.service';
@@ -30,12 +31,10 @@ export class SearchService {
 
   results: BehaviorSubject<SearchResultsModel> =
     new BehaviorSubject<SearchResultsModel>({});
-  page: number = 0;
+  currentPage: number = 1;
   isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   numberOfHits: number = 0;
   numberOfHitsIsCappedByElastic: boolean = false;
-
-  hasMoreResultsToLoad = true;
 
   private _searchQueryId = 0;
 
@@ -53,6 +52,7 @@ export class SearchService {
     private router: Router,
     private ui: UiService,
     private settings: SettingsService,
+    private scroll: ScrollService,
   ) {
     this.initSearchOnUrlChange();
     this.initSearchOnFilterChange();
@@ -60,24 +60,18 @@ export class SearchService {
     this.initSearchOnSortChange();
   }
 
-  private _mergeNodesById(
-    nodes: NodeModel[],
-    otherNodes: NodeModel[],
-  ): NodeModel[] {
-    const nodesMap = new Map<string, any>();
-    nodes.forEach((node) => {
-      nodesMap.set(node['@id'][0].value, node);
-    });
+  private _resetToFirstPage() {
+    this.currentPage = 1;
+    const currentPageParam =
+      this.route.snapshot.queryParams[Settings.url.params.page];
 
-    otherNodes.forEach((otherNode) => {
-      const id = otherNode['@id'][0].value;
-      if (nodesMap.has(id)) {
-        Object.assign(nodesMap.get(id), otherNode);
-      } else {
-        nodes.push(otherNode);
-      }
-    });
-    return nodes;
+    if (currentPageParam && currentPageParam !== '1') {
+      void this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { [Settings.url.params.page]: 1 },
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 
   private async _updateResultsFromSearchResponses(
@@ -103,23 +97,19 @@ export class SearchService {
       return;
     }
 
-    const mergedNodes = this._mergeNodesById(
-      this.results.value.nodes ?? [],
-      enrichedNodes,
-    );
-
     this.results.next({
-      nodes: mergedNodes,
+      nodes: enrichedNodes,
     });
   }
 
   initSearchOnFilterChange() {
-    this.filters.searchTrigger.subscribe((s) => {
+    this.filters.searchTrigger.pipe(skip(1)).subscribe((s) => {
       if (s.clearFilters) {
         console.log('-- Searching without filters to retrieve options');
       } else {
         console.log('-- Searching with re-applied filters');
       }
+      this._resetToFirstPage();
       void this.execute(true, s.clearFilters);
     });
   }
@@ -127,6 +117,7 @@ export class SearchService {
   initSearchOnEndpointChange() {
     this.endpoints.enabledIds.pipe(skip(1)).subscribe((_) => {
       console.log('Searching because of updated endpoints...');
+      this._resetToFirstPage();
       void this.execute(true);
     });
   }
@@ -136,6 +127,7 @@ export class SearchService {
       .pipe(skip(1))
       .subscribe((sortOption: SortOptionModel | undefined) => {
         console.log('Searching because of sort update...', sortOption);
+        this._resetToFirstPage();
         void this.execute(true);
       });
   }
@@ -147,12 +139,25 @@ export class SearchService {
     }
 
     const queryStr = queryParams[Settings.url.params.search];
+    const pageParam = queryParams[Settings.url.params.page];
+    const newPage = pageParam ? parseInt(pageParam, 10) : 1;
 
     const queryStrChanged = queryStr !== this.queryStr;
+    const pageChanged = newPage !== this.currentPage;
+
     if (queryStrChanged) {
       this.queryStr = queryStr;
       console.log('Searching because of query string update');
+      this._resetToFirstPage();
       void this.execute(true);
+      return;
+    }
+
+    if (pageChanged) {
+      this.currentPage = newPage;
+      console.log('Searching because of page change to:', newPage);
+      void this.execute(false, false);
+      this.scroll.scrollToTop();
       return;
     }
   }
@@ -182,22 +187,9 @@ export class SearchService {
 
   clearResults() {
     this.results.next({});
-    this.page = 0;
+    this.currentPage = 1;
     this.numberOfHits = 0;
     this.numberOfHitsIsCappedByElastic = false;
-  }
-
-  async checkHasMoreResultsToLoad() {
-    const responses: ElasticEndpointSearchResponse<ElasticNodeModel>[] =
-      await this.elastic.searchNodes(
-        this.queryStr ?? '',
-        this.page * Settings.search.resultsPerPagePerEndpoint,
-        Settings.search.resultsPerPagePerEndpoint,
-        this.filters.enabled.value,
-      );
-    const hits: estypes.SearchHit<ElasticNodeModel>[] =
-      this.hits.getFromSearchResponses(responses);
-    this.hasMoreResultsToLoad = hits && hits.length > 0;
   }
 
   private _calculateTotalHits(
@@ -245,9 +237,11 @@ export class SearchService {
       const searchQueryIdOfRequest = this._searchQueryId;
 
       // Get paginated results for display
+      const offset =
+        (this.currentPage - 1) * Settings.search.resultsPerPagePerEndpoint;
       const displayResponses = await this.elastic.searchNodes(
         this.queryStr ?? '',
-        this.page * Settings.search.resultsPerPagePerEndpoint,
+        offset,
         Settings.search.resultsPerPagePerEndpoint,
         this.filters.enabled.value,
       );
@@ -266,20 +260,12 @@ export class SearchService {
       // Update displayed results from the paginated response
       await this._updateResultsFromSearchResponses(displayResponses);
 
-      // Increment page if we got results
-      const displayHits = this.hits.getFromSearchResponses(displayResponses);
-      if (displayHits && displayHits.length > 0) {
-        this.page++;
-      }
-
       // Update filter options
       await this.filters.updateFilterOptionValues(this.queryStr ?? '');
     } catch (error) {
       console.error('Error searching:', error);
     } finally {
       this.isLoading.next(false);
-
-      void this.checkHasMoreResultsToLoad();
     }
   }
 }

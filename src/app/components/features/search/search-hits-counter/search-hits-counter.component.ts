@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Settings } from '../../../../config/settings';
 import { formatNumber } from '../../../../helpers/util.helper';
 import { DetailsService } from '../../../../services/details.service';
 import { SearchService } from '../../../../services/search/search.service';
@@ -25,5 +26,20 @@ export class SearchHitsCounterComponent {
       return this.translate.instant('search-interface.1-result');
     }
     return `${formatNumber(this.search.numberOfHits)}${this.search.numberOfHitsIsCappedByElastic ? '+' : ''} ${this.translate.instant('search-interface.results')}`;
+  }
+
+  get currentRangeStr(): string {
+    const pageSize = Settings.search.resultsPerPagePerEndpoint;
+    const currentPage = this.search.currentPage;
+    const totalHits = this.search.numberOfHits;
+
+    if (!totalHits) {
+      return '';
+    }
+
+    const startIndex = (currentPage - 1) * pageSize + 1;
+    const endIndex = Math.min(currentPage * pageSize, totalHits);
+
+    return `Getoond: ${formatNumber(startIndex)}-${formatNumber(endIndex)} van ${formatNumber(totalHits)}`;
   }
 }

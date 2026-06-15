@@ -12,5 +12,13 @@
 
   @if (!search.isLoading.value && !details.showing.value) {
     <span aria-hidden="true">{{ numberOfHitsStr }}</span>
+    @if (currentRangeStr) {
+      <span
+        class="block text-sm font-normal text-gray-600 mt-1"
+        aria-hidden="true"
+      >
+        {{ currentRangeStr }}
+      </span>
+    }
   }
 </h2>

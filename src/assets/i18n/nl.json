@@ -82,6 +82,12 @@
       "to": "Tot",
       "to-sr-label": "Tot (laatste datum)",
       "clear": "Datumfilter wissen"
+    },
+    "pagination": {
+      "label": "Paginering",
+      "previous": "Vorige",
+      "next": "Volgende",
+      "page": "Pagina"
     }
   },
   "records-interface": {

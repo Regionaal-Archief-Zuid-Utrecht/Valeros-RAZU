@@ -36,14 +36,28 @@ export class RoutingService {
 
   private handlePageParameterOnNavigation() {
     const urlParams = new URLSearchParams(window.location.search);
-    const hasPageParam = urlParams.has(Settings.url.params.page);
 
-    if (hasPageParam) {
-      if (!this.details.isShowing()) {
-        // Remove page parameter when not on details page
-        void this.url.updatePageInUrl(null);
+    // Remove search page parameter when not on search page
+    const hasSearchPageParam = urlParams.has(Settings.url.params.page);
+    if (hasSearchPageParam) {
+      const isOnSearchPage = this.isOnSearchPage();
+      if (!isOnSearchPage) {
+        void this.url.updateSearchPageInUrl(null);
       }
     }
+
+    // Remove IIIF page parameter when not on details page
+    const hasIiifPageParam = urlParams.has(Settings.url.params.iiifPage);
+    if (hasIiifPageParam) {
+      const isOnDetailsPage = this.details.isShowing();
+      if (!isOnDetailsPage) {
+        void this.url.updateIiifPageInUrl(null);
+      }
+    }
+  }
+
+  isOnSearchPage(): boolean {
+    return this.router.url.startsWith(`/${Settings.url.urls.search}`);
   }
 
   private isLastUrlSameAsUrl(url: string) {

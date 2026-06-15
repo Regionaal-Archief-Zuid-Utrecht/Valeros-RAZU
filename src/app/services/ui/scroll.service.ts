@@ -90,4 +90,13 @@ export class ScrollService {
       });
     }, 100);
   }
+
+  scrollToTop() {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }, 100);
+  }
 }
