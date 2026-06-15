@@ -37,15 +37,6 @@ export class RoutingService {
   private handlePageParameterOnNavigation() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Remove search page parameter when not on search page
-    const hasSearchPageParam = urlParams.has(Settings.url.params.page);
-    if (hasSearchPageParam) {
-      const isOnSearchPage = this.isOnSearchPage();
-      if (!isOnSearchPage) {
-        void this.url.updateSearchPageInUrl(null);
-      }
-    }
-
     // Remove IIIF page parameter when not on details page
     const hasIiifPageParam = urlParams.has(Settings.url.params.iiifPage);
     if (hasIiifPageParam) {
@@ -67,7 +58,6 @@ export class RoutingService {
       if (!query) return path;
       const params = new URLSearchParams(query);
       params.delete(Settings.url.params.filters);
-      params.delete(Settings.url.params.page);
       const filteredQuery = params.toString();
       return filteredQuery ? `${path}?${filteredQuery}` : path;
     };

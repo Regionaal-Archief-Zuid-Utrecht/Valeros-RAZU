@@ -179,10 +179,6 @@ export class UrlService {
     return null;
   }
 
-  updateSearchPageInUrl(pageNumber: number | null) {
-    this._updatePageNumberInUrl(Settings.url.params.page, pageNumber);
-  }
-
   updateIiifPageInUrl(pageNumber: number | null) {
     this._updatePageNumberInUrl(Settings.url.params.iiifPage, pageNumber);
   }

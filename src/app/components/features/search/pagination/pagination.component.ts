@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import {
   featherChevronLeft,
@@ -12,12 +11,10 @@ import { SearchService } from '../../../../services/search/search.service';
 
 @Component({
   selector: 'app-pagination',
-  imports: [CommonModule, RouterLink, TranslatePipe, NgIcon],
+  imports: [CommonModule, TranslatePipe, NgIcon],
   templateUrl: './pagination.component.html',
 })
 export class PaginationComponent {
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private search = inject(SearchService);
   private nodes = inject(NodeService);
 
@@ -86,11 +83,7 @@ export class PaginationComponent {
       return;
     }
 
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { page },
-      queryParamsHandling: 'merge',
-    });
+    this.search.setPage(page);
   }
 
   goToPrevious(): void {
@@ -103,18 +96,6 @@ export class PaginationComponent {
     if (this.hasNext()) {
       this.goToPage(this.currentPage() + 1);
     }
-  }
-
-  getPageQueryParams(page: number): Record<string, string> {
-    return { page: page.toString() };
-  }
-
-  getPreviousPageQueryParams(): Record<string, string> {
-    return this.getPageQueryParams(this.currentPage() - 1);
-  }
-
-  getNextPageQueryParams(): Record<string, string> {
-    return this.getPageQueryParams(this.currentPage() + 1);
   }
 
   private focusOnFirstResult(): void {

@@ -19,15 +19,13 @@
     [attr.aria-label]="'search-interface.pagination.label' | translate"
   >
     @if (hasPrevious()) {
-      <a
+      <button
         class="btn btn-xs xxs:btn-sm"
-        [routerLink]="[]"
-        [queryParams]="getPreviousPageQueryParams()"
-        queryParamsHandling="merge"
+        (click)="goToPrevious()"
         [attr.aria-label]="'search-interface.pagination.previous' | translate"
       >
         <ng-container *ngTemplateOutlet="prevContent" />
-      </a>
+      </button>
     } @else {
       <span
         class="btn btn-xs xxs:btn-sm btn-disabled"
@@ -42,33 +40,29 @@
         @if (page === "...") {
           <span class="join-item btn btn-xs xxs:btn-sm btn-disabled">...</span>
         } @else {
-          <a
+          <button
             class="join-item btn btn-xs xxs:btn-sm"
             [class.btn-active]="page === currentPage()"
-            [routerLink]="[]"
-            [queryParams]="getPageQueryParams($any(page))"
-            queryParamsHandling="merge"
+            (click)="goToPage($any(page))"
             [attr.aria-current]="page === currentPage() ? 'page' : null"
             [attr.aria-label]="
               ('search-interface.pagination.page' | translate) + ' ' + page
             "
           >
             {{ page }}
-          </a>
+          </button>
         }
       }
     </div>
 
     @if (hasNext()) {
-      <a
+      <button
         class="btn btn-xs xxs:btn-sm"
-        [routerLink]="[]"
-        [queryParams]="getNextPageQueryParams()"
-        queryParamsHandling="merge"
+        (click)="goToNext()"
         [attr.aria-label]="'search-interface.pagination.next' | translate"
       >
         <ng-container *ngTemplateOutlet="nextContent" />
-      </a>
+      </button>
     } @else {
       <span
         class="btn btn-xs xxs:btn-sm btn-disabled"

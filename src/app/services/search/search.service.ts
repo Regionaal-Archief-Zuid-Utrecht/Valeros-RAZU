@@ -61,15 +61,10 @@ export class SearchService {
     this.initSearchOnSortChange();
   }
 
-  private async _resetToFirstPage() {
-    this.currentPage = 1;
-    this.url.ignoreQueryParamChange = true;
-    await this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { [Settings.url.params.page]: 1 },
-      queryParamsHandling: 'merge',
-    });
-    this.url.ignoreQueryParamChange = false;
+  setPage(page: number) {
+    this.currentPage = page;
+    void this.execute(false, false);
+    this.scroll.scrollToTop();
   }
 
   private async _updateResultsFromSearchResponses(
@@ -101,21 +96,21 @@ export class SearchService {
   }
 
   initSearchOnFilterChange() {
-    this.filters.searchTrigger.pipe(skip(1)).subscribe(async (s) => {
+    this.filters.searchTrigger.pipe(skip(1)).subscribe((s) => {
       if (s.clearFilters) {
         console.log('-- Searching without filters to retrieve options');
       } else {
         console.log('-- Searching with re-applied filters');
       }
-      await this._resetToFirstPage();
+      this.currentPage = 1;
       void this.execute(true, s.clearFilters);
     });
   }
 
   initSearchOnEndpointChange() {
-    this.endpoints.enabledIds.pipe(skip(1)).subscribe(async (_) => {
+    this.endpoints.enabledIds.pipe(skip(1)).subscribe((_) => {
       console.log('Searching because of updated endpoints...');
-      await this._resetToFirstPage();
+      this.currentPage = 1;
       void this.execute(true);
     });
   }
@@ -123,9 +118,9 @@ export class SearchService {
   initSearchOnSortChange() {
     this.sort.current
       .pipe(skip(1))
-      .subscribe(async (sortOption: SortOptionModel | undefined) => {
+      .subscribe((sortOption: SortOptionModel | undefined) => {
         console.log('Searching because of sort update...', sortOption);
-        await this._resetToFirstPage();
+        this.currentPage = 1;
         void this.execute(true);
       });
   }
@@ -137,35 +132,22 @@ export class SearchService {
     }
 
     const queryStr = queryParams[Settings.url.params.search];
-    const pageParam = queryParams[Settings.url.params.page];
-    const newPage = pageParam ? parseInt(pageParam, 10) : 1;
 
     if (!this._isInitialized) {
       this._isInitialized = true;
       this.queryStr = queryStr;
-      this.currentPage = newPage;
-      console.log(`Initial load with query: "${queryStr}", page: ${newPage}`);
+      console.log(`Initial load with query: "${queryStr}"`);
       void this.execute(true);
       return;
     }
 
     const queryStrChanged = queryStr !== this.queryStr;
-    const pageChanged = newPage !== this.currentPage;
 
     if (queryStrChanged) {
       this.queryStr = queryStr;
+      this.currentPage = 1;
       console.log('Searching because of query string update');
-      this._resetToFirstPage().then(() => {
-        void this.execute(true);
-      });
-      return;
-    }
-
-    if (pageChanged) {
-      this.currentPage = newPage;
-      console.log('Searching because of page change to:', newPage);
-      void this.execute(false, false);
-      this.scroll.scrollToTop();
+      void this.execute(true);
       return;
     }
   }
