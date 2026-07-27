@@ -87,7 +87,8 @@
       "label": "Pagination",
       "previous": "Previous",
       "next": "Next",
-      "page": "Page"
+      "go-to-page-label": "Go to page",
+      "of": "of"
     }
   },
   "records-interface": {

@@ -87,7 +87,8 @@
       "label": "Paginering",
       "previous": "Vorige",
       "next": "Volgende",
-      "page": "Pagina"
+      "go-to-page-label": "Ga naar pagina",
+      "of": "van"
     }
   },
   "records-interface": {

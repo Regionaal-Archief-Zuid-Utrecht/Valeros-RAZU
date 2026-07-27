@@ -35,24 +35,26 @@
       </span>
     }
 
-    <div class="join">
-      @for (page of pages(); track $index) {
-        @if (page === "...") {
-          <span class="join-item btn btn-xs xxs:btn-sm btn-disabled">...</span>
-        } @else {
-          <button
-            class="join-item btn btn-xs xxs:btn-sm"
-            [class.btn-active]="page === currentPage()"
-            (click)="goToPage($any(page))"
-            [attr.aria-current]="page === currentPage() ? 'page' : null"
-            [attr.aria-label]="
-              ('search-interface.pagination.page' | translate) + ' ' + page
-            "
-          >
-            {{ page }}
-          </button>
-        }
-      }
+    <div class="flex items-center gap-1">
+      <label for="pagination-page-input" class="sr-only">
+        {{ "search-interface.pagination.go-to-page-label" | translate }}
+      </label>
+      <input
+        id="pagination-page-input"
+        type="number"
+        min="1"
+        [max]="totalPages()"
+        [value]="currentPage()"
+        (keydown.enter)="
+          goToInputPage($any($event.target).value, $any($event.target))
+        "
+        (blur)="goToInputPage($any($event.target).value, $any($event.target))"
+        class="input input-xs xxs:input-sm w-20 text-center px-1"
+      />
+      <span
+        >{{ "search-interface.pagination.of" | translate }}
+        {{ totalPages() }}</span
+      >
     </div>
 
     @if (hasNext()) {
