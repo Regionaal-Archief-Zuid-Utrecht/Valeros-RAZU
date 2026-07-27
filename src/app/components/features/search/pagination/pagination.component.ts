@@ -84,7 +84,7 @@ export class PaginationComponent {
         `[data-scroll-id="${encodeURIComponent(firstNodeId)}"] a.node-result-item`,
       );
       firstResultElem?.focus();
-    }, 100);
+    }, 500);
   }
 
   protected readonly featherChevronLeft = featherChevronLeft;
