@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: development # production
+    ports:
+      - "8080:80"
+    depends_on:
+      - gotenberg-proxy
+
+  gotenberg-proxy:
+    build:
+      context: https://github.com/Simon-Dirks/gotenberg-proxy.git
+    ports:
+      - "5000:5000"
+    environment:
+      GOTENBERG_HOST: http://gotenberg:3000
+    depends_on:
+      - gotenberg
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    environment:
+      - CHROMIUM_DISABLE_ROUTES=1

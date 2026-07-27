@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "view-a-LOD": {
+    "valeros": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/view-a-lod",
+            "outputPath": "dist/valeros",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -62,12 +62,12 @@
                 }
               ]
             },
-            "development": {
+            "development-serve": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             },
-            "dev-build": {
+            "development": {
               "externalDependencies": ["http", "https", "url", "util", "net"],
               "budgets": [
                 {
@@ -90,10 +90,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "view-a-LOD:build:production"
+              "buildTarget": "valeros:build:production"
             },
             "development": {
-              "buildTarget": "view-a-LOD:build:development"
+              "buildTarget": "valeros:build:development-serve"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "view-a-LOD:build"
+            "buildTarget": "valeros:build"
           }
         },
         "test": {

@@ -1,12 +1,11 @@
 {
-  "name": "view-a-lod",
+  "name": "valeros",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
     "build:dev": "ng build --configuration development",
-    "build:dev-build": "ng build --configuration dev-build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

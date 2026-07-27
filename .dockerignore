@@ -1,0 +1,9 @@
+node_modules
+dist
+.angular
+.git
+.vscode
+cypress
+cypress/videos
+cypress/downloads
+*.md
