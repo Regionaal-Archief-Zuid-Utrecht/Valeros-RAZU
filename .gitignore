@@ -47,3 +47,7 @@ src/app/config/theme
 # SURA secrets 
 docker/sura/*.env
 !docker/sura/*.env.example
+
+# Matomo secrets
+docker/matomo/*.env
+!docker/matomo/*.env.example

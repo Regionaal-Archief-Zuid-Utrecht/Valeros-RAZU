@@ -33,3 +33,46 @@ services:
     volumes:
       - ./docker/sura/general.env:/app/general.env
       - ./docker/sura/jwt.env:/app/jwt.env
+
+  matomo-db:
+    image: mariadb:lts
+    command: --max-allowed-packet=64MB
+    env_file:
+      - ./docker/matomo/db.env
+    environment:
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DATABASE=matomo
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+      - MARIADB_INITDB_SKIP_TZINFO=1
+      - MARIADB_USER=matomo
+    volumes:
+      - matomo-db:/var/lib/mysql
+
+  matomo:
+    image: matomo:fpm-alpine
+    depends_on:
+      - matomo-db
+    env_file:
+      - ./docker/matomo/db.env
+    environment:
+      - MATOMO_DATABASE_ADAPTER=mysql
+      - MATOMO_DATABASE_DBNAME=matomo
+      - MATOMO_DATABASE_HOST=matomo-db
+      - MATOMO_DATABASE_TABLES_PREFIX=matomo_
+      - MATOMO_DATABASE_USERNAME=matomo
+    volumes:
+      - matomo:/var/www/html
+
+  matomo-web:
+    image: nginx:alpine
+    depends_on:
+      - matomo
+    ports:
+      - "8081:80"
+    volumes:
+      - matomo:/var/www/html:ro
+      - ./docker/matomo/matomo.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  matomo-db:
+  matomo:
