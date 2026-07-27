@@ -1,7 +1,7 @@
 import { EndpointSettings } from '../../../../models/settings/endpoint-settings.model';
 import { endpointSettings } from '../../../default-settings/settings/endpoint.settings';
 
-// Default endpoint settings for development, replaced (see angular.json) for different environments (test, acceptance, production)
+// Default endpoint settings for development, replaced (see angular.json) for different environments
 export const razuEndpointSettings: EndpointSettings = {
   ...endpointSettings,
   data: {

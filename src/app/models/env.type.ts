@@ -1,1 +1,1 @@
-export type Env = 'production' | 'development' | 'acceptance' | 'test';
+export type Env = 'production' | 'development';
