@@ -46,6 +46,14 @@
         <app-search-hits-counter class="w-1/2 lg:w-3/4" />
         <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
       </div>
+
+      <div class="mb-4">
+        <app-pagination
+          [currentPage]="search.currentPage"
+          [totalItems]="search.numberOfHits"
+          [pageSize]="Settings.search.resultsPerPagePerEndpoint"
+        />
+      </div>
     }
 
     @if (!details.showing.value) {
