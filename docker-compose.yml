@@ -34,6 +34,14 @@ services:
       - ./docker/sura/general.env:/app/general.env
       - ./docker/sura/jwt.env:/app/jwt.env
 
+  snippetserver:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git
+    ports:
+      - "8001:8000"
+    environment:
+      ALLOWED_HOSTS: opslag.razu.nl
+
   matomo-db:
     image: mariadb:lts
     command: --max-allowed-packet=64MB
