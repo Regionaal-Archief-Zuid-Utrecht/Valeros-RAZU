@@ -24,3 +24,12 @@ services:
     image: gotenberg/gotenberg:8
     environment:
       - CHROMIUM_DISABLE_ROUTES=1
+
+  sura:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docker/sura/general.env:/app/general.env
+      - ./docker/sura/jwt.env:/app/jwt.env
