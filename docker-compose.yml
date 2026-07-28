@@ -32,7 +32,7 @@ services:
     build:
       context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8001:8000"
     volumes:
       - ./docker/sura/general.env:/app/general.env
       - ./docker/sura/jwt.env:/app/jwt.env
@@ -41,7 +41,7 @@ services:
     build:
       context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
     ports:
-      - "127.0.0.1:8001:8000"
+      - "127.0.0.1:8002:8000"
     environment:
       ALLOWED_HOSTS: opslag.razu.nl
 
