@@ -15,7 +15,7 @@ services:
 
   gotenberg-proxy:
     build:
-      context: https://github.com/Simon-Dirks/gotenberg-proxy.git
+      context: https://github.com/Simon-Dirks/gotenberg-proxy.git#main
     ports:
       - "127.0.0.1:5000:5000"
     environment:
@@ -30,7 +30,7 @@ services:
 
   sura:
     build:
-      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
@@ -39,7 +39,7 @@ services:
 
   snippetserver:
     build:
-      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
     ports:
       - "127.0.0.1:8001:8000"
     environment:
