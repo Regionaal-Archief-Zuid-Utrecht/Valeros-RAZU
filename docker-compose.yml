@@ -9,6 +9,9 @@ services:
       - "127.0.0.1:8080:80"
     depends_on:
       - gotenberg-proxy
+      - sura
+      - snippetserver
+      - matomo-web
 
   gotenberg-proxy:
     build:
