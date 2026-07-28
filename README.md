@@ -13,6 +13,12 @@ This project started as a collaboration between [Het Utrechts Archief](https://h
 
 If you have any questions or comments about the project, please reach out to mail@simondirks.com.
 
+## Getting started
+
+Development: `docker compose up`
+
+Production: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
+
 ## Why use Valeros?
 
 We believe that end users should not have to deal with the complexities of Linked Data. Because of this, Valeros is designed to **hide the complexities of Linked Data from users**. We have focused our efforts on making it easy to combine data from different organizations and ontologies in one place, but Valeros also works well with single datasets and ontologies.
