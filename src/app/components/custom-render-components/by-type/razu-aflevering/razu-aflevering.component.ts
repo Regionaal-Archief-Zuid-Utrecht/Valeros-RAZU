@@ -64,6 +64,7 @@ export class RazuAfleveringComponent
   hasType = false;
   repMetaLoaded = false;
   repMetaFetching = false;
+  downloadLinks: { url: string; page?: number; size: string }[] = [];
   @Input() visibility!: PredicateVisibility;
 
   // Loading state
@@ -396,6 +397,24 @@ export class RazuAfleveringComponent
             this.imageRepSizeMap.set(rep.value, sizeObjs[0].value);
           }
         }),
+      );
+
+      const sortedReps = reps
+        .filter((rep) => this.getFirstImageUrl(rep))
+        .sort(
+          (a, b) =>
+            (this.getPage(a) ?? Number.POSITIVE_INFINITY) -
+            (this.getPage(b) ?? Number.POSITIVE_INFINITY),
+        );
+      this.downloadLinks = await Promise.all(
+        sortedReps.map(async (rep) => ({
+          url: await this.urlService.processUrl(
+            this.getFirstImageUrl(rep),
+            false,
+          ),
+          page: this.getPage(rep),
+          size: this.formatBytes(this.getSizeBytes(rep)),
+        })),
       );
       this.repMetaLoaded = true;
     } finally {

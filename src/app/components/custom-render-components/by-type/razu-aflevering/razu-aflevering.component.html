@@ -215,27 +215,20 @@
         <section id="file-download">
           <h3 class="font-semibold mb-2">Download Bestanden</h3>
           <ol class="list-decimal ml-6">
-            @for (
-              rep of data?.node?.[
-                "https://data.razu.nl/def/ldto/isRepresentatieVan"
-              ] || [];
-              track trackByRep($index, rep)
-            ) {
-              @if (getFirstImageUrl(rep); as imgUrl) {
-                <li>
-                  <a
-                    [href]="imgUrl"
-                    class="text-blue-600 underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Download pagina {{ getPage(rep) || "?" }}
-                    @if (formatBytes(getSizeBytes(rep)); as size) {
-                      ({{ size }})
-                    }
-                  </a>
-                </li>
-              } @else {}
+            @for (link of downloadLinks; track link.url) {
+              <li>
+                <a
+                  [href]="link.url"
+                  class="text-blue-600 underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download pagina {{ link.page || "?" }}
+                  @if (link.size) {
+                    ({{ link.size }})
+                  }
+                </a>
+              </li>
             }
           </ol>
         </section>
