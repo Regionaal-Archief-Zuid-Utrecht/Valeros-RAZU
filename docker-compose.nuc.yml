@@ -42,5 +42,6 @@ services:
     ports:
       - "0.0.0.0:8002:8000"
     environment:
+      CORS_ALLOWED_ORIGINS: http://linuc.local:8081
       ALLOWED_HOSTS: opslag.razu.nl
 

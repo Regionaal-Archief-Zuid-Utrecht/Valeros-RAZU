@@ -20,5 +20,5 @@ export const razuEndpointSettings: EndpointSettings = {
     url: 'http://linuc.local:8001/process-url',
     matchSubstring: 'opslag.razu.nl',
   },
-  snippetServer: 'http://linuc.local:8002',
+  snippetServer: 'http://linuc.local:8002/snippet',
 };
