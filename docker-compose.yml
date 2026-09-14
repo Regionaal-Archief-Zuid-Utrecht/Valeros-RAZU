@@ -1,5 +1,6 @@
 services:
   app:
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
       - snippetserver
 
   gotenberg-proxy:
+    restart: unless-stopped
     build:
       context: https://github.com/Simon-Dirks/gotenberg-proxy.git#main
     ports:
@@ -23,11 +25,13 @@ services:
       - gotenberg
 
   gotenberg:
+    restart: unless-stopped
     image: gotenberg/gotenberg:8
     environment:
       - CHROMIUM_DISABLE_ROUTES=1
 
   sura:
+    restart: unless-stopped
     build:
       context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
     ports:
@@ -37,6 +41,7 @@ services:
       - ./docker/sura/jwt.env:/app/jwt.env
 
   snippetserver:
+    restart: unless-stopped
     build:
       context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
     ports:
