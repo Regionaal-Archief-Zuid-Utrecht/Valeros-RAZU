@@ -24,10 +24,12 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
   `docker compose -f docker-compose.nuc.yml up --build`
 
 - **Development** (assumes a frontend-facing nginx):  
-  `docker compose up`
+  `docker compose up --build`
 
 - **Production** (assumes a frontend-facing nginx):  
-  `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
+  `docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build`
+
+For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).
 
 ## Why use Valeros?
 
