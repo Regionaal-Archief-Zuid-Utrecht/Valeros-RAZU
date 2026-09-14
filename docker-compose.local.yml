@@ -1,0 +1,48 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: local
+    ports:
+      - "0.0.0.0:8081:80"
+    depends_on:
+      - gotenberg-proxy
+      - sura
+      - snippetserver
+
+  gotenberg-proxy:
+    build:
+      context: https://github.com/Simon-Dirks/gotenberg-proxy.git#main
+    ports:
+      - "0.0.0.0:5000:5000"
+    environment:
+      GOTENBERG_HOST: http://gotenberg:3000
+    depends_on:
+      - gotenberg
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    environment:
+      - CHROMIUM_DISABLE_ROUTES=1
+
+  sura:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
+    ports:
+      - "0.0.0.0:8001:8000"
+    volumes:
+      - ./docker/sura/general.env:/app/general.env
+      - ./docker/sura/jwt.env:/app/jwt.env
+
+  snippetserver:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
+    ports:
+      - "0.0.0.0:8002:8000"
+    environment:
+      CORS_ALLOWED_ORIGINS: http://localhost:8081
+      ALLOWED_HOSTS: opslag.razu.nl
+

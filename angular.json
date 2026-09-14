@@ -20,7 +20,9 @@
             "outputPath": "dist/valeros",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -32,12 +34,21 @@
                 "output": "/assets/pdfjs"
               }
             ],
-            "styles": ["src/styles.scss", "src/theme.scss"],
+            "styles": [
+              "src/styles.scss",
+              "src/theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -68,7 +79,13 @@
               "sourceMap": true
             },
             "development": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -84,13 +101,36 @@
               "outputHashing": "all"
             },
             "nuc": {
-              "externalDependencies": ["http", "https", "url", "util", "net"],
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
               "optimization": false,
               "sourceMap": true,
               "fileReplacements": [
                 {
                   "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
                   "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.nuc.settings.ts"
+                }
+              ]
+            },
+            "local": {
+              "externalDependencies": [
+                "http",
+                "https",
+                "url",
+                "util",
+                "net"
+              ],
+              "optimization": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.settings.ts",
+                  "with": "src/app/config/razu-settings/settings/endpoints/razu-endpoint.local.settings.ts"
                 }
               ]
             }
@@ -118,7 +158,10 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -130,7 +173,10 @@
                 "output": "/assets/pdfjs"
               }
             ],
-            "styles": ["src/styles.scss", "src/theme.scss"],
+            "styles": [
+              "src/styles.scss",
+              "src/theme.scss"
+            ],
             "scripts": []
           }
         }

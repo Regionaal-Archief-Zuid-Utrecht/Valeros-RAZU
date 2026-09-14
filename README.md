@@ -15,9 +15,19 @@ If you have any questions or comments about the project, please reach out to mai
 
 ## Getting started
 
-Development: `docker compose up`
+Valeros can be started in several configurations. The `local` and `nuc` variants expose the application and supporting services directly on the host without an additional nginx reverse proxy in front. The `development` and `production` variants are intended to run behind an existing frontend-facing nginx.
 
-Production: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
+- **Local** (no extra nginx):  
+  `docker compose -f docker-compose.local.yml up --build`
+
+- **Development NUC** (no extra nginx):  
+  `docker compose -f docker-compose.nuc.yml up --build`
+
+- **Development** (assumes a frontend-facing nginx):  
+  `docker compose up`
+
+- **Production** (assumes a frontend-facing nginx):  
+  `docker compose -f docker-compose.yml -f docker-compose.prod.yml up`
 
 ## Why use Valeros?
 
