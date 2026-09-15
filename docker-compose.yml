@@ -48,3 +48,4 @@ services:
       - "127.0.0.1:8002:8000"
     environment:
       ALLOWED_HOSTS: opslag.razu.nl
+      CORS_ALLOWED_ORIGINS: https://viewer.razu.nl,https://acceptatie.viewer.razu.nl,https://ontwikkel.viewer.razu.nl
