@@ -3,7 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import Mirador from 'mirador/dist/es/src/index';
 // prettier-ignore
 // @ts-ignore
-import { getCanvasIndex,getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
+import { getCanvasIndex, getCurrentCanvas } from 'mirador/dist/es/src/state/selectors';
 // @ts-ignore
 import textOverlayPlugin from 'mirador-textoverlay/es/index';
 import { BehaviorSubject } from 'rxjs';
@@ -27,7 +27,7 @@ export class MiradorService {
     private iiifService: IIIFService,
     private urlService: UrlService,
     private miradorHighlight: MiradorHighlightService,
-  ) {}
+  ) { }
 
   createViewer(config: MiradorConfig): Promise<any> {
     return this.ngZone.runOutsideAngular(async () => {
@@ -126,16 +126,16 @@ export class MiradorService {
         {
           manifestId: config.manifestId,
           canvasIndex: config.canvasIndex ?? (pageNum ? pageNum - 1 : 0),
-          allowWindowSideBar: true,
+          allowWindowSideBar: false,
           sideBarOpenByDefault: false,
           allowMaximize: false,
           allowFullscreen: true,
           allowClose: false,
           ...(config.thumbnailNavigation
             ? {
-                thumbnailNavigationPosition: 'far-right',
-                thumbnailNavigationVisible: true,
-              }
+              thumbnailNavigationPosition: 'far-right',
+              thumbnailNavigationVisible: true,
+            }
             : {}),
         },
       ],
