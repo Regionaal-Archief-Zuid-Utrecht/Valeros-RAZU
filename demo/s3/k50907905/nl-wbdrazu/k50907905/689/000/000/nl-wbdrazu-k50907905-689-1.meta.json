@@ -1,0 +1,62 @@
+[
+  {
+    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-1.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-1",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Informatieobject"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-1.meta.json"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/aggregatieniveau": [
+      {
+        "@id": "https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/classificatie": [
+      {
+        "@id": "https://data.razu.nl/id/soort/89cfa9e6349cc6bdf87135c96cd37e14"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijd": [
+      {
+        "@id": "_:b1"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "Collectie kranten RAZU"
+      }
+    ]
+  },
+  {
+    "@id": "_:b1",
+    "@type": [
+      "https://data.razu.nl/def/ldto/DekkingInTijdGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear",
+        "@value": "1855"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdEindDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#gYear",
+        "@value": "2013"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdType": [
+      {
+        "@id": "https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038"
+      }
+    ]
+  }
+]

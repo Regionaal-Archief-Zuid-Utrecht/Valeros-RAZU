@@ -1,0 +1,57 @@
+services:
+  silo:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    command: server /data --console-address ":9001"
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${SILO_ROOT_USER:-silo-admin}
+      MINIO_ROOT_PASSWORD: ${SILO_ROOT_PASSWORD:-silo-demo-password}
+      MINIO_API_CORS_ALLOW_ORIGIN: "*"
+    volumes:
+      - silo-data:/data
+    healthcheck:
+      test: [ "CMD", "silo", "healthcheck", "ready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  silo-init:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        mcli alias set demo http://silo:9000 "$${SILO_ROOT_USER}" "$${SILO_ROOT_PASSWORD}"
+        mcli mb --ignore-existing demo/k50907905
+        mcli anonymous set download demo/k50907905
+        mcli mirror --overwrite /seed demo/k50907905
+    environment:
+      SILO_ROOT_USER: ${SILO_ROOT_USER:-silo-admin}
+      SILO_ROOT_PASSWORD: ${SILO_ROOT_PASSWORD:-silo-demo-password}
+    volumes:
+      - ./demo/s3/k50907905:/seed:ro
+    depends_on:
+      silo:
+        condition: service_healthy
+
+  qlever:
+    image: adfreiburg/qlever:commit-55c05d4
+    entrypoint: /opt/valeros/start-qlever.sh
+    ports:
+      - "127.0.0.1:7001:7001"
+    volumes:
+      - ./demo/rdf:/data:ro
+      - ./docker/qlever/start-qlever.sh:/opt/valeros/start-qlever.sh:ro
+    tmpfs:
+      - /index:mode=1777
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "--silent", "http://localhost:7001/?query=ASK%20%7B%20?s%20?p%20?o%20%7D" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+volumes:
+  silo-data:

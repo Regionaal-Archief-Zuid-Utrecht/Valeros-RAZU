@@ -29,6 +29,8 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
 - **Production** (assumes a frontend-facing nginx):  
   `docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build`
 
+- **Self-contained demo**: Put RDF files (`.ttl`, `.nt`, or `.nq`) in `demo/rdf` and S3 seed files in `demo/s3/k50907905`, then run `docker compose -f docker-compose.demo.yml up`. QLever rebuilds its index on every start and exposes SPARQL at `http://localhost:7001`. SILO mirrors the seed files into the public `k50907905` bucket, exposes S3 at `http://localhost:9000`, and provides its console at `http://localhost:9001`. The default demo login is `silo-admin` / `silo-demo-password`; override it with `SILO_ROOT_USER` and `SILO_ROOT_PASSWORD`.
+
 For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).
 
 ## Why use Valeros?

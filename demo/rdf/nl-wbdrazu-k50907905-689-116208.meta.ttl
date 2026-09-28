@@ -1,0 +1,28 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <https://data.razu.nl/def/ldto/> .
+@prefix ns2: <http://schema.org/> .
+@prefix ns3: <http://iiif.io/api/presentation/3#> .
+@prefix ns4: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116208> a ns1:Bestand ;
+    ns3:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116208.jpg> ;
+    dcterms:hasFormat <https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.meta.json> ;
+    ns2:height 5979 ;
+    ns2:position 3 ;
+    ns2:width 4284 ;
+    ns1:URLBestand <https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.jpg> ;
+    ns1:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ;
+    ns1:checksum [ a ns1:ChecksumGegevens ;
+            ns1:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns1:checksumDatum "2025-04-18T17:21:39.838667"^^xsd:dateTime ;
+            ns1:checksumWaarde "6fcb991cddaa045aca3d7bd918f97e0d" ] ;
+    ns1:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns1:naam "nl-wbdrazu-k50907905-689-116208.jpg" ;
+    ns1:omvang 12972010 .
+
+<https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.jpg> a ns4:File ;
+    ns4:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0272.jpg" .
+
+<https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.meta.json> a ns4:File .
+

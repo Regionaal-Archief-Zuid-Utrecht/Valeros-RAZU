@@ -1,0 +1,153 @@
+[
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Informatieobject"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json"
+      }
+    ],
+    "http://schema.org/mainEntity": [
+      {
+        "@id": "_:Nbaee5edd87b24d9dbfe0d1ad568edac7"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/aggregatieniveau": [
+      {
+        "@id": "https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruik": [
+      {
+        "@id": "_:b0"
+      },
+      {
+        "@id": "_:b2"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/classificatie": [
+      {
+        "@id": "https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijd": [
+      {
+        "@id": "_:N5a99df03c646459b92084cc73f0a3c25"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isOnderdeelVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-34"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "Wijkse Courant, 24 augustus 1887 (nr. 68, jrg. 18)"
+      }
+    ]
+  },
+  {
+    "@id": "_:N5a99df03c646459b92084cc73f0a3c25",
+    "@type": [
+      "https://data.razu.nl/def/ldto/DekkingInTijdGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdEindDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1887-08-24"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdType": [
+      {
+        "@id": "https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038"
+      }
+    ]
+  },
+  {
+    "@id": "_:b0",
+    "@type": [
+      "https://data.razu.nl/def/ldto/BeperkingGebruikGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruikType": [
+      {
+        "@id": "https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20"
+      }
+    ]
+  },
+  {
+    "@id": "_:b2",
+    "@type": [
+      "https://data.razu.nl/def/ldto/BeperkingGebruikGegevens"
+    ],
+    "http://schema.org/copyrightHolder": [
+      {
+        "@id": "https://data.razu.nl/id/actor/ee065aecf4e6ecad10e8cd8bd9954a6f"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/beperkingGebruikType": [
+      {
+        "@id": "https://data.razu.nl/id/beperkinggebruiktype/0ee107032f9027f2d9c6ba381b881f29"
+      }
+    ]
+  },
+  {
+    "@id": "_:Nbaee5edd87b24d9dbfe0d1ad568edac7",
+    "@type": [
+      "http://schema.org/PublicationIssue"
+    ],
+    "http://schema.org/datePublished": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1887-08-24"
+      }
+    ],
+    "http://schema.org/isPartOf": [
+      {
+        "@id": "https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084"
+      },
+      {
+        "@id": "_:N6d2bdbad02e340d08e1694603a5f5233"
+      }
+    ],
+    "http://schema.org/issueNumber": [
+      {
+        "@value": "68"
+      }
+    ],
+    "http://schema.org/name": [
+      {
+        "@value": "Wijkse Courant, 24 augustus 1887 (nr. 68, jrg. 18)"
+      }
+    ],
+    "http://schema.org/numberOfPages": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4
+      }
+    ]
+  },
+  {
+    "@id": "_:N6d2bdbad02e340d08e1694603a5f5233",
+    "@type": [
+      "http://schema.org/PublicationVolume"
+    ],
+    "http://schema.org/isPartOf": [
+      {
+        "@id": "https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084"
+      }
+    ],
+    "http://schema.org/volumeNumber": [
+      {
+        "@value": "18"
+      }
+    ]
+  },
+  {
+    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  }
+]
