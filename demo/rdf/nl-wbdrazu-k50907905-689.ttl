@@ -1,0 +1,224 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://schema.org/> .
+@prefix ns2: <https://data.razu.nl/def/ldto/> .
+@prefix ns3: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix ns4: <http://iiif.io/api/presentation/3#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116204> a ns2:Bestand ;
+    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116204.jpg> ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116204.meta.json> ;
+    ns1:height 5982 ;
+    ns1:position 1 ;
+    ns1:width 4291 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116204.jpg> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-04-18T17:21:39.838667"^^xsd:dateTime ;
+            ns2:checksumWaarde "3107156fca6068ed25097b276c142e66" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116204.jpg" ;
+    ns2:omvang 13217220 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116206> a ns2:Bestand ;
+    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116206.jpg> ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116206.meta.json> ;
+    ns1:height 6006 ;
+    ns1:position 2 ;
+    ns1:width 4359 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116206.jpg> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-04-18T15:48:10.603652"^^xsd:dateTime ;
+            ns2:checksumWaarde "c2e6186f850dcd654d20c1821508f4f6" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116206.jpg" ;
+    ns2:omvang 13482803 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116208> a ns2:Bestand ;
+    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116208.jpg> ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.meta.json> ;
+    ns1:height 5979 ;
+    ns1:position 3 ;
+    ns1:width 4284 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.jpg> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-04-18T17:21:39.838667"^^xsd:dateTime ;
+            ns2:checksumWaarde "6fcb991cddaa045aca3d7bd918f97e0d" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116208.jpg" ;
+    ns2:omvang 12972010 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116210> a ns2:Bestand ;
+    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116210.jpg> ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.meta.json> ;
+    ns1:height 6003 ;
+    ns1:position 4 ;
+    ns1:width 4359 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.jpg> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-04-18T15:48:10.603652"^^xsd:dateTime ;
+            ns2:checksumWaarde "1bd0bb0662eaf4f10c6f590498263d90" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116210.jpg" ;
+    ns2:omvang 13493060 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116212> a ns2:Bestand ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.meta.json> ;
+    ns1:height 5982 ;
+    ns1:position 1 ;
+    ns1:width 4291 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.alto.xml> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-05-02T14:31:18"^^xsd:dateTime ;
+            ns2:checksumWaarde "e1252274a5a2022f5cdac781f3f9632c" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116212.alto.xml" ;
+    ns2:omvang 431242 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116213> a ns2:Bestand ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116213.meta.json> ;
+    ns1:height 6006 ;
+    ns1:position 2 ;
+    ns1:width 4359 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116213.alto.xml> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-05-02T14:31:18"^^xsd:dateTime ;
+            ns2:checksumWaarde "cea3eaea33383e1c32ccc957970d320c" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116213.alto.xml" ;
+    ns2:omvang 606638 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116214> a ns2:Bestand ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json> ;
+    ns1:height 5979 ;
+    ns1:position 3 ;
+    ns1:width 4284 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-05-02T14:31:18"^^xsd:dateTime ;
+            ns2:checksumWaarde "dc9a190f98be10ceaab96409444fbdf8" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116214.alto.xml" ;
+    ns2:omvang 576302 .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116215> a ns2:Bestand ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116215.meta.json> ;
+    ns1:height 6003 ;
+    ns1:position 4 ;
+    ns1:width 4359 ;
+    ns2:URLBestand <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116215.alto.xml> ;
+    ns2:bestandsformaat <https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e> ;
+    ns2:checksum [ a ns2:ChecksumGegevens ;
+            ns2:checksumAlgoritme <https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378> ;
+            ns2:checksumDatum "2025-05-02T14:31:18"^^xsd:dateTime ;
+            ns2:checksumWaarde "107860603a8ceb90a30c6af3182d770d" ] ;
+    ns2:isRepresentatieVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> ;
+    ns2:naam "nl-wbdrazu-k50907905-689-116215.alto.xml" ;
+    ns2:omvang 302995 .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-1.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-34.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116204.jpg> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0270.jpg" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116204.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116206.jpg> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0271.jpg" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116206.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.jpg> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0272.jpg" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.jpg> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0273.jpg" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.alto.xml> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0270.alto.xml" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116213.alto.xml> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0271.alto.xml" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116213.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0272.alto.xml" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json> a ns3:File .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116215.alto.xml> a ns3:File ;
+    ns3:originalName "Wijksche-Courant/1887/Wijksche-Courant_1887_0273.alto.xml" .
+
+<http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116215.meta.json> a ns3:File .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-1> a ns2:Informatieobject ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-1.meta.json> ;
+    ns2:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705> ;
+    ns2:classificatie <https://data.razu.nl/id/soort/89cfa9e6349cc6bdf87135c96cd37e14> ;
+    ns2:dekkingInTijd [ a ns2:DekkingInTijdGegevens ;
+            ns2:dekkingInTijdBeginDatum "1855"^^xsd:gYear ;
+            ns2:dekkingInTijdEindDatum "2013"^^xsd:gYear ;
+            ns2:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038> ] ;
+    ns2:naam "Collectie kranten RAZU" .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-34> a ns2:Informatieobject ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-34.meta.json> ;
+    ns1:mainEntity <https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084> ;
+    ns2:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/cd4b9482eadd1fea35dbf01c9a05b093> ;
+    ns2:classificatie <https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8> ;
+    ns2:dekkingInRuimte <https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153> ;
+    ns2:dekkingInTijd [ a ns2:DekkingInTijdGegevens ;
+            ns2:dekkingInTijdBeginDatum "1870-01-06"^^xsd:date ;
+            ns2:dekkingInTijdEindDatum "2008-12-30"^^xsd:date ;
+            ns2:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038> ] ;
+    ns2:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-1> ;
+    ns2:naam "Wijks(ch)e Courant" .
+
+<https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501> a ns2:Informatieobject ;
+    dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json> ;
+    ns1:mainEntity [ a ns1:PublicationIssue ;
+            ns1:datePublished "1887-08-24"^^xsd:date ;
+            ns1:isPartOf [ a ns1:PublicationVolume ;
+                    ns1:isPartOf <https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084> ;
+                    ns1:volumeNumber "18" ],
+                <https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084> ;
+            ns1:issueNumber "68" ;
+            ns1:name "Wijkse Courant, 24 augustus 1887 (nr. 68, jrg. 18)" ;
+            ns1:numberOfPages 4 ] ;
+    ns2:aggregatieniveau <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ;
+    ns2:beperkingGebruik [ a ns2:BeperkingGebruikGegevens ;
+            ns2:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> ],
+        [ a ns2:BeperkingGebruikGegevens ;
+            ns1:copyrightHolder <https://data.razu.nl/id/actor/ee065aecf4e6ecad10e8cd8bd9954a6f> ;
+            ns2:beperkingGebruikType <https://data.razu.nl/id/beperkinggebruiktype/0ee107032f9027f2d9c6ba381b881f29> ] ;
+    ns2:classificatie <https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260> ;
+    ns2:dekkingInTijd [ a ns2:DekkingInTijdGegevens ;
+            ns2:dekkingInTijdEindDatum "1887-08-24"^^xsd:date ;
+            ns2:dekkingInTijdType <https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038> ] ;
+    ns2:isOnderdeelVan <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-34> ;
+    ns2:naam "Wijkse Courant, 24 augustus 1887 (nr. 68, jrg. 18)" .
+

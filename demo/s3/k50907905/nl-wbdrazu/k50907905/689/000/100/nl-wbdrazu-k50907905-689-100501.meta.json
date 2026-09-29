@@ -6,7 +6,7 @@
     ],
     "http://purl.org/dc/terms/hasFormat": [
       {
-        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json"
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json"
       }
     ],
     "http://schema.org/mainEntity": [
@@ -145,7 +145,7 @@
     ]
   },
   {
-    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json",
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/100/nl-wbdrazu-k50907905-689-100501.meta.json",
     "@type": [
       "http://www.loc.gov/premis/rdf/v3/File"
     ]

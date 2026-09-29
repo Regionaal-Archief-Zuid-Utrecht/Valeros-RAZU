@@ -1,6 +1,6 @@
 [
   {
-    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json",
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json",
     "@type": [
       "http://www.loc.gov/premis/rdf/v3/File"
     ]
@@ -12,7 +12,7 @@
     ],
     "http://purl.org/dc/terms/hasFormat": [
       {
-        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json"
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.meta.json"
       }
     ],
     "http://schema.org/height": [
@@ -35,7 +35,7 @@
     ],
     "https://data.razu.nl/def/ldto/URLBestand": [
       {
-        "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml"
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml"
       }
     ],
     "https://data.razu.nl/def/ldto/bestandsformaat": [
@@ -88,7 +88,7 @@
     ]
   },
   {
-    "@id": "https://k50907905.opslag.razu.nl/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml",
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116214.alto.xml",
     "@type": [
       "http://www.loc.gov/premis/rdf/v3/File"
     ],
