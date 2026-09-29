@@ -1,4 +1,21 @@
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ports:
+      - "127.0.0.1:9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f --silent http://localhost:9200/_cluster/health?wait_for_status=yellow || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 40s
+
   silo:
     image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
     command: server /data --console-address ":9001"
@@ -53,5 +70,24 @@ services:
       retries: 12
       start_period: 30s
 
+  es-indexer:
+    build:
+      context: .
+      dockerfile: docker/es-indexer/Dockerfile
+    environment:
+      SPARQL_ENDPOINT: http://qlever:7001
+      ES_HOST: http://elasticsearch:9200
+      ES_INDEX: demo-kranten-m1
+      SEED_DIR: /seed
+    volumes:
+      - ./demo/s3/k50907905:/seed:ro
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      qlever:
+        condition: service_healthy
+    restart: "no"
+
 volumes:
   silo-data:
+  es-data:

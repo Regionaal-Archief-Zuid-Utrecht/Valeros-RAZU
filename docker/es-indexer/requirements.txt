@@ -1,0 +1,2 @@
+elasticsearch==8.15.1
+requests==2.32.3
