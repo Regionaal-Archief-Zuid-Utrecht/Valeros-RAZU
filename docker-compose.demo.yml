@@ -5,6 +5,10 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - http.cors.enabled=true
+      - "http.cors.allow-origin=\"*\""
+      - http.cors.allow-methods=OPTIONS,HEAD,GET,POST
+      - http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization
     ports:
       - "127.0.0.1:9200:9200"
     volumes:
@@ -49,6 +53,18 @@ services:
       SILO_ROOT_PASSWORD: ${SILO_ROOT_PASSWORD:-silo-demo-password}
     volumes:
       - ./demo/s3/k50907905:/seed:ro
+    depends_on:
+      silo:
+        condition: service_healthy
+
+  cantaloupe:
+    build:
+      context: docker/cantaloupe
+    ports:
+      - "127.0.0.1:8182:8182"
+    volumes:
+      - ./docker/cantaloupe/cantaloupe.properties:/etc/cantaloupe/cantaloupe.properties:ro
+      - ./docker/cantaloupe/delegates.rb:/etc/cantaloupe/delegates.rb:ro
     depends_on:
       silo:
         condition: service_healthy

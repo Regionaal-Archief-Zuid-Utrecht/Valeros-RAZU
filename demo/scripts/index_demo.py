@@ -94,16 +94,21 @@ def build_page_document(result: dict, parent_info: dict) -> dict:
         "isOnderdeelVan": value(result, "io"),
         "position": position,
         "URL_bestand": url,
-        "image": url if url.endswith(".jpg") else "",
+        "image": url,
         "full_text": "",
     }
 
-    if url.endswith(".alto.xml"):
-        doc["full_text"] = extract_alto_text(url)
-        # Try to find a matching JPG for the same base filename.
-        jpg_url = url.replace(".alto.xml", ".jpg")
-        if (SEED_DIR / urlparse(jpg_url).path.lstrip("/").replace("k50907905/", "", 1)).exists():
-            doc["image"] = jpg_url
+    date_published = parent_info.get("date_published", "")
+    if date_published:
+        iso_date = date_published[:10]
+        parts = iso_date.split("-")
+        if len(parts) == 3:
+            doc["document_year"], doc["document_month"] = parts[0], parts[1]
+            doc["document_day"] = iso_date
+
+    alto_url = value(result, "altoUrl")
+    if alto_url:
+        doc["full_text"] = extract_alto_text(alto_url)
 
     return doc
 
@@ -111,25 +116,44 @@ def build_page_document(result: dict, parent_info: dict) -> dict:
 def index_pages(es: Elasticsearch) -> int:
     parent_query = """
     PREFIX ldto: <https://data.razu.nl/def/ldto/>
-    SELECT ?io ?serie
+    PREFIX schema: <http://schema.org/>
+    SELECT ?io ?serie ?datePublished
     WHERE {
       ?io a ldto:Informatieobject .
       ?io ldto:naam ?serie .
+      OPTIONAL {
+        ?io schema:mainEntity ?mainEntity .
+        ?mainEntity schema:datePublished ?datePublished .
+      }
     }
     """
     parent_rows = sparql_query(parent_query)
-    parent_info = {value(row, "io"): {"serie": value(row, "serie")} for row in parent_rows}
+    parent_info = {
+        value(row, "io"): {
+            "serie": value(row, "serie"),
+            "date_published": value(row, "datePublished"),
+        }
+        for row in parent_rows
+    }
 
     page_query = """
     PREFIX ldto: <https://data.razu.nl/def/ldto/>
     PREFIX schema: <http://schema.org/>
-    SELECT ?file ?io ?name ?url ?position
+    SELECT ?file ?io ?name ?url ?position ?altoUrl
     WHERE {
       ?file a ldto:Bestand .
       ?file ldto:naam ?name .
       ?file ldto:URLBestand ?url .
       ?file ldto:isRepresentatieVan ?io .
       OPTIONAL { ?file schema:position ?position . }
+      FILTER(STRENDS(STR(?url), ".jpg"))
+      OPTIONAL {
+        ?alto a ldto:Bestand .
+        ?alto ldto:URLBestand ?altoUrl .
+        ?alto ldto:isRepresentatieVan ?io .
+        ?alto schema:position ?position .
+        FILTER(STRENDS(STR(?altoUrl), ".alto.xml"))
+      }
     }
     ORDER BY ?file
     """

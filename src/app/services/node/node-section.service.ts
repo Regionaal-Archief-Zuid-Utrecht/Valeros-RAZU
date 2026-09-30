@@ -17,7 +17,7 @@ export class NodeSectionService {
     private settings: SettingsService,
     private details: DetailsService,
     private nodes: NodeService,
-  ) {}
+  ) { }
 
   shouldShowSectionNextToTable(
     files: string[],
@@ -40,11 +40,7 @@ export class NodeSectionService {
     files: string[],
     canShowUsingFileRenderer: boolean,
   ): Promise<boolean> {
-    if (
-      !node ||
-      this.shouldShowFileNextToTable(files, canShowUsingFileRenderer) ||
-      !this.details.isShowing()
-    ) {
+    if (!node || !this.details.isShowing()) {
       return false;
     }
 
