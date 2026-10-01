@@ -41,6 +41,8 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
 
   `docker compose -f docker-compose.local.yml -f docker-compose.demo.yml up --build`
 
+  The frontend is then available at `http://localhost:8081`. Searching for `Amsterdam`, `Friesland` or `postkantoor` returns hits, including OCR snippets.
+
 For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).
 
 ## Why use Valeros?
