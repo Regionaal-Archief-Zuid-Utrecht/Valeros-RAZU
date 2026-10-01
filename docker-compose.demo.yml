@@ -57,11 +57,19 @@ services:
       silo:
         condition: service_healthy
 
-  # Demo-only overrides for the sura service defined in docker-compose.local.yml:
-  # mount elastic.env so SURA's Elastic forwarding is configured for the demo index.
+  # Overrides/extends the sura service from docker-compose.local.yml.
+  # Mount the committed *.env.example files onto the .env targets: the real .env
+  # files are gitignored, so these mounts keep working on a fresh clone (Compose
+  # merges volumes by target path, so these replace the mounts from the local file).
   sura:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
+    ports:
+      - "0.0.0.0:8001:8000"
     volumes:
-      - ./docker/sura/elastic.env:/app/elastic.env
+      - ./docker/sura/general.env.example:/app/general.env:ro
+      - ./docker/sura/jwt.env.example:/app/jwt.env:ro
+      - ./docker/sura/elastic.env.example:/app/elastic.env:ro
 
   cantaloupe:
     build:

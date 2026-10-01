@@ -37,9 +37,9 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
   - **Cantaloupe** serves the newspaper scans over IIIF at `http://localhost:8182/iiif/2`, reading images directly from SILO.
   - **Snippetserver** exposes `http://localhost:8002/snippet` for OCR snippets and only allows fetching from `localhost` (SILO). The `silo-loopback` sidecar shares its network namespace so that `localhost:9000` resolves to SILO inside the container.
 
-  To also run the Angular frontend against the demo services, combine with the local stack — put the demo file **last** so its environment variables (e.g. `ALLOWED_HOSTS`) win:
+  To also run the Angular frontend against the demo services, combine with the local stack:
 
-  `docker compose -f docker-compose.local.yml -f docker-compose.demo.yml up --build`
+  `docker compose -f docker-compose.demo.yml -f docker-compose.local.yml up --build`
 
   The frontend is then available at `http://localhost:8081`. Searching for `Amsterdam`, `Friesland` or `postkantoor` returns hits, including OCR snippets.
 
