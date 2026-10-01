@@ -33,7 +33,7 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
   - **QLever** (triplestore) rebuilds its index on every start from the RDF files (`.ttl`, `.nt`, `.nq`) in `demo/rdf` and exposes SPARQL at `http://localhost:7001`.
   - **SILO** (S3-compatible storage) mirrors the seed files in `demo/s3/k50907905` into the public `k50907905` bucket, exposes S3 at `http://localhost:9000`, and provides its console at `http://localhost:9001`. The default demo login is `silo-admin` / `silo-demo-password`; override it with `SILO_ROOT_USER` and `SILO_ROOT_PASSWORD`.
   - **Elasticsearch** runs at `http://localhost:9200` (security disabled, demo only).
-  - **es-indexer** is a one-shot job that creates the `wijkse-courant_m6` index using the production mapping (`demo/scripts/mapping_kranten.json`) and indexes the demo data via the production indexing script (`demo/scripts/index_kranten.py`), including OCR `full_text` extracted from the ALTO-XML files.
+  - **es-indexer** is a one-shot job that creates the `demo-kranten_m6` index using the production mapping (`demo/scripts/mapping_kranten.json`) and indexes the demo data via the production indexing script (`demo/scripts/index_kranten.py`), including OCR `full_text` extracted from the ALTO-XML files.
   - **Cantaloupe** serves the newspaper scans over IIIF at `http://localhost:8182/iiif/2`, reading images directly from SILO.
 
 For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).

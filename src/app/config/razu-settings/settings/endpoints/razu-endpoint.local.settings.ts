@@ -9,7 +9,7 @@ export const razuEndpointSettings: EndpointSettings = {
       label: 'Regionaal Archief Zuid-Utrecht',
       endpointUrls: [
         {
-          elastic: 'http://localhost:9200/demo-kranten-m1/_search',
+          elastic: 'http://localhost:9200/demo-kranten_m6/_search',
           sparql: 'http://localhost:7001',
         },
       ],

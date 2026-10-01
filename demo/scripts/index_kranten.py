@@ -119,7 +119,7 @@ mapping_release = "6"
 # index_name = "de-burensche-courant"
 # title_id = 37
 
-index_name = "wijkse-courant"
+index_name = "demo-kranten"
 title_id = 34
 
 limit = ""
