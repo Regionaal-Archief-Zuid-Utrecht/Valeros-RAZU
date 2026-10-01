@@ -367,6 +367,52 @@ OPTIONAL { ?beperkingGebruikType <http://www.w3.org/2004/02/skos/core#prefLabel>
     return results;
   }
 
+  // Fetches all beperkingGebruik data in a single query. Unlike getObjIds hops,
+  // this also works when intermediate nodes are blank nodes (e.g. QLever),
+  // since the blank node never needs to be referenced in a separate query.
+  async getBeperkingGebruikRows(id: string): Promise<
+    {
+      beperking: string;
+      type?: string;
+      notice?: string;
+      note?: string;
+      termijn?: string;
+      einddatum?: string;
+    }[]
+  > {
+    const queryTemplate = `
+<${id}> ldto:beperkingGebruik ?beperking .
+OPTIONAL { ?beperking ldto:beperkingGebruikType ?type . }
+OPTIONAL { ?beperking ldto:beperkingGebruikType/schema:copyrightNotice ?notice . }
+OPTIONAL { ?beperking ldto:beperkingGebruikType/skos:note ?note . }
+OPTIONAL { ?beperking ldto:beperkingGebruikTermijn ?termijn .
+  OPTIONAL { ?termijn ldto:termijnEinddatum ?einddatum . } }`;
+
+    const query = `
+    PREFIX ldto: <https://data.razu.nl/def/ldto/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    SELECT DISTINCT ?beperking ?type ?notice ?note ?termijn ?einddatum WHERE {
+        ${this.getFederatedQuery(queryTemplate)}
+    }`;
+
+    try {
+      return await this.api.postSparql<
+        {
+          beperking: string;
+          type?: string;
+          notice?: string;
+          note?: string;
+          termijn?: string;
+          einddatum?: string;
+        }[]
+      >(this.endpoints.getFirstUrls().sparql, query);
+    } catch (error) {
+      console.warn('Failed to fetch beperkingGebruik data:', error);
+      return [];
+    }
+  }
+
   async shouldShowIIIF(id: string): Promise<boolean> {
     // console.log('Checking should show IIIF for', id);
 

@@ -69,6 +69,19 @@ services:
       silo:
         condition: service_healthy
 
+  snippetserver:
+    restart: unless-stopped
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
+    ports:
+      - "127.0.0.1:8002:8000"
+    environment:
+      CORS_ALLOWED_ORIGINS: http://localhost:8081,http://localhost:4200
+      ALLOWED_HOSTS: localhost:9000
+    depends_on:
+      silo:
+        condition: service_healthy
+
   qlever:
     image: adfreiburg/qlever:commit-55c05d4
     entrypoint: /opt/valeros/start-qlever.sh

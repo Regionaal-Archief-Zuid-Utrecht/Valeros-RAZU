@@ -28,8 +28,7 @@ registerLocaleData(localeNl);
 })
 export class RazuAfleveringComponent
   extends TypeRenderComponent
-  implements OnInit
-{
+  implements OnInit {
   nodeService = inject(NodeService);
   urlService = inject(UrlService);
   iiifService = inject(IIIFService);
@@ -88,13 +87,6 @@ export class RazuAfleveringComponent
     showOriginalLink: false,
   };
 
-  // Hop settings for beperkingGebruik
-  beperkingGebruikSettings: HopLinkSettings = {
-    preds: ['https://data.razu.nl/def/ldto/beperkingGebruik'],
-    showHops: false,
-    showOriginalLink: false,
-  };
-
   // Hop settings for related properties
   naamSettings: HopLinkSettings = {
     preds: ['https://data.razu.nl/def/ldto/naam'],
@@ -134,24 +126,6 @@ export class RazuAfleveringComponent
 
   prefLabelSettings: HopLinkSettings = {
     preds: ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-    showHops: false,
-    showOriginalLink: false,
-  };
-
-  copyrightNoticeSettings: HopLinkSettings = {
-    preds: [
-      'https://data.razu.nl/def/ldto/beperkingGebruikType',
-      'http://schema.org/copyrightNotice',
-    ],
-    showHops: false,
-    showOriginalLink: false,
-  };
-
-  noteSettings: HopLinkSettings = {
-    preds: [
-      'https://data.razu.nl/def/ldto/beperkingGebruikType',
-      'http://www.w3.org/2004/02/skos/core#note',
-    ],
     showHops: false,
     showOriginalLink: false,
   };
@@ -225,81 +199,44 @@ export class RazuAfleveringComponent
 
       allPromises.push(onderdeelVanPromise);
 
-      // Fetch beperkingGebruikIds and related data
+      // Fetch beperkingGebruik data in a single query. The intermediate
+      // beperkingGebruik nodes may be blank nodes (e.g. in QLever), which
+      // cannot be referenced in follow-up hop queries.
       const beperkingGebruikPromise = this.sparqlService
-        .getObjIds(
-          this.data.node['@id'][0].value,
-          this.beperkingGebruikSettings.preds,
-        )
-        .then((ids) => {
-          this.beperkingGebruikIds = ids;
-          // console.log('Found beperkingGebruikIds:', ids);
+        .getBeperkingGebruikRows(this.data.node['@id'][0].value)
+        .then((rows) => {
+          this.beperkingGebruikIds = [...new Set(rows.map((r) => r.beperking))];
 
-          // Create an array of promises for all data fetching
-          const promises: Promise<void>[] = [];
-
-          // Fetch data for each beperkingGebruikId
-          ids.forEach((id) => {
-            // get copyrightNotice
-            const copyrightNoticePromise = this.sparqlService
-              .getObjIds(id, this.copyrightNoticeSettings.preds)
-              .then((copyrightNoticeIds) => {
-                if (copyrightNoticeIds.length > 0) {
-                  // console.log(
-                  //   `Found copyright notices for ${id}:`,
-                  //   copyrightNoticeIds,
-                  // );
-                  this.copyrightNoticeMap.set(id, copyrightNoticeIds);
-                }
-              });
-            promises.push(copyrightNoticePromise);
-
-            const copyrightNotePromise = this.sparqlService
-              .getObjIds(id, this.noteSettings.preds)
-              .then((noteIds) => {
-                if (noteIds.length > 0) {
-                  console.log(`Found notes for ${id}:`, noteIds);
-                  this.copyrightNoteMap.set(id, noteIds);
-                }
-              });
-            promises.push(copyrightNotePromise);
-
-            const beperkingGebruikTypePromise = this.sparqlService
-              .getObjIds(id, [
-                'https://data.razu.nl/def/ldto/beperkingGebruikType',
-              ])
-              .then((typeIds) => {
-                if (typeIds.length > 0) {
-                  // console.log(`Found types for ${id}:`, typeIds);
-                  this.beperkingGebruikTypeMap.set(id, typeIds);
-                }
-              });
-            promises.push(beperkingGebruikTypePromise);
-
-            const beperkingGebruikTermijnPromise = this.sparqlService
-              .getObjIds(id, [
-                'https://data.razu.nl/def/ldto/beperkingGebruikTermijn',
-              ])
-              .then((termijnIds) => {
-                if (termijnIds.length > 0) {
-                  this.beperkingGebruikTermijnMap.set(id, termijnIds);
-                  termijnIds.forEach((termijnId) => {
-                    const termijnEinddatumPromise = this.sparqlService
-                      .getObjIds(termijnId, [
-                        'https://data.razu.nl/def/ldto/termijnEinddatum',
-                      ])
-                      .then((dateIds) => {
-                        if (dateIds.length > 0) {
-                          this.termijnEinddatumMap.set(termijnId, dateIds[0]);
-                        }
-                      });
-                  });
-                }
-              });
-            promises.push(beperkingGebruikTermijnPromise);
-          });
-
-          return Promise.all(promises);
+          for (const row of rows) {
+            const id = row.beperking;
+            if (row.type) {
+              this.beperkingGebruikTypeMap.set(id, [
+                ...(this.beperkingGebruikTypeMap.get(id) ?? []),
+                row.type,
+              ]);
+            }
+            if (row.notice) {
+              this.copyrightNoticeMap.set(id, [
+                ...(this.copyrightNoticeMap.get(id) ?? []),
+                row.notice,
+              ]);
+            }
+            if (row.note) {
+              this.copyrightNoteMap.set(id, [
+                ...(this.copyrightNoteMap.get(id) ?? []),
+                row.note,
+              ]);
+            }
+            if (row.termijn) {
+              this.beperkingGebruikTermijnMap.set(id, [
+                ...(this.beperkingGebruikTermijnMap.get(id) ?? []),
+                row.termijn,
+              ]);
+              if (row.einddatum) {
+                this.termijnEinddatumMap.set(row.termijn, row.einddatum);
+              }
+            }
+          }
         });
 
       allPromises.push(beperkingGebruikPromise);
