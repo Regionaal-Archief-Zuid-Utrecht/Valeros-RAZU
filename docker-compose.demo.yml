@@ -57,6 +57,12 @@ services:
       silo:
         condition: service_healthy
 
+  # Demo-only overrides for the sura service defined in docker-compose.local.yml:
+  # mount elastic.env so SURA's Elastic forwarding is configured for the demo index.
+  sura:
+    volumes:
+      - ./docker/sura/elastic.env:/app/elastic.env
+
   cantaloupe:
     build:
       context: docker/cantaloupe
