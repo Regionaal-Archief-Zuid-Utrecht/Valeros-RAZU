@@ -148,15 +148,15 @@ export class DateRangeFilterService extends CustomFilterService<DateRangeQueryPa
       return [];
     }
 
+    const hasFromDate = !!(this.fromDate && this.fromDate.trim().length > 0);
+    const hasToDate = !!(this.toDate && this.toDate.trim().length > 0);
+    if (!hasFromDate && !hasToDate) {
+      return [];
+    }
+
     const queries: ElasticShouldQueries[] = [];
-    let from = '*';
-    if (this.fromDate && this.fromDate.trim().length > 0) {
-      from = this.fromDate;
-    }
-    let to = '*';
-    if (this.toDate && this.toDate.trim().length > 0) {
-      to = this.toDate;
-    }
+    const from = hasFromDate ? this.fromDate! : '*';
+    const to = hasToDate ? this.toDate! : '*';
     const fieldWithDots = this.fieldId as string;
     const fieldWithSpaces = this.data.replacePeriodsWithSpaces(fieldWithDots);
     const fieldWithEscapedSpaces = fieldWithSpaces.replace(/ /g, '\\ ');

@@ -6,7 +6,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116204> a ns2:Bestand ;
-    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116204.jpg> ;
+    ns4:service <http://localhost:8182/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116204.jpg> ;
     dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116204.meta.json> ;
     ns1:height 5982 ;
     ns1:position 1 ;
@@ -22,7 +22,7 @@
     ns2:omvang 13217220 .
 
 <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116206> a ns2:Bestand ;
-    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116206.jpg> ;
+    ns4:service <http://localhost:8182/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116206.jpg> ;
     dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116206.meta.json> ;
     ns1:height 6006 ;
     ns1:position 2 ;
@@ -38,7 +38,7 @@
     ns2:omvang 13482803 .
 
 <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116208> a ns2:Bestand ;
-    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116208.jpg> ;
+    ns4:service <http://localhost:8182/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116208.jpg> ;
     dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116208.meta.json> ;
     ns1:height 5979 ;
     ns1:position 3 ;
@@ -54,7 +54,7 @@
     ns2:omvang 12972010 .
 
 <https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116210> a ns2:Bestand ;
-    ns4:service <https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116210.jpg> ;
+    ns4:service <http://localhost:8182/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116210.jpg> ;
     dcterms:hasFormat <http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.meta.json> ;
     ns1:height 6003 ;
     ns1:position 4 ;
