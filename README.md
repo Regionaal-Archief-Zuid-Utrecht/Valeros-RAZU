@@ -35,7 +35,11 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
   - **Elasticsearch** runs at `http://localhost:9200` (security disabled, demo only).
   - **es-indexer** is a one-shot job that creates the `demo-kranten_m6` index using the production mapping (`demo/scripts/mapping_kranten.json`) and indexes the demo data via the production indexing script (`demo/scripts/index_kranten.py`), including OCR `full_text` extracted from the ALTO-XML files.
   - **Cantaloupe** serves the newspaper scans over IIIF at `http://localhost:8182/iiif/2`, reading images directly from SILO.
-  - **Snippetserver** exposes `http://localhost:8002/snippet` for OCR snippets and only allows fetching from `localhost:9000` (SILO).
+  - **Snippetserver** exposes `http://localhost:8002/snippet` for OCR snippets and only allows fetching from `localhost` (SILO).
+
+  To also run the Angular frontend against the demo services, combine with the local stack — put the demo file **last** so its environment variables (e.g. `ALLOWED_HOSTS`) win:
+
+  `docker compose -f docker-compose.local.yml -f docker-compose.demo.yml up --build`
 
 For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).
 
