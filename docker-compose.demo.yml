@@ -92,8 +92,7 @@ services:
       dockerfile: docker/es-indexer/Dockerfile
     environment:
       SPARQL_ENDPOINT: http://qlever:7001
-      ES_HOST: http://elasticsearch:9200
-      ES_INDEX: demo-kranten-m1
+      ES_URL: http://elasticsearch:9200
       SEED_DIR: /seed
     volumes:
       - ./demo/s3/k50907905:/seed:ro

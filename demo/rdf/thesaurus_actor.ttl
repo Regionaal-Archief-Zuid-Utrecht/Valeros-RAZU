@@ -1,0 +1,613 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ldto: <https://data.razu.nl/def/ldto/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e>
+   a skos:ConceptScheme ;
+   skos:prefLabel "Actoren"@nl ;
+   skos:prefLabel "Actors"@en ;
+   skos:description "Waardenlijst actoren"@nl ;
+   dcterms:hasFormat <https://context.data.razu.nl/actor.json> .
+
+<https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a>
+   a schema:Organization, skos:Concept, ldto:Actor  ;
+   skos:prefLabel "Regionaal Archief Zuid-Utrecht"@nl ;
+   skos:altLabel "RAZU"@nl ;
+   skos:notation "k50907905" ;
+   skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+   skos:exactMatch <http://www.wikidata.org/entity/Q121221853> ;
+   schema:url <https://www.razu.nl/> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/feae08aa6f9214231815e9ed7b3816d9>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Bestuur Regionaal Archief Zuid-Utrecht"@nl ;
+   skos:altLabel "Bestuur RAZU"@nl ;
+   skos:broader <https://data.razu.nl/id/actor/2bdb658a032a405d71c19159bd2bbb3a> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+# Huidige gemeente Bunnik
+<https://data.razu.nl/id/actor/5c5e44886a1cd6f67f5ae63b270a0b24>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Bunnik"@nl ;
+    skos:altLabel "Bunnik"@nl ;
+    skos:notation "g0312" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    schema:url <https://www.bunnik.nl/> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10032> , <https://identifier.overheid.nl/tooi/id/gemeente/gm0312>;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/923800df36ed049eac123375dbbdba81> ,
+        <https://data.razu.nl/id/actor/ccc01d72e94f5e19a6bb5212d1af4a6f> ,
+        <https://data.razu.nl/id/actor/adca2b4e2656afcd58480e6002c5aead>  .
+
+<https://data.razu.nl/id/actor/923800df36ed049eac123375dbbdba81>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Odijk"@nl ;
+    skos:altLabel "Odijk"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2124349> ;
+    schema:dissolutionDate "1964-09-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Bunnik in 1964."@nl .
+
+<https://data.razu.nl/id/actor/ccc01d72e94f5e19a6bb5212d1af4a6f>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Werkhoven"@nl ;
+    skos:altLabel "Werkhoven"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2541237> ;
+    schema:dissolutionDate "1964-09-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Bunnik in 1964."@nl .
+
+<https://data.razu.nl/id/actor/adca2b4e2656afcd58480e6002c5aead>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Rhijnauwen"@nl ;
+    skos:altLabel "Rhijnauwen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q68229209> ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Bunnik in 1857."@nl  .
+
+# Huidige gemeente Houten
+<https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Houten"@nl ;
+    skos:altLabel "Houten"@nl ;
+    skos:notation "g0321" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10044> , <https://identifier.overheid.nl/tooi/id/gemeente/gm0321> ;
+    schema:url <https://www.houten.nl/> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/3610e023616588658cac482f9bb90f9a> ,
+        <https://data.razu.nl/id/actor/38bcf3b052b74745deefae54f16fed23> ,
+        <https://data.razu.nl/id/actor/e1e62e8a7d7870fac9555695b7c122f9> ,
+        <https://data.razu.nl/id/actor/4190eb1f88774ec7771e2445a069daab> .
+
+# <https://data.razu.nl/id/actor/0494e72ea76ba309ff3db286f1a69609>
+#     a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+#     skos:prefLabel "Voormalige gemeente Houten"@nl ;
+#     skos:altLabel "Houten"@nl ;
+#     skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+#     schema:foundingDate "1818"^^xsd:gYear ;
+#     schema:dissolutionDate "1962"^^xsd:gYear ;
+#     rdfs:comment "Opgegaan in de gemeente Houten in 1962."@nl .
+
+<https://data.razu.nl/id/actor/3610e023616588658cac482f9bb90f9a>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Schalkwijk"@nl ;
+    skos:altLabel "Schalkwijk"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2724869> ;
+    schema:dissolutionDate "1962-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Houten in 1962."@nl  .
+
+<https://data.razu.nl/id/actor/38bcf3b052b74745deefae54f16fed23>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Tull en 't Waal"@nl ;
+    skos:altLabel "Tull en 't Waal"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2139917> ;
+    schema:dissolutionDate "1962-01-01"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Houten in 1962."@nl  .
+
+<https://data.razu.nl/id/actor/e1e62e8a7d7870fac9555695b7c122f9>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Oud-Wulven"@nl ;
+    skos:altLabel "Oud-Wulven"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2296683> ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Houten in 1857."@nl .
+
+<https://data.razu.nl/id/actor/4190eb1f88774ec7771e2445a069daab>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Schonauwen"@nl ;
+    skos:altLabel "Schonauwen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q68229198> ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Houten in 1857."@nl  .
+
+# Gemeente Rhenen
+<https://data.razu.nl/id/actor/124f62d77ae9d7beadab9dc57bced177>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Rhenen"@nl ;
+    skos:altLabel "Rhenen"@nl ;
+    skos:notation "g0340" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    schema:url <https://www.rhenen.nl/> ;
+    rdfs:comment "In 2006 is het Amerongse deel van Elst bij Rhenen gevoegd."@nl ; 
+    skos:exactMatch <http://www.wikidata.org/entity/Q10040>, <https://identifier.overheid.nl/tooi/id/gemeente/gm0340> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+# Huidige gemeente Utrechtse Heuvelrug
+<https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Utrechtse Heuvelrug"@nl ;
+    skos:altLabel "Utrechtse Heuvelrug"@nl ;
+    skos:notation "g1581" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    schema:url <https://www.heuvelrug.nl/> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10043>, <https://identifier.overheid.nl/tooi/id/gemeente/gm1581> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:foundingDate "2006-01-01"^^xsd:date ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/6cf0b8982bb387834d293b9993546570> ,
+        <https://data.razu.nl/id/actor/106d8307438635ebf14128a97c4f4850> ,
+        <https://data.razu.nl/id/actor/fb7488b12dfc5def5d192628e6a87f83> ,
+        <https://data.razu.nl/id/actor/3bbbed9ccf26c203bfa86299bcf1588c> ,
+        <https://data.razu.nl/id/actor/faa2b2d1e4b7247e2450d5608b193ffb> .
+
+<https://data.razu.nl/id/actor/6cf0b8982bb387834d293b9993546570>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Amerongen"@nl ;
+    skos:altLabel "Amerongen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1615400> ;
+    schema:dissolutionDate "2006-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Utrechtse Heuvelrug in 2006."@nl .
+
+<https://data.razu.nl/id/actor/106d8307438635ebf14128a97c4f4850>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Doorn"@nl ;
+    skos:altLabel "Doorn"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1615161> ;
+    schema:dissolutionDate "2006-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Utrechtse Heuvelrug in 2006."@nl  .
+
+<https://data.razu.nl/id/actor/fb7488b12dfc5def5d192628e6a87f83>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Driebergen-Rijsenburg"@nl ;
+    skos:altLabel "Driebergen-Rijsenburg"@nl ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1258901> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:foundingDate "1931-05-01"^^xsd:date ;
+    schema:dissolutionDate "2006-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Utrechtse Heuvelrug in 2006."@nl ;
+    prov:wasDerivedFrom 
+        <https://data.razu.nl/id/actor/7158d19ac18df68d08fb536cdfdd5bd3>,
+        <https://data.razu.nl/id/actor/b176ca0c66827cfdbcab666d620340b1>  .
+
+<https://data.razu.nl/id/actor/7158d19ac18df68d08fb536cdfdd5bd3>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Driebergen"@nl ;
+    skos:altLabel "Driebergen"@nl ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1899314> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1931-05-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Driebergen-Rijsenburg in 1931."@nl ;
+    prov:wasDerivedFrom 
+        <https://data.razu.nl/id/actor/a423ad03a5ec31619c557baad1671b61>,
+        <https://data.razu.nl/id/actor/28902f59ecfc715ec7a2057ee994678c> .
+
+<https://data.razu.nl/id/actor/b176ca0c66827cfdbcab666d620340b1>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Rijsenburg"@nl ;
+    skos:altLabel "Rijsenburg"@nl ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2431575> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1931-05-01"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Dreibergen-Rijsenburg in 1931."@nl  .
+
+<https://data.razu.nl/id/actor/3bbbed9ccf26c203bfa86299bcf1588c>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Leersum"@nl ;
+    skos:altLabel "Leersum"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q26721203> ;
+    schema:dissolutionDate "2006-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Utrechtse Heuvelrug in 2006."@nl ;
+    prov:wasDerivedFrom 
+        <https://data.razu.nl/id/actor/43202885debcfd00c13c5579c1469b48> .
+
+<https://data.razu.nl/id/actor/43202885debcfd00c13c5579c1469b48>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Darthuizen"@nl ;
+    skos:altLabel "Darthuizen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1959857> ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Leersum in 1857."@nl .
+
+# <https://data.razu.nl/id/actor/109e5fc34c69774e8ed1f1b708de802c>
+#     a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+#     skos:prefLabel "Voormalige gemeente Leersum (-1857)"@nl ;
+#     skos:altLabel "Leersum (-1857)"@nl ;
+#     skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+#     schema:dissolutionDate "1857-09-08"^^xsd:date ;
+#     rdfs:comment "Opgegaan in de nieuwe gemeente Leersum in 1857."@nl .
+
+<https://data.razu.nl/id/actor/faa2b2d1e4b7247e2450d5608b193ffb>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Maarn"@nl ;
+    skos:altLabel "Maarn"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1616311> ;
+    schema:dissolutionDate "2006-01-01"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Utrechtse Heuvelrug in 2006."@nl  .
+
+<https://data.razu.nl/id/actor/28902f59ecfc715ec7a2057ee994678c>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalig gerecht Sterkenburg"@nl ;
+    skos:altLabel "Sterkenburg"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2857513> ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Driebergen in 1857."@nl .
+
+<https://data.razu.nl/id/actor/a423ad03a5ec31619c557baad1671b61>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalig gerecht Hardenbroek"@nl ;
+    skos:altLabel "Hardenbroek"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1857-09-08"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Driebergen in 1857."@nl .
+
+
+# Huidige gemeente Vijfheerenlanden
+<https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Vijfheerenlanden"@nl ;
+    skos:altLabel "Vijfheerenlanden"@nl ;
+    skos:notation "g1961" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    schema:url <https://www.vijfheerenlanden.nl/> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q29032345> , <https://identifier.overheid.nl/tooi/id/gemeente/gm1961> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e>;
+    schema:foundingDate "2019-01-01"^^xsd:date ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/2067716d8c2bc3c6fd265f013377a113> ,
+        <https://data.razu.nl/id/actor/99658420a96f7b7d6b05b155f9f3f958> ,
+        <https://data.razu.nl/id/actor/b2a9c754845dd9cf78778a0d43df884a> .
+
+<https://data.razu.nl/id/actor/2067716d8c2bc3c6fd265f013377a113>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Vianen"@nl ;
+    skos:altLabel "Vianen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10052> ;
+    schema:dissolutionDate "2019-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Vijfheerenlanden in 2019."@nl ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/7e2b6b76e2f07becb5bb22a40dc4a972> .
+
+<https://data.razu.nl/id/actor/7e2b6b76e2f07becb5bb22a40dc4a972>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Hagestein"@nl ;
+    skos:altLabel "Hagestein"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q35107350> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    schema:foundingDate "1818-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Vianen in 1986."@nl  .
+
+# <https://data.razu.nl/id/actor/7e2b6b76e2f07becb5bb22a40dc4a972>
+#     a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+#     skos:prefLabel "Voormalige gemeente Vianen (-1986)"@nl ;
+#     skos:altLabel "Vianen (-1986)"@nl ;
+#     skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+#     schema:dissolutionDate "1986-01-01"^^xsd:date ;
+#     schema:foundingDate "1821-01-01"^^xsd:date ;
+#     rdfs:comment "Opgegaan in de nieuwe gemeente Vianen in 1986."@nl.
+
+<https://data.razu.nl/id/actor/99658420a96f7b7d6b05b155f9f3f958>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Leerdam"@nl ;
+    skos:altLabel "Leerdam"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q388575> ;
+    schema:dissolutionDate "2019-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Vijfheerenlanden in 2019."@nl ;
+    prov:wasDerivedFrom 
+        <https://data.razu.nl/id/actor/f96689e3aafaae5b20e2a66cc37acfd8>,
+        <https://data.razu.nl/id/actor/9c786b554aca4449bc2a16439afc6826> .
+
+<https://data.razu.nl/id/actor/f96689e3aafaae5b20e2a66cc37acfd8>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Schoonrewoerd"@nl ;
+    skos:altLabel "Schoonrewoerd"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3113902> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Leerdam in 1986."@nl .
+
+<https://data.razu.nl/id/actor/9c786b554aca4449bc2a16439afc6826>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Kedichem"@nl ;
+    skos:altLabel "Kedichem"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2609314> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Leerdam in 1986."@nl .
+
+# <https://data.razu.nl/id/actor/be14778321447ab633012b31c4b00200>
+#     a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+#     skos:prefLabel "Voormalige gemeente Leerdam (-1986)"@nl ;
+#     skos:altLabel "Leerdam"@nl ;
+#     skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+#     schema:dissolutionDate "1986-01-01"^^xsd:date ;
+#     schema:foundingDate "1812-01-01"^^xsd:date ;
+#     rdfs:comment "Opgegaan in de gemeente Leerdam in 1986."@nl .
+
+<https://data.razu.nl/id/actor/b2a9c754845dd9cf78778a0d43df884a>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Zederik"@nl ;
+    skos:altLabel "Zederik"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "2019-01-01"^^xsd:date ;
+    schema:foundingDate "1986-01-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q184288> ;
+    rdfs:comment "Opgegaan in de gemeente Vijfheerenlanden in 2019."@nl ;
+    prov:wasDerivedFrom 
+        <https://data.razu.nl/id/actor/ecff6a037cf917c8b735d7e3dca04113>,
+        <https://data.razu.nl/id/actor/2e22fe9c8931df8fb8ef6334e037c613>,
+        <https://data.razu.nl/id/actor/11136bba8beb12a38059acbba781ee0b>,
+        <https://data.razu.nl/id/actor/8fe5a801376397f06998fcec9ef9c338>,
+        <https://data.razu.nl/id/actor/86c8fe9bedc69acf3121dc6fbe207514>,
+        <https://data.razu.nl/id/actor/5749788cf7563c8381be8dc00c6ccef7>,
+        <https://data.razu.nl/id/actor/0f7477158d95c6f2cd30d1d962a4f3b3>  .
+
+<https://data.razu.nl/id/actor/ecff6a037cf917c8b735d7e3dca04113>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Ameide"@nl ;
+    skos:altLabel "Ameide"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2842582> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl .    
+
+<https://data.razu.nl/id/actor/2e22fe9c8931df8fb8ef6334e037c613>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Hei- en Boeicop"@nl ;
+    skos:altLabel "Hei- en Boeicop"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    schema:foundingDate "1817-04-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q961578> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl  .    
+
+<https://data.razu.nl/id/actor/11136bba8beb12a38059acbba781ee0b>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Leerbroek"@nl ;
+    skos:altLabel "Leerbroek"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    schema:foundingDate "1817-04-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1001658> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl .    
+
+<https://data.razu.nl/id/actor/8fe5a801376397f06998fcec9ef9c338>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Lexmond"@nl ;
+    skos:altLabel "Lexmond"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q44087750> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl  .    
+
+<https://data.razu.nl/id/actor/86c8fe9bedc69acf3121dc6fbe207514>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Meerkerk"@nl ;
+    skos:altLabel "Meerkerk"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2774284> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl  .    
+
+<https://data.razu.nl/id/actor/5749788cf7563c8381be8dc00c6ccef7>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Nieuwland"@nl ;
+    skos:altLabel "Nieuwland"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    schema:foundingDate "1817-04-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q77400973> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl .    
+
+<https://data.razu.nl/id/actor/0f7477158d95c6f2cd30d1d962a4f3b3>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Tienhoven [ZH]"@nl ;
+    skos:altLabel "Tienhoven [ZH]"@nl ;
+    rdfs:comment "De plaats Tienhoven heet sinds 2019 Tienhoven aan de Lek"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1986-01-01"^^xsd:date ;
+    schema:foundingDate "1817-04-01"^^xsd:date ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q43978338> ;
+    rdfs:comment "Opgegaan in de gemeente Zederik in 1986."@nl  .    
+
+# Huidige gemeente Wijk bij Duurstede
+<https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Gemeente Wijk bij Duurstede"@nl ;
+    skos:altLabel "Wijk bij Duurstede"@nl ;
+    skos:notation "g0352" ;
+    skos:scopeNote "Predicate 'skos:notation' offers the identier used in the naming scheme for files as used by RAZU."@en,
+        "Predicaat 'skos:notation' biedt de identifier die gebruikt wordt in het model dat RAZU toepast bij de naamgeving van bestanden"@nl ;
+    schema:url <https://www.wijkbijduurstede.nl/> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10053> , <https://identifier.overheid.nl/tooi/id/gemeente/gm0352>;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    prov:wasDerivedFrom
+        <https://data.razu.nl/id/actor/02392413101cbc78709d14b34f597e61> ,
+        <https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826> .
+
+# <https://data.razu.nl/id/actor/3e54159d91e927665a3398cf3b2734c5>
+#     a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+#     skos:prefLabel "Voormalige gemeente Wijk bij Duurstede"@nl ;
+#     skos:altLabel "Wijk bij Duurstede"@nl ;
+#     skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+#     schema:dissolutionDate "1996-01-01"^^xsd:date ;
+#     schema:foundingDate "1812-01-01"^^xsd:date ;
+#     rdfs:comment "Opgegaan in de gemeente Wijk bij Duurstede in 1996."@nl  .
+
+<https://data.razu.nl/id/actor/02392413101cbc78709d14b34f597e61>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Cothen"@nl ;
+    skos:altLabel "Cothen"@nl ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2860067> ;
+    schema:dissolutionDate "1996-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Wijk bij Duurstede in 1996."@nl .
+
+<https://data.razu.nl/id/actor/9291cee91d27d3eb899db7ca97fcc826>
+    a schema:Organization, skos:Concept, ldto:Actor, schema:Place ;
+    skos:prefLabel "Voormalige gemeente Langbroek"@nl ;
+    skos:altLabel "Langbroek"@nl ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3030117> ;
+    skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> ;
+    schema:dissolutionDate "1996-01-01"^^xsd:date ;
+    rdfs:comment "Opgegaan in de gemeente Wijk bij Duurstede in 1996."@nl  .
+
+<https://data.razu.nl/id/actor/ccedcee97bc84c621b2a04f2731bf86c>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Delta-Phot Luchtfotografie Middelburg Holland"@nl ;
+   rdfs:seeAlso <https://hdl.handle.net/10648/1118a373-4da4-4db3-aa9f-83fcd9c983ff> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/1bf73a1ffcfe062158a0f341b3615cbe>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Slagboom en Peeters"@nl ;
+   schema:url <https://www.slagboomenpeeters.com/>;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/fdf07d26952c341ed9a70909eb3a4a73>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "B. Ruitenbeek"@nl ;
+   skos:altLabel "Drukkerij B. Ruitenbeek - Doorn"@nl ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/ee065aecf4e6ecad10e8cd8bd9954a6f>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "BDUmedia BV"@nl ;
+   schema:url <https://bdumedia.nl/>;
+   skos:broader <https://data.razu.nl/id/actor/3087aad1bee701908c4f821ebad860c6> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/3087aad1bee701908c4f821ebad860c6>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "BDU"@nl;
+   skos:altLabel "Koninklijke Barneveldse Drukkerij en Uitgeverij"@nl ;
+   schema:url <http://www.bdu.nl/>;
+   skos:exactMatch <http://www.wikidata.org/entity/Q46779166> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/7334e8dd664c53f1ec683c4fef8b9927>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Kontakt Mediapartners"@nl;
+   schema:url <https://kmp.nl/> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/b45727406af009edb49448c7291adce3>
+   a schema:Organization, skos:Concept, ldto:Actor ;
+   skos:prefLabel "DPG Media"@nl;
+   schema:url <https://www.dpgmediagroup.com/> ;
+   skos:exactMatch <http://www.wikidata.org/entity/Q63020424> ;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/e368b7e6159f0608c95bfdcc3bf14f7b>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Kors van Bennekom"@nl;
+   schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "fotograaf"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;
+   skos:exactMatch <http://www.wikidata.org/entity/Q24736595>;
+   schema:url <https://korsvanbennekom.org/>;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/64a133b9164ebcfb66a81795ea4ae606>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Joris van Bennekom"@nl;
+   schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "fotograaf"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;
+   schema:url <https://jorisvanbennekom.nl/>;
+   skos:exactMatch <http://www.wikidata.org/entity/Q29557338>;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/b3cf0d11fb1a4678ec4c353b261262ac>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Marrie Bot"@nl;
+   schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "fotograaf"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;   
+   schema:url <https://marriebot.com/>;
+   skos:exactMatch <http://www.wikidata.org/entity/Q19842201>;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/d287145d55c36b8946c3c5e5b39befbe>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Gert Gesink"@nl;   
+   schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "auteur"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;  
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/54c0ba1fabcf6f09db71ce562392aa1d>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "Klaas Koppe"@nl;
+      schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "fotograaf"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;
+   schema:url <https://www.klaaskoppe.nl/> ;
+   skos:exactMatch <http://www.wikidata.org/entity/Q28767974>;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .
+
+<https://data.razu.nl/id/actor/a4e545cc04ce800f4c5e2968835194d0>
+   a schema:Person, skos:Concept, ldto:Actor ;
+   skos:prefLabel "John Melskens"@nl;
+   schema:hasOccupation [
+      a schema:Occupation ;
+      schema:name "fotograaf"@nl
+   ] ;
+   skos:scopeNote "Toegevoegd in verband met opt-out koepelovereenkomst inzake auteursrechten."@nl;
+   skos:inScheme <https://data.razu.nl/id/actor/bd4867122112bf6248d97334ea20479e> .

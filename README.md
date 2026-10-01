@@ -29,7 +29,12 @@ Valeros can be started in several configurations. The `local` and `nuc` variants
 - **Production** (assumes a frontend-facing nginx):  
   `docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build`
 
-- **Self-contained demo**: Put RDF files (`.ttl`, `.nt`, or `.nq`) in `demo/rdf` and S3 seed files in `demo/s3/k50907905`, then run `docker compose -f docker-compose.demo.yml up`. QLever rebuilds its index on every start and exposes SPARQL at `http://localhost:7001`. SILO mirrors the seed files into the public `k50907905` bucket, exposes S3 at `http://localhost:9000`, and provides its console at `http://localhost:9001`. The default demo login is `silo-admin` / `silo-demo-password`; override it with `SILO_ROOT_USER` and `SILO_ROOT_PASSWORD`.
+- **Self-contained demo**: Run `docker compose -f docker-compose.demo.yml up --build`. This starts a fully standalone environment with its own triplestore, object storage, search index and IIIF image server:
+  - **QLever** (triplestore) rebuilds its index on every start from the RDF files (`.ttl`, `.nt`, `.nq`) in `demo/rdf` and exposes SPARQL at `http://localhost:7001`.
+  - **SILO** (S3-compatible storage) mirrors the seed files in `demo/s3/k50907905` into the public `k50907905` bucket, exposes S3 at `http://localhost:9000`, and provides its console at `http://localhost:9001`. The default demo login is `silo-admin` / `silo-demo-password`; override it with `SILO_ROOT_USER` and `SILO_ROOT_PASSWORD`.
+  - **Elasticsearch** runs at `http://localhost:9200` (security disabled, demo only).
+  - **es-indexer** is a one-shot job that creates the `wijkse-courant_m6` index using the production mapping (`demo/scripts/mapping_kranten.json`) and indexes the demo data via the production indexing script (`demo/scripts/index_kranten.py`), including OCR `full_text` extracted from the ALTO-XML files.
+  - **Cantaloupe** serves the newspaper scans over IIIF at `http://localhost:8182/iiif/2`, reading images directly from SILO.
 
 For an example server-side nginx configuration that proxies the frontend and the supporting services (`/sura`, `/snippet`, `/gotenberg/convert`), see [`docker/nginx.server.example.conf`](docker/nginx.server.example.conf).
 

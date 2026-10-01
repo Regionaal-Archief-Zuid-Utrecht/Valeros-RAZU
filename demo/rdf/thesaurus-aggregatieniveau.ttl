@@ -1,0 +1,39 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee>
+  a skos:ConceptScheme ;
+  skos:prefLabel "Aggregatieniveaus"@nl ;
+  skos:description "Aggregatieniveaus"@nl ;
+  dcterms:hasFormat <https://context.data.razu.nl/aggregatieniveau.json> .
+
+<https://data.razu.nl/id/aggregatieniveau/62d05f1b8d586edb7da7f257be926705>
+    a skos:Concept ;
+    skos:prefLabel "Archief"@nl ;
+    skos:note "Geheel van informatieobjecten, ontvangen of opgemaakt door een archiefvormer."@nl ;
+    skos:inScheme <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> .
+
+<https://data.razu.nl/id/aggregatieniveau/cd4b9482eadd1fea35dbf01c9a05b093>
+    a skos:Concept ;
+    skos:prefLabel "Serie"@nl ;
+    skos:note "Verzameling van dossiers, fysieke archiefbestanddelen en/of stukken, numeriek, alfabetisch, chronologische of logisch geordend, ontstaan vanuit een identieke \"handeling\", dan wel een identieke vorm hebbend dan wel verwante inhoud bevattend."@nl ;
+    skos:inScheme <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> .
+
+<https://data.razu.nl/id/aggregatieniveau/f1a7b0e450eb0d62469cf223e5727b04>
+    a skos:Concept ;
+    skos:prefLabel "Dossier"@nl ;
+    skos:note "Geheel van fysieke of virtueel gekoppelde informatieobjecten die op één onderwerp betrekking hebben."@nl ;
+    skos:inScheme <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> .
+
+<https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e>
+    a skos:Concept ;
+    skos:prefLabel "Archiefstuk"@nl ;
+    skos:note "Enkelvoudig informatieobject of elementaire informatie-eenheid."@nl ;
+    skos:inScheme <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> .    
+
+<https://data.razu.nl/id/aggregatieniveau/2cb05e4bb7830be982f0922fed86b4cd>
+  a skos:Concept ;
+  skos:prefLabel "Component"@nl ;
+  skos:note "Onderdeel van een archiefstuk, bijvoorbeeld een pagina, zijde, opname of bestand."@nl ;
+  skos:broader <https://data.razu.nl/id/aggregatieniveau/96f7399fb1c5d3b7d2acdc48dac3d71e> ; 
+  skos:inScheme <https://data.razu.nl/id/aggregatieniveau/37b10081ed00e0e430c071ed04c99aee> .

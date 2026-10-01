@@ -1,0 +1,150 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1>
+  a skos:ConceptScheme ;
+  skos:prefLabel "Typering mogelijke beperkingen gebruik"@nl ;
+  skos:description "Typering mogelijke beperkingen in het gebruik van, of de toegang tot, een informatieobject."@nl ;
+  dcterms:hasFormat <https://context.data.razu.nl/beperkinggebruiktype.json> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/3e82de530014486e637ea9257088ccea>
+    a skos:Collection ;
+    skos:prefLabel "Auteursrecht"@nl ;
+    skos:description "Groepeerde auteursrechtelijke condities gebruik"@nl ;
+    skos:member <https://data.razu.nl/id/beperkinggebruiktype/d62b6d3ea088ceab27217c05307c9c56> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/428dde6dfa2a08b7df8875a7600b3097> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/0ee107032f9027f2d9c6ba381b881f29> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/9e4e7f2c29de6371c095df7b80df0850> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/3288125489a2f4c1721024e80221ba41> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/30a3770e15fca4ac73995354bda9c79b> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/be8f8f8decbbb8dede8e72aa3d2b03d9> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/2a747f5ab4430d474995c8fcd877c7ef> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/b270c98d99c3e7951da85ca84a34f35a> .
+    
+ 
+<https://data.razu.nl/id/beperkinggebruiktype/45d3fea5c7895348590a22f5134fd2d7>
+    a skos:Collection ;
+    skos:prefLabel "Openbaarheid"@nl ;
+    skos:description "Groepeerde beperkingen openbaarheid"@nl ;
+    skos:member <https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/6d9800579bad4dbeddc7b370aa5c2505> ,
+        <https://data.razu.nl/id/beperkinggebruiktype/a4b16a99c81d70299a1aca3f4352a181> .
+
+
+<https://data.razu.nl/id/beperkinggebruiktype/7c06ee72d9cbd6a8ab71f6d409c34a20>
+    a skos:Concept ;
+    skos:prefLabel "Geen openbaarheidsbeperkingen"@nl ;
+    skos:altLabel "Openbaar"@nl ;
+    skos:description "Er zijn geen beperkingen ten aanzien van de openbaarheid."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/f5fb6f6efcdb8c2392af00c73b918412>
+    a skos:Concept ;
+    skos:prefLabel "Eerbiediging persoonlijke levenssfeer"@nl ;
+    skos:note "Beperking op de openbaarheid met het oog op de eerbiediging van de persoonlijke levenssfeer (artikel 15 lid 1a, Archiefwet 1995)."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/6d9800579bad4dbeddc7b370aa5c2505>
+    a skos:Concept ;
+    skos:prefLabel "Belang Staat of zijn bondgenoten"@nl ;
+    skos:note "Beperking op de openbaarheid met het oog op het belang van de Staat of zijn bondgenoten (artikel 15 lid 1b, Archiefwet 1995)."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+  
+<https://data.razu.nl/id/beperkinggebruiktype/a4b16a99c81d70299a1aca3f4352a181>
+    a skos:Concept ;
+    skos:prefLabel "Onevenredige benadeling ander belang"@nl ;
+    skos:note "Beperking op de openbaarheid met het oog op de onevenredige benadeling van een ander belang dan genoemd in onderdeel a of onderdeel b (artikel 15 lid 1c, Archiefwet 1995)."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/d62b6d3ea088ceab27217c05307c9c56>
+    a skos:Concept ;
+    skos:prefLabel "Alle rechten voorbehouden"@nl ;
+    skos:note "Rechten liggen volledig bij de auteur. Vraag toestemming aan de maker (of zijn rechtverkrijgenden, zoals erfgenamen of uitgever) voordat je het werk mag gebruiken."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/428dde6dfa2a08b7df8875a7600b3097>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding"@nl ;
+    skos:altLabel "CC BY"@nl ;
+    skos:note "De gebruiker dient de maker van het werk te vermelden, een link naar de licentie te plaatsen en aan te geven of het werk veranderd is."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/0ee107032f9027f2d9c6ba381b881f29>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding & NietCommercieel"@nl ;
+    skos:altLabel "CC BY-NC"@nl ;
+    skos:note "Er rusten auteursrechten op dit werk U mag het downloaden, delen, kopiëren, publiceren en bewerken met volledige naams- en bronvermelding, uitsluitend voor niet-commercieel gebruik."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/9e4e7f2c29de6371c095df7b80df0850>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding & NietCommercieel & GeenAfgeleideWerken"@nl ;
+    skos:altLabel "CC BY-NC-ND"@nl ;
+    skos:note "De gebruiker dient de maker van het werk te vermelden, een link naar de licentie te plaatsen en aan te geven of het werk veranderd is. Je mag het werk niet gebruiken voor commerciële doeleinden. Je mag het veranderde materiaal niet verspreiden als je het werk hebt geremixt, veranderd, of op het werk hebt voortgebouwd."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by-nc-nd/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/3288125489a2f4c1721024e80221ba41>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding & NietCommercieel & GelijkDelen"@nl ;
+    skos:altLabel "CC BY NC-SA"@nl ;
+    skos:note "De gebruiker dient de maker van het werk te vermelden, een link naar de licentie te plaatsen en aan te geven of het werk veranderd is. Als je het werk hebt geremixt, veranderd, of op het werk hebt voortgebouwd, moet je het veranderde materiaal verspreiden onder dezelfde licentie als het originele werk. Je mag het werk niet gebruiken voor commerciële doeleinden."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by-nc-sa/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/30a3770e15fca4ac73995354bda9c79b>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding & GeenAfgeleideWerken"@nl ;
+    skos:altLabel "CC BY-ND"@nl ;
+    skos:note "De gebruiker dient de maker van het werk te vermelden, een link naar de licentie te plaatsen en aan te geven of het werk veranderd is. Je mag het veranderde materiaal niet verspreiden als je het werk hebt geremixt, veranderd, of op het werk hebt voortgebouwd."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by-nd/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/be8f8f8decbbb8dede8e72aa3d2b03d9>
+    a skos:Concept ;
+    skos:prefLabel "Naamsvermelding & GelijkDelen"@nl ;
+    skos:altLabel "CC BY-SA"@nl ;
+    skos:note "De gebruiker dient de maker van het werk te vermelden, een link naar de licentie te plaatsen en aan te geven of het werk veranderd is. Als je het werk hebt geremixt, veranderd, of op het werk hebt voortgebouwd, moet je het veranderde materiaal verspreiden onder dezelfde licentie als het originele werk."@nl ;
+    skos:exactMatch <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/c9ff6ea52d650cc82c5c04dd054aeb1f>
+    a skos:Concept ;
+    skos:prefLabel "Geen toestemming nodig"@nl ;
+    skos:altLabel "CC 0"@nl ;
+    skos:note "Je mag het werk zonder toestemming kopiëren, veranderen, verspreiden en uitvoeren, zelfs voor commerciële doeleinden."@nl ;
+    skos:closeMatch <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/3f71885c8fdcf4390a055fcb65af0232>
+    a skos:Concept ;
+    skos:prefLabel "Beperkt gebruik - Rechten onbekend"@nl ;
+    skos:note """Ondanks redelijke inspanningen zijn de rechthebbende(n) - of hun rechtsopvolger(s) - van dit werk niet geïdentificeerd of is contact uitgebleven. Ga ervan uit dat dit werk volledig auteursrechtelijk beschermd is; hergebruik is uitsluitend toegestaan met toestemming van de rechthebbende(n). Bent u de maker of rechthebbende? Neem dan contact op met ooc@razu.nl.
+    """@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+
+<https://data.razu.nl/id/beperkinggebruiktype/2a747f5ab4430d474995c8fcd877c7ef>
+    a skos:Concept ;
+    skos:prefLabel "Auteursrechten verlopen"@nl ;
+    skos:note "De auteursrechten zijn verlopen. Je mag het werk zonder toestemming kopiëren, veranderen, verspreiden en uitvoeren, zelfs voor commerciële doeleinden."@nl ;
+    skos:closeMatch <https://creativecommons.org/publicdomain/zero/1.0/> ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
+    
+<https://data.razu.nl/id/beperkinggebruiktype/b270c98d99c3e7951da85ca84a34f35a>
+    a skos:Concept ;
+    skos:prefLabel "Mogelijk auteursrechtelijk beschermd"@nl ;
+    skos:note """Op dit werk rust mogelijk nog auteursrecht. U mag het werk downloaden voor privégebruik. U mag het werk niet opnieuw op papier of digitaal publiceren. U mag wel linken naar het werk vanaf een eigen internetpagina of social media account.
+Het auteursrecht op verschillende delen van het werk, zoals de tekst en afbeeldingen, kunnen op verschillende momenten aflopen. De auteursrechtelijke bescherming geldt tot 70 jaar na het overlijden van de maker. Er zijn afspraken gemaakt met collectieve beheersorganisaties, die de makers vertegenwoordigen, om het werk op deze website te tonen. 
+Voor commerciële partijen is het verboden om kopieën van auteursrechtelijk 	beschermde kranten en tijdschriften op onze websites te maken ten behoeve van tekst- en datamining (TDM) waaronder 6 training van AI-modellen. Dit verbod vormt een voorbehoud als bedoeld in artikel 15o Auteurswet, artikel 4a sub b 	Databankenwet en artikel 4(3) CDSM-richtlijn. 
+Toestemming van rechthebbenden is nodig voor embedden, framed linken of anderszins linken naar auteursrechtelijk beschermd materiaal op onze website waarbij het voor publiek niet direct duidelijk is dat dit materiaal zich niet bevindt 	op uw website.
+Voor ander gebruik van het materiaal dient u nader onderzoek te doen naar de auteursrechtelijke status van het werk. 
+Bent u de rechthebbende en wilt u niet dat uw werk online beschikbaar wordt gesteld, dan kunt u een bericht sturen naar ooc@razu.nl.
+"""@nl ;
+    schema:copyrightNotice "Auteursrecht onbekend. Het zou kunnen dat nog auteursrecht rust op (delen van) dit object."@nl ;
+    skos:inScheme <https://data.razu.nl/id/beperkinggebruiktype/eec50697074c187a5e279dbd44252ad1> .
