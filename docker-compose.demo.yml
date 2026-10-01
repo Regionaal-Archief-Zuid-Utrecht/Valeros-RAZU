@@ -83,6 +83,18 @@ services:
       silo:
         condition: service_healthy
 
+  # Lets the snippetserver fetch http://localhost:9000/... URLs: inside its
+  # network namespace localhost points to this proxy, which forwards to silo.
+  silo-loopback:
+    image: alpine/socat
+    network_mode: service:snippetserver
+    command: tcp-listen:9000,fork,reuseaddr tcp-connect:silo:9000
+    depends_on:
+      silo:
+        condition: service_healthy
+      snippetserver:
+        condition: service_started
+
   qlever:
     image: adfreiburg/qlever:commit-55c05d4
     entrypoint: /opt/valeros/start-qlever.sh
