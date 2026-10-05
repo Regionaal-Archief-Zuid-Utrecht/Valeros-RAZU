@@ -1,0 +1,643 @@
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+
+<https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757>
+   a skos:ConceptScheme ;
+   skos:prefLabel "Publicaties"@nl;
+   skos:description "Publicaties (werken)"@nl;
+   skos:description "Publications (works)"@en; 
+   dcterms:hasFormat <https://context.data.razu.nl/pub.json> .
+
+<https://data.razu.nl/id/pub/20f3edb47790a8e083c087a9a6d1e460>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Amerongsche Courant" ;
+    skos:prefLabel "De Amerongsche Courant"@nl;
+    schema:alternateName "Nieuws- en advertentieblad voor Amerongen, Leersum, Maarn, Maarsbergen, Doorn, Driebergen, Langbroek, Cothen, Wijk-bij-Duurstede enz" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/bf16fd9ceb0435731ea10b6e92c0848b>, # "Amerongen", 
+        <https://data.razu.nl/id/locatie/152aa32fa903d3502880686e0d362668>, # "Leersum"
+        <https://data.razu.nl/id/locatie/218bbb2e70cfce022ae09d6a4327b899>, # "Maarn"
+        <https://data.razu.nl/id/locatie/a56c9792ea7d0614d0770b9bd46e3e56>, # "Maarsbergen" 
+        <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>, # "Doorn"
+        <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>, # "Driebergen"
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>, # "Langbroek"
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>, # "Cothen"
+        <https://data.razu.nl/id/locatie/152aa32fa903d3502880686e0d362668>, # Leersum
+        <https://data.razu.nl/id/locatie/dfc6eee060e002fcd5ed441380e2f915>, # Rhenen
+        <https://data.razu.nl/id/locatie/29b0e0e01d257d3ece50e425d9b1c1b8>, # Veenendaal
+        <https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153>; # "Wijk bij Duurstede" 
+    schema:temporalCoverage "1875/" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> .
+
+
+<https://data.razu.nl/id/pub/3dc373c7e9f5dc209a2ab3a984ea34c2>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Stichtse Courant" ;
+    skos:prefLabel "Stichtse Courant"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/086e8ac22c73a2498249a0835136837f>,
+        <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>, # Driebergen
+        <https://data.razu.nl/id/locatie/830bbd6ac4f17442d5fa262a3ef4525e>,
+        <https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>, # Zeist
+        <https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>, # Odijk
+        <https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83>, # Werkhoven
+        <https://data.razu.nl/id/locatie/4fbf1371d27645fce1e2fee1191a59c2>, # Austerlitz
+        <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>, # "Doorn"
+        <https://data.razu.nl/id/locatie/218bbb2e70cfce022ae09d6a4327b899>, # "Maarn"
+        <https://data.razu.nl/id/locatie/a56c9792ea7d0614d0770b9bd46e3e56>, # "Maarsbergen" 
+        <https://data.razu.nl/id/locatie/152aa32fa903d3502880686e0d362668>, # "Leersum"
+        <https://data.razu.nl/id/locatie/bf16fd9ceb0435731ea10b6e92c0848b>, # "Amerongen", 
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>, # "Langbroek"
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>, # "Cothen"
+        <https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153>; # "Wijk bij Duurstede" 
+    schema:temporalCoverage "1940/" ;   # ISO 8601 incl. range '/'-aanduiding; geeft aan wanneer uitgekomen
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> .                     
+
+<https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Wijkse Courant" ;
+    skos:prefLabel "Wijkse Courant"@nl;
+    schema:alternateName "Wijksche Courant" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153>; 
+    schema:temporalCoverage "1870/" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> .   
+
+<https://data.razu.nl/id/pub/59cb9b1eba986b2efdc2bea737f23e9d>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Asperensche en Heukelumsche Courant" ;
+    skos:prefLabel "Asperensche en Heukelumsche Courant"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/56c126a7ba18c93c43e1da625b48e226>, 
+        <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>; 
+    schema:temporalCoverage "1891/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> .   
+
+<https://data.razu.nl/id/pub/c7a4bbe4ac849de5b5530dec62538aba>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Boekenwereld" ;
+    skos:prefLabel "De Boekenwereld"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>,
+        <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>, 
+        <https://data.razu.nl/id/locatie/830bbd6ac4f17442d5fa262a3ef4525e> ,
+        <https://data.razu.nl/id/locatie/aa0891a7216c99d2c81c004170975000> ;
+    schema:temporalCoverage "1908-11-07/1910-05-15?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> .   
+
+<https://data.razu.nl/id/pub/d65094a09c63941965f5182d83d37298>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Kaap" ;
+    skos:prefLabel "De Kaap"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>,
+        <https://data.razu.nl/id/locatie/bf16fd9ceb0435731ea10b6e92c0848b>, 
+        <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc> ,
+        <https://data.razu.nl/id/locatie/218bbb2e70cfce022ae09d6a4327b899>,
+        <https://data.razu.nl/id/locatie/a56c9792ea7d0614d0770b9bd46e3e56> ;
+    schema:temporalCoverage "1905/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/dc2f2e1b12e64ec179f1207193b839b9>                        
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Leerdamsche Courant" ;
+    skos:prefLabel "Leerdamsche Courant"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923> ;
+    schema:temporalCoverage "1885/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/b3f2e92f6c1e3cdff5b2c318aa41e474>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Het Driemanschap" ;
+    skos:prefLabel "Het Driemanschap"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>,
+        <https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>,
+        <https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83> ;
+    schema:temporalCoverage "?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/47a4b0a0bb03a6a909e898f03d522a50>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Leerdammer" ;
+    skos:prefLabel "De Leerdammer"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923> ;
+    schema:temporalCoverage "1891/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/f0bf1030b2bc9fba4ea5ba53df15137a>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Lek" ;
+    skos:prefLabel "De Lek"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/49ad38c2223a924377bb288d3803aadb>,
+        <https://data.razu.nl/id/locatie/b5644eaf70a46a09fa1c3e03274867c6>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed> ;
+    schema:temporalCoverage "1891/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/1f9bf729591291d2f966290f80a52b70>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Lingestreek" ;
+    skos:prefLabel "De Lingestreek"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/23568a40bacfb2d3617af23ecc54982b>,
+        <https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>,
+        <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/bed148da65ebbaa28ed63af569e3a4de>,
+        <https://data.razu.nl/id/locatie/56c126a7ba18c93c43e1da625b48e226>,
+        <https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>,
+        <https://data.razu.nl/id/locatie/1fe2af9bef03a71c6ebdee104578b8f9>,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>,
+        <https://data.razu.nl/id/locatie/4dbd6828097de758d68cc2dacfd6cc7f>,
+        <https://data.razu.nl/id/locatie/dd41396ef045d15168927cf471e4b98a>,
+        <https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>,
+        <https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>,
+        <https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>,
+        <https://data.razu.nl/id/locatie/c6f2a194d385859adf152c061e42a993>, 
+        <https://data.razu.nl/id/locatie/e1590fef9f5d077bf60d9b34d023c182>,
+        <https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>,
+        <https://data.razu.nl/id/locatie/1843211b63a7c09a26395ccfb92766f7>,
+        <https://data.razu.nl/id/locatie/330613e635b98c939ce76afb61ca0818>,
+    <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>;
+    schema:temporalCoverage "1971/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/5360a8e9a5a098946f4bbda6611de153>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "De Voorlichter" ;
+    skos:prefLabel "De Voorlichter"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/ca41927f3891927ad3d7aa5396ff886f>,
+        <https://data.razu.nl/id/locatie/4c47d6bb7333f93efd3a7fbda52e6614>,
+        <https://data.razu.nl/id/locatie/9862f7a7a0acaaebcfcb5780de282c49>,
+        <https://data.razu.nl/id/locatie/28282503c6a8d9e3a1c702acc1cfad1e>;
+    schema:temporalCoverage "1945/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/87f3796bf2661557bf3cce69ff5a904b>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "E9" ;
+    skos:prefLabel "E9"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f> ;
+    schema:temporalCoverage "1974/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/68afc3f31c0641384120ab52058331f6>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Gelderse Koerier" ;
+    skos:prefLabel "Gelderse Koerier"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9> ;
+    schema:temporalCoverage "?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/555e782e737370f5c8133c228f23fcd2>          
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Het Nieuws" ;
+    skos:prefLabel "Het Nieuws"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/830bbd6ac4f17442d5fa262a3ef4525e>,
+        <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>,
+        <https://data.razu.nl/id/locatie/aa0891a7216c99d2c81c004170975000>,
+        <https://data.razu.nl/id/locatie/c0d1ae18a5cccce8d6e9847ba94904ff>,
+        <https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>,
+        <https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>,
+        <https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83>;
+    schema:temporalCoverage "1881/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/c481c8005fa1b1ae22ebaea090dd3fe2>  
+    a schema:Newspaper, skos:Concept ;
+    schema:name "Het Trefpunt" ;
+    skos:prefLabel "Het Trefpunt"@nl;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>,
+        <https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>,
+        <https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83>,
+        <https://data.razu.nl/id/locatie/c0d1ae18a5cccce8d6e9847ba94904ff>,
+        <https://data.razu.nl/id/locatie/ab8f1762b5e7bb47da861056a230d940>,
+        <https://data.razu.nl/id/locatie/c9682aad1ada5d296dc66925d15d256c>,
+        <https://data.razu.nl/id/locatie/c03189135b5f13ea1da74bd972d8f57a>,
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>,
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>,
+        <https://data.razu.nl/id/locatie/39490f0a449a6980ad69de4e533bce24>;
+    schema:temporalCoverage "1964/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/7e01b074c5a914af8e2c5dd9afbbf302>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Het Kontakt"@nl;
+    schema:name "Het Kontakt" ;
+    schema:alternateName "Het Kontakt editie Vianen" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/c6f2a194d385859adf152c061e42a993>;
+    schema:temporalCoverage "1991-11-06/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/12ac0d8fa044a43c75b1c5fdac55a685>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Lekstroom"@nl;
+    schema:name "De Lekstroom" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/c6f2a194d385859adf152c061e42a993>,
+        <https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>,
+        <https://data.razu.nl/id/locatie/3792e8ae3a3ee65602dd31b6020e5d12>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>,
+        <https://data.razu.nl/id/locatie/5e80a86dacab2b369281fc988f3b763f>,
+        <https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>,
+        <https://data.razu.nl/id/locatie/8c0b8b6189ebbeff228cdacad31699b6>, 
+        <https://data.razu.nl/id/locatie/8bdc4241d0a3c27eb97d4e4c30d71735>;
+    schema:temporalCoverage "1968-11-21/1972-05-25" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/f48fdc6922dbf7815e24c7812a4a1db5>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Nieuwe Tielsche Courant"@nl;
+    schema:name "Nieuwe Tielsche Courant" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>;
+    schema:temporalCoverage "1844/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/8ba4c90164adb0ccaff88ff26897d9e5>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Pension- en Woningcourant"@nl;
+    schema:name "Pension- en Woningcourant" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>,
+        <https://data.razu.nl/id/locatie/aa0891a7216c99d2c81c004170975000>,
+        <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>;
+    schema:temporalCoverage "1901/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/ffa16a323ff6d3e122d4622e072ac3fe>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Stichts Nieuws- en Handelsblad"@nl;
+    schema:name "Stichts Nieuws- en Handelsblad" ;
+    schema:spatialCoverage 
+        <https://data.razu.nl/id/locatie/086e8ac22c73a2498249a0835136837f>,
+        <https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>,
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>;
+    schema:temporalCoverage "1936/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/d7397a3f1700739d1bb434d073f9c696>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Vijfheerenlanden"@nl;
+    schema:name "De Vijfheerenlanden" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/ca41927f3891927ad3d7aa5396ff886f>;
+    schema:temporalCoverage "1855-02-28/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/275cfc2b7b8bdfe099ea09a2ac74241a>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Vianen Post"@nl;
+    schema:name "Vianen Post" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>;
+    schema:temporalCoverage "1991/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/8d8f80430e45aaf3f759edd89ce1bbbf>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Vianensche Courant"@nl;
+    schema:name "Vianensche Courant" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>;
+    schema:temporalCoverage "?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/ed1b615e1d23fb2e43181ee3e6fd8c6b>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Weekbode"@nl;
+    schema:name "Weekbode" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/830bbd6ac4f17442d5fa262a3ef4525e>,
+        <https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>;
+    schema:temporalCoverage "1864/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/92fdb5767a295fd61dafceeadd1dc05a>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Weekend Post"@nl;
+    schema:name "Weekend Post" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/97622407cb0f2fe2bd8bb5b8c788340c>;
+    schema:temporalCoverage "1980/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/739575b26144b5cecfa210e1c64a4227>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Wijks Nieuws / Bunniks Nieuws"@nl;
+    schema:name "Wijks Nieuws / Bunniks Nieuws" ;
+    schema:alternateName "'t Groentje" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153>,
+        <https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>,
+        <https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>, 
+        <https://data.razu.nl/id/locatie/8bdc4241d0a3c27eb97d4e4c30d71735>,
+        <https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>,
+        <https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83>,
+        <https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>;
+    schema:temporalCoverage "1965/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/8c2a1eac4eee0e8820e5ffd505184032>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Zenderstreeknieuws"@nl;
+    schema:name "Zenderstreeknieuws" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/254186d2a3c953c2480349748f346c00>,
+        <https://data.razu.nl/id/locatie/d606d81c962a9ef249f7f64a668b4416>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/f00bbf72c6735b859fd9a0720a16a2ac>,
+        <https://data.razu.nl/id/locatie/9abf462b04cc111f94e1828f6b430666>,
+        <https://data.razu.nl/id/locatie/8cdb906af987e7077a025b46d58e22bf>,
+        <https://data.razu.nl/id/locatie/253c10a7234cd908e34a3af1f87a0961>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>, 
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>, 
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>;
+    schema:temporalCoverage "1957/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+
+<https://data.razu.nl/id/pub/fe56b7a1d75d92a0a76d8f3c4a085793>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecombineerde"@nl;
+    schema:name "De Gecombineerde" ;
+    schema:alternateName "De gecombineerde Geldersche en Zuidhollandsche bladen" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>,
+        <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>,
+        <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f> ,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19> ;
+    schema:temporalCoverage "1891?/1987?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/b40c78310d608f607660e2af18100e88>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecombineerde Gelderland"@nl;
+    schema:name "De Gecombineerde Gelderland" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>,
+        <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>,
+        <https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>,
+        <https://data.razu.nl/id/locatie/86f6a4ab514cb29561cb65197cd233f3>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>,
+        <https://data.razu.nl/id/locatie/ae2b4db3b488bdb17dce722a5eb3d224>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/2502acebd5887f2fc1fa98bb416bcffa>,
+        <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>,
+        <https://data.razu.nl/id/locatie/a88551f513733db885c209b84e85592d>,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>,
+        <https://data.razu.nl/id/locatie/e3bf4e4eeb0bffe26dc17cc47602aa7c>,
+        <https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/f9cff50bbea84828ce8b1f2f38e4c8c1>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>,
+        <https://data.razu.nl/id/locatie/c965f7d9fb76f8a223b11c4885b1f3dd>,
+        <https://data.razu.nl/id/locatie/51ca4ea3fa26f2fba05b1d86c72dc769>,
+        <https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>,
+        <https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>,
+        <https://data.razu.nl/id/locatie/b30417283592bc71c36516eae524e0e6>,
+        <https://data.razu.nl/id/locatie/4d29643004f3878cb1865af61cf9b87d>,
+        <https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>,
+        <https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>,
+        <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>,
+        <https://data.razu.nl/id/locatie/a31c18cbca2ebdc7f2b05e02df638d9b>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/a5fced58fb1a5d570397bcb7198cdab1>,
+        <https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>,
+        <https://data.razu.nl/id/locatie/f14093198c026c353be44d0291ee34ee>,
+        <https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>;
+    schema:temporalCoverage "1891?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+
+<https://data.razu.nl/id/pub/f23f238942e2f400e8838b5a48e586cf>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecomineerde Midden Nederland"@nl;
+    schema:name "De Gecomineerde Midden Nederland" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>,
+        <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>,
+        <https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>,
+        <https://data.razu.nl/id/locatie/86f6a4ab514cb29561cb65197cd233f3>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>,
+        <https://data.razu.nl/id/locatie/ae2b4db3b488bdb17dce722a5eb3d224>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/2502acebd5887f2fc1fa98bb416bcffa>,
+        <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>,
+        <https://data.razu.nl/id/locatie/a88551f513733db885c209b84e85592d>,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>,
+        <https://data.razu.nl/id/locatie/e3bf4e4eeb0bffe26dc17cc47602aa7c>,
+        <https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/f9cff50bbea84828ce8b1f2f38e4c8c1>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>,
+        <https://data.razu.nl/id/locatie/c965f7d9fb76f8a223b11c4885b1f3dd>,
+        <https://data.razu.nl/id/locatie/51ca4ea3fa26f2fba05b1d86c72dc769>,
+        <https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>,
+        <https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>,
+        <https://data.razu.nl/id/locatie/b30417283592bc71c36516eae524e0e6>,
+        <https://data.razu.nl/id/locatie/4d29643004f3878cb1865af61cf9b87d>,
+        <https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>,
+        <https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>,
+        <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>,
+        <https://data.razu.nl/id/locatie/a31c18cbca2ebdc7f2b05e02df638d9b>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/a5fced58fb1a5d570397bcb7198cdab1>,
+        <https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>,
+        <https://data.razu.nl/id/locatie/f14093198c026c353be44d0291ee34ee>,
+        <https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>;
+    schema:temporalCoverage "1891?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+
+<https://data.razu.nl/id/pub/9e78b5e97274c20918b89c9fcc831c48>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecombineerde Zuid-Holland"@nl;
+    schema:name "De Gecombineerde Zuid-Holland" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>,
+        <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>,
+        <https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>,
+        <https://data.razu.nl/id/locatie/86f6a4ab514cb29561cb65197cd233f3>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>,
+        <https://data.razu.nl/id/locatie/ae2b4db3b488bdb17dce722a5eb3d224>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/2502acebd5887f2fc1fa98bb416bcffa>,
+        <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>,
+        <https://data.razu.nl/id/locatie/a88551f513733db885c209b84e85592d>,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>,
+        <https://data.razu.nl/id/locatie/e3bf4e4eeb0bffe26dc17cc47602aa7c>,
+        <https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/f9cff50bbea84828ce8b1f2f38e4c8c1>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>,
+        <https://data.razu.nl/id/locatie/c965f7d9fb76f8a223b11c4885b1f3dd>,
+        <https://data.razu.nl/id/locatie/51ca4ea3fa26f2fba05b1d86c72dc769>,
+        <https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>,
+        <https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>,
+        <https://data.razu.nl/id/locatie/b30417283592bc71c36516eae524e0e6>,
+        <https://data.razu.nl/id/locatie/4d29643004f3878cb1865af61cf9b87d>,
+        <https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>,
+        <https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>,
+        <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>,
+        <https://data.razu.nl/id/locatie/a31c18cbca2ebdc7f2b05e02df638d9b>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/a5fced58fb1a5d570397bcb7198cdab1>,
+        <https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>,
+        <https://data.razu.nl/id/locatie/f14093198c026c353be44d0291ee34ee>,
+        <https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>;
+    schema:temporalCoverage "1891?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+
+<https://data.razu.nl/id/pub/5d45e29232a8bf5532b55c5f7c840309>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecombineerde West-Betuwe"@nl;
+    schema:name "De Gecombineerde West-Betuwe" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>,
+        <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>,
+        <https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>,
+        <https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>,
+        <https://data.razu.nl/id/locatie/86f6a4ab514cb29561cb65197cd233f3>,
+        <https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>,
+        <https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>,
+        <https://data.razu.nl/id/locatie/ae2b4db3b488bdb17dce722a5eb3d224>,
+        <https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>,
+        <https://data.razu.nl/id/locatie/2502acebd5887f2fc1fa98bb416bcffa>,
+        <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>,
+        <https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f>,
+        <https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>,
+        <https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>,
+        <https://data.razu.nl/id/locatie/a88551f513733db885c209b84e85592d>,
+        <https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>,
+        <https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>,
+        <https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>,
+        <https://data.razu.nl/id/locatie/e3bf4e4eeb0bffe26dc17cc47602aa7c>,
+        <https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>,
+        <https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>,
+        <https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>,
+        <https://data.razu.nl/id/locatie/f9cff50bbea84828ce8b1f2f38e4c8c1>,
+        <https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>,
+        <https://data.razu.nl/id/locatie/c965f7d9fb76f8a223b11c4885b1f3dd>,
+        <https://data.razu.nl/id/locatie/51ca4ea3fa26f2fba05b1d86c72dc769>,
+        <https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>,
+        <https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>,
+        <https://data.razu.nl/id/locatie/b30417283592bc71c36516eae524e0e6>,
+        <https://data.razu.nl/id/locatie/4d29643004f3878cb1865af61cf9b87d>,
+        <https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>,
+        <https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>,
+        <https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>,
+        <https://data.razu.nl/id/locatie/a31c18cbca2ebdc7f2b05e02df638d9b>,
+        <https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>,
+        <https://data.razu.nl/id/locatie/a5fced58fb1a5d570397bcb7198cdab1>,
+        <https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>,
+        <https://data.razu.nl/id/locatie/f14093198c026c353be44d0291ee34ee>,
+        <https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>;
+    schema:temporalCoverage "1891?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/0b9eecce5815b757cd097bbda895b9e5>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Gecombineerde Vijfheerenlanden"@nl;
+    schema:name "De Gecombineerde Vijfheerenlanden" ;
+    schema:alternateName "De Gecombineerde Vijfheerenlanden en de Albasserwaard" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/ca41927f3891927ad3d7aa5396ff886f>, <https://data.razu.nl/id/locatie/97622407cb0f2fe2bd8bb5b8c788340c>;
+    schema:temporalCoverage "1891?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+
+<https://data.razu.nl/id/pub/454a3d5d49754b18b890896f08c60ae9>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Geldermalser"@nl;
+    schema:name "De Geldermalser" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>;
+    schema:temporalCoverage "1893?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/2956d613ec600415536432485a2342c5>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "De Burensche Courant"@nl;
+    schema:name "De Burensche Courant" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>;
+    schema:temporalCoverage "1905?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 
+
+<https://data.razu.nl/id/pub/ccd7d344856d5ee93fb1fcdd52a6f7db>  
+    a schema:Newspaper, skos:Concept ;
+    skos:prefLabel "Ameidensch Nieuwsblad"@nl;
+    schema:name "Ameidensch Nieuwsblad" ;
+    schema:spatialCoverage <https://data.razu.nl/id/locatie/b5644eaf70a46a09fa1c3e03274867c6>;
+    schema:temporalCoverage "1900?/?" ; 
+    schema:inLanguage "nl" ;
+    skos:inScheme <https://data.razu.nl/id/pub/f9021d3b9db7ec22f16ac2ecf2b2a757> . 

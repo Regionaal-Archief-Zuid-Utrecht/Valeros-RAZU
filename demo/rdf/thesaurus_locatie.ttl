@@ -1,0 +1,1370 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ogc: <http://www.opengis.net/def/crs/OGC/1.3/> . 
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix bag: <http://bag.basisregistraties.overheid.nl/def/bag#> . 
+@prefix ldto: <https://data.razu.nl/def/ldto/> .
+
+<https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43>
+   a skos:ConceptScheme ;
+   skos:prefLabel "Locaties"@nl;
+   skos:description "Waardenlijst locaties"@nl ;
+   dcterms:hasFormat <https://context.data.razu.nl/locatie.json> .
+
+<https://data.razu.nl/id/locatie/1843211b63a7c09a26395ccfb92766f7>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Acquoy (plaats)"@nl ;
+    schema:name "Acquoy"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1358 51.8789)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Acquoy"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2404083> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/b5644eaf70a46a09fa1c3e03274867c6>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Ameide (plaats)"@nl ;
+    schema:name "Ameide"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.9625 51.9539)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Ameide"@nl 
+    ] ;
+    bag:identificatie "2106";
+    schema:isPartOf <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2106> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2842582> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/bf16fd9ceb0435731ea10b6e92c0848b>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Amerongen (plaats)"@nl ;
+    schema:name "Amerongen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.459 52.000)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Amerongen"@nl 
+    ] ;
+    bag:identificatie "3337";
+    schema:isPartOf  <https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3337> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1615400> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/56c126a7ba18c93c43e1da625b48e226>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Arkel (plaats)"@nl ;
+    schema:name "Arkel"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.99 51.864)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Arkel"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1165364> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c0a59278d7c5a0f7b19a574338071a27>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Asperen (plaats)"@nl ;
+    schema:name "Asperen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.11 51.881)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Asperen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2162332> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/4fbf1371d27645fce1e2fee1191a59c2> 
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Austerlitz (plaats)"@nl ;
+    schema:name "Austerlitz"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3167 52.0786)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Austerlitz."@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2380583> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/86f6a4ab514cb29561cb65197cd233f3>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Brakel (plaats)"@nl ;
+    schema:name "Brakel"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0886 51.8169)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Brakel"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2916660> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/1d264e0c825b53fae4942926e80ccde2>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Bunnik (plaats)"@nl ;
+    schema:name "Bunnik"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.199 52.066)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Bunnik"@nl 
+    ] ;
+    bag:identificatie "2603";
+    schema:isPartOf  <https://data.razu.nl/id/actor/5c5e44886a1cd6f67f5ae63b270a0b24> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2603> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q937679> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Buren (plaats)"@nl ;
+    schema:name "Buren"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.333611 51.910833)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Buren"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1087187> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f5ef414df02e8a28bb60055ff6e1c151>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Cothen (plaats)"@nl ;
+    schema:name "Cothen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.308 51.997)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Cothen"@nl 
+    ] ;
+    bag:identificatie "1304";
+    schema:isPartOf  <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1304> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2860067> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a4ed213e4fcc0888b2a88ab1a81847c4>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Doorn (plaats)"@nl ;
+    schema:name "Doorn"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.346 52.033)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Doorn"@nl 
+    ] ;
+    bag:identificatie "3339";
+    schema:isPartOf  <https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3339> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1615161> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/2f3d1d59d29f6f07ac921eb57fe37fbc>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Driebergen (plaats)"@nl ;
+    schema:name "Driebergen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.283 52.052)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Driebergen"@nl 
+    ] ;
+    schema:isPartOf <https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1899314> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/086e8ac22c73a2498249a0835136837f>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Driebergen-Rijsenburg (plaats)"@nl ;
+    schema:name "Driebergen-Rijsenburg"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2803 52.0528)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Driebergen-Rijsenburg"@nl 
+    ] ;
+    bag:identificatie "3335";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3335> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1258901> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/84f43a0c8c5fc771958291f7d8feed6b>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Elst (plaats in Utrecht)"@nl ;
+    schema:name "Elst"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.50 51.99)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Elst (Utrecht)"@nl 
+    ] ;
+    bag:identificatie "1400";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1400> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q130622> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/ae2b4db3b488bdb17dce722a5eb3d224>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Enspijk (plaats)"@nl ;
+    schema:name "Enspijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2131 51.8836)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Enspijk"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q73277> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/9ef6deecc4799c07a54c953f5721a5ed>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Everdingen (plaats)"@nl ;
+    schema:name "Everdingen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1564 51.9647)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Everdingen"@nl 
+    ] ;
+    bag:identificatie "2840";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2840> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2937766> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/2502acebd5887f2fc1fa98bb416bcffa>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Gameren (plaats)"@nl ;
+    schema:name "Gamerenijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2003 51.8011)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Gameren"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q171245> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c9682aad1ada5d296dc66925d15d256c>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "'t Goy (plaats)"@nl ;
+    schema:name "'t Goy"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2230 52.0023)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats 't Goy"@nl 
+    ] ;
+    bag:identificatie "2054";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2054> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2218910> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/4edaebb1dd7f9a15e2e4ccf72dfe283f> 
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Haaften (plaats)"@nl ;
+    schema:name "Haaften"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2117 51.8169)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Haaften."@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q58404> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/6095143773896ebe2f897a724adb9dc5>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Hagestein (plaats)"@nl ;
+    schema:name "Hagestein"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1206 51.9797)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hagestein"@nl 
+    ] ;
+    bag:identificatie "3625";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3625> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q174398> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/9fdafafdc273158a716d67e41e1db1dd>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats  ;
+    skos:prefLabel "Hei- en Boeicop (plaats)"@nl ;
+    schema:name "Hei- en Boeicop"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0794 51.9444)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hei- en Boeicop"@nl 
+    ] ;
+    bag:identificatie "2109";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2109> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q961578> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a88551f513733db885c209b84e85592d>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Hellouw (plaats)"@nl ;
+    schema:name "Hellouw"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1769 51.8275)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hellouw"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2148331> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/eab5fdf0e257bb7a4725707ea201f955>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Hoef en Haag (plaats)"@nl ;
+    schema:name "Hoef en Haag"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.12 51.99)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hoef en Haag"@nl 
+    ] ;
+    bag:identificatie "3626";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3626> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q21696900> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c0d1ae18a5cccce8d6e9847ba94904ff> 
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Houten (plaats)"@nl ;
+    schema:name "Houten"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.16942 52.02922)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Houten."@nl 
+    ] ;
+    bag:identificatie "2053 ";
+    schema:isPartOf <https://data.razu.nl/id/actor/424280985651f416dfb6a68ee8ee6c6a> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2053> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33446293> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/0bcf61e5515a9ec5aafa61792d2090bd>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Ingen (plaats)"@nl ;
+    schema:name "Ingen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.486 51.959)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Ingen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3150932> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/fefe908a1760a56236417d1f41b224c0>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Kedichem (plaats)"@nl ;
+    schema:name "Kedichem"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0503 51.86)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Kedichem"@nl 
+    ] ;
+    bag:identificatie "2273";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2273> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2609314> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/e3bf4e4eeb0bffe26dc17cc47602aa7c>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Kerkdriel (plaats)"@nl ;
+    schema:name "Kerkdriel"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3367 51.7711)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Kerkdriel"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3112493> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f43ef3ffcb8654ff73a672a05b88b404>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Langbroek (plaats)"@nl ;
+    schema:name "Langbroek"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.326 52.011)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Langbroek"@nl 
+    ] ;
+    bag:identificatie "1303";
+    schema:isPartOf  <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1303> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3030117> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/ad3762fb5fe06410bce65993bfc09043>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Leerbroek (plaats)"@nl ;
+    schema:name "Leerbroek"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0514 51.9089)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Leerbroek"@nl 
+    ] ;
+    bag:identificatie "2110";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2110> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1001658> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+    
+<https://data.razu.nl/id/locatie/0d076228b6f2d07d253fffe2e1f43923>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Leerdam (plaats)"@nl ;
+    schema:name "Leerdam"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.09 51.892)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Leerdam"@nl 
+    ] ;
+    bag:identificatie "2271";
+    schema:isPartOf <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2271> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q388575> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/152aa32fa903d3502880686e0d362668>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Leersum (plaats)"@nl ;
+    schema:name "Leersum"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.428 52.012)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Leersum"@nl 
+    ] ;
+    bag:identificatie "3587";
+    schema:isPartOf  <https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3587> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q81177> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/fe789059e054f79e4c3bcd1b11efc2a8>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Lexmond (plaats)"@nl ;
+    schema:name "Lexmond"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0344 51.9625)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Lexmond"@nl 
+    ] ;
+    bag:identificatie "2105";
+    schema:isPartOf <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2105> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3026650> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/218bbb2e70cfce022ae09d6a4327b899>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Maarn (plaats)"@nl ;
+    schema:name "Maarn"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.371 52.064)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Maarn"@nl 
+    ] ;
+    bag:identificatie "3340";
+    schema:isPartOf  <https://data.razu.nl/id/actor/aafc151236a6978fdf1732dcadb53f2e> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3340> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1616311> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a56c9792ea7d0614d0770b9bd46e3e56>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Maarsbergen (plaats)"@nl ;
+    schema:name "Maarsbergen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.404 52.057)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Maarsbergen"@nl 
+    ] ;
+    bag:identificatie "3341";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3341> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2188096> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f9cff50bbea84828ce8b1f2f38e4c8c1>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Maurik (plaats)"@nl ;
+    schema:name "Maurik"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.4236 51.96)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Maurik"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2453631> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/258e2dc080f58e9c77e6077c5b6c604f>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats  ;
+    skos:prefLabel "Meerkerk (plaats)"@nl ;
+    schema:name "Meerkerk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.9942 51.92)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Meerkerk"@nl 
+    ] ;
+    bag:identificatie "2108";
+    schema:isPartOf <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2108> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2774284> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c965f7d9fb76f8a223b11c4885b1f3dd>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Meteren (plaats)"@nl ;
+    schema:name "Meteren"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2822 51.8653)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Meteren"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3112511> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/51ca4ea3fa26f2fba05b1d86c72dc769>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Nederhemert (plaats)"@nl ;
+    schema:name "Nederhemert"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.16817 51.76518)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Nederhemert"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2677372> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/d606d81c962a9ef249f7f64a668b4416>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Nieuwegein (plaats)"@nl ;
+    schema:name "Nieuwegein"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0919 52.0314)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Nieuwegein"@nl 
+    ] ;
+    bag:identificatie "1108";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1108> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10050> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/d82258d71a51197508c611e51c5602b6>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Nieuwland (plaats)"@nl ;
+    schema:name "Nieuwland"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.013333 51.902778)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Nieuwland"@nl 
+    ] ;
+    bag:identificatie "2111";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2111> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1911155> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/af82368743a2c484d2b69238f3850117>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Odijk (plaats)"@nl ;
+    schema:name "Odijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.236 52.052)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Odijk"@nl 
+    ] ;
+    bag:identificatie "2604";
+    schema:isPartOf  <https://data.razu.nl/id/actor/5c5e44886a1cd6f67f5ae63b270a0b24> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2604> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2124349> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/23568a40bacfb2d3617af23ecc54982b>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Oosterwijk (plaats)"@nl ;
+    schema:name "Oosterwijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0783 51.8781)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Oosterwijk"@nl 
+    ] ;
+    bag:identificatie "2274";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2274> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2948351> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/5edad0bfa34949cac87c0f8a1e5c5b76>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Ossenwaard (plaats)"@nl ;
+    schema:name "Ossenwaard"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.137 51.99)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Ossenwaard"@nl 
+    ] ;
+    bag:identificatie "2842";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2842> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1925668> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/b30417283592bc71c36516eae524e0e6>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Ophemert (plaats)"@nl ;
+    schema:name "Ophemert"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3842 51.8453)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Ophemert"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3110411> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/4d29643004f3878cb1865af61cf9b87d>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Opijnen (plaats)"@nl ;
+    schema:name "Opijnen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2983 51.8278)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Opijnen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2098932> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/d945111126485ef92aada7fd732e3563>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Overberg (plaats)"@nl ;
+    schema:name "Overberg"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.498 52.039)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Overberg"@nl 
+    ] ;
+    bag:identificatie "3588";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3588> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3358892> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/d7f1f5a374d4d95fadd30cfee00da1fc3>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Overlangbroek (plaats)"@nl ;
+    schema:name "Overlangbroek"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.384 51.991)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Overlangbroek"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2579504> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/dfc6eee060e002fcd5ed441380e2f915>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats  ;
+    skos:prefLabel "Rhenen (plaats)"@nl ;
+    schema:name "Rhenen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.565 51.957)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Rhenen"@nl 
+    ] ;
+    bag:identificatie "1399";
+    schema:isPartOf  <https://data.razu.nl/id/actor/124f62d77ae9d7beadab9dc57bced177> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1399> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33475264> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/8bdc4241d0a3c27eb97d4e4c30d71735>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Rijswijk (Gelderland)"@nl ;
+    schema:name "Rijswijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3564 51.9575)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Rijswijk"@nl 
+    ] ;
+    bag:identificatie "3383" ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/3383> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1812494> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+
+<https://data.razu.nl/id/locatie/ab8f1762b5e7bb47da861056a230d940>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Schalkwijk (plaats)"@nl ;
+    schema:name "Schalkwijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1843 51.995)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Schalkwijk"@nl 
+    ] ;
+    bag:identificatie "2056";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2056> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2724869> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/e1455a4027b8d2249c14593e637e602c>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Schoonrewoerd (plaats)"@nl ;
+    schema:name "Schoonrewoerd"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1158 51.9206)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Schoonrewoerd"@nl 
+    ] ;
+    bag:identificatie "2272";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2272> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3113902> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/49ad38c2223a924377bb288d3803aadb>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Tienhoven aan de Lek(plaats)"@nl ;
+    schema:name "Tienhoven aan de Lek"@nl ;
+    schema:alternateName "Tienhoven"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.9433 51.96)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Tienhoven aam de Lek"@nl 
+    ] ;
+    bag:identificatie "2107";
+    schema:isPartOf <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2107> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2575504> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a31c18cbca2ebdc7f2b05e02df638d9b>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Tricht (plaats)"@nl ;
+    schema:name "Tricht"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2725 51.89)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Tricht"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3112503> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c03189135b5f13ea1da74bd972d8f57a>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Tull en 't Waal (plaats)"@nl ;
+    schema:name "Tull en 't Waal"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.13315 52.00157)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Tull en 't Waal"@nl 
+    ] ;
+    bag:identificatie "2055";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2055> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2139917> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/29b0e0e01d257d3ece50e425d9b1c1b8>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Veenendaal (plaats)"@nl ;
+    schema:name "Veenendaal"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.555 52.0250)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Veenendaal"@nl 
+    ] ;
+    bag:identificatie "2048";
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2048> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1840> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f835ef71b52fe028dcaee8790abf4b45>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Vianen (plaats)"@nl ;
+    schema:name "Vianen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1 51.983333)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Vianen"@nl 
+    ] ;
+    bag:identificatie "2843";
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2843> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10052> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a5fced58fb1a5d570397bcb7198cdab1>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Waardenburg (plaats)"@nl ;
+    schema:name "Waardenburg"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2558 51.8322)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Waardenburg"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2797402> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/1745574a5916fa8eb50e4084caf1df83>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Werkhoven (plaats)"@nl ;
+    schema:name "Werkhoven"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.244 52.024)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Werkhoven"@nl 
+    ] ;
+    bag:identificatie "2605";
+    schema:isPartOf  <https://data.razu.nl/id/actor/5c5e44886a1cd6f67f5ae63b270a0b24> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2605> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2541237> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Wijk bij Duurstede (plaats)"@nl ;
+    schema:name "Wijk bij Duurstede"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.344 51.973)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Wijk bij Duurstede"@nl 
+    ] ;
+    bag:identificatie "1302";
+    schema:isPartOf  <https://data.razu.nl/id/actor/54c9a2e607988deae23c920dae4f43e4> ;
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/1302> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33516912> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/830bbd6ac4f17442d5fa262a3ef4525e>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Zeist (plaats)"@nl ;
+    schema:name "Zeist"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.233 52.09)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Zeist"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33527010> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f14093198c026c353be44d0291ee34ee>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Zoelen (plaats)"@nl ;
+    schema:name "Zoelen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.4 51.916667)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Zoelen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1985335> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/c6f2a194d385859adf152c061e42a993>
+    a schema:Place, skos:Concept, ldto:Locatie, bag:Woonplaats ;
+    skos:prefLabel "Zijderveld (plaats)"@nl ;
+    schema:name "Zijderveld"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1394 51.9419)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Zijderveld"@nl 
+    ] ;
+    bag:identificatie "2844"; 
+    skos:exactMatch <http://bag.basisregistraties.overheid.nl/bag/id/woonplaats/2844> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2334141> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/a6977baa61d147ab3e53e6fb6e6e987e>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Heukelum (plaats)"@nl ;
+    schema:name "Heukelum"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.11 51.881)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Heukelum"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2443843> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/aa0891a7216c99d2c81c004170975000>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Rijsenburg (plaats)"@nl ;
+    schema:name "Rijsenburg"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.253 52.044)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Rijsenburg"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2431575> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/bed148da65ebbaa28ed63af569e3a4de>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Vuren (plaats)"@nl ;
+    schema:name "Vuren"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0467 51.8244)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Vuren"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q3112541> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/ded2262e650d333631f1bc12db81a2fd>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Dalem (plaats)"@nl ;
+    schema:name "Dalem"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.009444 51.827778)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Dalem"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2628579> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/1fe2af9bef03a71c6ebdee104578b8f9>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Spijk (plaats)"@nl ;
+    schema:name "Spijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0078 51.855)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Spijk"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1978928> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/5ee3c06dfd71df6edc77d921d365de19>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Herwijnen (plaats)"@nl ;
+    schema:name "Herwijnen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1303 51.8253)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Herwijnen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2347830> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/4dbd6828097de758d68cc2dacfd6cc7f>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Hoornaar (plaats)"@nl ;
+    schema:name "Hoornaar"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.9469 51.8767)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hoornaar"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2012106> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/dd41396ef045d15168927cf471e4b98a>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Hoogblokland (plaats)"@nl ;
+    schema:name "Hoogblokland"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.975 51.8742)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Hoogblokland"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2969717> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/e1590fef9f5d077bf60d9b34d023c182>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Gellicum (plaats)"@nl ;
+    schema:name "Gellicum"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1547 51.8761)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Gellicum"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q171246> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/88919878dee9eb75ee069e114be5b657>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Rumpt (plaats)"@nl ;
+    schema:name "Rumpt"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1744 51.8847)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Rumpt"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q692944> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/330613e635b98c939ce76afb61ca0818>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Rhenoy (plaats)"@nl ;
+    schema:name "Rhenoy"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1533 51.8817)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Rhenoy"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q528105> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/66a0806c17e182dd0fbc6fbf488e6fde>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Beesd (plaats)"@nl ;
+    schema:name "Beesd"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.1911 51.8875)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Beesd"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2219434> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/8c8ec9962dc0b4af128c71ad16f6bd58>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Geldermalsen (plaats)"@nl ;
+    schema:name "Geldermalsen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2897 51.8789)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Geldermalsen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2216836> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/b4a0335d5091e45ce0f0d8ad0b541862>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Neerijnen (plaats)"@nl ;
+    schema:name "Neerijnen"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2806 51.8308)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Neerijnen"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2509390> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/3a25058fd74cee6a4f6a5b7c1a5263a9>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Buren (plaats)"@nl ;
+    schema:name "Buren"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.333611 51.910833)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Buren"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1087187> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/3792e8ae3a3ee65602dd31b6020e5d12>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Vreeswijk (plaats)"@nl ;
+    schema:name "Vreeswijk"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0938 52.007)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Vreeswijk"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2407693> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/3a182a55824e737e55369e8cafbe1e93>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Culemborg (plaats)"@nl ;
+    schema:name "Culemborg"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.233 51.95)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Culemborg"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q816699> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/e81cc69de1f06c1553cbb8eb0a53b34b>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Beusichem (plaats)"@nl ;
+    schema:name "Beusichem"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.2925 51.9489)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Beusichem"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q1879468> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/5e80a86dacab2b369281fc988f3b763f>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Asch (plaats)"@nl ;
+    schema:name "Asch"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3125 51.9294)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Asch"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2220170> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/eea5778fc06b4857ea8baa7001e07fb5>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Zoelmond (plaats)"@nl ;
+    schema:name "Zoelmond"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3103 51.9414)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Zoelmond"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2028052> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/8c0b8b6189ebbeff228cdacad31699b6>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Ravenswaaij (plaats)"@nl ;
+    schema:name "Ravenswaaij"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3286 51.9525)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Ravenswaaij"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q597792> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/ae9e36c5c68c07b569ca9637efde8233>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Tiel (plaats)"@nl ;
+    schema:name "Tiel"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.42917 51.88667)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Tiel"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33506500> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/254186d2a3c953c2480349748f346c00>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "IJsselstein (plaats)"@nl ;
+    schema:name "IJsselstein"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.0422 52.02)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats IJselstein"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q10045> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/f00bbf72c6735b859fd9a0720a16a2ac>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Montfoort (plaats)"@nl ;
+    schema:name "Montfoort"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.95278 52.04583)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Montfoort"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33463747> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/9abf462b04cc111f94e1828f6b430666>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Oudewater (plaats)"@nl ;
+    schema:name "Oudewater"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.86806 52.025)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Oudewater"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q33470616> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/8cdb906af987e7077a025b46d58e22bf>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Lopik (plaats)"@nl ;
+    schema:name "Lopik"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.945994 51.973144)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Lopik"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2242811> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/253c10a7234cd908e34a3af1f87a0961>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Benschop (plaats)"@nl ;
+    schema:name "Benschop"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.9794 52.0072)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Benschop"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2896698> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/aa9fe0c363011e154c5c959b627623aa>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Zaltbommel (plaats)"@nl ;
+    schema:name "Zaltbommel"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.247 51.81231)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de plaats Zaltbommel"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q73462> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/ca41927f3891927ad3d7aa5396ff886f>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Vijfheerenlanden (regio)"@nl ;
+    schema:name "Vijfheerenlanden"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.085833 51.907222)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Vijfheerenlanden"@nl 
+    ] ;
+    schema:isPartOf  <https://data.razu.nl/id/actor/3abb33e02dffa48fe675358805df281b> ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q978875> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/4c47d6bb7333f93efd3a7fbda52e6614>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Neder-Betuwe (regio)"@nl ;
+    schema:name "Neder-Betuwe"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.3318 51.9235)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Neder-Betuwe"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2413736> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/9862f7a7a0acaaebcfcb5780de282c49>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Tielerwaard (regio)"@nl ;
+    schema:name "Tielerwaard"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.21667 51.8667)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Tielerwaard"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2518474> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+
+<https://data.razu.nl/id/locatie/28282503c6a8d9e3a1c702acc1cfad1e>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Bommelerwaard (regio)"@nl ;
+    schema:name "Bommelerwaard"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.199167 51.775556)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Bommelerwaard"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q940458> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/39490f0a449a6980ad69de4e533bce24>
+    a schema:Place, skos:Concept, ldto:Locatie  ;
+    skos:prefLabel "Kromme Rijnstreek (regio)"@nl ;
+    schema:name "Kromme Rijnstreek"@nl ;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(5.27 52.0)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Kromme Rijnstreek"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q114839615> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+
+<https://data.razu.nl/id/locatie/97622407cb0f2fe2bd8bb5b8c788340c>
+    a schema:Place, skos:Concept, ldto:Locatie ;
+    skos:prefLabel "Alblasserwaard (regio)"@nl ;
+    schema:name "Alblasserwaard"@nl;
+    geo:hasGeometry [ 
+        a geo:Geometry ;
+        geo:asWKT "POINT(4.8 51.87)"^^geo:wktLiteral ;
+        geo:crs ogc:CRS84 ;
+        schema:description "Een representatief punt in de regio Alblasserwaard"@nl 
+    ] ;
+    skos:exactMatch <http://www.wikidata.org/entity/Q2214132> ;
+    skos:inScheme <https://data.razu.nl/id/locatie/00c28ef1f380c89a94e3b00e5c865a43> .
+

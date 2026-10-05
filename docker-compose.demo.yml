@@ -1,0 +1,148 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - http.cors.enabled=true
+      - "http.cors.allow-origin=\"*\""
+      - http.cors.allow-methods=OPTIONS,HEAD,GET,POST
+      - http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization
+    ports:
+      - "127.0.0.1:9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f --silent http://localhost:9200/_cluster/health?wait_for_status=yellow || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 40s
+
+  silo:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    command: server /data --console-address ":9001"
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${SILO_ROOT_USER:-silo-admin}
+      MINIO_ROOT_PASSWORD: ${SILO_ROOT_PASSWORD:-silo-demo-password}
+      MINIO_API_CORS_ALLOW_ORIGIN: "*"
+    volumes:
+      - silo-data:/data
+    healthcheck:
+      test: [ "CMD", "silo", "healthcheck", "ready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  silo-init:
+    image: docker.io/pgsty/silo:RELEASE.2026-09-16T00-00-00Z
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        mcli alias set demo http://silo:9000 "$${SILO_ROOT_USER}" "$${SILO_ROOT_PASSWORD}"
+        mcli mb --ignore-existing demo/k50907905
+        mcli anonymous set download demo/k50907905
+        mcli mirror --overwrite /seed demo/k50907905
+    environment:
+      SILO_ROOT_USER: ${SILO_ROOT_USER:-silo-admin}
+      SILO_ROOT_PASSWORD: ${SILO_ROOT_PASSWORD:-silo-demo-password}
+    volumes:
+      - ./demo/s3/k50907905:/seed:ro
+    depends_on:
+      silo:
+        condition: service_healthy
+
+  # Overrides/extends the sura service from docker-compose.local.yml.
+  # Mount the committed *.env.example files onto the .env targets: the real .env
+  # files are gitignored, so these mounts keep working on a fresh clone (Compose
+  # merges volumes by target path, so these replace the mounts from the local file).
+  sura:
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/SURA.git#main
+    ports:
+      - "0.0.0.0:8001:8000"
+    volumes:
+      - ./docker/sura/general.env.example:/app/general.env:ro
+      - ./docker/sura/jwt.env.example:/app/jwt.env:ro
+      - ./docker/sura/elastic.env.example:/app/elastic.env:ro
+
+  cantaloupe:
+    build:
+      context: docker/cantaloupe
+    ports:
+      - "127.0.0.1:8182:8182"
+    volumes:
+      - ./docker/cantaloupe/cantaloupe.properties:/etc/cantaloupe/cantaloupe.properties:ro
+      - ./docker/cantaloupe/delegates.rb:/etc/cantaloupe/delegates.rb:ro
+    depends_on:
+      silo:
+        condition: service_healthy
+
+  snippetserver:
+    restart: unless-stopped
+    build:
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/snippetserver.git#main
+    ports:
+      # Keep identical to docker-compose.local.yml so combined -f usage dedupes the port binding
+      - "0.0.0.0:8002:8000"
+    environment:
+      CORS_ALLOWED_ORIGINS: http://localhost:8081,http://localhost:4200
+      ALLOWED_HOSTS: localhost
+    depends_on:
+      silo:
+        condition: service_healthy
+
+  # Lets the snippetserver fetch http://localhost:9000/... URLs: inside its
+  # network namespace localhost points to this proxy, which forwards to silo.
+  silo-loopback:
+    image: alpine/socat
+    network_mode: service:snippetserver
+    command: tcp-listen:9000,fork,reuseaddr tcp-connect:silo:9000
+    depends_on:
+      silo:
+        condition: service_healthy
+      snippetserver:
+        condition: service_started
+
+  qlever:
+    image: adfreiburg/qlever:commit-55c05d4
+    entrypoint: /opt/valeros/start-qlever.sh
+    ports:
+      - "127.0.0.1:7001:7001"
+    volumes:
+      - ./demo/rdf:/data:ro
+      - ./docker/qlever/start-qlever.sh:/opt/valeros/start-qlever.sh:ro
+    tmpfs:
+      - /index:mode=1777
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "--silent", "http://localhost:7001/?query=ASK%20%7B%20?s%20?p%20?o%20%7D" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  es-indexer:
+    build:
+      context: .
+      dockerfile: docker/es-indexer/Dockerfile
+    environment:
+      SPARQL_ENDPOINT: http://qlever:7001
+      ES_URL: http://elasticsearch:9200
+      SEED_DIR: /seed
+    volumes:
+      - ./demo/s3/k50907905:/seed:ro
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      qlever:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  silo-data:
+  es-data:

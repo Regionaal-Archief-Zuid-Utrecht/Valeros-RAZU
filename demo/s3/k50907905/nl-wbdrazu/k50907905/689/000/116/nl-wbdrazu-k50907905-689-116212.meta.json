@@ -1,0 +1,101 @@
+[
+  {
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116212",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Bestand"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.meta.json"
+      }
+    ],
+    "http://schema.org/height": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 5982
+      }
+    ],
+    "http://schema.org/position": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "http://schema.org/width": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4291
+      }
+    ],
+    "https://data.razu.nl/def/ldto/URLBestand": [
+      {
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.alto.xml"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/bestandsformaat": [
+      {
+        "@id": "https://data.razu.nl/id/bestandsformaat/63e8775df9a69fa0aadbb461fafe4c1e"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksum": [
+      {
+        "@id": "_:Nd466846435cc480db94271b372f1eb31"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isRepresentatieVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "nl-wbdrazu-k50907905-689-116212.alto.xml"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/omvang": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 431242
+      }
+    ]
+  },
+  {
+    "@id": "_:Nd466846435cc480db94271b372f1eb31",
+    "@type": [
+      "https://data.razu.nl/def/ldto/ChecksumGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/checksumAlgoritme": [
+      {
+        "@id": "https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2025-05-02T14:31:18"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumWaarde": [
+      {
+        "@value": "e1252274a5a2022f5cdac781f3f9632c"
+      }
+    ]
+  },
+  {
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116212.alto.xml",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ],
+    "http://www.loc.gov/premis/rdf/v3/originalName": [
+      {
+        "@value": "Wijksche-Courant/1887/Wijksche-Courant_1887_0270.alto.xml"
+      }
+    ]
+  }
+]

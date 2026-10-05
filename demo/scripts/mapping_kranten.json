@@ -1,0 +1,151 @@
+{
+    "mappings": {
+        "_source": {
+            "excludes": [
+            ]
+        },
+        "properties": {
+            "@id": {
+                "type": "keyword"
+            },
+            "archief": {
+                "type": "keyword"
+            },
+            "archiefvormer": {
+                "properties": {
+                    "label": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "uri": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "serie": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+            },
+            "naam": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                }
+            },
+            "classificatie": {
+                "properties": {
+                    "label": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "uri": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "aggregatieniveau": {
+                "properties": {
+                    "label": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "uri": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "isOnderdeelVan": {
+                "type": "keyword"
+            },
+            "auteursrecht": {
+                "properties": {
+                    "label": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "uri": {
+                        "type": "keyword"
+                    },
+                    "melding": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "copyright_holder": {
+                        "type": "keyword",
+                        "index": false
+                    }
+                }
+            },
+            "openbaarheid": {
+                "properties": {
+                    "label": {
+                        "type": "keyword",
+                        "index": false
+                    },
+                    "uri": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "volume": {
+                "type": "keyword",
+                "index": false
+            },
+            "document_year": {
+                "type": "keyword"
+            },
+            "document_month": {
+                "type": "keyword"
+            },
+            "document_day": {
+                "type": "keyword"
+            },
+            "spatialCoverage": {
+                "type": "keyword"
+            },
+            "position": {
+                "type": "integer"
+            },
+            "URL_bestand": {
+                "type": "keyword",
+                "index": false
+            },
+            "image": {
+                "type": "keyword"
+            },
+            "full_text": {
+                "type": "text", 
+                "analyzer": "razu_custom"
+            }
+        }
+    },
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 1,
+        "index": {
+            "max_inner_result_window": 10000
+        },
+        "analysis": {
+            "filter": {
+                "dutch_stop": {
+                "type": "stop",
+                "stopwords": []                }
+            },
+            "analyzer": {
+                "razu_custom": {
+                "tokenizer": "standard",
+                "filter": ["lowercase", "asciifolding"]
+                }
+            }
+        }
+    }
+  }
+  

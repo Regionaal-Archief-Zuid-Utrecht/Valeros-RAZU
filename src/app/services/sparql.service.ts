@@ -22,37 +22,28 @@ export class SparqlService {
     private api: ApiService,
     private settings: SettingsService,
     private endpoints: EndpointService,
-  ) {}
+  ) { }
 
   getFederatedQuery(
     queryTemplate: string,
     queryEndpoints?: EndpointUrlsModel[],
   ): string {
-    const firstEndpoint = queryEndpoints
-      ? queryEndpoints[0].sparql
-      : this.endpoints.getFirstUrls().sparql;
-    const firstServiceQuery = `
-{
-  SERVICE <${firstEndpoint}> {
-      ${queryTemplate}
-      BIND("${firstEndpoint}" AS ?endpointUrl)
-  }
-}`;
+    const endpoints = queryEndpoints ?? this.endpoints.getAllEnabledUrls();
 
-    const unionEndpoints = queryEndpoints
-      ? queryEndpoints.slice(1)
-      : this.endpoints.getAllEnabledUrls().slice(1);
-    const unionServiceQueries = unionEndpoints.map(
-      (endpoint) => `
-UNION {
-    SERVICE <${endpoint.sparql}> {
-        ${queryTemplate}
-        BIND("${endpoint.sparql}" AS ?endpointUrl)
+    if (endpoints.length <= 1) {
+      return queryTemplate;
     }
+
+    const serviceQueries = endpoints.map(
+      (endpoint) => `{
+  SERVICE <${endpoint.sparql}> {
+      ${queryTemplate}
+      BIND("${endpoint.sparql}" AS ?endpointUrl)
+  }
 }`,
     );
 
-    return `${firstServiceQuery}\n${unionServiceQueries.join('\n')}`;
+    return serviceQueries.join('\nUNION\n');
   }
 
   private _ensureNodeHasId(node: NodeModel): void {
@@ -86,11 +77,9 @@ SELECT DISTINCT ?sub ?pred WHERE {
 limit 500`;
 
     try {
-      return await this.api.postData<SparqlIncomingRelationModel[]>(
+      return await this.api.postSparql<SparqlIncomingRelationModel[]>(
         this.endpoints.getFirstUrls().sparql,
-        {
-          query: query,
-        },
+        query,
       );
     } catch (error) {
       console.warn('Failed to fetch incoming relations:', error);
@@ -122,11 +111,9 @@ SELECT DISTINCT ?id ?title ?parent WHERE {
 limit 500`;
 
     try {
-      return await this.api.postData<SparqlNodeParentModel[]>(
+      return await this.api.postSparql<SparqlNodeParentModel[]>(
         this.endpoints.getFirstUrls().sparql,
-        {
-          query: query,
-        },
+        query,
       );
     } catch (error) {
       console.warn('Failed to fetch parent nodes:', error);
@@ -197,11 +184,11 @@ SELECT DISTINCT ?s ?label WHERE {
 LIMIT 10000`;
 
     try {
-      const response: { s: string; label: string }[] = await this.api.postData<
-        { s: string; label: string }[]
-      >(this.endpoints.getFirstUrls().sparql, {
-        query: query,
-      });
+      const response: { s: string; label: string }[] =
+        await this.api.postSparql<{ s: string; label: string }[]>(
+          this.endpoints.getFirstUrls().sparql,
+          query,
+        );
       const labels: ThingWithLabelModel[] = response.map(({ s, label }) => {
         return { '@id': s, label: label };
       });
@@ -233,11 +220,9 @@ SELECT DISTINCT ?o WHERE {
 }
 LIMIT 10000`;
     try {
-      const response: { o: string }[] = await this.api.postData<
+      const response: { o: string }[] = await this.api.postSparql<
         { o: string }[]
-      >(this.endpoints.getFirstUrls().sparql, {
-        query: query,
-      });
+      >(this.endpoints.getFirstUrls().sparql, query);
       const objIds = response.map((item) => item.o);
 
       return objIds;
@@ -263,12 +248,16 @@ LIMIT 10000`;
         ${this.getFederatedQuery(queryTemplate)}
     }`;
 
-    const results = await this.api.postData<SparqlPredObjModel[]>(
+    const results = await this.api.postSparql<SparqlPredObjModel[]>(
       this.endpoints.getFirstUrls().sparql,
-      {
-        query: query,
-      },
+      query,
     );
+
+    const enabledUrls = this.endpoints.getAllEnabledUrls();
+    if (enabledUrls.length === 1) {
+      results.forEach((result) => (result.endpointUrl = enabledUrls[0].sparql));
+    }
+
     const nodeData: { [pred: string]: NodeObj[] } = {};
     const endpointIds: Set<string> = new Set();
 
@@ -344,9 +333,9 @@ LIMIT 10000`;
           ldto:isRepresentatieVan ?aflevering ;
                   ?bp ?po . 
           }`;
-    return await this.api.postData<string>(
+    return await this.api.postSparql<string>(
       this.endpoints.getFirstUrls().sparql,
-      { query },
+      query,
       {
         accept: 'text/turtle',
         responseType: 'text',
@@ -369,15 +358,59 @@ OPTIONAL { ?beperkingGebruikType <http://www.w3.org/2004/02/skos/core#prefLabel>
     }`;
 
     const results: { copyrightNotice: string; beperkingGebruikType: string }[] =
-      await this.api.postData<
+      await this.api.postSparql<
         { copyrightNotice: string; beperkingGebruikType: string }[]
-      >(this.endpoints.getFirstUrls().sparql, {
-        query: query,
-      });
+      >(this.endpoints.getFirstUrls().sparql, query);
     if (!results || results.length === 0) {
       return null;
     }
     return results;
+  }
+
+  // Fetches all beperkingGebruik data in a single query. Unlike getObjIds hops,
+  // this also works when intermediate nodes are blank nodes (e.g. QLever),
+  // since the blank node never needs to be referenced in a separate query.
+  async getBeperkingGebruikRows(id: string): Promise<
+    {
+      beperking: string;
+      type?: string;
+      notice?: string;
+      note?: string;
+      termijn?: string;
+      einddatum?: string;
+    }[]
+  > {
+    const queryTemplate = `
+<${id}> ldto:beperkingGebruik ?beperking .
+OPTIONAL { ?beperking ldto:beperkingGebruikType ?type . }
+OPTIONAL { ?beperking ldto:beperkingGebruikType/schema:copyrightNotice ?notice . }
+OPTIONAL { ?beperking ldto:beperkingGebruikType/skos:note ?note . }
+OPTIONAL { ?beperking ldto:beperkingGebruikTermijn ?termijn .
+  OPTIONAL { ?termijn ldto:termijnEinddatum ?einddatum . } }`;
+
+    const query = `
+    PREFIX ldto: <https://data.razu.nl/def/ldto/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    SELECT DISTINCT ?beperking ?type ?notice ?note ?termijn ?einddatum WHERE {
+        ${this.getFederatedQuery(queryTemplate)}
+    }`;
+
+    try {
+      return await this.api.postSparql<
+        {
+          beperking: string;
+          type?: string;
+          notice?: string;
+          note?: string;
+          termijn?: string;
+          einddatum?: string;
+        }[]
+      >(this.endpoints.getFirstUrls().sparql, query);
+    } catch (error) {
+      console.warn('Failed to fetch beperkingGebruik data:', error);
+      return [];
+    }
   }
 
   async shouldShowIIIF(id: string): Promise<boolean> {
@@ -430,11 +463,9 @@ SELECT DISTINCT ?fileURI ?format ?name ?url ?iiifService ?width ?height ?positio
 } ORDER BY ?position`;
 
     try {
-      const iiifItems: IIIFItem[] = await this.api.postData<IIIFItem[]>(
+      const iiifItems: IIIFItem[] = await this.api.postSparql<IIIFItem[]>(
         this.endpoints.getFirstUrls().sparql,
-        {
-          query: query,
-        },
+        query,
       );
 
       return iiifItems.map((item) => {
@@ -464,11 +495,9 @@ select ?altoUrl where {
      ${this.getFederatedQuery(sparqlTemplate)}
 } limit 100`;
 
-    const results: { altoUrl: string }[] = await this.api.postData<
+    const results: { altoUrl: string }[] = await this.api.postSparql<
       { altoUrl: string }[]
-    >(this.endpoints.getFirstUrls().sparql, {
-      query: query,
-    });
+    >(this.endpoints.getFirstUrls().sparql, query);
     if (!results || results.length === 0) {
       return null;
     }

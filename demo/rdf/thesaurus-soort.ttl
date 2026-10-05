@@ -1,0 +1,170 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a>
+   a skos:ConceptScheme ;
+   skos:description "Type of soort informatieobject"@nl ;
+   skos:prefLabel "Soort"@nl ;
+   dcterms:hasFormat <https://context.data.razu.nl/soort.json> .
+
+<https://data.razu.nl/id/soort/4494b13ba2a3d7354c3c02b970bc51b6>
+   a skos:Concept ;
+   skos:prefLabel "Luchtfoto"@nl ;
+   skos:broader <https://data.razu.nl/id/soort/a5163fe21f330316158294f4b906f597> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/d5cd29a63289870be48cf55cbc79ae36>
+   a skos:Concept ;
+   skos:prefLabel "Kleurenfoto"@nl ;
+   skos:broader <https://data.razu.nl/id/soort/a5163fe21f330316158294f4b906f597> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/a5163fe21f330316158294f4b906f597>
+   a skos:Concept ;
+   skos:prefLabel "Foto"@nl ;
+   skos:broader <https://data.razu.nl/id/soort/7f47cc1a2a6c35bef93e8f6954809c73> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/7f47cc1a2a6c35bef93e8f6954809c73>
+   a skos:Concept ;
+   skos:prefLabel "Beeldmateriaal"@nl ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/40d7459d77bc1fefb775b88e4b4b42cc>
+   a skos:Concept ;
+   skos:prefLabel "Bestuursarchief"@nl ;
+   skos:definition "Documenten gecreëerd, ontvangen en bewaard door een bestuur als bewijs van besluitvorming en verantwoording van bestuurlijk handelen."@nl ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/a5a736ade5e176ad95d42ea91b7d3cbf>
+   a skos:Concept ;
+   skos:prefLabel "Vergadering"@nl ;
+   skos:definition "Een gestructureerde bijeenkomst van een officiële bestuurs- of adviesorgaan, georganiseerd volgens vastgestelde procedures en regels, waarin besluiten worden genomen, informatie wordt gedeeld, en/of advies wordt uitgebracht over specifieke onderwerpen die binnen de bevoegdheden van het orgaan vallen."@nl ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f>
+   a skos:Concept ;
+   skos:prefLabel "Vergaderstuk"@nl ;
+   skos:definition "Een document of verzameling documenten die zijn voorbereid, ingediend, besproken of geagendeerd in het kader van een formele vergadering, zoals die van een gemeenteraad, college van burgemeester en wethouders, of een raadscommissie."@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_7f9dffa7> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/49098c06473b94079cd2cb087eea7952>
+   a skos:Concept ;
+   skos:prefLabel "Agenda"@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_f90465b3> ;
+   skos:broader  <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/9c7586dcdd736c1b942e3953c702a7a2>
+   a skos:Concept ;
+   skos:prefLabel "Vergaderverslag"@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_42e406dd> ;
+   skos:broader  <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/b42b774b1802c7abd97591497ce4aab1>
+   a skos:Concept ;
+   skos:prefLabel "Jaarverslag"@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_3d782f30> ;
+   skos:broader  <https://data.razu.nl/id/soort/c85564bc9fb477028e36bfc8a5bff2a0> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/bb54207e3120a88e8746c2f13b5f8661>
+   a skos:Concept ;
+   skos:prefLabel "Ingekomen stuk"@nl ;
+   skos:definition "Een vergaderstuk dat afkomstig is van een actor buiten de vergadering."@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_de27ae7a> ;
+   skos:broader  <https://data.razu.nl/id/soort/b514faf97ce3619b6a2d520dee49930f> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/a2887a0a4e53f8ed778d476b93b62532>
+   a skos:Concept ;
+   skos:prefLabel "Begroting"@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_dfa0ff1f> ;
+   skos:broader  <https://data.razu.nl/id/soort/c85564bc9fb477028e36bfc8a5bff2a0> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/c85564bc9fb477028e36bfc8a5bff2a0>
+   a skos:Concept ;
+   skos:prefLabel "Beleidsdocument"@nl ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_10eb451d> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+ <https://data.razu.nl/id/soort/a5b79f2690d2386c162ead3066fca83f>
+   a skos:Concept ;
+   skos:prefLabel "Beleidsnota"@nl ;
+   skos:broader  <https://data.razu.nl/id/soort/c85564bc9fb477028e36bfc8a5bff2a0> ;
+   skos:exactMatch <https://identifier.overheid.nl/tooi/def/thes/kern/c_9376c730> ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+  <https://data.razu.nl/id/soort/c877b8b12e380ccafa35c210f2ab7dd8>
+    a skos:Concept ;
+    skos:prefLabel "Seriële publicatie"@nl ;
+    skos:definition "Een publicatie die in opeenvolgende delen verschijnt volgens een vaste of onbepaalde frequentie, zoals tijdschriften, kranten, jaarboeken en doorlopende reeksen."@nl ;
+    skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8>
+  a skos:Concept ;
+  skos:prefLabel "Krant"@nl ;
+  skos:definition "Een seriële publicatie die op regelmatige basis verschijnt en actuele nieuwsberichten, opinies en andere informatie bevat."@nl ;
+  skos:broader <https://data.razu.nl/id/soort/c877b8b12e380ccafa35c210f2ab7dd8> ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260>
+  a skos:Concept ;
+  skos:prefLabel "Aflevering"@nl ;
+  skos:altLabel "Issue"@nl, "Nummer"@nl ;
+  skos:definition "Een afzonderlijke editie of nummer van een seriële publicatie, zoals een krant of tijdschrift."@nl ;
+  skos:broader <https://data.razu.nl/id/soort/c877b8b12e380ccafa35c210f2ab7dd8> ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/265753c2d190a0266797b69903c13123>
+  a skos:Concept ;
+  skos:prefLabel "Pagina"@nl ;
+  skos:definition "Één zijde van een blad, een niet-zelfstandig deel van een publicatie of document."@nl ;
+  skos:broader <https://data.razu.nl/id/soort/30d2cbfabc5d7cf795d3ddb00b1e8260> ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/89cfa9e6349cc6bdf87135c96cd37e14> 
+  a skos:Concept ;
+  skos:prefLabel "Bibliografische collectie"@nl ;
+  skos:definition "Een verzameling van boeken, kranten, tijdschiften, artikelen en dergelijke."@nl ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/83f5430a921350f53972970595d2790c> 
+  a skos:Concept ;
+  skos:prefLabel "Bouwdossier"@nl ;
+  skos:definition "Een verzameling van documenten over de aanvraag, beoordeling en uitvoering van een bouwproject."@nl ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/b9e9be259c9c122c5a27bea9f53633d3> 
+  a skos:Concept ;
+  skos:prefLabel "Aanvraag vergunning"@nl ;
+  skos:definition "Een aanvraag voor een vergunning."@nl ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/67becbe183d87f424647aea18296da40> 
+  a skos:Concept ;
+  skos:prefLabel "Vergunning"@nl ;
+  skos:definition "Een vergunning of beschikking."@nl ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/6c83ee878ab36b68facbf10bf20b2819> 
+  a skos:Concept ;
+  skos:prefLabel "Bouwvergunning"@nl ;
+  skos:definition "Een bouwvergunning."@nl ;
+  skos:broader <https://data.razu.nl/id/soort/67becbe183d87f424647aea18296da40> ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/6904a889b403cfc53a8ac87427a1b041> 
+  a skos:Concept ;
+  skos:prefLabel "Bouwtekening"@nl ;
+  skos:definition "Een bouw- of constructietekening"@nl ;
+  skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .
+
+<https://data.razu.nl/id/soort/22b96f5bcaec05c55fd50039022db638>
+   a skos:Concept ;
+   skos:prefLabel "Document - niet nader gespecificeerd"@nl ;
+   skos:definition "Een document waarvan het type (nog) niet is geïdentificeerd."@nl ;
+   skos:inScheme <https://data.razu.nl/id/soort/bbc3a6702c26cc0f1ca33eb5e80c9d4a> .

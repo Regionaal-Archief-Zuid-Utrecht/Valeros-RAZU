@@ -112,7 +112,7 @@ export class NodeComponent implements OnInit, OnChanges {
     public labelsCache: LabelsCacheService,
     public nodeSection: NodeSectionService,
     public nodeFile: NodeFileService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     void this.retrieveParents();
@@ -212,9 +212,12 @@ export class NodeComponent implements OnInit, OnChanges {
   }
 
   shouldShowFileNextToTable(): boolean {
-    return this.nodeSection.shouldShowFileNextToTable(
-      this.files.value,
-      this.canShowUsingFileRenderer.value,
+    return (
+      !this.shouldShowIIIFSubject.value &&
+      this.nodeSection.shouldShowFileNextToTable(
+        this.files.value,
+        this.canShowUsingFileRenderer.value,
+      )
     );
   }
 

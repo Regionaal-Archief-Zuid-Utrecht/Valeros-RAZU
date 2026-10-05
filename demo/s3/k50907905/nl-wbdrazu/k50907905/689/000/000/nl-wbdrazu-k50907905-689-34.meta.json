@@ -1,0 +1,77 @@
+[
+  {
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-34.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-34",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Informatieobject"
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/000/nl-wbdrazu-k50907905-689-34.meta.json"
+      }
+    ],
+    "http://schema.org/mainEntity": [
+      {
+        "@id": "https://data.razu.nl/id/pub/4f5ac9bb87f11d5fc82ed3b7b7158084"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/aggregatieniveau": [
+      {
+        "@id": "https://data.razu.nl/id/aggregatieniveau/cd4b9482eadd1fea35dbf01c9a05b093"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/classificatie": [
+      {
+        "@id": "https://data.razu.nl/id/soort/e7f8935f15730273e0b9ab9a0f74b2f8"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInRuimte": [
+      {
+        "@id": "https://data.razu.nl/id/locatie/d5acdcc4f873045aaefd2a31af723153"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijd": [
+      {
+        "@id": "_:b1"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isOnderdeelVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-1"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "Wijks(ch)e Courant"
+      }
+    ]
+  },
+  {
+    "@id": "_:b1",
+    "@type": [
+      "https://data.razu.nl/def/ldto/DekkingInTijdGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdBeginDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "1870-01-06"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdEindDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2008-12-30"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/dekkingInTijdType": [
+      {
+        "@id": "https://data.razu.nl/id/dekkingintijdtype/a3e30182626730af3b3c2a7071c58038"
+      }
+    ]
+  }
+]

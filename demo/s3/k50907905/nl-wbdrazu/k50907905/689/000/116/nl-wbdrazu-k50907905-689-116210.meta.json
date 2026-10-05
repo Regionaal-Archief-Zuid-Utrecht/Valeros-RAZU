@@ -1,0 +1,106 @@
+[
+  {
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.jpg",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ],
+    "http://www.loc.gov/premis/rdf/v3/originalName": [
+      {
+        "@value": "Wijksche-Courant/1887/Wijksche-Courant_1887_0273.jpg"
+      }
+    ]
+  },
+  {
+    "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.meta.json",
+    "@type": [
+      "http://www.loc.gov/premis/rdf/v3/File"
+    ]
+  },
+  {
+    "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-116210",
+    "@type": [
+      "https://data.razu.nl/def/ldto/Bestand"
+    ],
+    "http://iiif.io/api/presentation/3#service": [
+      {
+        "@id": "https://iiif.razu.nl/iiif/2/k50907905__nl-wbdrazu__k50907905__689__000__116__nl-wbdrazu-k50907905-689-116210.jpg"
+      }
+    ],
+    "http://purl.org/dc/terms/hasFormat": [
+      {
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.meta.json"
+      }
+    ],
+    "http://schema.org/height": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 6003
+      }
+    ],
+    "http://schema.org/position": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4
+      }
+    ],
+    "http://schema.org/width": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4359
+      }
+    ],
+    "https://data.razu.nl/def/ldto/URLBestand": [
+      {
+        "@id": "http://localhost:9000/k50907905/nl-wbdrazu/k50907905/689/000/116/nl-wbdrazu-k50907905-689-116210.jpg"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/bestandsformaat": [
+      {
+        "@id": "https://data.razu.nl/id/bestandsformaat/9e03fffdb1f119a3a36a76d19c610218"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksum": [
+      {
+        "@id": "_:Nb190f63389294bd1ab312907617a329a"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/isRepresentatieVan": [
+      {
+        "@id": "https://data.razu.nl/id/object/nl-wbdrazu-k50907905-689-100501"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/naam": [
+      {
+        "@value": "nl-wbdrazu-k50907905-689-116210.jpg"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/omvang": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 13493060
+      }
+    ]
+  },
+  {
+    "@id": "_:Nb190f63389294bd1ab312907617a329a",
+    "@type": [
+      "https://data.razu.nl/def/ldto/ChecksumGegevens"
+    ],
+    "https://data.razu.nl/def/ldto/checksumAlgoritme": [
+      {
+        "@id": "https://data.razu.nl/id/algoritme/7f138a09169b250e9dcb378140907378"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumDatum": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2025-04-18T15:48:10.603652"
+      }
+    ],
+    "https://data.razu.nl/def/ldto/checksumWaarde": [
+      {
+        "@value": "1bd0bb0662eaf4f10c6f590498263d90"
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+# Default: let Git detect text files and store them with LF line endings in the
+# repository index. The working-tree line ending still depends on core.autocrlf.
+/.gitattributes text eol=lf
+* text=auto
+
+# Shell scripts must stay LF on checkout; CRLF causes shebang failures such as
+# "/usr/bin/env: 'bash\\r': No such file or directory" inside Linux containers.
+*.sh text eol=lf
+
+# Files mounted into or executed by Linux containers must remain LF.
+docker/**/*.py text eol=lf
+docker/**/*.rb text eol=lf
+docker/**/*.env text eol=lf
+docker/**/*.env.example text eol=lf
+docker/**/*.properties text eol=lf
+docker/**/*.conf text eol=lf
+docker/**/Dockerfile text eol=lf
+
+# Docker Compose files can embed shell commands that are passed to containers.
+docker-compose*.yml text eol=lf
+docker-compose*.yaml text eol=lf
+/Dockerfile text eol=lf
+
+# Demo seed/config files that are read by containers.
+demo/**/*.py text eol=lf
+demo/**/*.json text eol=lf
+*.ttl text eol=lf
+*.nt text eol=lf
+*.nq text eol=lf
+demo/**/*.ttl text eol=lf
+demo/**/*.nt text eol=lf
+demo/**/*.nq text eol=lf
