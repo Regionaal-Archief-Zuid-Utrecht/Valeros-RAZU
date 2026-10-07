@@ -16,6 +16,7 @@ import { SearchService } from '../../../services/search/search.service';
 })
 export class SnippetComponent implements OnInit {
   @Input() altoUrl?: string;
+  @Input() fragments?: { value: string }[];
   loading = false;
   snippet?: string;
 
@@ -26,12 +27,24 @@ export class SnippetComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['altoUrl'] || changes['searchService.queryStr']) {
+    if (
+      changes['altoUrl'] ||
+      changes['fragments'] ||
+      changes['searchService.queryStr']
+    ) {
       void this.retrieveSnippet();
     }
   }
 
   async retrieveSnippet(): Promise<void> {
+    const fragments = this.fragments
+      ?.map((f) => f.value)
+      .filter((f) => !!f?.trim());
+    if (fragments?.length) {
+      this.snippet = fragments.join(' &hellip; ');
+      return;
+    }
+
     const snippetUrl = Settings.endpoints?.snippetServer;
     if (!this.altoUrl || !snippetUrl || !this.searchService.queryStr?.trim()) {
       return;

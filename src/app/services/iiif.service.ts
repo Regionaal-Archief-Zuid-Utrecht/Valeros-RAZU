@@ -129,7 +129,7 @@ export class IIIFService {
 
     const processAltoUrl = async (item: IIIFItem) => {
       if (item.altoUrl) {
-        item.altoUrl = await this.url.processUrl(item.altoUrl);
+        item.altoUrl = await this.url.processUrl(item.altoUrl, false);
       }
       return item;
     };

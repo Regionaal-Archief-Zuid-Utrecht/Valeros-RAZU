@@ -102,7 +102,7 @@ export class ElasticService {
   private _getFullTextMatchQuery(query: string): ElasticFullTextMatchQuery {
     return {
       match: {
-        _full_text: {
+        full_text: {
           query: query,
         },
       },
@@ -335,6 +335,12 @@ export class ElasticService {
     if (query) {
       const combinedQuery = this._getCombinedSearchQuery(query);
       fieldOrValueFilterQueries.push(combinedQuery);
+
+      queryData.highlight = {
+        fields: {
+          full_text: {},
+        },
+      };
     } else {
       fieldOrValueFilterQueries.push({ match_all: {} });
     }
