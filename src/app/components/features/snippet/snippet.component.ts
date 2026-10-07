@@ -3,7 +3,7 @@ import {
   inject,
   Input,
   SimpleChanges,
-  type OnInit,
+  type OnChanges,
 } from '@angular/core';
 import { Settings } from '../../../config/settings';
 import { SearchService } from '../../../services/search/search.service';
@@ -14,7 +14,7 @@ import { SearchService } from '../../../services/search/search.service';
   templateUrl: './snippet.component.html',
   styleUrl: './snippet.component.scss',
 })
-export class SnippetComponent implements OnInit {
+export class SnippetComponent implements OnChanges {
   @Input() altoUrl?: string;
   @Input() fragments?: { value: string }[];
   loading = false;
@@ -22,16 +22,8 @@ export class SnippetComponent implements OnInit {
 
   searchService = inject(SearchService);
 
-  ngOnInit(): void {
-    void this.retrieveSnippet();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['altoUrl'] ||
-      changes['fragments'] ||
-      changes['searchService.queryStr']
-    ) {
+    if (changes['altoUrl'] || changes['fragments']) {
       void this.retrieveSnippet();
     }
   }
