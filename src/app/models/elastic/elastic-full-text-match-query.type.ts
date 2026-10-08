@@ -1,6 +1,6 @@
 export type ElasticFullTextMatchQuery = {
   match: {
-    _full_text: {
+    full_text: {
       query: string;
     };
   };

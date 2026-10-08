@@ -66,6 +66,11 @@ export class SearchHitsService {
         (hit._source as ElasticNodeModel)['endpointId'] =
           searchResponse.endpointId;
 
+        // Flatten Elasticsearch highlight fragments into the source
+        (hit._source as any)['_highlight'] = hit.highlight
+          ? Object.values(hit.highlight).flat()
+          : [];
+
         const id = hit._source['@id'];
         if (!id) {
           return;
@@ -81,6 +86,10 @@ export class SearchHitsService {
           const mergedSource: ElasticNodeModel = {
             ...existingHit._source,
             ...hit._source,
+            _highlight: [
+              ...((existingHit._source as any)._highlight ?? []),
+              ...((hit._source as any)._highlight ?? []),
+            ],
             // Keep track of all endpoints this record came from
             endpointId: Array.isArray((existingHit._source as any).endpointId)
               ? [

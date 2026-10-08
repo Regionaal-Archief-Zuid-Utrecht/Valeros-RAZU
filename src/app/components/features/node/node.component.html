@@ -89,6 +89,7 @@
           @if (showSnippet) {
             <app-snippet
               [altoUrl]="node?.['URL_bestand']?.[0]?.value"
+              [fragments]="node?.['_highlight']"
               class="text-sm sm:pr-32"
             />
           }
