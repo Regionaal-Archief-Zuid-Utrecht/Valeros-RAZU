@@ -139,10 +139,9 @@ export class UrlService {
       return this.details.getLinkFromUrl(url);
     }
 
-    url = url.replaceAll(
-      'hetutrechtsarchief.nl/id',
-      'hetutrechtsarchief.nl/collectie',
-    );
+    for (const rewrite of Settings.endpoints.urlRewrites ?? []) {
+      url = url.replaceAll(rewrite.from, rewrite.to);
+    }
     return url;
   }
 

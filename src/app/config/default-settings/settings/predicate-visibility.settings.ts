@@ -18,6 +18,6 @@ export const predicateVisibilitySettings: PredicateVisibilitySettings = {
       [PredicateVisibility.Hide]: [],
     },
   },
-  alwaysHide: ['@id', 'endpointId', ...typePredicates],
+  alwaysHide: ['@id', 'endpointId', '_highlight', ...typePredicates],
   hideTypeBadges: [],
 };
