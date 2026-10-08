@@ -16,7 +16,7 @@ services:
   gotenberg-proxy:
     restart: unless-stopped
     build:
-      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/gotenberg-proxy#main
+      context: https://github.com/Regionaal-Archief-Zuid-Utrecht/gotenberg-proxy.git#main
     ports:
       - "127.0.0.1:5000:5000"
     environment:
