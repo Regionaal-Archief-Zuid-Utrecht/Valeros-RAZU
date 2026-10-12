@@ -96,15 +96,17 @@ export class SearchService {
   }
 
   initSearchOnFilterChange() {
-    this.filters.searchTrigger.pipe(skip(1)).subscribe((s) => {
-      if (s.clearFilters) {
-        console.log('-- Searching without filters to retrieve options');
-      } else {
-        console.log('-- Searching with re-applied filters');
-      }
-      this.currentPage = 1;
-      void this.execute(true, s.clearFilters);
-    });
+    this.filters.searchTrigger
+      .pipe(filter(() => this._isInitialized))
+      .subscribe((s) => {
+        if (s.clearFilters) {
+          console.log('-- Searching without filters to retrieve options');
+        } else {
+          console.log('-- Searching with re-applied filters');
+        }
+        this.currentPage = 1;
+        void this.execute(true, s.clearFilters);
+      });
   }
 
   initSearchOnEndpointChange() {
