@@ -3,12 +3,12 @@ import type { estypes } from '@elastic/elasticsearch';
 import { Settings } from '../../config/settings';
 import { ElasticEndpointSearchResponse } from '../../models/elastic/elastic-endpoint-search-response.type';
 import { ElasticFieldExistsQuery } from '../../models/elastic/elastic-field-exists-query.type';
-import { ElasticFullTextMatchQuery } from '../../models/elastic/elastic-full-text-match-query.type';
 import { ElasticMatchAllQuery } from '../../models/elastic/elastic-match-all-query.type';
 import { ElasticMatchQueries } from '../../models/elastic/elastic-match-queries.type';
 import { ElasticNodeModel } from '../../models/elastic/elastic-node.model';
 import { ElasticQuery } from '../../models/elastic/elastic-query.type';
 import { ElasticShouldQueries } from '../../models/elastic/elastic-should-queries.type';
+import { ElasticSimpleQueryString } from '../../models/elastic/elastic-simple-query-string.type';
 import { ElasticSortEntryModel } from '../../models/elastic/elastic-sort.model';
 import {
   FilterOptionModel,
@@ -34,11 +34,7 @@ export class ElasticService {
     private endpoints: EndpointService,
     private sort: SortService,
     private customFiltersRegistry: CustomFiltersRegistry,
-  ) {}
-
-  private _getSearchQuery(query: string): ElasticQuery {
-    return this.getQuery(query);
-  }
+  ) { }
 
   private getQuery(
     query?: string,
@@ -82,7 +78,7 @@ export class ElasticService {
   ): (
     | ElasticFieldExistsQuery
     | ElasticQuery
-    | ElasticFullTextMatchQuery
+    | ElasticSimpleQueryString
     | ElasticShouldQueries
     | ElasticMatchAllQuery
   )[] {
@@ -99,23 +95,24 @@ export class ElasticService {
     });
   }
 
-  private _getFullTextMatchQuery(query: string): ElasticFullTextMatchQuery {
-    return {
-      match: {
-        full_text: {
+  private _getCombinedSearchQuery(
+    query: string,
+    useSimpleQuery = false,
+  ): ElasticQuery | ElasticSimpleQueryString {
+    const fields = ['*', 'full_text'];
+    if (useSimpleQuery) {
+      return {
+        simple_query_string: {
           query: query,
+          fields: fields,
         },
-      },
-    };
-  }
-
-  private _getCombinedSearchQuery(query: string): ElasticShouldQueries {
+      };
+    }
     return {
-      bool: {
-        should: [
-          this._getSearchQuery(query),
-          this._getFullTextMatchQuery(query),
-        ],
+      query_string: {
+        query: query,
+        fields: fields,
+        lenient: true,
       },
     };
   }
@@ -171,17 +168,20 @@ export class ElasticService {
       return result;
     }, {});
 
-    const queryData = this.getNodeSearchQuery(
-      query,
-      activeFilters,
-      0,
-      Settings.search.elasticFilterTopHitsMax,
-    );
-    queryData.aggs = { ...aggs };
-    queryData.size = 0;
-    queryData['_source'] = '';
+    return await this._searchEndpointsWithFallback((useSimpleQuery) => {
+      const queryData = this.getNodeSearchQuery(
+        query,
+        activeFilters,
+        0,
+        Settings.search.elasticFilterTopHitsMax,
+        useSimpleQuery,
+      );
+      queryData.aggs = { ...aggs };
+      queryData.size = 0;
+      queryData['_source'] = '';
 
-    return await this.searchEndpoints(queryData);
+      return queryData;
+    });
   }
 
   getFieldAndValueFilterQueries(
@@ -300,6 +300,7 @@ export class ElasticService {
     filters: FilterModel[],
     from?: number,
     size?: number,
+    useSimpleQuery = false,
   ): estypes.SearchRequest {
     if (query === undefined) {
       return {};
@@ -327,13 +328,16 @@ export class ElasticService {
     const fieldOrValueFilterQueries: (
       | ElasticFieldExistsQuery
       | ElasticQuery
-      | ElasticFullTextMatchQuery
+      | ElasticSimpleQueryString
       | ElasticShouldQueries
       | ElasticMatchAllQuery
     )[] = this._getFieldOrValueFilterQueries(searchFilters);
 
     if (query) {
-      const combinedQuery = this._getCombinedSearchQuery(query);
+      const combinedQuery = this._getCombinedSearchQuery(
+        query,
+        useSimpleQuery,
+      );
       fieldOrValueFilterQueries.push(combinedQuery);
 
       queryData.highlight = {
@@ -391,7 +395,7 @@ export class ElasticService {
     let boostQueries: (
       | ElasticQuery
       | ElasticFieldExistsQuery
-      | ElasticFullTextMatchQuery
+      | ElasticSimpleQueryString
       | ElasticShouldQueries
       | ElasticMatchQueries
       | ElasticMatchAllQuery
@@ -422,14 +426,32 @@ export class ElasticService {
     return queryData;
   }
 
+  private async _searchEndpointsWithFallback<T>(
+    buildQueryData: (useSimpleQuery: boolean) => estypes.SearchRequest,
+  ): Promise<ElasticEndpointSearchResponse<T>[]> {
+    try {
+      return await this.searchEndpoints(buildQueryData(false));
+    } catch (error: any) {
+      const isQueryParseError = error?.status === 400;
+      if (!isQueryParseError) {
+        throw error;
+      }
+      console.warn(
+        'Search failed with a bad request, retrying with simple_query_string',
+        error,
+      );
+      return await this.searchEndpoints(buildQueryData(true));
+    }
+  }
+
   async searchNodes(
     query: string,
     from: number,
     size: number,
     filters: FilterModel[],
   ): Promise<ElasticEndpointSearchResponse<ElasticNodeModel>[]> {
-    const queryData = this.getNodeSearchQuery(query, filters, from, size);
-
-    return await this.searchEndpoints(queryData);
+    return await this._searchEndpointsWithFallback((useSimpleQuery) =>
+      this.getNodeSearchQuery(query, filters, from, size, useSimpleQuery),
+    );
   }
 }

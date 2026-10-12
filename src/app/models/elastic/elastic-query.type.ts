@@ -3,6 +3,7 @@ export type ElasticQuery = {
     query: string;
     fields?: string[];
     boost?: number;
+    lenient?: boolean;
     analyzer?: string;
   };
 };
