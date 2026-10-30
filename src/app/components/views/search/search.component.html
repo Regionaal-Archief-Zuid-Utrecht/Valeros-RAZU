@@ -7,11 +7,9 @@
 
   <div class="flex-grow-0 p-2 sm:p-4 sm:pb-2">
     <div class="flex items-center gap-2 sm:gap-4 w-full">
-      <button
-        (click)="onHomeClicked()"
+      <button (click)="onHomeClicked()"
         class="bg-primary py-2 lg:py-3 px-4 lg:px-6 inline-flex items-center shadow-md hover:shadow-lg transition-shadow duration-600 rounded-md"
-        [attr.aria-label]="'homescreen.go-to-homepage' | translate"
-      >
+        [attr.aria-label]="'homescreen.go-to-homepage' | translate">
         <img [src]="Settings.ui.header.logoPath" alt="Logo" class="h-8" />
       </button>
 
@@ -23,63 +21,51 @@
     </div>
 
     @if (!details.showing.value) {
-      <app-search-buttons-toolbar class="hidden md:block" />
+    <app-search-buttons-toolbar class="hidden md:block" />
     }
 
     <!--    <app-active-filters />-->
   </div>
 
   @if (details.showing.value) {
-    <app-details-back-button class="px-4" />
+  <app-details-back-button class="px-4" />
   }
 
-  <div
-    class="p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow scroll-smooth w-full"
-    #scrollContainer
-  >
+  <div class="relative p-4 pt-1 sm:pt-2 overflow-y-scroll overflow-x-hidden flex-grow min-h-0 scroll-smooth w-full"
+    #scrollContainer>
     @if (details.showing.value) {
-      <app-details />
+    <app-details />
     }
 
     @if (!details.showing.value) {
-      <div class="flex flex-row -top-2 bg-background z-10 p-2">
-        <app-search-hits-counter class="w-1/2 lg:w-3/4" />
-        <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
-      </div>
+    <div class="flex flex-row -top-2 bg-background z-10 p-2">
+      <app-search-hits-counter class="w-1/2 lg:w-3/4" />
+      <app-sort-select class="w-1/2 lg:w-1/4 mb-2 flex justify-end" />
+    </div>
 
-      <div class="mb-4">
-        <app-pagination
-          [currentPage]="search.currentPage"
-          [totalItems]="search.numberOfHits"
-          [pageSize]="Settings.search.resultsPerPagePerEndpoint"
-        />
-      </div>
+    <div class="mb-4">
+      <app-pagination [currentPage]="search.currentPage" [totalItems]="search.numberOfHits"
+        [pageSize]="Settings.search.resultsPerPagePerEndpoint" />
+    </div>
     }
 
     @if (!details.showing.value) {
-      <div
-        class="overflow-hidden"
-        role="list"
-        [attr.aria-label]="'accessibility.results-list' | translate"
-        id="search-results"
-      >
-        @if (viewModes.current.value === ViewMode.Grid) {
-          <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
-        }
-        @if (viewModes.current.value === ViewMode.List) {
-          @for (node of search.results.value.nodes; track node?.["@id"]) {
-            <app-node [node]="node"></app-node>
-          }
-        }
-      </div>
+    <div class="overflow-hidden" role="list" [attr.aria-label]="'accessibility.results-list' | translate"
+      id="search-results">
+      @if (viewModes.current.value === ViewMode.Grid) {
+      <app-nodes-grid [nodes]="search.results.value.nodes" class="w-full" />
+      }
+      @if (viewModes.current.value === ViewMode.List) {
+      @for (node of search.results.value.nodes; track node?.["@id"]) {
+      <app-node [node]="node"></app-node>
+      }
+      }
+    </div>
     }
 
     @if (!details.showing.value) {
-      <app-pagination
-        [currentPage]="search.currentPage"
-        [totalItems]="search.numberOfHits"
-        [pageSize]="Settings.search.resultsPerPagePerEndpoint"
-      />
+    <app-pagination [currentPage]="search.currentPage" [totalItems]="search.numberOfHits"
+      [pageSize]="Settings.search.resultsPerPagePerEndpoint" />
     }
   </div>
 </app-view-container>
